@@ -1,7 +1,8 @@
 import React from "react";
 
 import ShoppingCartItem from "../ShoppingCartItem";
-import Button from "../Button";
+import ButtonLink from "../ButtonLink";
+import { DETAIL } from "../../constants/routes";
 
 function getCartTotal(cart) {
   return cart.reduce((accum, item) => {
@@ -49,7 +50,8 @@ function Cart({ cartItems, handleRemove, handleChange, ...props }) {
               <hr />
             </div>
             <div className="col">
-              <Button>Checkout</Button>
+              {/* <Button>Checkout</Button> */}
+              <ButtonLink page={DETAIL}>Checkout</ButtonLink>
             </div>
           </div>
         </div>
