@@ -199,7 +199,6 @@ function App() {
   return (
     <CartContextProvider>
       <BrowserRouter>
-        {" "}
         <Switch>
           <Route path={PROFILE_URL}>
             <Checkout
