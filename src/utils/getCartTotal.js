@@ -1,6 +1,7 @@
-function getCartTotal(cart) {
+function getCartTotal(cart, discount = 0) {
   return cart.reduce((accum, item) => {
-    return accum + item.price * item.quantity;
+    const total = accum + item.price * item.quantity;
+    return total - discount;
   }, 0);
 }
 

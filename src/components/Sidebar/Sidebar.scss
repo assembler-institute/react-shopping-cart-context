@@ -3,15 +3,24 @@
   height: inherit;
   border-radius: 5px;
   background-color: rgb(239, 239, 239);
+  .sidebar-title {
+    h2 {
+      font-weight: bold;
+    }
+  }
   .sidebar-products {
-    color: red;
     max-height: 50%;
     overflow: scroll;
   }
   .sidebar-disccount {
-    color: blue;
+    label {
+      flex-grow: 1;
+    }
+    button {
+      width: fit-content;
+      height: inherit;
+    }
   }
   .sidebar-totals {
-    color: green;
   }
 }

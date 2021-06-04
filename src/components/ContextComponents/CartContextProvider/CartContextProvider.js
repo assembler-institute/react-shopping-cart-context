@@ -5,6 +5,7 @@ import CartContext from "../../../context/cart-context";
 
 import loadLocalStorageItems from "../../../utils/loadLocalStorageItems";
 import useLocalStorage from "../../../hooks/useLocalStorage";
+import getCartTotal from "../../../utils/getCartTotal";
 
 const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
 const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
@@ -92,6 +93,7 @@ function CartContextProvider({ children }) {
     <CartContext.Provider
       value={{
         cartItems: cartItems,
+        total: getCartTotal(cartItems),
         add: handleAddToCart,
         remove: handleRemove,
         change: handleChange,

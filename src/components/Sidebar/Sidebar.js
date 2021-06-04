@@ -11,10 +11,9 @@ import FormSchema from "./form-schema";
 
 import CartContext from "../../context/cart-context";
 
-import getCartTotal from "../../utils/getCartTotal";
-
 function Sidebar() {
-  const { cartItems, remove, change } = useContext(CartContext);
+  const { cartItems, total, remove, change } = useContext(CartContext);
+
   const formik = useFormik({
     initialValues: {
       discountCode: "",
@@ -25,8 +24,10 @@ function Sidebar() {
     },
   });
   return (
-    <div id="sidebar" className="col-4">
-      <div className="sidebar-products">Products go here</div>
+    <div id="sidebar" className=" col col-4">
+      <div className=" col sidebar-title mb-4">
+        <h2>Checkout summary</h2>
+      </div>
       {cartItems.length > 0 &&
         cartItems.map((item) => (
           <SummaryItem
@@ -41,10 +42,17 @@ function Sidebar() {
             handleChange={change}
           />
         ))}
-      <hr />
-      <div className="sidebar-disccount">
-        <form onSubmit={formik.handleSubmit}>
-          <label htmlFor="discountCode">
+      <div className="col sidebar-disccount">
+        <hr className="mt-0" />
+
+        <h4 className="h5">
+          <strong>Discount code</strong>
+        </h4>
+        <form
+          className="d-flex align-content-center"
+          onSubmit={formik.handleSubmit}
+        >
+          <label className="mr-4 mb-0" htmlFor="discountCode">
             <input
               type="text"
               id="discountCode"
@@ -62,12 +70,17 @@ function Sidebar() {
               <p className="invalid-feedback">{formik.errors.discountCode}</p>
             )}
           </label>
-
           <Button submitButton>Enter</Button>
         </form>
+        <hr />
       </div>
-      <hr />
-      <div className="sidebar-totals">Total {getCartTotal(cartItems)}</div>
+
+      <div className="col sidebar-totals d-flex justify-content-between">
+        <h4 className="h5">
+          <strong>Total</strong>
+        </h4>
+        <h4 className="h5">{total}€</h4>
+      </div>
     </div>
   );
 }
