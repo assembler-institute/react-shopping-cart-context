@@ -38,7 +38,7 @@ function InformationForm() {
       <form onSubmit={formik.handleSubmit}>
         <Input
           type="text"
-          label="First Name"
+          label="First name"
           id="firstName"
           value={formik.values.firstName}
           placeholder="First name"
@@ -49,10 +49,10 @@ function InformationForm() {
         />
         <Input
           type="text"
-          label="Last Name"
+          label="Last name"
           id="lastName"
           value={formik.values.lastName}
-          placeholder="Last Name"
+          placeholder="Last name"
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
           hasErrorMessage={formik.touched.lastName}
@@ -118,7 +118,7 @@ function InformationForm() {
           label="Country"
           id="country"
           value={formik.values.country}
-          placeholder="Enter country"
+          placeholder="Enter coutry"
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
           hasErrorMessage={formik.touched.country}
@@ -154,8 +154,7 @@ function InformationForm() {
           {formik.isSubmitting ? "Submitting..." : "Submit"}
         </Button>
       </form>
-
-      {hasSubmitted && <Redirect to="/" />}
+      {hasSubmitted && <Redirect to="/checkout/step-2" />}
     </>
   );
 }
