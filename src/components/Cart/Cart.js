@@ -49,10 +49,12 @@ function Cart({ cartItems, handleRemove, handleChange, ...props }) {
               </div>
               <hr />
             </div>
-            <div className="col">
-              {/* <Button>Checkout</Button> */}
-              <ButtonLink page={DETAIL}>Checkout</ButtonLink>
-            </div>
+            {!props.checkout && (
+              <div className="col">
+                {/* <Button>Checkout</Button> */}
+                <ButtonLink page={DETAIL}>Checkout</ButtonLink>
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -6,10 +6,10 @@ import { useFormik } from "formik";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 
-import withLayout from "../../hoc/withLayout";
+import withCheckoutLayout from "../../hoc/withCheckoutLayout";
 // import Cart from "../../components/Cart";
 
-// import productSchema from "./product-schema";
+import detailSchema from "./Detail-schema";
 
 function Detail() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -20,7 +20,7 @@ function Detail() {
       email: "",
       tel: "",
     },
-    // validationSchema: productSchema,
+    validationSchema: detailSchema,
     onSubmit: (values, { setSubmitting }) => {
       //   const newProduct = addProductDetails(values);
       //   saveNewProduct(newProduct);
@@ -34,52 +34,61 @@ function Detail() {
 
   return (
     <>
-      <form onSubmit={formik.handleSubmit}>
-        <Input
-          type="text"
-          label="Product title"
-          id="title"
-          value={formik.values.title}
-          placeholder="Product title"
-          handleChange={formik.handleChange}
-          handleBlur={formik.handleBlur}
-          hasErrorMessage={formik.touched.title}
-          errorMessage={formik.errors.title}
-        />
-        <Input
-          type="number"
-          label="Product price"
-          id="price"
-          value={formik.values.price}
-          placeholder="Product price"
-          handleChange={formik.handleChange}
-          handleBlur={formik.handleBlur}
-          hasErrorMessage={formik.touched.price}
-          errorMessage={formik.errors.price}
-        />
-        <Input
-          type="text"
-          label="Product image url"
-          id="img"
-          value={formik.values.img}
-          placeholder="Product image url"
-          handleChange={formik.handleChange}
-          handleBlur={formik.handleBlur}
-          hasErrorMessage={formik.touched.img}
-          errorMessage={formik.errors.img}
-        />
-        <Button
-          submitButton
-          block
-          disabled={formik.isValidating || !formik.isValid}
-        >
-          {formik.isSubmitting ? "Submitting..." : "Submit"}
-        </Button>
-      </form>
+      <div className="row">
+        <div className="col col-8 m-auto">
+          <h3>Payment Details</h3>
+          <form onSubmit={formik.handleSubmit}>
+            <Input
+              type="text"
+              label="Your name"
+              id="name"
+              value={formik.values.name}
+              placeholder="User name"
+              handleChange={formik.handleChange}
+              handleBlur={formik.handleBlur}
+              hasErrorMessage={formik.touched.name}
+              errorMessage={formik.errors.name}
+            />
+            <Input
+              type="email"
+              label="Email address"
+              id="email"
+              value={formik.values.email}
+              placeholder="User email address"
+              handleChange={formik.handleChange}
+              handleBlur={formik.handleBlur}
+              hasErrorMessage={formik.touched.email}
+              errorMessage={formik.errors.email}
+            />
+            <Input
+              type="phone"
+              label="Mobile phone number"
+              id="tel"
+              value={formik.values.tel}
+              placeholder="Phone number"
+              handleChange={formik.handleChange}
+              handleBlur={formik.handleBlur}
+              hasErrorMessage={formik.touched.tel}
+              errorMessage={formik.errors.tel}
+            />
+            <div className="row">
+              <div className="col col-12 mt-4 d-flex justify-content-center">
+                <Button
+                  submitButton
+                  block
+                  disabled={formik.isValidating || !formik.isValid}
+                >
+                  {formik.isSubmitting ? "Submitting..." : "Next page"}
+                </Button>
+              </div>
+            </div>
+          </form>
 
-      {hasSubmitted && <Redirect to="/" />}
+          {hasSubmitted && <Redirect to="/" />}
+        </div>
+      </div>
     </>
   );
 }
 
-export default withLayout(Detail);
+export default withCheckoutLayout(Detail);
