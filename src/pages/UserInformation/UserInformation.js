@@ -1,8 +1,10 @@
 import React from "react";
+
+import CartSummary from "../../components/CartSummary/CartSummary";
 import InformationForm from "../../components/InformationForm/InfomationForm";
 import withLayout from "../../hoc/withLayout";
 
-function UserInformation() {
+function UserInformation({ cartItems, handleRemove, handleChange }) {
   return (
     <>
       <h1>User Information</h1>
@@ -19,8 +21,11 @@ function UserInformation() {
 
         <div className="col col-6">
           <header className="jumbotron">
-            <h3>Your Cart</h3>
-
+            <CartSummary
+              cartItems={cartItems}
+              handleRemove={handleRemove}
+              handleChange={handleChange}
+            />
             <hr />
           </header>
         </div>
