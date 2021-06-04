@@ -1,7 +1,11 @@
 import React from "react";
 
+import { Link } from "react-router-dom";
+
 import ShoppingCartItem from "../ShoppingCartItem";
 import Button from "../Button";
+
+import { PROFILE_URL } from "../../utils/constants";
 
 function getCartTotal(cart) {
   return cart.reduce((accum, item) => {
@@ -49,7 +53,9 @@ function Cart({ cartItems, handleRemove, handleChange, ...props }) {
               <hr />
             </div>
             <div className="col">
-              <Button>Checkout</Button>
+              <Link to={PROFILE_URL}>
+                <Button>Checkout</Button>
+              </Link>
             </div>
           </div>
         </div>

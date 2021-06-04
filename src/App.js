@@ -3,11 +3,26 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
 import NewProduct from "./pages/NewProduct";
+import Checkout from "./pages/Checkout";
 
 import * as api from "./api";
 
 import useLocalStorage from "./hooks/useLocalStorage";
 import loadLocalStorageItems from "./utils/loadLocalStorageItems";
+
+// Checkout constants
+import {
+  PROFILE,
+  BILLING,
+  PAYMENT,
+  SUMMARY,
+  PROFILE_URL,
+  BILLING_URL,
+  PAYMENT_URL,
+  SUMMARY_URL,
+  HOME_URL,
+  NEWPROD_URL,
+} from "./utils/constants";
 
 function buildNewCartItem(cartItem) {
   if (cartItem.quantity >= cartItem.unitsInStock) {
@@ -182,10 +197,22 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/new-product">
+        <Route path={PROFILE_URL}>
+          <Checkout processStep={PROFILE} />
+        </Route>
+        <Route path={BILLING_URL}>
+          <Checkout processStep={BILLING} />
+        </Route>
+        <Route path={PAYMENT_URL}>
+          <Checkout processStep={PAYMENT} />
+        </Route>
+        <Route path={SUMMARY_URL}>
+          <Checkout processStep={SUMMARY} />
+        </Route>
+        <Route path={NEWPROD_URL}>
           <NewProduct saveNewProduct={saveNewProduct} />
         </Route>
-        <Route path="/" exact>
+        <Route path={HOME_URL} exact>
           <Home
             fullWidth
             cartItems={cartItems}
