@@ -15,6 +15,28 @@ import * as api from "./api";
 import useLocalStorage from "./hooks/useLocalStorage";
 import loadLocalStorageItems from "./utils/loadLocalStorageItems";
 
+/*
+- checkoutInfo{
+    userName, 
+    userPassword,
+    name,
+    lastName,
+    email,  
+    phone prefix, 
+    phone  number,
+    address, 
+    city, 
+    ZC, 
+    country,
+    paymentMethod,
+    cardName,
+    cardNumber,
+    cardExpiryDate,
+    cardCVV,
+    termsConditions
+    }
+*/
+
 function buildNewCartItem(cartItem) {
   if (cartItem.quantity >= cartItem.unitsInStock) {
     return cartItem;
