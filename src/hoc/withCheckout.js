@@ -1,8 +1,9 @@
 import React from "react";
-import CheckoutFooter from "../components/CheckoutFooter/CheckoutFooter";
-import CheckoutForm from "../components/CheckoutForm/CheckoutForm";
-import CheckoutHeader from "../components/CheckoutHeader/CheckoutHeader";
-import CheckoutSideBar from "../components/CheckoutSideBar/CheckoutSideBar";
+
+import CheckoutFooter from "../components/CheckoutFooter";
+import CheckoutForm from "../components/CheckoutForm";
+import CheckoutHeader from "../components/CheckoutHeader";
+import CheckoutSideBar from "../components/CheckoutSideBar";
 
 // function getDisplayName(WrappedComponent) {
 //   return WrappedComponent.displayName || WrappedComponent.name || "Component";
@@ -13,14 +14,18 @@ function Checkout(WrappedComponent) {
   //   WrappedComponent,
   // )})`;
 
-  function WrapperComponent() {
+  function WrapperComponent({ ...props }) {
+    console.log(props);
+    const { path } = props;
+    console.log(path);
     return (
       <>
         <CheckoutHeader />
         <CheckoutForm />
-        <WrappedComponent />
+        <WrappedComponent {...props} />
+
         <CheckoutSideBar />
-        <CheckoutFooter />
+        <CheckoutFooter path={path} />
       </>
     );
   }
