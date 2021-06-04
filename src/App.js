@@ -187,13 +187,13 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route path="/Checkout/step-1">
-          <Details />
+          <Details path={1} />
         </Route>
         <Route path="/Checkout/step-2">
-          <Adress />
+          <Adress path={2} />
         </Route>
         <Route path="/Checkout/step-3">
-          <Payment />
+          <Payment path={3} />
         </Route>
         <Route path="/Checkout/order-summary">
           <Confirm />
