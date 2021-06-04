@@ -2,6 +2,7 @@ import React from "react";
 
 import ProductsListing from "../../components/ProductsListing";
 import Cart from "../../components/Cart";
+import FormHeader from "../../components/FormHeader";
 import withLayout from "../../hoc/withLayout";
 
 function Home({
@@ -22,6 +23,7 @@ function Home({
       <div className="col col-8">
         <div className="row">
           <div className="col col-12">
+            <FormHeader /> {/* TODO: Temporal position */}
             <header className="jumbotron">
               <h1 className="display-4">Shoe shop</h1>
               <p className="lead">
