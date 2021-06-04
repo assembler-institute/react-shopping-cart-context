@@ -155,3 +155,28 @@ Thanks goes to these wonderful people
 This project follows the
 [all-contributors](https://github.com/all-contributors/all-contributors)
 specification. Contributions of any kind welcome!
+
+## Notes
+
+### Components
+
+\*Input (with tick/cross and styling depending on validation. ! See how we can
+adapt it for phone input)
+
+\*Form (with children)
+
+### States
+
+State of each form.
+
+### Images/SVG
+
+\*Tick/Cross
+
+\*Lock
+
+\*PayPal/ApplePay
+
+\*VISA/MasterCard/AmericanExpress
+
+\*Back of a card (CVV Code)
