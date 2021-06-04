@@ -2,7 +2,8 @@
 import React, { useContext } from "react";
 import { useFormik } from "formik";
 
-import ShoppingCartItem from "../ShoppingCartItem";
+// import ShoppingCartItem from "../ShoppingCartItem";
+import SummaryItem from "../SummaryItem";
 
 import "./Sidebar.scss";
 import Button from "../Button";
@@ -28,7 +29,7 @@ function Sidebar() {
       <div className="sidebar-products">Products go here</div>
       {cartItems.length > 0 &&
         cartItems.map((item) => (
-          <ShoppingCartItem
+          <SummaryItem
             key={item.id}
             id={item.id}
             title={item.title}

@@ -1,7 +1,5 @@
 import React from "react";
 
-import "./ShoppingCartItem.scss";
-
 import Button from "../Button";
 
 import buildSelectOptions from "../../utils/buildSelectOptions";
@@ -17,7 +15,7 @@ import buildSelectOptions from "../../utils/buildSelectOptions";
 //   });
 // }
 
-function ShoppingCartItem({
+function SummaryItem({
   id,
   img,
   title,
@@ -83,4 +81,4 @@ function ShoppingCartItem({
   );
 }
 
-export default ShoppingCartItem;
+export default SummaryItem;
