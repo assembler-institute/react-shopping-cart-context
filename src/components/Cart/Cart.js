@@ -54,7 +54,9 @@ function Cart({ cartItems, handleRemove, handleChange, ...props }) {
             </div>
             <div className="col">
               <Link to={PROFILE_URL}>
-                <Button>Checkout</Button>
+                <Button disabled={cartItems.length === 0 && true}>
+                  Checkout
+                </Button>
               </Link>
             </div>
           </div>
