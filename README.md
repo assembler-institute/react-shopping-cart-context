@@ -1,5 +1,111 @@
 `#react.js` `#master-in-software-engineering`
 
+<!-- PROGRAMMING STRUCTURE -->
+## Pages
+
+1- Personal details
+  Formulary (3 inputs)
+    - Name input
+    - Email inputs
+    - Phone number input
+  Formik library using (validation with schema)
+  path: /checkout/step-1
+  EXTRA: Store info in Local Storage
+  EXTRA: footer steps buttons
+
+2- Billing address pages
+  Formulary (4 inputs)
+    - Address inputs
+    - City inputs
+    - PC input
+    - Country select input
+  Formik library using (validation with schema)
+  path: /checkout/step-2
+  EXTRA: Store info in Local Storage
+  EXTRA: footer steps buttons
+
+3- Payment details
+  Formulary (6 inputs)
+    - Select for payment method 
+    - Cardholder Name
+    - Card Number
+    - Card expiry date
+    - CVV Code
+    - Accepting conditions
+  path: /checkout/step-3
+  EXTRA: Store info in Local Storage
+  EXTRA: footer steps buttons
+  EXTRA: Credite card animation
+
+4- Order summary
+  - Item information
+  - User information
+  - Addresss information
+  path: /checkout/order-summary
+  EXTRA: Store info in Local Storage
+  EXTRA: footer steps buttons
+
+
+(0)- Authentication (EXTRA)
+  Login needed to go throught app
+
+
+## Pages components
+
+1- Personal details
+  <Header className=headerClass >
+  <Input className=inputClass component {type, key, label, value, placeholder, onChange, onBlur, ¿onSubmit?} />
+  <SidebarOverview>
+  <Footer>
+    <Button className=buttonClass component {urlPage, disabled, type, submit} />
+  
+
+2- Billing address pages
+  <Header className=headerClass >
+  <Input className=inputClass component {type, key, label, value, placeholder, onChange, onBlur, ¿onSubmit?} />
+  <SidebarOverview>
+  <Footer>
+
+
+3- Payment details
+  <Header className=headerClass >
+  <Input className=inputClass component {type, key, label, value, placeholder, onChange, onBlur, ¿onSubmit?} />
+  <SidebarOverview>
+  <Footer>
+
+4- Order summary
+  <Header className=headerClass >
+  <OrderSummary>
+
+
+## States
+
+App: 
+
+- products
+- cartItems
+- checkoutInfo{
+    userName, 
+    userPassword,
+    name,
+    lastName,
+    email,  
+    phone prefix, 
+    phone  number,
+    address, 
+    city, 
+    ZC, 
+    country,
+    paymentMethod,
+    cardName,
+    cardNumber,
+    cardExpiryDate,
+    cardCVV,
+    termsConditions
+    }
+
+
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
