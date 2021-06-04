@@ -7,6 +7,8 @@ import InformationSchema from "./information-schema";
 import Input from "../Input";
 import Button from "../Button";
 
+// Try making a new customer function
+
 function InformationForm() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
@@ -14,7 +16,7 @@ function InformationForm() {
     initialValues: {
       firstName: "",
       lastName: "",
-      phoneNumber: "",
+      phone: "",
       email: "",
       addressOne: "",
       addressTwo: "",
@@ -38,7 +40,7 @@ function InformationForm() {
       <form onSubmit={formik.handleSubmit}>
         <Input
           type="text"
-          label="Name"
+          label="First name"
           id="firstName"
           value={formik.values.firstName}
           placeholder="First name"
@@ -49,7 +51,7 @@ function InformationForm() {
         />
         <Input
           type="text"
-          label="Name"
+          label="Last name"
           id="lastName"
           value={formik.values.lastName}
           placeholder="Last name"
@@ -154,7 +156,7 @@ function InformationForm() {
           {formik.isSubmitting ? "Submitting..." : "Submit"}
         </Button>
       </form>
-      {hasSubmitted && <Redirect to="/" />}
+      {hasSubmitted && <Redirect to="/checkout/step-2" />}
     </>
   );
 }
