@@ -3,6 +3,9 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
 import NewProduct from "./pages/NewProduct";
+import Step1 from "./pages/Checkout/Step1";
+import Step2 from "./pages/Checkout/Step2";
+import Step3 from "./pages/Checkout/Step3";
 
 import * as api from "./api";
 
@@ -200,6 +203,15 @@ function App() {
             handleRemove={handleRemove}
             handleChange={handleChange}
           />
+        </Route>
+        <Route path="/checkout/step-1">
+          <Step1 />
+        </Route>
+        <Route path="/checkout/step-2">
+          <Step2 />
+        </Route>
+        <Route path="/checkout/step-3">
+          <Step3 />
         </Route>
       </Switch>
     </BrowserRouter>
