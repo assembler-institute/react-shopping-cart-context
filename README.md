@@ -160,10 +160,33 @@ specification. Contributions of any kind welcome!
 
 ### Components
 
-\*Input (with tick/cross and styling depending on validation. ! See how we can
-adapt it for phone input)
+Components
 
-\*Form (with children)
+```
+Checkout
+
+Header (navlinks)
+  Navlinks
+  Checkout button (Remove)
+
+Main (using BrowseRouter)
+  Process
+  Form
+    Input(s)
+    Submit button
+
+  Footer (navigation buttons)
+    Navigation Button (Changing inside text depending on page)
+
+Sidebar
+
+
+States
+
+Checkout Checkout information (object using context)
+
+Sidebar Disccount code (Easter egg)
+```
 
 ### States
 
