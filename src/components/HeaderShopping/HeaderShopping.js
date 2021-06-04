@@ -4,7 +4,11 @@ import React from "react";
 import "./HeaderShopping.scss";
 
 function HeaderShopping() {
-  return <header>hola</header>;
+  return (
+    <header className="header__Shopping">
+      <img className=".assembler__logo" />
+    </header>
+  );
 }
 
 export default HeaderShopping;
