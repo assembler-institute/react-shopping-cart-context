@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-
-import { useFormik } from "formik";
 import { Redirect } from "react-router-dom";
 
-import InformationSchema from "./information-schema";
+import { useFormik } from "formik";
+
 import Input from "../Input";
 import Button from "../Button";
+
+import InformationSchema from "./information-schema";
 
 function InformationForm() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -14,7 +15,7 @@ function InformationForm() {
     initialValues: {
       firstName: "",
       lastName: "",
-      phoneNumber: "",
+      phone: "",
       email: "",
       addressOne: "",
       addressTwo: "",
@@ -32,31 +33,30 @@ function InformationForm() {
       }, 500);
     },
   });
-
   return (
     <>
       <form onSubmit={formik.handleSubmit}>
         <Input
           type="text"
-          label="Name"
+          label="First Name"
           id="firstName"
-          value={formik.values.name}
+          value={formik.values.firstName}
           placeholder="First name"
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
-          hasErrorMessage={formik.touched.name}
-          errorMessage={formik.errors.name}
+          hasErrorMessage={formik.touched.firstName}
+          errorMessage={formik.errors.firstName}
         />
         <Input
           type="text"
-          label="Name"
-          id="LastName"
-          value={formik.values.name}
-          placeholder="Last name"
+          label="Last Name"
+          id="lastName"
+          value={formik.values.lastName}
+          placeholder="Last Name"
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
-          hasErrorMessage={formik.touched.name}
-          errorMessage={formik.errors.name}
+          hasErrorMessage={formik.touched.lastName}
+          errorMessage={formik.errors.lastName}
         />
         <Input
           type="tel"
@@ -84,67 +84,67 @@ function InformationForm() {
           type="text"
           label="Address 1"
           id="addressOne"
-          value={formik.values.email}
+          value={formik.values.addressOne}
           placeholder="Input address"
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
-          hasErrorMessage={formik.touched.email}
-          errorMessage={formik.errors.email}
+          hasErrorMessage={formik.touched.addressOne}
+          errorMessage={formik.errors.addressOne}
         />
         <Input
           type="text"
           label="Address 2"
           id="addressTwo"
-          value={formik.values.email}
+          value={formik.values.addressTwo}
           placeholder="Input second address"
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
-          hasErrorMessage={formik.touched.email}
-          errorMessage={formik.errors.email}
+          hasErrorMessage={formik.touched.addressTwo}
+          errorMessage={formik.errors.addressTwo}
         />
         <Input
-          type="number"
+          type="text"
           label="Zip code"
           id="zipCode"
-          value={formik.values.email}
+          value={formik.values.zipCode}
           placeholder="Enter zipcode"
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
-          hasErrorMessage={formik.touched.email}
-          errorMessage={formik.errors.email}
+          hasErrorMessage={formik.touched.zipCode}
+          errorMessage={formik.errors.zipCode}
         />
         <Input
           type="text"
           label="Country"
           id="country"
-          value={formik.values.email}
-          placeholder="Enter coutry"
+          value={formik.values.country}
+          placeholder="Enter country"
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
-          hasErrorMessage={formik.touched.email}
-          errorMessage={formik.errors.email}
+          hasErrorMessage={formik.touched.country}
+          errorMessage={formik.errors.country}
         />
         <Input
           type="text"
           label="State"
           id="state"
-          value={formik.values.email}
+          value={formik.values.state}
           placeholder="Enter state"
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
-          hasErrorMessage={formik.touched.email}
-          errorMessage={formik.errors.email}
+          hasErrorMessage={formik.touched.state}
+          errorMessage={formik.errors.state}
         />
         <Input
           type="text"
           label="City"
           id="city"
-          value={formik.values.email}
+          value={formik.values.city}
           placeholder="Enter city"
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
-          hasErrorMessage={formik.touched.email}
-          errorMessage={formik.errors.email}
+          hasErrorMessage={formik.touched.city}
+          errorMessage={formik.errors.city}
         />
         <Button
           submitButton
@@ -154,6 +154,7 @@ function InformationForm() {
           {formik.isSubmitting ? "Submitting..." : "Submit"}
         </Button>
       </form>
+
       {hasSubmitted && <Redirect to="/" />}
     </>
   );

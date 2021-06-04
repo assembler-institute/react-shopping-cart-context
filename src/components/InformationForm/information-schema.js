@@ -2,7 +2,7 @@ import * as Yup from "yup";
 
 const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 const InformationSchema = Yup.object().shape({
-  fistName: Yup.string()
+  firstName: Yup.string()
     .min(2, "Please Enter your Full name!")
     .required("Your full name is required"),
   lastName: Yup.string()
