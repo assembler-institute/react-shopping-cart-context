@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
+import "./style.scss";
+
 import Home from "./pages/Home";
 import NewProduct from "./pages/NewProduct";
+import BillingAddress from "./pages/CheckoutPages/BillingAddress";
+import OrderSummary from "./pages/CheckoutPages/OrderSummary";
+import PaymentDetails from "./pages/CheckoutPages/PaymentDetails";
+import PersonalDetails from "./pages/CheckoutPages/PersonalDetails";
 
 import * as api from "./api";
 
@@ -182,6 +188,21 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
+        <Route path="/checkout/step-1">
+          <PersonalDetails
+            saveNewProduct={saveNewProduct}
+            cartItems={cartItems}
+          />
+        </Route>
+        <Route path="/checkout/step-2">
+          <BillingAddress fullWidth saveNewProduct={saveNewProduct} />
+        </Route>
+        <Route path="/checkout/step-3">
+          <PaymentDetails fullWidth saveNewProduct={saveNewProduct} />
+        </Route>
+        <Route path="/checkout/order-summary">
+          <OrderSummary fullWidth saveNewProduct={saveNewProduct} />
+        </Route>
         <Route path="/new-product">
           <NewProduct saveNewProduct={saveNewProduct} />
         </Route>
@@ -200,6 +221,10 @@ function App() {
             handleRemove={handleRemove}
             handleChange={handleChange}
           />
+        </Route>
+        <Route path="*">
+          {/* Change to 404 not foun */}
+          <NewProduct saveNewProduct={saveNewProduct} />
         </Route>
       </Switch>
     </BrowserRouter>
