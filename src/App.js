@@ -12,6 +12,7 @@ import Adress from "./pages/Adress";
 import Payment from "./pages/Payment";
 import Confirm from "./pages/Confirm";
 import Details from "./pages/Details";
+import ShoppingContext from "./context";
 
 function buildNewCartItem(cartItem) {
   if (cartItem.quantity >= cartItem.unitsInStock) {
@@ -47,7 +48,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [loadingError, setLoadingError] = useState(null);
-
+  const [path, setPath] = useState(1);
   useEffect(() => {
     if (products.length === 0) {
       setIsLoading(true);
@@ -183,42 +184,48 @@ function App() {
     setProducts((prevState) => [newProduct, ...prevState]);
   }
 
+  function nextPath() {
+    setPath(path + 1);
+  }
+
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/Checkout/step-1">
-          <Details path={1} />
-        </Route>
-        <Route path="/Checkout/step-2">
-          <Adress path={2} />
-        </Route>
-        <Route path="/Checkout/step-3">
-          <Payment path={3} />
-        </Route>
-        <Route path="/Checkout/order-summary">
-          <Confirm />
-        </Route>
-        <Route path="/new-product">
-          <NewProduct saveNewProduct={saveNewProduct} />
-        </Route>
-        <Route path="/" exact>
-          <Home
-            fullWidth
-            cartItems={cartItems}
-            products={products}
-            isLoading={isLoading}
-            hasError={hasError}
-            loadingError={loadingError}
-            handleDownVote={handleDownVote}
-            handleUpVote={handleUpVote}
-            handleSetFavorite={handleSetFavorite}
-            handleAddToCart={handleAddToCart}
-            handleRemove={handleRemove}
-            handleChange={handleChange}
-          />
-        </Route>
-      </Switch>
-    </BrowserRouter>
+    <ShoppingContext.Provider value={{ path: path, nextPath: nextPath }}>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/Checkout/step-1">
+            <Details />
+          </Route>
+          <Route path="/Checkout/step-2">
+            <Adress />
+          </Route>
+          <Route path="/Checkout/step-3">
+            <Payment />
+          </Route>
+          <Route path="/Checkout/order-summary">
+            <Confirm />
+          </Route>
+          <Route path="/new-product">
+            <NewProduct saveNewProduct={saveNewProduct} />
+          </Route>
+          <Route path="/" exact>
+            <Home
+              fullWidth
+              cartItems={cartItems}
+              products={products}
+              isLoading={isLoading}
+              hasError={hasError}
+              loadingError={loadingError}
+              handleDownVote={handleDownVote}
+              handleUpVote={handleUpVote}
+              handleSetFavorite={handleSetFavorite}
+              handleAddToCart={handleAddToCart}
+              handleRemove={handleRemove}
+              handleChange={handleChange}
+            />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    </ShoppingContext.Provider>
   );
 }
 

@@ -14,18 +14,15 @@ function Checkout(WrappedComponent) {
   //   WrappedComponent,
   // )})`;
 
-  function WrapperComponent({ ...props }) {
-    console.log(props);
-    const { path } = props;
-    console.log(path);
+  function WrapperComponent() {
     return (
       <>
         <CheckoutHeader />
         <CheckoutForm />
-        <WrappedComponent {...props} />
+        <WrappedComponent />
 
         <CheckoutSideBar />
-        <CheckoutFooter path={path} />
+        <CheckoutFooter />
       </>
     );
   }
