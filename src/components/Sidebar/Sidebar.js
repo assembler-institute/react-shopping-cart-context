@@ -10,6 +10,8 @@ import FormSchema from "./form-schema";
 
 import CartContext from "../../context/cart-context";
 
+import getCartTotal from "../../utils/getCartTotal";
+
 function Sidebar() {
   const { cartItems, remove, change } = useContext(CartContext);
   const formik = useFormik({
@@ -64,7 +66,7 @@ function Sidebar() {
         </form>
       </div>
       <hr />
-      <div className="sidebar-totals">Total goes here</div>
+      <div className="sidebar-totals">Total {getCartTotal(cartItems)}</div>
     </div>
   );
 }
