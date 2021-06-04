@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React from "react";
+import React, { useContext } from "react";
 import { useFormik } from "formik";
 
 import ShoppingCartItem from "../ShoppingCartItem";
@@ -8,7 +8,10 @@ import "./Sidebar.scss";
 import Button from "../Button";
 import FormSchema from "./form-schema";
 
-function Sidebar({ cartItems, handleRemove, handleChange }) {
+import CartContext from "../../context/cart-context";
+
+function Sidebar() {
+  const { cartItems, remove, change } = useContext(CartContext);
   const formik = useFormik({
     initialValues: {
       discountCode: "",
@@ -31,8 +34,8 @@ function Sidebar({ cartItems, handleRemove, handleChange }) {
             img={item.img}
             quantity={item.quantity}
             unitsInStock={item.unitsInStock}
-            handleRemove={handleRemove}
-            handleChange={handleChange}
+            handleRemove={remove}
+            handleChange={change}
           />
         ))}
       <hr />
