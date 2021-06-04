@@ -8,6 +8,10 @@ import * as api from "./api";
 
 import useLocalStorage from "./hooks/useLocalStorage";
 import loadLocalStorageItems from "./utils/loadLocalStorageItems";
+import Adress from "./pages/Adress";
+import Payment from "./pages/Payment";
+import Confirm from "./pages/Confirm";
+import Details from "./pages/Details";
 
 function buildNewCartItem(cartItem) {
   if (cartItem.quantity >= cartItem.unitsInStock) {
@@ -182,6 +186,18 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
+        <Route path="/Checkout/step-1">
+          <Details />
+        </Route>
+        <Route path="/Checkout/step-2">
+          <Adress />
+        </Route>
+        <Route path="/Checkout/step-3">
+          <Payment />
+        </Route>
+        <Route path="/Checkout/order-summary">
+          <Confirm />
+        </Route>
         <Route path="/new-product">
           <NewProduct saveNewProduct={saveNewProduct} />
         </Route>
