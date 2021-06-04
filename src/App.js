@@ -5,13 +5,14 @@ import Home from "./pages/Home";
 import NewProduct from "./pages/NewProduct";
 import Detail from "./pages/Detail";
 import Payment from "./pages/Payment";
+import Address from "./pages/Address";
 
 import * as api from "./api";
 
 import useLocalStorage from "./hooks/useLocalStorage";
 import loadLocalStorageItems from "./utils/loadLocalStorageItems";
 
-import { HOME, NEWPRODUCT, DETAIL, PAYMENT } from "./constants/routes";
+import { HOME, NEWPRODUCT, DETAIL, PAYMENT, ADDRESS } from "./constants/routes";
 
 function buildNewCartItem(cartItem) {
   if (cartItem.quantity >= cartItem.unitsInStock) {
@@ -216,6 +217,13 @@ function App() {
         </Route>
         <Route path={PAYMENT}>
           <Payment
+            cartItems={cartItems}
+            handleRemove={handleRemove}
+            handleChange={handleChange}
+          />
+        </Route>
+        <Route path={ADDRESS}>
+          <Address
             cartItems={cartItems}
             handleRemove={handleRemove}
             handleChange={handleChange}

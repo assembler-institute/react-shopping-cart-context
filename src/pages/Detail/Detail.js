@@ -10,6 +10,7 @@ import withCheckoutLayout from "../../hoc/withCheckoutLayout";
 // import Cart from "../../components/Cart";
 
 import detailSchema from "./Detail-schema";
+import { ADDRESS } from "../../constants/routes";
 
 function Detail() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -84,7 +85,7 @@ function Detail() {
             </div>
           </form>
 
-          {hasSubmitted && <Redirect to="/" />}
+          {hasSubmitted && <Redirect to={ADDRESS} />}
         </div>
       </div>
     </>
