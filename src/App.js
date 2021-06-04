@@ -198,16 +198,36 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route path={PROFILE_URL}>
-          <Checkout processStep={PROFILE} />
+          <Checkout
+            processStep={PROFILE}
+            cartItems={cartItems}
+            handleRemove={handleRemove}
+            handleChange={handleChange}
+          />
         </Route>
         <Route path={BILLING_URL}>
-          <Checkout processStep={BILLING} />
+          <Checkout
+            processStep={BILLING}
+            cartItems={cartItems}
+            handleRemove={handleRemove}
+            handleChange={handleChange}
+          />
         </Route>
         <Route path={PAYMENT_URL}>
-          <Checkout processStep={PAYMENT} />
+          <Checkout
+            processStep={PAYMENT}
+            cartItems={cartItems}
+            handleRemove={handleRemove}
+            handleChange={handleChange}
+          />
         </Route>
         <Route path={SUMMARY_URL}>
-          <Checkout processStep={SUMMARY} />
+          <Checkout
+            processStep={SUMMARY}
+            cartItems={cartItems}
+            handleRemove={handleRemove}
+            handleChange={handleChange}
+          />
         </Route>
         <Route path={NEWPROD_URL}>
           <NewProduct saveNewProduct={saveNewProduct} />
