@@ -1,7 +1,8 @@
 import React from "react";
+import ShoppingLayout from "../../hoc/ShoppingLayout";
 
 function Step2() {
-  return <div>Step2</div>;
+  return <div>hola</div>;
 }
 
-export default Step2;
+export default ShoppingLayout(Step2);
