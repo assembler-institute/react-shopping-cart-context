@@ -6,6 +6,7 @@ import NewProduct from "./pages/NewProduct";
 import Step1 from "./pages/Checkout/Step1";
 import Step2 from "./pages/Checkout/Step2";
 import Step3 from "./pages/Checkout/Step3";
+import Step4 from "./pages/Checkout/Step4";
 
 import * as api from "./api";
 
@@ -204,19 +205,29 @@ function App() {
             handleChange={handleChange}
           />
         </Route>
-        <Route path="/checkout/step-1">
-          <Step1
-            cartItems={cartItems}
-            handleRemove={handleRemove}
-            handleChange={handleChange}
-          />
-        </Route>
-        <Route path="/checkout/step-2">
-          <Step2 />
-        </Route>
-        <Route path="/checkout/step-3">
-          <Step3 />
-        </Route>
+        <Route
+          path="/checkout/step-1"
+          render={(routeProps) => (
+            <Step1
+              {...routeProps}
+              cartItems={cartItems}
+              handleRemove={handleRemove}
+              handleChange={handleChange}
+            />
+          )}
+        />
+        <Route
+          path="/checkout/step-2"
+          render={(routeProps) => <Step2 {...routeProps} />}
+        />
+        <Route
+          path="/checkout/step-3"
+          render={(routeProps) => <Step3 {...routeProps} />}
+        />
+        <Route
+          path="/checkout/step-4"
+          render={(routeProps) => <Step4 {...routeProps} />}
+        />
       </Switch>
     </BrowserRouter>
   );

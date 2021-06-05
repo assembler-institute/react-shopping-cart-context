@@ -1,23 +1,13 @@
-* {
-  // outline: auto;
-}
-
-// .step1_container {
-//   background-color: rgb(255, 255, 255);
-//   display: grid;
-//   grid-template-columns: 1fr;
-//   grid-template-rows: 70px 1fr 50px;
-//   min-width: 100vw;
-//   min-height: 100vh;
-//   height: 100%;
-//   width: 100%;
-// }
-
-.step1_main--container {
-  // background-color: aqua;
+.step1__main--container {
+  background-color: rgb(255, 255, 255);
   display: grid;
   grid-template-columns: 6fr 4fr;
   grid-template-rows: 1fr;
   height: 100%;
   width: 100%;
+}
+
+.step1__main--container--form{
+  border-right:2px solid rgb(230, 230, 230);
+  padding: 2%;
 }
