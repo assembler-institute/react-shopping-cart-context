@@ -205,7 +205,11 @@ function App() {
           />
         </Route>
         <Route path="/checkout/step-1">
-          <Step1 />
+          <Step1
+            cartItems={cartItems}
+            handleRemove={handleRemove}
+            handleChange={handleChange}
+          />
         </Route>
         <Route path="/checkout/step-2">
           <Step2 />

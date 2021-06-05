@@ -6,7 +6,7 @@ import ShoppingLayout from "../../hoc/ShoppingLayout";
 
 import OrderSummary from "../../components/OrderSummary";
 
-function Step1() {
+function Step1({ cartItems, handleRemove, handleChange }) {
   return (
     <div className="step1_main--container">
       <div>
@@ -15,7 +15,11 @@ function Step1() {
         <div>Payment Button</div>
       </div>
       <div>
-        <OrderSummary />
+        <OrderSummary
+          cartItems={cartItems}
+          handleRemove={handleRemove}
+          handleChange={handleChange}
+        />
       </div>
     </div>
   );
