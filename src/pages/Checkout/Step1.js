@@ -1,6 +1,10 @@
 import React from "react";
+
 import "./Step1.scss";
+
 import ShoppingLayout from "../../hoc/ShoppingLayout";
+
+import OrderSummary from "../../components/OrderSummary";
 
 function Step1() {
   return (
@@ -10,7 +14,9 @@ function Step1() {
         <div>Form payment</div>
         <div>Payment Button</div>
       </div>
-      <div>Resum</div>
+      <div>
+        <OrderSummary />
+      </div>
     </div>
   );
 }
