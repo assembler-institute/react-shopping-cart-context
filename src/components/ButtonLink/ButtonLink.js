@@ -27,7 +27,7 @@ function ButtonLink({
     //   {children}
     // </button>
 
-    <Link className={classes} disabled={disabled} exact to={page} {...props}>
+    <Link className={classes} disabled={disabled} to={page} {...props}>
       {children}
     </Link>
   );

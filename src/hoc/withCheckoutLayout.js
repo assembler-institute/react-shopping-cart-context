@@ -50,7 +50,7 @@ function withCheckoutLayout(WrappedComponent) {
             </div>
 
             <Cart
-              checkout
+              checkout={false}
               className="col col-4"
               cartItems={props.cartItems}
               handleRemove={props.handleRemove}

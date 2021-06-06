@@ -11,7 +11,7 @@ import * as api from "./api";
 import useLocalStorage from "./hooks/useLocalStorage";
 import loadLocalStorageItems from "./utils/loadLocalStorageItems";
 
-import { HOME, NEWPRODUCT, DETAIL, ADDRESS } from "./constants/routes";
+import { HOME, NEW_PRODUCT, DETAIL, ADDRESS } from "./constants/routes";
 
 function buildNewCartItem(cartItem) {
   if (cartItem.quantity >= cartItem.unitsInStock) {
@@ -186,11 +186,24 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path={NEWPRODUCT}>
+        <Route path={NEW_PRODUCT}>
           <NewProduct saveNewProduct={saveNewProduct} />
         </Route>
-
-        <Route path={HOME} exact>
+        <Route path={DETAIL}>
+          <Detail
+            cartItems={cartItems}
+            handleRemove={handleRemove}
+            handleChange={handleChange}
+          />
+        </Route>
+        <Route path={ADDRESS}>
+          <Address
+            cartItems={cartItems}
+            handleRemove={handleRemove}
+            handleChange={handleChange}
+          />
+        </Route>
+        <Route path={HOME}>
           <Home
             fullWidth
             cartItems={cartItems}
@@ -202,21 +215,6 @@ function App() {
             handleUpVote={handleUpVote}
             handleSetFavorite={handleSetFavorite}
             handleAddToCart={handleAddToCart}
-            handleRemove={handleRemove}
-            handleChange={handleChange}
-          />
-        </Route>
-
-        <Route path={DETAIL}>
-          <Detail
-            cartItems={cartItems}
-            handleRemove={handleRemove}
-            handleChange={handleChange}
-          />
-        </Route>
-        <Route path={ADDRESS}>
-          <Address
-            cartItems={cartItems}
             handleRemove={handleRemove}
             handleChange={handleChange}
           />
