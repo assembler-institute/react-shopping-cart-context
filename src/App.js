@@ -202,6 +202,7 @@ function App() {
         <Switch>
           <Route path={PROFILE_URL}>
             <Checkout
+              fullWidth
               processStep={PROFILE}
               // cartItems={cartItems}
               // handleRemove={handleRemove}
@@ -210,6 +211,7 @@ function App() {
           </Route>
           <Route path={BILLING_URL}>
             <Checkout
+              fullWidth
               processStep={BILLING}
               // cartItems={cartItems}
               // handleRemove={handleRemove}
@@ -218,6 +220,7 @@ function App() {
           </Route>
           <Route path={PAYMENT_URL}>
             <Checkout
+              fullWidth
               processStep={PAYMENT}
               // cartItems={cartItems}
               // handleRemove={handleRemove}
@@ -226,6 +229,7 @@ function App() {
           </Route>
           <Route path={SUMMARY_URL}>
             <Checkout
+              fullWidth
               processStep={SUMMARY}
               // cartItems={cartItems}
               // handleRemove={handleRemove}
