@@ -47,10 +47,6 @@ function reducerForm(state, action) {
 function FormContextProvider({ children }) {
   const [formData, dispatch] = useReducer(reducerForm, initialValueFormData);
 
-  useEffect(() => {
-    console.log(formData);
-  }, [formData]);
-
   function updateFormData(newData) {
     dispatch({ type: UPDATE_FORM, payload: newData });
   }
