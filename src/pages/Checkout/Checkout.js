@@ -1,17 +1,24 @@
 import React from "react";
 
-import "./Checkout.scss";
+import withLayout from "../../hoc/withLayout";
 
 import Sidebar from "../../components/Sidebar";
+import CheckoutProfile from "./CheckoutProfile";
 
-import withLayout from "../../hoc/withLayout";
+import FormContextProvider from "../../components/ContextComponents/FormContextProvider";
+
+import { PROFILE } from "../../utils/constants";
+
+import "./Checkout.scss";
 
 function Checkout({ processStep, cartItems }) {
   return (
-    <div className="checkout row m-4">
-      <div className="col col-8"> {processStep}</div>
-      <Sidebar cartItems={cartItems} />
-    </div>
+    <FormContextProvider>
+      <div className="row d-flex">
+        {processStep === PROFILE && <CheckoutProfile />}
+        <Sidebar cartItems={cartItems} />
+      </div>
+    </FormContextProvider>
   );
 }
 
