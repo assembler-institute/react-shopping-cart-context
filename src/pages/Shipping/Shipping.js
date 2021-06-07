@@ -9,7 +9,7 @@ import CartSummary from "../../components/CartSummary/CartSummary";
 function Shipping({ cartItems, handleChange, handleRemove }) {
   return (
     <>
-      <h1>Shipping Information Jaja</h1>
+      <h1>Shipping Information</h1>
       <div className="row">
         <div className="col col-6">
           <header className="jumbotron">
