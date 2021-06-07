@@ -34,7 +34,7 @@ function SummaryItem({
   }
 
   return (
-    <div className="col sidebar-products">
+    <div className="col sidebar-products mb-4">
       <div className="row flex-column">
         <div className="col">
           <div className="row">
@@ -74,9 +74,9 @@ function SummaryItem({
             </div>
           </div>
         </div>
-        <div className="col">
+        {/* <div className="col">
           <hr />
-        </div>
+        </div> */}
       </div>
     </div>
   );

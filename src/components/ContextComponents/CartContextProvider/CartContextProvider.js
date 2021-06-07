@@ -1,5 +1,5 @@
 /* eslint-disable import/extensions */
-import React, { useState } from "react";
+import React, { useReducer } from "react";
 
 import CartContext from "../../../context/cart-context";
 
@@ -9,6 +9,14 @@ import getCartTotal from "../../../utils/getCartTotal";
 
 const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
 const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
+
+// Dispatch case
+const UPDATED_CART = "UPDATED_CART";
+
+const initialState = {
+  products: loadLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY, []),
+  cartItems: loadLocalStorageItems(CART_ITEMS_LOCAL_STORAGE_KEY, []),
+};
 
 function buildNewCartItem(cartItem) {
   if (cartItem.quantity >= cartItem.unitsInStock) {
@@ -27,16 +35,25 @@ function buildNewCartItem(cartItem) {
   };
 }
 
+function reducerCart(state, action) {
+  switch (action.type) {
+    case UPDATED_CART: {
+      return {
+        ...state,
+        cartItems: [...action.payload],
+      };
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
 function CartContextProvider({ children }) {
-  const [products] = useState(() =>
-    loadLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY, []),
-  );
-  const [cartItems, setCartItems] = useState(() =>
-    loadLocalStorageItems(CART_ITEMS_LOCAL_STORAGE_KEY, []),
-  );
+  const [state, dispatch] = useReducer(reducerCart, initialState);
+  const { products, cartItems } = state;
 
   useLocalStorage(products, PRODUCTS_LOCAL_STORAGE_KEY);
-
   useLocalStorage(cartItems, CART_ITEMS_LOCAL_STORAGE_KEY);
 
   // Methods
@@ -60,12 +77,15 @@ function CartContextProvider({ children }) {
         };
       });
 
-      setCartItems(updatedCartItems);
+      dispatch({ type: UPDATED_CART, payload: [...updatedCartItems] });
       return;
     }
 
     const updatedProduct = buildNewCartItem(foundProduct);
-    setCartItems((prevState) => [...prevState, updatedProduct]);
+    dispatch({
+      type: UPDATED_CART,
+      payload: [...cartItems, updatedProduct],
+    });
   }
 
   function handleChange(event, productId) {
@@ -80,13 +100,13 @@ function CartContextProvider({ children }) {
       return item;
     });
 
-    setCartItems(updatedCartItems);
+    dispatch({ type: UPDATED_CART, payload: [...updatedCartItems] });
   }
 
   function handleRemove(productId) {
     const updatedCartItems = cartItems.filter((item) => item.id !== productId);
 
-    setCartItems(updatedCartItems);
+    dispatch({ type: UPDATED_CART, payload: [...updatedCartItems] });
   }
 
   return (

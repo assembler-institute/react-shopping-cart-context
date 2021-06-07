@@ -68,7 +68,9 @@ function Sidebar() {
               }
             />
             {formik.touched.discountCode && formik.errors.discountCode && (
-              <p className="invalid-feedback">{formik.errors.discountCode}</p>
+              <p className="invalid-feedback my-1">
+                {formik.errors.discountCode}
+              </p>
             )}
           </label>
           <Button submitButton>Enter</Button>
