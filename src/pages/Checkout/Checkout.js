@@ -1,19 +1,18 @@
-import React from "react";
-import Cart from "../../components/Cart";
+import React, { useContext } from "react";
+
 import NewClientForm from "../../components/NewClientForm";
+import OrderSummary from "../../components/OrderSummary";
 import withLayout from "../../hoc/withLayout";
 
-function Checkout({ cartItems, handleChange, handleRemove }) {
+import CartContext from "../../context/cart-context";
+
+function Checkout() {
+  const { cartItems } = useContext(CartContext);
+
   return (
     <div className="row">
-      <div className="col col-8 border border-danger">Checkout page YAY</div>
-      <Cart
-        className="col col-4"
-        cartItems={cartItems}
-        handleRemove={handleRemove}
-        handleChange={handleChange}
-      />
-      <NewClientForm a={console.log(NewClientForm)} />
+      <NewClientForm />
+      <OrderSummary className="col col-4" cartItems={cartItems} />
     </div>
   );
 }

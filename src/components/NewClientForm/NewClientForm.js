@@ -68,7 +68,7 @@ function NewClientForm({ saveNewClient }) {
 
   return (
     <>
-      <form onSubmit={formik.handleSubmit}>
+      <form className="col col-8" onSubmit={formik.handleSubmit}>
         <Input
           type="text"
           label="Your name*"
