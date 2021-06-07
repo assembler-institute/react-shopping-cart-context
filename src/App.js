@@ -218,11 +218,25 @@ function App() {
         />
         <Route
           path="/checkout/step-2"
-          render={(routeProps) => <Step2 {...routeProps} />}
+          render={(routeProps) => (
+            <Step2
+              {...routeProps}
+              cartItems={cartItems}
+              handleRemove={handleRemove}
+              handleChange={handleChange}
+            />
+          )}
         />
         <Route
           path="/checkout/step-3"
-          render={(routeProps) => <Step3 {...routeProps} />}
+          render={(routeProps) => (
+            <Step3
+              {...routeProps}
+              cartItems={cartItems}
+              handleRemove={handleRemove}
+              handleChange={handleChange}
+            />
+          )}
         />
         <Route
           path="/checkout/step-4"

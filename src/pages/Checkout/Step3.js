@@ -1,11 +1,26 @@
 import React from "react";
-import ProgressBar from "../../components/ProgressBar";
 
-function Step3({ ...routeProps }) {
+import "./Step1.scss";
+
+// import ShoppingLayout from "../../hoc/ShoppingLayout";
+import ProgressBar from "../../components/ProgressBar";
+import OrderSummary from "../../components/OrderSummary";
+import FormShopping from "../../components/FormShopping";
+
+function Step3({ cartItems, handleRemove, handleChange, ...routeProps }) {
   return (
-    <div>
-      Step 3
-      <ProgressBar {...routeProps} />
+    <div className="step1__main--container">
+      <div className="step1__main--container--form">
+        <ProgressBar {...routeProps} />
+        <FormShopping />
+      </div>
+      <div className="col">
+        <OrderSummary
+          cartItems={cartItems}
+          handleRemove={handleRemove}
+          handleChange={handleChange}
+        />
+      </div>
     </div>
   );
 }

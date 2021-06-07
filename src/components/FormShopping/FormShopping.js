@@ -6,7 +6,10 @@ import BtnShopping from "../BtnShopping";
 function FormShopping() {
   return (
     <form>
-      <div>Form payment</div>
+      {/* <div>Step1</div>
+      <div>Step2</div>
+      <div>Step3</div>
+      <div>Step4</div> */}
       <BtnShopping />
     </form>
   );
