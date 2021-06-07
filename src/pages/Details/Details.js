@@ -1,5 +1,5 @@
-import { Formik } from "formik";
 import React, { useContext } from "react";
+import { Formik } from "formik";
 import Checkout from "../../hoc/withCheckout";
 import productSchemaDetails from "./product-schema";
 import Input from "../../components/Input";

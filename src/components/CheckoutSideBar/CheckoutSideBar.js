@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 // import { NavLink } from "react-router-dom";
+
+import ShoppingContext from "../../context";
 
 import "./CheckoutSideBar.scss";
 
 function CheckoutSideBar() {
+  const { cartItems } = useContext(ShoppingContext);
+
   return (
     <header className="bg-primary mb-4">
-      <h1>CheckoutSideBar</h1>
+      <h4>{JSON.stringify(cartItems)}</h4>
     </header>
   );
 }

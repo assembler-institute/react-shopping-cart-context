@@ -6,6 +6,9 @@ const ShoppingContext = createContext({
   prevPath: () => {},
   details: {},
   updateDetails: () => {},
+  cartItems: [],
+  adressData: {},
+  updateAdress: () => {},
 });
 
 export default ShoppingContext;
