@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import "./style.scss";
@@ -17,6 +17,56 @@ import loadLocalStorageItems from "./utils/loadLocalStorageItems";
 
 import checkoutContext from "./context/checkoutData";
 
+const SETISCHECKOUT = "SETISCHECKOUT";
+const RESETISCHECKOUT = "RESETISCHECKOUT";
+const PERSONALDETAILS = "PERSONALDETAILS";
+
+const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
+const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
+const CHECKOUT_DATA_LOCAL_STORAGE_KEY = "react-sc-state-checkout-data";
+
+// const initialState = {
+//   isCheckoutDisabled: true,
+//   // userName: "",
+//   // userPassword: "",
+//   name: "",
+//   // lastName: "",
+//   email: "",
+//   phonePrefix: "",
+//   phoneNumber: "",
+//   // address: "",
+//   // city: "",
+//   // ZC: 0,
+//   // country: "",
+//   // paymentMethod: "",
+//   // cardName: "",
+//   // cardNumber: 0,
+//   // cardExpiryDate: 0,
+//   // cardCVV: 0,
+//   // termsConditions: false,
+// };
+
+function reducer(state, action) {
+  switch (action.type) {
+    case SETISCHECKOUT: {
+      return { ...state, checkoutUserInfo: { isCheckoutDisabled: true } };
+    }
+    case RESETISCHECKOUT: {
+      return { ...state, checkoutUserInfo: { isCheckoutDisabled: false } };
+    }
+    case PERSONALDETAILS: {
+      console.log(action.payload);
+      return {
+        ...state,
+        checkoutUserInfo: { ...state.checkoutUserInfo, ...action.payload },
+      };
+    }
+    default: {
+      return state;
+    }
+  }
+}
+
 function buildNewCartItem(cartItem) {
   if (cartItem.quantity >= cartItem.unitsInStock) {
     return cartItem;
@@ -34,11 +84,12 @@ function buildNewCartItem(cartItem) {
   };
 }
 
-const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
-const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
-// const CHECKOUT_DATA_LOCAL_STORAGE_KEY = "react-sc-state-checkout-data";
-
 function App() {
+  const [state, dispatch] = useReducer(reducer, checkoutContext);
+  console.log(state);
+  const { checkoutUserInfo } = state;
+  // const { isCheckoutDisabled } = state;
+  console.log(checkoutUserInfo);
   const [products, setProducts] = useState(() =>
     loadLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY, []),
   );
@@ -51,14 +102,45 @@ function App() {
 
   useLocalStorage(products, PRODUCTS_LOCAL_STORAGE_KEY);
   useLocalStorage(cartItems, CART_ITEMS_LOCAL_STORAGE_KEY);
-  // useLocalStorage(checkoutData, CHECKOUT_DATA_LOCAL_STORAGE_KEY);
+  useLocalStorage(
+    checkoutContext._currentValue2,
+    CHECKOUT_DATA_LOCAL_STORAGE_KEY,
+  );
 
   const [isCheckoutDisabled, setIsCheckoutDisabled] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [loadingError, setLoadingError] = useState(null);
 
+  // function setLocalStorage(data, KEY_LOCAL_STORAGE) {
+  //   const prevData = JSON.parse(localStorage.getItem(KEY_LOCAL_STORAGE));
+  //   const updatedData = { ...prevData, ...data };
+  //   localStorage.setItem(KEY_LOCAL_STORAGE, JSON.stringify(updatedData));
+  // }
+
+  function setIsCheckout() {
+    dispatch({ type: SETISCHECKOUT });
+  }
+  function resetIsCheckout() {
+    dispatch({ type: RESETISCHECKOUT });
+  }
+
+  function setPersonalDetails(name, email, phonePrefix, phoneNumber) {
+    const PersonalDetailsData = {
+      name: name,
+      email: email,
+      phonePrefix: phonePrefix,
+      phoneNumber: phoneNumber,
+    };
+    dispatch({ type: PERSONALDETAILS, payload: PersonalDetailsData });
+    // setLocalStorage(PersonalDetailsData, CHECKOUT_DATA_LOCAL_STORAGE_KEY);
+  }
+
   useEffect(() => {
+    async function loadData() {
+      resetIsCheckout();
+    }
+    loadData();
     if (products.length === 0) {
       setIsLoading(true);
 
@@ -76,12 +158,23 @@ function App() {
     }
 
     if (cartItems.length === 0) {
-      setIsCheckoutDisabled(true);
-    }
-    if (cartItems.length !== 0) {
-      setIsCheckoutDisabled(false);
+      setIsCheckout();
+    } else {
+      resetIsCheckout();
     }
   }, []);
+
+  // useEffect(() => {
+  //   // const prevData = JSON.parse(
+  //   //   localStorage.getItem(CHECKOUT_DATA_LOCAL_STORAGE_KEY),
+  //   // );
+  //   // const updatedData = { ...prevData, ...state };
+  //   console.log(state);
+  //   // localStorage.setItem(
+  //   //   CHECKOUT_DATA_LOCAL_STORAGE_KEY,
+  //   //   JSON.stringify(updatedData),
+  //   // );
+  // }, [state]);
 
   function handleAddToCart(productId) {
     const prevCartItem = cartItems.find((item) => item.id === productId);
@@ -111,7 +204,7 @@ function App() {
     setCartItems((prevState) => [...prevState, updatedProduct]);
 
     if (cartItems) {
-      setIsCheckoutDisabled(false);
+      resetIsCheckout();
     }
   }
 
@@ -136,7 +229,7 @@ function App() {
     setCartItems(updatedCartItems);
 
     if (cartItems.length === 1) {
-      setIsCheckoutDisabled(true);
+      setIsCheckout();
     }
   }
 
@@ -209,7 +302,12 @@ function App() {
   }
 
   return (
-    <checkoutContext.Provider value={{ isCheckoutDisabled }}>
+    <checkoutContext.Provider
+      value={{
+        isCheckoutDisabled: checkoutUserInfo.isCheckoutDisabled,
+        setPersonalDetails: setPersonalDetails,
+      }}
+    >
       <BrowserRouter>
         <Switch>
           <Route path="/checkout/step-1">
