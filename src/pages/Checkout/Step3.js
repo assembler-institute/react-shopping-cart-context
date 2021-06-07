@@ -2,7 +2,7 @@ import React from "react";
 
 import "./Step1.scss";
 
-// import ShoppingLayout from "../../hoc/ShoppingLayout";
+import ShoppingLayout from "../../hoc/ShoppingLayout";
 import ProgressBar from "../../components/ProgressBar";
 import OrderSummary from "../../components/OrderSummary";
 import FormShopping from "../../components/FormShopping";
@@ -25,4 +25,4 @@ function Step3({ cartItems, handleRemove, handleChange, ...routeProps }) {
   );
 }
 
-export default Step3;
+export default ShoppingLayout(Step3);
