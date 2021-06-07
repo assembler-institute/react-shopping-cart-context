@@ -47,7 +47,7 @@ function CheckoutProfile() {
         />
         <Input
           type="text"
-          label="Enail"
+          label="Email"
           id="email"
           value={formik.values.email}
           placeholder="Your email"
