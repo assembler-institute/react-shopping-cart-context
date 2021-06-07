@@ -21,6 +21,7 @@ function Sidebar() {
     validationSchema: FormSchema,
     onSubmit: (values) => {
       console.log(values);
+      // event.target.blur(); ????
     },
   });
   return (
@@ -49,7 +50,7 @@ function Sidebar() {
           <strong>Discount code</strong>
         </h4>
         <form
-          className="d-flex align-content-center"
+          className="d-flex align-content-start"
           onSubmit={formik.handleSubmit}
         >
           <label className="mr-4 mb-0" htmlFor="discountCode">
