@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
+
+import FormContext from "../../../context/form-context";
 
 function CheckoutProfile() {
+  const { data: formData } = useContext(FormContext);
   return (
     <>
-      <h1>This is the profile page</h1>
+      <pre>{JSON.stringify(formData, null, 2)}</pre>
     </>
   );
 }
