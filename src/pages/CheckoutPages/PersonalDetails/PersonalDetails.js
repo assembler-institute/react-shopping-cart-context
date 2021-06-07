@@ -15,7 +15,7 @@ function PersonalDetails({ cartItems }) {
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
   const formik = useFormik({
-    initialValues: { name: "", email: "", phonePrefix: 0, phoneNumber: 0 },
+    initialValues: { name: "", email: "", phonePrefix: "", phoneNumber: "" },
     validationSchema: PersonalDetailsSchema,
     onSubmit: (values, { setSubmitting }) => {
       setSubmitting(true);
@@ -52,17 +52,27 @@ function PersonalDetails({ cartItems }) {
             hasErrorMessage={formik.touched.email}
             errorMessage={formik.errors.email}
           />
-          <Input
-            type="number"
-            label="Phone number"
-            id="phone-number"
-            value={formik.values.phoneNumber}
-            placeholder="Phone number"
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-            hasErrorMessage={formik.touched.phoneNumber}
-            errorMessage={formik.errors.phoneNumber}
-          />
+          <div className="phone-inputs">
+            <select>
+              <option value="grapefruit">Grapefruit</option>
+              <option value="lime">Lime</option>
+              <option selected value="coconut">
+                Coconut
+              </option>
+              <option value="mango">Mango</option>
+            </select>
+            <Input
+              type="text"
+              label="Phone number"
+              id="phoneNumber"
+              value={formik.values.phoneNumber}
+              placeholder="Phone number"
+              handleChange={formik.handleChange}
+              handleBlur={formik.handleBlur}
+              hasErrorMessage={formik.touched.phoneNumber}
+              errorMessage={formik.errors.phoneNumber}
+            />
+          </div>
           <Button
             submitButton
             block
