@@ -35,17 +35,27 @@ const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
 const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
 const INCREMENT = "INCREMENT";
 const DECREMENT = "DECREMENT";
+const UPDATEDETAILS = "UPDATEDETAILS";
 // const RESET = "RESET";
 function reducer(state, action) {
   switch (action.type) {
     case INCREMENT: {
       return {
+        ...state,
         path: state.path + 1,
       };
     }
     case DECREMENT: {
       return {
+        ...state,
         path: state.path - 1,
+      };
+    }
+    case UPDATEDETAILS: {
+      console.log(action.details);
+      return {
+        ...state,
+        details: action.details,
       };
     }
 
@@ -213,10 +223,21 @@ function App() {
   function prevPath() {
     dispatch({ type: DECREMENT });
   }
-
+  function updateDetails(newDetails) {
+    dispatch({
+      type: UPDATEDETAILS,
+      details: newDetails,
+    });
+  }
   return (
     <ShoppingContext.Provider
-      value={{ path: state.path, nextPath: nextPath, prevPath: prevPath }}
+      value={{
+        path: state.path,
+        details: state.details,
+        nextPath: nextPath,
+        prevPath: prevPath,
+        updateDetails: updateDetails,
+      }}
     >
       <BrowserRouter>
         <Switch>

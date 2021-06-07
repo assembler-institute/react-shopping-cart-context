@@ -1,11 +1,13 @@
-import React from "react";
 import { Formik } from "formik";
+import React, { useContext } from "react";
 import Checkout from "../../hoc/withCheckout";
 import productSchemaDetails from "./product-schema";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
+import ShoppingContext from "../../context";
 
 function Details() {
+  const { updateDetails } = useContext(ShoppingContext);
   return (
     <>
       <h1>Details</h1>
@@ -17,8 +19,7 @@ function Details() {
         }}
         validationSchema={productSchemaDetails}
         onSubmit={(values) => {
-          // eslint-disable-next-line
-          console.log(values);
+          updateDetails(values);
         }}
       >
         {({

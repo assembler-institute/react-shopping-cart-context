@@ -5,9 +5,9 @@ import "./CheckoutFooter.scss";
 import ShoppingContext from "../../context";
 
 function CheckoutFooter() {
-  const { path, nextPath, prevPath } = useContext(ShoppingContext);
+  const { path, nextPath, prevPath, details } = useContext(ShoppingContext);
   // eslint-disable-next-line
-  console.log(path);
+  console.log(details);
   return (
     <header className="bg-primary mb-4">
       <h1>CheckoutFooter</h1>
