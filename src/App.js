@@ -15,27 +15,7 @@ import * as api from "./api";
 import useLocalStorage from "./hooks/useLocalStorage";
 import loadLocalStorageItems from "./utils/loadLocalStorageItems";
 
-/*
-- checkoutInfo{
-    userName, 
-    userPassword,
-    name,
-    lastName,
-    email,  
-    phone prefix, 
-    phone  number,
-    address, 
-    city, 
-    ZC, 
-    country,
-    paymentMethod,
-    cardName,
-    cardNumber,
-    cardExpiryDate,
-    cardCVV,
-    termsConditions
-    }
-*/
+import checkoutContext from "./context/checkoutData";
 
 function buildNewCartItem(cartItem) {
   if (cartItem.quantity >= cartItem.unitsInStock) {
@@ -56,6 +36,7 @@ function buildNewCartItem(cartItem) {
 
 const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
 const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
+// const CHECKOUT_DATA_LOCAL_STORAGE_KEY = "react-sc-state-checkout-data";
 
 function App() {
   const [products, setProducts] = useState(() =>
@@ -64,10 +45,15 @@ function App() {
   const [cartItems, setCartItems] = useState(() =>
     loadLocalStorageItems(CART_ITEMS_LOCAL_STORAGE_KEY, []),
   );
+  // const [checkoutData, setCheckoutData] = useState(() =>
+  //   loadLocalStorageItems(CHECKOUT_DATA_LOCAL_STORAGE_KEY, []),
+  // );
 
   useLocalStorage(products, PRODUCTS_LOCAL_STORAGE_KEY);
   useLocalStorage(cartItems, CART_ITEMS_LOCAL_STORAGE_KEY);
+  // useLocalStorage(checkoutData, CHECKOUT_DATA_LOCAL_STORAGE_KEY);
 
+  const [isCheckoutDisabled, setIsCheckoutDisabled] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [loadingError, setLoadingError] = useState(null);
@@ -87,6 +73,13 @@ function App() {
           setHasError(true);
           setLoadingError(error.message);
         });
+    }
+
+    if (cartItems.length === 0) {
+      setIsCheckoutDisabled(true);
+    }
+    if (cartItems.length !== 0) {
+      setIsCheckoutDisabled(false);
     }
   }, []);
 
@@ -116,6 +109,10 @@ function App() {
 
     const updatedProduct = buildNewCartItem(foundProduct);
     setCartItems((prevState) => [...prevState, updatedProduct]);
+
+    if (cartItems) {
+      setIsCheckoutDisabled(false);
+    }
   }
 
   function handleChange(event, productId) {
@@ -137,6 +134,10 @@ function App() {
     const updatedCartItems = cartItems.filter((item) => item.id !== productId);
 
     setCartItems(updatedCartItems);
+
+    if (cartItems.length === 1) {
+      setIsCheckoutDisabled(true);
+    }
   }
 
   function handleDownVote(productId) {
@@ -208,48 +209,50 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/checkout/step-1">
-          <PersonalDetails
-            saveNewProduct={saveNewProduct}
-            cartItems={cartItems}
-          />
-        </Route>
-        <Route path="/checkout/step-2">
-          <BillingAddress fullWidth saveNewProduct={saveNewProduct} />
-        </Route>
-        <Route path="/checkout/step-3">
-          <PaymentDetails fullWidth saveNewProduct={saveNewProduct} />
-        </Route>
-        <Route path="/checkout/order-summary">
-          <OrderSummary fullWidth saveNewProduct={saveNewProduct} />
-        </Route>
-        <Route path="/new-product">
-          <NewProduct saveNewProduct={saveNewProduct} />
-        </Route>
-        <Route path="/" exact>
-          <Home
-            fullWidth
-            cartItems={cartItems}
-            products={products}
-            isLoading={isLoading}
-            hasError={hasError}
-            loadingError={loadingError}
-            handleDownVote={handleDownVote}
-            handleUpVote={handleUpVote}
-            handleSetFavorite={handleSetFavorite}
-            handleAddToCart={handleAddToCart}
-            handleRemove={handleRemove}
-            handleChange={handleChange}
-          />
-        </Route>
-        <Route path="*">
-          {/* Change to 404 not foun */}
-          <NewProduct saveNewProduct={saveNewProduct} />
-        </Route>
-      </Switch>
-    </BrowserRouter>
+    <checkoutContext.Provider value={{ isCheckoutDisabled }}>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/checkout/step-1">
+            <PersonalDetails
+              saveNewProduct={saveNewProduct}
+              cartItems={cartItems}
+            />
+          </Route>
+          <Route path="/checkout/step-2">
+            <BillingAddress fullWidth saveNewProduct={saveNewProduct} />
+          </Route>
+          <Route path="/checkout/step-3">
+            <PaymentDetails fullWidth saveNewProduct={saveNewProduct} />
+          </Route>
+          <Route path="/checkout/order-summary">
+            <OrderSummary fullWidth saveNewProduct={saveNewProduct} />
+          </Route>
+          <Route path="/new-product">
+            <NewProduct saveNewProduct={saveNewProduct} />
+          </Route>
+          <Route path="/" exact>
+            <Home
+              fullWidth
+              cartItems={cartItems}
+              products={products}
+              isLoading={isLoading}
+              hasError={hasError}
+              loadingError={loadingError}
+              handleDownVote={handleDownVote}
+              handleUpVote={handleUpVote}
+              handleSetFavorite={handleSetFavorite}
+              handleAddToCart={handleAddToCart}
+              handleRemove={handleRemove}
+              handleChange={handleChange}
+            />
+          </Route>
+          <Route path="*">
+            {/* Change to 404 not foun */}
+            <NewProduct saveNewProduct={saveNewProduct} />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    </checkoutContext.Provider>
   );
 }
 
