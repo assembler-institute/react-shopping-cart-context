@@ -10,7 +10,7 @@ const InformationSchema = Yup.object().shape({
     .min(2, "Please Enter your Full name!")
     .max(20)
     .required("Your last name is required"),
-  phone: Yup.number()
+  phone: Yup.string()
     .min(9, "Missing digits")
     .matches(phoneRegExp, "Phone number is not valid"),
   email: Yup.string().email("Invalid email").max(50).required("Required"),

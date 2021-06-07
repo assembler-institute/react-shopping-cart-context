@@ -189,7 +189,7 @@ function App() {
         <Route path="/checkout/order-summary" exact>
           <Confirmation />
         </Route>
-        <Route path="/checkout/step-2" exact>
+        <Route path="/checkout/step-3" exact>
           <Payment />
         </Route>
         <Route path="/checkout/step-2" exact>
