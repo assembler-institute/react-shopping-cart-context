@@ -197,7 +197,10 @@ function App() {
           />
         </Route>
         <Route path="/checkout/step-2" exact>
-          <Shipping />
+          <Shipping 
+            cartItems={cartItems}
+            handleRemove={handleRemove}
+            handleChange={handleChange}/>
         </Route>
         <Route path="/checkout/step-1" exact>
           <UserInformation
