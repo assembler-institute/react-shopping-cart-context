@@ -21,16 +21,51 @@ function Details() {
           console.log(values);
         }}
       >
-        {({ handleSubmit, values }) => (
+        {({
+          handleSubmit,
+          handleChange,
+          handleBlur,
+          errors,
+          values,
+          touched,
+          isValidating,
+          isValid,
+        }) => (
           <form onSubmit={handleSubmit}>
             <Input
               type="text"
               label="Write your name"
               id="userName"
               value={values.userName}
-              onChange={(event) => console.log(event.target.value)}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+              placeholder="Write your name"
+              hasErrorMessage={touched.userName}
+              errorMessage={errors.userName}
             />
-            <Button submitButton block>
+            <Input
+              type="email"
+              label="Write your email"
+              id="userEmail"
+              value={values.userEmail}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+              placeholder="Write your email"
+              hasErrorMessage={touched.userEmail}
+              errorMessage={errors.userEmail}
+            />
+            <Input
+              type="number"
+              label="Write your phone number"
+              id="userPhone"
+              value={values.userPhone}
+              handleChange={handleChange}
+              handleBlur={handleBlur}
+              placeholder="Write your phone"
+              hasErrorMessage={touched.userPhone}
+              errorMessage={errors.userPhone}
+            />
+            <Button submitButton block disabled={isValidating || !isValid}>
               Sumbit
             </Button>
           </form>
