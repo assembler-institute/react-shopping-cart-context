@@ -1,6 +1,6 @@
 import React, { createContext } from "react";
 
-const orderContext = createContext({
+export const orderContext = createContext({
   stepOne: {
     completed: false,
     name: "",
@@ -26,7 +26,7 @@ const orderContext = createContext({
   },
 });
 
-function CheckoutContext({ children }) {
+export function CheckoutContext({ children }) {
   return (
     <orderContext.Provider
       value={{
@@ -59,5 +59,3 @@ function CheckoutContext({ children }) {
     </orderContext.Provider>
   );
 }
-
-export default CheckoutContext;
