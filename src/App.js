@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
 import NewProduct from "./pages/NewProduct";
+import Checkout from "./pages/Checkout";
 
 import * as api from "./api";
 
@@ -184,6 +185,13 @@ function App() {
       <Switch>
         <Route path="/new-product">
           <NewProduct saveNewProduct={saveNewProduct} />
+        </Route>
+        <Route path="/checkout" exact>
+          <Checkout
+            cartItems={cartItems}
+            handleRemove={handleRemove}
+            handleChange={handleChange}
+          />
         </Route>
         <Route path="/" exact>
           <Home
