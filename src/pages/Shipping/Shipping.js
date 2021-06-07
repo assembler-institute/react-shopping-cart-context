@@ -1,4 +1,7 @@
 import React from "react";
+
+import { Link } from "react-router-dom";
+import Button from "../../components/Button";
 import ShippingForm from "../../components/ShippingForm/ShippingForm";
 import withLayout from "../../hoc/withLayout";
 import CartSummary from "../../components/CartSummary/CartSummary";
@@ -28,6 +31,11 @@ function Shipping({ cartItems, handleChange, handleRemove }) {
             />
 
             <hr />
+            <div className="col">
+              <Link to="/checkout/step-1">
+                <Button>Back</Button>
+              </Link>
+            </div>
           </header>
         </div>
       </div>

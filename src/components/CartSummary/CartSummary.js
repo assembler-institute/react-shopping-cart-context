@@ -1,8 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 import ShoppingCartItem from "../ShoppingCartItem";
-import Button from "../Button";
+// import Button from "../Button";
 
 function getCartTotal(cart) {
   return cart.reduce((accum, item) => {
@@ -47,12 +47,6 @@ function CartSummary({ cartItems, handleRemove, handleChange, ...props }) {
                   <strong>{getCartTotal(cartItems)}€</strong>
                 </h4>
               </div>
-              <hr />
-            </div>
-            <div className="col">
-              <Link to="/checkout/step-2">
-                <Button>Countiue with checkout</Button>
-              </Link>
             </div>
           </div>
         </div>

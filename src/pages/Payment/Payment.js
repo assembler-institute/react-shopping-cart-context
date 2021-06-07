@@ -1,4 +1,7 @@
 import React from "react";
+
+import { Link } from "react-router-dom";
+import Button from "../../components/Button";
 import withLayout from "../../hoc/withLayout";
 import CartSummary from "../../components/CartSummary/CartSummary";
 
@@ -24,6 +27,11 @@ function Payment({ cartItems, handleChange, handleRemove }) {
               handleChange={handleChange}
             />
             <hr />
+            <div className="col">
+              <Link to="/checkout/step-2">
+                <Button>Back</Button>
+              </Link>
+            </div>
           </header>
         </div>
       </div>
