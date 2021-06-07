@@ -12,25 +12,4 @@
   padding: 2%;
 }
 
-.cartItemsContainer {
-  max-height: 50vh;
-  overflow-y: scroll;
-}
 
-.gift {
-  &__CardContainer {
-    margin: 0 auto;
-  }
-  &__Form {
-    display: flex;
-    justify-content: space-around;
-  }
-  &__mockInput {
-    width: 75%;
-    // margin-right: 5px;
-    background-color: rgb(235, 235, 235);
-  }
-  &__Btn {
-    // margin-right: ;
-  }
-}
