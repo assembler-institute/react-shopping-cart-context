@@ -47,6 +47,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [loadingError, setLoadingError] = useState(null);
+  const [user, setUser] = useState([]);
 
   useEffect(() => {
     if (products.length === 0) {
@@ -183,14 +184,21 @@ function App() {
     setProducts((prevState) => [newProduct, ...prevState]);
   }
 
+  function saveUser(userData) {
+    setUser((prevState) => [...prevState, userData]);
+    // eslint-disable-next-line no-console
+    console.log(userData);
+  }
+
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/checkout/order-summary" exact>
-          <Confirmation />
+          <Confirmation user={user} />
         </Route>
         <Route path="/checkout/step-3" exact>
           <Payment
+            user={user}
             cartItems={cartItems}
             handleRemove={handleRemove}
             handleChange={handleChange}
@@ -198,6 +206,7 @@ function App() {
         </Route>
         <Route path="/checkout/step-2" exact>
           <Shipping
+            user={user}
             cartItems={cartItems}
             handleRemove={handleRemove}
             handleChange={handleChange}
@@ -205,6 +214,7 @@ function App() {
         </Route>
         <Route path="/checkout/step-1" exact>
           <UserInformation
+            saveUser={saveUser}
             cartItems={cartItems}
             handleRemove={handleRemove}
             handleChange={handleChange}
