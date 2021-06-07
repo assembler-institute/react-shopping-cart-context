@@ -1,5 +1,7 @@
 import React from "react";
 
+import "./Step1.scss";
+
 import ShoppingLayout from "../../hoc/ShoppingLayout";
 import ProgressBar from "../../components/ProgressBar";
 import OrderSummary from "../../components/OrderSummary";
