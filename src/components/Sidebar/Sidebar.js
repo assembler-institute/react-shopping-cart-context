@@ -79,10 +79,10 @@ function Sidebar() {
       </div>
 
       <div className="col sidebar-totals d-flex justify-content-between">
-        <h4 className="h5">
-          <strong>Total</strong>
+        <h4 className="h5">Total</h4>
+        <h4>
+          <strong> {total}€</strong>
         </h4>
-        <h4 className="h5">{total}€</h4>
       </div>
     </div>
   );
