@@ -190,18 +190,6 @@ function NewClientForm({ saveNewClient }) {
           hasErrorMessage={formik.touched.clientCardCvvCode}
           errorMessage={formik.errors.clientCardCvvCode}
         />
-        <Select
-          type="text"
-          label="Card CVV code*"
-          id="clientCardCvvCode"
-          value={formik.values.clientCardCvvCode}
-          placeholder="Insert card CVV code"
-          handleChange={formik.handleChange}
-          handleBlur={formik.handleBlur}
-          hasErrorMessage={formik.touched.clientCardCvvCode}
-          errorMessage={formik.errors.clientCardCvvCode}
-        />
-        />
         <Button
           submitButton
           block
