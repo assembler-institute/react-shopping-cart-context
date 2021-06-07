@@ -1,5 +1,6 @@
 import React from "react";
 import Cart from "../../components/Cart";
+import NewClientForm from "../../components/NewClientForm";
 import withLayout from "../../hoc/withLayout";
 
 function Checkout({ cartItems, handleChange, handleRemove }) {
@@ -12,6 +13,7 @@ function Checkout({ cartItems, handleChange, handleRemove }) {
         handleRemove={handleRemove}
         handleChange={handleChange}
       />
+      <NewClientForm a={console.log(NewClientForm)} />
     </div>
   );
 }

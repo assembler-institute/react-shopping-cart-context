@@ -1,36 +1,53 @@
 import * as Yup from "yup";
 
 const clientSchema = Yup.object().shape({
-  title: Yup.string()
-    .min(2, "The title is too short!")
-    .max(50, "The title is too long!")
-    .required("The title is required"),
-  price: Yup.number()
-    .integer("The price must be an integer")
-    .positive("The price must be a positive number")
-    .required("The price is required"),
-  img: Yup.string()
-    .url("The image url is invalid")
-    .required("The image url is required"),
-  shortDescription: Yup.string()
-    .min(2, "The short description is too short!")
-    .max(50, "The short description is too long!")
-    .required("The short description is required"),
-  longDescription: Yup.string()
-    .min(2, "The long description is too short!")
-    .max(100, "The long description is too long!")
-    .required("The long description is required"),
-  unitsInStock: Yup.number()
-    .integer("The units in stock must be an integer")
-    .positive("The units in stock must be a positive number")
-    .required("The units in stock is required"),
-  authorFirstName: Yup.string()
+  clientName: Yup.string()
+    .min(5, "You should write your full-name ")
+    .max(50, "Your full-name is too long")
+    .required("Your full-name is required"),
+  clientEmail: Yup.string()
+    .email("Invalid email, please try again")
+    .required("Your e-mail is required"),
+  clientPhone: Yup.number()
+    .typeError("That doesn't look like a phone number")
+    .positive("Your phone number can't start with a minus")
+    .integer("Your phone number can't include a decimal point")
+    .required("Your phone number is required"),
+  clientAdress: Yup.string()
+    .min(8, "Your adress is too short!")
+    .max(20, "Your adress is too long!")
+    .required("Your adress is required"),
+  clientCity: Yup.string()
+    .min(3, "Your city is too short!")
+    .max(10, "Your city is too long!")
+    .required("Your city is required"),
+  clientZip: Yup.string()
+    .min(3, "Your zip/post code is too short!")
+    .max(10, "Your zip/post code is too long!")
+    .required("Your zip/post code is required"),
+  clientCountry: Yup.string()
+    .min(3, "Your country/region is too short!")
+    .max(10, "Your country/region is too long!")
+    .required("Your country/region is required"),
+  clientCardholderName: Yup.string()
+    .min(5, "Your cardholder full-name is too short!")
+    .max(50, "Your cardholder full-name is too long!")
+    .required("Your cardholder full-name is required"),
+  clientCardExpiryDate: Yup.string()
+    .min(4, "Your card expiry date is too short!")
+    .max(4, "Your card expiry date is too long!")
+    .required("Your card expiry date is required"),
+  clientCardNumber: Yup.string()
+    .min(5, "Your card number is too short!")
+    .max(50, "Your card number is too long!")
+    .required("Your card number is required"),
+  clientCardCvvCode: Yup.string()
+    .min(3, "Your card CVV code is too short!")
+    .max(3, "Your card CVV code is too long!")
+    .required("Your card CVV code is required"),
+  clientConsent: Yup.string()
     .min(2, "The author first name is too short!")
     .required("The author first name is required"),
-  authorLastName: Yup.string()
-    .min(2, "The author last name is too short!")
-    .required("The author last name is required"),
-  authorEmail: Yup.string().email("Invalid email").required("Required"),
 });
 
 export default clientSchema;

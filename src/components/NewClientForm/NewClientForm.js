@@ -6,7 +6,7 @@ import { useFormik } from "formik";
 import Input from "../Input";
 import Button from "../Button";
 
-import clientSchema from "./product-schema";
+import clientSchema from "./client-schema";
 
 function addClientDetails(client) {
   return {
@@ -71,102 +71,136 @@ function NewClientForm({ saveNewClient }) {
       <form onSubmit={formik.handleSubmit}>
         <Input
           type="text"
-          label="Product title"
-          id="title"
-          value={formik.values.title}
-          placeholder="Product title"
+          label="Your name*"
+          id="clientName"
+          value={formik.values.clientName}
+          placeholder="Insert your full-name"
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
-          hasErrorMessage={formik.touched.title}
-          errorMessage={formik.errors.title}
-        />
-        <Input
-          type="number"
-          label="Product price"
-          id="price"
-          value={formik.values.price}
-          placeholder="Product price"
-          handleChange={formik.handleChange}
-          handleBlur={formik.handleBlur}
-          hasErrorMessage={formik.touched.price}
-          errorMessage={formik.errors.price}
-        />
-        <Input
-          type="text"
-          label="Product image url"
-          id="img"
-          value={formik.values.img}
-          placeholder="Product image url"
-          handleChange={formik.handleChange}
-          handleBlur={formik.handleBlur}
-          hasErrorMessage={formik.touched.img}
-          errorMessage={formik.errors.img}
-        />
-        <Input
-          type="text"
-          label="Short description"
-          id="shortDescription"
-          value={formik.values.shortDescription}
-          placeholder="Short description"
-          handleChange={formik.handleChange}
-          handleBlur={formik.handleBlur}
-          hasErrorMessage={formik.touched.shortDescription}
-          errorMessage={formik.errors.shortDescription}
-        />
-        <Input
-          type="text"
-          label="Long description"
-          id="longDescription"
-          value={formik.values.longDescription}
-          placeholder="Long description"
-          handleChange={formik.handleChange}
-          handleBlur={formik.handleBlur}
-          hasErrorMessage={formik.touched.longDescription}
-          errorMessage={formik.errors.longDescription}
-        />
-        <Input
-          type="number"
-          label="Units in stock"
-          id="unitsInStock"
-          value={formik.values.unitsInStock}
-          placeholder="Units in stock"
-          handleChange={formik.handleChange}
-          handleBlur={formik.handleBlur}
-          hasErrorMessage={formik.touched.unitsInStock}
-          errorMessage={formik.errors.unitsInStock}
-        />
-        <Input
-          type="text"
-          label="Author first name"
-          id="authorFirstName"
-          value={formik.values.authorFirstName}
-          placeholder="Author first name"
-          handleChange={formik.handleChange}
-          handleBlur={formik.handleBlur}
-          hasErrorMessage={formik.touched.authorFirstName}
-          errorMessage={formik.errors.authorFirstName}
-        />
-        <Input
-          type="text"
-          label="Author last name"
-          id="authorLastName"
-          value={formik.values.authorLastName}
-          placeholder="Author last name"
-          handleChange={formik.handleChange}
-          handleBlur={formik.handleBlur}
-          hasErrorMessage={formik.touched.authorLastName}
-          errorMessage={formik.errors.authorLastName}
+          hasErrorMessage={formik.touched.clientName}
+          errorMessage={formik.errors.clientName}
         />
         <Input
           type="email"
-          label="Author email"
-          id="authorEmail"
-          value={formik.values.authorEmail}
-          placeholder="Author email"
+          label="Email Adress*"
+          id="clientEmail"
+          value={formik.values.clientEmail}
+          placeholder="Insert your e-mail"
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
-          hasErrorMessage={formik.touched.authorEmail}
-          errorMessage={formik.errors.authorEmail}
+          hasErrorMessage={formik.touched.clientEmail}
+          errorMessage={formik.errors.clientEmail}
+        />
+        <Input
+          type="tel"
+          label="Mobile phone number*(falta el prefijo fijo)"
+          id="clientPhone"
+          value={formik.values.clientPhone}
+          placeholder="Insert your phone number"
+          handleChange={formik.handleChange}
+          handleBlur={formik.handleBlur}
+          hasErrorMessage={formik.touched.clientPhone}
+          errorMessage={formik.errors.clientPhone}
+        />
+        <Input
+          type="text"
+          label="Address*"
+          id="clientAdress"
+          value={formik.values.clientAdress}
+          placeholder="Insert your adress"
+          handleChange={formik.handleChange}
+          handleBlur={formik.handleBlur}
+          hasErrorMessage={formik.touched.clientAdress}
+          errorMessage={formik.errors.clientAdress}
+        />
+        <Input
+          type="text"
+          label="City*"
+          id="clientCity"
+          value={formik.values.clientCity}
+          placeholder="Insert yout city"
+          handleChange={formik.handleChange}
+          handleBlur={formik.handleBlur}
+          hasErrorMessage={formik.touched.clientCity}
+          errorMessage={formik.errors.clientCity}
+        />
+        <Input
+          type="text"
+          label="Zip/post code*"
+          id="clientZip"
+          value={formik.values.clientZip}
+          placeholder="insert your zip/post code number"
+          handleChange={formik.handleChange}
+          handleBlur={formik.handleBlur}
+          hasErrorMessage={formik.touched.clientZip}
+          errorMessage={formik.errors.clientZip}
+        />
+        <Input
+          type="text"
+          label="Country/region*"
+          id="clientCountry"
+          value={formik.values.clientCountry}
+          placeholder="insert your country/region"
+          handleChange={formik.handleChange}
+          handleBlur={formik.handleBlur}
+          hasErrorMessage={formik.touched.clientCountry}
+          errorMessage={formik.errors.clientCountry}
+        />
+        <Input
+          type="text"
+          label="Your Cardholder name*"
+          id="clientCardholderName"
+          value={formik.values.clientCardholderName}
+          placeholder="Insert cardHolder full-name"
+          handleChange={formik.handleChange}
+          handleBlur={formik.handleBlur}
+          hasErrorMessage={formik.touched.clientCardholderName}
+          errorMessage={formik.errors.clientCardholderName}
+        />
+        <Input
+          type="text"
+          label="Card expiry date*"
+          id="clientCardExpiryDate"
+          value={formik.values.clientCardExpiryDate}
+          placeholder="Insert card expiry date*"
+          handleChange={formik.handleChange}
+          handleBlur={formik.handleBlur}
+          hasErrorMessage={formik.touched.clientCardExpiryDate}
+          errorMessage={formik.errors.clientCardExpiryDate}
+        />
+        <Input
+          type="text"
+          label="Card number*"
+          id="clientCardNumber"
+          value={formik.values.clientCardNumber}
+          placeholder="Insert card number full-name"
+          handleChange={formik.handleChange}
+          handleBlur={formik.handleBlur}
+          hasErrorMessage={formik.touched.clientCardNumber}
+          errorMessage={formik.errors.clientCardNumber}
+        />
+        <Input
+          type="text"
+          label="Card CVV code*"
+          id="clientCardCvvCode"
+          value={formik.values.clientCardCvvCode}
+          placeholder="Insert card CVV code"
+          handleChange={formik.handleChange}
+          handleBlur={formik.handleBlur}
+          hasErrorMessage={formik.touched.clientCardCvvCode}
+          errorMessage={formik.errors.clientCardCvvCode}
+        />
+        <Select
+          type="text"
+          label="Card CVV code*"
+          id="clientCardCvvCode"
+          value={formik.values.clientCardCvvCode}
+          placeholder="Insert card CVV code"
+          handleChange={formik.handleChange}
+          handleBlur={formik.handleBlur}
+          hasErrorMessage={formik.touched.clientCardCvvCode}
+          errorMessage={formik.errors.clientCardCvvCode}
+        />
         />
         <Button
           submitButton
@@ -182,4 +216,4 @@ function NewClientForm({ saveNewClient }) {
   );
 }
 
-export default NewProductForm;
+export default NewClientForm;
