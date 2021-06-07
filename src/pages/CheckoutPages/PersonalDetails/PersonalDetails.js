@@ -38,8 +38,8 @@ function PersonalDetails({ cartItems }) {
             placeholder="Name"
             handleChange={formik.handleChange}
             handleBlur={formik.handleBlur}
-            hasErrorMessage={formik.touched.title}
-            errorMessage={formik.errors.title}
+            hasErrorMessage={formik.touched.name}
+            errorMessage={formik.errors.name}
           />
           <Input
             type="text"
@@ -49,8 +49,8 @@ function PersonalDetails({ cartItems }) {
             placeholder="Email"
             handleChange={formik.handleChange}
             handleBlur={formik.handleBlur}
-            hasErrorMessage={formik.touched.price}
-            errorMessage={formik.errors.price}
+            hasErrorMessage={formik.touched.email}
+            errorMessage={formik.errors.email}
           />
           <Input
             type="number"
@@ -60,8 +60,8 @@ function PersonalDetails({ cartItems }) {
             placeholder="Phone number"
             handleChange={formik.handleChange}
             handleBlur={formik.handleBlur}
-            hasErrorMessage={formik.touched.img}
-            errorMessage={formik.errors.img}
+            hasErrorMessage={formik.touched.phoneNumber}
+            errorMessage={formik.errors.phoneNumber}
           />
           <Button
             submitButton
