@@ -190,7 +190,11 @@ function App() {
           <Confirmation />
         </Route>
         <Route path="/checkout/step-3" exact>
-          <Payment />
+          <Payment
+            cartItems={cartItems}
+            handleRemove={handleRemove}
+            handleChange={handleChange}
+          />
         </Route>
         <Route path="/checkout/step-2" exact>
           <Shipping />
