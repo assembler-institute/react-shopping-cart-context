@@ -2,27 +2,7 @@ import React from "react";
 
 import "./ShoppingCartItem.scss";
 
-// import Button from "../Button";
-
-// function buildSelectOptions(unitsInStock) {
-//   return Array.from({ length: unitsInStock }, (_value, index) => {
-//     const currentIndex = index + 1;
-//     return (
-//       <option key={currentIndex} value={currentIndex}>
-//         {currentIndex}
-//       </option>
-//     );
-//   });
-// }
-
-function ShoppingCartItem({ img, title, price, quantity }) {
-  //   function onHandleChange(event) {
-  //     handleChange(event, id);
-  //   }
-  //   function onHandleRemove() {
-  //     handleRemove(id);
-  //   }
-
+function SummaryItem({ img, title, price, quantity }) {
   return (
     <div className="col">
       <div className="row flex-column">
@@ -43,12 +23,9 @@ function ShoppingCartItem({ img, title, price, quantity }) {
                     <strong>{price}€</strong>
                   </p>
                 </div>
-                <div className="col mt-auto">
-                  <div className="row">
-                    <div className="col col-6 col-lg-4">
-                      <div className="custom-select">{quantity}</div>
-                    </div>
-                  </div>
+                <div className="col d-flex flex-row justify-content-between bg-light m-auto">
+                  <div>quantity:</div>
+                  <div className="">{quantity}</div>
                 </div>
               </div>
             </div>
@@ -62,4 +39,4 @@ function ShoppingCartItem({ img, title, price, quantity }) {
   );
 }
 
-export default ShoppingCartItem;
+export default SummaryItem;
