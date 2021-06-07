@@ -9,7 +9,7 @@ function Shipping() {
       <div className="row">
         <div className="col col-6">
           <header className="jumbotron">
-            <h3>Your details</h3>
+            <h3>Shipping details</h3>
 
             <hr />
 
