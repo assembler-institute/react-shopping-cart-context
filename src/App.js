@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { useReducer } from "react";
 
 import Home from "./pages/Home";
 import NewProduct from "./pages/NewProduct";
@@ -33,8 +34,31 @@ function buildNewCartItem(cartItem) {
 
 const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
 const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
+const INCREMENT = "INCREMENT";
+const DECREMENT = "DECREMENT";
+// const RESET = "RESET";
+function reducer(state, action) {
+  switch (action.type) {
+    case INCREMENT: {
+      return {
+        path: state.path + 1,
+      };
+    }
+    case DECREMENT: {
+      return {
+        path: state.path - 1,
+      };
+    }
 
+    default: {
+      return state;
+    }
+  }
+}
 function App() {
+  const [state, dispatch] = useReducer(reducer, {
+    path: 1,
+  });
   const [products, setProducts] = useState(() =>
     loadLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY, []),
   );
@@ -48,7 +72,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [loadingError, setLoadingError] = useState(null);
-  const [path, setPath] = useState(1);
+  // const [path, setPath] = useState(1);
   useEffect(() => {
     if (products.length === 0) {
       setIsLoading(true);
@@ -185,11 +209,16 @@ function App() {
   }
 
   function nextPath() {
-    setPath(path + 1);
+    dispatch({ type: INCREMENT });
+  }
+  function prevPath() {
+    dispatch({ type: DECREMENT });
   }
 
   return (
-    <ShoppingContext.Provider value={{ path: path, nextPath: nextPath }}>
+    <ShoppingContext.Provider
+      value={{ path: state.path, nextPath: nextPath, prevPath: prevPath }}
+    >
       <BrowserRouter>
         <Switch>
           <Route path="/Checkout/step-1">
