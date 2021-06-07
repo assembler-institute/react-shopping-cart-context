@@ -76,13 +76,16 @@ function Address() {
               id="country"
               label="Country"
               name="country"
-              options={["Spain", "Argentina", "Morrocco"]}
+              options={["Spain", "Argentina", "Morocco"]}
               value={formik.values.country}
               handleChange={formik.handleChange}
               handleBlur={formik.handleBlur}
               hasErrorMessage={formik.touched.country}
               errorMessage={formik.errors.country}
             />
+
+            {/* {console.log("isValidating", formik.isValidating)}
+            {console.log("isValid", formik.isValid)} */}
 
             <div className="row">
               <div className="col col-12 mt-4 d-flex justify-content-center">

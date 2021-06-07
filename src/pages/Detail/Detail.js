@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 import { useFormik } from "formik";
 
 import Input from "../../components/Input";
+import PhoneInput from "../../components/PhoneInput";
 import Button from "../../components/Button";
 
 import withCheckoutLayout from "../../hoc/withCheckoutLayout";
@@ -61,7 +62,19 @@ function Detail() {
               hasErrorMessage={formik.touched.email}
               errorMessage={formik.errors.email}
             />
-            <Input
+            {/* <Input
+              type="phone"
+              label="Mobile phone number"
+              id="tel"
+              value={formik.values.tel}
+              placeholder="Phone number"
+              handleChange={formik.handleChange}
+              handleBlur={formik.handleBlur}
+              hasErrorMessage={formik.touched.tel}
+              errorMessage={formik.errors.tel}
+            /> */}
+
+            <PhoneInput
               type="phone"
               label="Mobile phone number"
               id="tel"
@@ -72,6 +85,11 @@ function Detail() {
               hasErrorMessage={formik.touched.tel}
               errorMessage={formik.errors.tel}
             />
+
+            {/* 
+            {console.log("isValidating", formik.isValidating)}
+            {console.log("isValid", formik.isValid)} */}
+
             <div className="row">
               <div className="col col-12 mt-4 d-flex justify-content-center">
                 <Button
