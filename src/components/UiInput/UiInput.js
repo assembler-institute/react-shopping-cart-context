@@ -11,6 +11,7 @@ function UiInput({
   handleBlur = () => {},
   errorMessage,
   hasErrorMessage,
+  type = "text",
   ...props
 }) {
   return (
@@ -25,7 +26,8 @@ function UiInput({
       onChange={handleChange}
       onBlur={handleBlur}
       error={hasErrorMessage && Boolean(errorMessage)}
-      helperText={errorMessage}
+      helperText={hasErrorMessage && errorMessage}
+      type={type}
       {...props}
     />
   );
