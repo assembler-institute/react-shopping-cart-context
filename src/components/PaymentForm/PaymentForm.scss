@@ -1,0 +1,42 @@
+$iconBoxBorder: solid 1px rgb(220, 222, 223);
+$iconBoxBorderRadius: 5px;
+
+.PaymentForm {
+  &__method {
+    height: 40px;
+    width: 300px;
+    border-radius: $iconBoxBorderRadius;
+    border: $iconBoxBorder;
+    .form-group {
+      margin: 0;
+      input {
+        margin-top: 10px;
+      }
+    }
+  }
+  &__cardIcon {
+    border-radius: $iconBoxBorderRadius;
+    height: 30px;
+  }
+  &__creditCard {
+    margin-top: 10px;
+    input {
+      background: #f9f9f9;
+      padding: 10px;
+      width: 100%;
+      border: none;
+      font-size: 14px;
+      color: rgb(0, 0, 0);
+      outline: none;
+      font-weight: 300;
+    }
+  }
+  &__checkbox {
+    .form-group {
+      margin-bottom: 0 !important;
+      input {
+        width: 15px;
+      }
+    }
+  }
+}

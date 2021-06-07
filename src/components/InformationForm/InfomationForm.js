@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-
-import { useFormik } from "formik";
 import { Redirect } from "react-router-dom";
 
-import InformationSchema from "./information-schema";
+import { useFormik } from "formik";
+
 import Input from "../Input";
 import Button from "../Button";
 
-// Try making a new customer function
+import InformationSchema from "./information-schema";
 
 function InformationForm() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -34,7 +33,6 @@ function InformationForm() {
       }, 500);
     },
   });
-
   return (
     <>
       <form onSubmit={formik.handleSubmit}>
@@ -105,7 +103,7 @@ function InformationForm() {
           errorMessage={formik.errors.addressTwo}
         />
         <Input
-          type="number"
+          type="text"
           label="Zip code"
           id="zipCode"
           value={formik.values.zipCode}
