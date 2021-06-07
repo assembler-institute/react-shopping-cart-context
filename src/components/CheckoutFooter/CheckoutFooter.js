@@ -1,17 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
-import { useContext } from "react";
 import Button from "../Button";
 import "./CheckoutFooter.scss";
 import ShoppingContext from "../../context";
 
 function CheckoutFooter() {
-  const { path, nextPath } = useContext(ShoppingContext);
-
+  const { path, nextPath, prevPath } = useContext(ShoppingContext);
+  // eslint-disable-next-line
   console.log(path);
   return (
     <header className="bg-primary mb-4">
       <h1>CheckoutFooter</h1>
+      <NavLink to={`/Checkout/step-${path - 1}`}>
+        <Button disabled={path - 1 === 0} onClick={prevPath}>
+          Previous
+        </Button>
+      </NavLink>
       <NavLink
         to={
           path + 1 === 4
@@ -19,7 +23,9 @@ function CheckoutFooter() {
             : `/Checkout/step-${path + 1}`
         }
       >
-        <Button onClick={nextPath}>Next</Button>
+        <Button onClick={nextPath}>
+          {path + 1 === 4 ? "Buy now" : "Next"}
+        </Button>
       </NavLink>
     </header>
   );

@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { useReducer } from "react";
 
 import Home from "./pages/Home";
 import NewProduct from "./pages/NewProduct";
