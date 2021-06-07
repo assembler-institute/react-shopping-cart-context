@@ -34,17 +34,18 @@ const initialValueFormData = {
 function Checkout({ processStep }) {
   const [formData, setFormData] = useState(initialValueFormData);
 
-  // function updateFormData({...newData}){
-  //   setFormData((prevData) => {
-  //     ...prevData,
-  //     ...newData
-  //   });
-  // }
+  function updateFormData(newData) {
+    setFormData((prevData) => {
+      console.log({ ...prevData, ...newData });
+      return { ...prevData, ...newData };
+    });
+  }
+
   return (
     <FormContext.Provider
       value={{
         data: formData,
-        setData: setFormData,
+        setData: updateFormData,
       }}
     >
       {processStep === PROFILE && <CheckoutProfile />}
