@@ -1,5 +1,7 @@
 import React from "react";
 
+const classNames = require("classnames");
+
 function Input({
   type = "text",
   label = "input-01",
@@ -10,17 +12,20 @@ function Input({
   handleBlur = () => {},
   errorMessage,
   hasErrorMessage,
+  shortInput = false,
   ...props
 }) {
+  const inputClasses = classNames({
+    "form-control": true,
+    "form-control is-invalid": hasErrorMessage && errorMessage,
+    "short-input": shortInput,
+  });
+
   return (
     <div className="form-group">
       <label htmlFor={id}>{label}</label>
       <input
-        className={
-          hasErrorMessage && errorMessage
-            ? "form-control is-invalid"
-            : "form-control"
-        }
+        className={inputClasses}
         id={id}
         name={id}
         type={type}
