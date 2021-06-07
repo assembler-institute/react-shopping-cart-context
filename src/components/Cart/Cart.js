@@ -10,7 +10,7 @@ function getCartTotal(cart) {
   }, 0);
 }
 
-function Cart({ cartItems, handleRemove, handleChange, ...props }) {
+function Cart({ cartItems, handleRemove, handleChange, checkout, ...props }) {
   return (
     <aside {...props}>
       <div className="row flex-column">
@@ -49,7 +49,7 @@ function Cart({ cartItems, handleRemove, handleChange, ...props }) {
               </div>
               <hr />
             </div>
-            {!props.checkout && (
+            {checkout && (
               <div className="col">
                 {/* <Button>Checkout</Button> */}
                 <ButtonLink page={DETAIL}>Checkout</ButtonLink>

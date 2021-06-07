@@ -12,7 +12,13 @@ import * as api from "./api";
 import useLocalStorage from "./hooks/useLocalStorage";
 import loadLocalStorageItems from "./utils/loadLocalStorageItems";
 
-import { HOME, NEWPRODUCT, DETAIL, PAYMENT, ADDRESS } from "./constants/routes";
+import {
+  HOME,
+  NEW_PRODUCT,
+  DETAIL,
+  PAYMENT,
+  ADDRESS,
+} from "./constants/routes";
 
 function buildNewCartItem(cartItem) {
   if (cartItem.quantity >= cartItem.unitsInStock) {
@@ -187,29 +193,18 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path={NEWPRODUCT}>
+        <Route path={NEW_PRODUCT}>
           <NewProduct saveNewProduct={saveNewProduct} />
         </Route>
-
-        <Route path={HOME} exact>
-          <Home
-            fullWidth
+        <Route path={DETAIL}>
+          <Detail
             cartItems={cartItems}
-            products={products}
-            isLoading={isLoading}
-            hasError={hasError}
-            loadingError={loadingError}
-            handleDownVote={handleDownVote}
-            handleUpVote={handleUpVote}
-            handleSetFavorite={handleSetFavorite}
-            handleAddToCart={handleAddToCart}
             handleRemove={handleRemove}
             handleChange={handleChange}
           />
         </Route>
-
-        <Route path={DETAIL}>
-          <Detail
+        <Route path={ADDRESS}>
+          <Address
             cartItems={cartItems}
             handleRemove={handleRemove}
             handleChange={handleChange}
@@ -222,9 +217,18 @@ function App() {
             handleChange={handleChange}
           />
         </Route>
-        <Route path={ADDRESS}>
-          <Address
+        <Route path={HOME}>
+          <Home
+            fullWidth
             cartItems={cartItems}
+            products={products}
+            isLoading={isLoading}
+            hasError={hasError}
+            loadingError={loadingError}
+            handleDownVote={handleDownVote}
+            handleUpVote={handleUpVote}
+            handleSetFavorite={handleSetFavorite}
+            handleAddToCart={handleAddToCart}
             handleRemove={handleRemove}
             handleChange={handleChange}
           />

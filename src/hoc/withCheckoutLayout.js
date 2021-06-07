@@ -36,7 +36,7 @@ function withCheckoutLayout(WrappedComponent) {
               <div className="col col-12">
                 <header className="jumbotron">
                   <h1 className="display-4 mb-5 text-danger">
-                    AQUI VA EL STEPPER
+                    AQUÍ VA EL STEPPER
                   </h1>
                   {/* <p className="lead">
                     This is the best shoe shop ever, you will never find a
@@ -50,7 +50,7 @@ function withCheckoutLayout(WrappedComponent) {
             </div>
 
             <Cart
-              checkout
+              checkout={false}
               className="col col-4"
               cartItems={props.cartItems}
               handleRemove={props.handleRemove}

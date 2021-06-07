@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 
-const AdressSchema = Yup.object().shape({
+const AddressSchema = Yup.object().shape({
   address: Yup.string()
     .required("The address is required")
     .min(2, "The address is too short!")
@@ -15,4 +15,4 @@ const AdressSchema = Yup.object().shape({
   country: Yup.string().required("The country is required"),
 });
 
-export default AdressSchema;
+export default AddressSchema;

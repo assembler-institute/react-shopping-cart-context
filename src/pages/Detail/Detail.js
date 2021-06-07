@@ -3,7 +3,9 @@ import { Redirect } from "react-router-dom";
 // import { v4 as uuid } from "uuid";
 import { useFormik } from "formik";
 
-import Input from "../../components/Input";
+// import Input from "../../components/Input";
+// import Input from "../../components/Input";
+import UiPhoneInput from "../../components/UiPhoneInput";
 import Button from "../../components/Button";
 
 import withCheckoutLayout from "../../hoc/withCheckoutLayout";
@@ -11,6 +13,7 @@ import withCheckoutLayout from "../../hoc/withCheckoutLayout";
 
 import detailSchema from "./Detail-schema";
 import { ADDRESS } from "../../constants/routes";
+import UiInput from "../../components/UiInput";
 
 function Detail() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -37,12 +40,14 @@ function Detail() {
     <>
       <div className="row">
         <div className="col col-8 m-auto">
-          <h3>Payment Details</h3>
+          <h3>Your Details</h3>
           <form onSubmit={formik.handleSubmit}>
-            <Input
+            <UiInput
               type="text"
               label="Your name"
               id="name"
+              name="name"
+              className="mb-4"
               value={formik.values.name}
               placeholder="User name"
               handleChange={formik.handleChange}
@@ -50,10 +55,12 @@ function Detail() {
               hasErrorMessage={formik.touched.name}
               errorMessage={formik.errors.name}
             />
-            <Input
+            <UiInput
               type="email"
               label="Email address"
               id="email"
+              name="email"
+              className="mb-4"
               value={formik.values.email}
               placeholder="User email address"
               handleChange={formik.handleChange}
@@ -61,9 +68,10 @@ function Detail() {
               hasErrorMessage={formik.touched.email}
               errorMessage={formik.errors.email}
             />
-            <Input
-              type="phone"
+            <UiPhoneInput
+              type="tel"
               label="Mobile phone number"
+              name="tel"
               id="tel"
               value={formik.values.tel}
               placeholder="Phone number"
@@ -72,6 +80,11 @@ function Detail() {
               hasErrorMessage={formik.touched.tel}
               errorMessage={formik.errors.tel}
             />
+
+            {/* 
+            {console.log("isValidating", formik.isValidating)}
+            {console.log("isValid", formik.isValid)} */}
+
             <div className="row">
               <div className="col col-12 mt-4 d-flex justify-content-center">
                 <Button

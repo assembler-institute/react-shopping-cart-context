@@ -59,6 +59,7 @@ function Home({
       </div>
 
       <Cart
+        checkout
         className="col col-4"
         cartItems={cartItems}
         handleRemove={handleRemove}

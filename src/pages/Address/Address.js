@@ -9,7 +9,7 @@ import UiSelect from "../../components/UiSelect";
 import UiInput from "../../components/UiInput";
 
 import withCheckoutLayout from "../../hoc/withCheckoutLayout";
-import AdressSchema from "./Address-schema";
+import AddressSchema from "./Address-schema";
 
 function Address() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -21,7 +21,7 @@ function Address() {
       zip: "",
       country: "",
     },
-    validationSchema: AdressSchema,
+    validationSchema: AddressSchema,
     onSubmit: (values, { setSubmitting }) => {
       //   const newProduct = addProductDetails(values);
       //   saveNewProduct(newProduct);
@@ -43,7 +43,7 @@ function Address() {
               id="address"
               label="Address"
               name="address"
-              className="mb-3"
+              className="mb-4"
               value={formik.values.address}
               handleChange={formik.handleChange}
               handleBlur={formik.handleBlur}
@@ -54,7 +54,7 @@ function Address() {
               id="city"
               label="City"
               name="city"
-              className="mb-3"
+              className="mb-4"
               value={formik.values.city}
               handleChange={formik.handleChange}
               handleBlur={formik.handleBlur}
@@ -65,7 +65,7 @@ function Address() {
               id="zip"
               label="Zip/code postal"
               name="zip"
-              className="mb-3"
+              className="mb-4"
               value={formik.values.zip}
               handleChange={formik.handleChange}
               handleBlur={formik.handleBlur}
@@ -76,13 +76,16 @@ function Address() {
               id="country"
               label="Country"
               name="country"
-              options={["Spain", "Argentina", "Morrocco"]}
+              options={["Spain", "Argentina", "Morocco"]}
               value={formik.values.country}
               handleChange={formik.handleChange}
               handleBlur={formik.handleBlur}
               hasErrorMessage={formik.touched.country}
               errorMessage={formik.errors.country}
             />
+
+            {/* {console.log("isValidating", formik.isValidating)}
+            {console.log("isValid", formik.isValid)} */}
 
             <div className="row">
               <div className="col col-12 mt-4 d-flex justify-content-center">
