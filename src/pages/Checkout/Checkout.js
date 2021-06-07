@@ -5,7 +5,7 @@ import withLayout from "../../hoc/withLayout";
 function Checkout({ cartItems, handleChange, handleRemove }) {
   return (
     <div className="row">
-      <div className="col col-8 border border-danger">Checkout page</div>
+      <div className="col col-8 border border-danger">Checkout page YAY</div>
       <Cart
         className="col col-4"
         cartItems={cartItems}
