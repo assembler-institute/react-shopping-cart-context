@@ -1,6 +1,6 @@
 import React from "react";
 
-import ShoppingCartItem from "../ShoppingCartItem";
+import CartItemShopping from "../CartItemShopping";
 
 function getCartTotal(cart) {
   return cart.reduce((accum, item) => {
@@ -19,17 +19,24 @@ function OrderSummary({ cartItems, handleRemove, handleChange, ...props }) {
         <div className="cartItemsContainer">
           {cartItems.length > 0 ? (
             cartItems.map((item) => (
-              <ShoppingCartItem
-                key={item.id}
-                id={item.id}
-                title={item.title}
-                price={item.price}
-                img={item.img}
-                quantity={item.quantity}
-                unitsInStock={item.unitsInStock}
-                handleRemove={handleRemove}
-                handleChange={handleChange}
-              />
+              <>
+                <CartItemShopping
+                  key={item.id}
+                  id={item.id}
+                  title={item.title}
+                  price={item.price}
+                  img={item.img}
+                  quantity={item.quantity}
+                  unitsInStock={item.unitsInStock}
+                  handleRemove={handleRemove}
+                  handleChange={handleChange}
+                />
+                {item !== cartItems[cartItems.length - 1] && (
+                  <div key={`d${item.id}`} className="col">
+                    <hr key={`h${item.id}`} />
+                  </div>
+                )}
+              </>
             ))
           ) : (
             <div className="col mb-4">
@@ -37,21 +44,8 @@ function OrderSummary({ cartItems, handleRemove, handleChange, ...props }) {
             </div>
           )}
         </div>
-
-        <div className="col shopping__cart__footer">
-          <div className="row row-cols-1 flex-column">
-            <div className="col">
-              <div className="d-flex justify-content-between">
-                <h4 className="h5">Total</h4>
-                <h4>
-                  <strong>{getCartTotal(cartItems)}€</strong>
-                </h4>
-              </div>
-              <hr />
-            </div>
-          </div>
-        </div>
         <div className="col">
+          <hr />
           <div className=" mb-4 gift__CardContainer">
             <p className="ml-4">Gift card/Discount code</p>
             <div className="gift__Form">
@@ -65,6 +59,19 @@ function OrderSummary({ cartItems, handleRemove, handleChange, ...props }) {
             </div>
           </div>
           <hr />
+        </div>
+        <div className="col shopping__cart__footer">
+          <div className="row row-cols-1 flex-column">
+            <div className="col">
+              <div className="d-flex justify-content-between">
+                <h4 className="h5">Total</h4>
+                <h4>
+                  <strong>{getCartTotal(cartItems)}€</strong>
+                </h4>
+              </div>
+              <hr />
+            </div>
+          </div>
         </div>
       </div>
     </aside>
