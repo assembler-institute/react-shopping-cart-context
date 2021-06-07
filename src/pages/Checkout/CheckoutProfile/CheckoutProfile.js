@@ -33,7 +33,7 @@ function CheckoutProfile() {
 
   return (
     <>
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} className="col col-8">
         <Input
           type="text"
           label="Name"
