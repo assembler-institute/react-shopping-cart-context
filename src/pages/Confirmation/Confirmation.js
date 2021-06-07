@@ -1,7 +1,8 @@
-import React from "react";
+// import React from "react";
+import withLayout from "../../hoc/withLayout";
 
-function Confirmation() {
-  return <h1>Confirmation</h1>;
+function Confirmation({ user }) {
+  return JSON.stringify({ user }, 2, null);
 }
 
-export default Confirmation;
+export default withLayout(Confirmation);

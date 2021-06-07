@@ -6,7 +6,7 @@ import ShippingForm from "../../components/ShippingForm/ShippingForm";
 import withLayout from "../../hoc/withLayout";
 import CartSummary from "../../components/CartSummary/CartSummary";
 
-function Shipping({ cartItems, handleChange, handleRemove }) {
+function Shipping({ cartItems, handleChange, handleRemove, user }) {
   return (
     <>
       <h1>Shipping Information</h1>
@@ -17,7 +17,7 @@ function Shipping({ cartItems, handleChange, handleRemove }) {
 
             <hr />
 
-            <ShippingForm />
+            <ShippingForm user={user} />
           </header>
         </div>
 
