@@ -2,36 +2,7 @@ import React from "react";
 
 import "./CartItemShopping.scss";
 
-import Button from "../Button";
-
-function buildSelectOptions(unitsInStock) {
-  return Array.from({ length: unitsInStock }, (_value, index) => {
-    const currentIndex = index + 1;
-    return (
-      <option key={currentIndex} value={currentIndex}>
-        {currentIndex}
-      </option>
-    );
-  });
-}
-
-function CartItemShopping({
-  id,
-  img,
-  title,
-  price,
-  quantity,
-  unitsInStock,
-  handleChange,
-  handleRemove,
-}) {
-  function onHandleChange(event) {
-    handleChange(event, id);
-  }
-  function onHandleRemove() {
-    handleRemove(id);
-  }
-
+function CartItemShopping({ img, title, price, quantity }) {
   return (
     <div className="col">
       <div className="row flex-column">
@@ -54,19 +25,7 @@ function CartItemShopping({
                 </div>
                 <div className="col mt-auto">
                   <div className="row">
-                    <div className="col col-6 col-lg-4">
-                      <select
-                        className="custom-select"
-                        onChange={onHandleChange}
-                        onBlur={onHandleChange}
-                        value={quantity}
-                      >
-                        {buildSelectOptions(unitsInStock)}
-                      </select>
-                    </div>
-                    <div className="col col-6 col-lg-8">
-                      <Button onClick={onHandleRemove}>Remove</Button>
-                    </div>
+                    <div className="col col-6 col-lg-4">X {quantity} </div>
                   </div>
                 </div>
               </div>

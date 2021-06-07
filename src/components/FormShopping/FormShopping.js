@@ -3,7 +3,9 @@ import React from "react";
 import "./FormShopping.scss";
 import BtnShopping from "../BtnShopping";
 
-function FormShopping() {
+function FormShopping({ ...routeProps }) {
+  console.log(routeProps);
+  // const [currentActive, setCurrentActive] = useState(1);
   return (
     <form>
       {/* <div>Step1</div>

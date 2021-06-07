@@ -12,7 +12,7 @@ function Step3({ cartItems, handleRemove, handleChange, ...routeProps }) {
     <div className="step1__main--container">
       <div className="step1__main--container--form">
         <ProgressBar {...routeProps} />
-        <FormShopping />
+        <FormShopping {...routeProps} />
       </div>
       <div className="col">
         <OrderSummary
