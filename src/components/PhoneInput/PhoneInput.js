@@ -21,15 +21,10 @@ function PhoneInput({
     "is-valid": hasErrorMessage && !errorMessage,
   });
 
-  const classes2 = cn({
-    "d-flex position-relative": true,
-    "is-invalid": hasErrorMessage && errorMessage,
-  });
-
   return (
     <div className="form-group mt-3">
       <label htmlFor={id}>{label}</label>
-      <div className={classes2}>
+      <div className="position-relative">
         <SelectCountryCode />
         <InputMask
           mask="999 999 999"
@@ -44,10 +39,10 @@ function PhoneInput({
           onBlur={handleBlur}
           {...props}
         />
+        {hasErrorMessage && errorMessage && (
+          <p className="invalid-feedback">{errorMessage}</p>
+        )}
       </div>
-      {hasErrorMessage && errorMessage && (
-        <p className="invalid-feedback">{errorMessage}</p>
-      )}
     </div>
   );
 }

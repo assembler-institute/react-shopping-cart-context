@@ -5,7 +5,7 @@ function UiInput({
   label = "input-01",
   id = "input-01",
   value = "",
-  name = "",
+  // name = "",
   // placeholder = "",
   handleChange = () => {},
   handleBlur = () => {},
@@ -16,16 +16,17 @@ function UiInput({
   return (
     <TextField
       fullWidth
+      required
       id={id}
       label={label}
-      name={name}
+      name={id}
       variant="filled"
       size="small"
       value={value}
       onChange={handleChange}
       onBlur={handleBlur}
       error={hasErrorMessage && Boolean(errorMessage)}
-      helperText={errorMessage}
+      helperText={hasErrorMessage && errorMessage}
       {...props}
     />
   );

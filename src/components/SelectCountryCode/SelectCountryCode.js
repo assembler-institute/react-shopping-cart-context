@@ -58,16 +58,17 @@ function SelectCountryCode() {
 
   return (
     <ul
-      className="p-0 m-0 h-100 position-absolute top-0 bottom-0"
+      className="p-0 m-0 position-absolute top-0 bottom-0"
       style={{
         listStyleType: "none",
       }}
     >
-      <li className="d-flex justify-content-between align-items-center px-2">
+      <li className="d-flex justify-content-between align-items-center px-2 py-1 ">
         <div className="d-flex align-items-center">
           <img style={{ maxWidth: "38px" }} src={country.flag} alt="spain" />
           <p className="my-0 mx-2">{country.code}</p>
         </div>
+
         <RiArrowDownSLine onClick={toggleDisplay} />
       </li>
 

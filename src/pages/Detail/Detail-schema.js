@@ -6,9 +6,7 @@ const DetailSchema = Yup.object().shape({
     .min(2, "The user name is too short!")
     .max(50, "The user name is too long!"),
   email: Yup.string().required("The email is required").email(),
-  tel: Yup.number()
-    .required("The phone number is required")
-    .min(9, "The phone number is too short!"),
+  tel: Yup.string().required("The phone number is required"),
 });
 
 export default DetailSchema;
