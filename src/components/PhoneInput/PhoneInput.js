@@ -1,9 +1,10 @@
 import React from "react";
 import cn from "clsx";
-import SelectCountryCode from "../SelectCountryCode/SelectCountryCode";
+import InputMask from "react-input-mask";
+import SelectCountryCode from "../SelectCountryCode";
 
 function PhoneInput({
-  type = "text",
+  // type = "text",
   label = "input-01",
   id = "input-01",
   value = "",
@@ -19,17 +20,24 @@ function PhoneInput({
     "is-invalid": hasErrorMessage && errorMessage,
     "is-valid": hasErrorMessage && !errorMessage,
   });
+
+  const classes2 = cn({
+    "d-flex position-relative": true,
+    "is-invalid": hasErrorMessage && errorMessage,
+  });
+
   return (
-    <div className="form-group mt-5">
+    <div className="form-group mt-3">
       <label htmlFor={id}>{label}</label>
-      <div className="d-flex position-relative">
+      <div className={classes2}>
         <SelectCountryCode />
-        <input
+        <InputMask
+          mask="999 999 999"
           className={classes}
           style={{ paddingLeft: "125px" }}
           id={id}
           name={id}
-          type={type}
+          type="tel"
           placeholder={placeholder}
           value={value}
           onChange={handleChange}

@@ -1,16 +1,19 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import cn from "clsx";
 import { RiArrowDownSLine } from "react-icons/ri";
 import flagSpain from "../../img/flag-spain.png";
 import flagMorocco from "../../img/flag-morocco.png";
 
+const availableCountries = [
+  { name: "Spain", flag: flagSpain, code: "+34" },
+  { name: "Morocco", flag: flagMorocco, code: "+212" },
+];
+
 function SelectCountryCode() {
   const [country, setCountry] = useState({});
   const [show, setShow] = useState(false);
-  const ulRef = useRef(null);
   useEffect(() => {
     setCountry({ flag: flagMorocco, code: "+212" });
-    // ulRef.current.style.display = "none";
   }, []);
 
   const classNames = cn({
@@ -19,12 +22,6 @@ function SelectCountryCode() {
   });
 
   function toggleDisplay() {
-    // const display = ulRef.current.style.display;
-    // if (display === "none") {
-    //   ulRef.current.style.display = "block";
-    //   return;
-    // }
-    // ulRef.current.style.display = "none";
     if (show) {
       setShow(false);
       return;
@@ -33,9 +30,30 @@ function SelectCountryCode() {
   }
 
   function handleClick(params = {}) {
-    // ulRef.current.style.display = "none";
     setShow(false);
     setCountry(params);
+  }
+
+  function countryOption(arr) {
+    return arr.map((_country) => {
+      return (
+        <li
+          key={_country.name}
+          className="list-group-item list-group-item-action px-2 py-0"
+        >
+          <button
+            type="button"
+            className="d-flex align-items-center w-100 bg-transparent border-0 p-0"
+            onClick={() =>
+              handleClick({ flag: _country.flag, code: _country.code })
+            }
+          >
+            <img style={{ maxWidth: "38px" }} src={_country.flag} alt="spain" />
+            <p className="my-0 mx-2">{_country.code}</p>
+          </button>
+        </li>
+      );
+    });
   }
 
   return (
@@ -53,28 +71,7 @@ function SelectCountryCode() {
         <RiArrowDownSLine onClick={toggleDisplay} />
       </li>
 
-      <ul ref={ulRef} className={classNames}>
-        <li className="list-group-item list-group-item-action px-2 py-1">
-          <button
-            type="button"
-            className="d-flex align-items-center w-100 bg-transparent border-0 p-0"
-            onClick={() => handleClick({ flag: flagMorocco, code: "+212" })}
-          >
-            <img style={{ maxWidth: "38px" }} src={flagMorocco} alt="spain" />
-            <p className="my-0 mx-2">+212</p>
-          </button>
-        </li>
-        <li className="list-group-item list-group-item-action px-2 py-1">
-          <button
-            type="button"
-            className="d-flex align-items-center w-100 bg-transparent border-0 p-0"
-            onClick={() => handleClick({ flag: flagSpain, code: "+34" })}
-          >
-            <img style={{ maxWidth: "38px" }} src={flagSpain} alt="spain" />
-            <p className="my-0 mx-2">+34</p>
-          </button>
-        </li>
-      </ul>
+      <ul className={classNames}>{countryOption(availableCountries)}</ul>
     </ul>
   );
 }

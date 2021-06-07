@@ -38,7 +38,7 @@ function Detail() {
     <>
       <div className="row">
         <div className="col col-8 m-auto">
-          <h3>Payment Details</h3>
+          <h3>Your Details</h3>
           <form onSubmit={formik.handleSubmit}>
             <Input
               type="text"
@@ -75,8 +75,9 @@ function Detail() {
             /> */}
 
             <PhoneInput
-              type="phone"
+              type="tel"
               label="Mobile phone number"
+              name="tel"
               id="tel"
               value={formik.values.tel}
               placeholder="Phone number"
