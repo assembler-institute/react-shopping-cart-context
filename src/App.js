@@ -201,6 +201,7 @@ function App() {
             cartItems={cartItems}
             handleRemove={handleRemove}
             handleChange={handleChange}
+            page={1}
           />
         </Route>
         <Route path={ADDRESS}>
@@ -208,6 +209,7 @@ function App() {
             cartItems={cartItems}
             handleRemove={handleRemove}
             handleChange={handleChange}
+            page={2}
           />
         </Route>
         <Route path={PAYMENT}>
@@ -215,6 +217,7 @@ function App() {
             cartItems={cartItems}
             handleRemove={handleRemove}
             handleChange={handleChange}
+            page={3}
           />
         </Route>
         <Route path={HOME}>

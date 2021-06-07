@@ -2,10 +2,10 @@ import React from "react";
 
 import Stepper from "../Stepper";
 
-export default function FormHeader() {
+export default function FormHeader({ page = 1 }) {
   return (
     <>
-      <Stepper activePage={1} />
+      <Stepper activePage={page} />
     </>
   );
 }

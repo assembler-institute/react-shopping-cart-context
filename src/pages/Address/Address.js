@@ -11,6 +11,8 @@ import UiInput from "../../components/UiInput";
 import withCheckoutLayout from "../../hoc/withCheckoutLayout";
 import AddressSchema from "./Address-schema";
 
+import { PAYMENT } from "../../constants/routes";
+
 function Address() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
@@ -100,7 +102,7 @@ function Address() {
             </div>
           </form>
 
-          {hasSubmitted && <Redirect to="/" />}
+          {hasSubmitted && <Redirect to={PAYMENT} />}
         </div>
       </div>
 
