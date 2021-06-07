@@ -10,13 +10,13 @@ const InformationSchema = Yup.object().shape({
     .min(2, "Please Enter your Full name!")
     .max(20)
     .required("Your last name is required"),
-  phone: Yup.string()
+  phone: Yup.number()
     .min(9, "Missing digits")
     .matches(phoneRegExp, "Phone number is not valid"),
   email: Yup.string().email("Invalid email").max(50).required("Required"),
   addressOne: Yup.string().min(2).max(50).required("Required"),
   addressTwo: Yup.string().min(2).max(50),
-  zipCode: Yup.string().min(5).required("Required"),
+  zipCode: Yup.number().min(5).required("Required"),
   country: Yup.string().min(5).max(20).required("Required"),
   state: Yup.string().required("Required"),
   city: Yup.string().required("Required"),
