@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { Link } from "react-router-dom";
 
@@ -7,13 +7,18 @@ import Button from "../Button";
 
 import { PROFILE_URL } from "../../utils/constants";
 
-function getCartTotal(cart) {
-  return cart.reduce((accum, item) => {
-    return accum + item.price * item.quantity;
-  }, 0);
-}
+import CartContext from "../../context/cart-context";
 
-function Cart({ cartItems, handleRemove, handleChange, ...props }) {
+import getCartTotal from "../../utils/getCartTotal";
+
+// function getCartTotal(cart) {
+//   return cart.reduce((accum, item) => {
+//     return accum + item.price * item.quantity;
+//   }, 0);
+// }
+
+function Cart({ ...props }) {
+  const { cartItems, remove, change } = useContext(CartContext);
   return (
     <aside {...props}>
       <div className="row flex-column">
@@ -32,8 +37,8 @@ function Cart({ cartItems, handleRemove, handleChange, ...props }) {
               img={item.img}
               quantity={item.quantity}
               unitsInStock={item.unitsInStock}
-              handleRemove={handleRemove}
-              handleChange={handleChange}
+              handleRemove={remove}
+              handleChange={change}
             />
           ))
         ) : (
@@ -54,7 +59,9 @@ function Cart({ cartItems, handleRemove, handleChange, ...props }) {
             </div>
             <div className="col">
               <Link to={PROFILE_URL}>
-                <Button>Checkout</Button>
+                <Button disabled={cartItems.length === 0 && true}>
+                  Checkout
+                </Button>
               </Link>
             </div>
           </div>
