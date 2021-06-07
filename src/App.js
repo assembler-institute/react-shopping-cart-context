@@ -44,32 +44,6 @@ function App() {
   const [hasError, setHasError] = useState(false);
   const [loadingError, setLoadingError] = useState(null);
 
-  const [stepOne, setStepOne] = useState({
-    completed: false,
-    name: "",
-    email: "",
-    country: "",
-    phone: "",
-  });
-
-  const [stepTwo, setStepTwo] = useState({
-    completed: false,
-    address: "",
-    city: "",
-    zip: "",
-    country: "",
-  });
-
-  const [stepThree, setStepThree] = useState({
-    completed: false,
-    payMethod: "",
-    cardHolder: "",
-    cardNumber: "",
-    expiryDate: "",
-    cvv: "",
-    acceptedTerms: false,
-  });
-
   useEffect(() => {
     if (products.length === 0) {
       setIsLoading(true);
