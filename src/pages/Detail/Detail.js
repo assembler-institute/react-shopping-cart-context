@@ -1,19 +1,15 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
-// import { v4 as uuid } from "uuid";
 import { useFormik } from "formik";
 
-// import Input from "../../components/Input";
-// import Input from "../../components/Input";
 import UiPhoneInput from "../../components/UiPhoneInput";
 import Button from "../../components/Button";
-
-import withCheckoutLayout from "../../hoc/withCheckoutLayout";
-// import Cart from "../../components/Cart";
+import UiInput from "../../components/UiInput";
+// import PhoneInput2 from "../../components/PhoneInput2";
 
 import detailSchema from "./Detail-schema";
 import { ADDRESS } from "../../constants/routes";
-import UiInput from "../../components/UiInput";
+import withCheckoutLayout from "../../hoc/withCheckoutLayout";
 
 function Detail() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -39,7 +35,7 @@ function Detail() {
   return (
     <>
       <div className="row">
-        <div className="col col-8 m-auto">
+        <div className="col col-sm-12 col-lg-8 m-auto">
           <h3>Your Details</h3>
           <form onSubmit={formik.handleSubmit}>
             <UiInput
@@ -80,10 +76,6 @@ function Detail() {
               hasErrorMessage={formik.touched.tel}
               errorMessage={formik.errors.tel}
             />
-
-            {/* 
-            {console.log("isValidating", formik.isValidating)}
-            {console.log("isValid", formik.isValid)} */}
 
             <div className="row">
               <div className="col col-12 mt-4 d-flex justify-content-center">

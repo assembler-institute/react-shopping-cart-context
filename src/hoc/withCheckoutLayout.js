@@ -4,6 +4,7 @@ import AppHeader from "../components/AppHeader";
 import Footer from "../components/Footer";
 import Main from "../components/Main";
 import Cart from "../components/Cart";
+import FormHeader from "../components/FormHeader";
 
 function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || "Component";
@@ -15,17 +16,6 @@ function withCheckoutLayout(WrappedComponent) {
     WrappedComponent,
   )})`;
 
-  // function WrapperComponent({ ...props }) {
-  //   return (
-  //     <>
-  //       <AppHeader />
-  //       <Main className={props.fullWidth ? "container-fluid" : "container"}>
-  //         <WrappedComponent {...props} />
-  //       </Main>
-  //       <Footer />
-  //     </>
-  //   );
-  // }
   function WrapperComponent({ ...props }) {
     return (
       <>
@@ -35,14 +25,7 @@ function withCheckoutLayout(WrappedComponent) {
             <div className="col col-8">
               <div className="col col-12">
                 <header className="jumbotron">
-                  <h1 className="display-4 mb-5 text-danger">
-                    AQUÍ VA EL STEPPER
-                  </h1>
-                  {/* <p className="lead">
-                    This is the best shoe shop ever, you will never find a
-                    better one.
-                  </p> */}
-                  {/* <p className="font-weight-bold">Buy now!</p> */}
+                  <FormHeader page={props.page} />
                 </header>
               </div>
 

@@ -37,10 +37,10 @@ function ShoppingCartItem({
       <div className="row flex-column">
         <div className="col">
           <div className="row">
-            <div className="col-12 col-xl-4 mb-3 mb-xl-0">
+            <div className="col-12 col-md-5 mb-3 mb-md-0">
               <img className="ShoppingCartItem__img" src={img} alt="" />
             </div>
-            <div className="col-12 col-xl-8">
+            <div className="col-12 col-md-7">
               <div className="row flex-column">
                 <div className="col">
                   <h4 className="h5">
