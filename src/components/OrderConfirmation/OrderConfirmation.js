@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import "./OrderConfirmation.scss";
-import { UserContext } from "../../Context/UserContext";
+import UserContext from "../../context/userContext";
 
 function OrderConfirmation() {
   const user = useContext(UserContext);

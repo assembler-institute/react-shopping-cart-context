@@ -13,7 +13,7 @@ import Payment from "./pages/Payment";
 import Shipping from "./pages/Shipping";
 import UserInformation from "./pages/UserInformation";
 import CartContextProvider from "./components/CartContextProvider";
-import { UserContext } from "./Context/UserContext";
+import UserContext from "./context/userContext";
 
 const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
 
@@ -136,7 +136,7 @@ function App() {
               <Shipping />
             </Route>
             <Route path="/checkout/step-1" exact>
-              <UserInformation />
+              <UserInformation saveUser={saveUser} />
             </Route>
             <Route path="/new-product">
               <NewProduct saveNewProduct={saveNewProduct} />
