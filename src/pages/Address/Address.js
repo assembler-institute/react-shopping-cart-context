@@ -38,7 +38,7 @@ function Address() {
   return (
     <>
       <div className="row">
-        <div className="col col-8 m-auto">
+        <div className="col col-sm-12 col-lg-8 m-auto">
           <h3>Billing Address</h3>
           <form onSubmit={formik.handleSubmit}>
             <UiInput

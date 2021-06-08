@@ -9,6 +9,9 @@ const useStyles = makeStyles((theme) => ({
   padding: {
     paddingLeft: theme.spacing(15),
   },
+  margin: {
+    marginLeft: theme.spacing(15),
+  },
 }));
 
 function TextMaskCustom(props) {
@@ -21,8 +24,6 @@ function TextMaskCustom(props) {
         inputRef(ref ? ref.inputElement : null);
       }}
       mask={[/[1-9]/, /\d/, /\d/, " ", /\d/, /\d/, /\d/, " ", /\d/, /\d/, /\d/]}
-      // placeholderChar={"\u2000"}
-      // showMask
     />
   );
 }
@@ -31,8 +32,6 @@ function UiPhoneInput({
   label = "input-01",
   id = "input-01",
   value = "",
-  // name = "",
-  // placeholder = "",
   handleChange = () => {},
   handleBlur = () => {},
   errorMessage,
@@ -43,7 +42,6 @@ function UiPhoneInput({
 
   return (
     <div className="form-group ">
-      {/* <label htmlFor={id}>{label}</label> */}
       <div className="position-relative">
         <TextField
           fullWidth
@@ -62,14 +60,11 @@ function UiPhoneInput({
             className: classes.padding,
             inputComponent: TextMaskCustom,
           }}
-          InputLabelProps={{ className: classes.padding }}
+          InputLabelProps={{ className: classes.margin }}
           {...props}
         />
         <SelectCountryCode />
       </div>
-      {/* {hasErrorMessage && errorMessage && (
-        <p className="invalid-feedback">{errorMessage}</p>
-      )} */}
     </div>
   );
 }
