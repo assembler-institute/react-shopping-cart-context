@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 
 import ShoppingCartItem from "../ShoppingCartItem";
 import Button from "../Button";
+import CartContext from "../../context/cartContext";
 
 function getCartTotal(cart) {
   return cart.reduce((accum, item) => {
@@ -10,9 +11,10 @@ function getCartTotal(cart) {
   }, 0);
 }
 
-function Cart({ cartItems, handleRemove, handleChange, ...props }) {
+function Cart() {
+  const { cartItems, handleChange, handleRemove } = useContext(CartContext);
   return (
-    <aside {...props}>
+    <aside className="col col-4">
       <div className="row flex-column">
         <div className="col shopping__cart__header">
           <h2 className="h3 mt-2">Shopping Cart</h2>
@@ -29,8 +31,8 @@ function Cart({ cartItems, handleRemove, handleChange, ...props }) {
               img={item.img}
               quantity={item.quantity}
               unitsInStock={item.unitsInStock}
-              handleRemove={handleRemove}
               handleChange={handleChange}
+              handleRemove={handleRemove}
             />
           ))
         ) : (

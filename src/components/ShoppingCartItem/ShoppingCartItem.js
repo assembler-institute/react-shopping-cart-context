@@ -26,7 +26,7 @@ function ShoppingCartItem({
   handleRemove,
 }) {
   function onHandleChange(event) {
-    handleChange(event, id);
+    handleChange(id, event);
   }
   function onHandleRemove() {
     handleRemove(id);

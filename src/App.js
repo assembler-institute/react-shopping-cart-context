@@ -12,37 +12,16 @@ import Confirmation from "./pages/Confirmation";
 import Payment from "./pages/Payment";
 import Shipping from "./pages/Shipping";
 import UserInformation from "./pages/UserInformation";
-
-function buildNewCartItem(cartItem) {
-  if (cartItem.quantity >= cartItem.unitsInStock) {
-    return cartItem;
-  }
-
-  return {
-    id: cartItem.id,
-    title: cartItem.title,
-    img: cartItem.img,
-    price: cartItem.price,
-    unitsInStock: cartItem.unitsInStock,
-    createdAt: cartItem.createdAt,
-    updatedAt: cartItem.updatedAt,
-    quantity: cartItem.quantity + 1,
-  };
-}
+import CartContextProvider from "./components/CartContextProvider";
 
 const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
-const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
 
 function App() {
   const [products, setProducts] = useState(() =>
     loadLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY, []),
   );
-  const [cartItems, setCartItems] = useState(() =>
-    loadLocalStorageItems(CART_ITEMS_LOCAL_STORAGE_KEY, []),
-  );
 
   useLocalStorage(products, PRODUCTS_LOCAL_STORAGE_KEY);
-  useLocalStorage(cartItems, CART_ITEMS_LOCAL_STORAGE_KEY);
 
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
@@ -65,55 +44,6 @@ function App() {
         });
     }
   }, []);
-
-  function handleAddToCart(productId) {
-    const prevCartItem = cartItems.find((item) => item.id === productId);
-    const foundProduct = products.find((product) => product.id === productId);
-
-    if (prevCartItem) {
-      const updatedCartItems = cartItems.map((item) => {
-        if (item.id !== productId) {
-          return item;
-        }
-
-        if (item.quantity >= item.unitsInStock) {
-          return item;
-        }
-
-        return {
-          ...item,
-          quantity: item.quantity + 1,
-        };
-      });
-
-      setCartItems(updatedCartItems);
-      return;
-    }
-
-    const updatedProduct = buildNewCartItem(foundProduct);
-    setCartItems((prevState) => [...prevState, updatedProduct]);
-  }
-
-  function handleChange(event, productId) {
-    const updatedCartItems = cartItems.map((item) => {
-      if (item.id === productId && item.quantity <= item.unitsInStock) {
-        return {
-          ...item,
-          quantity: Number(event.target.value),
-        };
-      }
-
-      return item;
-    });
-
-    setCartItems(updatedCartItems);
-  }
-
-  function handleRemove(productId) {
-    const updatedCartItems = cartItems.filter((item) => item.id !== productId);
-
-    setCartItems(updatedCartItems);
-  }
 
   function handleDownVote(productId) {
     const updatedProducts = products.map((product) => {
@@ -184,53 +114,40 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/checkout/order-summary" exact>
-          <Confirmation />
-        </Route>
-        <Route path="/checkout/step-3" exact>
-          <Payment
-            cartItems={cartItems}
-            handleRemove={handleRemove}
-            handleChange={handleChange}
-          />
-        </Route>
-        <Route path="/checkout/step-2" exact>
-          <Shipping
-            cartItems={cartItems}
-            handleRemove={handleRemove}
-            handleChange={handleChange}
-          />
-        </Route>
-        <Route path="/checkout/step-1" exact>
-          <UserInformation
-            cartItems={cartItems}
-            handleRemove={handleRemove}
-            handleChange={handleChange}
-          />
-        </Route>
-        <Route path="/new-product">
-          <NewProduct saveNewProduct={saveNewProduct} />
-        </Route>
-        <Route path="/" exact>
-          <Home
-            fullWidth
-            cartItems={cartItems}
-            products={products}
-            isLoading={isLoading}
-            hasError={hasError}
-            loadingError={loadingError}
-            handleDownVote={handleDownVote}
-            handleUpVote={handleUpVote}
-            handleSetFavorite={handleSetFavorite}
-            handleAddToCart={handleAddToCart}
-            handleRemove={handleRemove}
-            handleChange={handleChange}
-          />
-        </Route>
-      </Switch>
-    </BrowserRouter>
+    <CartContextProvider>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/checkout/order-summary" exact>
+            <Confirmation />
+          </Route>
+          <Route path="/checkout/step-3" exact>
+            <Payment />
+          </Route>
+          <Route path="/checkout/step-2" exact>
+            <Shipping />
+          </Route>
+          <Route path="/checkout/step-1" exact>
+            <UserInformation />
+          </Route>
+          <Route path="/new-product">
+            <NewProduct saveNewProduct={saveNewProduct} />
+          </Route>
+          <Route path="/" exact>
+            <Home
+              fullWidth
+              products={products}
+              isLoading={isLoading}
+              hasError={hasError}
+              loadingError={loadingError}
+              handleDownVote={handleDownVote}
+              handleUpVote={handleUpVote}
+              handleSetFavorite={handleSetFavorite}
+              handle
+            />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    </CartContextProvider>
   );
 }
 
