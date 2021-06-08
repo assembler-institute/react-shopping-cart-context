@@ -19,12 +19,33 @@ import checkoutContext from "./context/checkoutData";
 
 const SETISCHECKOUT = "SETISCHECKOUT";
 const RESETISCHECKOUT = "RESETISCHECKOUT";
-const PERSONALDETAILS = "PERSONALDETAILS";
 const LOADCHECKOUTDATA = "LOADCHECKOUTDATA";
 
 const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
 const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
 const CHECKOUT_DATA_LOCAL_STORAGE_KEY = "react-sc-state-checkout-data";
+
+const initialCheckoutContext = {
+  isCheckoutDisabled: true,
+  userName: "",
+  userPassword: "",
+  name: "",
+  lastName: "",
+  email: "",
+  phonePrefix: "",
+  phoneNumber: "",
+  address: "",
+  city: "",
+  ZC: 0,
+  country: "",
+  paymentMethod: "",
+  cardName: "",
+  cardNumber: 0,
+  cardExpiryDate: 0,
+  cardCVV: 0,
+  termsConditions: false,
+  setPersonalDetails: () => {},
+};
 
 function reducer(state, action) {
   switch (action.type) {
@@ -33,12 +54,6 @@ function reducer(state, action) {
     }
     case RESETISCHECKOUT: {
       return { ...state, isCheckoutDisabled: false };
-    }
-    case PERSONALDETAILS: {
-      return {
-        ...state,
-        ...action.payload,
-      };
     }
     case LOADCHECKOUTDATA: {
       return {
@@ -70,8 +85,9 @@ function buildNewCartItem(cartItem) {
 }
 
 function App() {
-  const [state, dispatch] = useReducer(reducer, checkoutContext);
+  const [state, dispatch] = useReducer(reducer, initialCheckoutContext);
   const { isCheckoutDisabled } = state;
+  console.log(state);
 
   const [products, setProducts] = useState(() =>
     loadLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY, []),
@@ -100,15 +116,9 @@ function App() {
     dispatch({ type: RESETISCHECKOUT });
   }
 
-  function setPersonalDetails(name, email, phonePrefix, phoneNumber) {
-    const PersonalDetailsData = {
-      name: name,
-      email: email,
-      phonePrefix: phonePrefix,
-      phoneNumber: phoneNumber,
-    };
-    dispatch({ type: PERSONALDETAILS, payload: PersonalDetailsData });
-    setLocalStorage(PersonalDetailsData, CHECKOUT_DATA_LOCAL_STORAGE_KEY);
+  function setCheckoutData(data) {
+    dispatch({ type: LOADCHECKOUTDATA, payload: data });
+    setLocalStorage(data, CHECKOUT_DATA_LOCAL_STORAGE_KEY);
   }
 
   useEffect(() => {
@@ -269,26 +279,23 @@ function App() {
     <checkoutContext.Provider
       value={{
         isCheckoutDisabled: isCheckoutDisabled,
-        setPersonalDetails: setPersonalDetails,
+        setCheckoutData: setCheckoutData,
         state: state,
       }}
     >
       <BrowserRouter>
         <Switch>
           <Route path="/checkout/step-1">
-            <PersonalDetails
-              saveNewProduct={saveNewProduct}
-              cartItems={cartItems}
-            />
+            <PersonalDetails cartItems={cartItems} />
           </Route>
           <Route path="/checkout/step-2">
-            <BillingAddress fullWidth saveNewProduct={saveNewProduct} />
+            <BillingAddress cartItems={cartItems} />
           </Route>
           <Route path="/checkout/step-3">
-            <PaymentDetails fullWidth saveNewProduct={saveNewProduct} />
+            <PaymentDetails />
           </Route>
           <Route path="/checkout/order-summary">
-            <OrderSummary fullWidth saveNewProduct={saveNewProduct} />
+            <OrderSummary />
           </Route>
           <Route path="/new-product">
             <NewProduct saveNewProduct={saveNewProduct} />
