@@ -22,9 +22,11 @@ import visaImage from "../../img/icons/payment/Visa.png";
 import mastercardImage from "../../img/icons/payment/MasterCard.png";
 import amexImage from "../../img/icons/payment/AmericanExpress.png";
 import CVV from "../../img/icons/payment/CVV.svg";
+import CreditCard from "../../components/CreditCard";
 
 function Payment() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [flip, setFlip] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -65,6 +67,9 @@ function Payment() {
     },
   ];
 
+  function handleFlip() {
+    return flip ? setFlip(false) : setFlip(true);
+  }
   return (
     <>
       <form onSubmit={formik.handleSubmit}>
@@ -163,6 +168,7 @@ function Payment() {
                       value={formik.values.cardCvv}
                       handleChange={formik.handleChange}
                       handleBlur={formik.handleBlur}
+                      handleFlip={handleFlip}
                       hasErrorMessage={formik.touched.cardCvv}
                       errorMessage={formik.errors.cardCvv}
                       type="number"
@@ -202,7 +208,14 @@ function Payment() {
                   </div>
                 </div>
               </div>
-              <div className="col-6">Aquí va la tarjeta</div>
+              {/* <div className="col-6">Aquí va la tarjeta</div> */}
+              <CreditCard
+                flip={flip}
+                cardNumber={formik.values.cardNumber}
+                cardCvv={formik.values.cardCvv}
+                cardExpiry={formik.values.cardExpiry}
+                carholderName={formik.values.carholderName}
+              />
             </div>
           </div>
           <div className="row">
