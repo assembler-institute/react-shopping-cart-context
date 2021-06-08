@@ -25,15 +25,6 @@ function getCartTotal(cart) {
 
 function CheckoutSideBar() {
   const { cartItems, handleChange, handleRemove } = useContext(ShoppingContext);
-  // const { id, img, title, price, quantity, unitsInStock } = cartItems;
-
-  // cartItems.map((item)=>{})
-  // function onHandleChange(event) {
-  //   handleChange(event, id);
-  // }
-  // function onHandleRemove() {
-  //   handleRemove(id);
-  // }
 
   return (
     <div className="col">
