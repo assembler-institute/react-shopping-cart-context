@@ -11,6 +11,25 @@ import { BILLING_URL, HOME_URL } from "../../../utils/constants";
 
 import formSchema from "../form-schema";
 
+const phonePrefixOptions = [
+  {
+    value: "+34",
+    display: "ES +34",
+  },
+  {
+    value: "+33",
+    display: "FR +33",
+  },
+  {
+    value: "+39",
+    display: "IT +39",
+  },
+  {
+    value: "+49",
+    display: "DE +49",
+  },
+];
+
 function CheckoutProfile() {
   const { data: formData, setData: updateFormData } = useContext(FormContext);
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -19,6 +38,7 @@ function CheckoutProfile() {
     initialValues: {
       name: formData.name,
       email: formData.email,
+      phonePrefix: formData.phonePrefix,
       phone: formData.phone,
     },
     validationSchema: formSchema,
@@ -57,6 +77,13 @@ function CheckoutProfile() {
           errorMessage={formik.errors.email}
         />
         <Input
+          withSelect={{
+            id: "phonePrefix",
+            options: phonePrefixOptions,
+            value: formik.values.phonePrefix,
+            handleChange: formik.handleChange,
+            handleBlur: formik.handleBlur,
+          }}
           type="text"
           label="Phone number"
           id="phone"
