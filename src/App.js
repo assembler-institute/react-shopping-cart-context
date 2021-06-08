@@ -9,6 +9,7 @@ import Step3 from "./pages/Checkout/Step3";
 import Step4 from "./pages/Checkout/Step4";
 
 import * as api from "./api";
+import ShoppingContext from "./context/ShoppingContext";
 
 import useLocalStorage from "./hooks/useLocalStorage";
 import loadLocalStorageItems from "./utils/loadLocalStorageItems";
@@ -47,6 +48,27 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [loadingError, setLoadingError] = useState(null);
+
+  // Destructuring context
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  // const [phoneNumber, setPhoneNumber] = useState("");
+  function submitStep1(valuesObject) {
+    setName(valuesObject.name);
+    setEmail(valuesObject.email);
+  }
+
+  // const [address, setAdress] = useState("");
+  // const [city, setCity] = useState("");
+  // const [zipCode, setZipCode] = useState("");
+  // const [country, setCountry] = useState("");
+
+  // const [paymentMethod, setPaymentMethod] = useState("");
+  // const [cardHolderName, setCardHolderName] = useState("");
+  // const [cardNumber, setCardNumber] = useState("");
+  // const [cardExpirationDate, setCardExpirationDate] = useState("");
+  // const [cardCVVCode, setcardCVVCode] = useState("");
+  // const [consentCheckbox, setconsentCheckbox] = useState("");
 
   useEffect(() => {
     if (products.length === 0) {
@@ -184,66 +206,87 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/new-product">
-          <NewProduct saveNewProduct={saveNewProduct} />
-        </Route>
-        <Route path="/" exact>
-          <Home
-            fullWidth
-            cartItems={cartItems}
-            products={products}
-            isLoading={isLoading}
-            hasError={hasError}
-            loadingError={loadingError}
-            handleDownVote={handleDownVote}
-            handleUpVote={handleUpVote}
-            handleSetFavorite={handleSetFavorite}
-            handleAddToCart={handleAddToCart}
-            handleRemove={handleRemove}
-            handleChange={handleChange}
+    <ShoppingContext.Provider
+      value={{
+        name: name,
+        email: email,
+        phoneNumber: "",
+        submitStep1: submitStep1,
+        address: "",
+        city: "",
+        zipCode: "",
+        country: "",
+        submitStep2: () => {},
+        paymentMethod: "",
+        cardHolderName: "",
+        cardNumber: "",
+        cardExpirationDate: "",
+        cardCVVCode: "",
+        consentCheckbox: "",
+        submitStep3: () => {},
+      }}
+    >
+      <BrowserRouter>
+        <Switch>
+          <Route path="/new-product">
+            <NewProduct saveNewProduct={saveNewProduct} />
+          </Route>
+          <Route path="/" exact>
+            <Home
+              fullWidth
+              cartItems={cartItems}
+              products={products}
+              isLoading={isLoading}
+              hasError={hasError}
+              loadingError={loadingError}
+              handleDownVote={handleDownVote}
+              handleUpVote={handleUpVote}
+              handleSetFavorite={handleSetFavorite}
+              handleAddToCart={handleAddToCart}
+              handleRemove={handleRemove}
+              handleChange={handleChange}
+            />
+          </Route>
+          <Route
+            path="/checkout/step-1"
+            render={(routeProps) => (
+              <Step1
+                {...routeProps}
+                cartItems={cartItems}
+                handleRemove={handleRemove}
+                handleChange={handleChange}
+              />
+            )}
           />
-        </Route>
-        <Route
-          path="/checkout/step-1"
-          render={(routeProps) => (
-            <Step1
-              {...routeProps}
-              cartItems={cartItems}
-              handleRemove={handleRemove}
-              handleChange={handleChange}
-            />
-          )}
-        />
-        <Route
-          path="/checkout/step-2"
-          render={(routeProps) => (
-            <Step2
-              {...routeProps}
-              cartItems={cartItems}
-              handleRemove={handleRemove}
-              handleChange={handleChange}
-            />
-          )}
-        />
-        <Route
-          path="/checkout/step-3"
-          render={(routeProps) => (
-            <Step3
-              {...routeProps}
-              cartItems={cartItems}
-              handleRemove={handleRemove}
-              handleChange={handleChange}
-            />
-          )}
-        />
-        <Route
-          path="/checkout/step-4"
-          render={(routeProps) => <Step4 {...routeProps} />}
-        />
-      </Switch>
-    </BrowserRouter>
+          <Route
+            path="/checkout/step-2"
+            render={(routeProps) => (
+              <Step2
+                {...routeProps}
+                cartItems={cartItems}
+                handleRemove={handleRemove}
+                handleChange={handleChange}
+              />
+            )}
+          />
+          <Route
+            path="/checkout/step-3"
+            render={(routeProps) => (
+              <Step3
+                {...routeProps}
+                cartItems={cartItems}
+                handleRemove={handleRemove}
+                handleChange={handleChange}
+              />
+            )}
+          />
+          <Route
+            path="/checkout/step-4"
+            render={(routeProps) => <Step4 {...routeProps} />}
+          />
+        </Switch>
+      </BrowserRouter>
+    </ShoppingContext.Provider>
   );
 }
 

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable no-console */
+import React, { useState, useEffect, useContext } from "react";
 import { Redirect } from "react-router-dom";
 // import { v4 as uuid } from "uuid";
 import { useFormik } from "formik";
@@ -7,12 +8,29 @@ import "./FormShopping.scss";
 
 import InputShopping from "../InputShopping";
 import ButtonShopping from "../ButtonShopping";
+import ShoppingContext from "../../context/ShoppingContext";
 
 import formSchemaShopping from "./formSchemaShopping";
 
-function FormShopping({ props, ...routeProps }) {
+function FormShopping({ ...routeProps }) {
   const [Url, setUrl] = useState(null);
   const [hasSubmitted, setHasSubmitted] = useState(false);
+  const {
+    name,
+    email,
+    phoneNumber,
+    submitStep1,
+    address,
+    city,
+    zipCode,
+    country,
+    paymentMethod,
+    cardHolderName,
+    cardNumber,
+    cardExpirationDate,
+    cardCVVCode,
+    consentCheckbox,
+  } = useContext(ShoppingContext);
 
   useEffect(() => {
     const activeUrl = routeProps.match.path;
@@ -22,15 +40,50 @@ function FormShopping({ props, ...routeProps }) {
     // console.log(activeUrlId);
   }, []);
 
+  function initialValuesSetup() {
+    let initialValues = {};
+    switch (Url) {
+      case 1:
+        initialValues = {
+          name: name,
+          email: email,
+          phoneNumber: phoneNumber,
+        };
+        // console.log("props-->", props);
+        console.log("initialValues-->", initialValues);
+        break;
+      case 2:
+        initialValues = {
+          address: address,
+          city: city,
+          zipCode: zipCode,
+          country: country,
+        };
+        break;
+      case 3:
+        initialValues = {
+          paymentMethod: paymentMethod,
+          cardHolderName: cardHolderName,
+          cardNumber: cardNumber,
+          cardExpirationDate: cardExpirationDate,
+          cardCVVCode: cardCVVCode,
+          consentCheckbox: consentCheckbox,
+        };
+        break;
+      default:
+        // eslint-disable-next-line no-console
+        console.log("initialValues -->", initialValues);
+    }
+    return initialValues;
+  }
+
   const formik = useFormik({
-    initialValues: {
-      name: "",
-      email: "",
-    },
+    initialValues: initialValuesSetup(),
     validationSchema: formSchemaShopping,
     onSubmit: (values, { setSubmitting }) => {
       setSubmitting(true);
-      console.log(values);
+      submitStep1(values);
+      // console.log(values);
 
       setTimeout(() => {
         setHasSubmitted(true);
