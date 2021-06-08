@@ -20,45 +20,30 @@ import checkoutContext from "./context/checkoutData";
 const SETISCHECKOUT = "SETISCHECKOUT";
 const RESETISCHECKOUT = "RESETISCHECKOUT";
 const PERSONALDETAILS = "PERSONALDETAILS";
+const LOADCHECKOUTDATA = "LOADCHECKOUTDATA";
 
 const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
 const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
 const CHECKOUT_DATA_LOCAL_STORAGE_KEY = "react-sc-state-checkout-data";
 
-// const initialState = {
-//   isCheckoutDisabled: true,
-//   // userName: "",
-//   // userPassword: "",
-//   name: "",
-//   // lastName: "",
-//   email: "",
-//   phonePrefix: "",
-//   phoneNumber: "",
-//   // address: "",
-//   // city: "",
-//   // ZC: 0,
-//   // country: "",
-//   // paymentMethod: "",
-//   // cardName: "",
-//   // cardNumber: 0,
-//   // cardExpiryDate: 0,
-//   // cardCVV: 0,
-//   // termsConditions: false,
-// };
-
 function reducer(state, action) {
   switch (action.type) {
     case SETISCHECKOUT: {
-      return { ...state, checkoutUserInfo: { isCheckoutDisabled: true } };
+      return { ...state, isCheckoutDisabled: true };
     }
     case RESETISCHECKOUT: {
-      return { ...state, checkoutUserInfo: { isCheckoutDisabled: false } };
+      return { ...state, isCheckoutDisabled: false };
     }
     case PERSONALDETAILS: {
-      console.log(action.payload);
       return {
         ...state,
-        checkoutUserInfo: { ...state.checkoutUserInfo, ...action.payload },
+        ...action.payload,
+      };
+    }
+    case LOADCHECKOUTDATA: {
+      return {
+        ...state,
+        ...action.payload,
       };
     }
     default: {
@@ -86,37 +71,27 @@ function buildNewCartItem(cartItem) {
 
 function App() {
   const [state, dispatch] = useReducer(reducer, checkoutContext);
-  console.log(state);
-  const { checkoutUserInfo } = state;
-  // const { isCheckoutDisabled } = state;
-  console.log(checkoutUserInfo);
+  const { isCheckoutDisabled } = state;
+
   const [products, setProducts] = useState(() =>
     loadLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY, []),
   );
   const [cartItems, setCartItems] = useState(() =>
     loadLocalStorageItems(CART_ITEMS_LOCAL_STORAGE_KEY, []),
   );
-  // const [checkoutData, setCheckoutData] = useState(() =>
-  //   loadLocalStorageItems(CHECKOUT_DATA_LOCAL_STORAGE_KEY, []),
-  // );
 
   useLocalStorage(products, PRODUCTS_LOCAL_STORAGE_KEY);
   useLocalStorage(cartItems, CART_ITEMS_LOCAL_STORAGE_KEY);
-  useLocalStorage(
-    checkoutContext._currentValue2,
-    CHECKOUT_DATA_LOCAL_STORAGE_KEY,
-  );
 
-  const [isCheckoutDisabled, setIsCheckoutDisabled] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [loadingError, setLoadingError] = useState(null);
 
-  // function setLocalStorage(data, KEY_LOCAL_STORAGE) {
-  //   const prevData = JSON.parse(localStorage.getItem(KEY_LOCAL_STORAGE));
-  //   const updatedData = { ...prevData, ...data };
-  //   localStorage.setItem(KEY_LOCAL_STORAGE, JSON.stringify(updatedData));
-  // }
+  function setLocalStorage(data, KEY_LOCAL_STORAGE) {
+    const prevData = JSON.parse(localStorage.getItem(KEY_LOCAL_STORAGE));
+    const updatedData = { ...prevData, ...data };
+    localStorage.setItem(KEY_LOCAL_STORAGE, JSON.stringify(updatedData));
+  }
 
   function setIsCheckout() {
     dispatch({ type: SETISCHECKOUT });
@@ -133,14 +108,15 @@ function App() {
       phoneNumber: phoneNumber,
     };
     dispatch({ type: PERSONALDETAILS, payload: PersonalDetailsData });
-    // setLocalStorage(PersonalDetailsData, CHECKOUT_DATA_LOCAL_STORAGE_KEY);
+    setLocalStorage(PersonalDetailsData, CHECKOUT_DATA_LOCAL_STORAGE_KEY);
   }
 
   useEffect(() => {
-    async function loadData() {
-      resetIsCheckout();
-    }
-    loadData();
+    const checkoutData = loadLocalStorageItems(
+      CHECKOUT_DATA_LOCAL_STORAGE_KEY,
+      [],
+    );
+    dispatch({ type: LOADCHECKOUTDATA, payload: checkoutData });
     if (products.length === 0) {
       setIsLoading(true);
 
@@ -163,18 +139,6 @@ function App() {
       resetIsCheckout();
     }
   }, []);
-
-  // useEffect(() => {
-  //   // const prevData = JSON.parse(
-  //   //   localStorage.getItem(CHECKOUT_DATA_LOCAL_STORAGE_KEY),
-  //   // );
-  //   // const updatedData = { ...prevData, ...state };
-  //   console.log(state);
-  //   // localStorage.setItem(
-  //   //   CHECKOUT_DATA_LOCAL_STORAGE_KEY,
-  //   //   JSON.stringify(updatedData),
-  //   // );
-  // }, [state]);
 
   function handleAddToCart(productId) {
     const prevCartItem = cartItems.find((item) => item.id === productId);
@@ -304,8 +268,9 @@ function App() {
   return (
     <checkoutContext.Provider
       value={{
-        isCheckoutDisabled: checkoutUserInfo.isCheckoutDisabled,
+        isCheckoutDisabled: isCheckoutDisabled,
         setPersonalDetails: setPersonalDetails,
+        state: state,
       }}
     >
       <BrowserRouter>

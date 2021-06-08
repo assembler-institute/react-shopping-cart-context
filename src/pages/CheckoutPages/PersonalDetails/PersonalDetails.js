@@ -15,10 +15,15 @@ const isCheckout = true;
 
 function PersonalDetails({ cartItems }) {
   const [hasSubmitted, setHasSubmitted] = useState(false);
-  const { setPersonalDetails } = useContext(checkoutContext);
+  const { setPersonalDetails, state } = useContext(checkoutContext);
 
   const formik = useFormik({
-    initialValues: { name: "", email: "", phonePrefix: "+34", phoneNumber: "" },
+    initialValues: {
+      name: state.name ? state.name : "",
+      email: state.email,
+      phonePrefix: state.phonePrefix,
+      phoneNumber: state.phoneNumber,
+    },
     validationSchema: PersonalDetailsSchema,
     onSubmit: (values, { setSubmitting }) => {
       setSubmitting(true);
