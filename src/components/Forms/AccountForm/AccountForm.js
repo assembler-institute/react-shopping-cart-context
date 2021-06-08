@@ -1,38 +1,12 @@
 import React, { useState } from "react";
 import { Redirect, Link } from "react-router-dom";
-// import { v4 as uuid } from "uuid";
 import { useFormik } from "formik";
 import formHeader from "../../../hoc/formHeader";
 
 import Input from "../../Input";
 import Button from "../../Button";
 
-import clientSchema from "../client-schema";
-
-// function addClientDetails(client) {
-//   return {
-//     id: uuid(),
-//     ...client,
-//     quantity: 0,
-//     isFavorite: false,
-//     createdAt: new Date().toISOString(),
-//     updatedAt: new Date().toISOString(),
-//     votes: {
-//       upVotes: {
-//         upperLimit: 10,
-//         currentValue: 0,
-//       },
-//       downVotes: {
-//         lowerLimit: 10,
-//         currentValue: 0,
-//       },
-//     },
-//     author: {
-//       id: uuid(),
-//       ...client.author,
-//     },
-//   };
-// }
+import accountSchema from "./account-form-schema";
 
 function AccountForm() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -44,15 +18,10 @@ function AccountForm() {
       clientPhone: "",
       // personalInfo: "",
     },
-    validationSchema: clientSchema,
+    validationSchema: accountSchema,
     onSubmit: (values, { setSubmitting }) => {
-      // const newClient = () => {};
       setSubmitting(true);
       setHasSubmitted(true);
-
-      // setTimeout(() => {
-      //   setHasSubmitted(true);
-      // }, 500);
     },
   });
   return (
@@ -91,16 +60,18 @@ function AccountForm() {
           hasErrorMessage={formik.touched.clientPhone}
           errorMessage={formik.errors.clientPhone}
         />
-        <Link className="btn btn-primary px-5" disabled="disabled" to="/">
-          Back Home
-        </Link>
-        <Button
-          submitButton
-          block
-          disabled={formik.isValidating || !formik.isValid}
-        >
-          {formik.isSubmitting ? "Submitting..." : "Submit"}
-        </Button>
+        <div className="d-flex justify-content-between">
+          <Link className="btn btn-primary px-5" disabled="disabled" to="/">
+            Back Home
+          </Link>
+          <Button
+            submitButton
+            // block
+            disabled={formik.isValidating || !formik.isValid}
+          >
+            {formik.isSubmitting ? "Submitting..." : "Go to Billing"}
+          </Button>
+        </div>
       </form>
       {hasSubmitted && <Redirect to="/checkout/step-2" />}
     </>
