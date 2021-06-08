@@ -18,7 +18,7 @@ export const formPayment = Yup.object().shape({
     .required("The name is required"),
   cardNumber: Yup.string()
     .typeError("Not a valid card number. Example: XXXX XXXX XXXX XXXX")
-    .max(19, "Not a valid card number. Example: XXXX XXXX XXXX XXXX")
+    .length(19, "Not a valid card number. Example: XXXX XXXX XXXX XXXX")
     .matches(
       /([0-9]{4}) ([0-9]{4}) ([0-9]{4}) ([0-9]{4})/,
       "Not a valid card number. Example: XXXX XXXX XXXX XXXX",
@@ -28,8 +28,11 @@ export const formPayment = Yup.object().shape({
     .typeError("Not a valid card expiration date. Example: MM/YY")
     .max(5, "Not a valid card expiration date. Example: MM/YY")
     .matches(
-      /([0-31]{2})\/([0-12]{2})/,
+      /([00-31]{2})\/([00-12]{2})/,
       "Not a valid card expiration date. Example: MM/YY",
     )
     .required("Card expiration date is required"),
+  cardCVV: Yup.string()
+    .typeError("Not a valid CVV. Example: XXX")
+    .length(3, "Not a valid CVV. Example: XXX"),
 });

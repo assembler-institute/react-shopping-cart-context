@@ -6,6 +6,7 @@ import { useFormik } from "formik";
 import FormContext from "../../../context/form-context";
 
 import Input from "../../../components/Input";
+import PaymentMethod from "../../../components/PaymentMethod";
 import Button from "../../../components/Button";
 
 import { HOME_URL, PROFILE_URL } from "../../../utils/constants";
@@ -15,6 +16,8 @@ import "../Checkout.scss";
 import { formPayment } from "../form-schema";
 
 // Image routes
+import payPal from "../../../img/payment/paypal-logo.svg";
+import applePay from "../../../img/payment/apple_pay-logo.svg";
 import visa from "../../../img/payment/visa-logo.svg";
 import masterCard from "../../../img/payment/mastercard-logo.svg";
 import americanExp from "../../../img/payment/american_express-logo.svg";
@@ -23,7 +26,7 @@ function CheckoutPayment() {
   const { data: formData, setData: updateFormData } = useContext(FormContext);
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
-  const formikPayment = useFormik({
+  const formik = useFormik({
     initialValues: {
       paymentMethod: formData.paymentMethod,
       cardName: formData.cardName,
@@ -36,8 +39,13 @@ function CheckoutPayment() {
     onSubmit: (values, { setSubmitting }) => {
       updateFormData(values);
       setSubmitting(true);
+      // eslint-disable-next-line no-console
+      console.log("Submitted");
+
       setTimeout(() => {
         setHasSubmitted(true);
+        // eslint-disable-next-line no-console
+        console.log("hasSubmitted");
       }, 500);
     },
   });
@@ -56,7 +64,11 @@ function CheckoutPayment() {
         {/* BOTTOM PART */}
         <div className="step-bottom d-flex flex-column">
           <p>How would you like to pay?</p>
-          <div className="payment-methods d-flex justify-content-between mb-4" />
+          <div className="payment-methods d-flex justify-content-between mb-4">
+            <PaymentMethod id="card-payment" text="Credit/Debit Card" />
+            <PaymentMethod id="paypal-payment" src={payPal} />
+            <PaymentMethod id="apple-pay-payment" src={applePay} />
+          </div>
           <div className="accepted-methods mb-4">
             <p>We accept the following credit/debit card</p>
             <div className="accepted-methods-logos">
@@ -76,53 +88,54 @@ function CheckoutPayment() {
           <div className="form-and-card d-flex mb-4">
             <form
               className="container-fluid d-flex flex-wrap px-0 mr-4"
-              onSubmit={formikPayment.handleSubmit}
+              onSubmit={formik.handleSubmit}
+              id="paymenyForm"
             >
               <Input
                 type="text"
                 label="Cardholder name"
-                id="cardholder-name"
-                value={formikPayment.values.cardName}
+                id="cardName"
+                value={formik.values.cardName}
                 placeholder="Name"
-                handleChange={formikPayment.handleChange}
-                handleBlur={formikPayment.handleBlur}
-                hasErrorMessage={formikPayment.touched.cardName}
-                errorMessage={formikPayment.errors.cardName}
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+                hasErrorMessage={formik.touched.cardName}
+                errorMessage={formik.errors.cardName}
               />
               <Input
                 type="text"
                 label="Card number"
-                id="card-number"
-                value={formikPayment.values.cardNumber}
+                id="cardNumber"
+                value={formik.values.cardNumber}
                 placeholder="XXXX-XXXX-XXXX-XXXX"
-                handleChange={formikPayment.handleChange}
-                handleBlur={formikPayment.handleBlur}
-                hasErrorMessage={formikPayment.touched.cardNumber}
-                errorMessage={formikPayment.errors.cardNumber}
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+                hasErrorMessage={formik.touched.cardNumber}
+                errorMessage={formik.errors.cardNumber}
               />
               <Input
                 shortInput
                 type="text"
                 label="Exp. date"
-                id="expiration-date"
-                value={formikPayment.values.cardDate}
+                id="cardDate"
+                value={formik.values.cardDate}
                 placeholder="MM/YY"
-                handleChange={formikPayment.handleChange}
-                handleBlur={formikPayment.handleBlur}
-                hasErrorMessage={formikPayment.touched.cardDate}
-                errorMessage={formikPayment.errors.cardDate}
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+                hasErrorMessage={formik.touched.cardDate}
+                errorMessage={formik.errors.cardDate}
               />
               <Input
                 shortInput
                 type="text"
                 label="CVV"
-                id="cvv-code"
-                value={formikPayment.values.cardCVV}
+                id="cardCVV"
+                value={formik.values.cardCVV}
                 placeholder="XXX"
-                handleChange={formikPayment.handleChange}
-                handleBlur={formikPayment.handleBlur}
-                hasErrorMessage={formikPayment.touched.cardCVV}
-                errorMessage={formikPayment.errors.cardCVV}
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+                hasErrorMessage={formik.touched.cardCVV}
+                errorMessage={formik.errors.cardCVV}
               />
             </form>
             <div className="card-illustration" />
@@ -148,9 +161,10 @@ function CheckoutPayment() {
         </Link>
         <Button
           submitButton
-          disabled={formikPayment.isValidating || !formikPayment.isValid}
+          form="paymenyForm"
+          disabled={formik.isValidating || !formik.isValid}
         >
-          {formikPayment.isSubmitting ? "Going to summary..." : "Summary"}
+          {formik.isSubmitting ? "Going to summary..." : "Summary"}
         </Button>
 
         {hasSubmitted && <Redirect to={HOME_URL} />}

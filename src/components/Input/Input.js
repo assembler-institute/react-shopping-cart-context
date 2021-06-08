@@ -40,7 +40,7 @@ function Input({
         {...props}
       />
       {hasErrorMessage && errorMessage && (
-        <p className="invalid-feedback">{errorMessage}</p>
+        <p className="invalid-feedback mb-0">{errorMessage}</p>
       )}
     </div>
   );
