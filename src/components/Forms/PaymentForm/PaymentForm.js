@@ -1,64 +1,27 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
-import { v4 as uuid } from "uuid";
 import { useFormik } from "formik";
 import formHeader from "../../../hoc/formHeader";
 
 import Input from "../../Input";
 import Button from "../../Button";
 
-import clientSchema from "../client-schema";
+import paymentSchema from "./payment-schema";
 
-function addClientDetails(client) {
-  return {
-    id: uuid(),
-    ...client,
-    quantity: 0,
-    isFavorite: false,
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
-    votes: {
-      upVotes: {
-        upperLimit: 10,
-        currentValue: 0,
-      },
-      downVotes: {
-        lowerLimit: 10,
-        currentValue: 0,
-      },
-    },
-    author: {
-      id: uuid(),
-      ...client.author,
-    },
-  };
-}
-
-function BillingForm({ saveNewClient }) {
+function PaymentForm() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
   const formik = useFormik({
     initialValues: {
-      clientName: "",
-      clientEmail: "",
-      clientPhone: "",
-      personalInfo: "",
-      clientAdress: "",
-      clientCity: "",
-      clientZip: "",
-      clientCountry: "",
-      locationInfo: "",
       clientCardholderName: "",
       clientCardNumber: "",
       clientCardExpiryDate: "",
       clientCardCvvCode: "",
       clientConsent: "",
-      billingInfo: "",
+      // billingInfo: "",
     },
-    validationSchema: clientSchema,
+    validationSchema: paymentSchema,
     onSubmit: (values, { setSubmitting }) => {
-      const newClient = addClientDetails(values);
-      saveNewClient(newClient);
       setSubmitting(true);
 
       setTimeout(() => {
@@ -69,6 +32,14 @@ function BillingForm({ saveNewClient }) {
   return (
     <>
       <form onSubmit={formik.handleSubmit}>
+        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+        <label htmlFor="creditCardPay" className="border">
+          Hello
+          <Input type="radio" name="picked" id="creditCardPay" />
+        </label>
+        {/* <Input type="radio" label="Credit/Debit Card" id="creditCardPay" />
+        <Input type="radio" label="Paypal" id="creditCardPay" />
+        <Input type="radio" label="Pay" id="creditCardPay" /> */}
         <Input
           type="text"
           label="Your Cardholder name*"
@@ -118,12 +89,12 @@ function BillingForm({ saveNewClient }) {
           block
           disabled={formik.isValidating || !formik.isValid}
         >
-          {formik.isSubmitting ? "Submitting..." : "Submit"}
+          {formik.isSubmitting ? "Submitting..." : "Review your order"}
         </Button>
       </form>
-      {hasSubmitted && <Redirect to="/" />}
+      {hasSubmitted && <Redirect to="/checkout/summary-order" />}
     </>
   );
 }
 
-export default formHeader(BillingForm);
+export default formHeader(PaymentForm);

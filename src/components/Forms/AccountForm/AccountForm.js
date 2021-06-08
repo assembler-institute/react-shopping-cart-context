@@ -21,9 +21,13 @@ function AccountForm() {
     validationSchema: accountSchema,
     onSubmit: (values, { setSubmitting }) => {
       setSubmitting(true);
-      setHasSubmitted(true);
+      // setHasSubmitted(true);
+      setTimeout(() => {
+        setHasSubmitted(true);
+      }, 500);
     },
   });
+
   return (
     <>
       <form onSubmit={formik.handleSubmit}>
@@ -66,7 +70,6 @@ function AccountForm() {
           </Link>
           <Button
             submitButton
-            // block
             disabled={formik.isValidating || !formik.isValid}
           >
             {formik.isSubmitting ? "Submitting..." : "Go to Billing"}
