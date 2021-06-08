@@ -15,11 +15,7 @@ function Step3({ cartItems, handleRemove, handleChange, ...routeProps }) {
         <FormShopping {...routeProps} />
       </div>
       <div className="col">
-        <OrderSummary
-          cartItems={cartItems}
-          handleRemove={handleRemove}
-          handleChange={handleChange}
-        />
+        <OrderSummary cartItems={cartItems} />
       </div>
     </div>
   );

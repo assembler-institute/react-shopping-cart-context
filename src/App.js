@@ -9,7 +9,7 @@ import Step3 from "./pages/Checkout/Step3";
 import Step4 from "./pages/Checkout/Step4";
 
 import * as api from "./api";
-import ShoppingContext from "./context/ShoppingContext";
+import ShoppingContextProvider from "./components/ShoppingContextProvider";
 
 import useLocalStorage from "./hooks/useLocalStorage";
 import loadLocalStorageItems from "./utils/loadLocalStorageItems";
@@ -48,27 +48,6 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [loadingError, setLoadingError] = useState(null);
-
-  // Destructuring context
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  // const [phoneNumber, setPhoneNumber] = useState("");
-  function submitStep1(valuesObject) {
-    setName(valuesObject.name);
-    setEmail(valuesObject.email);
-  }
-
-  // const [address, setAdress] = useState("");
-  // const [city, setCity] = useState("");
-  // const [zipCode, setZipCode] = useState("");
-  // const [country, setCountry] = useState("");
-
-  // const [paymentMethod, setPaymentMethod] = useState("");
-  // const [cardHolderName, setCardHolderName] = useState("");
-  // const [cardNumber, setCardNumber] = useState("");
-  // const [cardExpirationDate, setCardExpirationDate] = useState("");
-  // const [cardCVVCode, setcardCVVCode] = useState("");
-  // const [consentCheckbox, setconsentCheckbox] = useState("");
 
   useEffect(() => {
     if (products.length === 0) {
@@ -206,26 +185,7 @@ function App() {
   }
 
   return (
-    <ShoppingContext.Provider
-      value={{
-        name: name,
-        email: email,
-        phoneNumber: "",
-        submitStep1: submitStep1,
-        address: "",
-        city: "",
-        zipCode: "",
-        country: "",
-        submitStep2: () => {},
-        paymentMethod: "",
-        cardHolderName: "",
-        cardNumber: "",
-        cardExpirationDate: "",
-        cardCVVCode: "",
-        consentCheckbox: "",
-        submitStep3: () => {},
-      }}
-    >
+    <ShoppingContextProvider>
       <BrowserRouter>
         <Switch>
           <Route path="/new-product">
@@ -286,7 +246,7 @@ function App() {
           />
         </Switch>
       </BrowserRouter>
-    </ShoppingContext.Provider>
+    </ShoppingContextProvider>
   );
 }
 

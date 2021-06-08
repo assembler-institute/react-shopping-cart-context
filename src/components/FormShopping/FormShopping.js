@@ -83,7 +83,8 @@ function FormShopping({ ...routeProps }) {
     onSubmit: (values, { setSubmitting }) => {
       setSubmitting(true);
       submitStep1(values);
-      // console.log(values);
+      console.log(values);
+      console.log(submitStep1);
 
       setTimeout(() => {
         setHasSubmitted(true);

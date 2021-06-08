@@ -1,4 +1,5 @@
 import React from "react";
+// import { v4 as uuid } from "uuid";
 
 import CartItemShopping from "../CartItemShopping";
 
@@ -28,8 +29,8 @@ function OrderSummary({ cartItems, ...props }) {
                   quantity={item.quantity}
                 />
                 {item !== cartItems[cartItems.length - 1] && (
-                  <div key={`d${item.id}`} className="col">
-                    <hr key={`h${item.id}`} />
+                  <div key={`${item.id}div`} className="col">
+                    <hr />
                   </div>
                 )}
               </>
