@@ -5,7 +5,7 @@ import FormContext from "../../../context/form-context";
 const initialValueFormData = {
   name: "",
   email: "",
-  phonePrefix: "+34",
+  phonePrefix: "",
   phone: "",
   address: "",
   city: "",
