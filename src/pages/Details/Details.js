@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Formik } from "formik";
 import Checkout from "../../hoc/withCheckout";
-import productSchemaDetails from "./product-schema";
+import detailsSchema from "./details-schema";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import ShoppingContext from "../../context";
@@ -17,7 +17,7 @@ function Details() {
           userEmail: "",
           userPhone: 0,
         }}
-        validationSchema={productSchemaDetails}
+        validationSchema={detailsSchema}
         onSubmit={(values) => {
           updateDetails(values);
         }}
@@ -67,7 +67,7 @@ function Details() {
               errorMessage={errors.userPhone}
             />
             <Button submitButton block disabled={isValidating || !isValid}>
-              Sumbit
+              Submit
             </Button>
           </form>
         )}
