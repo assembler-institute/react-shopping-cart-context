@@ -267,13 +267,13 @@ function App() {
             <PersonalDetails cartItems={cartItems} />
           </Route>
           <Route path="/checkout/step-2">
-            <BillingAddress fullWidth cartItems={cartItems} />
+            <BillingAddress cartItems={cartItems} />
           </Route>
           <Route path="/checkout/step-3">
             <PaymentDetails />
           </Route>
           <Route path="/checkout/order-summary">
-            <OrderSummary fullWidth />
+            <OrderSummary />
           </Route>
           <Route path="/new-product">
             <NewProduct saveNewProduct={saveNewProduct} />

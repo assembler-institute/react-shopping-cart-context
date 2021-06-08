@@ -15,21 +15,19 @@ const isCheckout = true;
 
 function BillingAddress({ cartItems }) {
   const [hasSubmitted, setHasSubmitted] = useState(false);
-  const { setChceckoutData } = useContext(checkoutContext);
-  // const { setBillingAddress, state } = useContext(checkoutContext);
+  const { setCheckoutData, state } = useContext(checkoutContext);
 
   const formik = useFormik({
-    // initialValues: {
-    //   name: state.name ? state.name : "",
-    //   email: state.email,
-    //   phonePrefix: state.phonePrefix,
-    //   phoneNumber: state.phoneNumber,
-    // },
-    initialValues: { address: "", city: "", ZC: "", country: "Spain" },
+    initialValues: {
+      address: state.address,
+      city: state.city,
+      ZC: state.ZC,
+      country: state.country,
+    },
     validationSchema: BillingAddressSchema,
     onSubmit: (values, { setSubmitting }) => {
       setSubmitting(true);
-      setChceckoutData({
+      setCheckoutData({
         address: values.address,
         city: values.city,
         ZC: values.ZC,
