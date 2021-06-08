@@ -51,7 +51,7 @@ function Cart({ cartItems, handleRemove, handleChange, ...props }) {
             </div>
             <div className="col">
               {cartItems.length > 0 && (
-                <Link className="btn btn-primary" to="/checkout">
+                <Link className="btn btn-primary" to="/checkout/step-1">
                   Checkout
                 </Link>
               )}

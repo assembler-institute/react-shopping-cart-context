@@ -3,7 +3,10 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
 import NewProduct from "./pages/NewProduct";
-import Checkout from "./pages/Checkout";
+import Step1 from "./pages/Checkout/step1";
+import Step2 from "./pages/Checkout/step2";
+import Step3 from "./pages/Checkout/step3";
+import Step4 from "./pages/Checkout/order-summary";
 import CartContext from "./context/cart-context";
 
 import * as api from "./api";
@@ -185,11 +188,20 @@ function App() {
     <CartContext.Provider value={{ cartItems: cartItems }}>
       <BrowserRouter>
         <Switch>
+          <Route path="/checkout/step-1" exact>
+            <Step1 />
+          </Route>
+          <Route path="/checkout/step-2" exact>
+            <Step2 />
+          </Route>
+          <Route path="/checkout/step-3" exact>
+            <Step3 />
+          </Route>
+          <Route path="/checkout/order-summary" exact>
+            <Step4 />
+          </Route>
           <Route path="/new-product">
             <NewProduct saveNewProduct={saveNewProduct} />
-          </Route>
-          <Route path="/checkout" exact>
-            <Checkout />
           </Route>
           <Route path="/" exact>
             <Home

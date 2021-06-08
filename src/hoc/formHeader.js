@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Main from "../components/Main";
 
 function getDisplayName(WrappedComponent) {
@@ -13,6 +14,9 @@ function formHeader(WrappedComponent) {
 
   function WrapperComponent({ ...props }) {
     const formStep = "Your details";
+    const nextStep = "/checkout/step-2";
+    const prevStep = "/";
+    const isFalse = false;
     return (
       <div className="col col-8">
         <header className="mt-4 mb-4 p-0 d-flex container" {...props}>
@@ -25,18 +29,20 @@ function formHeader(WrappedComponent) {
         <Main className="border-bottom pb-3">
           <WrappedComponent {...props} />
         </Main>
-        <footer className="d-flex justify-content-between mt-4">
-          <button
-            className="btn btn-primary px-5"
-            disabled="true"
-            type="button"
-          >
-            Back
-          </button>
-          <button className="btn btn-primary px-5" type="button">
-            Next
-          </button>
-        </footer>
+        {isFalse && (
+          <footer className="d-flex justify-content-between mt-4">
+            <Link
+              className="btn btn-primary px-5"
+              disabled="disabled"
+              to={prevStep}
+            >
+              Back Home
+            </Link>
+            <Link className="btn btn-primary px-5" to={nextStep}>
+              Next
+            </Link>
+          </footer>
+        )}
       </div>
     );
   }
