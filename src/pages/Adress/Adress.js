@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Formik } from "formik";
 import Checkout from "../../hoc/withCheckout";
-import productSchemaAdress from "./product-schema";
+import adressSchema from "./adress-schema";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import ShoppingContext from "../../context";
@@ -18,10 +18,9 @@ function Adress() {
           postCode: 0,
           country: "",
         }}
-        validationSchema={productSchemaAdress}
+        validationSchema={adressSchema}
         onSubmit={(values) => {
           updateAdress(values);
-          console.log(values);
         }}
       >
         {({
@@ -80,7 +79,7 @@ function Adress() {
               errorMessage={errors.country}
             />
             <Button submitButton block disabled={isValidating || !isValid}>
-              Sumbit
+              Submit
             </Button>
           </form>
         )}
