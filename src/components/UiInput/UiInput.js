@@ -9,11 +9,24 @@ function UiInput({
   // placeholder = "",
   handleChange = () => {},
   handleBlur = () => {},
+  handleFlip = () => {},
   errorMessage,
   hasErrorMessage,
   type = "text",
   ...props
 }) {
+  function handleClick(e) {
+    if (e.target.id === "cardCvv") {
+      handleFlip(e);
+    }
+  }
+  function onHandleBlur(e) {
+    if (e.target.id === "cardCvv") {
+      handleFlip(e);
+    }
+    handleBlur(e);
+  }
+
   return (
     <TextField
       fullWidth
@@ -25,7 +38,8 @@ function UiInput({
       size="small"
       value={value}
       onChange={handleChange}
-      onBlur={handleBlur}
+      onBlur={onHandleBlur}
+      onClick={handleClick}
       error={hasErrorMessage && Boolean(errorMessage)}
       helperText={hasErrorMessage && errorMessage}
       type={type}
