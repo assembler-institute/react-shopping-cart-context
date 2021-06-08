@@ -267,6 +267,8 @@ function App() {
         updateDetails: updateDetails,
         updateAdress: updateAdress,
         updatePayment: updatePayment,
+        handleChange: handleChange,
+        handleRemove: handleRemove,
       }}
     >
       <BrowserRouter>

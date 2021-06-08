@@ -11,6 +11,8 @@ const ShoppingContext = createContext({
   updateAdress: () => {},
   paymentData: {},
   updatePayment: () => {},
+  handleChange: () => {},
+  handleRemove: () => {},
 });
 
 export default ShoppingContext;
