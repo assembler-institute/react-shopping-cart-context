@@ -1,11 +1,11 @@
-// import React from "react";
-import { useContext } from "react";
-import { UserContext } from "../../Context/UserContext";
+import React from "react";
+
+import OrderConfirmation from "../../components/OrderConfirmation/OrderConfirmation";
+
 import withLayout from "../../hoc/withLayout";
 
 function Confirmation() {
-  const user = useContext(UserContext);
-  return JSON.stringify({ user }, 2, null);
+  return <OrderConfirmation />;
 }
 
 export default withLayout(Confirmation);
