@@ -12,6 +12,7 @@ import Confirmation from "./pages/Confirmation";
 import Payment from "./pages/Payment";
 import Shipping from "./pages/Shipping";
 import UserInformation from "./pages/UserInformation";
+import { UserContext } from "./Context/UserContext";
 
 function buildNewCartItem(cartItem) {
   if (cartItem.quantity >= cartItem.unitsInStock) {
@@ -193,52 +194,53 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/checkout/order-summary" exact>
-          <Confirmation user={user} />
-        </Route>
-        <Route path="/checkout/step-3" exact>
-          <Payment
-            user={user}
-            cartItems={cartItems}
-            handleRemove={handleRemove}
-            handleChange={handleChange}
-          />
-        </Route>
-        <Route path="/checkout/step-2" exact>
-          <Shipping
-            user={user}
-            cartItems={cartItems}
-            handleRemove={handleRemove}
-            handleChange={handleChange}
-          />
-        </Route>
-        <Route path="/checkout/step-1" exact>
-          <UserInformation
-            saveUser={saveUser}
-            cartItems={cartItems}
-            handleRemove={handleRemove}
-            handleChange={handleChange}
-          />
-        </Route>
-        <Route path="/new-product">
-          <NewProduct saveNewProduct={saveNewProduct} />
-        </Route>
-        <Route path="/" exact>
-          <Home
-            fullWidth
-            cartItems={cartItems}
-            products={products}
-            isLoading={isLoading}
-            hasError={hasError}
-            loadingError={loadingError}
-            handleDownVote={handleDownVote}
-            handleUpVote={handleUpVote}
-            handleSetFavorite={handleSetFavorite}
-            handleAddToCart={handleAddToCart}
-            handleRemove={handleRemove}
-            handleChange={handleChange}
-          />
-        </Route>
+        <UserContext.Provider value={user}>
+          <Route path="/checkout/order-summary" exact>
+            <Confirmation />
+          </Route>
+          <Route path="/checkout/step-3" exact>
+            <Payment
+              cartItems={cartItems}
+              handleRemove={handleRemove}
+              handleChange={handleChange}
+            />
+          </Route>
+          <Route path="/checkout/step-2" exact>
+            <Shipping
+              cartItems={cartItems}
+              handleRemove={handleRemove}
+              handleChange={handleChange}
+            />
+          </Route>
+          <Route path="/checkout/step-1" exact>
+            <UserInformation
+              saveUser={saveUser}
+              cartItems={cartItems}
+              handleRemove={handleRemove}
+              handleChange={handleChange}
+            />
+          </Route>
+
+          <Route path="/new-product">
+            <NewProduct saveNewProduct={saveNewProduct} />
+          </Route>
+          <Route path="/" exact>
+            <Home
+              fullWidth
+              cartItems={cartItems}
+              products={products}
+              isLoading={isLoading}
+              hasError={hasError}
+              loadingError={loadingError}
+              handleDownVote={handleDownVote}
+              handleUpVote={handleUpVote}
+              handleSetFavorite={handleSetFavorite}
+              handleAddToCart={handleAddToCart}
+              handleRemove={handleRemove}
+              handleChange={handleChange}
+            />
+          </Route>
+        </UserContext.Provider>
       </Switch>
     </BrowserRouter>
   );
