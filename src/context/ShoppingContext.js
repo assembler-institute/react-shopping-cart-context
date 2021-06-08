@@ -9,8 +9,8 @@ const ShoppingContext = createContext({
   cartItems: [],
   adressData: {},
   updateAdress: () => {},
-  payment: {},
-  updatePayment: () => {},
+  handleChange: () => {},
+  handleRemove: () => {},
 });
 
 export default ShoppingContext;
