@@ -1,6 +1,8 @@
 import React from "react";
+import Select from "../Select";
 
 function Input({
+  withSelect,
   type = "text",
   label = "input-01",
   id = "input-01",
@@ -15,6 +17,15 @@ function Input({
   return (
     <div className="form-group">
       <label htmlFor={id}>{label}</label>
+      {withSelect && (
+        <Select
+          id={withSelect.id}
+          value={withSelect.value}
+          options={withSelect.options}
+          handleChange={withSelect.handleChange}
+          handleBlur={withSelect.handleBlur}
+        />
+      )}
       <input
         className={
           hasErrorMessage && errorMessage
