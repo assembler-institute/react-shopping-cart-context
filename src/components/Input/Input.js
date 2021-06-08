@@ -22,8 +22,11 @@ function Input({
           id={withSelect.id}
           value={withSelect.value}
           options={withSelect.options}
+          placeholder={withSelect.placeholder}
           handleChange={withSelect.handleChange}
           handleBlur={withSelect.handleBlur}
+          hasErrorMessage={withSelect.hasErrorMessage}
+          errorMessage={withSelect.errorMessage}
         />
       )}
       <input

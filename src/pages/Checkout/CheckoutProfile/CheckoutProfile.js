@@ -9,7 +9,7 @@ import Button from "../../../components/Button";
 
 import { BILLING_URL, HOME_URL } from "../../../utils/constants";
 
-import formSchema from "../form-schema";
+import { formProfile } from "../form-schema";
 
 const phonePrefixOptions = [
   {
@@ -41,7 +41,7 @@ function CheckoutProfile() {
       phonePrefix: formData.phonePrefix,
       phone: formData.phone,
     },
-    validationSchema: formSchema,
+    validationSchema: formProfile,
     onSubmit: (values, { setSubmitting }) => {
       updateFormData(values);
       setSubmitting(true);
@@ -81,8 +81,11 @@ function CheckoutProfile() {
             id: "phonePrefix",
             options: phonePrefixOptions,
             value: formik.values.phonePrefix,
+            placeholder: "Prefix...",
             handleChange: formik.handleChange,
             handleBlur: formik.handleBlur,
+            hasErrorMessage: formik.touched.phonePrefix,
+            errorMessage: formik.errors.phonePrefix,
           }}
           type="text"
           label="Phone number"
