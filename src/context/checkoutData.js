@@ -9,10 +9,10 @@ const checkoutData = createContext({
   email: "",
   phonePrefix: "",
   phoneNumber: "",
-  // address: "",
-  // city: "",
-  // ZC: 0,
-  // country: "",
+  address: "",
+  city: "",
+  ZC: "",
+  country: "",
   // paymentMethod: "",
   // cardName: "",
   // cardNumber: 0,
@@ -20,6 +20,7 @@ const checkoutData = createContext({
   // cardCVV: 0,
   // termsConditions: false,
   setPersonalDetails: () => {},
+  setBillingAddress: () => {},
 });
 
 export default checkoutData;

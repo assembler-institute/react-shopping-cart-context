@@ -20,6 +20,7 @@ import checkoutContext from "./context/checkoutData";
 const SETISCHECKOUT = "SETISCHECKOUT";
 const RESETISCHECKOUT = "RESETISCHECKOUT";
 const PERSONALDETAILS = "PERSONALDETAILS";
+const BILLINGADDRESS = "BILLINGADDRESS";
 const LOADCHECKOUTDATA = "LOADCHECKOUTDATA";
 
 const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
@@ -35,6 +36,12 @@ function reducer(state, action) {
       return { ...state, isCheckoutDisabled: false };
     }
     case PERSONALDETAILS: {
+      return {
+        ...state,
+        ...action.payload,
+      };
+    }
+    case BILLINGADDRESS: {
       return {
         ...state,
         ...action.payload,
@@ -109,6 +116,17 @@ function App() {
     };
     dispatch({ type: PERSONALDETAILS, payload: PersonalDetailsData });
     setLocalStorage(PersonalDetailsData, CHECKOUT_DATA_LOCAL_STORAGE_KEY);
+  }
+
+  function setBillingAddress(address, city, ZC, country) {
+    const billingAddressData = {
+      address: address,
+      city: city,
+      ZC: ZC,
+      country: country,
+    };
+    dispatch({ type: BILLINGADDRESS, payload: billingAddressData });
+    setLocalStorage(billingAddressData, CHECKOUT_DATA_LOCAL_STORAGE_KEY);
   }
 
   useEffect(() => {
@@ -270,6 +288,7 @@ function App() {
       value={{
         isCheckoutDisabled: isCheckoutDisabled,
         setPersonalDetails: setPersonalDetails,
+        setBillingAddress: setBillingAddress,
         state: state,
       }}
     >
@@ -282,7 +301,10 @@ function App() {
             />
           </Route>
           <Route path="/checkout/step-2">
-            <BillingAddress fullWidth saveNewProduct={saveNewProduct} />
+            <BillingAddress
+              saveNewProduct={saveNewProduct}
+              cartItems={cartItems}
+            />
           </Route>
           <Route path="/checkout/step-3">
             <PaymentDetails fullWidth saveNewProduct={saveNewProduct} />
