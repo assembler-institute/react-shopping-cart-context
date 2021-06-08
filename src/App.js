@@ -36,6 +36,7 @@ const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
 const INCREMENT = "INCREMENT";
 const DECREMENT = "DECREMENT";
 const UPDATEDETAILS = "UPDATEDETAILS";
+const UPDATEADRESS = "UPDATEADRESS";
 // const RESET = "RESET";
 function reducer(state, action) {
   switch (action.type) {
@@ -52,10 +53,15 @@ function reducer(state, action) {
       };
     }
     case UPDATEDETAILS: {
-      console.log(action.details);
       return {
         ...state,
-        details: action.details,
+        details: action.newdetails,
+      };
+    }
+    case UPDATEADRESS: {
+      return {
+        ...state,
+        adressData: action.newAdress,
       };
     }
 
@@ -226,7 +232,13 @@ function App() {
   function updateDetails(newDetails) {
     dispatch({
       type: UPDATEDETAILS,
-      details: newDetails,
+      newdetails: newDetails,
+    });
+  }
+  function updateAdress(newAdress) {
+    dispatch({
+      type: UPDATEADRESS,
+      newAdress: newAdress,
     });
   }
   return (
@@ -234,9 +246,14 @@ function App() {
       value={{
         path: state.path,
         details: state.details,
+        adressData: state.adressData,
+        cartItems: cartItems,
         nextPath: nextPath,
         prevPath: prevPath,
         updateDetails: updateDetails,
+        updateAdress: updateAdress,
+        handleChange: handleChange,
+        handleRemove: handleRemove,
       }}
     >
       <BrowserRouter>
