@@ -7,9 +7,9 @@ import FormContext from "../../../context/form-context";
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
 
-import { BILLING_URL, HOME_URL } from "../../../utils/constants";
+import { HOME_URL, PAYMENT_URL } from "../../../utils/constants";
 
-import formSchema from "../form-schema";
+import { formProfile } from "../form-schema";
 
 function CheckoutProfile() {
   const { data: formData, setData: updateFormData } = useContext(FormContext);
@@ -21,7 +21,7 @@ function CheckoutProfile() {
       email: formData.email,
       phone: formData.phone,
     },
-    validationSchema: formSchema,
+    validationSchema: formProfile,
     onSubmit: (values, { setSubmitting }) => {
       updateFormData(values);
       setSubmitting(true);
@@ -75,7 +75,7 @@ function CheckoutProfile() {
         </Button>
       </form>
 
-      {hasSubmitted && <Redirect to={BILLING_URL} />}
+      {hasSubmitted && <Redirect to={PAYMENT_URL} />}
     </>
   );
 }
