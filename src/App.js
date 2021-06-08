@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
@@ -12,6 +12,7 @@ import Adress from "./pages/Adress";
 import Payment from "./pages/Payment";
 import Confirm from "./pages/Confirm";
 import Details from "./pages/Details";
+import ShoppingContext from "./context";
 
 function buildNewCartItem(cartItem) {
   if (cartItem.quantity >= cartItem.unitsInStock) {
@@ -32,8 +33,54 @@ function buildNewCartItem(cartItem) {
 
 const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
 const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
+const INCREMENT = "INCREMENT";
+const DECREMENT = "DECREMENT";
+const UPDATEDETAILS = "UPDATEDETAILS";
+const UPDATEADRESS = "UPDATEADRESS";
+const UPDATEPAYMENT = "UPDATEPAYMENT";
+// const RESET = "RESET";
+function reducer(state, action) {
+  switch (action.type) {
+    case INCREMENT: {
+      return {
+        ...state,
+        path: state.path + 1,
+      };
+    }
+    case DECREMENT: {
+      return {
+        ...state,
+        path: state.path - 1,
+      };
+    }
+    case UPDATEDETAILS: {
+      return {
+        ...state,
+        details: action.newdetails,
+      };
+    }
+    case UPDATEADRESS: {
+      return {
+        ...state,
+        adressData: action.newAdress,
+      };
+    }
+    case UPDATEPAYMENT: {
+      return {
+        ...state,
+        paymentData: action.newPayment,
+      };
+    }
 
+    default: {
+      return state;
+    }
+  }
+}
 function App() {
+  const [state, dispatch] = useReducer(reducer, {
+    path: 1,
+  });
   const [products, setProducts] = useState(() =>
     loadLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY, []),
   );
@@ -47,7 +94,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [loadingError, setLoadingError] = useState(null);
-
+  // const [path, setPath] = useState(1);
   useEffect(() => {
     if (products.length === 0) {
       setIsLoading(true);
@@ -183,42 +230,83 @@ function App() {
     setProducts((prevState) => [newProduct, ...prevState]);
   }
 
+  function nextPath() {
+    dispatch({ type: INCREMENT });
+  }
+  function prevPath() {
+    dispatch({ type: DECREMENT });
+  }
+  function updateDetails(newDetails) {
+    dispatch({
+      type: UPDATEDETAILS,
+      newdetails: newDetails,
+    });
+  }
+  function updateAdress(newAdress) {
+    dispatch({
+      type: UPDATEADRESS,
+      newAdress: newAdress,
+    });
+  }
+  function updatePayment(newPayment) {
+    dispatch({
+      type: UPDATEPAYMENT,
+      newPayment: newPayment,
+    });
+  }
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/Checkout/step-1">
-          <Details path={1} />
-        </Route>
-        <Route path="/Checkout/step-2">
-          <Adress path={2} />
-        </Route>
-        <Route path="/Checkout/step-3">
-          <Payment path={3} />
-        </Route>
-        <Route path="/Checkout/order-summary">
-          <Confirm />
-        </Route>
-        <Route path="/new-product">
-          <NewProduct saveNewProduct={saveNewProduct} />
-        </Route>
-        <Route path="/" exact>
-          <Home
-            fullWidth
-            cartItems={cartItems}
-            products={products}
-            isLoading={isLoading}
-            hasError={hasError}
-            loadingError={loadingError}
-            handleDownVote={handleDownVote}
-            handleUpVote={handleUpVote}
-            handleSetFavorite={handleSetFavorite}
-            handleAddToCart={handleAddToCart}
-            handleRemove={handleRemove}
-            handleChange={handleChange}
-          />
-        </Route>
-      </Switch>
-    </BrowserRouter>
+    <ShoppingContext.Provider
+      value={{
+        path: state.path,
+        details: state.details,
+        adressData: state.adressData,
+        paymentData: state.paymentData,
+        cartItems: cartItems,
+        nextPath: nextPath,
+        prevPath: prevPath,
+        updateDetails: updateDetails,
+        updateAdress: updateAdress,
+        updatePayment: updatePayment,
+        handleChange: handleChange,
+        handleRemove: handleRemove,
+      }}
+    >
+      <BrowserRouter>
+        <Switch>
+          <Route path="/Checkout/step-1">
+            <Details />
+          </Route>
+          <Route path="/Checkout/step-2">
+            <Adress />
+          </Route>
+          <Route path="/Checkout/step-3">
+            <Payment />
+          </Route>
+          <Route path="/Checkout/order-summary">
+            <Confirm />
+          </Route>
+          <Route path="/new-product">
+            <NewProduct saveNewProduct={saveNewProduct} />
+          </Route>
+          <Route path="/" exact>
+            <Home
+              fullWidth
+              cartItems={cartItems}
+              products={products}
+              isLoading={isLoading}
+              hasError={hasError}
+              loadingError={loadingError}
+              handleDownVote={handleDownVote}
+              handleUpVote={handleUpVote}
+              handleSetFavorite={handleSetFavorite}
+              handleAddToCart={handleAddToCart}
+              handleRemove={handleRemove}
+              handleChange={handleChange}
+            />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    </ShoppingContext.Provider>
   );
 }
 

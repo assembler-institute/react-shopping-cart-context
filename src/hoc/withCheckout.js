@@ -1,9 +1,10 @@
-import React from "react";
-
+import React, { useContext } from "react";
 import CheckoutFooter from "../components/CheckoutFooter";
 import CheckoutForm from "../components/CheckoutForm";
 import CheckoutHeader from "../components/CheckoutHeader";
 import CheckoutSideBar from "../components/CheckoutSideBar";
+import ShoppingContext from "../context";
+import "./CheckoutStyles.scss";
 
 // function getDisplayName(WrappedComponent) {
 //   return WrappedComponent.displayName || WrappedComponent.name || "Component";
@@ -14,19 +15,22 @@ function Checkout(WrappedComponent) {
   //   WrappedComponent,
   // )})`;
 
-  function WrapperComponent({ ...props }) {
-    console.log(props);
-    const { path } = props;
-    console.log(path);
+  function WrapperComponent() {
+    // const { details, updateDetails } = useContext(ShoppingContext);
     return (
-      <>
-        <CheckoutHeader />
-        <CheckoutForm />
-        <WrappedComponent {...props} />
+      <section className="mainContainer">
+        <div className="checkoutContainer">
+          <CheckoutHeader />
+          <CheckoutForm />
+          <WrappedComponent />
+          <div>
+            <code>{JSON.stringify(useContext(ShoppingContext))}</code>
+          </div>
 
+          <CheckoutFooter />
+        </div>
         <CheckoutSideBar />
-        <CheckoutFooter path={path} />
-      </>
+      </section>
     );
   }
 
