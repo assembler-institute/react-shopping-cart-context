@@ -13,12 +13,12 @@ const checkoutData = createContext({
   // city: "",
   // ZC: 0,
   // country: "",
-  // paymentMethod: "",
-  // cardName: "",
-  // cardNumber: 0,
-  // cardExpiryDate: 0,
-  // cardCVV: 0,
-  // termsConditions: false,
+  paymentMethod: "",
+  cardName: "",
+  cardNumber: 0,
+  cardExpiryDate: 0,
+  cardCVV: 0,
+  termsConditions: false,
   setPersonalDetails: () => {},
 });
 

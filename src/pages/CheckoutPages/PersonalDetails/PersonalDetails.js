@@ -15,24 +15,24 @@ const isCheckout = true;
 
 function PersonalDetails({ cartItems }) {
   const [hasSubmitted, setHasSubmitted] = useState(false);
-  const { setPersonalDetails, state } = useContext(checkoutContext);
+  const { setCheckoutData, state } = useContext(checkoutContext);
 
   const formik = useFormik({
     initialValues: {
-      name: state.name ? state.name : "",
+      name: state.name,
       email: state.email,
-      phonePrefix: state.phonePrefix,
+      phonePrefix: state.phonePrefix ? state.phonePrefix : "+34",
       phoneNumber: state.phoneNumber,
     },
     validationSchema: PersonalDetailsSchema,
     onSubmit: (values, { setSubmitting }) => {
       setSubmitting(true);
-      setPersonalDetails(
-        values.name,
-        values.email,
-        values.phonePrefix,
-        values.phoneNumber,
-      );
+      setCheckoutData({
+        name: values.name,
+        email: values.email,
+        phonePrefix: values.phonePrefix,
+        phoneNumber: values.phoneNumber,
+      });
       setTimeout(() => {
         setHasSubmitted(true);
       }, 500);
@@ -102,7 +102,7 @@ function PersonalDetails({ cartItems }) {
             {formik.isSubmitting ? "Submitting..." : "Submit"}
           </Button>
         </form>
-        {hasSubmitted && <Redirect to="/" />}
+        {hasSubmitted && <Redirect to="/checkout/step-2" />}
       </div>
 
       <div className="col col-4">
