@@ -102,7 +102,7 @@ function BillingAddress({ cartItems }) {
             {formik.isSubmitting ? "Submitting..." : "Submit"}
           </Button>
         </form>
-        {hasSubmitted && <Redirect to="/" />}
+        {hasSubmitted && <Redirect to="/checkout/step-3" />}
       </div>
 
       <div className="col col-4">
