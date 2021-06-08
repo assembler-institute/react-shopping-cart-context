@@ -9,7 +9,7 @@ const ShoppingContext = createContext({
   cartItems: [],
   adressData: {},
   updateAdress: () => {},
-  payment: {},
+  paymentData: {},
   updatePayment: () => {},
 });
 

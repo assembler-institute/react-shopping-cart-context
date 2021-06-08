@@ -37,6 +37,7 @@ const INCREMENT = "INCREMENT";
 const DECREMENT = "DECREMENT";
 const UPDATEDETAILS = "UPDATEDETAILS";
 const UPDATEADRESS = "UPDATEADRESS";
+const UPDATEPAYMENT = "UPDATEPAYMENT";
 // const RESET = "RESET";
 function reducer(state, action) {
   switch (action.type) {
@@ -62,6 +63,12 @@ function reducer(state, action) {
       return {
         ...state,
         adressData: action.newAdress,
+      };
+    }
+    case UPDATEPAYMENT: {
+      return {
+        ...state,
+        paymentData: action.newPayment,
       };
     }
 
@@ -241,17 +248,25 @@ function App() {
       newAdress: newAdress,
     });
   }
+  function updatePayment(newPayment) {
+    dispatch({
+      type: UPDATEPAYMENT,
+      newPayment: newPayment,
+    });
+  }
   return (
     <ShoppingContext.Provider
       value={{
         path: state.path,
         details: state.details,
         adressData: state.adressData,
+        paymentData: state.paymentData,
         cartItems: cartItems,
         nextPath: nextPath,
         prevPath: prevPath,
         updateDetails: updateDetails,
         updateAdress: updateAdress,
+        updatePayment: updatePayment,
       }}
     >
       <BrowserRouter>
