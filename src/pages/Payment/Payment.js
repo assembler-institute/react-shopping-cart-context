@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
 import { Formik } from "formik";
+import { NavLink } from "react-router-dom";
+
 import Checkout from "../../hoc/withCheckout";
 import paymentSchema from "./payment-schema";
 import Input from "../../components/Input";
@@ -19,6 +21,7 @@ function Payment() {
           cardExpiryDate: "",
           cvvCode: "",
         }}
+        initialErrors={{ defaultIsValid: "false" }}
         validationSchema={paymentSchema}
         onSubmit={(values) => {
           updatePayment(values);
@@ -118,9 +121,20 @@ function Payment() {
               hasErrorMessage={touched.cvvCode}
               errorMessage={errors.cvvCode}
             />
-            <Button submitButton block disabled={isValidating || !isValid}>
-              Submit
-            </Button>
+            <NavLink to="/Checkout/step-2">
+              <Button>Previous</Button>
+            </NavLink>
+
+            <NavLink to="/Checkout/order-summary">
+              <Button submitButton disabled={isValidating || !isValid}>
+                Buy now
+              </Button>
+            </NavLink>
+            <div>
+              <code>{`errors: ${JSON.stringify(
+                errors,
+              )} | isValid: ${isValid}`}</code>
+            </div>
           </form>
         )}
       </Formik>
