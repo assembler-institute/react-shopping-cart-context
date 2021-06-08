@@ -1,3 +1,49 @@
+// General
 .checkout {
   min-height: 620px;
+}
+
+// Payment page
+.step-bottom {
+  .payment-methods {
+    height: 60px;
+    background-color: red;
+  }
+
+  .accepted-methods {
+    // background-color: blue;
+    p {
+      margin-bottom: 0;
+    }
+    .card-method {
+      width: 50px;
+      border: 1px solid gray;
+      background-color: white;
+      border-radius: 3px;
+      margin-right: 10px;
+    }
+  }
+
+  .form-and-card {
+    flex-grow: 1;
+
+    form,
+    .card-illustration {
+      width: 50%;
+    }
+
+    form {
+      .form-group {
+        width: 100%;
+      }
+      .short-input {
+        width: 30%;
+        margin-right: 20px;
+      }
+    }
+
+    .card-illustration {
+      background-color: yellow;
+    }
+  }
 }

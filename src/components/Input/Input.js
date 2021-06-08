@@ -15,14 +15,18 @@ function Input({
   shortInput = false,
   ...props
 }) {
-  const inputClasses = classNames({
-    "form-control": true,
-    "form-control is-invalid": hasErrorMessage && errorMessage,
+  const formItemClasses = classNames({
+    "form-group": true,
     "short-input": shortInput,
   });
 
+  const inputClasses = classNames({
+    "form-control": true,
+    "form-control is-invalid": hasErrorMessage && errorMessage,
+  });
+
   return (
-    <div className="form-group">
+    <div className={formItemClasses}>
       <label htmlFor={id}>{label}</label>
       <input
         className={inputClasses}
