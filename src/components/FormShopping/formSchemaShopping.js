@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 
-const productSchema = Yup.object().shape({
+const formSchemaShopping = Yup.object().shape({
   name: Yup.string()
     .min(2, "The title is too short!")
     .max(25, "The title is too long!")
@@ -8,4 +8,4 @@ const productSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
 });
 
-export default productSchema;
+export default formSchemaShopping;

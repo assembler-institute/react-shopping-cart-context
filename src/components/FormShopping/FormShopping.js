@@ -6,90 +6,232 @@ import { useFormik } from "formik";
 import "./FormShopping.scss";
 
 import InputShopping from "../InputShopping";
+import ButtonShopping from "../ButtonShopping";
 
-import productSchema from "./product-schema";
+import formSchemaShopping from "./formSchemaShopping";
 
 function FormShopping({ props, ...routeProps }) {
   const [Url, setUrl] = useState(null);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+
   useEffect(() => {
     const activeUrl = routeProps.match.path;
     const activeUrlstring = activeUrl.substring(15, 16);
     const activeUrlId = parseInt(activeUrlstring, 16);
-    setUrl(activeUrl);
-    console.log(activeUrlId);
-  });
+    setUrl(activeUrlId);
+    // console.log(activeUrlId);
+  }, []);
 
-  const [hasSubmitted, setHasSubmitted] = useState(false);
   const formik = useFormik({
     initialValues: {
       name: "",
       email: "",
     },
-    validationSchema: productSchema,
+    validationSchema: formSchemaShopping,
     onSubmit: (values, { setSubmitting }) => {
       setSubmitting(true);
+      console.log(values);
 
       setTimeout(() => {
         setHasSubmitted(true);
       }, 500);
     },
   });
-  if (Url === 1) {
-    return (
-      <>
-        <form onSubmit={formik.handleSubmit}>
-          <InputShopping
-            type="text"
-            label="Your Name:"
-            id="name"
-            value={formik.values.name}
-            placeholder="name..."
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-            hasErrorMessage={formik.touched.name}
-            errorMessage={formik.errors.name}
-          />
-          <InputShopping
-            type="email"
-            label="Email address"
-            id="email"
-            value={formik.values.email}
-            placeholder="email..."
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-            hasErrorMessage={formik.touched.email}
-            errorMessage={formik.errors.email}
-          />
-          <InputShopping
-            type="text"
-            label="Your Name:"
-            id="name"
-            value={formik.values.name}
-            placeholder="name..."
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-            hasErrorMessage={formik.touched.name}
-            errorMessage={formik.errors.name}
-          />
-          <div className="container">
-            <button type="button" className="btnForm">
-              Back
-            </button>
-            <button
-              type="button"
-              className="btnForm"
-              submitButton
-              block
-              disabled={formik.isValidating || !formik.isValid}
-            >
-              {formik.isSubmitting ? "Submitting..." : "Submit"}
-            </button>
+
+  return (
+    <>
+      {Url === 1 && (
+        <section className="form__container">
+          <div className="headerPage">
+            <h2>Billing address</h2>
+            <span>Step {Url} of 3</span>
           </div>
-        </form>
-        {hasSubmitted && <Redirect to="/" />}
-      </>
-    );
-  }
+          <hr />
+          <form onSubmit={formik.handleSubmit}>
+            <InputShopping
+              type="text"
+              label="Your Name:"
+              id="name"
+              value={formik.values.name}
+              placeholder="name..."
+              handleChange={formik.handleChange}
+              handleBlur={formik.handleBlur}
+              hasErrorMessage={formik.touched.name}
+              errorMessage={formik.errors.name}
+            />
+            <InputShopping
+              type="email"
+              label="Email address"
+              id="email"
+              value={formik.values.email}
+              placeholder="email..."
+              handleChange={formik.handleChange}
+              handleBlur={formik.handleBlur}
+              hasErrorMessage={formik.touched.email}
+              errorMessage={formik.errors.email}
+            />
+            <div className="container">
+              <ButtonShopping type="button">back</ButtonShopping>
+              <ButtonShopping
+                // type="submit"
+                submitButton
+                // block
+                disabled={formik.isValidating || !formik.isValid}
+              >
+                {formik.isSubmitting ? "Loading..." : "next"}
+              </ButtonShopping>
+            </div>
+          </form>
+          {hasSubmitted && <Redirect to={`/checkout/step-${Url + 1}`} />}
+        </section>
+      )}
+      {Url === 2 && (
+        <section>
+          <div>
+            <div className="headerPage">
+              <h2>Billing address</h2>
+              <span>Step {Url} of 3</span>
+            </div>
+            <hr />
+          </div>
+          <form onSubmit={formik.handleSubmit}>
+            <InputShopping
+              type="text"
+              label="Your Name:"
+              id="name"
+              value={formik.values.name}
+              placeholder="name..."
+              handleChange={formik.handleChange}
+              handleBlur={formik.handleBlur}
+              hasErrorMessage={formik.touched.name}
+              errorMessage={formik.errors.name}
+            />
+            <InputShopping
+              type="text"
+              label="Your Name:"
+              id="name"
+              value={formik.values.name}
+              placeholder="name..."
+              handleChange={formik.handleChange}
+              handleBlur={formik.handleBlur}
+              hasErrorMessage={formik.touched.name}
+              errorMessage={formik.errors.name}
+            />
+            <div className="container">
+              <ButtonShopping type="button">back</ButtonShopping>
+              <ButtonShopping
+                // type="submit"
+                submitButton
+                // block
+                disabled={formik.isValidating || !formik.isValid}
+              >
+                {formik.isSubmitting ? "Loading..." : "next"}
+              </ButtonShopping>
+            </div>
+          </form>
+          {hasSubmitted && <Redirect to={`/checkout/step-${Url + 1}`} />}
+        </section>
+      )}
+      {Url === 3 && (
+        <section>
+          <div>
+            <div className="headerPage">
+              <h2>Billing address</h2>
+              <span>Step {Url} of 3</span>
+            </div>
+            <hr />
+          </div>
+          <form onSubmit={formik.handleSubmit}>
+            <InputShopping
+              type="text"
+              label="Your Name:"
+              id="name"
+              value={formik.values.name}
+              placeholder="name..."
+              handleChange={formik.handleChange}
+              handleBlur={formik.handleBlur}
+              hasErrorMessage={formik.touched.name}
+              errorMessage={formik.errors.name}
+            />
+            <InputShopping
+              type="text"
+              label="Your Name:"
+              id="name"
+              value={formik.values.name}
+              placeholder="name..."
+              handleChange={formik.handleChange}
+              handleBlur={formik.handleBlur}
+              hasErrorMessage={formik.touched.name}
+              errorMessage={formik.errors.name}
+            />
+            <div className="container">
+              <ButtonShopping type="button" className="btnForm">
+                back
+              </ButtonShopping>
+              <ButtonShopping
+                type="button"
+                className="btnForm"
+                submitButton
+                // block
+                disabled={formik.isValidating || !formik.isValid}
+              >
+                {formik.isSubmitting ? "Submitting..." : "next"}
+              </ButtonShopping>
+            </div>
+          </form>
+        </section>
+      )}
+      {Url === 4 && (
+        <section>
+          <div>
+            <div className="headerPage">
+              <h2>Billing address</h2>
+              <span>Step {Url} of 3</span>
+            </div>
+            <hr />
+          </div>
+          <form onSubmit={formik.handleSubmit}>
+            <InputShopping
+              type="text"
+              label="Your Name:"
+              id="name"
+              value={formik.values.name}
+              placeholder="name..."
+              handleChange={formik.handleChange}
+              handleBlur={formik.handleBlur}
+              hasErrorMessage={formik.touched.name}
+              errorMessage={formik.errors.name}
+            />
+            <InputShopping
+              type="text"
+              label="Your Name:"
+              id="name"
+              value={formik.values.name}
+              placeholder="name..."
+              handleChange={formik.handleChange}
+              handleBlur={formik.handleBlur}
+              hasErrorMessage={formik.touched.name}
+              errorMessage={formik.errors.name}
+            />
+            <div className="container">
+              <ButtonShopping type="button" className="btnForm">
+                back
+              </ButtonShopping>
+              <ButtonShopping
+                type="button"
+                className="btnForm"
+                submitButton
+                // block
+                disabled={formik.isValidating || !formik.isValid}
+              >
+                {formik.isSubmitting ? "Submitting..." : "next"}
+              </ButtonShopping>
+            </div>
+          </form>
+        </section>
+      )}
+    </>
+  );
 }
 
 export default FormShopping;

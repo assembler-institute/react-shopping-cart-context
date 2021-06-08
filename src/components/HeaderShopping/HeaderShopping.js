@@ -1,16 +1,18 @@
 import React from "react";
-// import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import "./HeaderShopping.scss";
 
 function HeaderShopping() {
   return (
     <header className="header__Shopping">
-      <img
-        className="assembler__logo"
-        alt="assembler-logo"
-        src="https://assets.website-files.com/5d7ac47d34aefe1ecf290ce6/5d7ac68da9740c393a589ee7_logo_org_1.png"
-      />
+      <NavLink to="../" className="header__logo">
+        <img
+          className="assembler__logo"
+          alt="assembler-logo"
+          src="https://assets.website-files.com/5d7ac47d34aefe1ecf290ce6/5d7ac68da9740c393a589ee7_logo_org_1.png"
+        />
+      </NavLink>
       <ul className="header__ul">
         <li>No sé</li>
         <li>que chuchas</li>
