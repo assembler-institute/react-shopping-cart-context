@@ -7,14 +7,13 @@ import Step1 from "./pages/Checkout/step1";
 import Step2 from "./pages/Checkout/step2";
 import Step3 from "./pages/Checkout/step3";
 import Step4 from "./pages/Checkout/order-summary";
-// import StateContext from "./context/state-context";
 
 import * as api from "./api";
 
 import useLocalStorage from "./hooks/useLocalStorage";
 import loadLocalStorageItems from "./utils/loadLocalStorageItems";
-// import StateProvider from "./context/state-context";
-import StateContext from "./context/state-context";
+import StateProvider from "./context/state-context";
+// import StateContext from "./context/state-context";
 
 function buildNewCartItem(cartItem) {
   if (cartItem.quantity >= cartItem.unitsInStock) {
@@ -187,21 +186,21 @@ function App() {
   }
 
   return (
-    // <StateProvider>
-    <StateContext.Provider value={{ cartItems: cartItems }}>
+    <StateProvider>
+      {/* <StateContext.Provider value={{ cartItems: cartItems }}> */}
       <BrowserRouter>
         <Switch>
           <Route path="/checkout/step-1" exact>
-            <Step1 />
+            <Step1 cartItems={cartItems} />
           </Route>
           <Route path="/checkout/step-2" exact>
-            <Step2 />
+            <Step2 cartItems={cartItems} />
           </Route>
           <Route path="/checkout/step-3" exact>
-            <Step3 />
+            <Step3 cartItems={cartItems} />
           </Route>
           <Route path="/checkout/order-summary" exact>
-            <Step4 />
+            <Step4 cartItems={cartItems} />
           </Route>
           <Route path="/new-product">
             <NewProduct saveNewProduct={saveNewProduct} />
@@ -224,8 +223,8 @@ function App() {
           </Route>
         </Switch>
       </BrowserRouter>
-    </StateContext.Provider>
-    // </StateProvider>
+      {/* </StateContext.Provider> */}
+    </StateProvider>
   );
 }
 

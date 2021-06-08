@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import SummaryItem from "../SummaryItem";
 
-import StateContext from "../../context/state-context";
+import { StateContext } from "../../context/state-context";
 
 function getCartTotal(cart) {
   return cart.reduce((accum, item) => {
@@ -9,8 +9,13 @@ function getCartTotal(cart) {
   }, 0);
 }
 
-function OrderSummary({ ...props }) {
-  const { cartItems } = useContext(StateContext);
+function OrderSummary({ cartItems, ...props }) {
+  const [state, dispatch] = useContext(StateContext);
+
+  console.log(cartItems);
+  console.log(dispatch);
+  console.log(state);
+  // const { cartItems } = value;
   // const [state /* , dispatch */] = useContext(StateContext);
   // const { cartItems } = state;
   return (

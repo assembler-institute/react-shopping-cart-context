@@ -1,18 +1,16 @@
-import { /* React, */ /*  useReducer, */ createContext } from "react";
-// import reducer, { initialState } from "./state-reducer";
+import { React, useReducer, createContext } from "react";
+import { reducer, initialState } from "./state-reducer";
 
-const StateContext = createContext({
-  cartItems: [],
-});
+export const StateContext = createContext();
 
-// const StateProvider = ({ children }) => {
-//   const [state, dispatch] = useReducer(reducer, initialState);
-//   return (
-//     <StateContext.Provider value={[state, dispatch]}>
-//       {children}
-//     </StateContext.Provider>
-//   );
-// };
+const StateProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  // const { cartItems, account, billing, payment } = state;
+  return (
+    <StateContext.Provider value={[state, dispatch]}>
+      {children}
+    </StateContext.Provider>
+  );
+};
 
-// export default StateProvider;
-export default StateContext;
+export default StateProvider;
