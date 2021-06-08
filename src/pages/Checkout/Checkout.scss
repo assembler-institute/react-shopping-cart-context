@@ -7,11 +7,28 @@
 .step-bottom {
   .payment-methods {
     height: 60px;
-    background-color: red;
+    input {
+      display: none;
+    }
+    input:checked + .payment-method {
+      border: 3px solid rgb(0, 0, 0);
+    }
+
+    .payment-method {
+      height: 100%;
+      width: 30%;
+      border-radius: 3px;
+      border: 1px solid gray;
+      background-color: white;
+
+      img {
+        height: 150%;
+        width: auto;
+      }
+    }
   }
 
   .accepted-methods {
-    // background-color: blue;
     p {
       margin-bottom: 0;
     }
