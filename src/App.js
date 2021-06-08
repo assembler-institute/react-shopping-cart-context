@@ -252,6 +252,8 @@ function App() {
         prevPath: prevPath,
         updateDetails: updateDetails,
         updateAdress: updateAdress,
+        handleChange: handleChange,
+        handleRemove: handleRemove,
       }}
     >
       <BrowserRouter>
