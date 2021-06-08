@@ -8,6 +8,9 @@ import Button from "../../Button";
 
 import paymentSchema from "./payment-schema";
 
+import Applepay from "../../../img/Apple-pay.svg";
+import Paypal from "../../../img/paypal.svg";
+
 function PaymentForm() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
@@ -33,13 +36,34 @@ function PaymentForm() {
     <>
       <form onSubmit={formik.handleSubmit}>
         {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-        <label htmlFor="creditCardPay" className="border">
-          Hello
-          <Input type="radio" name="picked" id="creditCardPay" />
-        </label>
-        {/* <Input type="radio" label="Credit/Debit Card" id="creditCardPay" />
-        <Input type="radio" label="Paypal" id="creditCardPay" />
-        <Input type="radio" label="Pay" id="creditCardPay" /> */}
+        <div className="d-flex justify-content-between">
+          <label
+            htmlFor="creditCardPay"
+            className="d-flex align-items-center border rounded p-2 "
+          >
+            <input
+              type="radio"
+              name="picked"
+              id="creditCardPay"
+              className="mr-2"
+            />
+            Credit/Debit Card
+          </label>
+          <label
+            htmlFor="paypal"
+            className="d-flex align-items-center border rounded p-2 w-25"
+          >
+            <input type="radio" name="picked" id="paypal" className="mr-2" />
+            <img src={Paypal} alt="Paypal" style={{ width: "100%" }} />
+          </label>
+          <label
+            htmlFor="applepay"
+            className="d-flex align-items-center border rounded p-2 w-25"
+          >
+            <input type="radio" name="picked" id="applepay" className="mr-2" />
+            <img src={Applepay} alt="Apple pay" style={{ width: "100%" }} />
+          </label>
+        </div>
         <Input
           type="text"
           label="Your Cardholder name*"

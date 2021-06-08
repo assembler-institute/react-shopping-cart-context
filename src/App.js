@@ -7,12 +7,14 @@ import Step1 from "./pages/Checkout/step1";
 import Step2 from "./pages/Checkout/step2";
 import Step3 from "./pages/Checkout/step3";
 import Step4 from "./pages/Checkout/order-summary";
-import CartContext from "./context/cart-context";
+// import StateContext from "./context/state-context";
 
 import * as api from "./api";
 
 import useLocalStorage from "./hooks/useLocalStorage";
 import loadLocalStorageItems from "./utils/loadLocalStorageItems";
+// import StateProvider from "./context/state-context";
+import StateContext from "./context/state-context";
 
 function buildNewCartItem(cartItem) {
   if (cartItem.quantity >= cartItem.unitsInStock) {
@@ -185,7 +187,8 @@ function App() {
   }
 
   return (
-    <CartContext.Provider value={{ cartItems: cartItems }}>
+    // <StateProvider>
+    <StateContext.Provider value={{ cartItems: cartItems }}>
       <BrowserRouter>
         <Switch>
           <Route path="/checkout/step-1" exact>
@@ -221,7 +224,8 @@ function App() {
           </Route>
         </Switch>
       </BrowserRouter>
-    </CartContext.Provider>
+    </StateContext.Provider>
+    // </StateProvider>
   );
 }
 
