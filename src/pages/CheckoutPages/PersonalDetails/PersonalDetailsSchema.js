@@ -7,8 +7,10 @@ const PersonalDetailsSchema = Yup.object().shape({
     .min(2, "The name is too short!")
     .max(50, "The name is too long!")
     .required("The name is required"),
-  email: Yup.string().email("Invalid email").required("Required"),
-  phoneNumber: Yup.string().matches(phoneRegExp, "Phone number is not valid"),
+  email: Yup.string().email("Invalid email").required("The email is required"),
+  phoneNumber: Yup.string()
+    .matches(phoneRegExp, "Phone number is not valid")
+    .required("The phone number is required"),
 });
 
 export default PersonalDetailsSchema;

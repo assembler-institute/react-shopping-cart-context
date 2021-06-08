@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useFormik } from "formik";
 import { Redirect } from "react-router-dom";
 
@@ -9,17 +9,30 @@ import Button from "../../../components/Button";
 
 import PersonalDetailsSchema from "./PersonalDetailsSchema";
 
+import checkoutContext from "../../../context/checkoutData";
+
 const isCheckout = true;
 
 function PersonalDetails({ cartItems }) {
   const [hasSubmitted, setHasSubmitted] = useState(false);
+  const { setPersonalDetails, state } = useContext(checkoutContext);
 
   const formik = useFormik({
-    initialValues: { name: "", email: "", phonePrefix: "", phoneNumber: "" },
+    initialValues: {
+      name: state.name ? state.name : "",
+      email: state.email,
+      phonePrefix: state.phonePrefix,
+      phoneNumber: state.phoneNumber,
+    },
     validationSchema: PersonalDetailsSchema,
     onSubmit: (values, { setSubmitting }) => {
       setSubmitting(true);
-
+      setPersonalDetails(
+        values.name,
+        values.email,
+        values.phonePrefix,
+        values.phoneNumber,
+      );
       setTimeout(() => {
         setHasSubmitted(true);
       }, 500);
@@ -53,25 +66,33 @@ function PersonalDetails({ cartItems }) {
             errorMessage={formik.errors.email}
           />
           <div className="phone-inputs">
-            <select>
-              <option value="grapefruit">Grapefruit</option>
-              <option value="lime">Lime</option>
-              <option selected value="coconut">
-                Coconut
-              </option>
-              <option value="mango">Mango</option>
-            </select>
-            <Input
-              type="text"
-              label="Phone number"
-              id="phoneNumber"
-              value={formik.values.phoneNumber}
-              placeholder="Phone number"
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              hasErrorMessage={formik.touched.phoneNumber}
-              errorMessage={formik.errors.phoneNumber}
-            />
+            <label htmlFor="phoneNumber">
+              Phone Number
+              <br />
+              <select
+                value={formik.values.phonePrefix}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                id="phonePrefix"
+              >
+                <option value="+34">Spain +34</option>
+                <option value="+39">Italy +39</option>
+                <option value="+49">Germany +49</option>
+                <option value="+33">France +33</option>
+                <option value="+31">Netherlands +31</option>
+              </select>
+              <Input
+                type="text"
+                label=""
+                id="phoneNumber"
+                value={formik.values.phoneNumber}
+                placeholder="Phone number"
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+                hasErrorMessage={formik.touched.phoneNumber}
+                errorMessage={formik.errors.phoneNumber}
+              />
+            </label>
           </div>
           <Button
             submitButton

@@ -4,11 +4,11 @@ const checkoutData = createContext({
   isCheckoutDisabled: true,
   // userName: "",
   // userPassword: "",
-  // name: "",
+  name: "",
   // lastName: "",
-  // email: "",
-  // phonePrefix: 0,
-  // phoneNumber: 0,
+  email: "",
+  phonePrefix: "",
+  phoneNumber: "",
   // address: "",
   // city: "",
   // ZC: 0,
@@ -19,6 +19,7 @@ const checkoutData = createContext({
   // cardExpiryDate: 0,
   // cardCVV: 0,
   // termsConditions: false,
+  setPersonalDetails: () => {},
 });
 
 export default checkoutData;
