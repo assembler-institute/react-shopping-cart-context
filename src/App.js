@@ -11,6 +11,7 @@ import * as api from "./api";
 
 import useLocalStorage from "./hooks/useLocalStorage";
 import loadLocalStorageItems from "./utils/loadLocalStorageItems";
+import { CheckoutContextProvider } from "./context/checkout-context";
 
 import {
   HOME,
@@ -191,53 +192,55 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route path={NEW_PRODUCT}>
-          <NewProduct saveNewProduct={saveNewProduct} />
-        </Route>
-        <Route path={DETAIL}>
-          <Detail
-            cartItems={cartItems}
-            handleRemove={handleRemove}
-            handleChange={handleChange}
-            page={1}
-          />
-        </Route>
-        <Route path={ADDRESS}>
-          <Address
-            cartItems={cartItems}
-            handleRemove={handleRemove}
-            handleChange={handleChange}
-            page={2}
-          />
-        </Route>
-        <Route path={PAYMENT}>
-          <Payment
-            cartItems={cartItems}
-            handleRemove={handleRemove}
-            handleChange={handleChange}
-            page={3}
-          />
-        </Route>
-        <Route path={HOME}>
-          <Home
-            fullWidth
-            cartItems={cartItems}
-            products={products}
-            isLoading={isLoading}
-            hasError={hasError}
-            loadingError={loadingError}
-            handleDownVote={handleDownVote}
-            handleUpVote={handleUpVote}
-            handleSetFavorite={handleSetFavorite}
-            handleAddToCart={handleAddToCart}
-            handleRemove={handleRemove}
-            handleChange={handleChange}
-          />
-        </Route>
-      </Switch>
-    </BrowserRouter>
+    <CheckoutContextProvider>
+      <BrowserRouter>
+        <Switch>
+          <Route path={NEW_PRODUCT}>
+            <NewProduct saveNewProduct={saveNewProduct} />
+          </Route>
+          <Route path={DETAIL}>
+            <Detail
+              cartItems={cartItems}
+              handleRemove={handleRemove}
+              handleChange={handleChange}
+              page={1}
+            />
+          </Route>
+          <Route path={ADDRESS}>
+            <Address
+              cartItems={cartItems}
+              handleRemove={handleRemove}
+              handleChange={handleChange}
+              page={2}
+            />
+          </Route>
+          <Route path={PAYMENT}>
+            <Payment
+              cartItems={cartItems}
+              handleRemove={handleRemove}
+              handleChange={handleChange}
+              page={3}
+            />
+          </Route>
+          <Route path={HOME}>
+            <Home
+              fullWidth
+              cartItems={cartItems}
+              products={products}
+              isLoading={isLoading}
+              hasError={hasError}
+              loadingError={loadingError}
+              handleDownVote={handleDownVote}
+              handleUpVote={handleUpVote}
+              handleSetFavorite={handleSetFavorite}
+              handleAddToCart={handleAddToCart}
+              handleRemove={handleRemove}
+              handleChange={handleChange}
+            />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    </CheckoutContextProvider>
   );
 }
 

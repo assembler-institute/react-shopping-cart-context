@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Redirect } from "react-router-dom";
 // import { v4 as uuid } from "uuid";
 import { useFormik } from "formik";
@@ -10,11 +10,13 @@ import UiInput from "../../components/UiInput";
 
 import withCheckoutLayout from "../../hoc/withCheckoutLayout";
 import AddressSchema from "./Address-schema";
+import CheckoutContext from "../../context/checkout-context";
 
 import { PAYMENT } from "../../constants/routes";
 
 function Address() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
+  const { updateCheckoutContext } = useContext(CheckoutContext);
 
   const formik = useFormik({
     initialValues: {
@@ -28,7 +30,7 @@ function Address() {
       //   const newProduct = addProductDetails(values);
       //   saveNewProduct(newProduct);
       setSubmitting(true);
-
+      updateCheckoutContext(values);
       setTimeout(() => {
         setHasSubmitted(true);
       }, 500);

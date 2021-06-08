@@ -5,8 +5,6 @@ function UiInput({
   label = "input-01",
   id = "input-01",
   value = "",
-  // name = "",
-  // placeholder = "",
   handleChange = () => {},
   handleBlur = () => {},
   handleFlip = () => {},
@@ -15,7 +13,7 @@ function UiInput({
   type = "text",
   ...props
 }) {
-  function handleClick(e) {
+  function handleFocus(e) {
     if (e.target.id === "cardCvv") {
       handleFlip(e);
     }
@@ -39,7 +37,7 @@ function UiInput({
       value={value}
       onChange={handleChange}
       onBlur={onHandleBlur}
-      onClick={handleClick}
+      onFocus={handleFocus}
       error={hasErrorMessage && Boolean(errorMessage)}
       helperText={hasErrorMessage && errorMessage}
       type={type}

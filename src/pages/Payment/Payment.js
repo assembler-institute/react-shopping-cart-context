@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Redirect } from "react-router-dom";
 
 import clsx from "clsx";
@@ -15,6 +15,7 @@ import UiCustomRadio from "../../components/UiCustomRadio";
 import paymentSchema from "./Payment-schema";
 
 import withCheckoutLayout from "../../hoc/withCheckoutLayout";
+import CheckoutContext from "../../context/checkout-context";
 
 import paypalImage from "../../img/icons/payment/Paypal.png";
 import applePayImage from "../../img/icons/payment/Apple.png";
@@ -26,11 +27,12 @@ import CreditCard from "../../components/CreditCard";
 
 function Payment() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
+  const { updateCheckoutContext } = useContext(CheckoutContext);
   const [flip, setFlip] = useState(false);
 
   const formik = useFormik({
     initialValues: {
-      paymentValue: "card",
+      paymentMethod: "card",
       carholderName: "",
       cardNumber: "",
       cardExpiry: "",
@@ -40,6 +42,7 @@ function Payment() {
     validationSchema: paymentSchema,
     onSubmit: (values, { setSubmitting }) => {
       setSubmitting(true);
+      updateCheckoutContext(values);
       setTimeout(() => {
         setHasSubmitted(true);
       }, 500);
@@ -48,19 +51,19 @@ function Payment() {
 
   const paymentOptions = [
     {
-      value: "card",
+      method: "card",
       formText: "Credit/Debit Card",
       formImage: false,
       disabled: false,
     },
     {
-      value: "paypal",
+      method: "paypal",
       formText: false,
       formImage: paypalImage,
       disabled: true,
     },
     {
-      value: "applePay",
+      method: "applePay",
       formText: false,
       formImage: applePayImage,
       disabled: true,
@@ -82,22 +85,22 @@ function Payment() {
             </div>
             <div className="row gy-2">
               <RadioGroup
-                id="paymentValue"
+                id="paymentMethod"
                 aria-label="payment method"
-                name="paymentValue"
-                value={formik.values.paymentValue}
+                name="paymentMethod"
+                value={formik.values.paymentMethod}
                 onChange={formik.handleChange}
                 row
               >
                 {paymentOptions.map((payment) => {
                   return (
                     <UiCustomRadio
-                      chosenValue={formik.values.paymentValue}
-                      value={payment.value}
+                      chosenValue={formik.values.paymentMethod}
+                      value={payment.method}
                       formText={payment.formText}
                       formImage={payment.formImage}
                       disabled={payment.disabled}
-                      key={payment.value}
+                      key={payment.method}
                     />
                   );
                 })}
@@ -201,8 +204,7 @@ function Payment() {
                     />
                     {formik.touched.cardAgreement && (
                       <p className="invalid-feedback">
-                        I have read and I accept the conditions, general terms
-                        and privacy policy.
+                        You must accept the conditions to continue.
                       </p>
                     )}
                   </div>
