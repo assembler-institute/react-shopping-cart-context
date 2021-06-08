@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-// import ShoppingCartItem from "../ShoppingCartItem";
 import SummaryItem from "../SummaryItem";
 
 import CartContext from "../../context/cart-context";
@@ -23,7 +22,6 @@ function OrderSummary({ ...props }) {
           cartItems.map((item) => (
             <SummaryItem
               key={item.id}
-              id={item.id}
               title={item.title}
               price={item.price}
               img={item.img}
