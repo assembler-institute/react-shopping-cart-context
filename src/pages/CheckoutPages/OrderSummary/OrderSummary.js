@@ -6,7 +6,7 @@ const isCheckout = true;
 function OrderSummary() {
   return (
     <div className="row">
-      <div className="col col-8">1234</div>
+      <div className="col col-12">1234</div>
     </div>
   );
 }

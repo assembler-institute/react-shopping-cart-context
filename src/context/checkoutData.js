@@ -19,7 +19,7 @@ const checkoutData = createContext({
   cardExpiryDate: 0,
   cardCVV: 0,
   termsConditions: false,
-  setPersonalDetails: () => {},
+  setCheckoutData: () => {},
 });
 
 export default checkoutData;

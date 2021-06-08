@@ -25,6 +25,28 @@ const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
 const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
 const CHECKOUT_DATA_LOCAL_STORAGE_KEY = "react-sc-state-checkout-data";
 
+const initialCheckoutContext = {
+  isCheckoutDisabled: true,
+  userName: "",
+  userPassword: "",
+  name: "",
+  lastName: "",
+  email: "",
+  phonePrefix: "",
+  phoneNumber: "",
+  address: "",
+  city: "",
+  ZC: 0,
+  country: "",
+  paymentMethod: "",
+  cardName: "",
+  cardNumber: 0,
+  cardExpiryDate: 0,
+  cardCVV: 0,
+  termsConditions: false,
+  setPersonalDetails: () => {},
+};
+
 function reducer(state, action) {
   switch (action.type) {
     case SETISCHECKOUT: {
@@ -63,7 +85,7 @@ function buildNewCartItem(cartItem) {
 }
 
 function App() {
-  const [state, dispatch] = useReducer(reducer, checkoutContext);
+  const [state, dispatch] = useReducer(reducer, initialCheckoutContext);
   const { isCheckoutDisabled } = state;
   console.log(state);
 
