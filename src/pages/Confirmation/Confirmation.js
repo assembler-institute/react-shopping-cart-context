@@ -1,7 +1,11 @@
 import React from "react";
 
+import OrderConfirmation from "../../components/OrderConfirmation/OrderConfirmation";
+
+import withLayout from "../../hoc/withLayout";
+
 function Confirmation() {
-  return <h1>Confirmation</h1>;
+  return <OrderConfirmation />;
 }
 
-export default Confirmation;
+export default withLayout(Confirmation);

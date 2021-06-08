@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 
 import { useFormik } from "formik";
+import { v4 as uuid } from "uuid";
 
 import Input from "../Input";
 import Button from "../Button";
 
 import InformationSchema from "./information-schema";
 
-function InformationForm() {
+function InformationForm({ saveUser }) {
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
   const formik = useFormik({
@@ -28,11 +29,15 @@ function InformationForm() {
     onSubmit: (values, { setSubmitting }) => {
       setSubmitting(true);
 
+      saveUser({ id: uuid(), ...values });
+
       setTimeout(() => {
         setHasSubmitted(true);
       }, 500);
     },
   });
+  // eslint-disable-next-line no-console
+
   return (
     <>
       <form onSubmit={formik.handleSubmit}>

@@ -13,6 +13,7 @@ import Payment from "./pages/Payment";
 import Shipping from "./pages/Shipping";
 import UserInformation from "./pages/UserInformation";
 import CartContextProvider from "./components/CartContextProvider";
+import { UserContext } from "./Context/UserContext";
 
 const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
 
@@ -26,6 +27,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [loadingError, setLoadingError] = useState(null);
+  const [user, setUser] = useState([]);
 
   useEffect(() => {
     if (products.length === 0) {
@@ -113,38 +115,45 @@ function App() {
     setProducts((prevState) => [newProduct, ...prevState]);
   }
 
+  function saveUser(userData) {
+    setUser((prevState) => [...prevState, userData]);
+    // eslint-disable-next-line no-console
+    console.log(userData);
+  }
+
   return (
     <CartContextProvider>
       <BrowserRouter>
         <Switch>
-          <Route path="/checkout/order-summary" exact>
-            <Confirmation />
-          </Route>
-          <Route path="/checkout/step-3" exact>
-            <Payment />
-          </Route>
-          <Route path="/checkout/step-2" exact>
-            <Shipping />
-          </Route>
-          <Route path="/checkout/step-1" exact>
-            <UserInformation />
-          </Route>
-          <Route path="/new-product">
-            <NewProduct saveNewProduct={saveNewProduct} />
-          </Route>
-          <Route path="/" exact>
-            <Home
-              fullWidth
-              products={products}
-              isLoading={isLoading}
-              hasError={hasError}
-              loadingError={loadingError}
-              handleDownVote={handleDownVote}
-              handleUpVote={handleUpVote}
-              handleSetFavorite={handleSetFavorite}
-              handle
-            />
-          </Route>
+          <UserContext.Provider value={user}>
+            <Route path="/checkout/order-summary" exact>
+              <Confirmation />
+            </Route>
+            <Route path="/checkout/step-3" exact>
+              <Payment />
+            </Route>
+            <Route path="/checkout/step-2" exact>
+              <Shipping />
+            </Route>
+            <Route path="/checkout/step-1" exact>
+              <UserInformation />
+            </Route>
+            <Route path="/new-product">
+              <NewProduct saveNewProduct={saveNewProduct} />
+            </Route>
+            <Route path="/" exact>
+              <Home
+                fullWidth
+                products={products}
+                isLoading={isLoading}
+                hasError={hasError}
+                loadingError={loadingError}
+                handleDownVote={handleDownVote}
+                handleUpVote={handleUpVote}
+                handleSetFavorite={handleSetFavorite}
+              />
+            </Route>
+          </UserContext.Provider>
         </Switch>
       </BrowserRouter>
     </CartContextProvider>

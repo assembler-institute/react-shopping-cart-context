@@ -4,7 +4,7 @@ import CartSummary from "../../components/CartSummary/CartSummary";
 import InformationForm from "../../components/InformationForm/InfomationForm";
 import withLayout from "../../hoc/withLayout";
 
-function UserInformation({ cartItems, handleRemove, handleChange }) {
+function UserInformation({ cartItems, handleRemove, handleChange, saveUser }) {
   return (
     <>
       <h1>User Information</h1>
@@ -15,7 +15,7 @@ function UserInformation({ cartItems, handleRemove, handleChange }) {
 
             <hr />
 
-            <InformationForm />
+            <InformationForm saveUser={saveUser} />
           </header>
         </div>
 
