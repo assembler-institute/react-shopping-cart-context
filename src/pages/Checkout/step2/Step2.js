@@ -5,11 +5,11 @@ import BillingForm from "../../../components/Forms/BillingForm";
 import OrderSummary from "../../../components/OrderSummary";
 import withLayout from "../../../hoc/withLayout";
 
-function Step2({ cartItems }) {
+function Step2() {
   return (
     <div className="row">
       <BillingForm />
-      <OrderSummary className="col col-4" cartItems={cartItems} />
+      <OrderSummary className="col col-4" />
     </div>
   );
 }

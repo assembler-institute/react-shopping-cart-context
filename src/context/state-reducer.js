@@ -1,7 +1,7 @@
 // const cartItems = JSON.parse(localStorage.getItem("react-sc-state-cart-items"));
 
 export const initialState = {
-  //   cartItems: cartItems,
+  cartItems: [],
   account: {
     userName: "",
     emailAdress: "",
@@ -27,6 +27,7 @@ export const initialState = {
 };
 
 export const ACTIONS = {
+  ADD_PRODUCTS: "add-products",
   ADD_ACCOUNT: "add-account",
   ADD_BILLING: "add-billing",
   ADD_PAYMENT: "add-payment",
@@ -34,6 +35,11 @@ export const ACTIONS = {
 
 export const reducer = (state, action) => {
   switch (action.type) {
+    case ACTIONS.ADD_PRODUCTS:
+      return {
+        ...state,
+        cartItems: action.payload,
+      };
     default:
       return state;
   }

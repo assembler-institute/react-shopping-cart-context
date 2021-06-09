@@ -1,5 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import { StateContext } from "../../context/state-context";
+import { ACTIONS } from "../../context/state-reducer";
+// import { ACTIONS } from "../../context/state-reducer";
+// import StateProvider from "../../context/state-context";
 
 import ShoppingCartItem from "../ShoppingCartItem";
 // import Button from "../Button";
@@ -11,6 +16,9 @@ function getCartTotal(cart) {
 }
 
 function Cart({ cartItems, handleRemove, handleChange, ...props }) {
+  const value = useContext(StateContext);
+  const [, dispatch] = value;
+
   return (
     <aside {...props}>
       <div className="row flex-column">
@@ -51,7 +59,16 @@ function Cart({ cartItems, handleRemove, handleChange, ...props }) {
             </div>
             <div className="col">
               {cartItems.length > 0 && (
-                <Link className="btn btn-primary" to="/checkout/step-1">
+                <Link
+                  className="btn btn-primary"
+                  to="/checkout/step-1"
+                  onClick={() =>
+                    dispatch({
+                      type: ACTIONS.ADD_PRODUCTS,
+                      payload: cartItems,
+                    })
+                  }
+                >
                   Checkout
                 </Link>
               )}

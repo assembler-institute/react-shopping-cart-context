@@ -191,16 +191,16 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route path="/checkout/step-1" exact>
-            <Step1 cartItems={cartItems} />
+            <Step1 />
           </Route>
           <Route path="/checkout/step-2" exact>
-            <Step2 cartItems={cartItems} />
+            <Step2 />
           </Route>
           <Route path="/checkout/step-3" exact>
-            <Step3 cartItems={cartItems} />
+            <Step3 />
           </Route>
           <Route path="/checkout/order-summary" exact>
-            <Step4 cartItems={cartItems} />
+            <Step4 />
           </Route>
           <Route path="/new-product">
             <NewProduct saveNewProduct={saveNewProduct} />

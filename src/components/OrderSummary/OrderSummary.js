@@ -9,15 +9,10 @@ function getCartTotal(cart) {
   }, 0);
 }
 
-function OrderSummary({ cartItems, ...props }) {
-  const [state, dispatch] = useContext(StateContext);
+function OrderSummary({ ...props }) {
+  const [state] = useContext(StateContext);
+  const { cartItems } = state;
 
-  console.log(cartItems);
-  console.log(dispatch);
-  console.log(state);
-  // const { cartItems } = value;
-  // const [state /* , dispatch */] = useContext(StateContext);
-  // const { cartItems } = state;
   return (
     <aside {...props}>
       <div className="row flex-column">
