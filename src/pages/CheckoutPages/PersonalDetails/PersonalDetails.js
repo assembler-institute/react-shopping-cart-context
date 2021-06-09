@@ -6,6 +6,7 @@ import withLayout from "../../../hoc/withLayout";
 
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
+import OverviewSidebar from "../../../components/OverviewSidebar";
 
 import PersonalDetailsSchema from "./PersonalDetailsSchema";
 
@@ -104,19 +105,8 @@ function PersonalDetails({ cartItems }) {
         </form>
         {hasSubmitted && <Redirect to="/checkout/step-2" />}
       </div>
-
       <div className="col col-4">
-        {cartItems.map((item) => (
-          <div key={item.id} id={item.id}>
-            <p>Product name: {item.title}</p>
-            <img
-              src={item.img}
-              alt={item.title}
-              style={({ width: "100px" }, { height: "100px" })}
-            />
-            <p>Amount: {item.quantity}</p>
-          </div>
-        ))}
+        <OverviewSidebar className="col" cartItems={cartItems} />
       </div>
     </div>
   );
