@@ -16,11 +16,6 @@ function Radio({
     <>
       <div className="form-group">
         <input
-          className={
-            hasErrorMessage && errorMessage
-              ? "form-check-input is-invalid"
-              : "form-check-input"
-          }
           id={id}
           name={id}
           type={type}

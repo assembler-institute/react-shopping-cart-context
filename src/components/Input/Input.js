@@ -1,4 +1,5 @@
 import React from "react";
+import { CheckedIcon } from "../SVGIcons";
 
 function Input({
   type = "text",
@@ -12,15 +13,15 @@ function Input({
   hasErrorMessage,
   ...props
 }) {
+  const success =
+    !errorMessage && !hasErrorMessage && value ? "is-valid border-success" : "";
+  const error =
+    errorMessage && hasErrorMessage ? "is-invalid border border-danger" : "";
   return (
     <div className="form-group">
       <label htmlFor={id}>{label}</label>
       <input
-        className={
-          hasErrorMessage && errorMessage
-            ? "form-control is-invalid border border-danger"
-            : "form-control"
-        }
+        className={`form-control ${success} ${error}`}
         id={id}
         name={id}
         type={type}
@@ -33,6 +34,7 @@ function Input({
       {hasErrorMessage && errorMessage && (
         <p className="invalid-feedback">{errorMessage}</p>
       )}
+      {!hasErrorMessage && !errorMessage && value && <CheckedIcon />}
     </div>
   );
 }

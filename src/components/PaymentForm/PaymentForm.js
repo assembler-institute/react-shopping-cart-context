@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Redirect } from "react-router-dom";
 
 import { useFormik } from "formik";
@@ -18,9 +18,11 @@ import {
 } from "../SVGIcons";
 
 import "./PaymentForm.scss";
+import PaymentContext from "../../context/paymentContext";
 
 function PaymentForm() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
+  const { savePaymentInfo } = useContext(PaymentContext);
   const formik = useFormik({
     initialValues: {
       payMethod: "",
@@ -33,6 +35,7 @@ function PaymentForm() {
     validationSchema: paymentSchema,
     onSubmit: (values, { setSubmitting }) => {
       setSubmitting(true);
+      savePaymentInfo(values);
       setTimeout(() => {
         setHasSubmitted(true);
       }, 500);
@@ -125,7 +128,7 @@ function PaymentForm() {
                     id="cardHolderName"
                     label="Cardholder Name"
                     value={formik.values.cardHolderName}
-                    handleChange={formik.handleChange}
+                    handleChange={(e) => formik.handleChange(e)}
                     handleBlur={formik.handleBlur}
                     hasErrorMessage={formik.touched.cardHolderName}
                     errorMessage={formik.errors.cardHolderName}

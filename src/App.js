@@ -12,8 +12,10 @@ import Confirmation from "./pages/Confirmation";
 import Payment from "./pages/Payment";
 import Shipping from "./pages/Shipping";
 import UserInformation from "./pages/UserInformation";
+
 import CartContextProvider from "./components/CartContextProvider";
 import UserContext from "./context/userContext";
+import PaymentContext from "./context/paymentContext";
 
 const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
 
@@ -28,6 +30,7 @@ function App() {
   const [hasError, setHasError] = useState(false);
   const [loadingError, setLoadingError] = useState(null);
   const [user, setUser] = useState([]);
+  const [paymentInfo, setPaymentInfo] = useState([]);
 
   useEffect(() => {
     if (products.length === 0) {
@@ -121,17 +124,23 @@ function App() {
     console.log(userData);
   }
 
+  function savePaymentInfo(paymentData) {
+    setPaymentInfo((prevState) => [...prevState, paymentData]);
+    console.log(paymentData, "payment info");
+  }
   return (
     <CartContextProvider>
       <BrowserRouter>
         <Switch>
           <UserContext.Provider value={user}>
-            <Route path="/checkout/order-summary" exact>
-              <Confirmation />
-            </Route>
-            <Route path="/checkout/step-3" exact>
-              <Payment />
-            </Route>
+            <PaymentContext.Provider value={{ paymentInfo, savePaymentInfo }}>
+              <Route path="/checkout/order-summary" exact>
+                <Confirmation />
+              </Route>
+              <Route path="/checkout/step-3" exact>
+                <Payment />
+              </Route>
+            </PaymentContext.Provider>
             <Route path="/checkout/step-2" exact>
               <Shipping />
             </Route>
