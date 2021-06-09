@@ -18,11 +18,14 @@ const initialState = {
 const CheckoutContext = createContext(initialState);
 
 const UPDATE_CHECKOUT = "UPDATE_CHECKOUT";
+const CLEAR_CHECKOUT = "CLEAR_CHECKOUT";
 
 function CheckoutReducer(state, action) {
   switch (action.type) {
     case UPDATE_CHECKOUT:
       return { ...state, ...action.payload };
+    case CLEAR_CHECKOUT:
+      return initialState;
     default:
       return state;
   }
@@ -35,6 +38,12 @@ export const CheckoutContextProvider = ({ children }) => {
     dispatch({
       type: "UPDATE_CHECKOUT",
       payload: data,
+    });
+  }
+
+  function clearCheckoutContext() {
+    dispatch({
+      type: "CLEAR_CHECKOUT",
     });
   }
 
@@ -54,6 +63,7 @@ export const CheckoutContextProvider = ({ children }) => {
         cardExpiry: state.cardExpiry,
         cardCvv: state.cardCvv,
         updateCheckoutContext,
+        clearCheckoutContext,
       }}
     >
       {children}
