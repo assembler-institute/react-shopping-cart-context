@@ -19,7 +19,7 @@ const PAYPAL_PAY = "PayPal";
 const APPLE_PAY = "ApplePay";
 
 function CheckoutPayment() {
-  const [payment, setPayment] = useState(CARD_PAY);
+  const [payment, setPayment] = useState(null);
   return (
     <>
       <div className="col col-8">
@@ -39,7 +39,6 @@ function CheckoutPayment() {
               id={CARD_PAY}
               text="Credit/Debit Card"
               setPayment={setPayment}
-              checked
             />
             <PaymentMethod
               id={PAYPAL_PAY}
