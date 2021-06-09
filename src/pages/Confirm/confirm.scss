@@ -1,7 +1,13 @@
-section{
-    border: 1px red solid;
+section {
+  border: 1px red solid;
 }
-img{
-    width: 100%;
-    max-width: 250px;
+img {
+  width: 100%;
+  max-width: 250px;
+}
+.badge {
+  min-width: 50px;
+  font-size: 20px;
+  color: white;
+  padding: 10px 15px;
 }
