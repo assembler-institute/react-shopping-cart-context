@@ -30,12 +30,17 @@ function Summary({
   discount = 20,
 }) {
   const [total, setTotal] = useState(0);
-  const { paymentMethod, address, name } = useContext(CheckoutContext);
+  const { clearCheckoutContext, paymentMethod, address, name } = useContext(
+    CheckoutContext,
+  );
   const history = useHistory();
 
   useEffect(() => {
     setTotal(getCartTotal(cartItems));
     window.history.pushState(null, document.title, window.location.href);
+    return () => {
+      clearCheckoutContext();
+    };
   }, []);
 
   useEffect(() => {
