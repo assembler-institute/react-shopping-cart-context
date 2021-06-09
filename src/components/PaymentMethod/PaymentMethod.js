@@ -30,7 +30,7 @@ function PaymentMethod({
       >
         {text && (
           <p className="m-0" htmlFor={id}>
-            {text}
+            <strong>{text}</strong>
           </p>
         )}
         {src && <img src={src} alt={id} />}

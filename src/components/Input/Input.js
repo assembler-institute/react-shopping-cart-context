@@ -10,6 +10,7 @@ function Input({
   placeholder = "",
   handleChange = () => {},
   handleBlur = () => {},
+  handleFocus = () => {},
   errorMessage,
   hasErrorMessage,
   shortInput = false,
@@ -37,6 +38,7 @@ function Input({
         value={value}
         onChange={handleChange}
         onBlur={handleBlur}
+        onFocus={handleFocus}
         {...props}
       />
       {hasErrorMessage && errorMessage && (

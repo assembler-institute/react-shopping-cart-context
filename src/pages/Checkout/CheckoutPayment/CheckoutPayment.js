@@ -14,9 +14,9 @@ import "../Checkout.scss";
 import payPal from "../../../img/payment/paypal-logo.svg";
 import applePay from "../../../img/payment/apple_pay-logo.svg";
 
-const CARD_PAY = "CARD_PAY";
-const PAYPAL_PAY = "PAYPAL_PAY";
-const APPLE_PAY = "APPLE_PAY";
+const CARD_PAY = "Card";
+const PAYPAL_PAY = "PayPal";
+const APPLE_PAY = "ApplePay";
 
 function CheckoutPayment() {
   const [payment, setPayment] = useState(CARD_PAY);

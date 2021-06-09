@@ -11,14 +11,14 @@
       display: none;
     }
     input:checked + .payment-method {
-      border: 3px solid rgb(0, 0, 0);
+      border: 1px solid rgb(4, 123, 254);
     }
 
     .payment-method {
       height: 100%;
       width: 30%;
       border-radius: 3px;
-      border: 1px solid gray;
+      border: 1px solid lightgray;
       background-color: white;
 
       img {
@@ -29,7 +29,7 @@
   }
 
   .form-wrapper {
-    flex-grow: 300px;
+    flex-grow: 1px;
 
     .accepted-methods {
       p {
@@ -37,7 +37,7 @@
       }
       .card-method {
         width: 50px;
-        border: 1px solid gray;
+        border: 1px solid lightgray;
         background-color: white;
         border-radius: 3px;
         margin-right: 10px;
@@ -49,9 +49,8 @@
     }
 
     .form-and-card {
-      form,
-      .card-illustration {
-        width: 50%;
+      form {
+        width: 40%;
       }
 
       form {
@@ -63,9 +62,13 @@
           margin-right: 20px;
         }
       }
+    }
 
-      .card-illustration {
-        background-color: yellow;
+    .card-terms {
+      font-size: 10px;
+      width: 50%;
+      input {
+        margin-right: 10px;
       }
     }
 
