@@ -17,7 +17,7 @@ function getCartTotal(cart) {
 
 function Cart({ cartItems, handleRemove, handleChange, ...props }) {
   const value = useContext(StateContext);
-  const [, dispatch] = value;
+  const { dispatch } = value;
 
   return (
     <aside {...props}>

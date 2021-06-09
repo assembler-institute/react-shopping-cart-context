@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Redirect } from "react-router-dom";
 import { useFormik } from "formik";
 import formHeader from "../../../hoc/formHeader";
@@ -7,11 +7,15 @@ import Input from "../../Input";
 import Button from "../../Button";
 
 import paymentSchema from "./payment-schema";
+import { ACTIONS } from "../../../context/state-reducer";
+import { StateContext } from "../../../context/state-context";
 
 import Applepay from "../../../img/Apple-pay.svg";
 import Paypal from "../../../img/paypal.svg";
 
 function PaymentForm() {
+  const value = useContext(StateContext);
+  const { dispatch } = value;
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
   const formik = useFormik({
@@ -21,12 +25,20 @@ function PaymentForm() {
       clientCardExpiryDate: "",
       clientCardCvvCode: "",
       clientConsent: "",
-      // billingInfo: "",
     },
     validationSchema: paymentSchema,
-    onSubmit: (values, { setSubmitting }) => {
-      setSubmitting(true);
-
+    onSubmit: () => {
+      dispatch({
+        type: ACTIONS.ADD_PAYMENT,
+        payload: {
+          paymentType: "creditCardPay",
+          cardholderName: formik.values.clientCardholderName,
+          cardNumber: formik.values.clientCardNumber,
+          cardExpiryDate: formik.values.clientCardExpiryDate,
+          cvvCode: formik.values.clientCardCvvCode,
+          conditions: "false",
+        },
+      });
       setTimeout(() => {
         setHasSubmitted(true);
       }, 500);
@@ -116,7 +128,7 @@ function PaymentForm() {
           {formik.isSubmitting ? "Submitting..." : "Review your order"}
         </Button>
       </form>
-      {hasSubmitted && <Redirect to="/checkout/summary-order" />}
+      {hasSubmitted && <Redirect to="/checkout/order-summary" />}
     </>
   );
 }

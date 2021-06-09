@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Redirect, Link } from "react-router-dom";
 import { useFormik } from "formik";
 import formHeader from "../../../hoc/formHeader";
+import { StateContext } from "../../../context/state-context";
+import { ACTIONS } from "../../../context/state-reducer";
 
 import Input from "../../Input";
 import Button from "../../Button";
@@ -9,6 +11,8 @@ import Button from "../../Button";
 import accountSchema from "./account-form-schema";
 
 function AccountForm() {
+  const value = useContext(StateContext);
+  const { dispatch } = value;
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
   const formik = useFormik({
@@ -16,12 +20,17 @@ function AccountForm() {
       clientName: "",
       clientEmail: "",
       clientPhone: "",
-      // personalInfo: "",
     },
     validationSchema: accountSchema,
-    onSubmit: (values, { setSubmitting }) => {
-      setSubmitting(true);
-      // setHasSubmitted(true);
+    onSubmit: () => {
+      dispatch({
+        type: ACTIONS.ADD_ACCOUNT,
+        payload: {
+          name: formik.values.clientName,
+          email: formik.values.clientEmail,
+          phone: formik.values.clientPhone,
+        },
+      });
       setTimeout(() => {
         setHasSubmitted(true);
       }, 500);

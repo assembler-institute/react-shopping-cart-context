@@ -10,8 +10,8 @@ function getCartTotal(cart) {
 }
 
 function OrderSummary({ ...props }) {
-  const [state] = useContext(StateContext);
-  const { cartItems } = state;
+  const value = useContext(StateContext);
+  const { cartItems } = value;
 
   return (
     <aside {...props}>

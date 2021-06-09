@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Redirect } from "react-router-dom";
 import { useFormik } from "formik";
 import formHeader from "../../../hoc/formHeader";
@@ -7,8 +7,12 @@ import Input from "../../Input";
 import Button from "../../Button";
 
 import billingSchema from "./billing-schema";
+import { ACTIONS } from "../../../context/state-reducer";
+import { StateContext } from "../../../context/state-context";
 
 function BillingForm() {
+  const value = useContext(StateContext);
+  const { dispatch } = value;
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
   const formik = useFormik({
@@ -17,12 +21,18 @@ function BillingForm() {
       clientCity: "",
       clientZip: "",
       clientCountry: "",
-      //   locationInfo: "",
     },
     validationSchema: billingSchema,
-    onSubmit: (values, { setSubmitting }) => {
-      setSubmitting(true);
-
+    onSubmit: () => {
+      dispatch({
+        type: ACTIONS.ADD_BILLING,
+        payload: {
+          address: formik.values.clientAdress,
+          city: formik.values.clientCity,
+          postCode: formik.values.clientZip,
+          country: formik.values.clientCountry,
+        },
+      });
       setTimeout(() => {
         setHasSubmitted(true);
       }, 500);
