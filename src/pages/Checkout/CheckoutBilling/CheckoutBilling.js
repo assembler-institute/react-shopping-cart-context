@@ -31,7 +31,7 @@ const countryOptions = [
   },
 ];
 
-function CheckoutBilling() {
+function CheckoutBilling({ setProcessCompletedFlags }) {
   const { data: formData, setData: updateFormData } = useContext(FormContext);
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
@@ -47,6 +47,10 @@ function CheckoutBilling() {
       updateFormData(values);
       setSubmitting(true);
       setTimeout(() => {
+        setProcessCompletedFlags(({ ...prev }) => ({
+          ...prev,
+          billing: true,
+        }));
         setHasSubmitted(true);
       }, 500);
     },
@@ -54,7 +58,7 @@ function CheckoutBilling() {
 
   return (
     <>
-      <form onSubmit={formik.handleSubmit} className="col col-8">
+      <form onSubmit={formik.handleSubmit}>
         <Input
           type="text"
           label="Address"

@@ -1,0 +1,17 @@
+.process-item,
+.process-item:hover {
+  color: rgb(110, 110, 110);
+  text-decoration: none;
+}
+
+.process-active,
+.process-active:hover {
+  font-weight: 500;
+  color: #007bff;
+  cursor: default;
+}
+
+.process-disabled {
+  opacity: 0.2;
+  cursor: default;
+}

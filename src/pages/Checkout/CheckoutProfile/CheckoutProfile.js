@@ -30,7 +30,7 @@ const phonePrefixOptions = [
   },
 ];
 
-function CheckoutProfile() {
+function CheckoutProfile({ setProcessCompletedFlags }) {
   const { data: formData, setData: updateFormData } = useContext(FormContext);
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
@@ -46,6 +46,10 @@ function CheckoutProfile() {
       updateFormData(values);
       setSubmitting(true);
       setTimeout(() => {
+        setProcessCompletedFlags(({ ...prev }) => ({
+          ...prev,
+          profile: true,
+        }));
         setHasSubmitted(true);
       }, 500);
     },
@@ -53,7 +57,7 @@ function CheckoutProfile() {
 
   return (
     <>
-      <form onSubmit={formik.handleSubmit} className="col col-8">
+      <form onSubmit={formik.handleSubmit}>
         <Input
           type="text"
           label="Name"
