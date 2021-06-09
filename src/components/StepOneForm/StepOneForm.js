@@ -74,7 +74,7 @@ function StepOneForm() {
         handleBlur={formik.handleBlur}
         hasErrorMessage={formik.touched.email}
         errorMessage={formik.errors.email}
-        isTouched={formik.touched.name}
+        isTouched={formik.touched.email}
       />
 
       <span>Phone number</span>
