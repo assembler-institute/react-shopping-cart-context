@@ -51,7 +51,9 @@ function Cart({ cartItems, handleRemove, handleChange, checkout, ...props }) {
             </div>
             {checkout && (
               <div className="col col-12 d-flex justify-content-center">
-                <ButtonLink page={DETAIL}>Checkout</ButtonLink>
+                <ButtonLink disabled={!cartItems.length} page={DETAIL}>
+                  Checkout
+                </ButtonLink>
               </div>
             )}
           </div>

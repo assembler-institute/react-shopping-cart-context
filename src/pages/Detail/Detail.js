@@ -8,9 +8,10 @@ import UiInput from "../../components/UiInput";
 // import PhoneInput2 from "../../components/PhoneInput2";
 
 import detailSchema from "./Detail-schema";
-import { ADDRESS } from "../../constants/routes";
+import { ADDRESS, HOME } from "../../constants/routes";
 import withCheckoutLayout from "../../hoc/withCheckoutLayout";
 import CheckoutContext from "../../context/checkout-context";
+import ButtonLink from "../../components/ButtonLink";
 
 function Detail() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -85,6 +86,7 @@ function Detail() {
 
               <div className="row">
                 <div className="col col-12 mt-4 d-flex justify-content-center">
+                  <ButtonLink page={HOME}>Go back</ButtonLink>
                   <Button
                     submitButton
                     block
