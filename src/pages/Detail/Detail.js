@@ -5,17 +5,17 @@ import { useFormik } from "formik";
 import UiPhoneInput from "../../components/UiPhoneInput";
 import Button from "../../components/Button";
 import UiInput from "../../components/UiInput";
-// import PhoneInput2 from "../../components/PhoneInput2";
+import { getPageIndex } from "../../helpers/order-pages";
 
 import detailSchema from "./Detail-schema";
-import { ADDRESS, HOME } from "../../constants/routes";
+import { DETAIL, ADDRESS, HOME } from "../../constants/routes";
 import withCheckoutLayout from "../../hoc/withCheckoutLayout";
 import CheckoutContext from "../../context/checkout-context";
 import ButtonLink from "../../components/ButtonLink";
 
 function Detail() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
-  const { updateCheckoutContext } = useContext(CheckoutContext);
+  const { updateCheckoutContext, actualPage } = useContext(CheckoutContext);
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -30,6 +30,7 @@ function Detail() {
         setHasSubmitted(true);
       }, 500);
     },
+    validateOnMount: true,
   });
 
   return (
@@ -91,6 +92,11 @@ function Detail() {
                     submitButton
                     block
                     disabled={formik.isValidating || !formik.isValid}
+                    handleClick={() => {
+                      updateCheckoutContext({
+                        actualPage: getPageIndex(ADDRESS),
+                      });
+                    }}
                   >
                     {formik.isSubmitting ? "Submitting..." : "Next page"}
                   </Button>
@@ -100,6 +106,7 @@ function Detail() {
           </CheckoutContext.Provider>
 
           {hasSubmitted && <Redirect to={ADDRESS} />}
+          {actualPage < getPageIndex(DETAIL) && <Redirect to={HOME} />}
         </div>
       </div>
     </>

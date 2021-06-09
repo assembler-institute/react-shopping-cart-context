@@ -8,6 +8,7 @@ function ButtonLink({
   disabled = false,
   block = false,
   small = false,
+  handleClick = () => {},
   children,
   ...props
 }) {
@@ -19,12 +20,17 @@ function ButtonLink({
     "btn-sm": small,
   });
 
+  function onHandleClick(e) {
+    handleClick(e);
+    history.push(page);
+  }
+
   return (
     <button
       className={classes}
       type="button"
       disabled={disabled}
-      onClick={() => history.push(page)}
+      onClick={onHandleClick}
       {...props}
     >
       {children}

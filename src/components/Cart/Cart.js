@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import ShoppingCartItem from "../ShoppingCartItem";
 import ButtonLink from "../ButtonLink";
-import { DETAIL } from "../../constants/routes";
+import CheckoutContext from "../../context/checkout-context";
+
+import { getFirsCheckoutPage } from "../../helpers/order-pages";
 
 function getCartTotal(cart) {
   return cart.reduce((accum, item) => {
@@ -11,6 +13,8 @@ function getCartTotal(cart) {
 }
 
 function Cart({ cartItems, handleRemove, handleChange, checkout, ...props }) {
+  const { updateCheckoutContext } = useContext(CheckoutContext);
+
   return (
     <aside {...props}>
       <div className="row flex-column">
@@ -51,7 +55,11 @@ function Cart({ cartItems, handleRemove, handleChange, checkout, ...props }) {
             </div>
             {checkout && (
               <div className="col col-12 d-flex justify-content-center">
-                <ButtonLink disabled={!cartItems.length} page={DETAIL}>
+                <ButtonLink
+                  disabled={!cartItems.length}
+                  page={getFirsCheckoutPage()}
+                  handleClick={() => updateCheckoutContext({ actualPage: 1 })}
+                >
                   Checkout
                 </ButtonLink>
               </div>

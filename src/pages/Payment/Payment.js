@@ -19,15 +19,16 @@ import CheckoutContext from "../../context/checkout-context";
 import CVV from "../../img/icons/payment/CVV.svg";
 import sslIcon from "../../img/icons/payment/ssl.svg";
 import CreditCard from "../../components/CreditCard";
+import { getPageIndex } from "../../helpers/order-pages";
 
-import { SUMMARY, ADDRESS } from "../../constants/routes";
+import { SUMMARY, ADDRESS, HOME, PAYMENT } from "../../constants/routes";
 import ButtonLink from "../../components/ButtonLink";
 
 function Payment() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [flip, setFlip] = useState(false);
   const [cardType, setCardType] = useState("visa");
-  const { updateCheckoutContext } = useContext(CheckoutContext);
+  const { updateCheckoutContext, actualPage } = useContext(CheckoutContext);
 
   const formik = useFormik({
     initialValues: {
@@ -46,6 +47,7 @@ function Payment() {
         setHasSubmitted(true);
       }, 500);
     },
+    validateOnMount: true,
   });
 
   function handleFlip() {
@@ -184,12 +186,20 @@ function Payment() {
           <div className="row">
             <div className="col col-12 mt-4 d-flex justify-content-center">
               <ButtonLink page={ADDRESS}>Go back</ButtonLink>
-              <Button submitButton block>
+              <Button
+                submitButton
+                block
+                disabled={formik.isValidating || !formik.isValid}
+                handleClick={() =>
+                  updateCheckoutContext({ actualPage: getPageIndex(SUMMARY) })
+                }
+              >
                 {formik.isSubmitting ? "Submitting..." : "Finish purchase"}
               </Button>
             </div>
           </div>
           {hasSubmitted && <Redirect to={SUMMARY} />}
+          {actualPage < getPageIndex(PAYMENT) && <Redirect to={HOME} />}
         </div>
       </form>
     </>
