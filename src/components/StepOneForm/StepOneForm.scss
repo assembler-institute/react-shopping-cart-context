@@ -3,9 +3,15 @@
   background-color: #fff;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   width: 100%;
-  position: relative;
   display: flex;
   margin-top: 0.5rem;
+  &.valid.form-control:hover {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+  &.is-valid {
+    background-color: rgb(232, 240, 254);
+  }
 }
 
 .countryCode {
@@ -27,10 +33,19 @@
 
 .phone {
   border: 0px solid transparent;
+  background-color: transparent;
   outline: none;
   color: #495057;
 }
 
 .options {
   background-color: white !important;
+  color: #495057 !important;
+}
+
+.invalid-feedback-phone {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;
 }

@@ -10,17 +10,20 @@ function Input({
   handleBlur = () => {},
   errorMessage,
   hasErrorMessage,
+  isTouched,
   ...props
 }) {
   return (
     <div className="form-group">
       <label htmlFor={id}>{label}</label>
       <input
-        className={
-          hasErrorMessage && errorMessage
-            ? "form-control is-invalid"
-            : "form-control"
-        }
+        className={`${isTouched ? "is-valid" : ""}
+          ${
+            hasErrorMessage && errorMessage
+              ? "form-control is-invalid"
+              : "form-control"
+          }
+        `}
         id={id}
         name={id}
         type={type}

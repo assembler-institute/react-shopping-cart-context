@@ -12,14 +12,6 @@ import germany from "../../assets/img/germany16.png";
 import france from "../../assets/img/france16.png";
 import "./StepOneForm.scss";
 
-/* #TODO 
-  X Apply country selector on the phone number
-  - Create OnSubmit function (Reduce maybe?)
-  - Finish the validation Schema
-  - Add a function to mark the "completed" state as true
-  - Check how the layer components mash together
-*/
-
 const { Option } = components;
 const iconOption = (props) => (
   <Option {...props} className="options">
@@ -44,29 +36,22 @@ const options = [
 ];
 
 function StepOneForm() {
-  const { stepOne } = useContext(orderContext);
+  const { submitStepOne } = useContext(orderContext);
 
   const formik = useFormik({
     initialValues: {
       name: "",
       email: "",
+      countryCode: "",
       phone: "",
     },
     validationSchema: stepOneSchema,
     onSubmit: (values) => {
-      // eslint-disable-next-line no-console
-      console.log(values);
-      // eslint-disable-next-line no-console
-      console.log(stepOne);
+      submitStepOne(values);
     },
-
-    /* setTimeout(() => {
-        setHasSubmitted(true);
-      }, 500); 
-    }, */
   });
   return (
-    <form>
+    <form onSubmit={formik.handleSubmit} id="stepOne">
       <Input
         type="text"
         label="Name"
@@ -75,8 +60,9 @@ function StepOneForm() {
         placeholder="Your name"
         handleChange={formik.handleChange}
         handleBlur={formik.handleBlur}
-        hasErrorMessage={formik.touched.title}
-        errorMessage={formik.errors.title}
+        hasErrorMessage={formik.touched.name}
+        errorMessage={formik.errors.name}
+        isTouched={formik.touched.name}
       />
       <Input
         type="text"
@@ -86,29 +72,31 @@ function StepOneForm() {
         placeholder="Your email address"
         handleChange={formik.handleChange}
         handleBlur={formik.handleBlur}
-        hasErrorMessage={formik.touched.title}
-        errorMessage={formik.errors.title}
+        hasErrorMessage={formik.touched.email}
+        errorMessage={formik.errors.email}
+        isTouched={formik.touched.name}
       />
 
-      <div className="form-group">
-        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-        <label htmlFor="phone">Phone number</label>
-        <div
-          className={
-            formik.touched.title && formik.errors.title
-              ? "phoneWrapper form-control is-invalid"
-              : "phoneWrapper form-control"
+      <span>Phone number</span>
+      <div
+        className={`phoneWrapper form-control
+        ${formik.touched.phone && !formik.errors.phone ? "is-valid" : "valid"}
+          ${
+            formik.touched.phone && formik.errors.phone ? "is-invalid" : "valid"
           }
-        >
-          <Select
-            options={options}
-            className="countryCode"
-            onFocus={formik.handleFocus}
-            components={{
-              Option: iconOption,
-              SingleValue: iconSelect,
-            }}
-          />
+            `}
+      >
+        <Select
+          options={options}
+          className="countryCode"
+          onChange={(value) => formik.setFieldValue("countryCode", value.value)}
+          defaultValue={options[0]}
+          components={{
+            Option: iconOption,
+            SingleValue: iconSelect,
+          }}
+        />
+        <label htmlFor="phone">
           <input
             id="phone"
             name="phone"
@@ -119,11 +107,11 @@ function StepOneForm() {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          {formik.touched.title && formik.errors.title && (
-            <p className="invalid-feedback">{formik.errors.title}</p>
-          )}
-        </div>
+        </label>
       </div>
+      {formik.touched.phone && formik.errors.phone && (
+        <p className="invalid-feedback-phone">{formik.errors.phone}</p>
+      )}
     </form>
   );
 }
