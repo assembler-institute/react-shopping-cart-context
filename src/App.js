@@ -295,7 +295,7 @@ function App() {
             <PaymentDetails />
           </Route>
           <Route path="/checkout/order-summary">
-            <OrderSummary />
+            <OrderSummary cartItems={cartItems} />
           </Route>
           <Route path="/new-product">
             <NewProduct saveNewProduct={saveNewProduct} />
