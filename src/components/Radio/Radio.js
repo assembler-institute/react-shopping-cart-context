@@ -25,7 +25,9 @@ function Radio({
           onBlur={handleBlur}
           {...props}
         />
-        <label htmlFor={id}>{label}</label>
+        <label htmlFor={id} className="form-check-label">
+          {label}
+        </label>
       </div>
       <div>
         {hasErrorMessage && errorMessage && (

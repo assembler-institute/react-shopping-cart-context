@@ -49,7 +49,7 @@ function PaymentForm() {
           <strong>How would you like to pay?</strong>
         </p>
         <div className="d-flex justify-content-between">
-          <div className="PaymentForm__method form-check form-check-inline bg-light p-3">
+          <div className="PaymentForm__method form-check form-check-inline p-3">
             <Radio
               className="form-check-input"
               type="radio"
@@ -64,7 +64,7 @@ function PaymentForm() {
             />
             {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           </div>
-          <div className="PaymentForm__method form-check form-check-inline bg-light pt-2 pl-3">
+          <div className="PaymentForm__method form-check form-check-inline pt-2 pl-3">
             <Radio
               className="form-check-input"
               type="radio"
@@ -83,7 +83,7 @@ function PaymentForm() {
             </label> */}
           </div>
 
-          <div className="PaymentForm__method form-check form-check-inline bg-light pt-2 pl-3">
+          <div className="PaymentForm__method form-check form-check-inline pt-2 pl-3">
             <Radio
               className="form-check-input"
               type="radio"

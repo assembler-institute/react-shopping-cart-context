@@ -1,5 +1,5 @@
 import React from "react";
-import { CheckedIcon } from "../SVGIcons";
+// import { CheckedIcon } from "../SVGIcons";
 
 function Input({
   type = "text",
@@ -34,7 +34,9 @@ function Input({
       {hasErrorMessage && errorMessage && (
         <p className="invalid-feedback">{errorMessage}</p>
       )}
-      {!hasErrorMessage && !errorMessage && value && <CheckedIcon />}
+      {!hasErrorMessage && !errorMessage && value && (
+        <p className="valid-feedback">Looks good!</p>
+      )}
     </div>
   );
 }
