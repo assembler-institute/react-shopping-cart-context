@@ -16,11 +16,6 @@ function Radio({
     <>
       <div className="form-group">
         <input
-          className={
-            hasErrorMessage && errorMessage
-              ? "form-control is-invalid"
-              : "form-control"
-          }
           id={id}
           name={id}
           type={type}
@@ -30,7 +25,9 @@ function Radio({
           onBlur={handleBlur}
           {...props}
         />
-        <label htmlFor={id}>{label}</label>
+        <label htmlFor={id} className="form-check-label">
+          {label}
+        </label>
       </div>
       <div>
         {hasErrorMessage && errorMessage && (
