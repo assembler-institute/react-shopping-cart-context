@@ -5,12 +5,15 @@ function PaymentMethod({
   id = "radio-01",
   group = "paymentMethod",
   src = null,
-  value,
   text,
-  handleChange = () => {},
-  handleBlur = () => {},
+  setPayment = () => {},
+  checked,
   ...props
 }) {
+  function handleChange() {
+    setPayment(id);
+  }
+
   return (
     <>
       <input
@@ -19,7 +22,6 @@ function PaymentMethod({
         type={type}
         value={id}
         onChange={handleChange}
-        onBlur={handleBlur}
         {...props}
       />
       <label

@@ -28,39 +28,51 @@
     }
   }
 
-  .accepted-methods {
-    p {
-      margin-bottom: 0;
-    }
-    .card-method {
-      width: 50px;
-      border: 1px solid gray;
-      background-color: white;
-      border-radius: 3px;
-      margin-right: 10px;
-    }
-  }
+  .form-wrapper {
+    flex-grow: 300px;
 
-  .form-and-card {
-    flex-grow: 1;
+    .accepted-methods {
+      p {
+        margin-bottom: 0;
+      }
+      .card-method {
+        width: 50px;
+        border: 1px solid gray;
+        background-color: white;
+        border-radius: 3px;
+        margin-right: 10px;
+      }
+    }
 
-    form,
-    .card-illustration {
+    .email-form {
       width: 50%;
     }
 
-    form {
-      .form-group {
-        width: 100%;
+    .form-and-card {
+      form,
+      .card-illustration {
+        width: 50%;
       }
-      .short-input {
-        width: 30%;
-        margin-right: 20px;
+
+      form {
+        .form-group {
+          width: 100%;
+        }
+        .short-input {
+          width: 30%;
+          margin-right: 20px;
+        }
+      }
+
+      .card-illustration {
+        background-color: yellow;
       }
     }
 
-    .card-illustration {
-      background-color: yellow;
+    .navigation-buttons {
+      button {
+        min-width: 90px;
+      }
     }
   }
 }

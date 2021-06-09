@@ -11,7 +11,7 @@ export const formProfile = Yup.object().shape({
 });
 
 // PAYMENT
-export const formPayment = Yup.object().shape({
+export const cardPayment = Yup.object().shape({
   cardName: Yup.string()
     .min(2, "The name is too short!")
     .max(30, "The name is too long!")
@@ -35,18 +35,24 @@ export const formPayment = Yup.object().shape({
   cardCVV: Yup.string()
     .typeError("Not a valid CVV. Example: XXX")
     .length(3, "Not a valid CVV. Example: XXX"),
-  // payPalUser: Yup.string()
-  //   .min(2, "The name is too short!")
-  //   .max(30, "The name is too long!")
-  //   .required("The name is required"),
-  // payPalPassword: Yup.string()
-  //   .min(2, "The password is too short!")
-  //   .required("The password is required"),
-  // applePayUser: Yup.string()
-  //   .min(2, "The name is too short!")
-  //   .max(30, "The name is too long!")
-  //   .required("The name is required"),
-  // applePayPassword: Yup.string()
-  //   .min(2, "The password is too short!")
-  //   .required("The password is required"),
+});
+
+export const payPalPayment = Yup.object().shape({
+  payPalUser: Yup.string()
+    .min(2, "The name is too short!")
+    .max(30, "The name is too long!")
+    .required("The name is required"),
+  payPalPassword: Yup.string()
+    .min(2, "The password is too short!")
+    .required("The password is required"),
+});
+
+export const applePayment = Yup.object().shape({
+  applePayUser: Yup.string()
+    .min(2, "The name is too short!")
+    .max(30, "The name is too long!")
+    .required("The name is required"),
+  applePayPassword: Yup.string()
+    .min(2, "The password is too short!")
+    .required("The password is required"),
 });

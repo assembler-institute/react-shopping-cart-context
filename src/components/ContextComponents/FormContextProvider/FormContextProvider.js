@@ -51,7 +51,7 @@ function FormContextProvider({ children }) {
   useEffect(() => {
     // console.clear();
     console.log(formData);
-  }, [formData.paymentMethod]);
+  }, [formData]);
 
   function updateFormData(newData) {
     dispatch({ type: UPDATE_FORM, payload: newData });
