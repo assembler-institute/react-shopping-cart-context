@@ -1,11 +1,13 @@
 import React, { useContext, useState } from "react";
 import { Formik } from "formik";
 import { Redirect } from "react-router-dom";
-import Checkout from "../../hoc/withCheckout";
-import detailsSchema from "./details-schema";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import ShoppingContext from "../../context";
+import Checkout from "../../hoc/withCheckout";
+import detailsSchema from "./details-schema";
 
 function Details() {
   const { updateDetails } = useContext(ShoppingContext);
@@ -62,12 +64,15 @@ function Details() {
               hasErrorMessage={touched.userEmail}
               errorMessage={errors.userEmail}
             />
-            <Input
+            <PhoneInput
               type="number"
               label="Write your phone number"
               id="userPhone"
+              name="userPhone"
               value={values.userPhone}
-              handleChange={handleChange}
+              onChange={(phone) => console.log(phone)}
+              country="es"
+              // handleChange={handleChange}
               handleBlur={handleBlur}
               placeholder="Write your phone"
               hasErrorMessage={touched.userPhone}
