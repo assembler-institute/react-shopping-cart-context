@@ -3,8 +3,10 @@ import React, { useReducer } from "react";
 import ShoppingContext from "../../context/ShoppingContext";
 
 const shoppingInitialState = {
-  name: "n",
-  email: "e",
+  details: {
+    name: "",
+    email: "",
+  },
 };
 
 function shoppingReducer(state, action) {
@@ -12,7 +14,7 @@ function shoppingReducer(state, action) {
     case "submitStep1": {
       return {
         ...state,
-        name: action.newdetails,
+        details: action.newdetails,
       };
     }
     default:
@@ -49,8 +51,9 @@ function ShoppingContextProvider({ children }) {
   return (
     <ShoppingContext.Provider
       value={{
-        name: state.name,
-        email: state.email,
+        // name: state.name,
+        // email: state.email,
+        details: state.details,
         phoneNumber: "",
         submitStep1: submitStep1,
         address: "",

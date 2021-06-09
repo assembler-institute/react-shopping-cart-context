@@ -16,9 +16,8 @@ function FormShopping({ ...routeProps }) {
   const [Url, setUrl] = useState(null);
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const {
-    name,
-    email,
-    phoneNumber,
+    details,
+    // phoneNumber,
     submitStep1,
     address,
     city,
@@ -45,9 +44,9 @@ function FormShopping({ ...routeProps }) {
     switch (Url) {
       case 1:
         initialValues = {
-          name: name,
-          email: email,
-          phoneNumber: phoneNumber,
+          name: details.name,
+          email: details.email,
+          // phoneNumber: phoneNumber,
         };
         // console.log("props-->", props);
         console.log("initialValues-->", initialValues);
@@ -83,8 +82,8 @@ function FormShopping({ ...routeProps }) {
     onSubmit: (values, { setSubmitting }) => {
       setSubmitting(true);
       submitStep1(values);
-      console.log(values);
-      console.log(submitStep1);
+      // console.log(values);
+      // console.log(submitStep1);
 
       setTimeout(() => {
         setHasSubmitted(true);

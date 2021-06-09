@@ -1,8 +1,10 @@
 import { createContext } from "react";
 
 const ShoppingContext = createContext({
-  name: {},
-  email: "",
+  details: {
+    name: "",
+    email: "",
+  },
   phoneNumber: "",
   submitStep1: () => {},
   address: "",
