@@ -1,10 +1,10 @@
 import React from "react";
 
-import "./inputShopping.scss";
+import "./Select2Shopping.scss";
 
-function InputShopping({
+function Select2Shopping({
   type = "text",
-  label = "input-01",
+  // label = "input-01",
   id = "input-01",
   value = "",
   placeholder = "",
@@ -16,7 +16,12 @@ function InputShopping({
 }) {
   return (
     <div className="form">
-      <label htmlFor={id}>{label}</label>
+      <select>
+        <option>ES +34</option>
+        <option>PO +34</option>
+        <option>FA +34</option>
+        <option>IT +34</option>
+      </select>
       <input
         className={
           hasErrorMessage && errorMessage
@@ -39,4 +44,4 @@ function InputShopping({
   );
 }
 
-export default InputShopping;
+export default Select2Shopping;

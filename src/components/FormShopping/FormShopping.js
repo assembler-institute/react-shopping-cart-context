@@ -9,6 +9,8 @@ import InputShopping from "../InputShopping";
 import ButtonShopping from "../ButtonShopping";
 
 import formSchemaShopping from "./formSchemaShopping";
+import SelectShopping from "../SelectShopping";
+import Select2Shopping from "../Select2Shopping";
 
 function FormShopping({ props, ...routeProps }) {
   const [Url, setUrl] = useState(null);
@@ -70,6 +72,7 @@ function FormShopping({ props, ...routeProps }) {
               hasErrorMessage={formik.touched.email}
               errorMessage={formik.errors.email}
             />
+            <Select2Shopping />
             <div className="container">
               <ButtonShopping type="button">back</ButtonShopping>
               <ButtonShopping
@@ -86,37 +89,50 @@ function FormShopping({ props, ...routeProps }) {
         </section>
       )}
       {Url === 2 && (
-        <section>
-          <div>
-            <div className="headerPage">
-              <h2>Billing address</h2>
-              <span>Step {Url} of 3</span>
-            </div>
-            <hr />
+        <section className="form__container">
+          <div className="headerPage">
+            <h2>Billing address</h2>
+            <span>Step {Url} of 3</span>
           </div>
+          <hr />
           <form onSubmit={formik.handleSubmit}>
             <InputShopping
+              className="inputMediun"
               type="text"
-              label="Your Name:"
-              id="name"
-              value={formik.values.name}
-              placeholder="name..."
+              label="Address:"
+              id="address"
+              value={formik.values.address}
+              placeholder="address..."
               handleChange={formik.handleChange}
               handleBlur={formik.handleBlur}
-              hasErrorMessage={formik.touched.name}
-              errorMessage={formik.errors.name}
+              hasErrorMessage={formik.touched.address}
+              errorMessage={formik.errors.address}
             />
             <InputShopping
+              className="inputMediun"
               type="text"
-              label="Your Name:"
-              id="name"
-              value={formik.values.name}
-              placeholder="name..."
+              label="City: "
+              id="city"
+              value={formik.values.city}
+              placeholder="city..."
               handleChange={formik.handleChange}
               handleBlur={formik.handleBlur}
-              hasErrorMessage={formik.touched.name}
-              errorMessage={formik.errors.name}
+              hasErrorMessage={formik.touched.city}
+              errorMessage={formik.errors.city}
             />
+            <InputShopping
+              className="inputMediun"
+              type="number"
+              label="Code post: "
+              id="post"
+              value={formik.values.post}
+              placeholder="post..."
+              handleChange={formik.handleChange}
+              handleBlur={formik.handleBlur}
+              hasErrorMessage={formik.touched.post}
+              errorMessage={formik.errors.post}
+            />
+            <SelectShopping />
             <div className="container">
               <ButtonShopping type="button">back</ButtonShopping>
               <ButtonShopping
@@ -133,14 +149,12 @@ function FormShopping({ props, ...routeProps }) {
         </section>
       )}
       {Url === 3 && (
-        <section>
-          <div>
-            <div className="headerPage">
-              <h2>Billing address</h2>
-              <span>Step {Url} of 3</span>
-            </div>
-            <hr />
+        <section className="form__container">
+          <div className="headerPage">
+            <h2>Billing address</h2>
+            <span>Step {Url} of 3</span>
           </div>
+          <hr />
           <form onSubmit={formik.handleSubmit}>
             <InputShopping
               type="text"
@@ -182,14 +196,12 @@ function FormShopping({ props, ...routeProps }) {
         </section>
       )}
       {Url === 4 && (
-        <section>
-          <div>
-            <div className="headerPage">
-              <h2>Billing address</h2>
-              <span>Step {Url} of 3</span>
-            </div>
-            <hr />
+        <section className="form__container">
+          <div className="headerPage">
+            <h2>Billing address</h2>
+            <span>Step {Url} of 3</span>
           </div>
+          <hr />
           <form onSubmit={formik.handleSubmit}>
             <InputShopping
               type="text"

@@ -12,7 +12,15 @@
   color: white;
   width: 38%;
 }
-
+.headerPage {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.inputMediun {
+  width: 60%;
+}
 .form__container {
-  padding: 2% 20%;
+  padding: 2% 10%;
 }
