@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
+import { ThemeProvider } from "@material-ui/core/styles";
+
 import Home from "./pages/Home";
 import NewProduct from "./pages/NewProduct";
 import Detail from "./pages/Detail";
@@ -12,6 +14,8 @@ import * as api from "./api";
 import useLocalStorage from "./hooks/useLocalStorage";
 import loadLocalStorageItems from "./utils/loadLocalStorageItems";
 import { CheckoutContextProvider } from "./context/checkout-context";
+
+import { theme } from "./constants/materialUiColors";
 
 import {
   HOME,
@@ -194,62 +198,64 @@ function App() {
   }
 
   return (
-    <CheckoutContextProvider>
-      <BrowserRouter>
-        <Switch>
-          <Route path={NEW_PRODUCT}>
-            <NewProduct saveNewProduct={saveNewProduct} />
-          </Route>
-          <Route path={DETAIL}>
-            <Detail
-              cartItems={cartItems}
-              handleRemove={handleRemove}
-              handleChange={handleChange}
-              page={1}
-            />
-          </Route>
-          <Route path={ADDRESS}>
-            <Address
-              cartItems={cartItems}
-              handleRemove={handleRemove}
-              handleChange={handleChange}
-              page={2}
-            />
-          </Route>
-          <Route path={PAYMENT}>
-            <Payment
-              cartItems={cartItems}
-              handleRemove={handleRemove}
-              handleChange={handleChange}
-              page={3}
-            />
-          </Route>
-          <Route path={SUMMARY}>
-            <Summary
-              cartItems={cartItems}
-              date={new Date().toLocaleDateString()}
-              page={4}
-            />
-          </Route>
-          <Route path={HOME}>
-            <Home
-              fullWidth
-              cartItems={cartItems}
-              products={products}
-              isLoading={isLoading}
-              hasError={hasError}
-              loadingError={loadingError}
-              handleDownVote={handleDownVote}
-              handleUpVote={handleUpVote}
-              handleSetFavorite={handleSetFavorite}
-              handleAddToCart={handleAddToCart}
-              handleRemove={handleRemove}
-              handleChange={handleChange}
-            />
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    </CheckoutContextProvider>
+    <ThemeProvider theme={theme}>
+      <CheckoutContextProvider>
+        <BrowserRouter>
+          <Switch>
+            <Route path={NEW_PRODUCT}>
+              <NewProduct saveNewProduct={saveNewProduct} />
+            </Route>
+            <Route path={DETAIL}>
+              <Detail
+                cartItems={cartItems}
+                handleRemove={handleRemove}
+                handleChange={handleChange}
+                page={1}
+              />
+            </Route>
+            <Route path={ADDRESS}>
+              <Address
+                cartItems={cartItems}
+                handleRemove={handleRemove}
+                handleChange={handleChange}
+                page={2}
+              />
+            </Route>
+            <Route path={PAYMENT}>
+              <Payment
+                cartItems={cartItems}
+                handleRemove={handleRemove}
+                handleChange={handleChange}
+                page={3}
+              />
+            </Route>
+            <Route path={SUMMARY}>
+              <Summary
+                cartItems={cartItems}
+                date={new Date().toLocaleDateString()}
+                page={4}
+              />
+            </Route>
+            <Route path={HOME}>
+              <Home
+                fullWidth
+                cartItems={cartItems}
+                products={products}
+                isLoading={isLoading}
+                hasError={hasError}
+                loadingError={loadingError}
+                handleDownVote={handleDownVote}
+                handleUpVote={handleUpVote}
+                handleSetFavorite={handleSetFavorite}
+                handleAddToCart={handleAddToCart}
+                handleRemove={handleRemove}
+                handleChange={handleChange}
+              />
+            </Route>
+          </Switch>
+        </BrowserRouter>
+      </CheckoutContextProvider>
+    </ThemeProvider>
   );
 }
 

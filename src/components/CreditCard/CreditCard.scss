@@ -1,3 +1,6 @@
+$brand-color: #0d6efd;
+$brand-color-light: #408cff;
+
 *,
 *:before,
 *:after {
@@ -37,7 +40,11 @@
   position: absolute;
   right: 0;
   height: inherit;
-  background-image: linear-gradient(to bottom, #ff6767, #ff4545);
+  background-image: linear-gradient(
+    to bottom,
+    $brand-color-light,
+    $brand-color
+  );
   box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.5);
 }
 .strip-bottom {

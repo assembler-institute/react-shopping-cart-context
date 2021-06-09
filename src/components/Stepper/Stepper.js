@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 
-import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
-import { theme } from "../../constants/materialUiColors";
 
 const useStyles = makeStyles((newTheme) => ({
   root: {
@@ -33,16 +32,14 @@ export default function HorizontalLabelPositionBelowStepper({ activePage }) {
   }, [activePage]);
 
   return (
-    <ThemeProvider theme={theme}>
-      <div className={classes.root}>
-        <Stepper activeStep={activeStep} alternativeLabel>
-          {steps.map((label) => (
-            <Step key={label}>
-              <StepLabel>{label}</StepLabel>
-            </Step>
-          ))}
-        </Stepper>
-      </div>
-    </ThemeProvider>
+    <div className={classes.root}>
+      <Stepper activeStep={activeStep} alternativeLabel>
+        {steps.map((label) => (
+          <Step key={label}>
+            <StepLabel>{label}</StepLabel>
+          </Step>
+        ))}
+      </Stepper>
+    </div>
   );
 }

@@ -3,7 +3,7 @@ import React from "react";
 import AppHeader from "../components/AppHeader";
 import Footer from "../components/Footer";
 import Main from "../components/Main";
-import Cart from "../components/Cart";
+import CheckoutCart from "../components/CheckoutCart";
 import FormHeader from "../components/FormHeader";
 
 function getDisplayName(WrappedComponent) {
@@ -32,7 +32,7 @@ function withCheckoutLayout(WrappedComponent) {
               <WrappedComponent {...props} />
             </div>
 
-            <Cart
+            <CheckoutCart
               checkout={false}
               className="col col-4"
               cartItems={props.cartItems}
