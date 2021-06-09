@@ -1,5 +1,7 @@
 import React from "react";
 
+import "./OverviewSidebar.scss";
+
 function getCartTotal(cart) {
   return cart.reduce((accum, item) => {
     return accum + item.price * item.quantity;
@@ -8,7 +10,7 @@ function getCartTotal(cart) {
 
 function OverviewSidebar({ cartItems, ...props }) {
   return (
-    <aside {...props}>
+    <aside {...props} className="OverviwSidebar">
       <div className="row flex-column">
         <div className="col shopping__cart__header">
           <h2 className="h3 mt-2">Checkout Summary</h2>

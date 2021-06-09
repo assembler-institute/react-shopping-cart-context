@@ -4,7 +4,6 @@ import AppHeader from "../components/AppHeader";
 import Footer from "../components/Footer";
 import Main from "../components/Main";
 import SubHeader from "../components/SubHeader";
-import SubFooter from "../components/SubFooter";
 
 function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || "Component";
@@ -28,11 +27,6 @@ function withLayout(WrappedComponent, isCheckout = false) {
         <Main className={props.fullWidth ? "container-fluid" : "container"}>
           <WrappedComponent {...props} />
         </Main>
-        {isCheckout && (
-          <Main className="container">
-            <SubFooter />{" "}
-          </Main>
-        )}
         <Footer />
       </>
     );

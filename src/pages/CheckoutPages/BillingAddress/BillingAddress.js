@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useFormik } from "formik";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 import withLayout from "../../../hoc/withLayout";
 
@@ -95,13 +95,22 @@ function BillingAddress({ cartItems }) {
               </select>
             </label>
           </div>
-          <Button
-            submitButton
-            block
-            disabled={formik.isValidating || !formik.isValid}
-          >
-            {formik.isSubmitting ? "Submitting..." : "Submit"}
-          </Button>
+          <div className="row">
+            <div className="col col-6">
+              <Link className="w-100" to="/checkout/step-1">
+                <Button block>Back</Button>
+              </Link>
+            </div>
+            <div className="col col-6">
+              <Button
+                submitButton
+                block
+                disabled={formik.isValidating || !formik.isValid}
+              >
+                {formik.isSubmitting ? "Submitting..." : "Submit"}
+              </Button>
+            </div>
+          </div>
         </form>
         {hasSubmitted && <Redirect to="/checkout/step-3" />}
       </div>
