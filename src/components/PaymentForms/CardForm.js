@@ -17,6 +17,7 @@ import { HOME_URL, PROFILE_URL } from "../../utils/constants";
 import visa from "../../img/payment/visa-logo.svg";
 import masterCard from "../../img/payment/mastercard-logo.svg";
 import americanExp from "../../img/payment/american_express-logo.svg";
+import cvvIcon from "../../img/payment/cvv-icon.svg";
 
 function CardForm({ paymentMethod }) {
   const { data: formData, setData: updateFormData } = useContext(FormContext);
@@ -129,6 +130,7 @@ function CardForm({ paymentMethod }) {
               hasErrorMessage={formik.touched.cardCVV}
               errorMessage={formik.errors.cardCVV}
             />
+            <img src={cvvIcon} alt="CVV icon" />
           </form>
           <CardSvg
             isFront={isFront}
