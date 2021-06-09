@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import { FcOk, FcCancel } from "react-icons/fc";
 
 function UiInput({
   label = "input-01",
@@ -14,7 +16,10 @@ function UiInput({
   maxLength = 0,
   ...props
 }) {
+  const [wasFocused, changeWasFocused] = useState(false);
+
   function handleFocus(e) {
+    changeWasFocused(true);
     if (e.target.id === "cardCvv") {
       handleFlip(e);
     }
@@ -26,6 +31,7 @@ function UiInput({
     handleChange(e);
   }
   function onHandleBlur(e) {
+    changeWasFocused(true);
     if (e.target.id === "cardCvv") {
       handleFlip(e);
     }
@@ -50,6 +56,14 @@ function UiInput({
       type={type}
       // inputProps={{ maxLength: maxLength }}
       {...props}
+      InputProps={{
+        endAdornment: (
+          <InputAdornment position="end">
+            {wasFocused && !errorMessage && <FcOk />}
+            {wasFocused && errorMessage && <FcCancel />}
+          </InputAdornment>
+        ),
+      }}
     />
   );
 }

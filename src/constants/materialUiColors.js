@@ -22,4 +22,15 @@ export const theme = createMuiTheme({
     // E.g., shift from Red 500 to Red 300 or Red 700.
     tonalOffset: 0.2,
   },
+  overrides: {
+    MuiFilledInput: {
+      input: {
+        "&:-webkit-autofill": {
+          textFillColor: "#0066ff",
+          transitionDelay: "9999s", // This looks awful but it's the only way keep the input color on autocomplete
+          transitionProperty: "background-color",
+        },
+      },
+    },
+  },
 });
