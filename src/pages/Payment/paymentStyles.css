@@ -1,0 +1,62 @@
+.cardSection {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+}
+
+.wrappedCard {
+  margin-left: 100px;
+}
+
+.card {
+  font-family: 'PT Mono', monospace;
+  color: white;
+  position: relative;
+  border-radius: 20px;
+  max-width: 500px;
+  max-width: 400px;
+  min-height: 250px;
+  min-width: 350px;
+  background-image: url("../../img/credicart.png");
+  background-position: center;
+  background-size: cover;
+}
+
+.shortImputs {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+}
+
+#cvvCode {
+  max-width: 100px;
+}
+
+#cardExpiryDate {
+  max-width: 100px;
+}
+
+.cardNum {
+  position: absolute;
+  top: 130px;
+  left: 22px;
+}
+
+.cardName {
+  position: absolute;
+  left: 22px;
+  top: 175px;
+}
+
+.cardDate {
+  position: absolute;
+  top: 175px;
+  right: 25px;
+}
+
+.cardCode {
+  position: absolute;
+}
+/*# sourceMappingURL=paymentStyles.css.map */

@@ -17,10 +17,7 @@ function Confirm() {
     cardNumer,
     cardExpiryDate,
   } = paymentData;
-  console.log("CARITMENS", cartItems);
-  console.log("DETAILS", details);
-  console.log("ADRESSDATA", adressData);
-  console.log("PAYMENT", paymentData);
+
   return (
     <>
       <section className="container">
