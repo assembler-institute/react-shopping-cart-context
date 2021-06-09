@@ -87,7 +87,6 @@ function buildNewCartItem(cartItem) {
 function App() {
   const [state, dispatch] = useReducer(reducer, initialCheckoutContext);
   const { isCheckoutDisabled } = state;
-  console.log(state);
 
   const [products, setProducts] = useState(() =>
     loadLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY, []),

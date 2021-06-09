@@ -19,7 +19,7 @@ function Input({
         className={
           hasErrorMessage && errorMessage
             ? "form-control is-invalid"
-            : "form-control"
+            : "form-control is-valid"
         }
         id={id}
         name={id}

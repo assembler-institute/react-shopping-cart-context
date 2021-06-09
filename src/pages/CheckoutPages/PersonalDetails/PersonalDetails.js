@@ -2,6 +2,8 @@ import React, { useState, useContext } from "react";
 import { useFormik } from "formik";
 import { Redirect, Link } from "react-router-dom";
 
+// import Select from "react-select";
+
 import withLayout from "../../../hoc/withLayout";
 
 import Input from "../../../components/Input";
@@ -12,7 +14,17 @@ import PersonalDetailsSchema from "./PersonalDetailsSchema";
 
 import checkoutContext from "../../../context/checkoutData";
 
+import "./PersonalDetails.scss";
+
 const isCheckout = true;
+
+// const prefixPhoneOptions = [
+//   { value: "+34", label: "Spain +34" },
+//   { value: "+39", label: "Italy +39" },
+//   { value: "+49", label: "Germany +49" },
+//   { value: "+33", label: "France +33" },
+//   { value: "+31", label: "Netherlands +31" },
+// ];
 
 function PersonalDetails({ cartItems }) {
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -66,34 +78,51 @@ function PersonalDetails({ cartItems }) {
             hasErrorMessage={formik.touched.email}
             errorMessage={formik.errors.email}
           />
-          <div className="phone-inputs">
-            <label htmlFor="phoneNumber">
-              Phone Number
-              <br />
-              <select
-                value={formik.values.phonePrefix}
+          {/* <Select
+            defaultValue={prefixPhoneOptions[0]}
+            options={prefixPhoneOptions}
+            value={formik.values.phonePrefix}
+            onChange={(value) =>
+              formik.setFieldValue("phonePrefix", value.value)
+            }
+            // onChange={formik.setFieldValue("phonePrefix")}
+            onBlur={formik.handleBlur}
+            id="phonePrefix"
+          /> */}
+          <p className="mb-2 mt-3"> Phone Number </p>
+          <div className="form-group d-flex mb-3">
+            <select
+              className="phone-prefix-select"
+              value={formik.values.phonePrefix}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              id="phonePrefix"
+            >
+              <option value="+34">Spain +34</option>
+              <option value="+39">Italy +39</option>
+              <option value="+49">Germany +49</option>
+              <option value="+33">France +33</option>
+              <option value="+31">Netherlands +31</option>
+            </select>
+            <div className="phone-number">
+              <input
+                className={
+                  formik.touched.phoneNumber && formik.errors.phoneNumber
+                    ? "form-control is-invalid"
+                    : "form-control is-valid"
+                }
+                id="phoneNumber"
+                name="phoneNumber"
+                type="text"
+                placeholder="Phone number"
+                value={formik.values.phoneNumber}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                id="phonePrefix"
-              >
-                <option value="+34">Spain +34</option>
-                <option value="+39">Italy +39</option>
-                <option value="+49">Germany +49</option>
-                <option value="+33">France +33</option>
-                <option value="+31">Netherlands +31</option>
-              </select>
-              <Input
-                type="text"
-                label=""
-                id="phoneNumber"
-                value={formik.values.phoneNumber}
-                placeholder="Phone number"
-                handleChange={formik.handleChange}
-                handleBlur={formik.handleBlur}
-                hasErrorMessage={formik.touched.phoneNumber}
-                errorMessage={formik.errors.phoneNumber}
               />
-            </label>
+            </div>
+            {formik.touched.phoneNumber && formik.errors.phoneNumber && (
+              <p className="invalid-feedback">{formik.errors.phoneNumber}</p>
+            )}
           </div>
           <div className="row">
             <div className="col col-6">
