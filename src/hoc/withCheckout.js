@@ -16,7 +16,6 @@ function Checkout(WrappedComponent) {
   // )})`;
 
   function WrapperComponent() {
-    // const { details, updateDetails } = useContext(ShoppingContext);
     return (
       <section className="mainContainer">
         <div className="checkoutContainer">

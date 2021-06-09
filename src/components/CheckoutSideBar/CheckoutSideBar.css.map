@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAEA,AAAA,gBAAgB,CAAA;EACZ,SAAS,EAAE,KAAK;CACnB",
+    "sources": [
+        "CheckoutSideBar.scss"
+    ],
+    "names": [],
+    "file": "CheckoutSideBar.css"
+}

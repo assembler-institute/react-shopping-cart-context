@@ -8,10 +8,15 @@ import Button from "../../components/Button";
 import ShoppingContext from "../../context";
 
 function Details() {
-  const { updateDetails } = useContext(ShoppingContext);
+  const { cartItems, updateDetails } = useContext(ShoppingContext);
   const [redirect, setRedirect] = useState(false);
+
   if (redirect) {
     return <Redirect to="/Checkout/step-2" />;
+  }
+  if (cartItems.length === 0) {
+    alert("Chose at least one product");
+    return <Redirect to="/" />;
   }
   return (
     <>
