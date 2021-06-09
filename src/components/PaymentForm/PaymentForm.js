@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 import { useFormik } from "formik";
 
 import Input from "../Input";
+import Button from "../Button";
 import Radio from "../Radio";
 import paymentSchema from "./payment-schema";
 
@@ -20,7 +21,6 @@ import "./PaymentForm.scss";
 
 function PaymentForm() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
-
   const formik = useFormik({
     initialValues: {
       payMethod: "",
@@ -53,12 +53,11 @@ function PaymentForm() {
               name="payMethod"
               id="inlineRadio1"
               label="Credit/Debit Card"
-              value={formik.values.payMethod}
+              value="Credit Card"
               handleChange={formik.handleChange}
               handleBlur={formik.handleBlur}
               hasErrorMessage={formik.touched.payMethod}
               errorMessage={formik.errors.payMethod}
-              checked
             />
             {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           </div>
@@ -69,8 +68,8 @@ function PaymentForm() {
               name="payMethod"
               id="inlineRadio2"
               label={<PaypalIcon />}
-              value={formik.values.payMethod}
-              onChange={formik.handleChange}
+              value="Paypal"
+              onChange={(e) => formik.handleChange(e)}
               onBlur={formik.handleBlur}
               hasErrorMessage={formik.touched.payMethod}
               errorMessage={formik.errors.payMethod}
@@ -80,6 +79,7 @@ function PaymentForm() {
               <PaypalIcon />
             </label> */}
           </div>
+
           <div className="PaymentForm__method form-check form-check-inline bg-light pt-2 pl-3">
             <Radio
               className="form-check-input"
@@ -87,7 +87,7 @@ function PaymentForm() {
               name="payMethod"
               id="inlineRadio3"
               label={<ApplePayIcon />}
-              value={formik.values.payMethod}
+              value="Apple Pay"
               handleChange={formik.handleChange}
               handleBlur={formik.handleBlur}
               hasErrorMessage={formik.touched.payMethod}
@@ -195,6 +195,13 @@ function PaymentForm() {
             </div>
           </div>
         </div>
+        <Button
+          submitButton
+          block
+          disabled={formik.isValidating || !formik.isValid}
+        >
+          {formik.isSubmitting ? "Submitting..." : "Submit"}
+        </Button>
       </form>
       {hasSubmitted && <Redirect to="/checkout/order-summary" />}
     </div>

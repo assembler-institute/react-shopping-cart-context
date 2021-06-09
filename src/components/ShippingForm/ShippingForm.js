@@ -40,8 +40,8 @@ function ShippingForm() {
           placeholder="Input address"
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
-          hasErrorMessage={formik.touched.email}
-          errorMessage={formik.errors.email}
+          hasErrorMessage={formik.touched.addressOne}
+          errorMessage={formik.errors.addressOne}
         />
         <Input
           type="text"
@@ -51,8 +51,8 @@ function ShippingForm() {
           placeholder="Input second address"
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
-          hasErrorMessage={formik.touched.email}
-          errorMessage={formik.errors.email}
+          hasErrorMessage={formik.touched.addressTwo}
+          errorMessage={formik.errors.addressTwo}
         />
         <Input
           type="number"
@@ -62,8 +62,8 @@ function ShippingForm() {
           placeholder="Enter zipcode"
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
-          hasErrorMessage={formik.touched.email}
-          errorMessage={formik.errors.email}
+          hasErrorMessage={formik.touched.zipCode}
+          errorMessage={formik.errors.zipCode}
         />
         <Input
           type="text"
@@ -73,8 +73,8 @@ function ShippingForm() {
           placeholder="Enter coutry"
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
-          hasErrorMessage={formik.touched.email}
-          errorMessage={formik.errors.email}
+          hasErrorMessage={formik.touched.country}
+          errorMessage={formik.errors.country}
         />
         <Input
           type="text"
@@ -84,8 +84,8 @@ function ShippingForm() {
           placeholder="Enter state"
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
-          hasErrorMessage={formik.touched.email}
-          errorMessage={formik.errors.email}
+          hasErrorMessage={formik.touched.state}
+          errorMessage={formik.errors.state}
         />
         <Input
           type="text"
@@ -95,8 +95,8 @@ function ShippingForm() {
           placeholder="Enter city"
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
-          hasErrorMessage={formik.touched.email}
-          errorMessage={formik.errors.email}
+          hasErrorMessage={formik.touched.city}
+          errorMessage={formik.errors.city}
         />
         <Button
           submitButton

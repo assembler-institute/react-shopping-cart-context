@@ -18,7 +18,7 @@ function Input({
       <input
         className={
           hasErrorMessage && errorMessage
-            ? "form-control is-invalid"
+            ? "form-control is-invalid border border-danger"
             : "form-control"
         }
         id={id}
