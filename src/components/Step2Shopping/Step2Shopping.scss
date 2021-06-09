@@ -1,0 +1,17 @@
+.containerStep {
+  width: 100%;
+  height: 10%;
+}
+
+.headerPage {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.containerInputs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
