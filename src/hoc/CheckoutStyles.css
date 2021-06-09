@@ -1,0 +1,7 @@
+.mainContainer {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 4fr 2fr;
+      grid-template-columns: 4fr 2fr;
+}
+/*# sourceMappingURL=CheckoutStyles.css.map */

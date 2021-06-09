@@ -45,7 +45,7 @@ function Confirm() {
           <div className="col">
             <h4>Adress</h4>
             <p>
-              {streetName},{cityName},{country}
+              {streetName}/{cityName}/{country}
             </p>
           </div>
         </div>
