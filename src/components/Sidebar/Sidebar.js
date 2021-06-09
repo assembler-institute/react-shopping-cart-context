@@ -19,8 +19,8 @@ function Sidebar() {
       discountCode: "",
     },
     validationSchema: FormSchema,
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: () => {
+      console.log("Discount");
       // event.target.blur(); ????
     },
   });

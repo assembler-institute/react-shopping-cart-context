@@ -1,5 +1,5 @@
 /* eslint-disable react/self-closing-comp */
-import React, { useContext, useState } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useFormik } from "formik";
 
@@ -7,9 +7,8 @@ import FormContext from "../../../context/form-context";
 
 // import Input from "../../../components/Input";
 import PaymentMethod from "../../../components/PaymentMethod";
-// import CardForm from "../../../components/PaymentForms/CardForm";
+import CardForm from "../../../components/PaymentForms/CardForm";
 import EmailForm from "../../../components/PaymentForms/EmailForm";
-
 import Button from "../../../components/Button";
 
 import { HOME_URL, PROFILE_URL } from "../../../utils/constants";
@@ -25,9 +24,14 @@ import visa from "../../../img/payment/visa-logo.svg";
 import masterCard from "../../../img/payment/mastercard-logo.svg";
 import americanExp from "../../../img/payment/american_express-logo.svg";
 
+const CARD_PAY = "CARD_PAY";
+const PAYPAL_PAY = "PAYPAL_PAY";
+const APPLE_PAY = "APPLE_PAY";
+
 function CheckoutPayment() {
   const { data: formData, setData: updateFormData } = useContext(FormContext);
   const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [payment, setPaymentMethod] = useState(CARD_PAY);
 
   const formik = useFormik({
     initialValues: {
@@ -37,14 +41,10 @@ function CheckoutPayment() {
       cardDate: formData.cardDate,
       cardCVV: formData.cardCVV,
       cardTerms: formData.cardTerms,
-      payPal: {
-        payPalUser: "",
-        payPalPassword: "",
-      },
-      applePay: {
-        applePayUser: "",
-        applePayPassword: "",
-      },
+      "payPal.payPalUser": formData.payPal.payPalUser,
+      "payPal.payPalPassword": formData.payPal.payPalPassword,
+      "applePay.applePayUser": formData.applePay.applePayUser,
+      "applePay.applePayPassword": formData.applePay.applePayPassword,
     },
     validationSchema: formPayment,
     onSubmit: (values, { setSubmitting }) => {
@@ -55,6 +55,17 @@ function CheckoutPayment() {
       }, 500);
     },
   });
+
+  useEffect(() => {
+    console.log("Changed method ", formik.values.paymentMethod);
+    if (formik.values.paymentMethod === "card-method") {
+      setPaymentMethod(CARD_PAY);
+    } else if (formik.values.paymentMethod === "paypal-method") {
+      setPaymentMethod(PAYPAL_PAY);
+    } else if (formik.values.paymentMethod === "apple-method") {
+      setPaymentMethod(APPLE_PAY);
+    }
+  }, [formik.values.paymentMethod]);
 
   return (
     <>
@@ -72,21 +83,21 @@ function CheckoutPayment() {
           <p>How would you like to pay?</p>
           <div className="payment-methods d-flex justify-content-between mb-4">
             <PaymentMethod
-              id="card-payment"
+              id="card-method"
               text="Credit/Debit Card"
               value={formik.values.paymentMethod}
               handleChange={formik.handleChange}
               handleBlur={formik.handleBlur}
             />
             <PaymentMethod
-              id="paypal-payment"
+              id="paypal-method"
               src={payPal}
               value={formik.values.paymentMethod}
               handleChange={formik.handleChange}
               handleBlur={formik.handleBlur}
             />
             <PaymentMethod
-              id="apple-pay-payment"
+              id="apple-method"
               src={applePay}
               value={formik.values.paymentMethod}
               handleChange={formik.handleChange}
@@ -110,10 +121,9 @@ function CheckoutPayment() {
             </div>
           </div>
           <div className="form-and-card d-flex mb-4">
-            {/* <CardForm formik={formik} /> */}
-            <EmailForm formik={formik} isPaypal />
-            <EmailForm formik={formik} />
-            {/* <EmailForm formik={formik} /> */}
+            {payment === CARD_PAY && <CardForm formik={formik} />}
+            {payment === PAYPAL_PAY && <EmailForm formik={formik} isPaypal />}
+            {payment === APPLE_PAY && <EmailForm formik={formik} />}
             <div className="card-illustration" />
           </div>
           <div className="card-terms">

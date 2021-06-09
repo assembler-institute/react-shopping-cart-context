@@ -4,7 +4,7 @@ import React from "react";
 import Input from "../Input";
 
 function EmailForm({ formik, isPaypal }) {
-  console.log(isPaypal);
+  // console.log(isPaypal);
   return (
     <form
       className="container-fluid d-flex flex-wrap px-0 mr-4"
@@ -16,48 +16,48 @@ function EmailForm({ formik, isPaypal }) {
           <Input
             type="text"
             label="Email name"
-            id="payPalpayPalUser"
-            value={formik.values.payPal}
+            id="payPalUser"
+            name="payPalUser"
+            value={formik.values.payPalUser}
             placeholder="user@mail.com"
             handleChange={formik.handleChange}
             handleBlur={formik.handleBlur}
-            hasErrorMessage={formik.touched.payPal}
-            errorMessage={formik.errors.payPal}
+            hasErrorMessage={formik.touched.payPalUser}
+            errorMessage={formik.errors.payPalUser}
           />
           <Input
             type="password"
             label="Password"
-            id="payPalpayPalPassword"
-            value={formik.values.payPal}
+            id="payPalPassword"
+            value={formik.values.payPalPassword}
             handleChange={formik.handleChange}
             handleBlur={formik.handleBlur}
-            hasErrorMessage={formik.touched.payPal}
-            errorMessage={formik.errors.payPal}
-          />{" "}
+            hasErrorMessage={formik.touched.payPalPassword}
+            errorMessage={formik.errors.payPalPassword}
+          />
         </>
       ) : (
         <>
-          {" "}
           <Input
             type="text"
             label="Apple pay user"
-            id="applePay.applePayUser"
-            value={formik.values.applePay}
+            id="applePayUser"
+            value={formik.values.applePayUser}
             placeholder="user@mail.com"
             handleChange={formik.handleChange}
             handleBlur={formik.handleBlur}
-            hasErrorMessage={formik.touched.applePay}
-            errorMessage={formik.errors.applePay}
+            hasErrorMessage={formik.touched.applePayUser}
+            errorMessage={formik.errors.applePayUser}
           />
           <Input
             type="password"
             label="Password"
-            id="applePay.applePayPassword"
-            value={formik.values.applePay}
+            id="applePayPassword"
+            value={formik.values.applePayPassword}
             handleChange={formik.handleChange}
             handleBlur={formik.handleBlur}
-            hasErrorMessage={formik.touched.applePay}
-            errorMessage={formik.errors.applePay}
+            hasErrorMessage={formik.touched.applePayPassword}
+            errorMessage={formik.errors.applePayPassword}
           />
         </>
       )}

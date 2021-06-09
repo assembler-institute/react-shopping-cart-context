@@ -49,9 +49,9 @@ function FormContextProvider({ children }) {
   const [formData, dispatch] = useReducer(reducerForm, initialValueFormData);
 
   useEffect(() => {
-    console.clear();
+    // console.clear();
     console.log(formData);
-  }, [formData]);
+  }, [formData.paymentMethod]);
 
   function updateFormData(newData) {
     dispatch({ type: UPDATE_FORM, payload: newData });
