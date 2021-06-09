@@ -26,7 +26,8 @@
     "sass": "^1.32.11",
     "uuid": "^8.3.2",
     "web-vitals": "^1.1.1",
-    "yup": "^0.32.9"
+    "yup": "^0.32.9",
+    "yup-phone": "^1.2.19"
   },
   "devDependencies": {
     "@babel/core": "^7.13.16",

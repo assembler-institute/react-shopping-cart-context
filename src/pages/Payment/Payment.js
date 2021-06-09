@@ -1,5 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Formik } from "formik";
+import { NavLink, Redirect } from "react-router-dom";
+
 import Checkout from "../../hoc/withCheckout";
 import paymentSchema from "./payment-schema";
 import Input from "../../components/Input";
@@ -8,6 +10,11 @@ import ShoppingContext from "../../context";
 
 function Payment() {
   const { updatePayment } = useContext(ShoppingContext);
+  const [redirect, setRedirect] = useState(false);
+  if (redirect) {
+    return <Redirect to="/Checkout/order-summary" />;
+  }
+
   return (
     <>
       <h1>Payment</h1>
@@ -19,10 +26,11 @@ function Payment() {
           cardExpiryDate: "",
           cvvCode: "",
         }}
+        initialErrors={{ defaultIsValid: "false" }}
         validationSchema={paymentSchema}
         onSubmit={(values) => {
           updatePayment(values);
-          console.log(values.paymentMethod);
+          setRedirect(true);
         }}
       >
         {({
@@ -118,9 +126,18 @@ function Payment() {
               hasErrorMessage={touched.cvvCode}
               errorMessage={errors.cvvCode}
             />
-            <Button submitButton block disabled={isValidating || !isValid}>
-              Submit
+            <NavLink to="/Checkout/step-2">
+              <Button>Previous</Button>
+            </NavLink>
+
+            <Button submitButton disabled={isValidating || !isValid}>
+              Buy now
             </Button>
+            <div>
+              <code>{`errors: ${JSON.stringify(
+                errors,
+              )} | isValid: ${isValid}`}</code>
+            </div>
           </form>
         )}
       </Formik>

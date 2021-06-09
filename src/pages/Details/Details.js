@@ -1,5 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Formik } from "formik";
+import { Redirect } from "react-router-dom";
 import Checkout from "../../hoc/withCheckout";
 import detailsSchema from "./details-schema";
 import Input from "../../components/Input";
@@ -8,6 +9,10 @@ import ShoppingContext from "../../context";
 
 function Details() {
   const { updateDetails } = useContext(ShoppingContext);
+  const [redirect, setRedirect] = useState(false);
+  if (redirect) {
+    return <Redirect to="/Checkout/step-2" />;
+  }
   return (
     <>
       <h1>Details</h1>
@@ -15,11 +20,13 @@ function Details() {
         initialValues={{
           userName: "",
           userEmail: "",
-          userPhone: 0,
+          userPhone: "",
         }}
+        initialErrors={{ defaultIsValid: "false" }}
         validationSchema={detailsSchema}
         onSubmit={(values) => {
           updateDetails(values);
+          setRedirect(true);
         }}
       >
         {({
@@ -66,9 +73,14 @@ function Details() {
               hasErrorMessage={touched.userPhone}
               errorMessage={errors.userPhone}
             />
-            <Button submitButton block disabled={isValidating || !isValid}>
-              Submit
+            <Button submitButton disabled={isValidating || !isValid}>
+              Next
             </Button>
+            <div>
+              <code>{`errors: ${JSON.stringify(
+                errors,
+              )} | isValid: ${isValid}`}</code>
+            </div>
           </form>
         )}
       </Formik>
