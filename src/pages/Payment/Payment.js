@@ -8,7 +8,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Button from "../../components/Button";
 import UiInput from "../../components/UiInput";
-import UiInputDate from "../../components/UiInputDate";
+import UiInputMasked from "../../components/UiInputMasked";
 import PaymentMethod from "../../components/PaymentMethod";
 
 import paymentSchema from "./Payment-schema";
@@ -24,8 +24,9 @@ import { SUMMARY } from "../../constants/routes";
 
 function Payment() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
-  const { updateCheckoutContext } = useContext(CheckoutContext);
   const [flip, setFlip] = useState(false);
+  const [cardType, setCardType] = useState("visa");
+  const { updateCheckoutContext } = useContext(CheckoutContext);
 
   const formik = useFormik({
     initialValues: {
@@ -48,6 +49,9 @@ function Payment() {
 
   function handleFlip() {
     return flip ? setFlip(false) : setFlip(true);
+  }
+  function handleCardType(type) {
+    return type ? setCardType(type) : "visa";
   }
   return (
     <>
@@ -74,7 +78,7 @@ function Payment() {
                   errorMessage={formik.errors.carholderName}
                   required
                 />
-                <UiInput
+                {/* <UiInput
                   id="cardNumber"
                   label="Card number"
                   name="cardNumber"
@@ -86,10 +90,26 @@ function Payment() {
                   errorMessage={formik.errors.cardNumber}
                   type="number"
                   required
+                /> */}
+
+                <UiInputMasked
+                  id="cardNumber"
+                  label="Card number"
+                  name="cardNumber"
+                  className="mb-3"
+                  value={formik.values.cardNumber}
+                  handleChange={formik.handleChange}
+                  handleBlur={formik.handleBlur}
+                  hasErrorMessage={formik.touched.cardNumber}
+                  errorMessage={formik.errors.cardNumber}
+                  handleCardType={handleCardType}
+                  // type="number"
+                  required
                 />
+
                 <div className="row">
                   <div className="col-5">
-                    <UiInputDate
+                    <UiInputMasked
                       id="cardExpiry"
                       label="Card expiry date"
                       name="cardExpiry"
@@ -115,6 +135,7 @@ function Payment() {
                       hasErrorMessage={formik.touched.cardCvv}
                       errorMessage={formik.errors.cardCvv}
                       type="number"
+                      maxLength={3}
                       required
                     />
                   </div>
@@ -153,6 +174,7 @@ function Payment() {
               <div className="col-6">
                 <CreditCard
                   flip={flip}
+                  cardType={cardType}
                   cardNumber={formik.values.cardNumber}
                   cardCvv={formik.values.cardCvv}
                   cardExpiry={formik.values.cardExpiry}

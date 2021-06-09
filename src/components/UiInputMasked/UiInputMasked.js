@@ -1,10 +1,44 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
 
+import valid from "card-validator";
+
 import InputMask from "react-input-mask";
 
-function TextMaskCustom(props) {
-  const { inputRef, ...other } = props;
+const usedMask = [
+  {
+    id: "cardExpiry",
+    mask: [/\d/, /\d/, "/", /\d/, /\d/],
+  },
+  {
+    id: "cardNumber",
+    mask: [
+      /\d/,
+      /\d/,
+      /\d/,
+      /\d/,
+      " ",
+      /\d/,
+      /\d/,
+      /\d/,
+      /\d/,
+      " ",
+      /\d/,
+      /\d/,
+      /\d/,
+      /\d/,
+      " ",
+      /\d/,
+      /\d/,
+      /\d/,
+      /\d/,
+    ],
+  },
+];
+
+function TextMaskCustom(_props) {
+  const { inputRef, ...other } = _props;
+  const [obj] = usedMask.filter((el) => el.id === other.id);
 
   return (
     <InputMask
@@ -12,7 +46,7 @@ function TextMaskCustom(props) {
       ref={(ref) => {
         inputRef(ref ? ref.inputElement : null);
       }}
-      mask={[/\d/, /\d/, "/", /\d/, /\d/]}
+      mask={obj.mask}
     />
   );
 }
@@ -24,11 +58,18 @@ function UiInputDate({
   name = "",
   handleChange = () => {},
   handleBlur = () => {},
+  handleCardType = () => {},
   errorMessage,
   hasErrorMessage,
   type = "text",
   ...props
 }) {
+  function onHandleChange(e) {
+    handleChange(e);
+    const numberValidation = valid.number(e.target.value);
+    handleCardType(numberValidation.card?.type);
+  }
+
   return (
     <TextField
       fullWidth
@@ -38,7 +79,7 @@ function UiInputDate({
       variant="filled"
       size="small"
       value={value}
-      onChange={handleChange}
+      onChange={onHandleChange}
       onBlur={handleBlur}
       error={hasErrorMessage && Boolean(errorMessage)}
       helperText={hasErrorMessage && errorMessage}

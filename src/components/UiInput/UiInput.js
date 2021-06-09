@@ -11,12 +11,19 @@ function UiInput({
   errorMessage,
   hasErrorMessage,
   type = "text",
+  maxLength = 0,
   ...props
 }) {
   function handleFocus(e) {
     if (e.target.id === "cardCvv") {
       handleFlip(e);
     }
+  }
+  function onHandleChange(e) {
+    if (e.target.value.length === maxLength + 1 && maxLength) {
+      e.target.value = e.target.value.slice(0, maxLength);
+    }
+    handleChange(e);
   }
   function onHandleBlur(e) {
     if (e.target.id === "cardCvv") {
@@ -35,12 +42,13 @@ function UiInput({
       variant="filled"
       size="small"
       value={value}
-      onChange={handleChange}
+      onChange={onHandleChange}
       onBlur={onHandleBlur}
       onFocus={handleFocus}
       error={hasErrorMessage && Boolean(errorMessage)}
       helperText={hasErrorMessage && errorMessage}
       type={type}
+      // inputProps={{ maxLength: maxLength }}
       {...props}
     />
   );
