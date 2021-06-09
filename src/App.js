@@ -19,7 +19,9 @@ import {
   DETAIL,
   PAYMENT,
   ADDRESS,
+  SUMMARY,
 } from "./constants/routes";
+import Summary from "./pages/Summary";
 
 function buildNewCartItem(cartItem) {
   if (cartItem.quantity >= cartItem.unitsInStock) {
@@ -220,6 +222,13 @@ function App() {
               handleRemove={handleRemove}
               handleChange={handleChange}
               page={3}
+            />
+          </Route>
+          <Route path={SUMMARY}>
+            <Summary
+              cartItems={cartItems}
+              date={new Date().toLocaleDateString()}
+              page={4}
             />
           </Route>
           <Route path={HOME}>

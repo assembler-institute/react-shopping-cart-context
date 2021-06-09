@@ -50,8 +50,7 @@ function Cart({ cartItems, handleRemove, handleChange, checkout, ...props }) {
               <hr />
             </div>
             {checkout && (
-              <div className="col">
-                {/* <Button>Checkout</Button> */}
+              <div className="col col-12 d-flex justify-content-center">
                 <ButtonLink page={DETAIL}>Checkout</ButtonLink>
               </div>
             )}
