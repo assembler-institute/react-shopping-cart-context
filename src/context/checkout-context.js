@@ -41,7 +41,18 @@ export const CheckoutContextProvider = ({ children }) => {
   return (
     <CheckoutContext.Provider
       value={{
-        form: state.form,
+        name: state.name,
+        email: state.email,
+        tel: state.tel,
+        address: state.address,
+        city: state.city,
+        zip: state.zip,
+        country: state.country,
+        paymentMethod: state.paymentMethod,
+        carholderName: state.carholderName,
+        cardNumber: state.cardNumber,
+        cardExpiry: state.cardExpiry,
+        cardCvv: state.cardCvv,
         updateCheckoutContext,
       }}
     >

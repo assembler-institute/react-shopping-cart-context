@@ -11,7 +11,7 @@ function ButtonLink({
   ...props
 }) {
   const classes = cn({
-    btn: true,
+    "btn px-4": true,
     "btn-primary": true,
     "btn-block": block,
     "btn-sm": small,
