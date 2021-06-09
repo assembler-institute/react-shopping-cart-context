@@ -21,7 +21,9 @@ function Payment() {
   let cardName = "cardName";
   let cardDate = "cardDate";
   let cardCvv = "cardCvvFront";
+  let payMethod = "paymethod";
   if (state === true) {
+    payMethod = "cardBackHide";
     card = "cardBack";
     cardNum = "cardBackHide";
     cardName = "cardBackHide";
@@ -60,11 +62,15 @@ function Payment() {
           <form onSubmit={handleSubmit}>
             <div id="my-radio-group">Choose the payment method</div>
 
-            <div role="group" aria-labelledby="my-radio-group">
+            <div
+              className="radioButtons"
+              role="group"
+              aria-labelledby="my-radio-group"
+            >
               <Input
                 type="radio"
                 name="paymentMethod"
-                label="Credit Card"
+                label={<div className="creditCard">.</div>}
                 id="creditCard"
                 value="creditCard"
                 handleChange={handleChange}
@@ -75,7 +81,7 @@ function Payment() {
               <Input
                 type="radio"
                 name="paymentMethod"
-                label="Pay Pal"
+                label={<div className="payPal">.</div>}
                 id="payPal"
                 value="payPal"
                 handleChange={handleChange}
@@ -86,7 +92,7 @@ function Payment() {
               <Input
                 type="radio"
                 name="paymentMethod"
-                label="Apple Pay"
+                label={<div className="applePay">.</div>}
                 id="applePay"
                 value="applePay"
                 handleChange={handleChange}
@@ -175,6 +181,7 @@ function Payment() {
               </div>
               <div className="wrappedCard">
                 <div className={card}>
+                  <div className={payMethod}>.</div>
                   <p className={cardNum}>{values.cardNumber}</p>,
                   <p className={cardName}>{values.cardholderName}</p>
                   <p className={cardDate}>{values.cardExpiryDate}</p>

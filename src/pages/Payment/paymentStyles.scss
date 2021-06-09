@@ -23,6 +23,48 @@
    animation-timing-function: ease-out; 
    
 }
+.radioButtons{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr ;
+}
+.creditCard {  
+    background-image: url("../../img/visa.png");
+    background-position: center;
+    background-size: cover;
+    min-width: 150px;
+    min-height: 90px;  
+    cursor: pointer;
+    margin: 20px 20px;
+}
+#creditCard{
+visibility: hidden;
+}
+.payPal{
+    background-image: url("../../img/paypal.png");
+    background-position: center;
+    background-size: cover;
+    min-width: 150px;
+    min-height: 90px;  
+    cursor: pointer;
+    margin: 20px 20px;
+    
+}
+#payPal{
+    visibility: hidden;
+}
+.applePay{
+    background-image: url("../../img/applePay.png");
+    background-position: center;
+    background-size: cover;
+    min-width: 150px;
+    min-height: 90px;  
+    cursor: pointer;
+    border-radius: 15px;
+    margin: 20px 20px;
+}
+#applePay{
+    visibility: hidden;
+}
 .cardBack{
     font-family: 'PT Mono', monospace;
     color: black;
@@ -64,7 +106,16 @@ position: absolute;
 left: 22px;
 top:175px;
 }
-
+.paymethod{
+    background-image: url("../../img/applePay.png");
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+    top:20px;
+    right: 22px;
+    min-width: 50px;
+    min-height: 30px;
+}
 .cardDate{
     position: absolute;
     top:175px;
