@@ -36,6 +36,7 @@ function Details() {
           handleChange,
           handleBlur,
           setFieldValue,
+          setFieldTouched,
           errors,
           values,
           touched,
@@ -65,31 +66,45 @@ function Details() {
               hasErrorMessage={touched.userEmail}
               errorMessage={errors.userEmail}
             />
-            <PhoneInput
-              type="number"
-              label="Write your phone number"
-              id="userPhone"
-              name="userPhone"
-              value={values.userPhone}
-              onChange={(phone) => {
-                setFieldValue("userPhone", phone, true);
-              }}
-              onBlur={(phone) => {
-                handleBlur(phone);
-              }}
-              country="es"
-              // handleChange={handleChange}
-              // handleBlur={handleBlur}
-              placeholder="Write your phone"
-              hasErrorMessage={touched.userPhone}
-              errorMessage={errors.userPhone}
-            />
+            <div className="form-group">
+              <PhoneInput
+                type="number"
+                label="Write your phone number"
+                id="userPhone"
+                name="userPhone"
+                value={values.userPhone}
+                onChange={(phone) => {
+                  setFieldValue("userPhone", phone, true);
+                }}
+                onBlur={() => {
+                  setFieldTouched("userPhone", true);
+                }}
+                country="es"
+                placeholder="Write your phone"
+                inputProps={{
+                  id: "userPhone",
+                  name: "userPhone",
+                  className:
+                    touched.userPhone && errors.userPhone
+                      ? "form-control is-invalid"
+                      : "form-control",
+                  // onChange: handleChange,
+                  // onBlur: handleBlur,
+                }}
+              />
+              {touched.userPhone && errors.userPhone && (
+                <p className="invalid-feedback">{errors.userPhone}</p>
+              )}
+            </div>
+
             <Button submitButton disabled={isValidating || !isValid}>
               Next
             </Button>
             <div>
               <code>{`errors: ${JSON.stringify(
                 errors,
+              )} | touched: ${JSON.stringify(
+                touched,
               )} | isValid: ${isValid} | values: ${JSON.stringify(
                 values,
               )}`}</code>
