@@ -8,7 +8,7 @@ function OrderConfirmation() {
   console.log(user);
   return (
     <section className="summaryBox">
-      <h2>Order Summary </h2>
+      <h2>Shipping information </h2>
       <hr />
       <div className="clientBox">
         <h6>Order number: </h6> {user[0].id}
