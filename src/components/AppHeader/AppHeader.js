@@ -5,7 +5,7 @@ import "./AppHeader.scss";
 
 function AppHeader({ ...props }) {
   return (
-    <header className="bg-primary mb-4" {...props}>
+    <header className="bg-primary mb-3" {...props}>
       <div className="container-fluid">
         <div className="row">
           <nav className="navbar navbar-expand navbar-dark">

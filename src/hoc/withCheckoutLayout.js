@@ -24,7 +24,7 @@ function withCheckoutLayout(WrappedComponent) {
           <div className="row">
             <div className="col col-8">
               <div className="col col-12">
-                <header className="jumbotron">
+                <header className="jumbotron mb-3">
                   <FormHeader page={props.page} />
                 </header>
               </div>
