@@ -16,12 +16,22 @@ function Payment() {
     return <Redirect to="/Checkout/order-summary" />;
   }
   const [state, setClass] = useState(false);
+  const [payment, setPayment] = useState("");
+
   let card = "card";
   let cardNum = "cardNum";
   let cardName = "cardName";
   let cardDate = "cardDate";
   let cardCvv = "cardCvvFront";
-  let payMethod = "paymethod";
+  let payMethod = "";
+  if (payment === "payPal") {
+    payMethod = "payPal";
+  } else if (payment === "applePay") {
+    payMethod = "applePay";
+  } else if (payment === "visa") {
+    payMethod = "visa";
+  }
+
   if (state === true) {
     payMethod = "cardBackHide";
     card = "cardBack";
@@ -68,9 +78,12 @@ function Payment() {
               aria-labelledby="my-radio-group"
             >
               <Input
+                onClick={() => {
+                  setPayment("visa");
+                }}
                 type="radio"
                 name="paymentMethod"
-                label={<div className="creditCard">.</div>}
+                label={<div className="creditCardLabel">.</div>}
                 id="creditCard"
                 value="creditCard"
                 handleChange={handleChange}
@@ -79,9 +92,12 @@ function Payment() {
                 errorMessage={errors.paymentMethod}
               />
               <Input
+                onClick={() => {
+                  setPayment("payPal");
+                }}
                 type="radio"
                 name="paymentMethod"
-                label={<div className="payPal">.</div>}
+                label={<div className="payPalLabel">.</div>}
                 id="payPal"
                 value="payPal"
                 handleChange={handleChange}
@@ -90,9 +106,12 @@ function Payment() {
                 errorMessage={errors.paymentMethod}
               />
               <Input
+                onClick={() => {
+                  setPayment("applePay");
+                }}
                 type="radio"
                 name="paymentMethod"
-                label={<div className="applePay">.</div>}
+                label={<div className="applePayLabel">.</div>}
                 id="applePay"
                 value="applePay"
                 handleChange={handleChange}

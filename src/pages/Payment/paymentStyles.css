@@ -34,7 +34,7 @@
       grid-template-columns: 1fr 1fr 1fr;
 }
 
-.creditCard {
+.creditCardLabel {
   background-image: url("../../img/visa.png");
   background-position: center;
   background-size: cover;
@@ -48,7 +48,7 @@
   visibility: hidden;
 }
 
-.payPal {
+.payPalLabel {
   background-image: url("../../img/paypal.png");
   background-position: center;
   background-size: cover;
@@ -62,7 +62,7 @@
   visibility: hidden;
 }
 
-.applePay {
+.applePayLabel {
   background-image: url("../../img/applePay.png");
   background-position: center;
   background-size: cover;
@@ -77,7 +77,7 @@
   visibility: hidden;
 }
 
-.cardBack {
+.cardBackLabel {
   font-family: 'PT Mono', monospace;
   color: black;
   position: relative;
@@ -124,8 +124,30 @@
   top: 175px;
 }
 
-.paymethod {
+.payPal {
+  background-image: url("../../img/paypal.png");
+  background-position: center;
+  background-size: cover;
+  position: absolute;
+  top: 20px;
+  right: 22px;
+  min-width: 50px;
+  min-height: 30px;
+}
+
+.applePay {
   background-image: url("../../img/applePay.png");
+  background-position: center;
+  background-size: cover;
+  position: absolute;
+  top: 20px;
+  right: 22px;
+  min-width: 50px;
+  min-height: 30px;
+}
+
+.visa {
+  background-image: url("../../img/visa.png");
   background-position: center;
   background-size: cover;
   position: absolute;
