@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
-import StepLabel from "@material-ui/core/StepLabel";
+import StepButton from "@material-ui/core/StepButton";
+
+import { DETAIL, PAYMENT, SUMMARY, ADDRESS } from "../../constants/routes";
 
 const useStyles = makeStyles((newTheme) => ({
   root: {
@@ -18,14 +21,16 @@ const useStyles = makeStyles((newTheme) => ({
   },
 }));
 
-function getSteps() {
-  return ["Account", "Shipping", "Payment", "Order review"];
-}
-
 export default function HorizontalLabelPositionBelowStepper({ activePage }) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
-  const steps = getSteps();
+  const history = useHistory();
+  const steps = [
+    { name: "Account", route: DETAIL },
+    { name: "Shipping", route: ADDRESS },
+    { name: "Payment", route: PAYMENT },
+    { name: "Order review", route: SUMMARY },
+  ];
 
   useEffect(() => {
     setActiveStep(activePage - 1);
@@ -33,10 +38,16 @@ export default function HorizontalLabelPositionBelowStepper({ activePage }) {
 
   return (
     <div className={classes.root}>
-      <Stepper activeStep={activeStep} alternativeLabel>
-        {steps.map((label) => (
-          <Step key={label}>
-            <StepLabel>{label}</StepLabel>
+      <Stepper activeStep={activeStep}>
+        {steps.map((step) => (
+          <Step key={step.name}>
+            <StepButton
+              onClick={() => {
+                history.push(step.route);
+              }}
+            >
+              {step.name}
+            </StepButton>
           </Step>
         ))}
       </Stepper>
