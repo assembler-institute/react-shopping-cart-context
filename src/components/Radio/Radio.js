@@ -18,8 +18,8 @@ function Radio({
         <input
           className={
             hasErrorMessage && errorMessage
-              ? "form-control is-invalid"
-              : "form-control"
+              ? "form-check-input is-invalid"
+              : "form-check-input"
           }
           id={id}
           name={id}
