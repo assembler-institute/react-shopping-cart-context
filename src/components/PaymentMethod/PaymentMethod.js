@@ -5,7 +5,6 @@ import UiCustomRadio from "../UiCustomRadio";
 
 import visaImage from "../../img/icons/payment/Visa_Inc.-Logo.wine.svg";
 import mastercardImage from "../../img/icons/payment/Mastercard-Logo.wine.svg";
-import amexImage from "../../img/icons/payment/American_Express-Logo.wine.svg";
 import paypalImage from "../../img/icons/payment/Paypal.png";
 import applePayImage from "../../img/icons/payment/Apple.png";
 
@@ -64,7 +63,6 @@ export default function PaymentMethod({ value, changeHandler }) {
         <div className="col-12">
           <img className="radio-border-box" src={visaImage} alt="" />
           <img className="radio-border-box" src={mastercardImage} alt="" />
-          <img className="radio-border-box" src={amexImage} alt="" />
         </div>
       </div>
     </>
