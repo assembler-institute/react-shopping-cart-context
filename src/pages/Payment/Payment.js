@@ -98,7 +98,7 @@ function Payment() {
                   <div className="col-5">
                     <UiInputMasked
                       id="cardExpiry"
-                      label="Card expiry date"
+                      label="Expiry date"
                       name="cardExpiry"
                       className="mb-3"
                       value={formik.values.cardExpiry}
