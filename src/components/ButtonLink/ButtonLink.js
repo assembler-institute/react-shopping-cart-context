@@ -1,15 +1,17 @@
 import React from "react";
 import cn from "clsx";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 function ButtonLink({
-  page,
+  page = "",
   disabled = false,
   block = false,
   small = false,
   children,
   ...props
 }) {
+  const history = useHistory();
   const classes = cn({
     "btn px-4": true,
     "btn-primary": true,
@@ -18,18 +20,19 @@ function ButtonLink({
   });
 
   return (
-    // <button
-    //   className={classes}
-    //   type={submitButton ? "submit" : "button"}
-    //   disabled={disabled}
-    //   {...props}
-    // >
-    //   {children}
-    // </button>
-
-    <Link className={classes} disabled={disabled} to={page} {...props}>
+    <button
+      className={classes}
+      type="button"
+      disabled={disabled}
+      onClick={() => history.push(page)}
+      {...props}
+    >
       {children}
-    </Link>
+    </button>
+
+    // <Link className={classes} disabled={disabled} to={page} {...props}>
+    //   {children}
+    // </Link>
   );
 }
 
