@@ -1,4 +1,5 @@
 import React from "react";
+// import { v4 as uuid } from "uuid";
 
 import CartItemShopping from "../CartItemShopping";
 
@@ -8,7 +9,7 @@ function getCartTotal(cart) {
   }, 0);
 }
 
-function OrderSummary({ cartItems, handleRemove, handleChange, ...props }) {
+function OrderSummary({ cartItems, ...props }) {
   return (
     <aside {...props}>
       <div className="row flex-column">
@@ -22,18 +23,14 @@ function OrderSummary({ cartItems, handleRemove, handleChange, ...props }) {
               <>
                 <CartItemShopping
                   key={item.id}
-                  id={item.id}
                   title={item.title}
                   price={item.price}
                   img={item.img}
                   quantity={item.quantity}
-                  unitsInStock={item.unitsInStock}
-                  handleRemove={handleRemove}
-                  handleChange={handleChange}
                 />
                 {item !== cartItems[cartItems.length - 1] && (
-                  <div key={`d${item.id}`} className="col">
-                    <hr key={`h${item.id}`} />
+                  <div key={`${item.id}div`} className="col">
+                    <hr />
                   </div>
                 )}
               </>

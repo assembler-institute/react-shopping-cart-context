@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from "react";
 
 import "./Step1.scss";
@@ -8,7 +9,7 @@ import ProgressBar from "../../components/ProgressBar";
 import OrderSummary from "../../components/OrderSummary";
 import FormShopping from "../../components/FormShopping";
 
-function Step1({ cartItems, handleRemove, handleChange, ...routeProps }) {
+function Step1({ cartItems, ...routeProps }) {
   return (
     <div className="step1__main--container">
       <div className="step1__main--container--form">
@@ -16,11 +17,7 @@ function Step1({ cartItems, handleRemove, handleChange, ...routeProps }) {
         <FormShopping {...routeProps} />
       </div>
       <div className="col">
-        <OrderSummary
-          cartItems={cartItems}
-          handleRemove={handleRemove}
-          handleChange={handleChange}
-        />
+        <OrderSummary cartItems={cartItems} />
       </div>
     </div>
   );

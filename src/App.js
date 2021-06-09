@@ -9,6 +9,7 @@ import Step3 from "./pages/Checkout/Step3";
 import Step4 from "./pages/Checkout/Step4";
 
 import * as api from "./api";
+import ShoppingContextProvider from "./components/ShoppingContextProvider";
 
 import useLocalStorage from "./hooks/useLocalStorage";
 import loadLocalStorageItems from "./utils/loadLocalStorageItems";
@@ -184,66 +185,68 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/new-product">
-          <NewProduct saveNewProduct={saveNewProduct} />
-        </Route>
-        <Route path="/" exact>
-          <Home
-            fullWidth
-            cartItems={cartItems}
-            products={products}
-            isLoading={isLoading}
-            hasError={hasError}
-            loadingError={loadingError}
-            handleDownVote={handleDownVote}
-            handleUpVote={handleUpVote}
-            handleSetFavorite={handleSetFavorite}
-            handleAddToCart={handleAddToCart}
-            handleRemove={handleRemove}
-            handleChange={handleChange}
+    <ShoppingContextProvider>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/new-product">
+            <NewProduct saveNewProduct={saveNewProduct} />
+          </Route>
+          <Route path="/" exact>
+            <Home
+              fullWidth
+              cartItems={cartItems}
+              products={products}
+              isLoading={isLoading}
+              hasError={hasError}
+              loadingError={loadingError}
+              handleDownVote={handleDownVote}
+              handleUpVote={handleUpVote}
+              handleSetFavorite={handleSetFavorite}
+              handleAddToCart={handleAddToCart}
+              handleRemove={handleRemove}
+              handleChange={handleChange}
+            />
+          </Route>
+          <Route
+            path="/checkout/step-1"
+            render={(routeProps) => (
+              <Step1
+                {...routeProps}
+                cartItems={cartItems}
+                handleRemove={handleRemove}
+                handleChange={handleChange}
+              />
+            )}
           />
-        </Route>
-        <Route
-          path="/checkout/step-1"
-          render={(routeProps) => (
-            <Step1
-              {...routeProps}
-              cartItems={cartItems}
-              handleRemove={handleRemove}
-              handleChange={handleChange}
-            />
-          )}
-        />
-        <Route
-          path="/checkout/step-2"
-          render={(routeProps) => (
-            <Step2
-              {...routeProps}
-              cartItems={cartItems}
-              handleRemove={handleRemove}
-              handleChange={handleChange}
-            />
-          )}
-        />
-        <Route
-          path="/checkout/step-3"
-          render={(routeProps) => (
-            <Step3
-              {...routeProps}
-              cartItems={cartItems}
-              handleRemove={handleRemove}
-              handleChange={handleChange}
-            />
-          )}
-        />
-        <Route
-          path="/checkout/step-4"
-          render={(routeProps) => <Step4 {...routeProps} />}
-        />
-      </Switch>
-    </BrowserRouter>
+          <Route
+            path="/checkout/step-2"
+            render={(routeProps) => (
+              <Step2
+                {...routeProps}
+                cartItems={cartItems}
+                handleRemove={handleRemove}
+                handleChange={handleChange}
+              />
+            )}
+          />
+          <Route
+            path="/checkout/step-3"
+            render={(routeProps) => (
+              <Step3
+                {...routeProps}
+                cartItems={cartItems}
+                handleRemove={handleRemove}
+                handleChange={handleChange}
+              />
+            )}
+          />
+          <Route
+            path="/checkout/step-4"
+            render={(routeProps) => <Step4 {...routeProps} />}
+          />
+        </Switch>
+      </BrowserRouter>
+    </ShoppingContextProvider>
   );
 }
 
