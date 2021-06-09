@@ -1,5 +1,9 @@
 .summaryBox {
-  height: 70vh;
+  display: grid;
+  grid-template-columns: 2fr 50%;
+  grid-gap: 1rem;
+  border-radius: 5px;
+
   width: 50%;
   background-color: aquamarine;
   box-sizing: border-box;
