@@ -20,7 +20,8 @@ import CVV from "../../img/icons/payment/CVV.svg";
 import sslIcon from "../../img/icons/payment/ssl.svg";
 import CreditCard from "../../components/CreditCard";
 
-import { SUMMARY } from "../../constants/routes";
+import { SUMMARY, ADDRESS } from "../../constants/routes";
+import ButtonLink from "../../components/ButtonLink";
 
 function Payment() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -78,20 +79,6 @@ function Payment() {
                   errorMessage={formik.errors.carholderName}
                   required
                 />
-                {/* <UiInput
-                  id="cardNumber"
-                  label="Card number"
-                  name="cardNumber"
-                  className="mb-3"
-                  value={formik.values.cardNumber}
-                  handleChange={formik.handleChange}
-                  handleBlur={formik.handleBlur}
-                  hasErrorMessage={formik.touched.cardNumber}
-                  errorMessage={formik.errors.cardNumber}
-                  type="number"
-                  required
-                /> */}
-
                 <UiInputMasked
                   id="cardNumber"
                   label="Card number"
@@ -196,6 +183,7 @@ function Payment() {
           </div>
           <div className="row">
             <div className="col col-12 mt-4 d-flex justify-content-center">
+              <ButtonLink page={ADDRESS}>Go back</ButtonLink>
               <Button submitButton block>
                 {formik.isSubmitting ? "Submitting..." : "Finish purchase"}
               </Button>

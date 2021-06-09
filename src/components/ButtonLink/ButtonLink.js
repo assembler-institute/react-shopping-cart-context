@@ -13,7 +13,7 @@ function ButtonLink({
 }) {
   const history = useHistory();
   const classes = cn({
-    "btn px-4": true,
+    "btn px-4 mx-3": true,
     "btn-primary": true,
     "btn-block": block,
     "btn-sm": small,

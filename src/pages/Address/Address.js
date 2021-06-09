@@ -12,7 +12,8 @@ import withCheckoutLayout from "../../hoc/withCheckoutLayout";
 import AddressSchema from "./Address-schema";
 import CheckoutContext from "../../context/checkout-context";
 
-import { PAYMENT } from "../../constants/routes";
+import { PAYMENT, DETAIL } from "../../constants/routes";
+import ButtonLink from "../../components/ButtonLink";
 
 function Address() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -38,78 +39,72 @@ function Address() {
   });
 
   return (
-    <>
-      <div className="row">
-        <div className="col col-sm-12 col-lg-8 m-auto">
-          <h3>Billing Address</h3>
-          <form onSubmit={formik.handleSubmit}>
-            <UiInput
-              id="address"
-              label="Address"
-              name="address"
-              className="mb-4"
-              value={formik.values.address}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              hasErrorMessage={formik.touched.address}
-              errorMessage={formik.errors.address}
-            />
-            <UiInput
-              id="city"
-              label="City"
-              name="city"
-              className="mb-4"
-              value={formik.values.city}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              hasErrorMessage={formik.touched.city}
-              errorMessage={formik.errors.city}
-            />
-            <UiInput
-              id="zip"
-              label="Zip/code postal"
-              name="zip"
-              className="mb-4"
-              value={formik.values.zip}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              hasErrorMessage={formik.touched.zip}
-              errorMessage={formik.errors.zip}
-            />
-            <UiSelect
-              id="country"
-              label="Country"
-              name="country"
-              options={["Spain", "Argentina", "Morocco"]}
-              value={formik.values.country}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              hasErrorMessage={formik.touched.country}
-              errorMessage={formik.errors.country}
-            />
+    <div className="row">
+      <div className="col col-sm-12 col-lg-8 m-auto">
+        <h3>Billing Address</h3>
+        <form onSubmit={formik.handleSubmit}>
+          <UiInput
+            id="address"
+            label="Address"
+            name="address"
+            className="mb-4"
+            value={formik.values.address}
+            handleChange={formik.handleChange}
+            handleBlur={formik.handleBlur}
+            hasErrorMessage={formik.touched.address}
+            errorMessage={formik.errors.address}
+          />
+          <UiInput
+            id="city"
+            label="City"
+            name="city"
+            className="mb-4"
+            value={formik.values.city}
+            handleChange={formik.handleChange}
+            handleBlur={formik.handleBlur}
+            hasErrorMessage={formik.touched.city}
+            errorMessage={formik.errors.city}
+          />
+          <UiInput
+            id="zip"
+            label="Zip/code postal"
+            name="zip"
+            className="mb-4"
+            value={formik.values.zip}
+            handleChange={formik.handleChange}
+            handleBlur={formik.handleBlur}
+            hasErrorMessage={formik.touched.zip}
+            errorMessage={formik.errors.zip}
+          />
+          <UiSelect
+            id="country"
+            label="Country"
+            name="country"
+            options={["Spain", "Argentina", "Morocco"]}
+            value={formik.values.country}
+            handleChange={formik.handleChange}
+            handleBlur={formik.handleBlur}
+            hasErrorMessage={formik.touched.country}
+            errorMessage={formik.errors.country}
+          />
 
-            {/* {console.log("isValidating", formik.isValidating)}
-            {console.log("isValid", formik.isValid)} */}
-
-            <div className="row">
-              <div className="col col-12 mt-4 d-flex justify-content-center">
-                <Button
-                  submitButton
-                  block
-                  disabled={formik.isValidating || !formik.isValid}
-                >
-                  {formik.isSubmitting ? "Submitting..." : "Next page"}
-                </Button>
-              </div>
+          <div className="row">
+            <div className="col col-12 mt-4 d-flex justify-content-center">
+              <ButtonLink page={DETAIL}>Go back</ButtonLink>
+              <Button
+                submitButton
+                block
+                disabled={formik.isValidating || !formik.isValid}
+              >
+                {formik.isSubmitting ? "Submitting..." : "Next page"}
+              </Button>
             </div>
-          </form>
+          </div>
+        </form>
 
-          {hasSubmitted && <Redirect to={PAYMENT} />}
-        </div>
+        {hasSubmitted && <Redirect to={PAYMENT} />}
       </div>
-
-      {/* <UiInput /> */}
-    </>
+    </div>
   );
 }
 
