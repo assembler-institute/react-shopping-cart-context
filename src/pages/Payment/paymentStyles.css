@@ -14,13 +14,37 @@
   color: white;
   position: relative;
   border-radius: 20px;
-  max-width: 500px;
+  width: 100%;
   max-width: 400px;
   min-height: 250px;
   min-width: 350px;
   background-image: url("../../img/credicart.png");
   background-position: center;
   background-size: cover;
+  -webkit-animation-duration: 0.5s;
+          animation-duration: 0.5s;
+  -webkit-animation-timing-function: ease-out;
+          animation-timing-function: ease-out;
+}
+
+.cardBack {
+  font-family: 'PT Mono', monospace;
+  color: black;
+  position: relative;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 400px;
+  min-height: 250px;
+  min-width: 350px;
+  background-image: url("../../img/cradiCardBack.png");
+  background-position: center;
+  background-size: cover;
+  -webkit-animation-name: backTheCard2;
+          animation-name: backTheCard2;
+  -webkit-animation-duration: 0.5s;
+          animation-duration: 0.5s;
+  -webkit-animation-timing-function: ease-out;
+          animation-timing-function: ease-out;
 }
 
 .shortImputs {
@@ -56,7 +80,65 @@
   right: 25px;
 }
 
-.cardCode {
+.cardCvv {
   position: absolute;
+  top: 100px;
+  right: 30px;
+}
+
+.cardCvvFront {
+  visibility: hidden;
+}
+
+.cardBackHide {
+  visibility: hidden;
+}
+
+@-webkit-keyframes backTheCard1 {
+  0% {
+    width: 100%;
+    min-width: 350px;
+  }
+  100% {
+    width: 0%;
+    min-width: 0px;
+  }
+}
+
+@keyframes backTheCard1 {
+  0% {
+    width: 100%;
+    min-width: 350px;
+  }
+  100% {
+    width: 0%;
+    min-width: 0px;
+  }
+}
+
+@-webkit-keyframes backTheCard2 {
+  0% {
+    width: 0%;
+    min-width: 0px;
+    -webkit-transform: skewY(30deg);
+            transform: skewY(30deg);
+  }
+  100% {
+    width: 100%;
+    min-width: 350px;
+  }
+}
+
+@keyframes backTheCard2 {
+  0% {
+    width: 0%;
+    min-width: 0px;
+    -webkit-transform: skewY(30deg);
+            transform: skewY(30deg);
+  }
+  100% {
+    width: 100%;
+    min-width: 350px;
+  }
 }
 /*# sourceMappingURL=paymentStyles.css.map */

@@ -15,6 +15,19 @@ function Payment() {
   if (redirect) {
     return <Redirect to="/Checkout/order-summary" />;
   }
+  const [state, setClass] = useState(false);
+  let card = "card";
+  let cardNum = "cardNum";
+  let cardName = "cardName";
+  let cardDate = "cardDate";
+  let cardCvv = "cardCvvFront";
+  if (state === true) {
+    card = "cardBack";
+    cardNum = "cardBackHide";
+    cardName = "cardBackHide";
+    cardDate = "cardBackHide";
+    cardCvv = "cardCvv";
+  }
 
   return (
     <>
@@ -25,7 +38,7 @@ function Payment() {
           cardholderName: "Holder name",
           cardNumber: "XXXX XXXX XXXX XXXX",
           cardExpiryDate: "../..",
-          cvvCode: "...",
+          cvvCode: "",
         }}
         initialErrors={{ defaultIsValid: "false" }}
         validationSchema={paymentSchema}
@@ -89,6 +102,7 @@ function Payment() {
                     if (event.target.value === "XXXX XXXX XXXX XXXX") {
                       // eslint-disable-next-line no-param-reassign
                       event.target.value = "";
+                      setClass(false);
                     }
                   }}
                   type="text"
@@ -106,6 +120,7 @@ function Payment() {
                     if (event.target.value === "Holder name") {
                       // eslint-disable-next-line no-param-reassign
                       event.target.value = "";
+                      setClass(false);
                     }
                   }}
                   type="text"
@@ -124,6 +139,7 @@ function Payment() {
                       if (event.target.value === "../..") {
                         // eslint-disable-next-line no-param-reassign
                         event.target.value = "";
+                        setClass(false);
                       }
                     }}
                     type="text"
@@ -137,6 +153,14 @@ function Payment() {
                     errorMessage={errors.cardExpiryDate}
                   />
                   <Input
+                    onFocus={(event) => {
+                      setClass(true);
+                      if (event.target.value === "") {
+                        console.log(event.target);
+                        // eslint-disable-next-line no-param-reassign
+                        event.target.placeholder = "";
+                      }
+                    }}
                     type="text"
                     label="CVV Code"
                     id="cvvCode"
@@ -150,11 +174,11 @@ function Payment() {
                 </div>
               </div>
               <div className="wrappedCard">
-                <div className="card">
-                  <p className="cardNum">{values.cardNumber}</p>,
-                  <p className="cardName">{values.cardholderName}</p>
-                  <p className="cardDate">{values.cardExpiryDate}</p>
-                  {/* <p className="cardCode">356</p> */}
+                <div className={card}>
+                  <p className={cardNum}>{values.cardNumber}</p>,
+                  <p className={cardName}>{values.cardholderName}</p>
+                  <p className={cardDate}>{values.cardExpiryDate}</p>
+                  <p className={cardCvv}>{values.cvvCode}</p>
                 </div>
               </div>
             </section>
