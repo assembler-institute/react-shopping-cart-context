@@ -45,13 +45,19 @@
   color: #fb8c00;
 }
 
+h1, h2, h3, h4, h5, p {
+  margin: 0;
+  padding: 0;
+}
+
 section.main_layout {
   background-color: rgb(167, 0, 167);
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 8% 1fr 5%;
-  min-width: 100vw;
+  min-width: 98vw;
+  max-width: 99vw;
   min-height: 600px;
   height: 100vh;
-  width: 100vw;
+  width: 100%;
 }
