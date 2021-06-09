@@ -2,9 +2,18 @@
 import React from "react";
 import cn from "clsx";
 
+import visaImage from "../../img/icons/payment/Visa_Inc.-Logo.wine.svg";
+
 import "./CreditCard.scss";
 
-function CreditCard({ carholderName, cardNumber, cardCvv, cardExpiry, flip }) {
+function CreditCard({
+  carholderName,
+  cardNumber,
+  cardCvv,
+  cardExpiry,
+  flip,
+  cardType,
+}) {
   const classes = cn({
     card: true,
     flipState: flip,
@@ -46,15 +55,22 @@ function CreditCard({ carholderName, cardNumber, cardCvv, cardExpiry, flip }) {
               <div className="card-holder">
                 {carholderName || "mr Mathias Fortuna"}
               </div>
-              <div className="master">
-                <div className="circle master-red" />
-                <div className="circle master-yellow" />
-              </div>
+              {cardType === "mastercard" && (
+                <div className="master">
+                  <div className="circle master-red" />
+                  <div className="circle master-yellow" />
+                </div>
+              )}
+              {cardType === "visa" && (
+                <div className="visa">
+                  <img className="" src={visaImage} alt="visa" />
+                </div>
+              )}
             </div>
             <div className="back">
               <div className="strip-black" />
               <div className="ccv">
-                <label>ccv</label>
+                <label>cvv</label>
                 <div>{cardCvv}</div>
               </div>
               <div className="terms">
