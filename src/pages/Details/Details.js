@@ -35,6 +35,7 @@ function Details() {
           handleSubmit,
           handleChange,
           handleBlur,
+          setFieldValue,
           errors,
           values,
           touched,
@@ -70,10 +71,15 @@ function Details() {
               id="userPhone"
               name="userPhone"
               value={values.userPhone}
-              onChange={(phone) => console.log(phone)}
+              onChange={(phone) => {
+                setFieldValue("userPhone", phone, true);
+              }}
+              onBlur={(phone) => {
+                handleBlur(phone);
+              }}
               country="es"
               // handleChange={handleChange}
-              handleBlur={handleBlur}
+              // handleBlur={handleBlur}
               placeholder="Write your phone"
               hasErrorMessage={touched.userPhone}
               errorMessage={errors.userPhone}
@@ -84,7 +90,9 @@ function Details() {
             <div>
               <code>{`errors: ${JSON.stringify(
                 errors,
-              )} | isValid: ${isValid}`}</code>
+              )} | isValid: ${isValid} | values: ${JSON.stringify(
+                values,
+              )}`}</code>
             </div>
           </form>
         )}
