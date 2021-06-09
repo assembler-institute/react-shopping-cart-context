@@ -11,7 +11,10 @@ import ButtonShopping from "../ButtonShopping";
 import ShoppingContext from "../../context/ShoppingContext";
 // import RadioInput from "../RadioInput";
 
-import formSchemaShopping from "./formSchemaShopping";
+import formSchemaShoppingStep1 from "./formSchemaShoppingStep1";
+import formSchemaShoppingStep2 from "./formSchemaShoppingStep2";
+import formSchemaShoppingStep3 from "./formSchemaShoppingStep3";
+
 import SelectShopping from "../SelectShopping";
 import Select2Shopping from "../Select2Shopping";
 
@@ -19,19 +22,12 @@ function FormShopping({ ...routeProps }) {
   const [Url, setUrl] = useState(null);
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const {
-    details,
-    // phoneNumber,
+    personalDetails,
     submitStep1,
-    address,
-    city,
-    zipCode,
-    country,
-    paymentMethod,
-    cardHolderName,
-    cardNumber,
-    cardExpirationDate,
-    cardCVVCode,
-    consentCheckbox,
+    shippingingDetails,
+    submitStep2,
+    paymentDetails,
+    submitStep3,
   } = useContext(ShoppingContext);
   const [checkedPoly, setCheckedPoly] = useState(false);
 
@@ -48,29 +44,29 @@ function FormShopping({ ...routeProps }) {
     switch (Url) {
       case 1:
         initialValues = {
-          name: details.name,
-          email: details.email,
-          // phoneNumber: phoneNumber,
+          name: personalDetails.name,
+          email: personalDetails.email,
+          phoneNumber: personalDetails.phoneNumber,
         };
         // console.log("props-->", props);
         console.log("initialValues-->", initialValues);
         break;
       case 2:
         initialValues = {
-          address: address,
-          city: city,
-          zipCode: zipCode,
-          country: country,
+          address: shippingingDetails.address,
+          city: shippingingDetails.city,
+          zipCode: shippingingDetails.zipCode,
+          country: shippingingDetails.country,
         };
         break;
       case 3:
         initialValues = {
-          paymentMethod: paymentMethod,
-          cardHolderName: cardHolderName,
-          cardNumber: cardNumber,
-          cardExpirationDate: cardExpirationDate,
-          cardCVVCode: cardCVVCode,
-          consentCheckbox: consentCheckbox,
+          paymentMethod: paymentDetails.paymentMethod,
+          cardHolderName: paymentDetails.cardHolderName,
+          cardNumber: paymentDetails.cardNumber,
+          cardExpirationDate: paymentDetails.cardExpirationDate,
+          cardCVVCode: paymentDetails.cardCVVCode,
+          consentCheckbox: paymentDetails.consentCheckbox,
         };
         break;
       default:
@@ -80,14 +76,45 @@ function FormShopping({ ...routeProps }) {
     return initialValues;
   }
 
+  function submitSwitch(valuesObject) {
+    switch (Url) {
+      case 1:
+        console.log("Im in submitStep1");
+        return submitStep1(valuesObject);
+      case 2:
+        console.log("Im in submitStep2");
+        return submitStep2(valuesObject);
+      case 3:
+        console.log("Im in submitStep3");
+        return submitStep3(valuesObject);
+      default:
+        return "";
+    }
+  }
+
+  function schemaSwitch() {
+    switch (Url) {
+      case 1:
+        console.log("Im in formSchemaShoppingStep1");
+        return formSchemaShoppingStep1;
+      case 2:
+        console.log("Im in formSchemaShoppingStep2");
+        return formSchemaShoppingStep2;
+      case 3:
+        console.log("Im in formSchemaShoppingStep3");
+        return formSchemaShoppingStep3;
+      default:
+        return "";
+    }
+  }
   const formik = useFormik({
     initialValues: initialValuesSetup(),
-    validationSchema: formSchemaShopping,
+    validationSchema: schemaSwitch(),
     onSubmit: (values, { setSubmitting }) => {
+      submitSwitch(values);
+      console.log(values);
       setSubmitting(true);
-      submitStep1(values);
-      // console.log(values);
-      // console.log(submitStep1);
+      console.log(formSchemaShoppingStep2);
 
       setTimeout(() => {
         setHasSubmitted(true);
@@ -187,13 +214,13 @@ function FormShopping({ ...routeProps }) {
               className="inputMediun"
               type="number"
               label="Code post: "
-              id="post"
-              value={formik.values.post}
+              id="zipCode"
+              value={formik.values.zipCode}
               placeholder="post..."
               handleChange={formik.handleChange}
               handleBlur={formik.handleBlur}
-              hasErrorMessage={formik.touched.post}
-              errorMessage={formik.errors.post}
+              hasErrorMessage={formik.touched.zipCode}
+              errorMessage={formik.errors.zipCode}
             />
             <SelectShopping />
             <div className="container">
@@ -226,12 +253,20 @@ function FormShopping({ ...routeProps }) {
               className="form__container--step-3"
             >
               <p className="p__input--pay">How would you like to play?</p>
-              <div className="radio__options--input--container">
+              <div
+                className="radio__options--input--container"
+                id="paymentMethod"
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+                hasErrorMessage={formik.touched.paymentMethod}
+                errorMessage={formik.errors.paymentMethod}
+              >
                 <div className="radio__input">
                   <label htmlFor="Credit/DebitCard">
                     <Field
                       type="radio"
-                      name="Credit/DebitCard"
+                      id="radioOption1"
+                      name="paymentMethod"
                       value="Credit/DebitCard"
                     />
                     {/* <input /> */}
@@ -240,7 +275,12 @@ function FormShopping({ ...routeProps }) {
                 </div>
                 <div className="radio__input">
                   <label htmlFor="Paypal">
-                    <Field type="radio" name="Paypal" value="Paypal" />
+                    <Field
+                      type="radio"
+                      id="radioOption2"
+                      name="paymentMethod"
+                      value="Paypal"
+                    />
                     {/* <input /> */}
                     <img
                       className="img__input--paypal"
@@ -251,7 +291,12 @@ function FormShopping({ ...routeProps }) {
                 </div>
                 <div className="radio__input">
                   <label htmlFor="ApplePay">
-                    <Field type="radio" name="ApplePay" value="ApplePay" />
+                    <Field
+                      type="radio"
+                      id="radioOption3"
+                      name="paymentMethod"
+                      value="ApplePay"
+                    />
                     {/* <input /> */}
                     <img
                       className="img__input--applepay"
@@ -412,10 +457,10 @@ function FormShopping({ ...routeProps }) {
                   <InputShopping
                     type="text"
                     label="Card name:"
-                    id="cardName"
+                    id="cardHolderName"
                     value={formik.values.cardHolderName}
                     placeholder="Your fucking name bestio &#128539;"
-                    handleChange={formik.cardHolderName}
+                    handleChange={formik.handleChange}
                     handleBlur={formik.handleBlur}
                     hasErrorMessage={formik.touched.cardHolderName}
                     errorMessage={formik.errors.cardHolderName}
@@ -435,7 +480,7 @@ function FormShopping({ ...routeProps }) {
                     <InputShopping
                       type="text"
                       label="Card expiry date:"
-                      id="expiryYear"
+                      id="cardExpirationDate"
                       value={formik.values.cardExpirationDate}
                       placeholder="mm/yy"
                       handleChange={formik.handleChange}
@@ -446,7 +491,7 @@ function FormShopping({ ...routeProps }) {
                     <InputShopping
                       type="text"
                       label="cvc code:"
-                      id="cvc"
+                      id="cardCVVCode"
                       value={formik.values.cardCVVCode}
                       placeholder="XXX"
                       handleChange={formik.handleChange}
@@ -467,10 +512,15 @@ function FormShopping({ ...routeProps }) {
               </div>
               <div className="botton__texts--container">
                 <div>
-                  <input
+                  <Field
+                    id="consentCheckbox"
                     type="checkbox"
                     checked={checkedPoly}
                     onClick={handleCHeck}
+                    handleChange={formik.handleChange}
+                    handleBlur={formik.handleBlur}
+                    hasErrorMessage={formik.touched.consentCheckbox}
+                    errorMessage={formik.errors.consentCheckbox}
                   />
                   <p>
                     I have read and I accept the booking conditions, general

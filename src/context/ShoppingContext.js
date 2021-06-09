@@ -1,23 +1,27 @@
 import { createContext } from "react";
 
 const ShoppingContext = createContext({
-  details: {
+  personalDetails: {
     name: "",
     email: "",
+    phoneNumber: "",
   },
-  phoneNumber: "",
   submitStep1: () => {},
-  address: "",
-  city: "",
-  zipCode: "",
-  country: "",
+  shippingingDetails: {
+    address: "",
+    city: "",
+    zipCode: "",
+    country: "",
+  },
   submitStep2: () => {},
-  paymentMethod: "",
-  cardHolderName: "",
-  cardNumber: "",
-  cardExpirationDate: "",
-  cardCVVCode: "",
-  consentCheckbox: "",
+  paymentDetails: {
+    paymentMethod: "",
+    cardHolderName: "",
+    cardNumber: "",
+    cardExpirationDate: "",
+    cardCVVCode: "",
+    consentCheckbox: false,
+  },
   submitStep3: () => {},
 });
 

@@ -3,9 +3,24 @@ import React, { useReducer } from "react";
 import ShoppingContext from "../../context/ShoppingContext";
 
 const shoppingInitialState = {
-  details: {
+  personalDetails: {
     name: "",
     email: "",
+    phoneNumber: "",
+  },
+  shippingDetails: {
+    address: "",
+    city: "",
+    zipCode: "",
+    country: "",
+  },
+  paymentDetails: {
+    paymentMethod: "",
+    cardHolderName: "",
+    cardNumber: "",
+    cardExpirationDate: "",
+    cardCVVCode: "",
+    consentCheckbox: "",
   },
 };
 
@@ -14,7 +29,19 @@ function shoppingReducer(state, action) {
     case "submitStep1": {
       return {
         ...state,
-        details: action.newdetails,
+        personalDetails: action.newDetails,
+      };
+    }
+    case "submitStep2": {
+      return {
+        ...state,
+        shippingingDetails: action.newShipping,
+      };
+    }
+    case "submitStep3": {
+      return {
+        ...state,
+        paymentDetails: action.newPayment,
       };
     }
     default:
@@ -26,14 +53,25 @@ function shoppingReducer(state, action) {
 
 function ShoppingContextProvider({ children }) {
   const [state, dispatch] = useReducer(shoppingReducer, shoppingInitialState);
-  // Destructuring context
-  //   const [name, setName] = useState("");
-  //   const [email, setEmail] = useState("");
-  // const [phoneNumber, setPhoneNumber] = useState("");
+
   function submitStep1(valuesObject) {
     dispatch({
       type: "submitStep1",
-      newdetails: valuesObject,
+      newDetails: valuesObject,
+    });
+  }
+
+  function submitStep2(valuesObject) {
+    dispatch({
+      type: "submitStep2",
+      newShipping: valuesObject,
+    });
+  }
+
+  function submitStep3(valuesObject) {
+    dispatch({
+      type: "submitStep3",
+      newPayment: valuesObject,
     });
   }
 
@@ -51,23 +89,12 @@ function ShoppingContextProvider({ children }) {
   return (
     <ShoppingContext.Provider
       value={{
-        // name: state.name,
-        // email: state.email,
-        details: state.details,
-        phoneNumber: "",
+        personalDetails: state.personalDetails,
         submitStep1: submitStep1,
-        address: "",
-        city: "",
-        zipCode: "",
-        country: "",
-        submitStep2: () => {},
-        paymentMethod: "",
-        cardHolderName: "",
-        cardNumber: "",
-        cardExpirationDate: "",
-        cardCVVCode: "",
-        consentCheckbox: "",
-        submitStep3: () => {},
+        shippingingDetails: state.shippingDetails,
+        submitStep2: submitStep2,
+        paymentDetails: state.paymentDetails,
+        submitStep3: submitStep3,
       }}
     >
       {children}
