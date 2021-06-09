@@ -5,8 +5,11 @@ import { useFormik } from "formik";
 
 import FormContext from "../../../context/form-context";
 
-import Input from "../../../components/Input";
+// import Input from "../../../components/Input";
 import PaymentMethod from "../../../components/PaymentMethod";
+// import CardForm from "../../../components/PaymentForms/CardForm";
+import EmailForm from "../../../components/PaymentForms/EmailForm";
+
 import Button from "../../../components/Button";
 
 import { HOME_URL, PROFILE_URL } from "../../../utils/constants";
@@ -34,18 +37,21 @@ function CheckoutPayment() {
       cardDate: formData.cardDate,
       cardCVV: formData.cardCVV,
       cardTerms: formData.cardTerms,
+      payPal: {
+        payPalUser: "",
+        payPalPassword: "",
+      },
+      applePay: {
+        applePayUser: "",
+        applePayPassword: "",
+      },
     },
     validationSchema: formPayment,
     onSubmit: (values, { setSubmitting }) => {
       updateFormData(values);
       setSubmitting(true);
-      // eslint-disable-next-line no-console
-      console.log("Submitted");
-
       setTimeout(() => {
         setHasSubmitted(true);
-        // eslint-disable-next-line no-console
-        console.log("hasSubmitted");
       }, 500);
     },
   });
@@ -65,9 +71,27 @@ function CheckoutPayment() {
         <div className="step-bottom d-flex flex-column">
           <p>How would you like to pay?</p>
           <div className="payment-methods d-flex justify-content-between mb-4">
-            <PaymentMethod id="card-payment" text="Credit/Debit Card" />
-            <PaymentMethod id="paypal-payment" src={payPal} />
-            <PaymentMethod id="apple-pay-payment" src={applePay} />
+            <PaymentMethod
+              id="card-payment"
+              text="Credit/Debit Card"
+              value={formik.values.paymentMethod}
+              handleChange={formik.handleChange}
+              handleBlur={formik.handleBlur}
+            />
+            <PaymentMethod
+              id="paypal-payment"
+              src={payPal}
+              value={formik.values.paymentMethod}
+              handleChange={formik.handleChange}
+              handleBlur={formik.handleBlur}
+            />
+            <PaymentMethod
+              id="apple-pay-payment"
+              src={applePay}
+              value={formik.values.paymentMethod}
+              handleChange={formik.handleChange}
+              handleBlur={formik.handleBlur}
+            />
           </div>
           <div className="accepted-methods mb-4">
             <p>We accept the following credit/debit card</p>
@@ -86,58 +110,10 @@ function CheckoutPayment() {
             </div>
           </div>
           <div className="form-and-card d-flex mb-4">
-            <form
-              className="container-fluid d-flex flex-wrap px-0 mr-4"
-              onSubmit={formik.handleSubmit}
-              id="paymenyForm"
-            >
-              <Input
-                type="text"
-                label="Cardholder name"
-                id="cardName"
-                value={formik.values.cardName}
-                placeholder="Name"
-                handleChange={formik.handleChange}
-                handleBlur={formik.handleBlur}
-                hasErrorMessage={formik.touched.cardName}
-                errorMessage={formik.errors.cardName}
-              />
-              <Input
-                type="text"
-                label="Card number"
-                id="cardNumber"
-                value={formik.values.cardNumber}
-                placeholder="XXXX-XXXX-XXXX-XXXX"
-                handleChange={formik.handleChange}
-                handleBlur={formik.handleBlur}
-                hasErrorMessage={formik.touched.cardNumber}
-                errorMessage={formik.errors.cardNumber}
-              />
-              <Input
-                shortInput
-                type="text"
-                label="Exp. date"
-                id="cardDate"
-                value={formik.values.cardDate}
-                placeholder="MM/YY"
-                handleChange={formik.handleChange}
-                handleBlur={formik.handleBlur}
-                hasErrorMessage={formik.touched.cardDate}
-                errorMessage={formik.errors.cardDate}
-              />
-              <Input
-                shortInput
-                type="text"
-                label="CVV"
-                id="cardCVV"
-                value={formik.values.cardCVV}
-                placeholder="XXX"
-                handleChange={formik.handleChange}
-                handleBlur={formik.handleBlur}
-                hasErrorMessage={formik.touched.cardCVV}
-                errorMessage={formik.errors.cardCVV}
-              />
-            </form>
+            {/* <CardForm formik={formik} /> */}
+            <EmailForm formik={formik} isPaypal />
+            <EmailForm formik={formik} />
+            {/* <EmailForm formik={formik} /> */}
             <div className="card-illustration" />
           </div>
           <div className="card-terms">
@@ -161,7 +137,7 @@ function CheckoutPayment() {
         </Link>
         <Button
           submitButton
-          form="paymenyForm"
+          form="paymentForm"
           disabled={formik.isValidating || !formik.isValid}
         >
           {formik.isSubmitting ? "Going to summary..." : "Summary"}
