@@ -87,7 +87,6 @@ function Address() {
             hasErrorMessage={formik.touched.country}
             errorMessage={formik.errors.country}
           />
-
           <div className="row">
             <div className="col col-12 mt-4 d-flex justify-content-center">
               <ButtonLink page={DETAIL}>Go back</ButtonLink>
