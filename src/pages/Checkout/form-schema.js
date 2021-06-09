@@ -34,13 +34,16 @@ export const cardPayment = Yup.object().shape({
     .required("Card expiration date is required"),
   cardCVV: Yup.string()
     .typeError("Not a valid CVV. Example: XXX")
-    .length(3, "Not a valid CVV. Example: XXX"),
+    .length(3, "Not a valid CVV. Example: XXX")
+    .required("CVV code is required"),
+  cardTerms: Yup.bool().oneOf([true]),
 });
 
 export const payPalPayment = Yup.object().shape({
   payPalUser: Yup.string()
     .min(2, "The name is too short!")
     .max(30, "The name is too long!")
+    .email("Invalid email")
     .required("The name is required"),
   payPalPassword: Yup.string()
     .min(2, "The password is too short!")
@@ -51,7 +54,8 @@ export const applePayment = Yup.object().shape({
   applePayUser: Yup.string()
     .min(2, "The name is too short!")
     .max(30, "The name is too long!")
-    .required("The name is required"),
+    .required("The name is required")
+    .email("Invalid email"),
   applePayPassword: Yup.string()
     .min(2, "The password is too short!")
     .required("The password is required"),
