@@ -95,9 +95,13 @@ function App() {
   const [cartItems, setCartItems] = useState(() =>
     loadLocalStorageItems(CART_ITEMS_LOCAL_STORAGE_KEY, []),
   );
+  // const [checkoutData, setCheckoutData] = useState(() =>
+  //   loadLocalStorageItems(CHECKOUT_DATA_LOCAL_STORAGE_KEY, []),
+  // );
 
   useLocalStorage(products, PRODUCTS_LOCAL_STORAGE_KEY);
   useLocalStorage(cartItems, CART_ITEMS_LOCAL_STORAGE_KEY);
+  // useLocalStorage(checkoutData, CHECKOUT_DATA_LOCAL_STORAGE_KEY);
 
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);

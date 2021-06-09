@@ -94,25 +94,25 @@ function OrderSummary({ cartItems }) {
                     <p className="col col-10 text-uppercase">{item.title}</p>
                   </div>
                 </div>
-                <div className="col col-1">
-                  <p className="text-end">{item.price}</p>
+                <div className="col col-1 d-flex justify-content-end">
+                  <p>{item.price}</p>
                 </div>
-                <div className="col col-1">
+                <div className="col col-1 d-flex justify-content-center">
                   <p>{item.quantity}</p>
                 </div>
-                <div className="col col-1">
+                <div className="col col-1 d-flex justify-content-end">
                   <p>{itemCalc(item.quantity, item.price)}</p>
                 </div>
               </div>
             ))}
             <div className="row">
               <div className="col col-10" />
-              <div className="col col-1">
+              <div className="col col-1 d-flex justify-content-center">
                 <p>
                   <strong>Total:</strong>
                 </p>
               </div>
-              <div className="col col-1">
+              <div className="col col-1 d-flex justify-content-end">
                 <p>
                   <strong>{totalCalc()}</strong>
                 </p>
