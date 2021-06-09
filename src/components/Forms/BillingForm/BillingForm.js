@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { useFormik } from "formik";
 import formHeader from "../../../hoc/formHeader";
 
@@ -12,15 +12,15 @@ import { StateContext } from "../../../context/state-context";
 
 function BillingForm() {
   const value = useContext(StateContext);
-  const { dispatch } = value;
+  const { dispatch, billing } = value;
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
   const formik = useFormik({
     initialValues: {
-      clientAdress: "",
-      clientCity: "",
-      clientZip: "",
-      clientCountry: "",
+      clientAdress: billing.address,
+      clientCity: billing.city,
+      clientZip: billing.postCode,
+      clientCountry: billing.country,
     },
     validationSchema: billingSchema,
     onSubmit: () => {
@@ -85,13 +85,17 @@ function BillingForm() {
           hasErrorMessage={formik.touched.clientCountry}
           errorMessage={formik.errors.clientCountry}
         />
-        <Button
-          submitButton
-          block
-          disabled={formik.isValidating || !formik.isValid}
-        >
-          {formik.isSubmitting ? "Submitting..." : "Go to Payment"}
-        </Button>
+        <div className="d-flex justify-content-between">
+          <Link className="btn btn-primary px-5" to="/checkout/step-1">
+            Back to account
+          </Link>
+          <Button
+            submitButton
+            disabled={formik.isValidating || !formik.isValid}
+          >
+            {formik.isSubmitting ? "Submitting..." : "Go to Payment"}
+          </Button>
+        </div>
       </form>
       {hasSubmitted && <Redirect to="/checkout/step-3" />}
     </>

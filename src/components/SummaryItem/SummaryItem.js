@@ -3,8 +3,9 @@ import React from "react";
 import "./ShoppingCartItem.scss";
 
 function SummaryItem({ img, title, price, quantity }) {
+  const isCompleted = true;
   return (
-    <div className="col">
+    <div className={isCompleted ? "col col-6" : "col"}>
       <div className="row flex-column">
         <div className="col">
           <div className="row">

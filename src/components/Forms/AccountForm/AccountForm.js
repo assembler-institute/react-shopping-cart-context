@@ -12,14 +12,14 @@ import accountSchema from "./account-form-schema";
 
 function AccountForm() {
   const value = useContext(StateContext);
-  const { dispatch } = value;
+  const { dispatch, account } = value;
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
   const formik = useFormik({
     initialValues: {
-      clientName: "",
-      clientEmail: "",
-      clientPhone: "",
+      clientName: account.userName,
+      clientEmail: account.emailAdress,
+      clientPhone: account.phoneNumber,
     },
     validationSchema: accountSchema,
     onSubmit: () => {
@@ -74,7 +74,7 @@ function AccountForm() {
           errorMessage={formik.errors.clientPhone}
         />
         <div className="d-flex justify-content-between">
-          <Link className="btn btn-primary px-5" disabled="disabled" to="/">
+          <Link className="btn btn-primary px-5" to="/">
             Back Home
           </Link>
           <Button
