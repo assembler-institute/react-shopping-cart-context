@@ -66,7 +66,7 @@ function PersonalDetailsForm() {
         />
         <Select2Shopping
           type="text"
-          label=""
+          label="Phone number:"
           id="phoneNumber"
           value={formik.values.phoneNumber}
           placeholder="phone number..."

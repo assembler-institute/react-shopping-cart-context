@@ -43,7 +43,6 @@ function ShippingDetailsForm() {
       <hr />
       <form onSubmit={formik.handleSubmit}>
         <InputShopping
-          className=""
           type="text"
           label="Address:"
           id="address"
@@ -55,7 +54,6 @@ function ShippingDetailsForm() {
           errorMessage={formik.errors.address}
         />
         <InputShopping
-          className="inputMediun"
           type="text"
           label="City: "
           id="city"
@@ -67,7 +65,6 @@ function ShippingDetailsForm() {
           errorMessage={formik.errors.city}
         />
         <InputShopping
-          className="inputMediun"
           type="text"
           label="Code post: "
           id="zipCode"

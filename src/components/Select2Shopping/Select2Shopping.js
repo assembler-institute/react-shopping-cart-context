@@ -4,7 +4,7 @@ import "./Select2Shopping.scss";
 
 function Select2Shopping({
   type,
-  // label = "input-01",
+  label,
   id,
   value,
   placeholder,
@@ -16,11 +16,16 @@ function Select2Shopping({
 }) {
   return (
     <div className="formulario">
-      <select className="selectTel">
-        <option>ES +34</option>
-        <option>PO +34</option>
-        <option>FA +34</option>
-        <option>IT +34</option>
+      <select
+        className="selectTel"
+        id="countryPrefix"
+        name="countryPrefix"
+        // onChange={handleChange}
+      >
+        <option value="+34">ES +34</option>
+        <option value="+4">PO +34</option>
+        <option value="+3">FA +34</option>
+        <option value="+10">IT +34</option>
       </select>
       <input
         className={
@@ -29,6 +34,7 @@ function Select2Shopping({
             : "form-control prueba"
         }
         id={id}
+        label={label}
         name={id}
         type={type}
         placeholder={placeholder}
