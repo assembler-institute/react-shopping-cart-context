@@ -5,9 +5,10 @@ const ShoppingContext = createContext({
     name: "",
     email: "",
     phoneNumber: "",
+    countryPrefix: "",
   },
   submitStep1: () => {},
-  shippingingDetails: {
+  shippingDetails: {
     address: "",
     city: "",
     zipCode: "",

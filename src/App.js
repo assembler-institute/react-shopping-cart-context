@@ -210,34 +210,19 @@ function App() {
           <Route
             path="/checkout/step-1"
             render={(routeProps) => (
-              <Step1
-                {...routeProps}
-                cartItems={cartItems}
-                handleRemove={handleRemove}
-                handleChange={handleChange}
-              />
+              <Step1 {...routeProps} cartItems={cartItems} />
             )}
           />
           <Route
             path="/checkout/step-2"
             render={(routeProps) => (
-              <Step2
-                {...routeProps}
-                cartItems={cartItems}
-                handleRemove={handleRemove}
-                handleChange={handleChange}
-              />
+              <Step2 {...routeProps} cartItems={cartItems} />
             )}
           />
           <Route
             path="/checkout/step-3"
             render={(routeProps) => (
-              <Step3
-                {...routeProps}
-                cartItems={cartItems}
-                handleRemove={handleRemove}
-                handleChange={handleChange}
-              />
+              <Step3 {...routeProps} cartItems={cartItems} />
             )}
           />
           <Route

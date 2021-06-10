@@ -7,6 +7,7 @@ const shoppingInitialState = {
     name: "",
     email: "",
     phoneNumber: "",
+    countryPrefix: "",
   },
   shippingDetails: {
     address: "",
@@ -35,7 +36,7 @@ function shoppingReducer(state, action) {
     case "submitStep2": {
       return {
         ...state,
-        shippingingDetails: action.newShipping,
+        shippingDetails: action.newShipping,
       };
     }
     case "submitStep3": {
@@ -91,7 +92,7 @@ function ShoppingContextProvider({ children }) {
       value={{
         personalDetails: state.personalDetails,
         submitStep1: submitStep1,
-        shippingingDetails: state.shippingDetails,
+        shippingDetails: state.shippingDetails,
         submitStep2: submitStep2,
         paymentDetails: state.paymentDetails,
         submitStep3: submitStep3,

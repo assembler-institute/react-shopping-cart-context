@@ -5,14 +5,16 @@ import "./Step1.scss";
 import ShoppingLayout from "../../hoc/ShoppingLayout";
 import ProgressBar from "../../components/ProgressBar";
 import OrderSummary from "../../components/OrderSummary";
-import FormShopping from "../../components/FormShopping";
+// import FormShopping from "../../components/FormShopping";
 
-function Step3({ cartItems, handleRemove, handleChange, ...routeProps }) {
+import PaymentDetailsForm from "../../components/Forms/PaymentDetailsForm";
+
+function Step3({ cartItems, ...routeProps }) {
   return (
     <div className="step1__main--container">
       <div className="step1__main--container--form">
         <ProgressBar {...routeProps} />
-        <FormShopping {...routeProps} />
+        <PaymentDetailsForm />
       </div>
       <div className="col">
         <OrderSummary cartItems={cartItems} />
