@@ -1,19 +1,15 @@
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
+import "../../components/OrderCart/OrderCart.scss";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import personalSchema from "./personal-schema";
-import ShoppingCartItem from "../../components/ShoppingCartItem";
+// import ShoppingCartItem from "../../components/ShoppingCartItem";
+import OrderCart from "../../components/OrderCart";
 
-function PersonalDetails({ cartItems, ...props }) {
+function PersonalDetails({ cartItems }) {
   const [hasSubmitted] = useState(false);
-
-  function getCartTotal(cart) {
-    return cart.reduce((accum, item) => {
-      return accum + item.price * item.quantity;
-    }, 0);
-  }
 
   const formik = useFormik({
     initialValues: {
@@ -62,37 +58,19 @@ function PersonalDetails({ cartItems, ...props }) {
           hasErrorMessage={formik.touched.phoneNumber}
           errorMessage={formik.errors.phoneNumber}
         />
-        <Link to="/billing-address-page">
-          <Button
-            submitButton
-            block
-            disabled={formik.isValidating || !formik.isValid}
-          >
+
+        <Button
+          submitButton
+          block
+          disabled={formik.isValidating || !formik.isValid}
+        >
+          <Link to="/billing-address-page">
             {formik.isSubmitting ? "Submitting..." : "Submit"}
-          </Button>
-        </Link>
+          </Link>
+        </Button>
       </form>
-      <div className="col-6" {...props}>
-        {cartItems.length > 0 ? (
-          cartItems.map((item) => (
-            <ShoppingCartItem
-              key={item.id}
-              id={item.id}
-              title={item.title}
-              price={item.price}
-              img={item.img}
-              quantity={item.quantity}
-              unitsInStock={item.unitsInStock}
-            />
-          ))
-        ) : (
-          <div className="col mb-4">
-            <h4>Your cart is empty</h4>
-          </div>
-        )}
-        <h4>
-          <strong>{getCartTotal(cartItems)}€</strong>
-        </h4>
+      <div className="col">
+        <OrderCart cartItems={cartItems} />
       </div>
       {hasSubmitted && <Link to="/" />}
     </div>
