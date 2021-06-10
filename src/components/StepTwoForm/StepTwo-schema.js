@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 
-const stepOneSchema = Yup.object().shape({
+const stepTwoSchema = Yup.object().shape({
   address: Yup.string()
     .min(3, "Please insert a valid address")
     .required("Remember to add your complete address"),
@@ -15,4 +15,4 @@ const stepOneSchema = Yup.object().shape({
     .required("Your zip code is required"),
 });
 
-export default stepOneSchema;
+export default stepTwoSchema;
