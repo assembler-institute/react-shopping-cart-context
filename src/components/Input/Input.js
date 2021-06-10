@@ -29,15 +29,14 @@ function Input({
         type === "checkbox" ? "custom-control custom-switch" : "form-group"
       }
     >
-      {type !== "checkbox" ||
-        (type !== "radio" && (
-          <label
-            htmlFor={id}
-            className={type === "checkbox" ? "custom-control-label" : ""}
-          >
-            {label}
-          </label>
-        ))}
+      {(type !== "checkbox" || type !== "radio") && (
+        <label
+          htmlFor={id}
+          className={type === "checkbox" ? "custom-control-label" : "mt-3 mb-2"}
+        >
+          {label}
+        </label>
+      )}
       <input
         // className={
         //   hasErrorMessage && errorMessage

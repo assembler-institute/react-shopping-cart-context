@@ -24,7 +24,7 @@ function PaymentDetails() {
     initialValues: {
       paymentMethod: state.paymentMethod,
       cardName: state.cardName,
-      cardNumber: state.cardNumber,
+      cardNumber: state.tempData.protectedCardNumber,
       cardExpiryDate: state.cardExpiryDate,
       cvc: state.cvc,
       termsConditions: state.termsConditions,
