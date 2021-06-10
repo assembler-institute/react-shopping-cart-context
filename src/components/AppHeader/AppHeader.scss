@@ -8,6 +8,13 @@
   }
 
   .right-nav {
+    display: flex;
+    align-items: center;
+    .login-name {
+      color: blue;
+      margin-bottom: 0;
+      margin-right: 20px;
+    }
     button {
       min-width: 80px;
       text-align: center;
