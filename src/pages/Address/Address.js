@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
+import "../../components/OrderCart/OrderCart.scss";
 import AddressSchema from "./Address-schema";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
+import OrderCart from "../../components/OrderCart";
 
-function Address() {
+function Address({ cartItems }) {
   const [hasSubmitted] = useState(false);
 
   const formik = useFormik({
@@ -81,7 +83,9 @@ function Address() {
               </div>
             </div>
           </form>
-
+          <div className="col">
+            <OrderCart cartItems={cartItems} />
+          </div>
           {hasSubmitted && <Link to="/" />}
         </div>
       </div>

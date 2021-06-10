@@ -191,7 +191,7 @@ function App() {
           <PersonalDetails cartItems={cartItems} />
         </Route>
         <Route path="/billing-address-page">
-          <Address />
+          <Address cartItems={cartItems} />
         </Route>
         <Route path="/" exact>
           <Home

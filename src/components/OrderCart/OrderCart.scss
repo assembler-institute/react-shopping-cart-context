@@ -1,0 +1,40 @@
+.cartItemsContainer {
+    max-height: 70vh;
+    overflow-y: scroll;
+}
+
+.gift {
+    &__CardContainer {
+        margin: 0 auto;
+    }
+
+    &__Form {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    &__mockInput {
+        width: 75%;
+        // margin-right: 5px;
+        background-color: rgb(235, 235, 235);
+    }
+
+    // &__Btn {
+    //   margin-right: ;
+    // }
+}
+
+.cartItemsContainer::-webkit-scrollbar {
+    background-color: rgb(209, 209, 209);
+    width: 10px;
+}
+
+.cartItemsContainer::-webkit-scrollbar-thumb {
+    background-color: rgb(117, 117, 117);
+    border-radius: 2px;
+}
+
+.price__total {
+    padding-right: 5%;
+    font-size: 2.3em;
+}

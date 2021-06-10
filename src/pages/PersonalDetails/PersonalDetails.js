@@ -1,19 +1,16 @@
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
+import "../../components/OrderCart/OrderCart.scss";
+import "../layouts.scss";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import personalSchema from "./personal-schema";
-import ShoppingCartItem from "../../components/ShoppingCartItem";
+// import ShoppingCartItem from "../../components/ShoppingCartItem";
+import OrderCart from "../../components/OrderCart";
 
-function PersonalDetails({ cartItems, ...props }) {
+function PersonalDetails({ cartItems }) {
   const [hasSubmitted] = useState(false);
-
-  function getCartTotal(cart) {
-    return cart.reduce((accum, item) => {
-      return accum + item.price * item.quantity;
-    }, 0);
-  }
 
   const formik = useFormik({
     initialValues: {
@@ -25,78 +22,66 @@ function PersonalDetails({ cartItems, ...props }) {
   });
 
   return (
-    <div className="row">
-      <form onSubmit={formik.handleSubmit} className="col-6">
-        <Input
-          type="text"
-          label="Your name"
-          id="name"
-          value={formik.values.name}
-          placeholder="Your Name"
-          handleChange={formik.handleChange}
-          handleBlur={formik.handleBlur}
-          hasErrorMessage={formik.touched.name}
-          errorMessage={formik.errors.name}
-        />
-
-        <Input
-          type="email"
-          label="Email Address"
-          id="email"
-          value={formik.values.email}
-          placeholder="Your Email Address"
-          handleChange={formik.handleChange}
-          handleBlur={formik.handleBlur}
-          hasErrorMessage={formik.touched.email}
-          errorMessage={formik.errors.email}
-        />
-
-        <Input
-          type="number"
-          label="Mobile Phone Number"
-          id="phoneNumber"
-          value={formik.values.phoneNumber}
-          placeholder="Your Mobile Phone Number"
-          handleChange={formik.handleChange}
-          handleBlur={formik.handleBlur}
-          hasErrorMessage={formik.touched.phoneNumber}
-          errorMessage={formik.errors.phoneNumber}
-        />
-        <Link to="/billing-address-page">
-          <Button
-            submitButton
-            block
-            disabled={formik.isValidating || !formik.isValid}
-          >
-            {formik.isSubmitting ? "Submitting..." : "Submit"}
-          </Button>
-        </Link>
-      </form>
-
-      <div className="col-6" {...props}>
-        {cartItems.length > 0 ? (
-          cartItems.map((item) => (
-            <ShoppingCartItem
-              key={item.id}
-              id={item.id}
-              title={item.title}
-              price={item.price}
-              img={item.img}
-              quantity={item.quantity}
-              unitsInStock={item.unitsInStock}
-            />
-          ))
-        ) : (
-          <div className="col mb-4">
-            <h4>Your cart is empty</h4>
+    <section className="form__container">
+      <div className="step__main--container">
+        <div className="step__main--container--form">
+          <div className="headerPage">
+            <h3>Personal Details</h3>
           </div>
-        )}
-        <h4>
-          <strong>{getCartTotal(cartItems)}€</strong>
-        </h4>
+          <form onSubmit={formik.handleSubmit} className="col-6">
+            <Input
+              type="text"
+              label="Your name"
+              id="name"
+              value={formik.values.name}
+              placeholder="Your Name"
+              handleChange={formik.handleChange}
+              handleBlur={formik.handleBlur}
+              hasErrorMessage={formik.touched.name}
+              errorMessage={formik.errors.name}
+            />
+
+            <Input
+              type="email"
+              label="Email Address"
+              id="email"
+              value={formik.values.email}
+              placeholder="Your Email Address"
+              handleChange={formik.handleChange}
+              handleBlur={formik.handleBlur}
+              hasErrorMessage={formik.touched.email}
+              errorMessage={formik.errors.email}
+            />
+
+            <Input
+              type="number"
+              label="Mobile Phone Number"
+              id="phoneNumber"
+              value={formik.values.phoneNumber}
+              placeholder="Your Mobile Phone Number"
+              handleChange={formik.handleChange}
+              handleBlur={formik.handleBlur}
+              hasErrorMessage={formik.touched.phoneNumber}
+              errorMessage={formik.errors.phoneNumber}
+            />
+
+            <Button
+              submitButton
+              block
+              disabled={formik.isValidating || !formik.isValid}
+            >
+              <Link to="/billing-address-page">
+                {formik.isSubmitting ? "Submitting..." : "Submit"}
+              </Link>
+            </Button>
+          </form>
+        </div>
+        <div className="col">
+          <OrderCart cartItems={cartItems} />
+        </div>
+        {hasSubmitted && <Link to="/" />}
       </div>
-      {hasSubmitted && <Link to="/" />}
-    </div>
+    </section>
   );
 }
 export default PersonalDetails;
