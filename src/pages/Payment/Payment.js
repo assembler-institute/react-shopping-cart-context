@@ -34,11 +34,6 @@ function Payment({ cartItems, handleChange, handleRemove }) {
                 <Button>Back</Button>
               </Link>
             </div>
-            <div className="col">
-              <Link to="/checkout/order-summary">
-                <Button>Confrim</Button>
-              </Link>
-            </div>
           </header>
         </div>
       </div>
