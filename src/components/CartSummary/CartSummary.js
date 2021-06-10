@@ -17,7 +17,7 @@ function CartSummary() {
     <aside>
       <div className="row flex-column">
         <div className="col shopping__cart__header">
-          <h2 className="h3 mt-2">Shopping Cart</h2>
+          <h4 className="mt-2 ml-2">Your Cart</h4>
           <hr className="mb-3" />
         </div>
 
