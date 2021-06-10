@@ -5,6 +5,7 @@ import formHeader from "../../../hoc/formHeader";
 
 import Input from "../../Input";
 import Button from "../../Button";
+import Card from "../../Card";
 
 import paymentSchema from "./payment-schema";
 import { ACTIONS } from "../../../context/state-reducer";
@@ -169,7 +170,9 @@ function PaymentForm() {
               <img alt="" />
             </div>
           </div>
-          <div className="w-50 bg-warning">Aquí va la tarjeta</div>
+          <div className="w-50 bg-warning">Aquí va la tarjetAAAa</div>
+          <Card />
+          {/* NEW HERE */}
         </div>
         <Input
           type="checkbox"
