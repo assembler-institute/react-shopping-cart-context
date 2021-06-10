@@ -7,10 +7,10 @@ function SummaryItem({ img, title, price, quantity }) {
   const value = useContext(StateContext);
   const { currentStep } = value;
   return (
-    <div className={currentStep === 4 ? "col col-4" : "col"}>
+    <div className={currentStep === 4 ? "col col-5 pl-0 mb-3" : "col"}>
       <div className="row flex-column">
-        <div className="col">
-          <div className="row">
+        <div className={currentStep === 4 ? "col p-0" : "col"}>
+          <div className={currentStep === 4 ? "d-flex" : "row"}>
             <div className="col-12 col-xl-4 mb-3 mb-xl-0">
               <img className="ShoppingCartItem__img" src={img} alt="" />
             </div>
@@ -26,17 +26,19 @@ function SummaryItem({ img, title, price, quantity }) {
                     <strong>{price}€</strong>
                   </p>
                 </div>
-                <div className="col d-flex flex-row justify-content-between bg-light m-auto">
-                  <div>quantity:</div>
+                <div className="col d-flex flex-row m-auto">
+                  <div className="mr-3">quantity:</div>
                   <div className="">{quantity}</div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="col">
-          <hr />
-        </div>
+        {currentStep < 4 && (
+          <div className="col">
+            <hr />
+          </div>
+        )}
       </div>
     </div>
   );
