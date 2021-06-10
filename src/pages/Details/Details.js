@@ -9,11 +9,15 @@ import Button from "../../components/Button";
 import ShoppingContext from "../../context";
 import Checkout from "../../hoc/withCheckout";
 import detailsSchema from "./details-schema";
+// import loadLocalStorageItems from "../../utils/loadLocalStorageItems";
 
 function Details() {
-  const { cartItems, nextProgress, updateDetails } = useContext(
-    ShoppingContext,
-  );
+  const {
+    cartItems,
+    nextProgress,
+    updateDetails,
+    setLocatStorage,
+  } = useContext(ShoppingContext);
   const [redirect, setRedirect] = useState(false);
 
   if (redirect) {
@@ -36,8 +40,9 @@ function Details() {
         validationSchema={detailsSchema}
         onSubmit={(values) => {
           updateDetails(values);
-          setRedirect(true);
           nextProgress();
+          setRedirect(true);
+          setLocatStorage();
         }}
       >
         {({

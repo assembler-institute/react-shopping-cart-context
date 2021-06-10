@@ -10,7 +10,7 @@ import ShoppingContext from "../../context";
 import "./paymentStyles.scss";
 
 function Payment() {
-  const { updatePayment } = useContext(ShoppingContext);
+  const { updatePayment, setLocatStorage } = useContext(ShoppingContext);
   const [redirect, setRedirect] = useState(false);
 
   const [state, setClass] = useState(false);
@@ -57,7 +57,9 @@ function Payment() {
         validationSchema={paymentSchema}
         onSubmit={(values) => {
           updatePayment(values);
+
           setRedirect(true);
+          setLocatStorage();
         }}
       >
         {({

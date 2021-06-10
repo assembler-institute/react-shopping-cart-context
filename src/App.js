@@ -33,6 +33,8 @@ function buildNewCartItem(cartItem) {
 
 const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
 const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
+const SET_LOCALSTORAGE = "SET_LOCALSTORAGE";
+
 const PROGRES = "PROGRES";
 const UPDATEDETAILS = "UPDATEDETAILS";
 const UPDATEADRESS = "UPDATEADRESS";
@@ -63,6 +65,12 @@ function reducer(state, action) {
       return {
         ...state,
         paymentData: action.newPayment,
+      };
+    }
+    case SET_LOCALSTORAGE: {
+      return {
+        progresBar: state.progresBar,
+        ...loadLocalStorageItems("context", state),
       };
     }
 
@@ -106,6 +114,11 @@ function App() {
         });
     }
   }, []);
+  useEffect(() => {
+    localStorage.setItem("context", JSON.stringify(state));
+
+    console.log(state);
+  }, [state]);
 
   function handleAddToCart(productId) {
     const prevCartItem = cartItems.find((item) => item.id === productId);
@@ -246,6 +259,9 @@ function App() {
       newPayment: newPayment,
     });
   }
+  function setLocatStorage() {
+    dispatch({ type: SET_LOCALSTORAGE });
+  }
   return (
     <ShoppingContext.Provider
       value={{
@@ -260,6 +276,7 @@ function App() {
         updatePayment: updatePayment,
         handleChange: handleChange,
         handleRemove: handleRemove,
+        setLocatStorage: setLocatStorage,
       }}
     >
       <BrowserRouter>

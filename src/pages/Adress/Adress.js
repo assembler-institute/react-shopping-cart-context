@@ -9,7 +9,9 @@ import Button from "../../components/Button";
 import ShoppingContext from "../../context";
 
 function Adress() {
-  const { updateAdress, nextProgress } = useContext(ShoppingContext);
+  const { updateAdress, nextProgress, setLocatStorage } = useContext(
+    ShoppingContext,
+  );
   const [redirect, setRedirect] = useState(false);
   if (redirect) {
     return <Redirect to="/Checkout/step-3" />;
@@ -31,6 +33,7 @@ function Adress() {
           updateAdress(values);
           setRedirect(true);
           nextProgress();
+          setLocatStorage();
         }}
       >
         {({

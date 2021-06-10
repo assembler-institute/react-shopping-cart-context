@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 // import { NavLink } from "react-router-dom";
 import ShoppingContext from "../../context";
 
@@ -6,6 +6,9 @@ import "./CheckoutHeader.scss";
 
 function CheckoutHeader() {
   const { progresBar } = useContext(ShoppingContext);
+  useEffect(() => {
+    console.log(progresBar);
+  }, [progresBar]);
   let progresBarClass = "";
   const Sphere1 = "Sphere1";
   let Sphere2 = "Sphere2";
