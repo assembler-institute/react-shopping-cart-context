@@ -1,5 +1,8 @@
+import classNames from "classnames";
 import React from "react";
 import Select from "../Select";
+
+import "./Input.scss";
 
 function Input({
   withSelect,
@@ -14,38 +17,106 @@ function Input({
   hasErrorMessage,
   ...props
 }) {
+  let messageFail;
+  if (withSelect) {
+    if (
+      hasErrorMessage &&
+      errorMessage &&
+      withSelect.hasErrorMessage &&
+      withSelect.errorMessage
+    ) {
+      messageFail = `${withSelect.errorMessage} | ${errorMessage}`;
+    } else if (hasErrorMessage && errorMessage) {
+      messageFail = errorMessage;
+    } else if (withSelect.hasErrorMessage && withSelect.errorMessage) {
+      messageFail = withSelect.errorMessage;
+    }
+  }
   return (
-    <div className="form-group">
-      <label htmlFor={id}>{label}</label>
-      {withSelect && (
-        <Select
-          id={withSelect.id}
-          value={withSelect.value}
-          options={withSelect.options}
-          placeholder={withSelect.placeholder}
-          handleChange={withSelect.handleChange}
-          handleBlur={withSelect.handleBlur}
-          hasErrorMessage={withSelect.hasErrorMessage}
-          errorMessage={withSelect.errorMessage}
-        />
+    <div className="mt-3">
+      {!withSelect && (
+        <>
+          <label htmlFor={id}>{label}</label>
+          <div
+            className={classNames("flex-prop", "input-wrapper", {
+              "input-fail": hasErrorMessage && errorMessage,
+              "input-success": hasErrorMessage && !errorMessage,
+            })}
+          >
+            <input
+              className="form-input mr-2"
+              id={id}
+              name={id}
+              type={type}
+              placeholder={placeholder}
+              value={value}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              {...props}
+            />
+            {hasErrorMessage && errorMessage && (
+              <i className="uit uit-times-circle custom-icon-fail" />
+            )}
+            {hasErrorMessage && !errorMessage && (
+              <i className="uit uit-check-circle custom-icon-success" />
+            )}
+          </div>
+          {hasErrorMessage && errorMessage && (
+            <p className="form-feedback">{errorMessage}</p>
+          )}
+        </>
       )}
-      <input
-        className={
-          hasErrorMessage && errorMessage
-            ? "form-control is-invalid"
-            : "form-control"
-        }
-        id={id}
-        name={id}
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        {...props}
-      />
-      {hasErrorMessage && errorMessage && (
-        <p className="invalid-feedback">{errorMessage}</p>
+      {withSelect && (
+        <>
+          <label htmlFor={id}>{label}</label>
+          <div
+            className={classNames("flex-prop", "input-wrapper", {
+              "input-fail":
+                (hasErrorMessage && errorMessage) ||
+                (withSelect.hasErrorMessage && withSelect.errorMessage),
+              "input-success":
+                hasErrorMessage &&
+                !errorMessage &&
+                withSelect.hasErrorMessage &&
+                !withSelect.errorMessage,
+            })}
+          >
+            <Select
+              isChild
+              id={withSelect.id}
+              value={withSelect.value}
+              options={withSelect.options}
+              placeholder={withSelect.placeholder}
+              handleChange={withSelect.handleChange}
+              handleBlur={withSelect.handleBlur}
+              hasErrorMessage={withSelect.hasErrorMessage}
+              errorMessage={withSelect.errorMessage}
+            />
+            <span className="separator mr-3" />
+            <input
+              className="form-input mr-2"
+              id={id}
+              name={id}
+              type={type}
+              placeholder={placeholder}
+              value={value}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              {...props}
+            />
+            {((hasErrorMessage && errorMessage) ||
+              (withSelect.hasErrorMessage && withSelect.errorMessage)) && (
+              <i className="uit uit-times-circle custom-icon-fail" />
+            )}
+            {hasErrorMessage &&
+              !errorMessage &&
+              withSelect.hasErrorMessage &&
+              !withSelect.errorMessage && (
+                <i className="uit uit-check-circle custom-icon-success" />
+              )}
+          </div>
+          {messageFail && <p className="form-feedback">{messageFail}</p>}
+        </>
       )}
     </div>
   );

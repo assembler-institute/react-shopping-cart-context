@@ -85,7 +85,7 @@ function CheckoutProfile({ setProcessCompletedFlags }) {
             id: "phonePrefix",
             options: phonePrefixOptions,
             value: formik.values.phonePrefix,
-            placeholder: "Prefix...",
+            placeholder: "Prefix",
             handleChange: formik.handleChange,
             handleBlur: formik.handleBlur,
             hasErrorMessage: formik.touched.phonePrefix,
