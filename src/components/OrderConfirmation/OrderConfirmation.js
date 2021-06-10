@@ -1,8 +1,10 @@
 import React, { useContext } from "react";
 import "./OrderConfirmation.scss";
 import UserContext from "../../context/userContext";
+// import PaymentContext from "../../context/paymentContext";
 
 function OrderConfirmation() {
+  // const paymentInfo = useContext(PaymentContext);
   const user = useContext(UserContext);
   // eslint-disable-next-line no-console
   console.log(user);

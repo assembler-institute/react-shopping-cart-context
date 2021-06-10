@@ -8,3 +8,4 @@ export { default as VisaCardIcon } from "./VisaCardIcon";
 export { default as MasterCardIcon } from "./MasterCardIcon";
 export { default as AmexCardIcon } from "./AmexCardIcon";
 export { default as CardImage } from "./CardImage";
+export { default as CheckedIcon } from "./CheckedIcon";
