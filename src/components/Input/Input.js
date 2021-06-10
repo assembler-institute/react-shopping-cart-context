@@ -1,6 +1,8 @@
 import React from "react";
 import Select from "../Select";
 
+const classNames = require("classnames");
+
 function Input({
   withSelect,
   type = "text",
@@ -10,12 +12,24 @@ function Input({
   placeholder = "",
   handleChange = () => {},
   handleBlur = () => {},
+  handleFocus = () => {},
   errorMessage,
   hasErrorMessage,
+  shortInput = false,
   ...props
 }) {
+  const formItemClasses = classNames({
+    "form-group": true,
+    "short-input": shortInput,
+  });
+
+  const inputClasses = classNames({
+    "form-control": true,
+    "form-control is-invalid": hasErrorMessage && errorMessage,
+  });
+
   return (
-    <div className="form-group">
+    <div className={formItemClasses}>
       <label htmlFor={id}>{label}</label>
       {withSelect && (
         <Select
@@ -30,11 +44,7 @@ function Input({
         />
       )}
       <input
-        className={
-          hasErrorMessage && errorMessage
-            ? "form-control is-invalid"
-            : "form-control"
-        }
+        className={inputClasses}
         id={id}
         name={id}
         type={type}
@@ -42,10 +52,11 @@ function Input({
         value={value}
         onChange={handleChange}
         onBlur={handleBlur}
+        onFocus={handleFocus}
         {...props}
       />
       {hasErrorMessage && errorMessage && (
-        <p className="invalid-feedback">{errorMessage}</p>
+        <p className="invalid-feedback mb-0">{errorMessage}</p>
       )}
     </div>
   );
