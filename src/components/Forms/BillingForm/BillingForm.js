@@ -64,7 +64,7 @@ function BillingForm() {
           errorMessage={formik.errors.clientCity}
         />
         <Input
-          type="text"
+          type="number"
           label="Zip/post code*"
           id="clientZip"
           value={formik.values.clientZip}
