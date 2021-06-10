@@ -19,9 +19,7 @@ function Checkout(WrappedComponent) {
         <div className="checkoutContainer">
           <CheckoutHeader />
 
-          <div className="WrappedComponent">
-            <WrappedComponent />
-          </div>
+          <WrappedComponent />
 
           <Footer />
         </div>
