@@ -73,3 +73,8 @@ section.checkout__main--container{
 .checkout__footer--section{
 	margin: 0;
 }
+
+.checkout__header--section div{
+	display: flex;
+	flex-direction: column;
+}

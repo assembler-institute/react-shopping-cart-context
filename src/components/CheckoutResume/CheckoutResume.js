@@ -39,73 +39,21 @@ function CheckoutResume({ cartItems }) {
           <section>
             <h4>Your order Confirmed!</h4> <br />
           </section>
-          <section>
+          <section className="checkout__header--section">
             {personalDetails.name === "" ? (
-              <h5>
-                Hi, client, <br />
-                Your order has beeen confirmed and will be shipping soon.
-              </h5>
+              <div>
+                <h5>Hi, client,</h5>
+                <p>Your order has beeen confirmed and will be shipping soon.</p>
+              </div>
             ) : (
-              <h5>
-                Hi, {personalDetails.name}, <br />
-                Your order has beeen confirmed and will be shipping soon.
-              </h5>
+              <div>
+                <h5>Hi, {personalDetails.name},</h5>
+                <p>Your order has beeen confirmed and will be shipping soon.</p>
+              </div>
             )}
             <hr />
           </section>
           <div className="checkout__resume">
-            <section className="checkout__orderDate--section">
-              <div>
-                <h6>Order Date</h6> <p> {myDate} </p>
-                {/* <h6>Order Date</h6> <p> 18 March, 2021 </p> */}
-              </div>
-              <div>
-                <h6>Shipping number</h6> <p> BK55546456745 </p>
-              </div>
-              {paymentDetails.paymentMethod === "" ? (
-                <div>
-                  <h6>Payment</h6> <p> Visa Visota </p>
-                </div>
-              ) : (
-                <div>
-                  <h6>Payment</h6> <p> {paymentDetails.paymentMethod} </p>
-                </div>
-              )}
-              {paymentDetails.cardHolderName === "" ? (
-                <div>
-                  <h6>Nombre de tarjeta</h6>
-                  <p> No credit card </p>
-                </div>
-              ) : (
-                <div>
-                  <h6>Nombre de tarjeta</h6>{" "}
-                  <p> {paymentDetails.cardHolderName} </p>
-                </div>
-              )}
-              <hr />
-            </section>
-            <section className="checkout__productCard--section">
-              <OrderSummaryResume cartItems={cartItems} />
-            </section>
-            <section className="checkout__price--section">
-              <div>
-                <h6>Subtotal</h6>
-                <p>$199.99</p>
-              </div>
-              <div>
-                <h6>Exprees Shipping</h6>
-                <p>$6.99</p>
-              </div>
-              <div>
-                <h6>Taxes</h6>
-                <p>$13</p>
-              </div>
-              <div>
-                <h6>Discount</h6>
-                <p>-20%</p>
-              </div>
-              <hr />
-            </section>
             <section className="checkout__personalDetail--section">
               <h4>Personal Details</h4> <br />
               {personalDetails.name === "" ? (
@@ -148,6 +96,58 @@ function CheckoutResume({ cartItems }) {
                 <div>
                   <h6>Phone number</h6>
                   <p>{personalDetails.phoneNumber}</p>
+                </div>
+              )}
+              <hr />
+            </section>
+            <section className="checkout__productCard--section">
+              <OrderSummaryResume cartItems={cartItems} />
+            </section>
+            <section className="checkout__price--section">
+              <div>
+                <h6>Subtotal</h6>
+                <p>$199.99</p>
+              </div>
+              <div>
+                <h6>Exprees Shipping</h6>
+                <p>$6.99</p>
+              </div>
+              <div>
+                <h6>Taxes</h6>
+                <p>$13</p>
+              </div>
+              <div>
+                <h6>Discount</h6>
+                <p>-20%</p>
+              </div>
+              <hr />
+            </section>
+            <section className="checkout__orderDate--section">
+              <div>
+                <h6>Order Date</h6> <p> {myDate} </p>
+                {/* <h6>Order Date</h6> <p> 18 March, 2021 </p> */}
+              </div>
+              <div>
+                <h6>Shipping number</h6> <p> BK55546456745 </p>
+              </div>
+              {paymentDetails.paymentMethod === "" ? (
+                <div>
+                  <h6>Payment</h6> <p> Visa Visota </p>
+                </div>
+              ) : (
+                <div>
+                  <h6>Payment</h6> <p> {paymentDetails.paymentMethod} </p>
+                </div>
+              )}
+              {paymentDetails.cardHolderName === "" ? (
+                <div>
+                  <h6>Nombre de tarjeta</h6>
+                  <p> No credit card </p>
+                </div>
+              ) : (
+                <div>
+                  <h6>Nombre de tarjeta</h6>{" "}
+                  <p> {paymentDetails.cardHolderName} </p>
                 </div>
               )}
               <hr />

@@ -20,6 +20,9 @@ function CreditCard({
     } else {
       setCcvChange(true);
     }
+    setTimeout(() => {
+      setCcvChange(false);
+    }, 4000);
   }, [cardCVVCodeAnimation]);
 
   useEffect(() => {

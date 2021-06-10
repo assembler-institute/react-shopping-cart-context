@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useEffect } from "react";
 
 import ShoppingContext from "../../context/ShoppingContext";
 
@@ -87,7 +87,15 @@ function shoppingReducer(state, action) {
 }
 
 function ShoppingContextProvider({ children }) {
-  const [state, dispatch] = useReducer(shoppingReducer, shoppingInitialState);
+  // const [state, dispatch] = useReducer(shoppingReducer, shoppingInitialState);
+  const [state, dispatch] = useReducer(
+    shoppingReducer,
+    shoppingInitialState,
+    () => {
+      const localData = localStorage.getItem("react-context");
+      return localData ? JSON.parse(localData) : [];
+    },
+  );
   // const { personalDetails, shippingDetails, paymentDetails } = state;
   // console.log(personalDetails);
 
@@ -128,6 +136,16 @@ function ShoppingContextProvider({ children }) {
   // const [cardExpirationDate, setCardExpirationDate] = useState("");
   // const [cardCVVCode, setcardCVVCode] = useState("");
   // const [consentCheckbox, setconsentCheckbox] = useState("");
+
+  // function saveLocalStorage() {
+  //   useLocalStorage(shoppingReducer, CONTEXT_LOCAL_STORAGE_KEY);
+  //   console.log(shoppingReducer);
+  // }
+
+  useEffect(() => {
+    localStorage.setItem("react-context", JSON.stringify(state));
+  }, [state]);
+
   return (
     <ShoppingContext.Provider
       value={{
