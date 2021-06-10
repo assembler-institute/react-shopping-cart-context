@@ -1,17 +1,18 @@
-/* eslint-disable no-plusplus */
 import React, { useEffect, useState } from "react";
 import "./CreditCard.scss";
 
 function CreditCard({
-  cardNameAnimation = `your rich name  `,
-  cardCVVCodeAnimation = "xxx",
-  cardNumberAnimation = "xxxxxxxxxxxxxxxx",
-  cardExpirationDateAnimation = "xx/xx",
+  cardNameAnimation,
+  cardCVVCodeAnimation,
+  cardNumberAnimation,
+  cardExpirationDateAnimation,
 }) {
   const [ccvChange, setCcvChange] = useState(false);
   const [newNumber, setNewNumber] = useState("");
   const [newCvv, setNewCvv] = useState("");
   const ccvCHangelol = "";
+
+  const cardNumberAnimationString = cardNumberAnimation.toString();
 
   useEffect(() => {
     if (ccvCHangelol === cardCVVCodeAnimation) {
@@ -24,7 +25,7 @@ function CreditCard({
   useEffect(() => {
     const myPlus = "x";
     let plusChain = "";
-    for (let i = 0; i <= cardNumberAnimation.length + 3; i++) {
+    for (let i = 0; i <= cardNumberAnimationString.length + 3; i += 1) {
       if (i % 5 === 0) {
         plusChain += " ";
       } else {
@@ -37,18 +38,19 @@ function CreditCard({
   useEffect(() => {
     const myPlusCVV = "x";
     let plusChainCVV = "";
-    for (let i = 0; i < cardCVVCodeAnimation.length; i++) {
+    for (let i = 0; i < cardCVVCodeAnimation.length; i += 1) {
       plusChainCVV += myPlusCVV;
     }
     setNewCvv(plusChainCVV);
   }, [cardCVVCodeAnimation]);
 
-  useEffect(() => {
-    console.log(cardNameAnimation);
-    console.log(cardCVVCodeAnimation);
-    console.log(cardNumberAnimation);
-    console.log(cardExpirationDateAnimation);
-  }, []);
+  // useEffect(() => {
+  //   console.log(cardNameAnimation);
+  //   console.log(cardCVVCodeAnimation);
+  //   console.log(cardNumberAnimation);
+  //   console.log(cardExpirationDateAnimation);
+  //   console.log(cardNumberAnimationString);
+  // }, []);
 
   return (
     <>
@@ -87,17 +89,34 @@ function CreditCard({
                 </svg>
               </div>
             </div>
-            <div className="card__body">{newNumber}</div>
+            {newNumber === " xxx" ? (
+              <div className="card__body">xxxx xxxx xxxx xxxx</div>
+            ) : (
+              <div className="card__body">{newNumber}</div>
+            )}
             <div className="card__footer">
               <div>
-                <p>
-                  {cardNameAnimation}
-                  <span role="img" aria-labelledby="emoji">
-                    &#129297;
-                  </span>
-                </p>
+                {cardNameAnimation === "" ? (
+                  <p>
+                    Your fucking name
+                    <span role="img" aria-labelledby="emoji">
+                      &#129297;
+                    </span>
+                  </p>
+                ) : (
+                  <p>
+                    {cardNameAnimation}
+                    <span role="img" aria-labelledby="emoji">
+                      &#129297;
+                    </span>
+                  </p>
+                )}
               </div>
-              <div>{cardExpirationDateAnimation}</div>
+              {cardExpirationDateAnimation === "" ? (
+                <div>mm/yy</div>
+              ) : (
+                <div>{cardExpirationDateAnimation}</div>
+              )}
             </div>
           </div>
         </div>

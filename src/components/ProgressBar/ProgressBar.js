@@ -52,7 +52,7 @@ export default function ProgressBar({ ...routeProps }) {
       if (newIndex === activeUrlId) {
         setCurrentActive(activeUrlId);
         circle.classList.add("activeCircle");
-        console.log(activeUrlId);
+        // console.log(activeUrlId);
       } else if (activeUrl === "/checkout/order-summary") {
         setCurrentActive(activeUrlId);
         circles[3].classList.add("activeCircle");
