@@ -17,7 +17,7 @@ function CheckoutSidebar() {
   }
 
   return (
-    <aside className="col col-4">
+    <aside className="col">
       <div className="row flex-column">
         <div className="col shopping__cart__header">
           <h2 className="h3 mt-2">Your order</h2>

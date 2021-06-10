@@ -18,11 +18,11 @@ function Input({
     <div className="form-group">
       <label htmlFor={id}>{label}</label>
       <input
-        className={`${isTouched ? "is-valid" : ""}
+        className={`${isTouched ? `is-valid${margins}` : `${margins}`}
           ${
             hasErrorMessage && errorMessage
-              ? "form-control is-invalid"
-              : "form-control"
+              ? `form-control is-invalid${margins}`
+              : `form-control${margins}`
           }
         `}
         id={id}

@@ -78,7 +78,7 @@ export function checkoutReducer(state, action) {
     case SUBMITTHREE: {
       return {
         ...state,
-        stepTwo: {
+        stepThree: {
           ...action.payload,
           completed: true,
         },

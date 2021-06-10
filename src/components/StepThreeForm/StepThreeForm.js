@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 
 import Input from "../Input";
 import stepThreeSchema from "./StepThree-schema";
-import { CheckoutContext } from "../../CheckoutContext";
+import { orderContext } from "../../CheckoutContext";
 import paypal from "../../assets/img/PayPal.svg";
 import apple from "../../assets/img/ApplePay.svg";
 import visa from "../../assets/img/Visa.svg";
@@ -12,7 +12,7 @@ import american from "../../assets/img/American.svg";
 import "./StepThreeForm.scss";
 
 function StepThreeForm() {
-  const { submitStepThree } = useContext(CheckoutContext);
+  const { submitStepThree } = useContext(orderContext);
 
   const formik = useFormik({
     initialValues: {

@@ -2,6 +2,11 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
+import CheckoutStepOne from "./pages/CheckoutStepOne";
+import CheckoutStepTwo from "./pages/CheckoutStepTwo";
+import CheckoutStepThree from "./pages/CheckoutStepThree";
+import CheckoutStepFour from "./pages/CheckoutStepFour";
+
 import NewProduct from "./pages/NewProduct";
 import SignUp from "./pages/SignUp";
 
@@ -9,6 +14,7 @@ import * as api from "./api";
 
 import useLocalStorage from "./hooks/useLocalStorage";
 import loadLocalStorageItems from "./utils/loadLocalStorageItems";
+import { CheckoutContext } from "./CheckoutContext";
 import AuthContextProvider from "./components/AuthContextProvider/AuthContextProvider";
 
 function buildNewCartItem(cartItem) {
@@ -183,32 +189,46 @@ function App() {
 
   return (
     <AuthContextProvider>
-      <BrowserRouter>
-        <Switch>
-          <Route path="/new-product">
-            <NewProduct saveNewProduct={saveNewProduct} />
-          </Route>
-          <Route path="/signUp">
-            <SignUp fullWidth />
-          </Route>
-          <Route path="/" exact>
-            <Home
-              fullWidth
-              cartItems={cartItems}
-              products={products}
-              isLoading={isLoading}
-              hasError={hasError}
-              loadingError={loadingError}
-              handleDownVote={handleDownVote}
-              handleUpVote={handleUpVote}
-              handleSetFavorite={handleSetFavorite}
-              handleAddToCart={handleAddToCart}
-              handleRemove={handleRemove}
-              handleChange={handleChange}
-            />
-          </Route>
-        </Switch>
-      </BrowserRouter>
+      <CheckoutContext>
+        <BrowserRouter>
+          <Switch>
+            <Route path="/new-product" exact>
+              <NewProduct saveNewProduct={saveNewProduct} />
+            </Route>
+            <Route path="/signUp" exact>
+              <SignUp fullWidth />
+            </Route>
+            <Route path="/context/step-1" exact>
+              <CheckoutStepOne />
+            </Route>
+            <Route path="/context/step-2" exact>
+              <CheckoutStepTwo />
+            </Route>
+            <Route path="/context/step-3" exact>
+              <CheckoutStepThree />
+            </Route>
+            <Route path="/checkout/order-summary" exact>
+              <CheckoutStepFour />
+            </Route>
+            <Route path="/" exact>
+              <Home
+                fullWidth
+                cartItems={cartItems}
+                products={products}
+                isLoading={isLoading}
+                hasError={hasError}
+                loadingError={loadingError}
+                handleDownVote={handleDownVote}
+                handleUpVote={handleUpVote}
+                handleSetFavorite={handleSetFavorite}
+                handleAddToCart={handleAddToCart}
+                handleRemove={handleRemove}
+                handleChange={handleChange}
+              />
+            </Route>
+          </Switch>
+        </BrowserRouter>
+      </CheckoutContext>
     </AuthContextProvider>
   );
 }
