@@ -86,7 +86,6 @@ function AppHeader({ showNewProductForm, ...props }) {
           </nav>
         </div>
       </div>
-      {/* {!loginData.isLogged && <Redirect to={HOME_URL} />} */}
     </header>
   );
 }
