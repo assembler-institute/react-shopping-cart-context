@@ -18,19 +18,11 @@ const CARD_PAY = "Card";
 const PAYPAL_PAY = "PayPal";
 const APPLE_PAY = "ApplePay";
 
-function CheckoutPayment() {
+function CheckoutPayment({ setProcessCompletedFlags }) {
   const [payment, setPayment] = useState(null);
   return (
     <>
-      <div className="col col-8">
-        {/* TOP PART */}
-        <div className="step-top">
-          <div className="d-flex justify-content-between align-items-end">
-            <h4 className="step-title">Payment details</h4>
-            <h5 className="step-subtitle">Step 3 of 3</h5>
-          </div>
-          <hr />
-        </div>
+      <div className="container-fluid">
         {/* BOTTOM PART */}
         <div className="step-bottom d-flex flex-column">
           <p>How would you like to pay?</p>
@@ -51,9 +43,24 @@ function CheckoutPayment() {
               setPayment={setPayment}
             />
           </div>
-          {payment === CARD_PAY && <CardForm paymentMethod={payment} />}
-          {payment === PAYPAL_PAY && <PayPalForm paymentMethod={payment} />}
-          {payment === APPLE_PAY && <ApplePayForm paymentMethod={payment} />}
+          {payment === CARD_PAY && (
+            <CardForm
+              setProcessCompletedFlags={setProcessCompletedFlags}
+              paymentMethod={payment}
+            />
+          )}
+          {payment === PAYPAL_PAY && (
+            <PayPalForm
+              setProcessCompletedFlags={setProcessCompletedFlags}
+              paymentMethod={payment}
+            />
+          )}
+          {payment === APPLE_PAY && (
+            <ApplePayForm
+              setProcessCompletedFlags={setProcessCompletedFlags}
+              paymentMethod={payment}
+            />
+          )}
         </div>
       </div>
     </>

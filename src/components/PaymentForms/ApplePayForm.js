@@ -10,9 +10,9 @@ import { applePayment } from "../../pages/Checkout/form-schema";
 
 import FormContext from "../../context/form-context";
 
-import { HOME_URL, PROFILE_URL } from "../../utils/constants";
+import { BILLING_URL, SUMMARY_URL } from "../../utils/constants";
 
-function ApplePayForm({ paymentMethod }) {
+function ApplePayForm({ paymentMethod, setProcessCompletedFlags }) {
   const { data: formData, setData: updateFormData } = useContext(FormContext);
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
@@ -26,6 +26,10 @@ function ApplePayForm({ paymentMethod }) {
       updateFormData({ paymentMethod: paymentMethod, applePay: { ...values } });
       setSubmitting(true);
       setTimeout(() => {
+        setProcessCompletedFlags(({ ...prev }) => ({
+          ...prev,
+          payment: true,
+        }));
         setHasSubmitted(true);
       }, 500);
     },
@@ -62,7 +66,7 @@ function ApplePayForm({ paymentMethod }) {
           />
         </form>
         <div className="navigation-buttons d-flex justify-content-between">
-          <Link to={PROFILE_URL}>
+          <Link to={BILLING_URL}>
             <Button>Profile</Button>
           </Link>
           <Button
@@ -73,7 +77,7 @@ function ApplePayForm({ paymentMethod }) {
             {formik.isSubmitting ? "Going to summary..." : "Summary"}
           </Button>
 
-          {hasSubmitted && <Redirect to={HOME_URL} />}
+          {hasSubmitted && <Redirect to={SUMMARY_URL} />}
         </div>
       </div>
     </>

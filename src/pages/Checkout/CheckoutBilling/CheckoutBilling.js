@@ -58,7 +58,7 @@ function CheckoutBilling({ setProcessCompletedFlags }) {
 
   return (
     <>
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} id="billingForm">
         <Input
           type="text"
           label="Address"
@@ -103,15 +103,20 @@ function CheckoutBilling({ setProcessCompletedFlags }) {
           hasErrorMessage={formik.touched.country}
           errorMessage={formik.errors.country}
         />
+      </form>
+      <div className="navigation-buttons d-flex justify-content-between mt-3">
         <Link to={PROFILE_URL}>
           <Button>Return to Profile</Button>
         </Link>
-        <Button submitButton disabled={formik.isValidating || !formik.isValid}>
+        <Button
+          submitButton
+          form="billingForm"
+          disabled={formik.isValidating || !formik.isValid}
+        >
           {formik.isSubmitting ? "Going to Payment..." : "Go to Payment"}
         </Button>
-      </form>
-
-      {hasSubmitted && <Redirect to={PAYMENT_URL} />}
+        {hasSubmitted && <Redirect to={PAYMENT_URL} />}
+      </div>
     </>
   );
 }

@@ -11,7 +11,7 @@ import { cardPayment } from "../../pages/Checkout/form-schema";
 
 import FormContext from "../../context/form-context";
 
-import { HOME_URL, PROFILE_URL } from "../../utils/constants";
+import { BILLING_URL, SUMMARY_URL } from "../../utils/constants";
 
 // Image routes
 import visa from "../../img/payment/visa-logo.svg";
@@ -19,7 +19,7 @@ import masterCard from "../../img/payment/mastercard-logo.svg";
 import americanExp from "../../img/payment/american_express-logo.svg";
 import cvvIcon from "../../img/payment/cvv-icon.svg";
 
-function CardForm({ paymentMethod }) {
+function CardForm({ paymentMethod, setProcessCompletedFlags }) {
   const { data: formData, setData: updateFormData } = useContext(FormContext);
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [isFront, setIsFront] = useState(true);
@@ -37,6 +37,10 @@ function CardForm({ paymentMethod }) {
       updateFormData({ paymentMethod: paymentMethod, card: { ...values } });
       setSubmitting(true);
       setTimeout(() => {
+        setProcessCompletedFlags(({ ...prev }) => ({
+          ...prev,
+          payment: true,
+        }));
         setHasSubmitted(true);
       }, 500);
     },
@@ -160,7 +164,7 @@ function CardForm({ paymentMethod }) {
           </div>
         </div>
         <div className="navigation-buttons d-flex justify-content-between">
-          <Link to={PROFILE_URL}>
+          <Link to={BILLING_URL}>
             <Button>Profile</Button>
           </Link>
           <Button
@@ -174,7 +178,7 @@ function CardForm({ paymentMethod }) {
             {formik.isSubmitting ? "Going to summary..." : "Summary"}
           </Button>
 
-          {hasSubmitted && <Redirect to={HOME_URL} />}
+          {hasSubmitted && <Redirect to={SUMMARY_URL} />}
         </div>
       </div>
     </>

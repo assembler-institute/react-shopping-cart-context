@@ -7,7 +7,7 @@ import FormContext from "../../../context/form-context";
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
 
-import { HOME_URL, PAYMENT_URL } from "../../../utils/constants";
+import { HOME_URL, BILLING_URL } from "../../../utils/constants";
 
 import { formProfile } from "../form-schema";
 
@@ -57,7 +57,7 @@ function CheckoutProfile({ setProcessCompletedFlags }) {
 
   return (
     <>
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} id="profileForm">
         <Input
           type="text"
           label="Name"
@@ -101,15 +101,21 @@ function CheckoutProfile({ setProcessCompletedFlags }) {
           hasErrorMessage={formik.touched.phone}
           errorMessage={formik.errors.phone}
         />
+      </form>
+      <div className="navigation-buttons d-flex justify-content-between mt-3">
         <Link to={HOME_URL}>
           <Button>Return to Home</Button>
         </Link>
-        <Button submitButton disabled={formik.isValidating || !formik.isValid}>
+        <Button
+          submitButton
+          form="profileForm"
+          disabled={formik.isValidating || !formik.isValid}
+        >
           {formik.isSubmitting ? "Going to Billing..." : "Go to Billing"}
         </Button>
-      </form>
 
-      {hasSubmitted && <Redirect to={PAYMENT_URL} />}
+        {hasSubmitted && <Redirect to={BILLING_URL} />}
+      </div>
     </>
   );
 }

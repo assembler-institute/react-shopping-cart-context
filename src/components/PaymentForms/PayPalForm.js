@@ -10,9 +10,9 @@ import { payPalPayment } from "../../pages/Checkout/form-schema";
 
 import FormContext from "../../context/form-context";
 
-import { HOME_URL, PROFILE_URL } from "../../utils/constants";
+import { BILLING_URL, SUMMARY_URL } from "../../utils/constants";
 
-function PayPalForm({ paymentMethod }) {
+function PayPalForm({ paymentMethod, setProcessCompletedFlags }) {
   const { data: formData, setData: updateFormData } = useContext(FormContext);
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
@@ -26,6 +26,10 @@ function PayPalForm({ paymentMethod }) {
       updateFormData({ paymentMethod: paymentMethod, payPal: { ...values } });
       setSubmitting(true);
       setTimeout(() => {
+        setProcessCompletedFlags(({ ...prev }) => ({
+          ...prev,
+          payment: true,
+        }));
         setHasSubmitted(true);
       }, 500);
     },
@@ -63,7 +67,7 @@ function PayPalForm({ paymentMethod }) {
           />
         </form>
         <div className="navigation-buttons d-flex justify-content-between">
-          <Link to={PROFILE_URL}>
+          <Link to={BILLING_URL}>
             <Button>Profile</Button>
           </Link>
           <Button
@@ -74,7 +78,7 @@ function PayPalForm({ paymentMethod }) {
             {formik.isSubmitting ? "Going to summary..." : "Summary"}
           </Button>
 
-          {hasSubmitted && <Redirect to={HOME_URL} />}
+          {hasSubmitted && <Redirect to={SUMMARY_URL} />}
         </div>
       </div>
     </>
