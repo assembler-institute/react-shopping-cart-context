@@ -47,29 +47,33 @@ function SummaryItem({
                   <h4 className="h5">
                     <strong>{title}</strong>
                   </h4>
-                  <button type="button" onClick={onHandleRemove}>
-                    <i className="uil uil-times" />
-                  </button>
+                  {handleRemove && (
+                    <button type="button" onClick={onHandleRemove}>
+                      <i className="uil uil-times" />
+                    </button>
+                  )}
                 </div>
                 <div className="col">
                   <p>
                     <strong>{price}€</strong> × {quantity}
                   </p>
                 </div>
-                <div className="col mt-auto">
-                  <div className="row">
-                    <div className="col col-6 col-lg-4">
-                      <select
-                        className="custom-select"
-                        onChange={onHandleChange}
-                        onBlur={onHandleChange}
-                        value={quantity}
-                      >
-                        {buildSelectOptions(unitsInStock)}
-                      </select>
+                {handleChange && (
+                  <div className="col mt-auto">
+                    <div className="row">
+                      <div className="col col-6 col-lg-4">
+                        <select
+                          className="custom-select"
+                          onChange={onHandleChange}
+                          onBlur={onHandleChange}
+                          value={quantity}
+                        >
+                          {buildSelectOptions(unitsInStock)}
+                        </select>
+                      </div>
                     </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           </div>
