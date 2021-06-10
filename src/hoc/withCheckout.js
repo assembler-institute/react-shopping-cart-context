@@ -18,8 +18,9 @@ function Checkout(WrappedComponent) {
       <section className="mainContainer">
         <div className="checkoutContainer">
           <CheckoutHeader />
-
-          <WrappedComponent />
+          <div className="wrappedComponenet">
+            <WrappedComponent />
+          </div>
 
           <Footer />
         </div>

@@ -108,6 +108,7 @@ function Details() {
               {touched.userPhone && errors.userPhone && (
                 <p className="invalid-feedback invalid-feedback-phone">
                   {errors.userPhone}
+                  {useContext(ShoppingContext)}
                 </p>
               )}
             </div>
