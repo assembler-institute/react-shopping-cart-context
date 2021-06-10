@@ -73,7 +73,7 @@ function CheckoutCart({
                   color="primary"
                   onClick={discountCode}
                 >
-                  Apply
+                  APPLY
                 </Button>
               </div>
             </div>
