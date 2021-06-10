@@ -12,9 +12,7 @@ import "./paymentStyles.scss";
 function Payment() {
   const { updatePayment } = useContext(ShoppingContext);
   const [redirect, setRedirect] = useState(false);
-  if (redirect) {
-    return <Redirect to="/Checkout/order-summary" />;
-  }
+
   const [state, setClass] = useState(false);
   const [payment, setPayment] = useState("");
 
@@ -39,6 +37,9 @@ function Payment() {
     cardName = "cardBackHide";
     cardDate = "cardBackHide";
     cardCvv = "cardCvv";
+  }
+  if (redirect) {
+    return <Redirect to="/Checkout/order-summary" />;
   }
 
   return (
@@ -124,10 +125,10 @@ function Payment() {
               <div className="input">
                 <Input
                   onFocus={(event) => {
+                    setClass(false);
                     if (event.target.value === "XXXX XXXX XXXX XXXX") {
                       // eslint-disable-next-line no-param-reassign
                       event.target.value = "";
-                      setClass(false);
                     }
                   }}
                   type="text"
@@ -142,10 +143,10 @@ function Payment() {
                 />
                 <Input
                   onFocus={(event) => {
+                    setClass(false);
                     if (event.target.value === "Holder name") {
                       // eslint-disable-next-line no-param-reassign
                       event.target.value = "";
-                      setClass(false);
                     }
                   }}
                   type="text"
@@ -161,10 +162,10 @@ function Payment() {
                 <div className="shortImputs">
                   <Input
                     onFocus={(event) => {
+                      setClass(false);
                       if (event.target.value === "../..") {
                         // eslint-disable-next-line no-param-reassign
                         event.target.value = "";
-                        setClass(false);
                       }
                     }}
                     type="text"

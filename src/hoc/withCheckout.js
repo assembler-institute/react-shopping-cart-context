@@ -1,6 +1,5 @@
 import React from "react";
-import CheckoutFooter from "../components/CheckoutFooter";
-import CheckoutForm from "../components/CheckoutForm";
+import Footer from "../components/Footer";
 import CheckoutHeader from "../components/CheckoutHeader";
 import CheckoutSideBar from "../components/CheckoutSideBar";
 import "./CheckoutStyles.scss";
@@ -19,10 +18,12 @@ function Checkout(WrappedComponent) {
       <section className="mainContainer">
         <div className="checkoutContainer">
           <CheckoutHeader />
-          <CheckoutForm />
-          <WrappedComponent />
 
-          <CheckoutFooter />
+          <div className="WrappedComponent">
+            <WrappedComponent />
+          </div>
+
+          <Footer />
         </div>
         <CheckoutSideBar />
       </section>
