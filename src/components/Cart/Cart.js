@@ -21,6 +21,7 @@ function Cart({ cartItems, handleRemove, handleChange, ...props }) {
         {cartItems.length > 0 ? (
           cartItems.map((item) => (
             <ShoppingCartItem
+              isEditable
               key={item.id}
               id={item.id}
               title={item.title}

@@ -187,7 +187,7 @@ function App() {
           <NewProduct saveNewProduct={saveNewProduct} />
         </Route>
         <Route path="/personal-details-page">
-          <PersonalDetails />
+          <PersonalDetails cartItems={cartItems} />
         </Route>
         {/* <Route path='/billing-address-page'>
 
