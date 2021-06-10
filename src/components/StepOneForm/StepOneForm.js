@@ -28,11 +28,11 @@ const iconSelect = (props) => (
 );
 
 const options = [
-  { img: spain, value: "spain", label: " +34" },
-  { img: italy, value: "italy", label: " +39" },
-  { img: greece, value: "greece", label: " +30" },
-  { img: germany, value: "germany", label: " +49" },
-  { img: france, value: "france", label: " +33" },
+  { img: spain, value: "+34", label: " +34" },
+  { img: italy, value: "+39", label: " +39" },
+  { img: greece, value: "+30", label: " +30" },
+  { img: germany, value: "+49", label: " +49" },
+  { img: france, value: "+33", label: " +33" },
 ];
 
 function StepOneForm() {
