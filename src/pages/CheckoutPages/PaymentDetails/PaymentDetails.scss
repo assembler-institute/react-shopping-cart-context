@@ -16,26 +16,34 @@
   text-align: right;
 }
 
-.visa {
-  background-image: url("../../../img/visa.png");
+.pay-method {
   background-size: contain;
   background-repeat: no-repeat;
+  background-position: center;
   width: 100px;
   height: 50px;
+}
+
+.visa {
+  background-image: url("../../../img/visa.png");
 }
 
 .paypal {
   background-image: url("../../../img/paypal.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  width: 100px;
-  height: 50px;
 }
 
 .applepay {
   background-image: url("../../../img/applePay.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  width: 100px;
-  height: 50px;
+}
+
+.mastercard {
+  background-image: url("../../../img/mastercard.PNG");
+}
+
+.amex {
+  background-image: url("../../../img/amex.png");
+}
+
+.gpay {
+  background-image: url("../../../img/gpay.png");
 }

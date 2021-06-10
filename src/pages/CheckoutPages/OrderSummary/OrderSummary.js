@@ -52,7 +52,7 @@ function OrderSummary({ cartItems }) {
             <li>{state.cardName}</li>
             <li>{state.cardNumber}</li>
             <li>{state.cardExpiryDate}</li>
-            <li>{state.cardCVV}</li>
+            <li>{state.cvc}</li>
             <li>{state.termsConditions}</li>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useFormik } from "formik";
 import { Redirect, Link } from "react-router-dom";
+import Cards from "react-credit-cards";
 
 import "./PaymentDetails.scss";
 
@@ -25,7 +26,7 @@ function PaymentDetails() {
       cardName: state.cardName,
       cardNumber: state.cardNumber,
       cardExpiryDate: state.cardExpiryDate,
-      cardCVV: state.cardCVV,
+      cvc: state.cvc,
       termsConditions: state.termsConditions,
     },
     validationSchema: PaymentDetailsSchema,
@@ -36,9 +37,10 @@ function PaymentDetails() {
         cardName: values.cardName,
         cardNumber: values.cardNumber,
         cardExpiryDate: values.cardExpiryDate,
-        cardCVV: values.cardCVV,
+        cvc: values.cvc,
         termsConditions: values.termsConditions,
       });
+
       setTimeout(() => {
         setHasSubmitted(true);
       }, 500);
@@ -54,8 +56,8 @@ function PaymentDetails() {
               <strong>How would you like to pay?</strong>
             </p>
           </div>
-          <div className="row">
-            <div className="col col-4">
+          <div className="row pb-5">
+            <div className="col col-4 border rounded">
               <Input
                 type="radio"
                 label="Credit/Debit card"
@@ -66,11 +68,15 @@ function PaymentDetails() {
                 handleBlur={formik.handleBlur}
                 hasErrorMessage={formik.touched.paymentMethod}
                 errorMessage={formik.errors.paymentMethod}
-                className="form-check-input"
+                // className="form-check-input"
               />
-              <div className="visa" />
+              <div className="row">
+                <div className="col col-4 pay-method visa" />
+                <div className="col col-4 pay-method mastercard" />
+                <div className="col col-4 pay-method amex" />
+              </div>
             </div>
-            <div className="col col-4">
+            <div className="col col-4 border rounded justify-content-center">
               <Input
                 type="radio"
                 label="Paypal"
@@ -81,24 +87,27 @@ function PaymentDetails() {
                 handleBlur={formik.handleBlur}
                 hasErrorMessage={formik.touched.paymentMethod}
                 errorMessage={formik.errors.paymentMethod}
-                className="form-check-input"
+                // className="form-check-input"
               />
-              <div className="paypal" />
+              <div className="col col-12 pay-method paypal" />
             </div>
-            <div className="col col-4">
+            <div className="col col-4 border rounded">
               <Input
                 type="radio"
                 label="Apple pay"
                 id="paymentMethod"
-                value="Apple pay"
+                value="Apple Pay"
                 placeholder="Apple pay"
                 handleChange={formik.handleChange}
                 handleBlur={formik.handleBlur}
                 hasErrorMessage={formik.touched.paymentMethod}
                 errorMessage={formik.errors.paymentMethod}
-                className="form-check-input"
+                // className="form-check-input"
               />
-              <div className="applepay" />
+              <div className="row">
+                <div className="col col-6 pay-method applepay" />
+                <div className="col col-6 pay-method gpay" />
+              </div>
             </div>
           </div>
           <div className="row">
@@ -115,7 +124,7 @@ function PaymentDetails() {
                 errorMessage={formik.errors.cardName}
               />
               <Input
-                type="text"
+                type="password"
                 label="Card number*"
                 id="cardNumber"
                 value={formik.values.cardNumber}
@@ -128,7 +137,7 @@ function PaymentDetails() {
               <div className="card-inputs row col-12 text-center">
                 <div className="col col-6">
                   <Input
-                    type="date"
+                    type="text"
                     label="Card expiry date*"
                     id="cardExpiryDate"
                     value={formik.values.cardExpiryDate}
@@ -137,49 +146,31 @@ function PaymentDetails() {
                     handleBlur={formik.handleBlur}
                     hasErrorMessage={formik.touched.cardExpiryDate}
                     errorMessage={formik.errors.cardExpiryDate}
-                    pattern="[0-9]{2}-[0-9]{4}"
                   />
                 </div>
                 <div className="col col-6">
                   <Input
                     type="password"
-                    label="Card CVV*"
-                    id="cardCVV"
-                    value={formik.values.cardCVV}
-                    placeholder="CVV"
+                    label="Card CVC*"
+                    id="cvc"
+                    value={formik.values.cvc}
+                    placeholder="CVC"
                     handleChange={formik.handleChange}
                     handleBlur={formik.handleBlur}
-                    hasErrorMessage={formik.touched.cardCVV}
-                    errorMessage={formik.errors.cardCVV}
+                    hasErrorMessage={formik.touched.cvc}
+                    errorMessage={formik.errors.cvc}
                   />
                 </div>
               </div>
             </div>
             <div className="col col-6">
-              <div className="col front-card pt-1">
-                <div className="col col-12 pt-4 pl-1">
-                  <div className="col col-12 pt-5 pl-1">
-                    {state.tempData.cardName}
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col col-12 pt-2 pl-4">
-                    {state.tempData.cardNumber}
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col col-12 pt-3 pr-4 text-right">
-                    {state.tempData.cardExpiryDate}
-                  </div>
-                </div>
-              </div>
-              <div className="col back-card">
-                <div className="col col-12">
-                  <div className="col col-12 pb-2 mb-1">
-                    {state.tempData.cardCVV}
-                  </div>
-                </div>
-              </div>
+              <Cards
+                cvc={state.cvc}
+                expiry={state.cardExpiryDate}
+                focused={state.cardFocus}
+                name={state.cardName}
+                number={state.cardNumber}
+              />
             </div>
           </div>
           <div className="row">

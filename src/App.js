@@ -2,6 +2,7 @@ import React, { useState, useEffect, useReducer } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import "./style.scss";
+import "react-credit-cards/lib/styles.scss";
 
 import Home from "./pages/Home";
 import NewProduct from "./pages/NewProduct";
@@ -43,7 +44,7 @@ const initialCheckoutContext = {
   cardName: "",
   cardNumber: "",
   cardExpiryDate: "",
-  cardCVV: "",
+  cvc: "",
   termsConditions: false,
   setPersonalDetails: () => {},
   tempData: () => {},
@@ -293,12 +294,17 @@ function App() {
     setProducts((prevState) => [newProduct, ...prevState]);
   }
 
+  function focusCreditCard(e) {
+    setCheckoutData({ cardFocus: e.target.name });
+  }
+
   return (
     <checkoutContext.Provider
       value={{
         isCheckoutDisabled: isCheckoutDisabled,
         setCheckoutData: setCheckoutData,
         tempData: tempData,
+        focusCreditCard: focusCreditCard,
         state: state,
       }}
     >
