@@ -95,6 +95,7 @@ function Details() {
               {touched.userPhone && errors.userPhone && (
                 <p className="invalid-feedback">{errors.userPhone}</p>
               )}
+              <p className="invalid-feedback">sdasdas {errors.userPhone}</p>
             </div>
 
             <Button submitButton disabled={isValidating || !isValid}>
