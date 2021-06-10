@@ -4,6 +4,7 @@ import ShoppingContext from "../../context";
 import "./confirm.scss";
 import { getCartTotal } from "../../components/Cart/Cart";
 import Button from "../../components/Button";
+// this is confirm page
 
 function Confirm() {
   const { cartItems, details, adressData, paymentData } = useContext(
