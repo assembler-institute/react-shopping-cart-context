@@ -1,15 +1,17 @@
 import React from "react";
-
 import { Link } from "react-router-dom";
 import Button from "../../components/Button";
 import withLayout from "../../hoc/withLayout";
 import CartSummary from "../../components/CartSummary/CartSummary";
 
 import PaymentForm from "../../components/PaymentForm";
+import Stepper from "../../components/Stepper/Stepper";
 
 function Payment({ cartItems, handleChange, handleRemove }) {
   return (
     <>
+      <Stepper />
+      <div className="Space" />
       <div className="row">
         <div className="col col-8">
           <header className="jumbotron pt-4 pb-2">
