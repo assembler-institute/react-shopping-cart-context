@@ -9,6 +9,7 @@ import * as api from "./api";
 import useLocalStorage from "./hooks/useLocalStorage";
 import loadLocalStorageItems from "./utils/loadLocalStorageItems";
 import PersonalDetails from "./pages/PersonalDetails/PersonalDetails";
+import Address from "./pages/Address/Address";
 
 function buildNewCartItem(cartItem) {
   if (cartItem.quantity >= cartItem.unitsInStock) {
@@ -189,9 +190,9 @@ function App() {
         <Route path="/personal-details-page">
           <PersonalDetails />
         </Route>
-        {/* <Route path='/billing-address-page'>
-
-        </Route> */}
+        <Route path="/billing-address-page">
+          <Address />
+        </Route>
         <Route path="/" exact>
           <Home
             fullWidth

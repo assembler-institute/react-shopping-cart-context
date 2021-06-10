@@ -12,7 +12,7 @@ function PersonalDetails() {
     initialValues: {
       name: "",
       email: "",
-      phoneNumber: 0,
+      phoneNumber: "",
     },
     validationSchema: personalSchema,
   });
@@ -55,17 +55,18 @@ function PersonalDetails() {
           hasErrorMessage={formik.touched.phoneNumber}
           errorMessage={formik.errors.phoneNumber}
         />
-
-        <Button
-          submitButton
-          block
-          disabled={formik.isValidating || !formik.isValid}
-        >
-          {formik.isSubmitting ? "Submitting..." : "Submit"}
-        </Button>
+        <Link to="/billing-address-page">
+          <Button
+            submitButton
+            block
+            disabled={formik.isValidating || !formik.isValid}
+          >
+            {formik.isSubmitting ? "Submitting..." : "Submit"}
+          </Button>
+        </Link>
       </form>
 
-      {hasSubmitted && <Link to="/" />}
+      {hasSubmitted && <Link to="/billing-address-page" />}
     </div>
   );
 }
