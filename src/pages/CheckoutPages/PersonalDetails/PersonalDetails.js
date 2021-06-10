@@ -2,8 +2,6 @@ import React, { useState, useContext } from "react";
 import { useFormik } from "formik";
 import { Redirect, Link } from "react-router-dom";
 
-// import Select from "react-select";
-
 import withLayout from "../../../hoc/withLayout";
 
 import Input from "../../../components/Input";
@@ -17,14 +15,6 @@ import checkoutContext from "../../../context/checkoutData";
 import "./PersonalDetails.scss";
 
 const isCheckout = true;
-
-// const prefixPhoneOptions = [
-//   { value: "+34", label: "Spain +34" },
-//   { value: "+39", label: "Italy +39" },
-//   { value: "+49", label: "Germany +49" },
-//   { value: "+33", label: "France +33" },
-//   { value: "+31", label: "Netherlands +31" },
-// ];
 
 function PersonalDetails({ cartItems }) {
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -83,17 +73,6 @@ function PersonalDetails({ cartItems }) {
               hasErrorMessage={formik.touched.email}
               errorMessage={formik.errors.email}
             />
-            {/* <Select
-            defaultValue={prefixPhoneOptions[0]}
-            options={prefixPhoneOptions}
-            value={formik.values.phonePrefix}
-            onChange={(value) =>
-              formik.setFieldValue("phonePrefix", value.value)
-            }
-            // onChange={formik.setFieldValue("phonePrefix")}
-            onBlur={formik.handleBlur}
-            id="phonePrefix"
-          /> */}
             <p className="mb-2 mt-3"> Phone Number </p>
             <div className="form-group d-flex mb-3">
               <select
