@@ -2,6 +2,7 @@ import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import "../../components/OrderCart/OrderCart.scss";
+import "../layouts.scss";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import personalSchema from "./personal-schema";
@@ -21,59 +22,66 @@ function PersonalDetails({ cartItems }) {
   });
 
   return (
-    <div className="row">
-      <form onSubmit={formik.handleSubmit} className="col-6">
-        <Input
-          type="text"
-          label="Your name"
-          id="name"
-          value={formik.values.name}
-          placeholder="Your Name"
-          handleChange={formik.handleChange}
-          handleBlur={formik.handleBlur}
-          hasErrorMessage={formik.touched.name}
-          errorMessage={formik.errors.name}
-        />
+    <section className="form__container">
+      <div className="step__main--container">
+        <div className="step__main--container--form">
+          <div className="headerPage">
+            <h3>Personal Details</h3>
+          </div>
+          <form onSubmit={formik.handleSubmit} className="col-6">
+            <Input
+              type="text"
+              label="Your name"
+              id="name"
+              value={formik.values.name}
+              placeholder="Your Name"
+              handleChange={formik.handleChange}
+              handleBlur={formik.handleBlur}
+              hasErrorMessage={formik.touched.name}
+              errorMessage={formik.errors.name}
+            />
 
-        <Input
-          type="email"
-          label="Email Address"
-          id="email"
-          value={formik.values.email}
-          placeholder="Your Email Address"
-          handleChange={formik.handleChange}
-          handleBlur={formik.handleBlur}
-          hasErrorMessage={formik.touched.email}
-          errorMessage={formik.errors.email}
-        />
+            <Input
+              type="email"
+              label="Email Address"
+              id="email"
+              value={formik.values.email}
+              placeholder="Your Email Address"
+              handleChange={formik.handleChange}
+              handleBlur={formik.handleBlur}
+              hasErrorMessage={formik.touched.email}
+              errorMessage={formik.errors.email}
+            />
 
-        <Input
-          type="number"
-          label="Mobile Phone Number"
-          id="phoneNumber"
-          value={formik.values.phoneNumber}
-          placeholder="Your Mobile Phone Number"
-          handleChange={formik.handleChange}
-          handleBlur={formik.handleBlur}
-          hasErrorMessage={formik.touched.phoneNumber}
-          errorMessage={formik.errors.phoneNumber}
-        />
+            <Input
+              type="number"
+              label="Mobile Phone Number"
+              id="phoneNumber"
+              value={formik.values.phoneNumber}
+              placeholder="Your Mobile Phone Number"
+              handleChange={formik.handleChange}
+              handleBlur={formik.handleBlur}
+              hasErrorMessage={formik.touched.phoneNumber}
+              errorMessage={formik.errors.phoneNumber}
+            />
 
-        <Button
-          submitButton
-          block
-          disabled={formik.isValidating || !formik.isValid}
-        >
-          <Link to="/billing-address-page">
-            {formik.isSubmitting ? "Submitting..." : "Submit"}
-          </Link>
-        </Button>
-      </form>
-      <div className="col">
-        <OrderCart cartItems={cartItems} />
+            <Button
+              submitButton
+              block
+              disabled={formik.isValidating || !formik.isValid}
+            >
+              <Link to="/billing-address-page">
+                {formik.isSubmitting ? "Submitting..." : "Submit"}
+              </Link>
+            </Button>
+          </form>
+        </div>
+        <div className="col">
+          <OrderCart cartItems={cartItems} />
+        </div>
+        {hasSubmitted && <Link to="/" />}
       </div>
-      {hasSubmitted && <Link to="/" />}
-    </div>
+    </section>
   );
 }
 export default PersonalDetails;
