@@ -72,6 +72,7 @@ function PersonalDetails({ cartItems, ...props }) {
           </Button>
         </Link>
       </form>
+
       <div className="col-6" {...props}>
         {cartItems.length > 0 ? (
           cartItems.map((item) => (
