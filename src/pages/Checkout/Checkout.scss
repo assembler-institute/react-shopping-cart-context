@@ -20,6 +20,7 @@
       border-radius: 3px;
       border: 1px solid lightgray;
       background-color: white;
+      cursor: pointer;
 
       img {
         height: 150%;
@@ -74,6 +75,10 @@
       width: 50%;
       input {
         margin-right: 10px;
+        cursor: pointer;
+      }
+      label {
+        cursor: pointer;
       }
     }
 
