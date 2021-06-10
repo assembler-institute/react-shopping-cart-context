@@ -1,12 +1,13 @@
 // import React, { useState, useContext } from "react";
 import React, { useState, useEffect, useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 
 import SummaryCartItem from "../../components/SummaryCartItem";
 import withLayout from "../../hoc/withLayout";
+import { skipRoutes, getPageIndex } from "../../helpers/order-pages";
 
 import CheckoutContext from "../../context/checkout-context";
-import { HOME } from "../../constants/routes";
+import { HOME, SUMMARY } from "../../constants/routes";
 import ButtonLink from "../../components/ButtonLink";
 
 import "./Summary.scss";
@@ -30,9 +31,13 @@ function Summary({
   discount = 20,
 }) {
   const [total, setTotal] = useState(0);
-  const { clearCheckoutContext, paymentMethod, address, name } = useContext(
-    CheckoutContext,
-  );
+  const {
+    clearCheckoutContext,
+    paymentMethod,
+    address,
+    name,
+    actualPage,
+  } = useContext(CheckoutContext);
   const history = useHistory();
 
   useEffect(() => {
@@ -141,6 +146,10 @@ function Summary({
       <div className="col col-12 d-flex justify-content-center">
         <ButtonLink page={HOME}>Go home</ButtonLink>
       </div>
+
+      {skipRoutes && actualPage < getPageIndex(SUMMARY) && (
+        <Redirect to={HOME} />
+      )}
     </div>
   );
 }
