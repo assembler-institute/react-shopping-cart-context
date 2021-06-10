@@ -1,0 +1,48 @@
+.flex-prop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.select-wrapper {
+  border: 1px solid rgb(206, 206, 206);
+  border-radius: 5px;
+  height: 35px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.select-fail {
+  border-color: red;
+}
+
+.select-success {
+  border-color: green;
+}
+
+.select-input {
+  width: 100%;
+  border: none;
+}
+
+.select-input:focus {
+  outline: none;
+}
+
+.select-feedback {
+  font-size: 13px;
+  color: red;
+}
+
+.select-child {
+  width: 110px;
+  border: none;
+}
+
+.custom-icon-fail {
+  color: red;
+}
+
+.custom-icon-success {
+  color: green;
+}

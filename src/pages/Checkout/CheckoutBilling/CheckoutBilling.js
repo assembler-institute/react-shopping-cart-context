@@ -60,7 +60,7 @@ function CheckoutBilling({ setProcessCompletedFlags }) {
 
   return (
     <>
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} id="billingForm">
         <Input
           type="text"
           label="Address"
@@ -105,16 +105,22 @@ function CheckoutBilling({ setProcessCompletedFlags }) {
           hasErrorMessage={formik.touched.country}
           errorMessage={formik.errors.country}
         />
-        <Link to={PROFILE_URL}>
-          <Button>Return to Profile</Button>
-        </Link>
-        <Button submitButton disabled={formik.isValidating || !formik.isValid}>
-          {formik.isSubmitting ? "Going to Payment..." : "Go to Payment"}
-        </Button>
       </form>
+      <div className="navigation-buttons d-flex justify-content-between">
+        <Link to={PROFILE_URL}>
+          <Button>Profile</Button>
+        </Link>
+        <Button
+          submitButton
+          form="billingForm"
+          disabled={formik.isValidating || !formik.isValid}
+        >
+          {formik.isSubmitting ? "Going to Payment..." : "Payment"}
+        </Button>
 
-      {hasSubmitted && <Redirect to={PAYMENT_URL} />}
-      {!loginData.isLogged && <Redirect to={HOME_URL} />}
+        {hasSubmitted && <Redirect to={PAYMENT_URL} />}
+        {!loginData.isLogged && <Redirect to={HOME_URL} />}
+      </div>
     </>
   );
 }

@@ -6,11 +6,12 @@ import withLayout from "../../hoc/withLayout";
 import ProcessBar from "../../components/ProcessBar";
 import Sidebar from "../../components/Sidebar";
 import CheckoutProfile from "./CheckoutProfile";
+import CheckoutPayment from "./CheckoutPayment";
 import CheckoutBilling from "./CheckoutBilling/CheckoutBilling";
 
 import FormContextProvider from "../../components/ContextComponents/FormContextProvider";
 
-import { BILLING, PROFILE } from "../../utils/constants";
+import { PROFILE, BILLING, PAYMENT } from "../../utils/constants";
 
 import "./Checkout.scss";
 
@@ -37,6 +38,11 @@ function Checkout({ processStep, cartItems }) {
           )}
           {processStep === BILLING && (
             <CheckoutBilling
+              setProcessCompletedFlags={setProcessCompletedFlags}
+            />
+          )}
+          {processStep === PAYMENT && (
+            <CheckoutPayment
               setProcessCompletedFlags={setProcessCompletedFlags}
             />
           )}

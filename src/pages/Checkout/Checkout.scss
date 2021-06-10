@@ -1,3 +1,92 @@
+// General
 .checkout {
   min-height: 620px;
+}
+
+// Payment page
+.step-bottom {
+  .payment-methods {
+    height: 60px;
+    input {
+      display: none;
+    }
+    input:checked + .payment-method {
+      border: 1px solid rgb(4, 123, 254);
+    }
+
+    .payment-method {
+      height: 100%;
+      width: 30%;
+      border-radius: 3px;
+      border: 1px solid lightgray;
+      background-color: white;
+      cursor: pointer;
+
+      img {
+        height: 150%;
+        width: auto;
+      }
+    }
+  }
+
+  .form-wrapper {
+    flex-grow: 1px;
+
+    .accepted-methods {
+      p {
+        margin-bottom: 0;
+      }
+      .card-method {
+        width: 50px;
+        border: 1px solid lightgray;
+        background-color: white;
+        border-radius: 3px;
+        margin-right: 10px;
+      }
+    }
+
+    .email-form {
+      width: 50%;
+    }
+
+    .form-and-card {
+      form {
+        width: 40%;
+      }
+
+      form {
+        .form-group {
+          width: 100%;
+        }
+        .short-input {
+          width: 30%;
+          margin-right: 20px;
+        }
+
+        img {
+          max-width: 30px;
+          transform: translateY(10px);
+        }
+      }
+    }
+
+    .card-terms {
+      font-size: 10px;
+      width: 50%;
+      input {
+        margin-right: 10px;
+        cursor: pointer;
+      }
+      label {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.navigation-buttons {
+  margin-top: 16px;
+  button {
+    min-width: 90px;
+  }
 }
