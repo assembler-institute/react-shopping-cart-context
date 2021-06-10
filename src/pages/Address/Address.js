@@ -100,7 +100,11 @@ function Address() {
                 submitButton
                 block
                 disabled={
-                  formik.isValidating || !formik.isValid || !formik.dirty
+                  formik.isValidating ||
+                  !formik.isValid ||
+                  !formik.values.address ||
+                  !formik.values.city ||
+                  !formik.values.zip
                 }
                 handleClick={() =>
                   formik.dirty &&

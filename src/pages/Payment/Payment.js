@@ -191,7 +191,13 @@ function Payment() {
                 submitButton
                 block
                 disabled={
-                  formik.isValidating || !formik.isValid || !formik.dirty
+                  formik.isValidating ||
+                  !formik.isValid ||
+                  !formik.values.carholderName ||
+                  !formik.values.cardNumber ||
+                  !formik.values.cardExpiry ||
+                  !formik.values.cardCvv ||
+                  !formik.values.cardAgreement
                 }
                 handleClick={() =>
                   formik.dirty &&
