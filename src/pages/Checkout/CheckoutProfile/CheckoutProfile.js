@@ -11,7 +11,26 @@ import { HOME_URL, PAYMENT_URL } from "../../../utils/constants";
 
 import { formProfile } from "../form-schema";
 
-function CheckoutProfile() {
+const phonePrefixOptions = [
+  {
+    value: "+34",
+    display: "ES +34",
+  },
+  {
+    value: "+33",
+    display: "FR +33",
+  },
+  {
+    value: "+39",
+    display: "IT +39",
+  },
+  {
+    value: "+49",
+    display: "DE +49",
+  },
+];
+
+function CheckoutProfile({ setProcessCompletedFlags }) {
   const { data: formData, setData: updateFormData } = useContext(FormContext);
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
@@ -19,6 +38,7 @@ function CheckoutProfile() {
     initialValues: {
       name: formData.name,
       email: formData.email,
+      phonePrefix: formData.phonePrefix,
       phone: formData.phone,
     },
     validationSchema: formProfile,
@@ -26,6 +46,10 @@ function CheckoutProfile() {
       updateFormData(values);
       setSubmitting(true);
       setTimeout(() => {
+        setProcessCompletedFlags(({ ...prev }) => ({
+          ...prev,
+          profile: true,
+        }));
         setHasSubmitted(true);
       }, 500);
     },
@@ -33,7 +57,7 @@ function CheckoutProfile() {
 
   return (
     <>
-      <form onSubmit={formik.handleSubmit} className="col col-8">
+      <form onSubmit={formik.handleSubmit}>
         <Input
           type="text"
           label="Name"
@@ -57,6 +81,16 @@ function CheckoutProfile() {
           errorMessage={formik.errors.email}
         />
         <Input
+          withSelect={{
+            id: "phonePrefix",
+            options: phonePrefixOptions,
+            value: formik.values.phonePrefix,
+            placeholder: "Prefix...",
+            handleChange: formik.handleChange,
+            handleBlur: formik.handleBlur,
+            hasErrorMessage: formik.touched.phonePrefix,
+            errorMessage: formik.errors.phonePrefix,
+          }}
           type="text"
           label="Phone number"
           id="phone"

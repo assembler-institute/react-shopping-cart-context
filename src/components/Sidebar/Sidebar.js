@@ -29,7 +29,7 @@ function Sidebar() {
     },
   });
   return (
-    <div id="sidebar" className="col col-4">
+    <>
       <div className=" col sidebar-title mb-4">
         <h2>Checkout summary</h2>
       </div>
@@ -88,7 +88,7 @@ function Sidebar() {
           <strong> {customTotal}€</strong>
         </h4>
       </div>
-    </div>
+    </>
   );
 }
 

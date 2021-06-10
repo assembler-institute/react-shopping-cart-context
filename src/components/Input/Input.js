@@ -1,8 +1,10 @@
 import React from "react";
+import Select from "../Select";
 
 const classNames = require("classnames");
 
 function Input({
+  withSelect,
   type = "text",
   label = "input-01",
   id = "input-01",
@@ -29,6 +31,18 @@ function Input({
   return (
     <div className={formItemClasses}>
       <label htmlFor={id}>{label}</label>
+      {withSelect && (
+        <Select
+          id={withSelect.id}
+          value={withSelect.value}
+          options={withSelect.options}
+          placeholder={withSelect.placeholder}
+          handleChange={withSelect.handleChange}
+          handleBlur={withSelect.handleBlur}
+          hasErrorMessage={withSelect.hasErrorMessage}
+          errorMessage={withSelect.errorMessage}
+        />
+      )}
       <input
         className={inputClasses}
         id={id}

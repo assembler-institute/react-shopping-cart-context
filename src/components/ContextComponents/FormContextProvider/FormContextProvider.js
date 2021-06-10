@@ -6,6 +6,7 @@ import FormContext from "../../../context/form-context";
 const initialValueFormData = {
   name: "",
   email: "",
+  phonePrefix: "",
   phone: "",
   address: "",
   city: "",
@@ -49,7 +50,6 @@ function FormContextProvider({ children }) {
   const [formData, dispatch] = useReducer(reducerForm, initialValueFormData);
 
   useEffect(() => {
-    // console.clear();
     console.log(formData);
   }, [formData]);
 

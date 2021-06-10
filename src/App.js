@@ -233,6 +233,7 @@ function App() {
               handleDownVote={handleDownVote}
               handleUpVote={handleUpVote}
               handleSetFavorite={handleSetFavorite}
+              showNewProductForm
               // handleAddToCart={handleAddToCart}
               // handleRemove={handleRemove}
               // handleChange={handleChange}

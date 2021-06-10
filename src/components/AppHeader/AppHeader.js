@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 import "./AppHeader.scss";
 
-function AppHeader({ ...props }) {
+function AppHeader({ showNewProductForm, ...props }) {
   return (
     <header className="bg-primary mb-4" {...props}>
       <div className="container-fluid">
@@ -18,18 +18,20 @@ function AppHeader({ ...props }) {
               Home
             </NavLink>
 
-            <ul className="navbar-nav mr-auto">
-              <li className="nav-item">
-                <NavLink
-                  exact
-                  activeClassName="active"
-                  className="nav-link"
-                  to="/new-product"
-                >
-                  New Product
-                </NavLink>
-              </li>
-            </ul>
+            {showNewProductForm && (
+              <ul className="navbar-nav mr-auto">
+                <li className="nav-item">
+                  <NavLink
+                    exact
+                    activeClassName="active"
+                    className="nav-link"
+                    to="/new-product"
+                  >
+                    New Product
+                  </NavLink>
+                </li>
+              </ul>
+            )}
           </nav>
         </div>
       </div>
