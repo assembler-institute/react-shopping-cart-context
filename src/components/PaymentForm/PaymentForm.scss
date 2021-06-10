@@ -36,6 +36,9 @@ $iconBoxBorderRadius: 5px;
       }
     }
   }
+  &__apple_pay {
+    height: 40px;
+  }
 }
 
 @media only screen and (max-width: 1200px) {

@@ -11,20 +11,20 @@ function PaymentConfirmation() {
     <div>
       <h2>Payment summary</h2>
       <hr />
-      <p className="clientBox">
+      <div className="clientBox">
         <h6> Card holder name: </h6>
         {payment.cardHolderName}
-      </p>
+      </div>
       <hr className="linebreak" />
-      <p className="clientBox paymentSum">
+      <div className="clientBox paymentSum">
         <h6>Card number: </h6>
         {payment.cardNumber}
-      </p>
+      </div>
       <hr />
-      <p className="clientBox paymentSum">
+      <div className="clientBox paymentSum">
         <h6>Payment method: </h6>
         {payment.payMethod}
-      </p>
+      </div>
       <hr />
     </div>
   );

@@ -99,11 +99,9 @@ function PaymentForm() {
               errorMessage={formik.errors.payMethod}
             />
             {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-            {/* <label className="form-check-label" htmlFor="inlineRadio3">
-              <ApplePayIcon />
-            </label> */}
           </div>
         </div>
+
         <div className="mt-4">
           <p className="text-secondary">
             We accept the following debit/credit cards
@@ -201,6 +199,25 @@ function PaymentForm() {
             </div>
           </div>
         </div>
+        {formik.values.payMethod === "Paypal" && (
+          <div className="m-4 text-center">
+            <img
+              src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-large.png"
+              alt="Check out with PayPal"
+              disabled={formik.isValidating || !formik.isValid}
+            />
+          </div>
+        )}
+        {formik.values.payMethod === "Apple Pay" && (
+          <div className="m-4 text-center">
+            <img
+              className="PaymentForm__apple_pay"
+              src="https://developer.apple.com/design/human-interface-guidelines/apple-pay/images/ApplePay-PayWith_2x.png"
+              alt="Check out with Apple Pay"
+              disabled={formik.isValidating || !formik.isValid}
+            />
+          </div>
+        )}
         <Button
           submitButton
           block
