@@ -1,6 +1,7 @@
 import React from "react";
 import cn from "clsx";
 import { useHistory } from "react-router-dom";
+import ButtonMUI from "@material-ui/core/Button";
 // import { Link } from "react-router-dom";
 
 function ButtonLink({
@@ -26,7 +27,9 @@ function ButtonLink({
   }
 
   return (
-    <button
+    <ButtonMUI
+      variant="contained"
+      color="primary"
       className={classes}
       type="button"
       disabled={disabled}
@@ -34,7 +37,7 @@ function ButtonLink({
       {...props}
     >
       {children}
-    </button>
+    </ButtonMUI>
 
     // <Link className={classes} disabled={disabled} to={page} {...props}>
     //   {children}
