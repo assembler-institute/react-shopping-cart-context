@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useLocation } from "react-router-dom";
 import Main from "../components/Main";
+import { StateContext } from "../context/state-context";
 
 function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name || "Component";
@@ -14,20 +15,67 @@ function formHeader(WrappedComponent) {
 
   function WrapperComponent({ ...props }) {
     const path = useLocation();
-    console.log(path);
-    // const url = path.pathname;
+    const value = useContext(StateContext);
+    const { currentStep } = value;
 
     return (
       <div className="col col-8">
         <header className="mt-4 mb-4 p-0 d-flex container" {...props}>
-          <h6 className="mr-3 text-primary font-weight-bold">1. Account</h6>
-          <h6 className="mr-3 text-muted">2. Billing</h6>
-          <h6 className="mr-3 text-muted">3. Payment</h6>
-          <h6 className="mr-3 text-muted">4. Resume</h6>
+          <h6
+            className={
+              currentStep >= 1
+                ? "mr-3 text-primary font-weight-bold"
+                : "mr-3 text-primary"
+            }
+          >
+            1. Account
+          </h6>
+          <h6
+            className={
+              currentStep >= 2
+                ? "mr-3 text-primary font-weight-bold"
+                : "mr-3 text-muted"
+            }
+          >
+            2. Billing
+          </h6>
+          <h6
+            className={
+              currentStep >= 3
+                ? "mr-3 text-primary font-weight-bold"
+                : "mr-3 text-muted"
+            }
+          >
+            3. Payment
+          </h6>
+          <h6
+            className={
+              currentStep >= 4
+                ? "mr-3 text-primary font-weight-bold"
+                : "mr-3 text-muted"
+            }
+          >
+            4. Resume
+          </h6>
         </header>
-        {/* {title && (
-          <h3 className="mb-3 pb-2 border-bottom text-primary">{title}</h3>
-        )} */}
+        {path.pathname === "/checkout/step-1" && (
+          <h3 className="mb-3 pb-2 border-bottom text-primary">Your details</h3>
+        )}
+        {path.pathname === "/checkout/step-2" && (
+          <h3 className="mb-3 pb-2 border-bottom text-primary">
+            Billing details
+          </h3>
+        )}
+        {path.pathname === "/checkout/step-3" && (
+          <h3 className="mb-3 pb-2 border-bottom text-primary">
+            Payment details
+          </h3>
+        )}
+        {path.pathname === "/checkout/order-summary" && (
+          <h3 className="mb-3 pb-2 border-bottom text-primary">
+            Your order have been completed!
+          </h3>
+        )}
         <Main className="border-bottom pb-3">
           <WrappedComponent {...props} />
         </Main>

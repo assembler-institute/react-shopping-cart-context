@@ -24,6 +24,7 @@ export const initialState = {
     conditions: false,
     paymentInfo: false,
   },
+  currentStep: 0,
 };
 
 export const ACTIONS = {
@@ -39,6 +40,7 @@ export const reducer = (state, action) => {
       return {
         ...state,
         cartItems: action.payload,
+        currentStep: 1,
       };
     case ACTIONS.ADD_ACCOUNT:
       return {
@@ -49,6 +51,7 @@ export const reducer = (state, action) => {
           phoneNumber: action.payload.phone,
           userInfo: true,
         },
+        currentStep: 2,
       };
     case ACTIONS.ADD_BILLING:
       return {
@@ -60,6 +63,7 @@ export const reducer = (state, action) => {
           country: action.payload.country,
           billingInfo: true,
         },
+        currentStep: 3,
       };
     case ACTIONS.ADD_PAYMENT:
       return {
@@ -73,6 +77,7 @@ export const reducer = (state, action) => {
           conditions: action.payload.conditions,
           paymentInfo: true,
         },
+        currentStep: 4,
       };
     default:
       return state;
