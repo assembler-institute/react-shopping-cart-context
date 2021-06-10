@@ -1,9 +1,9 @@
 import { createContext } from "react";
 
 const ShoppingContext = createContext({
-  path: 1,
-  nextPath: () => {},
-  prevPath: () => {},
+  progresBar: 1,
+  nextProgress: () => {},
+
   details: {},
   updateDetails: () => {},
   cartItems: [],

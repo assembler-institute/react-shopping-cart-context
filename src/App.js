@@ -33,26 +33,20 @@ function buildNewCartItem(cartItem) {
 
 const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
 const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
-const INCREMENT = "INCREMENT";
-const DECREMENT = "DECREMENT";
+const PROGRES = "PROGRES";
 const UPDATEDETAILS = "UPDATEDETAILS";
 const UPDATEADRESS = "UPDATEADRESS";
 const UPDATEPAYMENT = "UPDATEPAYMENT";
 // const RESET = "RESET";
 function reducer(state, action) {
   switch (action.type) {
-    case INCREMENT: {
+    case PROGRES: {
       return {
         ...state,
-        path: state.path + 1,
+        progresBar: state.progresBar + 1,
       };
     }
-    case DECREMENT: {
-      return {
-        ...state,
-        path: state.path - 1,
-      };
-    }
+
     case UPDATEDETAILS: {
       return {
         ...state,
@@ -79,7 +73,7 @@ function reducer(state, action) {
 }
 function App() {
   const [state, dispatch] = useReducer(reducer, {
-    path: 1,
+    progresBar: 1,
   });
   const [products, setProducts] = useState(() =>
     loadLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY, []),
@@ -230,12 +224,10 @@ function App() {
     setProducts((prevState) => [newProduct, ...prevState]);
   }
 
-  function nextPath() {
-    dispatch({ type: INCREMENT });
+  function nextProgress() {
+    dispatch({ type: PROGRES });
   }
-  function prevPath() {
-    dispatch({ type: DECREMENT });
-  }
+
   function updateDetails(newDetails) {
     dispatch({
       type: UPDATEDETAILS,
@@ -257,13 +249,12 @@ function App() {
   return (
     <ShoppingContext.Provider
       value={{
-        path: state.path,
+        progresBar: state.progresBar,
         details: state.details,
         adressData: state.adressData,
         paymentData: state.paymentData,
         cartItems: cartItems,
-        nextPath: nextPath,
-        prevPath: prevPath,
+        nextProgress: nextProgress,
         updateDetails: updateDetails,
         updateAdress: updateAdress,
         updatePayment: updatePayment,
