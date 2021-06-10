@@ -1,5 +1,7 @@
 import React from "react";
 
+import Button from "../Button";
+
 function LoginModal() {
   return (
     <div
@@ -14,29 +16,29 @@ function LoginModal() {
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id="exampleModalLabel">
-              Modal title
+              Log in modal
             </h5>
-            <button
+            <Button
               type="button"
               className="close"
               data-dismiss="modal"
               aria-label="Close"
             >
               <span aria-hidden="true">&times;</span>
-            </button>
+            </Button>
           </div>
-          <div className="modal-body"></div>
+          <div className="modal-body">Login form</div>
           <div className="modal-footer">
-            <button
+            <Button
               type="button"
               className="btn btn-secondary"
               data-dismiss="modal"
             >
               Close
-            </button>
-            <button type="button" className="btn btn-primary">
-              Save changes
-            </button>
+            </Button>
+            <Button type="button" className="btn btn-primary">
+              Log in
+            </Button>
           </div>
         </div>
       </div>
