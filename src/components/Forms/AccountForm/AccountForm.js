@@ -23,15 +23,15 @@ function AccountForm() {
     },
     validationSchema: accountSchema,
     onSubmit: () => {
-      dispatch({
-        type: ACTIONS.ADD_ACCOUNT,
-        payload: {
-          name: formik.values.clientName,
-          email: formik.values.clientEmail,
-          phone: formik.values.clientPhone,
-        },
-      });
       setTimeout(() => {
+        dispatch({
+          type: ACTIONS.ADD_ACCOUNT,
+          payload: {
+            name: formik.values.clientName,
+            email: formik.values.clientEmail,
+            phone: formik.values.clientPhone,
+          },
+        });
         setHasSubmitted(true);
       }, 500);
     },

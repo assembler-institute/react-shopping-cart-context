@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
+import { StateContext } from "../../context/state-context";
 
 import "./ShoppingCartItem.scss";
 
 function SummaryItem({ img, title, price, quantity }) {
-  const isCompleted = true;
+  const value = useContext(StateContext);
+  const { currentStep } = value;
   return (
-    <div className={isCompleted ? "col col-6" : "col"}>
+    <div className={currentStep === 4 ? "col col-4" : "col"}>
       <div className="row flex-column">
         <div className="col">
           <div className="row">

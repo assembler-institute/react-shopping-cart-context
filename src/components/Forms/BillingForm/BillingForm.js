@@ -24,16 +24,16 @@ function BillingForm() {
     },
     validationSchema: billingSchema,
     onSubmit: () => {
-      dispatch({
-        type: ACTIONS.ADD_BILLING,
-        payload: {
-          address: formik.values.clientAdress,
-          city: formik.values.clientCity,
-          postCode: formik.values.clientZip,
-          country: formik.values.clientCountry,
-        },
-      });
       setTimeout(() => {
+        dispatch({
+          type: ACTIONS.ADD_BILLING,
+          payload: {
+            address: formik.values.clientAdress,
+            city: formik.values.clientCity,
+            postCode: formik.values.clientZip,
+            country: formik.values.clientCountry,
+          },
+        });
         setHasSubmitted(true);
       }, 500);
     },

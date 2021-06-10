@@ -32,18 +32,18 @@ function PaymentForm() {
     },
     validationSchema: paymentSchema,
     onSubmit: () => {
-      dispatch({
-        type: ACTIONS.ADD_PAYMENT,
-        payload: {
-          paymentType: "creditCardPay",
-          cardholderName: formik.values.clientCardholderName,
-          cardNumber: formik.values.clientCardNumber,
-          cardExpiryDate: formik.values.clientCardExpiryDate,
-          cvvCode: formik.values.clientCardCvvCode,
-          conditions: "false",
-        },
-      });
       setTimeout(() => {
+        dispatch({
+          type: ACTIONS.ADD_PAYMENT,
+          payload: {
+            paymentType: "creditCardPay",
+            cardholderName: formik.values.clientCardholderName,
+            cardNumber: formik.values.clientCardNumber,
+            cardExpiryDate: formik.values.clientCardExpiryDate,
+            cvvCode: formik.values.clientCardCvvCode,
+            conditions: "false",
+          },
+        });
         setHasSubmitted(true);
       }, 500);
     },
