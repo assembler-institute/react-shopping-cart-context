@@ -23,7 +23,7 @@ function OrderConfirmation() {
         </div>
         <hr />
         <div className="clientBox ">
-          <h6>Phone Number: </h6> {user[0].phone}
+          <h6>Phone Number: </h6>+{user[0].prefix} {user[0].phone}
         </div>
         <hr />
         <div className="clientBox ">

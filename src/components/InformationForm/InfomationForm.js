@@ -8,6 +8,7 @@ import Input from "../Input";
 import Button from "../Button";
 
 import InformationSchema from "./information-schema";
+import PrefixSelect from "../PrefixSelect/PrefixSelect";
 
 function InformationForm({ saveUser }) {
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -16,6 +17,7 @@ function InformationForm({ saveUser }) {
     initialValues: {
       firstName: "",
       lastName: "",
+      prefix: "",
       phone: "",
       email: "",
       addressOne: "",
@@ -36,7 +38,6 @@ function InformationForm({ saveUser }) {
       }, 500);
     },
   });
-  // eslint-disable-next-line no-console
 
   return (
     <>
@@ -62,6 +63,17 @@ function InformationForm({ saveUser }) {
           handleBlur={formik.handleBlur}
           hasErrorMessage={formik.touched.lastName}
           errorMessage={formik.errors.lastName}
+        />
+        <PrefixSelect
+          type="number"
+          label="Prefix"
+          id="prefix"
+          value={formik.values.prefix}
+          placeholder="Phone Number"
+          handleChange={formik.handleChange}
+          handleBlur={formik.handleBlur}
+          hasErrorMessage={formik.touched.prefix}
+          errorMessage={formik.errors.prefix}
         />
         <Input
           type="tel"
