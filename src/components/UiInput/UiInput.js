@@ -45,7 +45,6 @@ function UiInput({
       id={id}
       label={label}
       name={id}
-      variant="filled"
       size="small"
       value={value}
       onChange={onHandleChange}
@@ -54,7 +53,6 @@ function UiInput({
       error={hasErrorMessage && Boolean(errorMessage)}
       helperText={hasErrorMessage && errorMessage}
       type={type}
-      // inputProps={{ maxLength: maxLength }}
       {...props}
       InputProps={{
         endAdornment: (

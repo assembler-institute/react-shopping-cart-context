@@ -50,7 +50,6 @@ function UiPhoneInput({
           id={id}
           label={label}
           name={id}
-          variant="filled"
           size="small"
           value={value}
           onChange={handleChange}

@@ -88,7 +88,11 @@ function Detail() {
                   submitButton
                   block
                   disabled={
-                    formik.isValidating || !formik.isValid || !formik.dirty
+                    formik.isValidating ||
+                    !formik.isValid ||
+                    !formik.values.name ||
+                    !formik.values.email ||
+                    !formik.values.tel
                   }
                   handleClick={() =>
                     formik.dirty &&
