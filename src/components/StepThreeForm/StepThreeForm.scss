@@ -1,0 +1,83 @@
+.paymentCanvas {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 190px;
+  align-items: center;
+  border: 1.5px solid #495057;
+  border-radius: 5px;
+  padding: 0 5px;
+  margin: 10px 0;
+  overflow: hidden;
+}
+
+.credit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+  border: 0.1px solid #49505746;
+  border-radius: 5px;
+  margin: 0 10px 10px 0;
+}
+
+.cardData {
+  width: 45%;
+}
+
+.smallFields {
+  display: flex;
+  align-items: space-between;
+  input {
+    width: 95%;
+  }
+}
+
+.rightCol {
+  width: 50%;
+  display: flex;
+}
+
+.mockup {
+  width: 100%;
+  background-image: url("../../assets/img/cardMockup.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-top: 3%;
+}
+
+.dataTranslation {
+  margin-top: 20%;
+  text-align: left;
+  color: white;
+  font-size: 18px;
+  p {
+    margin-bottom: 20px;
+    margin-left: 10%;
+    height: 25px;
+  }
+  p:first-child {
+    margin-right: 10%;
+    text-align: right;
+  }
+}
+
+.smallOutput {
+  margin: 0 10%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.terms {
+  font-size: 0.9rem;
+  align-items: center;
+  label {
+    width: 15px;
+    margin-right: 15px;
+    margin-top: 7px;
+  }
+  .form-control:focus {
+    box-shadow: none;
+  }
+}
