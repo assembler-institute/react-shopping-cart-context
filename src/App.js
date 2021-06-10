@@ -122,14 +122,10 @@ function App() {
 
   function saveUser(userData) {
     setUser((prevState) => [...prevState, userData]);
-    // eslint-disable-next-line no-console
-    console.log(userData);
   }
 
   function savePaymentInfo(paymentData) {
     setPaymentInfo((prevState) => [...prevState, paymentData]);
-    // eslint-disable-next-line no-console
-    console.log(paymentData, "payment info");
   }
   return (
     <CartContextProvider>

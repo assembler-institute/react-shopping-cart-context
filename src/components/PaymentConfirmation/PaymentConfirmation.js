@@ -4,8 +4,7 @@ import "../OrderConfirmation/OrderConfirmation.scss";
 
 function PaymentConfirmation() {
   const { paymentInfo } = useContext(PaymentContext);
-  // eslint-disable-next-line no-console
-  console.log(paymentInfo);
+
   const payment = paymentInfo[0];
   return (
     <div>

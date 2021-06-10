@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
-// import { Link } from "react-router-dom";
 
 import ShoppingCartItem from "../ShoppingCartItem";
-// import Button from "../Button";
+
 import CartContext from "../../context/cartContext";
 
 function getCartTotal(cart) {

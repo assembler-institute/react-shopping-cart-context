@@ -14,7 +14,6 @@ import {
   VisaCardIcon,
   MasterCardIcon,
   AmexCardIcon,
-  // CardImage,
 } from "../SVGIcons";
 
 import "./PaymentForm.scss";
@@ -64,7 +63,6 @@ function PaymentForm() {
               hasErrorMessage={formik.touched.payMethod}
               errorMessage={formik.errors.payMethod}
             />
-            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
           </div>
           <div className="PaymentForm__method form-check form-check-inline pt-2 pl-3">
             <Radio
@@ -79,10 +77,6 @@ function PaymentForm() {
               hasErrorMessage={formik.touched.payMethod}
               errorMessage={formik.errors.payMethod}
             />
-            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-            {/* <label className="form-check-label" htmlFor="inlineRadio2">
-              <PaypalIcon />
-            </label> */}
           </div>
 
           <div className="PaymentForm__method form-check form-check-inline pt-2 pl-3">
@@ -178,7 +172,6 @@ function PaymentForm() {
                 </div>
               </div>
               <div className="col mt-4 p-0">
-                {/* <CardImage /> */}
                 <CreditCard values={formik.values} />
               </div>
             </div>
