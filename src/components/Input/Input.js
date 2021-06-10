@@ -22,37 +22,36 @@ function Input({
     tempData(JSON.parse(data));
   }
 
+  function customClass() {
+    if (type === "checkbox") {
+      return "form-check form-switch";
+    }
+    return null;
+  }
+
   return (
     <div
       // className="form-group"
       className={
-        type === "checkbox" ? "custom-control custom-switch" : "form-group"
+        type === "checkbox" || type === "radio" ? customClass() : "form-group"
       }
     >
       {(type !== "checkbox" || type !== "radio") && (
-        <label
-          htmlFor={id}
-          className={type === "checkbox" ? "custom-control-label" : "mt-3 mb-2"}
-        >
+        <label htmlFor={id} className={type === "checkbox" ? "" : "mt-3 mb-2"}>
           {label}
         </label>
       )}
       <input
-        // className={
-        //   hasErrorMessage && errorMessage
-        //     ? "form-control is-invalid"
-        //     : "form-control is-valid"
-        // }
         className={
           hasErrorMessage && errorMessage
             ? `${
                 type === "checkbox"
-                  ? "custom-control-input is-invalid"
+                  ? "form-check-input is-invalid mt-4"
                   : "form-control is-invalid"
               }`
             : `${
                 type === "checkbox"
-                  ? "custom-control-input is-valid"
+                  ? "form-check-input is-valid mt-4"
                   : "form-control  is-valid"
               }`
         }

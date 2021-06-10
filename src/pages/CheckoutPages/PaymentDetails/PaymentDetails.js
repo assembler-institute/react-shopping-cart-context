@@ -68,7 +68,7 @@ function PaymentDetails() {
                 handleBlur={formik.handleBlur}
                 hasErrorMessage={formik.touched.paymentMethod}
                 errorMessage={formik.errors.paymentMethod}
-                // className="form-check-input"
+                className="form-check-input"
               />
               <div className="row">
                 <div className="col col-4 pay-method visa" />
@@ -87,7 +87,7 @@ function PaymentDetails() {
                 handleBlur={formik.handleBlur}
                 hasErrorMessage={formik.touched.paymentMethod}
                 errorMessage={formik.errors.paymentMethod}
-                // className="form-check-input"
+                className="form-check-input"
               />
               <div className="col col-12 pay-method paypal" />
             </div>
@@ -102,7 +102,7 @@ function PaymentDetails() {
                 handleBlur={formik.handleBlur}
                 hasErrorMessage={formik.touched.paymentMethod}
                 errorMessage={formik.errors.paymentMethod}
-                // className="form-check-input"
+                className="form-check-input"
               />
               <div className="row">
                 <div className="col col-6 pay-method applepay" />
@@ -165,11 +165,23 @@ function PaymentDetails() {
             </div>
             <div className="col col-6">
               <Cards
-                cvc={state.cvc}
-                expiry={state.cardExpiryDate}
+                cvc={state.tempData.cvc ? state.tempData.cvc : state.cvc}
+                expiry={
+                  state.tempData.cardExpiryDate
+                    ? state.tempData.cardExpiryDate
+                    : state.cardExpiryDate
+                }
                 focused={state.cardFocus}
-                name={state.cardName}
-                number={state.cardNumber}
+                name={
+                  state.tempData.cardName
+                    ? state.tempData.cardName
+                    : state.cardName
+                }
+                number={
+                  state.tempData.cardNumber
+                    ? state.tempData.cardNumber
+                    : state.cardNumber
+                }
               />
             </div>
           </div>

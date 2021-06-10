@@ -47,7 +47,7 @@ const initialCheckoutContext = {
   cvc: "",
   termsConditions: false,
   setPersonalDetails: () => {},
-  tempData: () => {},
+  tempData: {},
   navBar: 12.5,
   disabledPersonalDetails: false,
   disabledBillingAddress: true,
