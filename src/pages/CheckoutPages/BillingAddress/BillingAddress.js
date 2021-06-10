@@ -45,83 +45,86 @@ function BillingAddress({ cartItems }) {
   });
 
   return (
-    <div className="row mt-5">
-      <div className="col col-8">
-        <h4 className="mb-4">Billing Address</h4>
-        <form onSubmit={formik.handleSubmit}>
-          <Input
-            type="text"
-            label="Address"
-            id="address"
-            value={formik.values.address}
-            placeholder="Address"
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-            hasErrorMessage={formik.touched.address}
-            errorMessage={formik.errors.address}
-          />
-          <Input
-            type="text"
-            label="City"
-            id="city"
-            value={formik.values.city}
-            placeholder="City"
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-            hasErrorMessage={formik.touched.city}
-            errorMessage={formik.errors.city}
-          />
-          <Input
-            type="text"
-            label="Zip Code"
-            id="ZC"
-            value={formik.values.ZC}
-            placeholder="Zip Code"
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-            hasErrorMessage={formik.touched.ZC}
-            errorMessage={formik.errors.ZC}
-          />
-          <p className="mb-2 mt-3"> Country </p>
+    <>
+      {state.disabledBillingAddress && <Redirect to="/" />}
+      <div className="row mt-5">
+        <div className="col col-8">
+          <h4 className="mb-4">Billing Address</h4>
+          <form onSubmit={formik.handleSubmit}>
+            <Input
+              type="text"
+              label="Address"
+              id="address"
+              value={formik.values.address}
+              placeholder="Address"
+              handleChange={formik.handleChange}
+              handleBlur={formik.handleBlur}
+              hasErrorMessage={formik.touched.address}
+              errorMessage={formik.errors.address}
+            />
+            <Input
+              type="text"
+              label="City"
+              id="city"
+              value={formik.values.city}
+              placeholder="City"
+              handleChange={formik.handleChange}
+              handleBlur={formik.handleBlur}
+              hasErrorMessage={formik.touched.city}
+              errorMessage={formik.errors.city}
+            />
+            <Input
+              type="text"
+              label="Zip Code"
+              id="ZC"
+              value={formik.values.ZC}
+              placeholder="Zip Code"
+              handleChange={formik.handleChange}
+              handleBlur={formik.handleBlur}
+              hasErrorMessage={formik.touched.ZC}
+              errorMessage={formik.errors.ZC}
+            />
+            <p className="mb-2 mt-3"> Country </p>
 
-          <div className="form-group d-flex mb-4">
-            <select
-              className="country-select w-100"
-              value={formik.values.country}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              id="country"
-            >
-              <option value="Spain">Spain</option>
-              <option value="Italy">Italy</option>
-              <option value="Germany">Germany</option>
-              <option value="France">France</option>
-              <option value="Netherlands">Netherlands</option>
-            </select>
-          </div>
-          <div className="row">
-            <div className="col col-6">
-              <Link className="w-100" to="/checkout/step-1">
-                <Button block>Back</Button>
-              </Link>
-            </div>
-            <div className="col col-6">
-              <Button
-                submitButton
-                block
-                disabled={formik.isValidating || !formik.isValid}
+            <div className="form-group d-flex mb-4">
+              <select
+                className="country-select w-100"
+                value={formik.values.country}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                id="country"
               >
-                {formik.isSubmitting ? "Submitting..." : "Submit"}
-              </Button>
+                <option value="Spain">Spain</option>
+                <option value="Italy">Italy</option>
+                <option value="Germany">Germany</option>
+                <option value="France">France</option>
+                <option value="Netherlands">Netherlands</option>
+              </select>
             </div>
-          </div>
-        </form>
-        {hasSubmitted && <Redirect to="/checkout/step-3" />}
+            <div className="row">
+              <div className="col col-6">
+                <Link className="w-100" to="/checkout/step-1">
+                  <Button block>Back</Button>
+                </Link>
+              </div>
+              <div className="col col-6">
+                <Button
+                  submitButton
+                  block
+                  disabled={formik.isValidating || !formik.isValid}
+                >
+                  {formik.isSubmitting ? "Submitting..." : "Submit"}
+                </Button>
+              </div>
+            </div>
+          </form>
+          {hasSubmitted && <Redirect to="/checkout/step-3" />}
+        </div>
+        <div className="col col-4">
+          <OverviewSidebar className="col" cartItems={cartItems} />
+        </div>
       </div>
-      <div className="col col-4">
-        <OverviewSidebar className="col" cartItems={cartItems} />
-      </div>
-    </div>
+    </>
   );
 }
 

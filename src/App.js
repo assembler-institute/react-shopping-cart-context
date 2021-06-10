@@ -49,7 +49,7 @@ const initialCheckoutContext = {
   setPersonalDetails: () => {},
   tempData: {},
   navBar: 12.5,
-  disabledPersonalDetails: false,
+  disabledPersonalDetails: true,
   disabledBillingAddress: true,
   disabledPaymentDetails: true,
   disabledOrderSummary: true,
@@ -58,10 +58,18 @@ const initialCheckoutContext = {
 function reducer(state, action) {
   switch (action.type) {
     case SETISCHECKOUT: {
-      return { ...state, isCheckoutDisabled: true };
+      return {
+        ...state,
+        isCheckoutDisabled: true,
+        disabledPersonalDetails: true,
+      };
     }
     case RESETISCHECKOUT: {
-      return { ...state, isCheckoutDisabled: false };
+      return {
+        ...state,
+        isCheckoutDisabled: false,
+        disabledPersonalDetails: false,
+      };
     }
     case LOADCHECKOUTDATA: {
       return {
