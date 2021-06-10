@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { useFormik } from "formik";
 
@@ -9,6 +9,7 @@ import { skipRoutes, getPageIndex } from "../../helpers/order-pages";
 
 import detailSchema from "./Detail-schema";
 import { DETAIL, ADDRESS, HOME } from "../../constants/routes";
+import { CHECKOUT_CONTEXT_KEY } from "../../constants/local-storage-keys";
 import withCheckoutLayout from "../../hoc/withCheckoutLayout";
 import CheckoutContext from "../../context/checkout-context";
 import ButtonLink from "../../components/ButtonLink";
@@ -18,6 +19,16 @@ function Detail() {
   const { updateCheckoutContext, actualPage, name, email, tel } = useContext(
     CheckoutContext,
   );
+
+  useEffect(() => {
+    const localStorageContext = JSON.parse(
+      localStorage.getItem(CHECKOUT_CONTEXT_KEY),
+    );
+    if (localStorageContext) {
+      updateCheckoutContext(localStorageContext);
+    }
+  }, []);
+
   const formik = useFormik({
     initialValues: {
       name: name,
@@ -32,7 +43,7 @@ function Detail() {
         setHasSubmitted(true);
       }, 500);
     },
-    // validateOnMount: true,
+    enableReinitialize: true,
   });
 
   return (
