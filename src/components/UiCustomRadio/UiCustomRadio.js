@@ -13,7 +13,10 @@ export default function UiCustomRadio({
 }) {
   return (
     <div
-      className={clsx("radio-border-box", chosenValue === value && "selected")}
+      className={clsx(
+        "radio-border-box mb-2 mb-lg-0",
+        chosenValue === value && "selected",
+      )}
       key={value}
     >
       <FormControlLabel
