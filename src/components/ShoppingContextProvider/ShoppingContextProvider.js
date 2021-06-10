@@ -93,7 +93,7 @@ function ShoppingContextProvider({ children }) {
     shoppingInitialState,
     () => {
       const localData = localStorage.getItem("react-context");
-      return localData ? JSON.parse(localData) : [];
+      return localData ? JSON.parse(localData) : shoppingInitialState;
     },
   );
   // const { personalDetails, shippingDetails, paymentDetails } = state;
