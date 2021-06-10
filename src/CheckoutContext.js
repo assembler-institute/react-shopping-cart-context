@@ -17,7 +17,6 @@ export const orderContext = createContext({
   },
   stepThree: {
     completed: false,
-    payMethod: "",
     cardHolder: "",
     cardNumber: "",
     expiryDate: "",
@@ -54,6 +53,7 @@ export const checkInitialState = {
 
 const SUBMITONE = "SUBMITONE";
 const SUBMITTWO = "SUBMITTWO";
+const SUBMITTHREE = "SUBMITTHREE";
 
 export function checkoutReducer(state, action) {
   switch (action.type) {
@@ -67,6 +67,15 @@ export function checkoutReducer(state, action) {
       };
     }
     case SUBMITTWO: {
+      return {
+        ...state,
+        stepTwo: {
+          ...action.payload,
+          completed: true,
+        },
+      };
+    }
+    case SUBMITTHREE: {
       return {
         ...state,
         stepTwo: {
@@ -93,8 +102,15 @@ export function CheckoutContext({ children }) {
 
   function submitStepTwo(formTwo) {
     dispatch({
-      type: SUBMITONE,
+      type: SUBMITTWO,
       payload: formTwo,
+    });
+  }
+
+  function submitStepThree(formThree) {
+    dispatch({
+      type: SUBMITTHREE,
+      payload: formThree,
     });
   }
 
@@ -120,6 +136,7 @@ export function CheckoutContext({ children }) {
         },
         submitStepOne: submitStepOne,
         submitStepTwo: submitStepTwo,
+        submitStepThree: submitStepThree,
       }}
     >
       {children}
