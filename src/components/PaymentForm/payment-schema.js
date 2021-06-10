@@ -59,7 +59,7 @@ const paymentSchema = Yup.object().shape({
         return true;
       },
     ),
-  cvvCode: Yup.string().min(3).max(4).required("CVV code is required!"),
+  cvvCode: Yup.string().max(3).required("CVV code is required!"),
   termCheck: Yup.boolean()
     .required("The terms and conditions must be accepted.")
     .oneOf([true], "The terms and conditions must be accepted."),

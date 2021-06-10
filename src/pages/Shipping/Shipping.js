@@ -23,7 +23,6 @@ function Shipping({ cartItems, handleChange, handleRemove, user }) {
 
         <div className="col col-6">
           <header className="jumbotron">
-            <h3>Your Cart</h3>
             <CartSummary
               cartItems={cartItems}
               handleRemove={handleRemove}

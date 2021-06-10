@@ -14,15 +14,17 @@ import {
   VisaCardIcon,
   MasterCardIcon,
   AmexCardIcon,
-  CardImage,
+  // CardImage,
 } from "../SVGIcons";
 
 import "./PaymentForm.scss";
 import PaymentContext from "../../context/paymentContext";
+import CreditCard from "../CreditCard";
 
 function PaymentForm() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const { savePaymentInfo } = useContext(PaymentContext);
+
   const formik = useFormik({
     initialValues: {
       payMethod: "",
@@ -48,7 +50,7 @@ function PaymentForm() {
         <p>
           <strong>How would you like to pay?</strong>
         </p>
-        <div className="d-flex justify-content-between">
+        <div className="PaymentForm__methods d-flex justify-content-between">
           <div className="PaymentForm__method form-check form-check-inline p-3">
             <Radio
               className="form-check-input"
@@ -72,7 +74,7 @@ function PaymentForm() {
               id="inlineRadio2"
               label={<PaypalIcon />}
               value="Paypal"
-              onChange={(e) => formik.handleChange(e)}
+              handleChange={formik.handleChange}
               onBlur={formik.handleBlur}
               hasErrorMessage={formik.touched.payMethod}
               errorMessage={formik.errors.payMethod}
@@ -128,7 +130,7 @@ function PaymentForm() {
                     id="cardHolderName"
                     label="Cardholder Name"
                     value={formik.values.cardHolderName}
-                    handleChange={(e) => formik.handleChange(e)}
+                    handleChange={formik.handleChange}
                     handleBlur={formik.handleBlur}
                     hasErrorMessage={formik.touched.cardHolderName}
                     errorMessage={formik.errors.cardHolderName}
@@ -146,8 +148,8 @@ function PaymentForm() {
                     errorMessage={formik.errors.cardNumber}
                   />
                 </div>
-                <div className="d-flex flex-row">
-                  <div className="mr-3">
+                <div className="d-flex flex-row justify-content-between">
+                  <div className="mr-3 w-100">
                     <Input
                       type="tel"
                       name="expiryDate"
@@ -161,7 +163,7 @@ function PaymentForm() {
                       errorMessage={formik.errors.expiryDate}
                     />
                   </div>
-                  <div>
+                  <div className="w-100">
                     <Input
                       type="tel"
                       name="cvvCode"
@@ -177,8 +179,9 @@ function PaymentForm() {
                   </div>
                 </div>
               </div>
-              <div className="col">
-                <CardImage />
+              <div className="col mt-4 p-0">
+                {/* <CardImage /> */}
+                <CreditCard values={formik.values} />
               </div>
             </div>
             <div className="Payment__checkbox form-check form-check-inline p-3">
