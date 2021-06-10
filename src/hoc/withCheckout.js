@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import CheckoutFooter from "../components/CheckoutFooter";
-import CheckoutForm from "../components/CheckoutForm";
 import CheckoutHeader from "../components/CheckoutHeader";
 import CheckoutSideBar from "../components/CheckoutSideBar";
 import ShoppingContext from "../context";
@@ -21,7 +20,7 @@ function Checkout(WrappedComponent) {
       <section className="mainContainer">
         <div className="checkoutContainer">
           <CheckoutHeader />
-          <CheckoutForm />
+
           <WrappedComponent />
           <div>
             <code>{JSON.stringify(useContext(ShoppingContext))}</code>
