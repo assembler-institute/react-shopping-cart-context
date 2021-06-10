@@ -75,6 +75,7 @@ function Address() {
             handleBlur={formik.handleBlur}
             hasErrorMessage={formik.touched.zip}
             errorMessage={formik.errors.zip}
+            type="number"
           />
           <UiSelect
             id="country"
