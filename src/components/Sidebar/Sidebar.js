@@ -25,8 +25,8 @@ function Sidebar() {
     validationSchema: FormSchema,
     onSubmit: () => {
       if (!hasDiscount) {
-        setCustomTotal((total * 0.8).toFixed(2));
-        sethasDiscount(false);
+        setCustomTotal((prevState) => prevState * (0.8).toFixed(2));
+        sethasDiscount(true);
       }
     },
   });
@@ -90,7 +90,7 @@ function Sidebar() {
       <div className="col sidebar-totals d-flex justify-content-between">
         <h4 className="h5">Total</h4>
         <h4>
-          <strong> {customTotal}€</strong>
+          <strong>{customTotal}€</strong>
         </h4>
       </div>
     </>
