@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Redirect, Link } from "react-router-dom";
 import { useFormik, Field, FormikProvider } from "formik";
-// { useState, useEffect, useContext }
 import "./FormShopping.scss";
 
 import ShoppingContext from "../../context/ShoppingContext";
@@ -16,17 +15,13 @@ function PaymentDetails() {
   const { paymentDetails, submitStep3 } = useContext(ShoppingContext);
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [checkedPoly, setCheckedPoly] = useState(false);
-  const [cardNameAnimation, setCardNameAnimation] = useState(
-    "your rich name  ",
-  );
-  const [cardCVVCodeAnimation, setCardCVVCodeAnimation] = useState("xxx");
-  const [cardNumberAnimation, setCardNumberAnimation] = useState(
-    "xxxxxxxxxxxxxxxx",
-  );
+  const [cardNameAnimation, setCardNameAnimation] = useState("");
+  const [cardCVVCodeAnimation, setCardCVVCodeAnimation] = useState("");
+  const [cardNumberAnimation, setCardNumberAnimation] = useState("");
   const [
     cardExpirationDateAnimation,
     setCardExpirationDateAnimation,
-  ] = useState("xx/xx");
+  ] = useState("");
 
   const formik = useFormik({
     initialValues: {
