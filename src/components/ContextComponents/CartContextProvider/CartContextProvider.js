@@ -7,6 +7,7 @@ import loadLocalStorageItems from "../../../utils/loadLocalStorageItems";
 import useLocalStorage from "../../../hooks/useLocalStorage";
 import getCartTotal from "../../../utils/getCartTotal";
 
+// Local storage key
 const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
 const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
 

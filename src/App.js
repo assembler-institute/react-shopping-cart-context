@@ -11,6 +11,7 @@ import useLocalStorage from "./hooks/useLocalStorage";
 import loadLocalStorageItems from "./utils/loadLocalStorageItems";
 
 import CartContextProvider from "./components/ContextComponents/CartContextProvider";
+import LoginContextProvider from "./components/ContextComponents/LoginContextProvider";
 
 // Checkout constants
 import {
@@ -27,18 +28,13 @@ import {
 } from "./utils/constants";
 
 const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
-// const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
 
 function App() {
   const [products, setProducts] = useState(() =>
     loadLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY, []),
   );
-  // const [cartItems, setCartItems] = useState(() =>
-  //   loadLocalStorageItems(CART_ITEMS_LOCAL_STORAGE_KEY, []),
-  // );
 
   useLocalStorage(products, PRODUCTS_LOCAL_STORAGE_KEY);
-  // useLocalStorage(cartItems, CART_ITEMS_LOCAL_STORAGE_KEY);
 
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
@@ -61,55 +57,6 @@ function App() {
         });
     }
   }, []);
-
-  // function handleAddToCart(productId) {
-  //   const prevCartItem = cartItems.find((item) => item.id === productId);
-  //   const foundProduct = products.find((product) => product.id === productId);
-
-  //   if (prevCartItem) {
-  //     const updatedCartItems = cartItems.map((item) => {
-  //       if (item.id !== productId) {
-  //         return item;
-  //       }
-
-  //       if (item.quantity >= item.unitsInStock) {
-  //         return item;
-  //       }
-
-  //       return {
-  //         ...item,
-  //         quantity: item.quantity + 1,
-  //       };
-  //     });
-
-  //     setCartItems(updatedCartItems);
-  //     return;
-  //   }
-
-  //   const updatedProduct = buildNewCartItem(foundProduct);
-  //   setCartItems((prevState) => [...prevState, updatedProduct]);
-  // }
-
-  // function handleChange(event, productId) {
-  //   const updatedCartItems = cartItems.map((item) => {
-  //     if (item.id === productId && item.quantity <= item.unitsInStock) {
-  //       return {
-  //         ...item,
-  //         quantity: Number(event.target.value),
-  //       };
-  //     }
-
-  //     return item;
-  //   });
-
-  //   setCartItems(updatedCartItems);
-  // }
-
-  // function handleRemove(productId) {
-  //   const updatedCartItems = cartItems.filter((item) => item.id !== productId);
-
-  //   setCartItems(updatedCartItems);
-  // }
 
   function handleDownVote(productId) {
     const updatedProducts = products.map((product) => {
@@ -180,68 +127,42 @@ function App() {
   }
 
   return (
-    <CartContextProvider>
-      <BrowserRouter>
-        <Switch>
-          <Route path={PROFILE_URL}>
-            <Checkout
-              fullWidth
-              processStep={PROFILE}
-              // cartItems={cartItems}
-              // handleRemove={handleRemove}
-              // handleChange={handleChange}
-            />
-          </Route>
-          <Route path={BILLING_URL}>
-            <Checkout
-              fullWidth
-              processStep={BILLING}
-              // cartItems={cartItems}
-              // handleRemove={handleRemove}
-              // handleChange={handleChange}
-            />
-          </Route>
-          <Route path={PAYMENT_URL}>
-            <Checkout
-              fullWidth
-              processStep={PAYMENT}
-              // cartItems={cartItems}
-              // handleRemove={handleRemove}
-              // handleChange={handleChange}
-            />
-          </Route>
-          <Route path={SUMMARY_URL}>
-            <Checkout
-              fullWidth
-              processStep={SUMMARY}
-              // cartItems={cartItems}
-              // handleRemove={handleRemove}
-              // handleChange={handleChange}
-            />
-          </Route>
-          <Route path={NEWPROD_URL}>
-            <NewProduct saveNewProduct={saveNewProduct} />
-          </Route>
-          <Route path={HOME_URL} exact>
-            <Home
-              fullWidth
-              // cartItems={cartItems}
-              products={products}
-              isLoading={isLoading}
-              hasError={hasError}
-              loadingError={loadingError}
-              handleDownVote={handleDownVote}
-              handleUpVote={handleUpVote}
-              handleSetFavorite={handleSetFavorite}
-              showNewProductForm
-              // handleAddToCart={handleAddToCart}
-              // handleRemove={handleRemove}
-              // handleChange={handleChange}
-            />
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    </CartContextProvider>
+    <LoginContextProvider>
+      <CartContextProvider>
+        <BrowserRouter>
+          <Switch>
+            <Route path={PROFILE_URL}>
+              <Checkout fullWidth processStep={PROFILE} />
+            </Route>
+            <Route path={BILLING_URL}>
+              <Checkout fullWidth processStep={BILLING} />
+            </Route>
+            <Route path={PAYMENT_URL}>
+              <Checkout fullWidth processStep={PAYMENT} />
+            </Route>
+            <Route path={SUMMARY_URL}>
+              <Checkout fullWidth processStep={SUMMARY} />
+            </Route>
+            <Route path={NEWPROD_URL}>
+              <NewProduct saveNewProduct={saveNewProduct} />
+            </Route>
+            <Route path={HOME_URL} exact>
+              <Home
+                fullWidth
+                products={products}
+                isLoading={isLoading}
+                hasError={hasError}
+                loadingError={loadingError}
+                handleDownVote={handleDownVote}
+                handleUpVote={handleUpVote}
+                handleSetFavorite={handleSetFavorite}
+                showNewProductForm
+              />
+            </Route>
+          </Switch>
+        </BrowserRouter>
+      </CartContextProvider>
+    </LoginContextProvider>
   );
 }
 

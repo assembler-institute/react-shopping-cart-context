@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 import React, { useState, useContext } from "react";
 import { useFormik } from "formik";
+import { Redirect } from "react-router-dom";
 
-// import ShoppingCartItem from "../ShoppingCartItem";
 import SummaryItem from "../SummaryItem";
 
 import "./Sidebar.scss";
@@ -10,6 +10,8 @@ import Button from "../Button";
 import FormSchema from "./form-schema";
 
 import CartContext from "../../context/cart-context";
+
+import { HOME_URL } from "../../utils/constants";
 
 function Sidebar() {
   const { cartItems, total, remove, change } = useContext(CartContext);
@@ -33,7 +35,7 @@ function Sidebar() {
       <div className=" col sidebar-title mb-4">
         <h2>Checkout summary</h2>
       </div>
-      {cartItems.length > 0 &&
+      {cartItems.length > 0 ? (
         cartItems.map((item) => (
           <SummaryItem
             key={item.id}
@@ -46,7 +48,10 @@ function Sidebar() {
             handleRemove={remove}
             handleChange={change}
           />
-        ))}
+        ))
+      ) : (
+        <Redirect to={HOME_URL} />
+      )}
       <div className="col sidebar-disccount">
         <hr className="mt-0" />
 

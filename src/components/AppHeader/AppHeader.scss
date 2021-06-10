@@ -1,2 +1,25 @@
-.AppHeader {
+.navbar {
+  width: 100%;
+  .navbar-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // background-color: red;
+  }
+
+  .right-nav {
+    display: flex;
+    align-items: center;
+    .login-name {
+      color: blue;
+      margin-bottom: 0;
+      margin-right: 20px;
+    }
+    button {
+      min-width: 80px;
+      text-align: center;
+      border: 1px solid white;
+      border-radius: 3px;
+    }
+  }
 }
