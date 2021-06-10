@@ -154,7 +154,7 @@ function CardForm({ paymentMethod, setProcessCompletedFlags }) {
               onBlur={formik.handleBlur}
             />
           </div>
-          <div className="description-terms mb-4">
+          <div className="description-terms">
             <label htmlFor="cardTerms">
               I have read and accept the booking conditions, general terms and
               privacy policy. <br />
@@ -165,7 +165,7 @@ function CardForm({ paymentMethod, setProcessCompletedFlags }) {
         </div>
         <div className="navigation-buttons d-flex justify-content-between">
           <Link to={BILLING_URL}>
-            <Button>Profile</Button>
+            <Button>Billing</Button>
           </Link>
           <Button
             submitButton
@@ -175,7 +175,7 @@ function CardForm({ paymentMethod, setProcessCompletedFlags }) {
               (!formik.isValid && !formik.values.cardTerms)
             }
           >
-            {formik.isSubmitting ? "Going to summary..." : "Summary"}
+            {formik.isSubmitting ? "Going to Summary..." : "Summary"}
           </Button>
 
           {hasSubmitted && <Redirect to={SUMMARY_URL} />}

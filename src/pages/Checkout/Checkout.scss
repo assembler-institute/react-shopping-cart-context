@@ -81,11 +81,12 @@
         cursor: pointer;
       }
     }
+  }
+}
 
-    .navigation-buttons {
-      button {
-        min-width: 90px;
-      }
-    }
+.navigation-buttons {
+  margin-top: 16px;
+  button {
+    min-width: 90px;
   }
 }

@@ -74,7 +74,7 @@ function ApplePayForm({ paymentMethod, setProcessCompletedFlags }) {
             form="paymentForm"
             disabled={formik.isValidating || !formik.isValid}
           >
-            {formik.isSubmitting ? "Going to summary..." : "Summary"}
+            {formik.isSubmitting ? "Going to Summary..." : "Summary"}
           </Button>
 
           {hasSubmitted && <Redirect to={SUMMARY_URL} />}

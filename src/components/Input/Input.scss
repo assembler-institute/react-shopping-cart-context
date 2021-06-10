@@ -1,0 +1,44 @@
+.flex-prop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.input-wrapper {
+  border: 1px solid rgb(206, 206, 206);
+  border-radius: 5px;
+  height: 35px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.input-fail {
+  border-color: red;
+}
+
+.input-success {
+  border-color: green;
+}
+
+.form-input {
+  width: 100%;
+  border: none;
+}
+
+.form-feedback {
+  font-size: 13px;
+  color: red;
+}
+
+.custom-icon-fail {
+  color: red;
+}
+
+.custom-icon-success {
+  color: green;
+}
+
+.separator {
+  height: 100%;
+  border-right: 1px solid black;
+}

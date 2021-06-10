@@ -85,7 +85,7 @@ function CheckoutProfile({ setProcessCompletedFlags }) {
             id: "phonePrefix",
             options: phonePrefixOptions,
             value: formik.values.phonePrefix,
-            placeholder: "Prefix...",
+            placeholder: "Prefix",
             handleChange: formik.handleChange,
             handleBlur: formik.handleBlur,
             hasErrorMessage: formik.touched.phonePrefix,
@@ -102,16 +102,16 @@ function CheckoutProfile({ setProcessCompletedFlags }) {
           errorMessage={formik.errors.phone}
         />
       </form>
-      <div className="navigation-buttons d-flex justify-content-between mt-3">
+      <div className="navigation-buttons d-flex justify-content-between">
         <Link to={HOME_URL}>
-          <Button>Return to Home</Button>
+          <Button>Home</Button>
         </Link>
         <Button
           submitButton
           form="profileForm"
           disabled={formik.isValidating || !formik.isValid}
         >
-          {formik.isSubmitting ? "Going to Billing..." : "Go to Billing"}
+          {formik.isSubmitting ? "Going to Billing..." : "Billing"}
         </Button>
 
         {hasSubmitted && <Redirect to={BILLING_URL} />}
