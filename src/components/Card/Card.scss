@@ -1,39 +1,39 @@
 @import url("https://fonts.googleapis.com/css?family=Space+Mono:400,400i,700,700i");
 
-* {
-  box-sizing: border-box;
-  font-family: "Space Mono", monospace;
-}
+// * {
+//   box-sizing: border-box;
+//   font-family: "Space Mono", monospace;
+// }
 
-body,
-html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
-}
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  display: -webkit-flex;
-  -webkit-align-items: center;
-  -webkit-justify-content: center;
-  background-image: linear-gradient(
-    to right top,
-    #a2beeb,
-    #8ecfee,
-    #8edde5,
-    #a4e7d5,
-    #c7eec7
-  );
-  flex-direction: column;
-  -webkit-flex-direction: column;
-}
-.title {
-  margin-bottom: 30px;
-  color: #162969;
-}
+// body,
+// html {
+//   margin: 0;
+//   padding: 0;
+//   height: 100%;
+//   width: 100%;
+// }
+// body {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   display: -webkit-flex;
+//   -webkit-align-items: center;
+//   -webkit-justify-content: center;
+//   background-image: linear-gradient(
+//     to right top,
+//     #a2beeb,
+//     #8ecfee,
+//     #8edde5,
+//     #a4e7d5,
+//     #c7eec7
+//   );
+//   flex-direction: column;
+//   -webkit-flex-direction: column;
+// // }
+// .title {
+//   margin-bottom: 30px;
+//   color: #162969;
+// }
 
 .card {
   width: 320px;
@@ -46,10 +46,11 @@ body {
 .card__part {
   box-shadow: 1px 1px #aaa3a3;
   top: 0;
-  position: absolute;
+  position: -webkit-sticky;
   z-index: 1000;
   left: 0;
-  display: inline-block;
+  display: flex;
+  align-items: center;
   width: 320px;
   height: 190px;
   background-image: url("https://image.ibb.co/bVnMrc/g3095.png"),
