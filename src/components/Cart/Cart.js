@@ -53,7 +53,11 @@ function Cart() {
             </div>
             <div className="col">
               <Link to="/checkout/step-1">
-                <Button>Checkout</Button>
+                {getCartTotal(cartItems) <= 0 ? (
+                  <Button disabled>Checkout</Button>
+                ) : (
+                  <Button>Checkout</Button>
+                )}
               </Link>
             </div>
           </div>
