@@ -8,17 +8,15 @@ import Button from "../Button";
 import { PROFILE_URL } from "../../utils/constants";
 
 import CartContext from "../../context/cart-context";
+import LoginContext from "../../context/login-context";
 
 import getCartTotal from "../../utils/getCartTotal";
 
-// function getCartTotal(cart) {
-//   return cart.reduce((accum, item) => {
-//     return accum + item.price * item.quantity;
-//   }, 0);
-// }
-
 function Cart({ ...props }) {
   const { cartItems, remove, change } = useContext(CartContext);
+
+  const { data: loginData } = useContext(LoginContext);
+
   return (
     <aside {...props}>
       <div className="row flex-column">
@@ -59,7 +57,9 @@ function Cart({ ...props }) {
             </div>
             <div className="col">
               <Link to={PROFILE_URL}>
-                <Button disabled={cartItems.length === 0 && true}>
+                <Button
+                  disabled={cartItems.length !== 0 && !loginData.isLogged}
+                >
                   Checkout
                 </Button>
               </Link>

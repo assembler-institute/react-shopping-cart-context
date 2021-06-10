@@ -47,19 +47,13 @@ function Home({
                 handleDownVote={handleDownVote}
                 handleUpVote={handleUpVote}
                 handleSetFavorite={handleSetFavorite}
-                // handleAddToCart={handleAddToCart}
               />
             </div>
           )}
         </div>
       </div>
 
-      <Cart
-        className="col col-4"
-        // cartItems={cartItems}
-        // handleRemove={handleRemove}
-        // handleChange={handleChange}
-      />
+      <Cart className="col col-4" />
     </div>
   );
 }
