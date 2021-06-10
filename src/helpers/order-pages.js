@@ -15,3 +15,5 @@ export function getPageIndex(page) {
 export function getFirsCheckoutPage() {
   return orderRoutes[1];
 }
+
+export const skipRoutes = false;

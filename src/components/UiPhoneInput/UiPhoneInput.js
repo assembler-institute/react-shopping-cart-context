@@ -32,6 +32,7 @@ function UiPhoneInput({
   label = "input-01",
   id = "input-01",
   value = "",
+  shrink = false,
   handleChange = () => {},
   handleBlur = () => {},
   errorMessage,
@@ -60,7 +61,7 @@ function UiPhoneInput({
             className: classes.padding,
             inputComponent: TextMaskCustom,
           }}
-          InputLabelProps={{ className: classes.margin }}
+          InputLabelProps={{ className: classes.margin, shrink: shrink }}
           {...props}
         />
         <SelectCountryCode />

@@ -4,7 +4,7 @@ import { Redirect, useHistory } from "react-router-dom";
 
 import SummaryCartItem from "../../components/SummaryCartItem";
 import withLayout from "../../hoc/withLayout";
-import { getPageIndex } from "../../helpers/order-pages";
+import { skipRoutes, getPageIndex } from "../../helpers/order-pages";
 
 import CheckoutContext from "../../context/checkout-context";
 import { HOME, SUMMARY } from "../../constants/routes";
@@ -147,7 +147,9 @@ function Summary({
         <ButtonLink page={HOME}>Go home</ButtonLink>
       </div>
 
-      {actualPage < getPageIndex(SUMMARY) && <Redirect to={HOME} />}
+      {skipRoutes && actualPage < getPageIndex(SUMMARY) && (
+        <Redirect to={HOME} />
+      )}
     </div>
   );
 }

@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Redirect } from "react-router-dom";
 import { useFormik } from "formik";
 
-import { getPageIndex } from "../../helpers/order-pages";
+import { skipRoutes, getPageIndex } from "../../helpers/order-pages";
 import Button from "../../components/Button";
 import UiSelect from "../../components/UiSelect";
 import UiInput from "../../components/UiInput";
@@ -16,14 +16,21 @@ import ButtonLink from "../../components/ButtonLink";
 
 function Address() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
-  const { updateCheckoutContext, actualPage } = useContext(CheckoutContext);
+  const {
+    updateCheckoutContext,
+    actualPage,
+    address,
+    city,
+    zip,
+    country,
+  } = useContext(CheckoutContext);
 
   const formik = useFormik({
     initialValues: {
-      address: "",
-      city: "",
-      zip: "",
-      country: "",
+      address: address,
+      city: city,
+      zip: zip,
+      country: country,
     },
     validationSchema: AddressSchema,
     onSubmit: (values, { setSubmitting }) => {
@@ -33,7 +40,7 @@ function Address() {
         setHasSubmitted(true);
       }, 500);
     },
-    validateOnMount: true,
+    // validateOnMount: true,
   });
 
   return (
@@ -91,9 +98,14 @@ function Address() {
               <Button
                 submitButton
                 block
-                disabled={formik.isValidating || !formik.isValid}
+                disabled={
+                  formik.isValidating || !formik.isValid || !formik.dirty
+                }
                 handleClick={() =>
-                  updateCheckoutContext({ actualPage: getPageIndex(PAYMENT) })
+                  formik.dirty &&
+                  updateCheckoutContext({
+                    actualPage: getPageIndex(PAYMENT),
+                  })
                 }
               >
                 {formik.isSubmitting ? "Submitting..." : "Next page"}
@@ -102,7 +114,9 @@ function Address() {
           </div>
         </form>
         {hasSubmitted && <Redirect to={PAYMENT} />}
-        {actualPage < getPageIndex(ADDRESS) && <Redirect to={HOME} />}
+        {skipRoutes && actualPage < getPageIndex(ADDRESS) && (
+          <Redirect to={HOME} />
+        )}
       </div>
     </div>
   );

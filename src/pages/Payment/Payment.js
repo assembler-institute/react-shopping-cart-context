@@ -19,7 +19,7 @@ import CheckoutContext from "../../context/checkout-context";
 import CVV from "../../img/icons/payment/CVV.svg";
 import sslIcon from "../../img/icons/payment/ssl.svg";
 import CreditCard from "../../components/CreditCard";
-import { getPageIndex } from "../../helpers/order-pages";
+import { skipRoutes, getPageIndex } from "../../helpers/order-pages";
 
 import { SUMMARY, ADDRESS, HOME, PAYMENT } from "../../constants/routes";
 import ButtonLink from "../../components/ButtonLink";
@@ -47,7 +47,7 @@ function Payment() {
         setHasSubmitted(true);
       }, 500);
     },
-    validateOnMount: true,
+    // validateOnMount: true,
   });
 
   function handleFlip() {
@@ -189,8 +189,11 @@ function Payment() {
               <Button
                 submitButton
                 block
-                disabled={formik.isValidating || !formik.isValid}
+                disabled={
+                  formik.isValidating || !formik.isValid || !formik.dirty
+                }
                 handleClick={() =>
+                  formik.dirty &&
                   updateCheckoutContext({ actualPage: getPageIndex(SUMMARY) })
                 }
               >
@@ -199,7 +202,9 @@ function Payment() {
             </div>
           </div>
           {hasSubmitted && <Redirect to={SUMMARY} />}
-          {actualPage < getPageIndex(PAYMENT) && <Redirect to={HOME} />}
+          {skipRoutes && actualPage < getPageIndex(PAYMENT) && (
+            <Redirect to={HOME} />
+          )}
         </div>
       </form>
     </>
