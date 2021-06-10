@@ -5,8 +5,6 @@ import checkoutContext from "../../../context/checkoutData";
 
 import "./OrderSummary.scss";
 
-const isCheckout = true;
-
 function OrderSummary({ cartItems }) {
   const { state } = useContext(checkoutContext);
 
@@ -25,6 +23,9 @@ function OrderSummary({ cartItems }) {
 
   return (
     <div className="row mt-5">
+      <div className="col col-12 mb-4">
+        <h1>Order Summary</h1>
+      </div>
       <div className="col col-12">
         <div className="row">
           <div className="col col-4">
@@ -53,23 +54,23 @@ function OrderSummary({ cartItems }) {
             <li>{state.cardNumber}</li>
             <li>{state.cardExpiryDate}</li>
             <li>{state.cvc}</li>
-            <li>{state.termsConditions}</li>
           </div>
         </div>
         <div className="row mt-5">
           <div className="col col-12">
-            <h3 className="text-center">Pursache resume</h3>
+            <h3 className="text-center mb-5">Pursache resume</h3>
             <div className="row">
-              <div className="col col-9">
+              <div className="col col-6" />
+              <div className="col col-3 border-bottom">
                 <h5>Product:</h5>
               </div>
-              <div className="col col-1">
+              <div className="col col-1 border-bottom">
                 <h5>Price:</h5>
               </div>
-              <div className="col col-1">
+              <div className="col col-1 border-bottom">
                 <h5>Amount:</h5>
               </div>
-              <div className="col col-1">
+              <div className="col col-1 border-bottom">
                 <h5>Total:</h5>
               </div>
             </div>
@@ -77,21 +78,22 @@ function OrderSummary({ cartItems }) {
               <div key={item.id} id={item.id} className="row">
                 <div className="col col-9">
                   <div className="row">
+                    <div className="col col-6" />
                     <img
                       src={item.img}
                       alt={item.title}
                       className="col col-2"
                     />
-                    <p className="col col-10 text-uppercase">{item.title}</p>
+                    <p className="col col-4 text-uppercase">{item.title}</p>
                   </div>
                 </div>
-                <div className="col col-1 d-flex justify-content-end">
+                <div className="col col-1 d-flex justify-content-end border-bottom">
                   <p>{item.price}</p>
                 </div>
-                <div className="col col-1 d-flex justify-content-center">
+                <div className="col col-1 d-flex justify-content-center border-bottom">
                   <p>{item.quantity}</p>
                 </div>
-                <div className="col col-1 d-flex justify-content-end">
+                <div className="col col-1 d-flex justify-content-end border-bottom">
                   <p>{itemCalc(item.quantity, item.price)}</p>
                 </div>
               </div>
@@ -116,4 +118,4 @@ function OrderSummary({ cartItems }) {
   );
 }
 
-export default withLayout(OrderSummary, isCheckout);
+export default withLayout(OrderSummary);
