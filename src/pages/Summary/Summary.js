@@ -67,7 +67,7 @@ function Summary({
       <hr className="mb-3" />
 
       <section>
-        <div className="d-flex justify-content-between">
+        <div className="d-flex flex-wrap justify-content-between ">
           <div>
             <h5 className="text-black-50">Order Date</h5>
             <p>{date}</p>

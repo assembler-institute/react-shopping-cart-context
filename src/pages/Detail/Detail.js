@@ -82,7 +82,7 @@ function Detail() {
             />
 
             <div className="row">
-              <div className="col col-12 mt-4 d-flex justify-content-center">
+              <div className="col col-12 my-4 d-flex justify-content-center">
                 <ButtonLink page={HOME}>Go back</ButtonLink>
                 <Button
                   submitButton

@@ -46,6 +46,7 @@ $brand-color-light: #408cff;
     $brand-color
   );
   box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.5);
+  z-index: -1;
 }
 .strip-bottom {
   width: 200px;
@@ -224,5 +225,39 @@ $brand-color-light: #408cff;
   }
   50% {
     transform: rotateY(180deg);
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .card {
+    width: 315px;
+    height: 230px;
+  }
+  .card-number {
+    margin: 22px 25px 10px;
+    font-size: 19px;
+  }
+  .wave {
+    top: 0px;
+  }
+  .chip {
+    top: 40px;
+  }
+}
+
+@media only screen and (min-width: 1400px) {
+  .card {
+    width: 400px;
+    height: 250px;
+  }
+  .card-number {
+    margin: 40px 25px 10px;
+    font-size: 23px;
+  }
+  .wave {
+    top: 20px;
+  }
+  .chip {
+    top: 60px;
   }
 }

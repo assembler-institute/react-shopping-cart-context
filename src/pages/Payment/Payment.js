@@ -68,7 +68,7 @@ function Payment() {
               changeHandler={formik.handleChange}
             />
             <div className="row gy-4">
-              <div className="col-6">
+              <div className="col col-12 col-lg-6">
                 <UiInput
                   id="carholderName"
                   label="Cardholder name"
@@ -161,7 +161,7 @@ function Payment() {
                   </div>
                 </div>
               </div>
-              <div className="col-6">
+              <div className="col col-lg-6 d-none d-lg-block">
                 <CreditCard
                   flip={flip}
                   cardType={cardType}
@@ -185,7 +185,7 @@ function Payment() {
             </div>
           </div>
           <div className="row">
-            <div className="col col-12 mt-4 d-flex justify-content-center">
+            <div className="col col-12 my-4 d-flex justify-content-center">
               <ButtonLink page={ADDRESS}>Go back</ButtonLink>
               <Button
                 submitButton

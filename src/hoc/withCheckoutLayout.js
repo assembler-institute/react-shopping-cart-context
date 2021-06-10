@@ -19,10 +19,10 @@ function withCheckoutLayout(WrappedComponent) {
   function WrapperComponent({ ...props }) {
     return (
       <>
-        <AppHeader />
+        <AppHeader page={props.page} />
         <Main className={props.fullWidth ? "container-fluid" : "container"}>
           <div className="row">
-            <div className="col col-8">
+            <div className="col col-12 col-md-8">
               <div className="col col-12">
                 <header className="jumbotron mb-3">
                   <FormHeader page={props.page} />
@@ -34,7 +34,7 @@ function withCheckoutLayout(WrappedComponent) {
 
             <CheckoutCart
               checkout={false}
-              className="col col-4"
+              className="col col-12 col-md-4"
               cartItems={props.cartItems}
               handleRemove={props.handleRemove}
               handleChange={props.handleChange}
