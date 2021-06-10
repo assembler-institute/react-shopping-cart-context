@@ -77,12 +77,10 @@ const CartContextProvider = ({ children }) => {
 
   function handleChange(productId, event) {
     // eslint-disable-next-line no-console
-    console.log(productId);
 
     const updatedCartItems = cartItems.map((item) => {
       if (item.id === productId && item.quantity <= item.unitsInStock) {
         // eslint-disable-next-line no-console
-        console.log(item.id);
         return {
           ...item,
           quantity: Number(event.target.value),
@@ -92,13 +90,11 @@ const CartContextProvider = ({ children }) => {
       return item;
     });
     // eslint-disable-next-line no-console
-    console.log(updatedCartItems, "updated");
     dispatch({
       type: UPDATED_CART_ITEMS,
       payload: [...updatedCartItems],
     });
     // eslint-disable-next-line no-console
-    console.log("change");
   }
 
   function handleRemove(productId) {
@@ -106,7 +102,6 @@ const CartContextProvider = ({ children }) => {
 
     dispatch({ type: REMOVE_CART_ITEM, payload: productId });
     // eslint-disable-next-line no-console
-    console.log("handle remove");
   }
 
   return (

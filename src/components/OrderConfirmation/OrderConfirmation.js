@@ -7,7 +7,6 @@ function OrderConfirmation() {
   const user = useContext(UserContext);
 
   // eslint-disable-next-line no-console
-  console.log(user);
   return (
     <section className="summaryBox">
       <div className="shippingSummary">
