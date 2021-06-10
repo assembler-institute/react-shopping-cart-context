@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { useFormik } from "formik";
 import "../../components/OrderCart/OrderCart.scss";
+import "../layouts.scss";
 import AddressSchema from "./Address-schema";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import OrderCart from "../../components/OrderCart";
 
 function Address({ cartItems }) {
-  const [hasSubmitted] = useState(false);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -18,77 +19,84 @@ function Address({ cartItems }) {
       country: "",
     },
     validationSchema: AddressSchema,
+    onSubmit: (values, { setSubmitting }) => {
+      setSubmitting(true);
+
+      setTimeout(() => {
+        setHasSubmitted(true);
+      }, 500);
+    },
   });
 
   return (
     <>
-      <div className="row">
-        <div className="col col-sm-12 col-lg-8 m-auto">
-          <h3>Billing Address</h3>
-          <form onSubmit={formik.handleSubmit}>
-            <Input
-              label="Address"
-              id="address"
-              value={formik.values.address}
-              placeholder="Address*"
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              hasErrorMessage={formik.touched.address}
-              errorMessage={formik.errors.address}
-            />
-
-            <Input
-              label="City"
-              id="city"
-              value={formik.values.city}
-              placeholder="city*"
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              hasErrorMessage={formik.touched.city}
-              errorMessage={formik.errors.city}
-            />
-
-            <Input
-              type="number"
-              label="Zip Code"
-              id="zip"
-              value={formik.values.zip}
-              placeholder="Zip Code*"
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              hasErrorMessage={formik.touched.zip}
-              errorMessage={formik.errors.zip}
-            />
-            <Input
-              type="country"
-              id="country"
-              label="Country"
-              name="country"
-              placeholder="Country*"
-              value={formik.values.country}
-              handleChange={formik.handleChange}
-              handleBlur={formik.handleBlur}
-              hasErrorMessage={formik.touched.country}
-              errorMessage={formik.errors.country}
-            />
-            <div className="row">
-              <div className="col col-12 mt-4 d-flex justify-content-center">
-                <Button
-                  submitButton
-                  block
-                  disabled={formik.isValidating || !formik.isValid}
-                >
-                  {formik.isSubmitting ? "Submitting..." : "Next page"}
-                </Button>
-              </div>
+      <section className="form__container">
+        <div className="step__main--container">
+          <div className="step__main--container--form">
+            <div className="headerPage">
+              <h3>Billing Address</h3>
             </div>
-          </form>
+            <form onSubmit={formik.handleSubmit} className="col-10">
+              <Input
+                label="Address"
+                id="address"
+                value={formik.values.address}
+                placeholder="Address*"
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+                hasErrorMessage={formik.touched.address}
+                errorMessage={formik.errors.address}
+              />
+
+              <Input
+                label="City"
+                id="city"
+                value={formik.values.city}
+                placeholder="city*"
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+                hasErrorMessage={formik.touched.city}
+                errorMessage={formik.errors.city}
+              />
+
+              <Input
+                type="number"
+                label="Zip Code"
+                id="zip"
+                value={formik.values.zip}
+                placeholder="Zip Code*"
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+                hasErrorMessage={formik.touched.zip}
+                errorMessage={formik.errors.zip}
+              />
+              <Input
+                type="country"
+                id="country"
+                label="Country"
+                name="country"
+                placeholder="Country*"
+                value={formik.values.country}
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+                hasErrorMessage={formik.touched.country}
+                errorMessage={formik.errors.country}
+              />
+              <Button
+                submitButton
+                block
+                disabled={formik.isValidating || !formik.isValid}
+              >
+                {formik.isSubmitting ? "Submitting..." : "Next page"}
+              </Button>
+            </form>
+          </div>
           <div className="col">
             <OrderCart cartItems={cartItems} />
           </div>
-          {hasSubmitted && <Link to="/" />}
+          {hasSubmitted && <Redirect to="/checkout/step-3" />}
         </div>
-      </div>
+      </section>
     </>
   );
 }

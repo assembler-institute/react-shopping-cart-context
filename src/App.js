@@ -187,10 +187,10 @@ function App() {
         <Route path="/new-product">
           <NewProduct saveNewProduct={saveNewProduct} />
         </Route>
-        <Route path="/personal-details-page">
+        <Route path="/checkout/step-1">
           <PersonalDetails cartItems={cartItems} />
         </Route>
-        <Route path="/billing-address-page">
+        <Route path="/checkout/step-2">
           <Address cartItems={cartItems} />
         </Route>
         <Route path="/" exact>

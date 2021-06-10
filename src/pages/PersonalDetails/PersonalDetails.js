@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import React, { useState } from "react";
 import "../../components/OrderCart/OrderCart.scss";
 import "../layouts.scss";
@@ -10,7 +10,7 @@ import personalSchema from "./personal-schema";
 import OrderCart from "../../components/OrderCart";
 
 function PersonalDetails({ cartItems }) {
-  const [hasSubmitted] = useState(false);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -19,6 +19,13 @@ function PersonalDetails({ cartItems }) {
       phoneNumber: "",
     },
     validationSchema: personalSchema,
+    onSubmit: (values, { setSubmitting }) => {
+      setSubmitting(true);
+
+      setTimeout(() => {
+        setHasSubmitted(true);
+      }, 500);
+    },
   });
 
   return (
@@ -28,7 +35,7 @@ function PersonalDetails({ cartItems }) {
           <div className="headerPage">
             <h3>Personal Details</h3>
           </div>
-          <form onSubmit={formik.handleSubmit} className="col-6">
+          <form onSubmit={formik.handleSubmit} className="col-10">
             <Input
               type="text"
               label="Your name"
@@ -70,16 +77,14 @@ function PersonalDetails({ cartItems }) {
               block
               disabled={formik.isValidating || !formik.isValid}
             >
-              <Link to="/billing-address-page">
-                {formik.isSubmitting ? "Submitting..." : "Submit"}
-              </Link>
+              {formik.isSubmitting ? "Submitting..." : "Next Page"}
             </Button>
           </form>
         </div>
         <div className="col">
           <OrderCart cartItems={cartItems} />
         </div>
-        {hasSubmitted && <Link to="/" />}
+        {hasSubmitted && <Redirect to="/checkout/step-2" />}
       </div>
     </section>
   );
