@@ -44,23 +44,20 @@
 }
 
 .card__part {
-  box-shadow: 1px 1px #aaa3a3;
-  top: 0;
-  position: -webkit-sticky;
+  box-shadow: 5px 5px #aaa3a3;
+  position: relative;
   z-index: 1000;
-  left: 0;
-  display: flex;
-  align-items: center;
-  width: 320px;
+  margin: 20px 20px 20px 20px;
+  width: 920px;
   height: 190px;
   background-image: url("https://image.ibb.co/bVnMrc/g3095.png"),
     linear-gradient(
       to right bottom,
-      #fd696b,
-      #fa616e,
-      #f65871,
-      #f15075,
-      #ec4879
+      #6b69fd,
+      #428ec2,
+      #58f6d4,
+      #50f193,
+      #48ec63
     ); /*linear-gradient(to right bottom, #fd8369, #fc7870, #f96e78, #f56581, #ee5d8a)*/
   background-repeat: no-repeat;
   background-position: center;

@@ -11,11 +11,11 @@ function Card() {
           // src={frontCard}
           // alt="frontCard"
         /> */}
-        <img
+        {/* <img
           className="card__front-logo card__logo"
           src=""
           alt="alternative text yay"
-        />
+        /> */}
         <p className="card_numer">**** **** **** 6258</p>
         <div className="card__space-75">
           <span className="card__label">Card holder</span>
@@ -33,7 +33,7 @@ function Card() {
           <div className="card__secret">
             <p className="card__secret--last">420</p>
           </div>
-          <img
+          {/* <img
             className="card__back-square card__square"
             src="https://image.ibb.co/cZeFjx/little_square.png"
             alt="alternative text yay"
@@ -42,7 +42,7 @@ function Card() {
             className="card__back-logo card__logo"
             src="https://www.fireeye.com/partners/strategic-technology-partners/visa-fireeye-cyber-watch-program/_jcr_content/content-par/grid_20_80_full/grid-20-left/image.img.png/1505254557388.png"
             alt="alternative text yay"
-          />
+          /> */}
         </div>
       </div>
     </>
