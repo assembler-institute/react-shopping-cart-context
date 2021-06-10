@@ -20,6 +20,7 @@ const checkoutData = createContext({
   cardCVV: 0,
   termsConditions: false,
   setCheckoutData: () => {},
+  tempData: () => {},
 });
 
 export default checkoutData;

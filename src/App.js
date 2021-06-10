@@ -20,6 +20,7 @@ import checkoutContext from "./context/checkoutData";
 const SETISCHECKOUT = "SETISCHECKOUT";
 const RESETISCHECKOUT = "RESETISCHECKOUT";
 const LOADCHECKOUTDATA = "LOADCHECKOUTDATA";
+const TEMPSTATEDATA = "TEMPSTATEDATA";
 
 const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
 const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
@@ -36,15 +37,16 @@ const initialCheckoutContext = {
   phoneNumber: "",
   address: "",
   city: "",
-  ZC: 0,
+  ZC: "",
   country: "",
   paymentMethod: "",
   cardName: "",
-  cardNumber: 0,
-  cardExpiryDate: 0,
-  cardCVV: 0,
+  cardNumber: "",
+  cardExpiryDate: "",
+  cardCVV: "",
   termsConditions: false,
   setPersonalDetails: () => {},
+  tempData: () => {},
 };
 
 function reducer(state, action) {
@@ -59,6 +61,15 @@ function reducer(state, action) {
       return {
         ...state,
         ...action.payload,
+      };
+    }
+    case TEMPSTATEDATA: {
+      return {
+        ...state,
+        tempData: {
+          ...state.tempData,
+          ...action.payload,
+        },
       };
     }
     default: {
@@ -122,6 +133,10 @@ function App() {
   function setCheckoutData(data) {
     dispatch({ type: LOADCHECKOUTDATA, payload: data });
     setLocalStorage(data, CHECKOUT_DATA_LOCAL_STORAGE_KEY);
+  }
+
+  function tempData(data) {
+    dispatch({ type: TEMPSTATEDATA, payload: data });
   }
 
   useEffect(() => {
@@ -283,6 +298,7 @@ function App() {
       value={{
         isCheckoutDisabled: isCheckoutDisabled,
         setCheckoutData: setCheckoutData,
+        tempData: tempData,
         state: state,
       }}
     >

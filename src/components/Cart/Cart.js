@@ -14,7 +14,6 @@ function getCartTotal(cart) {
 
 function Cart({ cartItems, handleRemove, handleChange, ...props }) {
   const { isCheckoutDisabled } = useContext(checkoutContext);
-  console.log(isCheckoutDisabled);
   return (
     <aside {...props}>
       <div className="row flex-column">

@@ -9,7 +9,6 @@ const isCheckout = true;
 
 function OrderSummary({ cartItems }) {
   const { state } = useContext(checkoutContext);
-  console.log(state);
 
   function itemCalc(itemQuantity, itemPrice) {
     return itemQuantity * itemPrice;
@@ -62,24 +61,16 @@ function OrderSummary({ cartItems }) {
             <h3 className="text-center">Pursache resume</h3>
             <div className="row">
               <div className="col col-9">
-                <p>
-                  <h5>Product:</h5>
-                </p>
+                <h5>Product:</h5>
               </div>
               <div className="col col-1">
-                <p>
-                  <h5>Price:</h5>
-                </p>
+                <h5>Price:</h5>
               </div>
               <div className="col col-1">
-                <p>
-                  <h5>Amount:</h5>
-                </p>
+                <h5>Amount:</h5>
               </div>
               <div className="col col-1">
-                <p>
-                  <h5>Total:</h5>
-                </p>
+                <h5>Total:</h5>
               </div>
             </div>
             {cartItems.map((item) => (

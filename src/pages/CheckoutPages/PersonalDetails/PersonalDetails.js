@@ -53,7 +53,7 @@ function PersonalDetails({ cartItems }) {
   });
 
   return (
-    <div className="row">
+    <div className="row mt-5">
       <div className="col col-8">
         <form onSubmit={formik.handleSubmit}>
           <Input
