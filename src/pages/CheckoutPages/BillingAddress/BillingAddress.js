@@ -35,6 +35,8 @@ function BillingAddress({ cartItems }) {
         city: values.city,
         ZC: values.ZC,
         country: values.country,
+        navBar: 62.5,
+        disabledPaymentDetails: false,
       });
       setTimeout(() => {
         setHasSubmitted(true);
@@ -45,6 +47,7 @@ function BillingAddress({ cartItems }) {
   return (
     <div className="row mt-5">
       <div className="col col-8">
+        <h4 className="mb-4">Billing Address</h4>
         <form onSubmit={formik.handleSubmit}>
           <Input
             type="text"

@@ -14,6 +14,7 @@ function Button({
     "btn-primary": true,
     "btn-block": block,
     "btn-sm": small,
+    "w-100": true,
   });
 
   return (

@@ -1,0 +1,19 @@
+.navbar-wrapper{
+    margin-top: -23px;
+    margin-bottom: -30px;
+    .navbar-button{
+        height: 30px;
+        width: 30px;
+        border: 2px solid #0D6EFD;
+        border-radius: 50%;
+        background-color: white;
+        color: #0D6EFD;
+    }
+    .navbar-button:disabled{
+        border: 2px solid #E9ECEF;
+        color: #E9ECEF;
+    }
+    .navbar-text{
+        font-size: 15px;
+    }
+}

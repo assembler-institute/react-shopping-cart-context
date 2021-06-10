@@ -45,6 +45,8 @@ function PersonalDetails({ cartItems }) {
         email: values.email,
         phonePrefix: values.phonePrefix,
         phoneNumber: values.phoneNumber,
+        navBar: 37.5,
+        disabledBillingAddress: false,
       });
       setTimeout(() => {
         setHasSubmitted(true);
@@ -55,6 +57,7 @@ function PersonalDetails({ cartItems }) {
   return (
     <div className="row mt-5">
       <div className="col col-8">
+        <h4 className="mb-4">Personal Details</h4>
         <form onSubmit={formik.handleSubmit}>
           <Input
             type="text"
