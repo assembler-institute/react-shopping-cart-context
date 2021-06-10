@@ -6,7 +6,6 @@ import Button from "../Button";
 import LoginModal from "../LoginModal";
 
 function AppHeader({ showNewProductForm, ...props }) {
-  // Modal behaivour
   const [showModal, setShowModal] = useState(false);
 
   function handleShowModal() {
@@ -52,7 +51,9 @@ function AppHeader({ showNewProductForm, ...props }) {
               >
                 Log in
               </Button>
-              <LoginModal showModal={showModal} setShownModal={setShowModal} />
+              {showModal && (
+                <LoginModal showModal={showModal} setShowModal={setShowModal} />
+              )}
             </div>
           </nav>
         </div>
