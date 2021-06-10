@@ -1,12 +1,14 @@
 import React from "react";
-
 import CartSummary from "../../components/CartSummary/CartSummary";
 import InformationForm from "../../components/InformationForm/InfomationForm";
+import Stepper from "../../components/Stepper/Stepper";
 import withLayout from "../../hoc/withLayout";
 
 function UserInformation({ cartItems, handleRemove, handleChange, saveUser }) {
   return (
     <>
+      <Stepper />
+      <div className="Space" />
       <h1>User Information</h1>
       <div className="row">
         <div className="col col-6">

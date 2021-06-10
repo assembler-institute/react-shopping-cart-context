@@ -126,6 +126,7 @@ function App() {
 
   function savePaymentInfo(paymentData) {
     setPaymentInfo((prevState) => [...prevState, paymentData]);
+    // eslint-disable-next-line no-console
     console.log(paymentData, "payment info");
   }
   return (

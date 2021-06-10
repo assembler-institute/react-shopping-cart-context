@@ -4,14 +4,15 @@ import OrderConfirmation from "../../components/OrderConfirmation/OrderConfirmat
 import CartConfirmation from "../../components/CartConfirmation";
 
 import withLayout from "../../hoc/withLayout";
-import PaymentConfirmation from "../../components/PaymentConfirmation";
+import Stepper from "../../components/Stepper/Stepper";
 
 function Confirmation() {
   return (
     <>
-      <div className="row">
+      <Stepper />
+      <div className="Space " />
+      <div className="row ">
         <OrderConfirmation />
-        <PaymentConfirmation />
         <div className="col col-6">
           <header className="jumbotron">
             <CartConfirmation />
