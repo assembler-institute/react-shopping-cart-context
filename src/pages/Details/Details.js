@@ -73,6 +73,7 @@ function Details() {
               errorMessage={errors.userEmail}
             />
             <div className="form-group">
+              <span>Write your phone number</span>
               <PhoneInput
                 type="number"
                 label="Write your phone number"
@@ -90,12 +91,15 @@ function Details() {
                 inputProps={{
                   id: "userPhone",
                   name: "userPhone",
-                  className:
+                  className: `form-control phone-input ${
                     touched.userPhone && errors.userPhone
-                      ? "form-control is-invalid phone-is-invalid"
-                      : "form-control",
-                  // onChange: handleChange,
-                  // onBlur: handleBlur,
+                      ? "is-invalid phone-is-invalid"
+                      : ""
+                  } ${
+                    touched.userPhone && !errors.userPhone
+                      ? "phone-is-checked"
+                      : ""
+                  }`,
                 }}
               />
               {touched.userPhone && errors.userPhone && (
