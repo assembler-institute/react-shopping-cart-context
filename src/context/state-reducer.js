@@ -32,6 +32,7 @@ export const ACTIONS = {
   ADD_ACCOUNT: "add-account",
   ADD_BILLING: "add-billing",
   ADD_PAYMENT: "add-payment",
+  CLEAR_INFO: "clear-info",
 };
 
 export const reducer = (state, action) => {
@@ -78,6 +79,33 @@ export const reducer = (state, action) => {
           paymentInfo: true,
         },
         currentStep: 4,
+      };
+    case ACTIONS.CLEAR_INFO:
+      return {
+        cartItems: [],
+        account: {
+          userName: "",
+          emailAdress: "",
+          phoneNumber: "",
+          userInfo: false,
+        },
+        billing: {
+          address: "",
+          city: "",
+          postCode: "",
+          country: "",
+          billingInfo: false,
+        },
+        payment: {
+          paymentType: "",
+          cardholderName: "",
+          cardNumber: "",
+          cardExpiryDate: "",
+          cvvCode: "",
+          conditions: false,
+          paymentInfo: false,
+        },
+        currentStep: 0,
       };
     default:
       return state;

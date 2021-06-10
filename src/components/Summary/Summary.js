@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import { StateContext } from "../../context/state-context";
+import { ACTIONS } from "../../context/state-reducer";
 import SummaryItem from "../SummaryItem";
-// import { ACTIONS } from "../../../context/state-reducer";
 
 function getCartTotal(cart) {
   return cart.reduce((accum, item) => {
@@ -11,7 +12,7 @@ function getCartTotal(cart) {
 
 function Summary() {
   const value = useContext(StateContext);
-  const { cartItems, account, billing, payment } = value;
+  const { cartItems, account, billing, payment, dispatch } = value;
   return (
     <div className="p-3 shadow-sm">
       <div className="border-bottom mb-4">
@@ -68,9 +69,11 @@ function Summary() {
       <div className="d-flex justify-content-between pb-3">
         {`Your order has been confirmed. We'll send you shipping confirmation to ${account.emailAdress} when your item(s) are on the way! Enjoy your purchase!`}
       </div>
-      <button type="button" className="btn btn-primary">
-        Go Home
-      </button>
+      <Link to="/" onClick={() => dispatch({ type: ACTIONS.CLEAR_INFO })}>
+        <button type="button" className="btn btn-primary">
+          Back Home
+        </button>
+      </Link>
     </div>
   );
 }
