@@ -85,11 +85,11 @@ function CheckoutCart({
             <div className="col">
               <div className="d-flex justify-content-between">
                 <p>Subtotal</p>
-                <p>{0.79 * getCartTotal(cartItems)}€</p>
+                <p>{parseFloat(0.79 * getCartTotal(cartItems)).toFixed(2)}€</p>
               </div>
               <div className="d-flex justify-content-between">
                 <p>Tax</p>
-                <p>{0.21 * getCartTotal(cartItems)}€</p>
+                <p>{parseFloat(0.21 * getCartTotal(cartItems)).toFixed(2)}€</p>
               </div>
               <div className="d-flex justify-content-between">
                 <p>Shipping</p>
