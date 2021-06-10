@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { useFormik } from "formik";
 // { useState, useEffect, useContext }
 import "./FormShopping.scss";
@@ -43,7 +43,7 @@ function ShippingDetailsForm() {
       <hr />
       <form onSubmit={formik.handleSubmit}>
         <InputShopping
-          className="inputMediun"
+          className=""
           type="text"
           label="Address:"
           id="address"
@@ -68,7 +68,7 @@ function ShippingDetailsForm() {
         />
         <InputShopping
           className="inputMediun"
-          type="number"
+          type="text"
           label="Code post: "
           id="zipCode"
           value={formik.values.zipCode}
@@ -80,9 +80,11 @@ function ShippingDetailsForm() {
         />
         <SelectShopping />
         <div className="btn__container">
-          <ButtonShopping type="button">back</ButtonShopping>
+          <Link to="/checkout/step-1">
+            <ButtonShopping type="button">back</ButtonShopping>
+          </Link>
           <ButtonShopping
-            type="button"
+            // type="button"
             submitButton
             // block
             disabled={formik.isValidating || !formik.isValid}

@@ -2,6 +2,40 @@ import React, { useReducer } from "react";
 
 import ShoppingContext from "../../context/ShoppingContext";
 
+// function getLocalStorageCheckoutData() {
+//   const prevState = localStorage.getItem("checkoutData");
+//   if (!prevState) {
+//     return {
+//       personalDetails: {
+//         name: "",
+//         email: "",
+//         phoneNumber: "",
+//         countryPrefix: "",
+//       },
+//       shippingDetails: {
+//         address: "",
+//         city: "",
+//         zipCode: "",
+//         country: "",
+//       },
+//       paymentDetails: {
+//         paymentMethod: "",
+//         cardHolderName: "",
+//         cardNumber: "",
+//         cardExpirationDate: "",
+//         cardCVVCode: "",
+//         consentCheckbox: false,
+//       },
+//     };
+//   }
+
+//   try {
+//     return JSON.parse(prevState);
+//   } catch (error) {
+//     return null;
+//   }
+// }
+
 const shoppingInitialState = {
   personalDetails: {
     name: "",
@@ -21,7 +55,7 @@ const shoppingInitialState = {
     cardNumber: "",
     cardExpirationDate: "",
     cardCVVCode: "",
-    consentCheckbox: "",
+    consentCheckbox: false,
   },
 };
 
@@ -54,12 +88,19 @@ function shoppingReducer(state, action) {
 
 function ShoppingContextProvider({ children }) {
   const [state, dispatch] = useReducer(shoppingReducer, shoppingInitialState);
+  // const { personalDetails, shippingDetails, paymentDetails } = state;
+  // console.log(personalDetails);
 
   function submitStep1(valuesObject) {
     dispatch({
       type: "submitStep1",
       newDetails: valuesObject,
     });
+    // console.log("Im going to update localStorage");
+    // localStorage.setItem(
+    //   "checkoutData",
+    //   JSON.stringify(personalDetails, shippingDetails, paymentDetails),
+    // );
   }
 
   function submitStep2(valuesObject) {

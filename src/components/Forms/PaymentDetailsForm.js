@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { useFormik, Field, FormikProvider } from "formik";
 // { useState, useEffect, useContext }
 import "./FormShopping.scss";
@@ -295,7 +295,7 @@ function PaymentDetails() {
                 errorMessage={formik.errors.cardHolderName}
               />
               <InputShopping
-                type="text"
+                type="number"
                 label="Number card:"
                 id="cardNumber"
                 value={formik.values.cardNumber}
@@ -371,9 +371,11 @@ function PaymentDetails() {
             </div>
           </div>
           <div className="btn__container">
-            <ButtonShopping type="button">back</ButtonShopping>
+            <Link to="/checkout/step-2">
+              <ButtonShopping type="button">back</ButtonShopping>
+            </Link>
             <ButtonShopping
-              type="button"
+              // type="button"
               submitButton
               // block
               disabled={formik.isValidating || !formik.isValid}

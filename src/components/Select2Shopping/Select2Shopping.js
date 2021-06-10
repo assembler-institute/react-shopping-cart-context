@@ -3,11 +3,11 @@ import React from "react";
 import "./Select2Shopping.scss";
 
 function Select2Shopping({
-  type = "text",
+  type,
   // label = "input-01",
-  id = "input-01",
-  value = "",
-  placeholder = "",
+  id,
+  value,
+  placeholder,
   handleChange = () => {},
   handleBlur = () => {},
   errorMessage,

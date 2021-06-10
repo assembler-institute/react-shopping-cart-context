@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { useFormik } from "formik";
 // { useState, useEffect, useContext }
 import "./FormShopping.scss";
@@ -64,11 +64,23 @@ function PersonalDetailsForm() {
           hasErrorMessage={formik.touched.email}
           errorMessage={formik.errors.email}
         />
-        <Select2Shopping />
+        <Select2Shopping
+          type="text"
+          label=""
+          id="phoneNumber"
+          value={formik.values.phoneNumber}
+          placeholder="phone number..."
+          handleChange={formik.handleChange}
+          handleBlur={formik.handleBlur}
+          hasErrorMessage={formik.touched.phoneNumber}
+          errorMessage={formik.errors.phoneNumber}
+        />
         <div className="btn__container">
-          <ButtonShopping type="button">back</ButtonShopping>
+          <Link to="/">
+            <ButtonShopping type="button">back</ButtonShopping>
+          </Link>
           <ButtonShopping
-            type="button"
+            // type="button"
             submitButton
             // block
             disabled={formik.isValidating || !formik.isValid}

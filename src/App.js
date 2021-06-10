@@ -226,7 +226,7 @@ function App() {
             )}
           />
           <Route
-            path="/checkout/step-4"
+            path="/checkout/order-summary"
             render={(routeProps) => (
               <Step4 {...routeProps} cartItems={cartItems} />
             )}
