@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
 
 import "./AppHeader.scss";
@@ -13,10 +13,6 @@ function AppHeader({ showNewProductForm, ...props }) {
     LoginContext,
   );
   const [showModal, setShowModal] = useState(false);
-
-  useEffect(() => {
-    console.log("Logged?", loginData.isLogged);
-  }, [loginData]);
 
   function handleLogOut() {
     updateLoginData({
