@@ -8,7 +8,7 @@ import Button from "../Button";
 
 import productSchema from "./product-schema";
 
-function addProductDetails(product) {
+export function addProductDetails(product) {
   return {
     id: uuid(),
     ...product,

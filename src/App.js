@@ -8,6 +8,7 @@ import * as api from "./api";
 
 import useLocalStorage from "./hooks/useLocalStorage";
 import loadLocalStorageItems from "./utils/loadLocalStorageItems";
+import PersonalDetails from "./pages/PersonalDetails/PersonalDetails";
 
 function buildNewCartItem(cartItem) {
   if (cartItem.quantity >= cartItem.unitsInStock) {
@@ -185,6 +186,12 @@ function App() {
         <Route path="/new-product">
           <NewProduct saveNewProduct={saveNewProduct} />
         </Route>
+        <Route path="/personal-details-page">
+          <PersonalDetails />
+        </Route>
+        {/* <Route path='/billing-address-page'>
+
+        </Route> */}
         <Route path="/" exact>
           <Home
             fullWidth
