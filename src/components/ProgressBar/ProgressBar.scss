@@ -22,8 +22,18 @@
 }
 
 :root{
-	--line-border-fill: green;
-	--line-border-empty: grey;
+	--progress-bar: rgb(226, 192, 0);
+	--progress-bar--empty: rgb(185, 185, 185);
+	--shadow: 0 3px 3px -5px #a5ca00, 0 2px 5px #f2cf70;
+	--background: linear-gradient(to left, rgb(226, 192, 0), #f2ffcd);
+	--gradient:linear-gradient(
+			45deg,
+			#6d6e0c,
+			#313131,
+			#cccccc,
+			#889700,
+			#ffee00,
+			#f9f871);
 }
 
 .container__temp{
@@ -45,11 +55,9 @@
 	margin-bottom: 10px;
 	margin-top: 10px;
 	width: 100%;
-	// padding: 10px 20%;
 }
 
 .progress__bar{
-	background-color: var(--line-border-fill);
 	top:50%;
 	left:0;
 	transform: translateY(-50%);
@@ -58,11 +66,13 @@
 	width: 0%;
 	transition: 0.4s ease;
 	z-index: 50;
+	background-color: var(--progress-bar);
+	box-shadow: var(--shadow);
 }
 
 .progress__bar--grey{
 	content: "";
-	background-color: var(--line-border-empty);
+	background-color: var(--progress-bar--empty);
 	top:50%;
 	left:0;
 	transform: translateY(-50%);
@@ -83,12 +93,22 @@
 	justify-content: center;
 	z-index: 100;
 	transition: 0.4s ease;
+	box-shadow: var(--shadow);
 }
 
 .progress__circle .material-icons{
-	color: rgb(153, 153, 153);
+	color: rgb(56, 56, 56);
 	font-size: 15px;
 }
 .progress__circle.activeCircle{
-	border-color: var(--line-border-fill);
+	border:3px solid var(--progress-bar);
+	background: var(--gradient);
+	box-shadow: var(--shadow);
+	background-size: 300%;
+	animation: title-animation 4s infinite alternate;
+}
+
+@keyframes title-animation{
+	0%{background-position:left;}
+	100%{background-position:right;}
 }

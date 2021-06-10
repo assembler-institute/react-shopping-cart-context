@@ -65,15 +65,15 @@ function PersonalDetailsForm() {
           errorMessage={formik.errors.email}
         />
         <Select2Shopping />
-        <div className="container">
+        <div className="btn__container">
           <ButtonShopping type="button">back</ButtonShopping>
           <ButtonShopping
-            // type="submit"
+            type="button"
             submitButton
             // block
             disabled={formik.isValidating || !formik.isValid}
           >
-            {formik.isSubmitting ? "Loading..." : "next"}
+            {formik.isSubmitting ? "Submitting..." : "next"}
           </ButtonShopping>
         </div>
       </form>

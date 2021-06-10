@@ -12,7 +12,7 @@ function getCartTotal(cart) {
 function OrderSummary({ cartItems, ...props }) {
   return (
     <aside {...props}>
-      <div className="row flex-column">
+      <div className="row flex-column order__container">
         <div className="col shopping__cart__header">
           <h2 className="h3 mt-2">Order Summary</h2>
           <hr className="mb-3" />
@@ -46,7 +46,7 @@ function OrderSummary({ cartItems, ...props }) {
           <div className=" mb-4 gift__CardContainer">
             <p className="ml-4">Gift card/Discount code</p>
             <div className="gift__Form">
-              <div className="gift__mockInput">hello</div>
+              <div className="gift__mockInput" />
               <button
                 type="button"
                 className="btn btn-outline-primary gift__Btn"
@@ -61,12 +61,11 @@ function OrderSummary({ cartItems, ...props }) {
           <div className="row row-cols-1 flex-column">
             <div className="col">
               <div className="d-flex justify-content-between">
-                <h4 className="h5">Total</h4>
-                <h4>
+                <h4>Total</h4>
+                <h4 className="price__total funTitle">
                   <strong>{getCartTotal(cartItems)}€</strong>
                 </h4>
               </div>
-              <hr />
             </div>
           </div>
         </div>

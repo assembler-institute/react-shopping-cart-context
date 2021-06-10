@@ -227,7 +227,9 @@ function App() {
           />
           <Route
             path="/checkout/step-4"
-            render={(routeProps) => <Step4 {...routeProps} />}
+            render={(routeProps) => (
+              <Step4 {...routeProps} cartItems={cartItems} />
+            )}
           />
         </Switch>
       </BrowserRouter>

@@ -1,5 +1,5 @@
 .cartItemsContainer {
-  max-height: 50vh;
+  max-height: 70vh;
   overflow-y: scroll;
 }
 
@@ -19,4 +19,31 @@
   // &__Btn {
   //   margin-right: ;
   // }
+}
+
+.cartItemsContainer::-webkit-scrollbar{
+  background-color: rgb(209, 209, 209);
+  width: 10px;
+}
+.cartItemsContainer::-webkit-scrollbar-thumb{
+  background-color: rgb(117, 117, 117);
+  border-radius: 2px;
+}
+
+.price__total{
+  padding-right: 5%;
+  font-size: 2.3em;
+}
+
+.funTitle{
+	background-image: var(--gradient);
+	-webkit-background-clip: text; /*edge no soporta esta funcion a no ser que se le añada el webkit*/
+	color: transparent;
+	background-size: 200%;
+	animation: title-animation 2s infinite alternate;
+}
+
+@keyframes title-animation{
+	0%{background-position:left;}
+	100%{background-position:right;}
 }

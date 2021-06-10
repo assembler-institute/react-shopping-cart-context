@@ -1,0 +1,138 @@
+/* Google Fonts */
+@import url(https://fonts.googleapis.com/css?family=Anonymous+Pro);
+
+.creditCard--container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  font-family: "Anonymous Pro", monospace;
+  font-size: 1.3em;
+}
+
+.creditCard {
+  position: relative;
+  height: 90%;
+  width: 100%;
+  border-radius: 10px;
+  padding: 5%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/5/53/Vaporwave-4K-Wallpapers.jpg");
+  background-size: cover;
+	border: 3px solid rgb(0, 0, 0);
+	transition: 3s ease;
+}
+
+.card__chip {
+  width: 45px;
+  height: 45px;
+}
+
+.card__header {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.card__header div {
+  margin: 0;
+}
+
+.card__body {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  text-align: center;
+}
+
+.card__footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1% 1%;
+  height: 100%;
+  width: 100%;
+}
+
+.background_card_image {
+  opacity: 20%;
+  position: absolute;
+  object-fit: cover;
+  height: 100%;
+}
+
+.creditCard--Back {
+  position: relative;
+  height: 85%;
+  width: 100%;
+  border-radius: 10px;
+  color: rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  background-image: url("https://image.freepik.com/vector-gratis/culo-corgi-dibujos-animados-hueso-patrones-fisuras_42750-457.jpg");
+  background-size: cover;
+	border:1px solid black;
+	transition: 3s ease;
+}
+
+.card__header--back{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	width: 100%;
+	height: 100%;
+}
+.card__header--back div{
+	background-color: rgb(0, 0, 0);
+	width: 100%;
+	height: 50%;
+}
+
+.card__body--Back{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	align-items: flex-end;
+	width: 100%;
+	height: 100%;
+	gap: 5%;
+	padding: 2%;
+}
+
+.card__line{
+	background-color: rgb(255, 255, 255);
+	width: 100%;
+	height: 50%;
+}
+
+.card__CCV{
+	border:solid 3px rgb(255, 255, 255);
+	min-width: 70px;
+	padding-left: 10px;
+	height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card__footer--back{
+ display: flex;
+ align-items: center;
+ width: 100%;
+ height: 100%;
+ padding: 2%;
+}
+
+.card__line2{
+	background-color: rgb(117, 117, 117);
+	width: 50px;
+	height: 50%;
+	border-radius: 5px;
+ }

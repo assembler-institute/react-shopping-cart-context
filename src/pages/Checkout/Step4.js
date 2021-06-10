@@ -1,13 +1,24 @@
-import React from "react";
-import ProgressBar from "../../components/ProgressBar";
+import React, { useEffect } from "react";
 
-function Step4({ ...routeProps }) {
+import "./checkoutPage.scss";
+
+import ShoppingLayout from "../../hoc/ShoppingLayout";
+import ProgressBar from "../../components/ProgressBar";
+import CheckoutResume from "../../components/CheckoutResume";
+
+function Step4({ cartItems, ...routeProps }) {
+  useEffect(() => {
+    console.log(cartItems);
+  });
+
   return (
-    <div>
-      Step 4
-      <ProgressBar {...routeProps} />
+    <div className="checkout__main--container">
+      <div className="checkout__main--container--form">
+        <ProgressBar {...routeProps} />
+        <CheckoutResume {...routeProps} cartItems={cartItems} />
+      </div>
     </div>
   );
 }
 
-export default Step4;
+export default ShoppingLayout(Step4);

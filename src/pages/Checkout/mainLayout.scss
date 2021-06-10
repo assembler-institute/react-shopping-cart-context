@@ -1,13 +1,13 @@
-.step1__main--container {
+.step__main--container {
   background-color: rgb(255, 255, 255);
   display: grid;
-  grid-template-columns: 6fr 4fr;
+  grid-template-columns: 7fr 3fr;
   grid-template-rows: 1fr;
   height: 100%;
   width: 100%;
 }
 
-.step1__main--container--form {
+.step__main--container--form {
   border-right: 2px solid rgb(230, 230, 230);
   padding: 2% 0px;
 }

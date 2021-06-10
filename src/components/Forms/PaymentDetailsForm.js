@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { useFormik, Field, FormikProvider } from "formik";
 // { useState, useEffect, useContext }
@@ -10,19 +10,23 @@ import paymentDetailsFormSchema from "./paymentDetailsFormSchema";
 
 import InputShopping from "../InputShopping";
 import ButtonShopping from "../ButtonShopping";
+import CreditCard from "../CreditCard";
 
 function PaymentDetails() {
   const { paymentDetails, submitStep3 } = useContext(ShoppingContext);
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [checkedPoly, setCheckedPoly] = useState(false);
-
-  function handleCHeck() {
-    if (checkedPoly) {
-      setCheckedPoly(false);
-    } else {
-      setCheckedPoly(true);
-    }
-  }
+  const [cardNameAnimation, setCardNameAnimation] = useState(
+    "your rich name  ",
+  );
+  const [cardCVVCodeAnimation, setCardCVVCodeAnimation] = useState("xxx");
+  const [cardNumberAnimation, setCardNumberAnimation] = useState(
+    "xxxxxxxxxxxxxxxx",
+  );
+  const [
+    cardExpirationDateAnimation,
+    setCardExpirationDateAnimation,
+  ] = useState("xx/xx");
 
   const formik = useFormik({
     initialValues: {
@@ -43,6 +47,26 @@ function PaymentDetails() {
       }, 500);
     },
   });
+  function handleCHeck() {
+    if (checkedPoly) {
+      setCheckedPoly(false);
+    } else {
+      setCheckedPoly(true);
+    }
+  }
+
+  // UseEffect con el que hago la animación de la tarjeta Wey
+  useEffect(() => {
+    setCardNameAnimation(formik.values.cardHolderName);
+    setCardCVVCodeAnimation(formik.values.cardCVVCode);
+    setCardNumberAnimation(formik.values.cardNumber);
+    setCardExpirationDateAnimation(formik.values.cardExpirationDate);
+    // console.log(cardNameAnimation);
+    // console.log(cardCVVCodeAnimation);
+    // console.log(cardNumberAnimation);
+    // console.log(cardExpirationDateAnimation);
+  }, [formik]);
+
   return (
     <FormikProvider value={formik}>
       <section>
@@ -311,9 +335,12 @@ function PaymentDetails() {
                 />
               </div>
             </div>
-            <div className="creditCard--container">
-              <div className="creditCard">Credit Card</div>
-            </div>
+            <CreditCard
+              cardNameAnimation={cardNameAnimation}
+              cardCVVCodeAnimation={cardCVVCodeAnimation}
+              cardNumberAnimation={cardNumberAnimation}
+              cardExpirationDateAnimation={cardExpirationDateAnimation}
+            />
           </div>
           <div className="botton__texts--container">
             <div>
@@ -344,12 +371,9 @@ function PaymentDetails() {
             </div>
           </div>
           <div className="btn__container">
-            <ButtonShopping type="button" className="btnForm">
-              back
-            </ButtonShopping>
+            <ButtonShopping type="button">back</ButtonShopping>
             <ButtonShopping
               type="button"
-              className="btnForm"
               submitButton
               // block
               disabled={formik.isValidating || !formik.isValid}
