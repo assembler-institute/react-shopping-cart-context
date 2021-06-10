@@ -13,7 +13,7 @@ function Shipping({ cartItems, handleChange, handleRemove, user }) {
       <div className="Space" />
       <h1>Shipping Information</h1>
       <div className="row">
-        <div className="col col-6">
+        <div className="col-12 col-md-8">
           <header className="jumbotron">
             <h3>Shipping details</h3>
 
@@ -23,7 +23,7 @@ function Shipping({ cartItems, handleChange, handleRemove, user }) {
           </header>
         </div>
 
-        <div className="col col-6">
+        <div className="col-12 col-md-4">
           <header className="jumbotron">
             <CartSummary
               cartItems={cartItems}
@@ -32,9 +32,12 @@ function Shipping({ cartItems, handleChange, handleRemove, user }) {
             />
 
             <hr />
-            <div className="col">
+            <div className="row-4 d-flex justify-content-around">
               <Link to="/checkout/step-1">
                 <Button>Back</Button>
+              </Link>
+              <Link to="/">
+                <Button>Home</Button>
               </Link>
             </div>
           </header>

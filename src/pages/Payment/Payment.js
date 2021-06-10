@@ -29,14 +29,12 @@ function Payment({ cartItems, handleChange, handleRemove }) {
               handleChange={handleChange}
             />
             <hr />
-            <div className="col">
+            <div className="row-4 d-flex justify-content-around">
               <Link to="/checkout/step-2">
                 <Button>Back</Button>
               </Link>
-            </div>
-            <div className="col">
-              <Link to="/checkout/order-summary">
-                <Button>Confrim</Button>
+              <Link to="/">
+                <Button>Home</Button>
               </Link>
             </div>
           </header>

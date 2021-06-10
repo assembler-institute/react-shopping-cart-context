@@ -29,7 +29,7 @@ function CartConfirmation() {
             />
           ))
         ) : (
-          <div className="col mb-4">
+          <div className="col mb-4 text-center text-danger">
             <h4>Your cart is empty</h4>
           </div>
         )}

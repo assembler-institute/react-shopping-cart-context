@@ -4,7 +4,7 @@
   font-family: "Inconsolata", monospace;
 
   &__img {
-    width: 350px;
+    width: 100%;
     border-radius: 15px;
     position: relative;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
@@ -34,39 +34,63 @@
   }
 }
 
-@media only screen and (max-width: 600px) {
-  .CreditCard {
-    &__img {
-      width: 100%;
-    }
-
-    &__expiry {
-      top: 145px;
-      right: 85px;
-      font-size: 14px;
-    }
-  }
-}
-@media only screen and (min-width: 601px) {
+@media only screen and (max-width: 328px) {
   .CreditCard {
     &__img {
       width: 100%;
     }
     &__name {
       top: 100px;
-      font-size: 15px;
+      font-size: 14px;
       left: 30px;
     }
     &__number {
       top: 70px;
-      left: 90px;
-      font-size: 17px;
+      left: 80px;
+      font-size: 16px;
     }
 
     &__expiry {
-      top: 140px;
+      top: 135px;
       right: 85px;
-      font-size: 14px;
+      font-size: 12px;
+    }
+  }
+}
+
+// @media only screen and (min-width: 600px) {
+//   .CreditCard {
+//     &__img {
+//       width: 100%;
+//     }
+
+//     &__expiry {
+//       top: 240px;
+//       right: 85px;
+//       font-size: 14px;
+//     }
+//   }
+// }
+@media only screen and (min-width: 500px) {
+  .CreditCard {
+    &__img {
+      width: 100%;
+    }
+    &__name {
+      top: 180px;
+      font-size: 20px;
+      left: 30px;
+    }
+    &__number {
+      top: 130px;
+      left: 150px;
+      font-size: 24px;
+    }
+
+    &__expiry {
+      top: 240px;
+      right: 150px;
+      font-size: 18px;
     }
   }
 }
@@ -118,7 +142,7 @@
     }
   }
 }
-@media only screen and (min-width: 1216px) {
+@media only screen and (min-width: 1193px) {
   .CreditCard {
     text-align: center;
     &__img {

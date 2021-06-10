@@ -11,7 +11,7 @@ function Button({
 }) {
   const classes = cn({
     btn: true,
-    "btn-primary": true,
+    "btn-success": true,
     "btn-block": block,
     "btn-sm": small,
   });

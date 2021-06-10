@@ -34,7 +34,7 @@ function Input({
       {hasErrorMessage && errorMessage && (
         <p className="invalid-feedback">{errorMessage}</p>
       )}
-      {!hasErrorMessage && !errorMessage && value && (
+      {!hasErrorMessage && !errorMessage && (
         <p className="valid-feedback">Looks good!</p>
       )}
     </div>

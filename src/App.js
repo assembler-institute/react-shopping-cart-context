@@ -17,6 +17,8 @@ import CartContextProvider from "./components/CartContextProvider";
 import UserContext from "./context/userContext";
 import PaymentContext from "./context/paymentContext";
 
+import "./App.scss";
+
 const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
 
 function App() {

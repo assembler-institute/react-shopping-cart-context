@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import Button from "../../components/Button";
 import CartSummary from "../../components/CartSummary/CartSummary";
 import InformationForm from "../../components/InformationForm/InfomationForm";
 import Stepper from "../../components/Stepper/Stepper";
@@ -11,7 +13,7 @@ function UserInformation({ cartItems, handleRemove, handleChange, saveUser }) {
       <div className="Space" />
       <h1>User Information</h1>
       <div className="row">
-        <div className="col col-6">
+        <div className="col-12 col-md-8">
           <header className="jumbotron">
             <h3>Your details</h3>
 
@@ -21,7 +23,7 @@ function UserInformation({ cartItems, handleRemove, handleChange, saveUser }) {
           </header>
         </div>
 
-        <div className="col col-6">
+        <div className="col-12 col-md-4">
           <header className="jumbotron">
             <CartSummary
               cartItems={cartItems}
@@ -29,6 +31,11 @@ function UserInformation({ cartItems, handleRemove, handleChange, saveUser }) {
               handleChange={handleChange}
             />
             <hr />
+            <div className="col">
+              <Link to="/">
+                <Button>Back</Button>
+              </Link>
+            </div>
           </header>
         </div>
       </div>

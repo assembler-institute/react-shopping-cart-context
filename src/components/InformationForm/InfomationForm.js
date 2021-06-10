@@ -11,7 +11,6 @@ import InformationSchema from "./information-schema";
 
 function InformationForm({ saveUser }) {
   const [hasSubmitted, setHasSubmitted] = useState(false);
-
   const formik = useFormik({
     initialValues: {
       firstName: "",
