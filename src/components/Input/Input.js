@@ -1,5 +1,6 @@
 import React from "react";
 import "./input.scss";
+import classNames from "classnames";
 
 function Input({
   type = "text",
@@ -14,24 +15,17 @@ function Input({
   hasErrorMessage,
   ...props
 }) {
+  const inputState = classNames({
+    "form-control": true,
+    "is-invalid": hasErrorMessage && errorMessage,
+    "is-checked": hasErrorMessage && !errorMessage,
+  });
+
   return (
     <div className="form-group">
       <label htmlFor={id}>{label}</label>
       <input
-        className={
-          hasErrorMessage && errorMessage
-            ? "form-control is-invalid"
-            : "form-control is-checked"
-        }
-        // className={() => {
-        //   if (hasErrorMessage && errorMessage) {
-        //     return "form-control is-invalid";
-        //   }
-        //   if (hasErrorMessage) {
-        //     return "form-control is-checked";
-        //   }
-        //   return "form-control";
-        // }}
+        className={inputState}
         id={id}
         name={id}
         type={type}
