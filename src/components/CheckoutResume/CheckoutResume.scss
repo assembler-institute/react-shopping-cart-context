@@ -53,6 +53,13 @@ section.checkout__main--container{
 	padding-bottom: 5px;
 }
 
+.checkout__personalDetail--section div{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding-bottom: 5px;
+}
+
 .checkout__total--section{
 	margin: 0;
 }

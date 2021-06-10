@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import "./checkoutPage.scss";
 
@@ -7,10 +7,6 @@ import ProgressBar from "../../components/ProgressBar";
 import CheckoutResume from "../../components/CheckoutResume";
 
 function Step4({ cartItems, ...routeProps }) {
-  useEffect(() => {
-    console.log(cartItems);
-  });
-
   return (
     <div className="checkout__main--container">
       <div className="checkout__main--container--form">
