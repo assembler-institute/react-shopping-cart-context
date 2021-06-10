@@ -3,6 +3,7 @@ import { Formik } from "formik";
 import { Redirect } from "react-router-dom";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import "./details.scss";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import ShoppingContext from "../../context";
@@ -91,16 +92,17 @@ function Details() {
                   name: "userPhone",
                   className:
                     touched.userPhone && errors.userPhone
-                      ? "form-control is-invalid"
+                      ? "form-control is-invalid phone-is-invalid"
                       : "form-control",
                   // onChange: handleChange,
                   // onBlur: handleBlur,
                 }}
               />
               {touched.userPhone && errors.userPhone && (
-                <p className="invalid-feedback">{errors.userPhone}</p>
+                <p className="invalid-feedback invalid-feedback-phone">
+                  {errors.userPhone}
+                </p>
               )}
-              <p className="invalid-feedback">sdasdas {errors.userPhone}</p>
             </div>
 
             <Button submitButton disabled={isValidating || !isValid}>
