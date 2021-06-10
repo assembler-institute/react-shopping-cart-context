@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 // import { Modal } from "react-bootstrap";
 import { useFormik } from "formik";
 
@@ -16,12 +16,14 @@ function LoginModal({ showModal, setShowModal }) {
   );
   const [hasLoggedIn, setHasLoggedIn] = useState(false);
 
-  const handleCloseModal = () => {
+  useEffect(() => {
     if (hasLoggedIn) {
-      setTimeout(() => {
-        setShowModal(false);
-      }, 500);
+      setShowModal(false);
     }
+  }, [hasLoggedIn]);
+
+  const handleCloseModal = () => {
+    setShowModal(false);
   };
 
   const formik = useFormik({
@@ -61,6 +63,7 @@ function LoginModal({ showModal, setShowModal }) {
                   className="close"
                   data-dismiss="modal"
                   aria-label="Close"
+                  onClick={handleCloseModal}
                 >
                   <span aria-hidden="true">&times;</span>
                 </Button>
@@ -96,6 +99,7 @@ function LoginModal({ showModal, setShowModal }) {
                   type="button"
                   className="btn btn-secondary"
                   data-dismiss="modal"
+                  onClick={handleCloseModal}
                 >
                   Close
                 </Button>

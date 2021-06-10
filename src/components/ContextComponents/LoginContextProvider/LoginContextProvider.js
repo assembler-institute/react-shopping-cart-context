@@ -14,6 +14,7 @@ const UPDATE_LOGIN = "UPDATED_LOGIN";
 const initialState = {
   loginName: "",
   loginPassword: "",
+  isLogged: false,
 };
 
 function reducerLogin(state, action) {
