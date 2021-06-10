@@ -1,9 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+// import { HOME } from "../../constants/routes";
 
 import "./AppHeader.scss";
 
-function AppHeader({ ...props }) {
+function AppHeader({ page, ...props }) {
   return (
     <header className="bg-primary mb-3" {...props}>
       <div className="container-fluid">
@@ -17,19 +18,20 @@ function AppHeader({ ...props }) {
             >
               Home
             </NavLink>
-
-            <ul className="navbar-nav mr-auto">
-              <li className="nav-item">
-                <NavLink
-                  exact
-                  activeClassName="active"
-                  className="nav-link"
-                  to="/new-product"
-                >
-                  New Product
-                </NavLink>
-              </li>
-            </ul>
+            {!page && (
+              <ul className="navbar-nav mr-auto">
+                <li className="nav-item">
+                  <NavLink
+                    exact
+                    activeClassName="active"
+                    className="nav-link"
+                    to="/new-product"
+                  >
+                    New Product
+                  </NavLink>
+                </li>
+              </ul>
+            )}
           </nav>
         </div>
       </div>

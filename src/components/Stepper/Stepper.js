@@ -21,7 +21,10 @@ const useStyles = makeStyles((newTheme) => ({
   },
 }));
 
-export default function HorizontalLabelPositionBelowStepper({ activePage }) {
+export default function HorizontalLabelPositionBelowStepper({
+  activePage,
+  mobile,
+}) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
   const history = useHistory();
@@ -46,7 +49,7 @@ export default function HorizontalLabelPositionBelowStepper({ activePage }) {
                 history.push(step.route);
               }}
             >
-              {step.name}
+              {mobile && step.name}
             </StepButton>
           </Step>
         ))}

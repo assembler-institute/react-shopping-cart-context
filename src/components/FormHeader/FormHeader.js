@@ -5,7 +5,12 @@ import Stepper from "../Stepper";
 export default function FormHeader({ page = 1 }) {
   return (
     <>
-      <Stepper activePage={page} />
+      <div className="d-md-none">
+        <Stepper activePage={page} />
+      </div>
+      <div className="d-none d-md-block">
+        <Stepper mobile activePage={page} />
+      </div>
     </>
   );
 }
