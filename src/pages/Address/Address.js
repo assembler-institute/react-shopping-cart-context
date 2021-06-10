@@ -94,7 +94,7 @@ function Address({ cartItems }) {
           <div className="col">
             <OrderCart cartItems={cartItems} />
           </div>
-          {hasSubmitted && <Redirect to="/checkout/step-3" />}
+          {hasSubmitted && <Redirect to="/checkout/order-summary" />}
         </div>
       </section>
     </>

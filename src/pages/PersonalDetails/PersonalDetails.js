@@ -3,6 +3,8 @@ import { Redirect } from "react-router-dom";
 import React, { useState } from "react";
 import "../../components/OrderCart/OrderCart.scss";
 import "../layouts.scss";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import personalSchema from "./personal-schema";
@@ -11,7 +13,6 @@ import OrderCart from "../../components/OrderCart";
 
 function PersonalDetails({ cartItems }) {
   const [hasSubmitted, setHasSubmitted] = useState(false);
-
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -60,7 +61,7 @@ function PersonalDetails({ cartItems }) {
               errorMessage={formik.errors.email}
             />
 
-            <Input
+            {/* <Input
               type="number"
               label="Mobile Phone Number"
               id="phoneNumber"
@@ -70,8 +71,23 @@ function PersonalDetails({ cartItems }) {
               handleBlur={formik.handleBlur}
               hasErrorMessage={formik.touched.phoneNumber}
               errorMessage={formik.errors.phoneNumber}
+            /> */}
+            <p>Mobile Phone Number</p>
+            <PhoneInput
+              id="phoneNumber"
+              value={formik.values.phoneNumber}
+              placeholder="Your Mobile Phone Number"
+              handleChange={formik.handleChange}
+              handleBlur={formik.handleBlur}
+              hasErrorMessage={formik.touched.phoneNumber}
+              errorMessage={formik.errors.phoneNumber}
+              inputProps={{
+                name: "phone",
+                required: true,
+                autoFocus: true,
+              }}
             />
-
+            <br />
             <Button
               submitButton
               block
