@@ -6,7 +6,6 @@ import PaymentConfirmation from "../PaymentConfirmation";
 function OrderConfirmation() {
   const user = useContext(UserContext);
 
-  // eslint-disable-next-line no-console
   return (
     <section className="summaryBox">
       <div className="shippingSummary">
