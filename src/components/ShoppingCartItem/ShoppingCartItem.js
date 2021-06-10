@@ -71,7 +71,7 @@ function ShoppingCartItem({
                       <IconButton
                         onClick={onHandleRemove}
                         variant="contained"
-                        color="primary"
+                        color="secondary"
                       >
                         <DeleteIcon />
                       </IconButton>

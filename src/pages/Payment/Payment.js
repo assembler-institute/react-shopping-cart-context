@@ -142,6 +142,7 @@ function Payment() {
                           name="cardAgreement"
                           value={formik.values.cardAgreement}
                           id="cardAgreement"
+                          color="primary"
                         />
                       }
                       className={clsx({
