@@ -11,6 +11,7 @@ import useLocalStorage from "./hooks/useLocalStorage";
 import loadLocalStorageItems from "./utils/loadLocalStorageItems";
 
 import CartContextProvider from "./components/ContextComponents/CartContextProvider";
+import LoginContextProvider from "./components/ContextComponents/LoginContextProvider";
 
 // Checkout constants
 import {
@@ -197,68 +198,70 @@ function App() {
   }
 
   return (
-    <CartContextProvider>
-      <BrowserRouter>
-        <Switch>
-          <Route path={PROFILE_URL}>
-            <Checkout
-              fullWidth
-              processStep={PROFILE}
-              // cartItems={cartItems}
-              // handleRemove={handleRemove}
-              // handleChange={handleChange}
-            />
-          </Route>
-          <Route path={BILLING_URL}>
-            <Checkout
-              fullWidth
-              processStep={BILLING}
-              // cartItems={cartItems}
-              // handleRemove={handleRemove}
-              // handleChange={handleChange}
-            />
-          </Route>
-          <Route path={PAYMENT_URL}>
-            <Checkout
-              fullWidth
-              processStep={PAYMENT}
-              // cartItems={cartItems}
-              // handleRemove={handleRemove}
-              // handleChange={handleChange}
-            />
-          </Route>
-          <Route path={SUMMARY_URL}>
-            <Checkout
-              fullWidth
-              processStep={SUMMARY}
-              // cartItems={cartItems}
-              // handleRemove={handleRemove}
-              // handleChange={handleChange}
-            />
-          </Route>
-          <Route path={NEWPROD_URL}>
-            <NewProduct saveNewProduct={saveNewProduct} />
-          </Route>
-          <Route path={HOME_URL} exact>
-            <Home
-              fullWidth
-              // cartItems={cartItems}
-              products={products}
-              isLoading={isLoading}
-              hasError={hasError}
-              loadingError={loadingError}
-              handleDownVote={handleDownVote}
-              handleUpVote={handleUpVote}
-              handleSetFavorite={handleSetFavorite}
-              showNewProductForm
-              // handleAddToCart={handleAddToCart}
-              // handleRemove={handleRemove}
-              // handleChange={handleChange}
-            />
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    </CartContextProvider>
+    <LoginContextProvider>
+      <CartContextProvider>
+        <BrowserRouter>
+          <Switch>
+            <Route path={PROFILE_URL}>
+              <Checkout
+                fullWidth
+                processStep={PROFILE}
+                // cartItems={cartItems}
+                // handleRemove={handleRemove}
+                // handleChange={handleChange}
+              />
+            </Route>
+            <Route path={BILLING_URL}>
+              <Checkout
+                fullWidth
+                processStep={BILLING}
+                // cartItems={cartItems}
+                // handleRemove={handleRemove}
+                // handleChange={handleChange}
+              />
+            </Route>
+            <Route path={PAYMENT_URL}>
+              <Checkout
+                fullWidth
+                processStep={PAYMENT}
+                // cartItems={cartItems}
+                // handleRemove={handleRemove}
+                // handleChange={handleChange}
+              />
+            </Route>
+            <Route path={SUMMARY_URL}>
+              <Checkout
+                fullWidth
+                processStep={SUMMARY}
+                // cartItems={cartItems}
+                // handleRemove={handleRemove}
+                // handleChange={handleChange}
+              />
+            </Route>
+            <Route path={NEWPROD_URL}>
+              <NewProduct saveNewProduct={saveNewProduct} />
+            </Route>
+            <Route path={HOME_URL} exact>
+              <Home
+                fullWidth
+                // cartItems={cartItems}
+                products={products}
+                isLoading={isLoading}
+                hasError={hasError}
+                loadingError={loadingError}
+                handleDownVote={handleDownVote}
+                handleUpVote={handleUpVote}
+                handleSetFavorite={handleSetFavorite}
+                showNewProductForm
+                // handleAddToCart={handleAddToCart}
+                // handleRemove={handleRemove}
+                // handleChange={handleChange}
+              />
+            </Route>
+          </Switch>
+        </BrowserRouter>
+      </CartContextProvider>
+    </LoginContextProvider>
   );
 }
 

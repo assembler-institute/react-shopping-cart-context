@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import "./AppHeader.scss";
@@ -6,6 +6,13 @@ import Button from "../Button";
 import LoginModal from "../LoginModal";
 
 function AppHeader({ showNewProductForm, ...props }) {
+  // Modal behaivour
+  const [showModal, setShowModal] = useState(false);
+
+  function handleShowModal() {
+    setShowModal(true);
+  }
+
   return (
     <header className="bg-primary container-fluid mb-4" {...props}>
       <div className="container-fluid">
@@ -40,11 +47,12 @@ function AppHeader({ showNewProductForm, ...props }) {
               <Button
                 type="button"
                 data-toggle="modal"
-                data-target="#exampleModal"
+                data-target="#loginModal"
+                onClick={handleShowModal}
               >
                 Log in
               </Button>
-              <LoginModal />
+              <LoginModal showModal={showModal} setShownModal={setShowModal} />
             </div>
           </nav>
         </div>
