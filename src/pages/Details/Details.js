@@ -11,7 +11,9 @@ import Checkout from "../../hoc/withCheckout";
 import detailsSchema from "./details-schema";
 
 function Details() {
-  const { cartItems, updateDetails } = useContext(ShoppingContext);
+  const { cartItems, nextProgress, updateDetails } = useContext(
+    ShoppingContext,
+  );
   const [redirect, setRedirect] = useState(false);
 
   if (redirect) {
@@ -35,6 +37,7 @@ function Details() {
         onSubmit={(values) => {
           updateDetails(values);
           setRedirect(true);
+          nextProgress();
         }}
       >
         {({
