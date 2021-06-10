@@ -33,9 +33,12 @@ function reducerLogin(state, action) {
 
 function CartContextProvider({ children }) {
   const [loginData, dispatch] = useReducer(reducerLogin, initialState);
-  const { loginName, loginPassword } = loginData;
+  const { loginName, loginPassword, isLogged } = loginData;
 
-  useLocalStorage({ loginName, loginPassword }, LOGIN_LOCAL_STORAGE_KEY);
+  useLocalStorage(
+    { loginName, loginPassword, isLogged },
+    LOGIN_LOCAL_STORAGE_KEY,
+  );
 
   // Method
   function updateLoginData(newData) {

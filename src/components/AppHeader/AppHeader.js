@@ -1,12 +1,31 @@
-import React, { useState } from "react";
+/* eslint-disable no-console */
+import React, { useState, useEffect, useContext } from "react";
 import { NavLink } from "react-router-dom";
 
 import "./AppHeader.scss";
 import Button from "../Button";
 import LoginModal from "../LoginModal";
 
+import LoginContext from "../../context/login-context";
+
 function AppHeader({ showNewProductForm, ...props }) {
+  const { data: loginData, setData: updateLoginData } = useContext(
+    LoginContext,
+  );
   const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    console.log("Logged?", loginData.isLogged);
+  }, [loginData]);
+
+  function handleLogOut() {
+    updateLoginData({
+      loginName: "",
+      loginPassword: "",
+      isLogged: false,
+    });
+    console.log(loginData);
+  }
 
   function handleShowModal() {
     setShowModal(true);
@@ -43,14 +62,20 @@ function AppHeader({ showNewProductForm, ...props }) {
               )}
             </div>
             <div className="navbar-group right-nav">
-              <Button
-                type="button"
-                data-toggle="modal"
-                data-target="#loginModal"
-                onClick={handleShowModal}
-              >
-                Log in
-              </Button>
+              {loginData.isLogged ? (
+                <Button type="button" onClick={handleLogOut}>
+                  Log out
+                </Button>
+              ) : (
+                <Button
+                  type="button"
+                  data-toggle="modal"
+                  data-target="#loginModal"
+                  onClick={handleShowModal}
+                >
+                  Log in
+                </Button>
+              )}
               {showModal && (
                 <LoginModal showModal={showModal} setShowModal={setShowModal} />
               )}
