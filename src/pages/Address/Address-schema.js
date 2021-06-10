@@ -9,9 +9,10 @@ const AddressSchema = Yup.object().shape({
     .required("The city is required")
     .min(2, "The city is too short!")
     .max(50, "The city is too long!"),
-  zip: Yup.number()
+  zip: Yup.string()
     .required("The code postal is required")
-    .integer("The code postal must be a number"),
+    // .integer("The code postal must be a number"),
+    .matches(/^[1-9]+$/, "Only numbers accepted"),
   country: Yup.string().required("The country is required"),
 });
 
