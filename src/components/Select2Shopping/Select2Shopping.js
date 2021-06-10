@@ -15,8 +15,8 @@ function Select2Shopping({
   ...props
 }) {
   return (
-    <div className="form">
-      <select>
+    <div className="formulario">
+      <select className="selectTel">
         <option>ES +34</option>
         <option>PO +34</option>
         <option>FA +34</option>
@@ -26,7 +26,7 @@ function Select2Shopping({
         className={
           hasErrorMessage && errorMessage
             ? "form-control is-invalid"
-            : "form-control"
+            : "form-control prueba"
         }
         id={id}
         name={id}
