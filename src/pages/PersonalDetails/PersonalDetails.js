@@ -19,7 +19,7 @@ function PersonalDetails({ cartItems, ...props }) {
     initialValues: {
       name: "",
       email: "",
-      phoneNumber: 0,
+      phoneNumber: "",
     },
     validationSchema: personalSchema,
   });
@@ -62,14 +62,15 @@ function PersonalDetails({ cartItems, ...props }) {
           hasErrorMessage={formik.touched.phoneNumber}
           errorMessage={formik.errors.phoneNumber}
         />
-
-        <Button
-          submitButton
-          block
-          disabled={formik.isValidating || !formik.isValid}
-        >
-          {formik.isSubmitting ? "Submitting..." : "Submit"}
-        </Button>
+        <Link to="/billing-address-page">
+          <Button
+            submitButton
+            block
+            disabled={formik.isValidating || !formik.isValid}
+          >
+            {formik.isSubmitting ? "Submitting..." : "Submit"}
+          </Button>
+        </Link>
       </form>
       <div className="col-6" {...props}>
         {cartItems.length > 0 ? (
