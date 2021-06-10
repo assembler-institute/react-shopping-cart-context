@@ -22,6 +22,23 @@ export const theme = createMuiTheme({
     // E.g., shift from Red 500 to Red 300 or Red 700.
     tonalOffset: 0.2,
   },
+  typography: {
+    fontFamily: [
+      "system-ui",
+      "-apple-system",
+      "Segoe UI",
+      "Roboto",
+      "Helvetica Neue",
+      "Arial",
+      "Noto Sans",
+      "Liberation Sans",
+      "sans-serif",
+      "Apple Color Emoji",
+      "Segoe UI Emoji",
+      "Segoe UI Symbol",
+      "Noto Color Emoji",
+    ],
+  },
   overrides: {
     MuiInput: {
       input: {
@@ -30,6 +47,12 @@ export const theme = createMuiTheme({
           transitionDelay: "9999s", // This looks awful but it's the only way keep the input color on autocomplete
           transitionProperty: "background-color",
         },
+      },
+    },
+    MuiButton: {
+      label: {
+        textTransform: "none",
+        fontWeight: "400",
       },
     },
   },
