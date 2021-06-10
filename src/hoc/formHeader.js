@@ -15,6 +15,8 @@ function formHeader(WrappedComponent) {
   function WrapperComponent({ ...props }) {
     const path = useLocation();
     console.log(path);
+    // const url = path.pathname;
+
     return (
       <div className="col col-8">
         <header className="mt-4 mb-4 p-0 d-flex container" {...props}>
@@ -23,10 +25,8 @@ function formHeader(WrappedComponent) {
           <h6 className="mr-3 text-muted">3. Payment</h6>
           <h6 className="mr-3 text-muted">4. Resume</h6>
         </header>
-        {/* {billing.billingInfo && (
-          <h3 className="mb-3 pb-2 border-bottom text-primary">
-            Payment details
-          </h3>
+        {/* {title && (
+          <h3 className="mb-3 pb-2 border-bottom text-primary">{title}</h3>
         )} */}
         <Main className="border-bottom pb-3">
           <WrappedComponent {...props} />
