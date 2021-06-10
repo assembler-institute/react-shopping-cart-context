@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,OAAO,CAAC;EACN,MAAM,EAAE,aAAa;CACtB;;AACD,AAAA,GAAG,CAAC;EACF,KAAK,EAAE,IAAI;EACX,SAAS,EAAE,KAAK;CACjB;;AACD,AAAA,MAAM,CAAC;EACL,SAAS,EAAE,IAAI;EACf,SAAS,EAAE,IAAI;EACf,KAAK,EAAE,KAAK;EACZ,OAAO,EAAE,SAAS;CACnB",
+    "sources": [
+        "confirm.scss"
+    ],
+    "names": [],
+    "file": "confirm.css"
+}
