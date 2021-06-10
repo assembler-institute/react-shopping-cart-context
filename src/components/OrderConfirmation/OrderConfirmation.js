@@ -19,7 +19,7 @@ function OrderConfirmation() {
         <hr />
         <div className="clientBox">
           <h6>Client full name: </h6>
-          {user[0].firstName}
+          <span className="firstName">{user[0].firstName}</span>
           {user[0].lastName}
         </div>
         <hr />

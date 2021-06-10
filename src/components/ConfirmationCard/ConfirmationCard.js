@@ -26,7 +26,7 @@ function ConfirmationCard({ img, title, price }) {
                 <div className="col mt-auto">
                   <div className="row">
                     <div className="col col-6 col-lg-4">
-                      Thank you for your order!
+                      <b>Thank you for your order!</b>
                     </div>
                   </div>
                 </div>
