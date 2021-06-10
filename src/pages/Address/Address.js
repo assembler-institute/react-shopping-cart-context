@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { useFormik } from "formik";
+import withLayout from "../../hoc/withLayout";
 import "../../components/OrderCart/OrderCart.scss";
 import "../layouts.scss";
 import AddressSchema from "./Address-schema";
@@ -100,4 +101,4 @@ function Address({ cartItems }) {
     </>
   );
 }
-export default Address;
+export default withLayout(Address);

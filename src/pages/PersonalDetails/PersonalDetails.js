@@ -5,6 +5,7 @@ import "../../components/OrderCart/OrderCart.scss";
 import "../layouts.scss";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import withLayout from "../../hoc/withLayout";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import personalSchema from "./personal-schema";
@@ -105,4 +106,4 @@ function PersonalDetails({ cartItems }) {
     </section>
   );
 }
-export default PersonalDetails;
+export default withLayout(PersonalDetails);

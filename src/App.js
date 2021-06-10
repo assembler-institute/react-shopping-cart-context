@@ -193,7 +193,7 @@ function App() {
         <Route path="/checkout/step-2">
           <Address cartItems={cartItems} />
         </Route>
-        <Route path="/checkout/order-summary"></Route>
+        {/* <Route path="/checkout/order-summary"></Route> */}
         <Route path="/" exact>
           <Home
             fullWidth
