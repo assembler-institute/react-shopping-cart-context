@@ -1,5 +1,14 @@
-.form {
+.formulario {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   margin: 0 0 2% 0;
+}
+.selectTel {
+  width: 12%;
+  padding: 0.5rem;
+}
+.prueba {
+  width: 88%;
 }
