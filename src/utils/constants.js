@@ -8,7 +8,7 @@ export const SUMMARY = "summary";
 export const PROFILE_URL = "/checkout/step-1";
 export const BILLING_URL = "/checkout/step-2";
 export const PAYMENT_URL = "/checkout/step-3";
-export const SUMMARY_URL = "/checkout/step-4";
+export const SUMMARY_URL = "/checkout/order-summary";
 
 export const HOME_URL = "/";
 export const NEWPROD_URL = "/new-product";

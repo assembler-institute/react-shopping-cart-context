@@ -104,16 +104,16 @@ function CheckoutBilling({ setProcessCompletedFlags }) {
           errorMessage={formik.errors.country}
         />
       </form>
-      <div className="navigation-buttons d-flex justify-content-between mt-3">
+      <div className="navigation-buttons d-flex justify-content-between">
         <Link to={PROFILE_URL}>
-          <Button>Return to Profile</Button>
+          <Button>Profile</Button>
         </Link>
         <Button
           submitButton
           form="billingForm"
           disabled={formik.isValidating || !formik.isValid}
         >
-          {formik.isSubmitting ? "Going to Payment..." : "Go to Payment"}
+          {formik.isSubmitting ? "Going to Payment..." : "Payment"}
         </Button>
         {hasSubmitted && <Redirect to={PAYMENT_URL} />}
       </div>
