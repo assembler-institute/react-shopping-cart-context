@@ -53,6 +53,7 @@ export default function PaymentMethod({ value, changeHandler }) {
                 formImage={payment.formImage}
                 disabled={payment.disabled}
                 key={payment.method}
+                color="primary"
               />
             );
           })}

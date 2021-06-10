@@ -76,7 +76,6 @@ function UiInputDate({
       id={id}
       label={label}
       name={name}
-      variant="filled"
       size="small"
       value={value}
       onChange={onHandleChange}

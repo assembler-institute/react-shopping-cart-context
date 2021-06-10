@@ -1,5 +1,6 @@
 import React from "react";
 import cn from "clsx";
+import ButtonMUI from "@material-ui/core/Button";
 
 function Button({
   submitButton,
@@ -22,7 +23,9 @@ function Button({
   });
 
   return (
-    <button
+    <ButtonMUI
+      variant="contained"
+      color="primary"
       className={classes}
       type={submitButton ? "submit" : "button"}
       disabled={disabled}
@@ -30,7 +33,7 @@ function Button({
       {...props}
     >
       {children}
-    </button>
+    </ButtonMUI>
   );
 }
 

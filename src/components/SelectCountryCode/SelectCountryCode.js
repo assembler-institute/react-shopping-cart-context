@@ -39,7 +39,8 @@ function SelectCountryCode() {
   return (
     <div className="dropdown position-absolute top-0 bottom-0 ">
       <button
-        className="dropdown-toggle h-100 bg-transparent border-0 d-flex align-items-center justify-content-between border-end border-3"
+        className="dropdown-toggle h-100 bg-transparent border-0 d-flex align-items-center justify-content-between"
+        // className="dropdown-toggle h-100 bg-transparent border-0 d-flex align-items-center justify-content-between border-end border-3"
         style={{ maxHeight: "48px" }}
         type="button"
         id="dropdownMenuButton1"
