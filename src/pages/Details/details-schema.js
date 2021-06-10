@@ -1,5 +1,4 @@
 import * as Yup from "yup";
-// import "yup-phone";
 
 const detailsSchema = Yup.object().shape({
   userName: Yup.string()
@@ -9,8 +8,8 @@ const detailsSchema = Yup.object().shape({
   userEmail: Yup.string()
     .email("Invalid email")
     .required("The email is required"),
-  userPhone: Yup.number()
-    // .phone("ES", true)
+  userPhone: Yup.string()
+    .matches(/[0-9]{11}/, "Invalid phone number")
     .required("The phone number is required"),
 });
 

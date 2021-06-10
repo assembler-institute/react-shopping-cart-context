@@ -1,4 +1,5 @@
 import React from "react";
+import "./input.scss";
 
 function Input({
   type = "text",
@@ -20,8 +21,17 @@ function Input({
         className={
           hasErrorMessage && errorMessage
             ? "form-control is-invalid"
-            : "form-control"
+            : "form-control is-checked"
         }
+        // className={() => {
+        //   if (hasErrorMessage && errorMessage) {
+        //     return "form-control is-invalid";
+        //   }
+        //   if (hasErrorMessage) {
+        //     return "form-control is-checked";
+        //   }
+        //   return "form-control";
+        // }}
         id={id}
         name={id}
         type={type}
