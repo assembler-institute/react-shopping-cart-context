@@ -26,23 +26,6 @@ import {
   NEWPROD_URL,
 } from "./utils/constants";
 
-// function buildNewCartItem(cartItem) {
-//   if (cartItem.quantity >= cartItem.unitsInStock) {
-//     return cartItem;
-//   }
-
-//   return {
-//     id: cartItem.id,
-//     title: cartItem.title,
-//     img: cartItem.img,
-//     price: cartItem.price,
-//     unitsInStock: cartItem.unitsInStock,
-//     createdAt: cartItem.createdAt,
-//     updatedAt: cartItem.updatedAt,
-//     quantity: cartItem.quantity + 1,
-//   };
-// }
-
 const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
 // const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
 

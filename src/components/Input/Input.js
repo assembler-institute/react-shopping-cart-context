@@ -13,10 +13,17 @@ function Input({
   placeholder = "",
   handleChange = () => {},
   handleBlur = () => {},
+  handleFocus = () => {},
   errorMessage,
   hasErrorMessage,
+  shortInput = false,
   ...props
 }) {
+  const formItemClasses = classNames({
+    "mt-3": true,
+    "short-input": shortInput,
+  });
+
   let messageFail;
   if (withSelect) {
     if (
@@ -33,7 +40,7 @@ function Input({
     }
   }
   return (
-    <div className="mt-3">
+    <div className={formItemClasses}>
       {!withSelect && (
         <>
           <label htmlFor={id}>{label}</label>
@@ -52,6 +59,7 @@ function Input({
               value={value}
               onChange={handleChange}
               onBlur={handleBlur}
+              onFocus={handleFocus}
               {...props}
             />
             {hasErrorMessage && errorMessage && (

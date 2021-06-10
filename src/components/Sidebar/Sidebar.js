@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useFormik } from "formik";
 
 // import ShoppingCartItem from "../ShoppingCartItem";
@@ -13,15 +13,19 @@ import CartContext from "../../context/cart-context";
 
 function Sidebar() {
   const { cartItems, total, remove, change } = useContext(CartContext);
+  const [customTotal, setCustomTotal] = useState(total);
+  const [hasDiscount, sethasDiscount] = useState(false);
 
   const formik = useFormik({
     initialValues: {
       discountCode: "",
     },
     validationSchema: FormSchema,
-    onSubmit: (values) => {
-      console.log(values);
-      // event.target.blur(); ????
+    onSubmit: () => {
+      if (!hasDiscount) {
+        setCustomTotal((total * 0.8).toFixed(2));
+        sethasDiscount(false);
+      }
     },
   });
   return (
@@ -81,7 +85,7 @@ function Sidebar() {
       <div className="col sidebar-totals d-flex justify-content-between">
         <h4 className="h5">Total</h4>
         <h4>
-          <strong> {total}€</strong>
+          <strong> {customTotal}€</strong>
         </h4>
       </div>
     </>
