@@ -3,7 +3,6 @@ import CartSummary from "../../components/CartSummary/CartSummary";
 import InformationForm from "../../components/InformationForm/InfomationForm";
 import Stepper from "../../components/Stepper/Stepper";
 import withLayout from "../../hoc/withLayout";
-import "./UserInformation.scss";
 
 function UserInformation({ cartItems, handleRemove, handleChange, saveUser }) {
   return (
