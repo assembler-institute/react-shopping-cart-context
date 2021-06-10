@@ -13,6 +13,7 @@ const initialState = {
   cardNumber: "",
   cardExpiry: "",
   cardCvv: "",
+  actualPage: 0,
 };
 
 const CheckoutContext = createContext(initialState);
@@ -62,6 +63,7 @@ export const CheckoutContextProvider = ({ children }) => {
         cardNumber: state.cardNumber,
         cardExpiry: state.cardExpiry,
         cardCvv: state.cardCvv,
+        actualPage: state.actualPage,
         updateCheckoutContext,
         clearCheckoutContext,
       }}

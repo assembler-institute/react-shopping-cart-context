@@ -14,7 +14,7 @@ import * as api from "./api";
 import useLocalStorage from "./hooks/useLocalStorage";
 import loadLocalStorageItems from "./utils/loadLocalStorageItems";
 import { CheckoutContextProvider } from "./context/checkout-context";
-
+import { getPageIndex } from "./helpers/order-pages";
 import { theme } from "./constants/materialUiColors";
 
 import {
@@ -210,7 +210,7 @@ function App() {
                 cartItems={cartItems}
                 handleRemove={handleRemove}
                 handleChange={handleChange}
-                page={1}
+                page={getPageIndex(DETAIL)}
               />
             </Route>
             <Route path={ADDRESS}>
@@ -218,7 +218,7 @@ function App() {
                 cartItems={cartItems}
                 handleRemove={handleRemove}
                 handleChange={handleChange}
-                page={2}
+                page={getPageIndex(ADDRESS)}
               />
             </Route>
             <Route path={PAYMENT}>
@@ -226,14 +226,14 @@ function App() {
                 cartItems={cartItems}
                 handleRemove={handleRemove}
                 handleChange={handleChange}
-                page={3}
+                page={getPageIndex(PAYMENT)}
               />
             </Route>
             <Route path={SUMMARY}>
               <Summary
                 cartItems={cartItems}
                 date={new Date().toLocaleDateString()}
-                page={4}
+                page={getPageIndex(SUMMARY)}
               />
             </Route>
             <Route path={HOME}>

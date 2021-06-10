@@ -1,9 +1,8 @@
 import React, { useState, useContext } from "react";
 import { Redirect } from "react-router-dom";
-// import { v4 as uuid } from "uuid";
 import { useFormik } from "formik";
 
-// import Input from "../../components/Input";
+import { skipRoutes, getPageIndex } from "../../helpers/order-pages";
 import Button from "../../components/Button";
 import UiSelect from "../../components/UiSelect";
 import UiInput from "../../components/UiInput";
@@ -12,30 +11,36 @@ import withCheckoutLayout from "../../hoc/withCheckoutLayout";
 import AddressSchema from "./Address-schema";
 import CheckoutContext from "../../context/checkout-context";
 
-import { PAYMENT, DETAIL } from "../../constants/routes";
+import { PAYMENT, DETAIL, HOME, ADDRESS } from "../../constants/routes";
 import ButtonLink from "../../components/ButtonLink";
 
 function Address() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
-  const { updateCheckoutContext } = useContext(CheckoutContext);
+  const {
+    updateCheckoutContext,
+    actualPage,
+    address,
+    city,
+    zip,
+    country,
+  } = useContext(CheckoutContext);
 
   const formik = useFormik({
     initialValues: {
-      address: "",
-      city: "",
-      zip: "",
-      country: "",
+      address: address,
+      city: city,
+      zip: zip,
+      country: country,
     },
     validationSchema: AddressSchema,
     onSubmit: (values, { setSubmitting }) => {
-      //   const newProduct = addProductDetails(values);
-      //   saveNewProduct(newProduct);
       setSubmitting(true);
       updateCheckoutContext(values);
       setTimeout(() => {
         setHasSubmitted(true);
       }, 500);
     },
+    // validateOnMount: true,
   });
 
   return (
@@ -94,15 +99,25 @@ function Address() {
               <Button
                 submitButton
                 block
-                disabled={formik.isValidating || !formik.isValid}
+                disabled={
+                  formik.isValidating || !formik.isValid || !formik.dirty
+                }
+                handleClick={() =>
+                  formik.dirty &&
+                  updateCheckoutContext({
+                    actualPage: getPageIndex(PAYMENT),
+                  })
+                }
               >
                 {formik.isSubmitting ? "Submitting..." : "Next page"}
               </Button>
             </div>
           </div>
         </form>
-
         {hasSubmitted && <Redirect to={PAYMENT} />}
+        {skipRoutes && actualPage < getPageIndex(ADDRESS) && (
+          <Redirect to={HOME} />
+        )}
       </div>
     </div>
   );
