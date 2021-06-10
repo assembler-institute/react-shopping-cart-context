@@ -10,6 +10,7 @@ function Input({
   handleBlur = () => {},
   errorMessage,
   hasErrorMessage,
+  margins = "",
   isTouched,
   ...props
 }) {
@@ -34,7 +35,7 @@ function Input({
         {...props}
       />
       {hasErrorMessage && errorMessage && (
-        <p className="invalid-feedback">{errorMessage}</p>
+        <p className={`invalid-feedback${margins}`}>{errorMessage}</p>
       )}
     </div>
   );

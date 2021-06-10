@@ -3,11 +3,13 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
 import NewProduct from "./pages/NewProduct";
+import SignUp from "./pages/SignUp";
 
 import * as api from "./api";
 
 import useLocalStorage from "./hooks/useLocalStorage";
 import loadLocalStorageItems from "./utils/loadLocalStorageItems";
+import AuthContextProvider from "./components/AuthContextProvider/AuthContextProvider";
 
 function buildNewCartItem(cartItem) {
   if (cartItem.quantity >= cartItem.unitsInStock) {
@@ -180,29 +182,34 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/new-product">
-          <NewProduct saveNewProduct={saveNewProduct} />
-        </Route>
-        <Route path="/" exact>
-          <Home
-            fullWidth
-            cartItems={cartItems}
-            products={products}
-            isLoading={isLoading}
-            hasError={hasError}
-            loadingError={loadingError}
-            handleDownVote={handleDownVote}
-            handleUpVote={handleUpVote}
-            handleSetFavorite={handleSetFavorite}
-            handleAddToCart={handleAddToCart}
-            handleRemove={handleRemove}
-            handleChange={handleChange}
-          />
-        </Route>
-      </Switch>
-    </BrowserRouter>
+    <AuthContextProvider>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/new-product">
+            <NewProduct saveNewProduct={saveNewProduct} />
+          </Route>
+          <Route path="/signUp">
+            <SignUp fullWidth />
+          </Route>
+          <Route path="/" exact>
+            <Home
+              fullWidth
+              cartItems={cartItems}
+              products={products}
+              isLoading={isLoading}
+              hasError={hasError}
+              loadingError={loadingError}
+              handleDownVote={handleDownVote}
+              handleUpVote={handleUpVote}
+              handleSetFavorite={handleSetFavorite}
+              handleAddToCart={handleAddToCart}
+              handleRemove={handleRemove}
+              handleChange={handleChange}
+            />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    </AuthContextProvider>
   );
 }
 

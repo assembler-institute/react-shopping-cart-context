@@ -1,0 +1,11 @@
+.ItemShowcase {
+  width: 30%;
+  &__img {
+    width: 100%;
+    min-width: 2rem;
+    height: auto;
+    border-radius: 4px;
+    object-fit: cover;
+    background-position: center;
+  }
+}
