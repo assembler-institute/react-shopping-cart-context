@@ -1,4 +1,6 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
+import { Redirect, NavLink } from "react-router-dom";
+
 import { Formik } from "formik";
 import Checkout from "../../hoc/withCheckout";
 import adressSchema from "./adress-schema";
@@ -8,6 +10,11 @@ import ShoppingContext from "../../context";
 
 function Adress() {
   const { updateAdress } = useContext(ShoppingContext);
+  const [redirect, setRedirect] = useState(false);
+  if (redirect) {
+    return <Redirect to="/Checkout/step-3" />;
+  }
+
   return (
     <>
       <h1>Adress</h1>
@@ -18,9 +25,11 @@ function Adress() {
           postCode: 0,
           country: "",
         }}
+        initialErrors={{ defaultIsValid: "false" }}
         validationSchema={adressSchema}
         onSubmit={(values) => {
           updateAdress(values);
+          setRedirect(true);
         }}
       >
         {({
@@ -78,9 +87,18 @@ function Adress() {
               hasErrorMessage={touched.country}
               errorMessage={errors.country}
             />
-            <Button submitButton block disabled={isValidating || !isValid}>
-              Submit
+            <NavLink to="/Checkout/step-1">
+              <Button>Previous</Button>
+            </NavLink>
+
+            <Button submitButton disabled={isValidating || !isValid}>
+              Next
             </Button>
+            <div>
+              <code>{`errors: ${JSON.stringify(
+                errors,
+              )} | isValid: ${isValid}`}</code>
+            </div>
           </form>
         )}
       </Formik>

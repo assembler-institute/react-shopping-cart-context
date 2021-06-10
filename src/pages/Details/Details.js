@@ -1,13 +1,26 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Formik } from "formik";
-import Checkout from "../../hoc/withCheckout";
-import detailsSchema from "./details-schema";
+import { Redirect } from "react-router-dom";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+import "./details.scss";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import ShoppingContext from "../../context";
+import Checkout from "../../hoc/withCheckout";
+import detailsSchema from "./details-schema";
 
 function Details() {
-  const { updateDetails } = useContext(ShoppingContext);
+  const { cartItems, updateDetails } = useContext(ShoppingContext);
+  const [redirect, setRedirect] = useState(false);
+
+  if (redirect) {
+    return <Redirect to="/Checkout/step-2" />;
+  }
+  if (cartItems.length === 0) {
+    alert("Chose at least one product");
+    return <Redirect to="/" />;
+  }
   return (
     <>
       <h1>Details</h1>
@@ -15,17 +28,21 @@ function Details() {
         initialValues={{
           userName: "",
           userEmail: "",
-          userPhone: 0,
+          userPhone: "",
         }}
+        initialErrors={{ defaultIsValid: "false" }}
         validationSchema={detailsSchema}
         onSubmit={(values) => {
           updateDetails(values);
+          setRedirect(true);
         }}
       >
         {({
           handleSubmit,
           handleChange,
           handleBlur,
+          setFieldValue,
+          setFieldTouched,
           errors,
           values,
           touched,
@@ -55,20 +72,51 @@ function Details() {
               hasErrorMessage={touched.userEmail}
               errorMessage={errors.userEmail}
             />
-            <Input
-              type="number"
-              label="Write your phone number"
-              id="userPhone"
-              value={values.userPhone}
-              handleChange={handleChange}
-              handleBlur={handleBlur}
-              placeholder="Write your phone"
-              hasErrorMessage={touched.userPhone}
-              errorMessage={errors.userPhone}
-            />
-            <Button submitButton block disabled={isValidating || !isValid}>
-              Submit
+            <div className="form-group">
+              <PhoneInput
+                type="number"
+                label="Write your phone number"
+                id="userPhone"
+                name="userPhone"
+                value={values.userPhone}
+                onChange={(phone) => {
+                  setFieldValue("userPhone", phone, true);
+                }}
+                onBlur={() => {
+                  setFieldTouched("userPhone", true);
+                }}
+                country="es"
+                placeholder="Write your phone"
+                inputProps={{
+                  id: "userPhone",
+                  name: "userPhone",
+                  className:
+                    touched.userPhone && errors.userPhone
+                      ? "form-control is-invalid phone-is-invalid"
+                      : "form-control",
+                  // onChange: handleChange,
+                  // onBlur: handleBlur,
+                }}
+              />
+              {touched.userPhone && errors.userPhone && (
+                <p className="invalid-feedback invalid-feedback-phone">
+                  {errors.userPhone}
+                </p>
+              )}
+            </div>
+
+            <Button submitButton disabled={isValidating || !isValid}>
+              Next
             </Button>
+            <div>
+              <code>{`errors: ${JSON.stringify(
+                errors,
+              )} | touched: ${JSON.stringify(
+                touched,
+              )} | isValid: ${isValid} | values: ${JSON.stringify(
+                values,
+              )}`}</code>
+            </div>
           </form>
         )}
       </Formik>

@@ -8,7 +8,9 @@ const detailsSchema = Yup.object().shape({
   userEmail: Yup.string()
     .email("Invalid email")
     .required("The email is required"),
-  userPhone: Yup.number().required(9, "The email is required"),
+  userPhone: Yup.string()
+    .matches(/[0-9]{11}/, "Invalid phone number")
+    .required("The phone number is required"),
 });
 
 export default detailsSchema;
