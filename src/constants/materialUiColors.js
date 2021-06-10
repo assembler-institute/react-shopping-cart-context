@@ -23,7 +23,7 @@ export const theme = createMuiTheme({
     tonalOffset: 0.2,
   },
   overrides: {
-    MuiFilledInput: {
+    MuiInput: {
       input: {
         "&:-webkit-autofill": {
           textFillColor: "#0066ff",

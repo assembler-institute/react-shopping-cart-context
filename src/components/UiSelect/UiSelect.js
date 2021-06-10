@@ -20,7 +20,6 @@ function UiSelect({
   value = "",
   name = "",
   options,
-  // placeholder = "",
   handleChange = () => {},
   handleBlur = () => {},
   errorMessage,
@@ -34,16 +33,12 @@ function UiSelect({
       label={label}
       name={name}
       value={value}
-      variant="filled"
       size="small"
       onChange={handleChange}
       onBlur={handleBlur}
       error={hasErrorMessage && Boolean(errorMessage)}
       helperText={errorMessage}
     >
-      {/* <MenuItem value="">None</MenuItem>
-      <MenuItem value="10">Ten</MenuItem>
-      <MenuItem value="20">Twenty</MenuItem> */}
       {buildSelectOptions(options)}
     </TextField>
   );
