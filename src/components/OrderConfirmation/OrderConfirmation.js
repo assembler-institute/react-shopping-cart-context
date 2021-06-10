@@ -6,6 +6,7 @@ import PaymentConfirmation from "../PaymentConfirmation";
 function OrderConfirmation() {
   const user = useContext(UserContext);
 
+  // eslint-disable-next-line no-console
   console.log(user);
   return (
     <section className="summaryBox">
@@ -20,6 +21,10 @@ function OrderConfirmation() {
           <h6>Client full name: </h6>
           {user[0].firstName}
           {user[0].lastName}
+        </div>
+        <hr />
+        <div className="clientBox ">
+          <h6>Phone Number: </h6> {user[0].phone}
         </div>
         <hr />
         <div className="clientBox ">
