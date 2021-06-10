@@ -53,6 +53,7 @@ export const checkInitialState = {
 };
 
 const SUBMITONE = "SUBMITONE";
+const SUBMITTWO = "SUBMITTWO";
 
 export function checkoutReducer(state, action) {
   switch (action.type) {
@@ -60,6 +61,15 @@ export function checkoutReducer(state, action) {
       return {
         ...state,
         stepOne: {
+          ...action.payload,
+          completed: true,
+        },
+      };
+    }
+    case SUBMITTWO: {
+      return {
+        ...state,
+        stepTwo: {
           ...action.payload,
           completed: true,
         },
@@ -74,10 +84,17 @@ export function checkoutReducer(state, action) {
 export function CheckoutContext({ children }) {
   const [checkState, dispatch] = useReducer(checkoutReducer, checkInitialState);
 
-  function submitStepOne(formInfo) {
+  function submitStepOne(formOne) {
     dispatch({
       type: SUBMITONE,
-      payload: formInfo,
+      payload: formOne,
+    });
+  }
+
+  function submitStepTwo(formTwo) {
+    dispatch({
+      type: SUBMITONE,
+      payload: formTwo,
     });
   }
 
@@ -102,6 +119,7 @@ export function CheckoutContext({ children }) {
           acceptedTerms: false,
         },
         submitStepOne: submitStepOne,
+        submitStepTwo: submitStepTwo,
       }}
     >
       {children}
