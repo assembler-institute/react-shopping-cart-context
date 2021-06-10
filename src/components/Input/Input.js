@@ -20,7 +20,7 @@ function Input({
   ...props
 }) {
   const formItemClasses = classNames({
-    "mt-3": true,
+    "mt-3 width-100": true,
     "short-input": shortInput,
   });
 
