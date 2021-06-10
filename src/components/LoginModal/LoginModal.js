@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { useFormik } from "formik";
 
 import Button from "../Button";
@@ -10,13 +10,7 @@ import { formLogin } from "./form-schema";
 import LoginContext from "../../context/login-context";
 
 function LoginModal({ setShowModal }) {
-  const { data: loginData, setData: updateLoginData } = useContext(
-    LoginContext,
-  );
-
-  useEffect(() => {
-    console.log(loginData);
-  }, [loginData]);
+  const { setData: updateLoginData } = useContext(LoginContext);
 
   const handleCloseModal = () => {
     const modal = document.getElementById("loginModal");

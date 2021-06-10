@@ -3,12 +3,13 @@ import { Link, Redirect } from "react-router-dom";
 import { useFormik } from "formik";
 
 import FormContext from "../../../context/form-context";
+import LoginContext from "../../../context/login-context";
 
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
 import Select from "../../../components/Select";
 
-import { PAYMENT_URL, PROFILE_URL } from "../../../utils/constants";
+import { HOME_URL, PAYMENT_URL, PROFILE_URL } from "../../../utils/constants";
 
 import { formBilling } from "../form-schema";
 
@@ -33,6 +34,7 @@ const countryOptions = [
 
 function CheckoutBilling({ setProcessCompletedFlags }) {
   const { data: formData, setData: updateFormData } = useContext(FormContext);
+  const { data: loginData } = useContext(LoginContext);
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
   const formik = useFormik({
@@ -112,6 +114,7 @@ function CheckoutBilling({ setProcessCompletedFlags }) {
       </form>
 
       {hasSubmitted && <Redirect to={PAYMENT_URL} />}
+      {!loginData.isLogged && <Redirect to={HOME_URL} />}
     </>
   );
 }

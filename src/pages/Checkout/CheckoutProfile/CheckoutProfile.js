@@ -3,6 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import { useFormik } from "formik";
 
 import FormContext from "../../../context/form-context";
+import LoginContext from "../../../context/login-context";
 
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
@@ -32,6 +33,8 @@ const phonePrefixOptions = [
 
 function CheckoutProfile({ setProcessCompletedFlags }) {
   const { data: formData, setData: updateFormData } = useContext(FormContext);
+  const { data: loginData } = useContext(LoginContext);
+
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
   const formik = useFormik({
@@ -110,6 +113,7 @@ function CheckoutProfile({ setProcessCompletedFlags }) {
       </form>
 
       {hasSubmitted && <Redirect to={BILLING_URL} />}
+      {!loginData.isLogged && <Redirect to={HOME_URL} />}
     </>
   );
 }

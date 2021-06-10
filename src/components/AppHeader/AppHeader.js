@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { NavLink } from "react-router-dom";
 
 import "./AppHeader.scss";
@@ -8,13 +8,15 @@ import LoginModal from "../LoginModal";
 
 import LoginContext from "../../context/login-context";
 
-// import { HOME_URL } from "../../utils/constants";
-
 function AppHeader({ showNewProductForm, ...props }) {
   const { data: loginData, setData: updateLoginData } = useContext(
     LoginContext,
   );
   const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    console.log(loginData);
+  }, [loginData]);
 
   function handleLogOut() {
     updateLoginData({
