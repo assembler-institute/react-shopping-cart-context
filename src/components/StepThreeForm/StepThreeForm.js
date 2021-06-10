@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useFormik } from "formik";
 
 import Input from "../Input";
 import stepThreeSchema from "./StepThree-schema";
+import { CheckoutContext } from "../../CheckoutContext";
 import paypal from "../../assets/img/PayPal.svg";
 import apple from "../../assets/img/ApplePay.svg";
 import visa from "../../assets/img/Visa.svg";
@@ -11,9 +12,10 @@ import american from "../../assets/img/American.svg";
 import "./StepThreeForm.scss";
 
 function StepThreeForm() {
+  const { submitStepThree } = useContext(CheckoutContext);
+
   const formik = useFormik({
     initialValues: {
-      payMethod: "",
       cardHolder: "",
       cardNumber: "",
       expiryDate: "",
@@ -21,9 +23,9 @@ function StepThreeForm() {
       acceptedTerms: false,
     },
     validationSchema: stepThreeSchema,
-    /* onSubmit: (values) => {
-      submitStepTwo(values);
-    }, */
+    onSubmit: (values) => {
+      submitStepThree(values);
+    },
   });
   return (
     <form onSubmit={formik.handleSubmit} id="stepThree">
