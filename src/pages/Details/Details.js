@@ -112,18 +112,10 @@ function Details() {
                 </p>
               )}
             </div>
-
-            <Button submitButton disabled={isValidating || !isValid}>
-              Next
-            </Button>
-            <div>
-              <code>{`errors: ${JSON.stringify(
-                errors,
-              )} | touched: ${JSON.stringify(
-                touched,
-              )} | isValid: ${isValid} | values: ${JSON.stringify(
-                values,
-              )}`}</code>
+            <div className="buttonsContainer">
+              <Button submitButton disabled={isValidating || !isValid}>
+                Next
+              </Button>
             </div>
           </form>
         )}

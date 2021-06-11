@@ -7,6 +7,7 @@ import adressSchema from "./adress-schema";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import ShoppingContext from "../../context";
+import "./adressStyles.scss";
 
 function Adress() {
   const { updateAdress, nextProgress } = useContext(ShoppingContext);
@@ -88,17 +89,14 @@ function Adress() {
               hasErrorMessage={touched.country}
               errorMessage={errors.country}
             />
-            <NavLink to="/Checkout/step-1">
-              <Button>Previous</Button>
-            </NavLink>
+            <div className="buttonsContainer">
+              <NavLink to="/Checkout/step-1">
+                <Button>Previous</Button>
+              </NavLink>
 
-            <Button submitButton disabled={isValidating || !isValid}>
-              Next
-            </Button>
-            <div>
-              <code>{`errors: ${JSON.stringify(
-                errors,
-              )} | isValid: ${isValid}`}</code>
+              <Button submitButton disabled={isValidating || !isValid}>
+                Next
+              </Button>
             </div>
           </form>
         )}

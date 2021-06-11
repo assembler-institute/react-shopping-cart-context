@@ -210,17 +210,14 @@ function Payment() {
                 </div>
               </div>
             </section>
-            <NavLink to="/Checkout/step-2">
-              <Button>Previous</Button>
-            </NavLink>
+            <div className="buttonsContainer">
+              <NavLink to="/Checkout/step-2">
+                <Button>Previous</Button>
+              </NavLink>
 
-            <Button submitButton disabled={isValidating || !isValid}>
-              Buy now
-            </Button>
-            <div>
-              <code>{`errors: ${JSON.stringify(
-                errors,
-              )} | isValid: ${isValid}`}</code>
+              <Button submitButton disabled={isValidating || !isValid}>
+                Buy now
+              </Button>
             </div>
           </form>
         )}

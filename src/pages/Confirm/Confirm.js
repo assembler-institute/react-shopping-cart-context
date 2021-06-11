@@ -7,9 +7,14 @@ import Button from "../../components/Button";
 // this is confirm page
 
 function Confirm() {
-  const { cartItems, details, adressData, paymentData } = useContext(
-    ShoppingContext,
-  );
+  const {
+    cartItems,
+    details,
+    adressData,
+    paymentData,
+    ProgressToZero,
+  } = useContext(ShoppingContext);
+
   const { userName, userEmail } = details;
   const { streetName, cityName, country } = adressData;
   const {
@@ -94,7 +99,14 @@ function Confirm() {
         <div>
           <p>Will send you a confirmation message to your emial: {userEmail}</p>
           <NavLink to="/">
-            <Button>FINISH</Button>
+            <Button
+              onClick={() => {
+                ProgressToZero();
+                localStorage.removeItem("context");
+              }}
+            >
+              FINISH
+            </Button>
           </NavLink>
         </div>
       </section>

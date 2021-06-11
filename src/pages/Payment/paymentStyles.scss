@@ -179,3 +179,18 @@ top:175px;
 
     }
 }
+Button{
+    margin-left: 20px;
+}
+
+.buttonsContainer{
+    display:flex;
+    
+    justify-content: space-between;
+    align-content: center;
+    width: 100%;
+    margin:50px 0px;
+    padding: 10px 0px;
+    border-top: rgb(218, 211, 211) 1px solid;
+    border-bottom: rgb(218, 211, 211) 1px solid;
+}

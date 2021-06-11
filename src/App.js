@@ -34,7 +34,7 @@ function buildNewCartItem(cartItem) {
 const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
 const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
 const UPLOAD_LOCALSTORAGE = "UPLOAD_LOCALSTORAGE";
-
+const PROGRES_TO_ZERO = "PROGRES_TO_ZERO";
 const PROGRES = "PROGRES";
 const UPDATEDETAILS = "UPDATEDETAILS";
 const UPDATEADRESS = "UPDATEADRESS";
@@ -54,6 +54,13 @@ function reducer(state, action) {
       return {
         ...state,
         progresBar: state.progresBar + 1,
+      };
+    }
+
+    case PROGRES_TO_ZERO: {
+      return {
+        ...state,
+        progresBar: state.progresBar - 2,
       };
     }
 
@@ -265,6 +272,10 @@ function App() {
     dispatch({ type: PROGRES });
   }
 
+  function ProgressToZero() {
+    dispatch({ type: PROGRES_TO_ZERO });
+  }
+
   function updateDetails(newDetails) {
     dispatch({
       type: UPDATEDETAILS,
@@ -300,6 +311,7 @@ function App() {
         paymentData: state.paymentData,
         cartItems: cartItems,
         nextProgress: nextProgress,
+        ProgressToZero: ProgressToZero,
         updateDetails: updateDetails,
         updateAdress: updateAdress,
         updatePayment: updatePayment,
