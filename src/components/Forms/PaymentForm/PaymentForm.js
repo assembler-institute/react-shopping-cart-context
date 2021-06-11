@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import formHeader from "../../../hoc/formHeader";
 
 import Input from "../../Input";
+import InputCheck from "../../InputCheck";
 import Button from "../../Button";
 import Card from "../../Card";
 
@@ -21,6 +22,7 @@ function PaymentForm() {
   const value = useContext(StateContext);
   const { dispatch, payment } = value;
   const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [check, setCheck] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -170,22 +172,21 @@ function PaymentForm() {
               <img alt="" />
             </div>
           </div>
-          {/* <div className="w-50 bg-warning">Aquí va la tarjetAAAa</div> */}
 
           <Card />
           {/* NEW HERE */}
         </div>
-        <Input
+        <InputCheck
           type="checkbox"
-          label="I have read and I accept all terms and conditions  sdfsadf asdfasdfsadfsd"
+          label="I have read and I accept all terms and conditions"
           id="clientConsent"
           // checked={formik.values.clientConsent}
-          value={formik.values.clientConsent}
+          value={check}
           placeholder=""
-          handleChange={formik.handleChange}
+          handleChange={setCheck}
           hasErrorMessage={formik.touched.clientConsent}
           errorMessage={formik.errors.clientConsent}
-          className="form-check-input"
+          className=""
         />
         {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
         <div className="d-flex justify-content-between">

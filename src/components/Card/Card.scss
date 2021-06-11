@@ -44,15 +44,14 @@
   margin: 20px 20px 20px 20px;
   width: 320px;
   height: 190px;
-  background-image: url(""),
-    linear-gradient(
-      to right bottom,
-      #6b69fd,
-      #428ec2,
-      #58f6d4,
-      #50f193,
-      #48ec63
-    ); /*linear-gradient(to right bottom, #fd8369, #fc7870, #f96e78, #f56581, #ee5d8a)*/
+  background-image: linear-gradient(
+    to right bottom,
+    #6b69fd,
+    #428ec2,
+    #58f6d4,
+    #50f193,
+    #48ec63
+  ); /*linear-gradient(to right bottom, #fd8369, #fc7870, #f96e78, #f56581, #ee5d8a)*/
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
