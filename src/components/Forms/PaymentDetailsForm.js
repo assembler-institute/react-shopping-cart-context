@@ -290,7 +290,7 @@ function PaymentDetails() {
                 errorMessage={formik.errors.cardHolderName}
               />
               <InputShopping
-                type="number"
+                type="text"
                 label="Number card:"
                 id="cardNumber"
                 value={formik.values.cardNumber}

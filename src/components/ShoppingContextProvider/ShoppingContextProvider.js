@@ -2,40 +2,6 @@ import React, { useReducer, useEffect } from "react";
 
 import ShoppingContext from "../../context/ShoppingContext";
 
-// function getLocalStorageCheckoutData() {
-//   const prevState = localStorage.getItem("checkoutData");
-//   if (!prevState) {
-//     return {
-//       personalDetails: {
-//         name: "",
-//         email: "",
-//         phoneNumber: "",
-//         countryPrefix: "",
-//       },
-//       shippingDetails: {
-//         address: "",
-//         city: "",
-//         zipCode: "",
-//         country: "",
-//       },
-//       paymentDetails: {
-//         paymentMethod: "",
-//         cardHolderName: "",
-//         cardNumber: "",
-//         cardExpirationDate: "",
-//         cardCVVCode: "",
-//         consentCheckbox: false,
-//       },
-//     };
-//   }
-
-//   try {
-//     return JSON.parse(prevState);
-//   } catch (error) {
-//     return null;
-//   }
-// }
-
 const shoppingInitialState = {
   personalDetails: {
     name: "",
@@ -87,7 +53,6 @@ function shoppingReducer(state, action) {
 }
 
 function ShoppingContextProvider({ children }) {
-  // const [state, dispatch] = useReducer(shoppingReducer, shoppingInitialState);
   const [state, dispatch] = useReducer(
     shoppingReducer,
     shoppingInitialState,
@@ -96,19 +61,12 @@ function ShoppingContextProvider({ children }) {
       return localData ? JSON.parse(localData) : shoppingInitialState;
     },
   );
-  // const { personalDetails, shippingDetails, paymentDetails } = state;
-  // console.log(personalDetails);
 
   function submitStep1(valuesObject) {
     dispatch({
       type: "submitStep1",
       newDetails: valuesObject,
     });
-    // console.log("Im going to update localStorage");
-    // localStorage.setItem(
-    //   "checkoutData",
-    //   JSON.stringify(personalDetails, shippingDetails, paymentDetails),
-    // );
   }
 
   function submitStep2(valuesObject) {
@@ -124,23 +82,6 @@ function ShoppingContextProvider({ children }) {
       newPayment: valuesObject,
     });
   }
-
-  // const [address, setAdress] = useState("");
-  // const [city, setCity] = useState("");
-  // const [zipCode, setZipCode] = useState("");
-  // const [country, setCountry] = useState("");
-
-  // const [paymentMethod, setPaymentMethod] = useState("");
-  // const [cardHolderName, setCardHolderName] = useState("");
-  // const [cardNumber, setCardNumber] = useState("");
-  // const [cardExpirationDate, setCardExpirationDate] = useState("");
-  // const [cardCVVCode, setcardCVVCode] = useState("");
-  // const [consentCheckbox, setconsentCheckbox] = useState("");
-
-  // function saveLocalStorage() {
-  //   useLocalStorage(shoppingReducer, CONTEXT_LOCAL_STORAGE_KEY);
-  //   console.log(shoppingReducer);
-  // }
 
   useEffect(() => {
     localStorage.setItem("react-context", JSON.stringify(state));
