@@ -10,7 +10,7 @@ import ShoppingContext from "../../context";
 import "./paymentStyles.scss";
 
 function Payment() {
-  const { updatePayment, setLocatStorage } = useContext(ShoppingContext);
+  const { updatePayment } = useContext(ShoppingContext);
   const [redirect, setRedirect] = useState(false);
 
   const [state, setClass] = useState(false);
@@ -59,7 +59,6 @@ function Payment() {
           updatePayment(values);
 
           setRedirect(true);
-          setLocatStorage();
         }}
       >
         {({

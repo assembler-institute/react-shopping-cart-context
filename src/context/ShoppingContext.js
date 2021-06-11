@@ -3,7 +3,7 @@ import { createContext } from "react";
 const ShoppingContext = createContext({
   progresBar: 1,
   nextProgress: () => {},
-  setLocatStorage: () => {},
+
   details: {},
   updateDetails: () => {},
   cartItems: [],

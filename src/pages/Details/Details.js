@@ -12,12 +12,9 @@ import detailsSchema from "./details-schema";
 // import loadLocalStorageItems from "../../utils/loadLocalStorageItems";
 
 function Details() {
-  const {
-    cartItems,
-    nextProgress,
-    updateDetails,
-    setLocatStorage,
-  } = useContext(ShoppingContext);
+  const { cartItems, nextProgress, updateDetails } = useContext(
+    ShoppingContext,
+  );
   const [redirect, setRedirect] = useState(false);
 
   if (redirect) {
@@ -42,7 +39,6 @@ function Details() {
           updateDetails(values);
           nextProgress();
           setRedirect(true);
-          setLocatStorage();
         }}
       >
         {({

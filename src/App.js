@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState, useEffect, useReducer, useContext } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
@@ -33,16 +33,24 @@ function buildNewCartItem(cartItem) {
 
 const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
 const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
-const SET_LOCALSTORAGE = "SET_LOCALSTORAGE";
+const UPLOAD_LOCALSTORAGE = "UPLOAD_LOCALSTORAGE";
 
 const PROGRES = "PROGRES";
 const UPDATEDETAILS = "UPDATEDETAILS";
 const UPDATEADRESS = "UPDATEADRESS";
 const UPDATEPAYMENT = "UPDATEPAYMENT";
+
 // const RESET = "RESET";
 function reducer(state, action) {
   switch (action.type) {
     case PROGRES: {
+      localStorage.setItem(
+        "context",
+        JSON.stringify({
+          ...state,
+          progresBar: state.progresBar + 1,
+        }),
+      );
       return {
         ...state,
         progresBar: state.progresBar + 1,
@@ -50,24 +58,45 @@ function reducer(state, action) {
     }
 
     case UPDATEDETAILS: {
+      localStorage.setItem(
+        "context",
+        JSON.stringify({
+          ...state,
+          details: action.newdetails,
+        }),
+      );
       return {
         ...state,
         details: action.newdetails,
       };
     }
     case UPDATEADRESS: {
+      localStorage.setItem(
+        "context",
+        JSON.stringify({
+          ...state,
+          adressData: action.newAdress,
+        }),
+      );
       return {
         ...state,
         adressData: action.newAdress,
       };
     }
     case UPDATEPAYMENT: {
+      localStorage.setItem(
+        "context",
+        JSON.stringify({
+          ...state,
+          paymentData: action.newPayment,
+        }),
+      );
       return {
         ...state,
         paymentData: action.newPayment,
       };
     }
-    case SET_LOCALSTORAGE: {
+    case UPLOAD_LOCALSTORAGE: {
       return {
         progresBar: state.progresBar,
         ...loadLocalStorageItems("context", state),
@@ -114,11 +143,6 @@ function App() {
         });
     }
   }, []);
-  useEffect(() => {
-    localStorage.setItem("context", JSON.stringify(state));
-
-    console.log(state);
-  }, [state]);
 
   function handleAddToCart(productId) {
     const prevCartItem = cartItems.find((item) => item.id === productId);
@@ -259,9 +283,14 @@ function App() {
       newPayment: newPayment,
     });
   }
-  function setLocatStorage() {
-    dispatch({ type: SET_LOCALSTORAGE });
+  function uploadLocatStorage() {
+    dispatch({ type: UPLOAD_LOCALSTORAGE });
   }
+
+  useEffect(() => {
+    uploadLocatStorage();
+    console.log(state);
+  }, []);
   return (
     <ShoppingContext.Provider
       value={{
@@ -276,7 +305,6 @@ function App() {
         updatePayment: updatePayment,
         handleChange: handleChange,
         handleRemove: handleRemove,
-        setLocatStorage: setLocatStorage,
       }}
     >
       <BrowserRouter>

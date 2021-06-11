@@ -9,7 +9,7 @@ import Button from "../../components/Button";
 import ShoppingContext from "../../context";
 
 function Adress() {
-  const { updateAdress, nextProgress, setLocatStorage } = useContext(
+  const { updateAdress, nextProgress } = useContext(
     ShoppingContext,
   );
   const [redirect, setRedirect] = useState(false);
@@ -33,7 +33,6 @@ function Adress() {
           updateAdress(values);
           setRedirect(true);
           nextProgress();
-          setLocatStorage();
         }}
       >
         {({
