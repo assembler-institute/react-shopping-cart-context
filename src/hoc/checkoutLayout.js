@@ -1,5 +1,6 @@
 import React from "react";
 
+import CheckoutHeader from "../components/CheckoutHeader";
 import CheckoutSidebar from "../components/CheckoutSidebar";
 import CheckoutFooter from "../components/CheckoutFooter";
 
@@ -19,7 +20,7 @@ function checkoutLayout(WrappedComponent) {
         <div className="col col-8">
           <div className="row">
             <div className="col col-12">
-              <header />
+              <CheckoutHeader />
               <WrappedComponent {...props} />
             </div>
           </div>
