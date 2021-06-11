@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 
 import clsx from "clsx";
@@ -22,6 +22,7 @@ import CreditCard from "../../components/CreditCard";
 import { skipRoutes, getPageIndex } from "../../helpers/order-pages";
 
 import { SUMMARY, ADDRESS, HOME, PAYMENT } from "../../constants/routes";
+import { CHECKOUT_CONTEXT_KEY } from "../../constants/local-storage-keys";
 import ButtonLink from "../../components/ButtonLink";
 
 function Payment() {
@@ -29,6 +30,15 @@ function Payment() {
   const [flip, setFlip] = useState(false);
   const [cardType, setCardType] = useState("visa");
   const { updateCheckoutContext, actualPage } = useContext(CheckoutContext);
+
+  useEffect(() => {
+    const localStorageContext = JSON.parse(
+      localStorage.getItem(CHECKOUT_CONTEXT_KEY),
+    );
+    if (localStorageContext) {
+      updateCheckoutContext(localStorageContext);
+    }
+  }, []);
 
   const formik = useFormik({
     initialValues: {
@@ -47,7 +57,7 @@ function Payment() {
         setHasSubmitted(true);
       }, 500);
     },
-    // validateOnMount: true,
+    enableReinitialize: true,
   });
 
   function handleFlip() {

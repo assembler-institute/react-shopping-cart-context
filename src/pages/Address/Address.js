@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { useFormik } from "formik";
 
@@ -12,6 +12,7 @@ import AddressSchema from "./Address-schema";
 import CheckoutContext from "../../context/checkout-context";
 
 import { PAYMENT, DETAIL, HOME, ADDRESS } from "../../constants/routes";
+import { CHECKOUT_CONTEXT_KEY } from "../../constants/local-storage-keys";
 import ButtonLink from "../../components/ButtonLink";
 
 function Address() {
@@ -24,6 +25,15 @@ function Address() {
     zip,
     country,
   } = useContext(CheckoutContext);
+
+  useEffect(() => {
+    const localStorageContext = JSON.parse(
+      localStorage.getItem(CHECKOUT_CONTEXT_KEY),
+    );
+    if (localStorageContext) {
+      updateCheckoutContext(localStorageContext);
+    }
+  }, []);
 
   const formik = useFormik({
     initialValues: {
@@ -40,7 +50,7 @@ function Address() {
         setHasSubmitted(true);
       }, 500);
     },
-    // validateOnMount: true,
+    enableReinitialize: true,
   });
 
   return (
