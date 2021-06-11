@@ -17,4 +17,4 @@ export function getFirsCheckoutPage() {
   return orderRoutes[0];
 }
 
-export const skipRoutes = false;
+export const skipRoutes = true;

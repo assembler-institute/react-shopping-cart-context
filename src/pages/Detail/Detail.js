@@ -108,7 +108,7 @@ function Detail() {
                     !formik.values.tel
                   }
                   handleClick={() =>
-                    formik.dirty &&
+                    // formik.dirty &&
                     updateCheckoutContext({
                       actualPage: getPageIndex(ADDRESS),
                     })

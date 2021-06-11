@@ -212,7 +212,7 @@ function Payment() {
                   !formik.values.cardAgreement
                 }
                 handleClick={() =>
-                  formik.dirty &&
+                  // formik.dirty &&
                   updateCheckoutContext({ actualPage: getPageIndex(SUMMARY) })
                 }
               >

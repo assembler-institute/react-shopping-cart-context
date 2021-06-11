@@ -119,7 +119,7 @@ function Address() {
                   !formik.values.zip
                 }
                 handleClick={() =>
-                  formik.dirty &&
+                  // formik.dirty &&
                   updateCheckoutContext({
                     actualPage: getPageIndex(PAYMENT),
                   })
