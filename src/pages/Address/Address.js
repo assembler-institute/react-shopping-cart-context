@@ -10,6 +10,7 @@ import UiInput from "../../components/UiInput";
 import withCheckoutLayout from "../../hoc/withCheckoutLayout";
 import AddressSchema from "./Address-schema";
 import CheckoutContext from "../../context/checkout-context";
+import AuthContext from "../../context/auth-context";
 
 import { PAYMENT, DETAIL, HOME, ADDRESS } from "../../constants/routes";
 import { CHECKOUT_CONTEXT_KEY } from "../../constants/local-storage-keys";
@@ -25,6 +26,7 @@ function Address() {
     zip,
     country,
   } = useContext(CheckoutContext);
+  const { auth } = useContext(AuthContext);
 
   useEffect(() => {
     const localStorageContext = JSON.parse(
@@ -117,7 +119,7 @@ function Address() {
                   !formik.values.zip
                 }
                 handleClick={() =>
-                  formik.dirty &&
+                  // formik.dirty &&
                   updateCheckoutContext({
                     actualPage: getPageIndex(PAYMENT),
                   })
@@ -132,6 +134,7 @@ function Address() {
         {skipRoutes && actualPage < getPageIndex(ADDRESS) && (
           <Redirect to={HOME} />
         )}
+        {!auth.isAuthenticated && <Redirect to={HOME} />}
       </div>
     </div>
   );

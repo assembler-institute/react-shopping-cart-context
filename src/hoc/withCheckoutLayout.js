@@ -20,7 +20,7 @@ function withCheckoutLayout(WrappedComponent) {
     return (
       <>
         <AppHeader page={props.page} />
-        <Main className={props.fullWidth ? "container-fluid" : "container"}>
+        <Main className={props.fullWidth ? "container-fluid " : "container "}>
           <div className="row">
             <div className="col col-12 col-md-8">
               <div className="col col-12">

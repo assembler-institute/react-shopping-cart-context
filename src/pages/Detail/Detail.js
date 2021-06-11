@@ -12,6 +12,7 @@ import { DETAIL, ADDRESS, HOME } from "../../constants/routes";
 import { CHECKOUT_CONTEXT_KEY } from "../../constants/local-storage-keys";
 import withCheckoutLayout from "../../hoc/withCheckoutLayout";
 import CheckoutContext from "../../context/checkout-context";
+import AuthContext from "../../context/auth-context";
 import ButtonLink from "../../components/ButtonLink";
 
 function Detail() {
@@ -19,6 +20,7 @@ function Detail() {
   const { updateCheckoutContext, actualPage, name, email, tel } = useContext(
     CheckoutContext,
   );
+  const { auth } = useContext(AuthContext);
 
   useEffect(() => {
     const localStorageContext = JSON.parse(
@@ -106,7 +108,7 @@ function Detail() {
                     !formik.values.tel
                   }
                   handleClick={() =>
-                    formik.dirty &&
+                    // formik.dirty &&
                     updateCheckoutContext({
                       actualPage: getPageIndex(ADDRESS),
                     })
@@ -122,6 +124,7 @@ function Detail() {
           {skipRoutes && actualPage < getPageIndex(DETAIL) && (
             <Redirect to={HOME} />
           )}
+          {!auth.isAuthenticated && <Redirect to={HOME} />}
         </div>
       </div>
     </>
