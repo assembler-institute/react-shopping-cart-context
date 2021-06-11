@@ -32,7 +32,6 @@ function CheckoutReducer(state, action) {
       );
       return { ...state, ...action.payload };
     case CLEAR_CHECKOUT:
-      localStorage.removeItem(CHECKOUT_CONTEXT_KEY);
       return initialState;
     default:
       return state;
