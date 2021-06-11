@@ -31,7 +31,6 @@ function LoginModal({ setShowModal }) {
     validationSchema: formLogin,
     onSubmit: (values, { setSubmitting }) => {
       updateLoginData({ ...values, isLogged: true });
-      console.log(values);
       setSubmitting(true);
       setTimeout(() => {
         handleCloseModal();

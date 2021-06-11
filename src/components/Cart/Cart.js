@@ -19,15 +19,12 @@ function Cart({ ...props }) {
 
   const { data: loginData } = useContext(LoginContext);
 
-  const enableCheckout = !hasCartItems || !loginData.isLogged;
-
   useEffect(() => {
     if (cartItems.length > 0) {
       setHasCartItems(true);
     } else {
       setHasCartItems(false);
     }
-    console.log(enableCheckout);
   }, [cartItems, loginData.isLogged]);
 
   return (
@@ -70,7 +67,9 @@ function Cart({ ...props }) {
             </div>
             <div className="col">
               <Link to={PROFILE_URL}>
-                <Button disabled={enableCheckout}>Checkout</Button>
+                <Button disabled={!hasCartItems || !loginData.isLogged}>
+                  Checkout
+                </Button>
               </Link>
             </div>
           </div>

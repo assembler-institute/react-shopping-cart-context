@@ -24,7 +24,6 @@ function Sidebar({ hasDiscount, sethasDiscount }) {
     } else {
       setCustomTotal(total);
     }
-    console.log("this is total: ", total);
   }, [total]);
 
   const formik = useFormik({

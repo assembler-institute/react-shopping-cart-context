@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import withLayout from "../../hoc/withLayout";
 
@@ -23,10 +23,6 @@ function Checkout({ processStep }) {
     payment: false,
   });
   const [hasDiscount, sethasDiscount] = useState(false);
-
-  useEffect(() => {
-    console.log(processCompletedFlags);
-  }, [processCompletedFlags]);
 
   return (
     <FormContextProvider>
