@@ -33,14 +33,24 @@ function buildNewCartItem(cartItem) {
 
 const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
 const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
+const UPLOAD_LOCALSTORAGE = "UPLOAD_LOCALSTORAGE";
+
 const PROGRES = "PROGRES";
 const UPDATEDETAILS = "UPDATEDETAILS";
 const UPDATEADRESS = "UPDATEADRESS";
 const UPDATEPAYMENT = "UPDATEPAYMENT";
+
 // const RESET = "RESET";
 function reducer(state, action) {
   switch (action.type) {
     case PROGRES: {
+      localStorage.setItem(
+        "context",
+        JSON.stringify({
+          ...state,
+          progresBar: state.progresBar + 1,
+        }),
+      );
       return {
         ...state,
         progresBar: state.progresBar + 1,
@@ -48,21 +58,48 @@ function reducer(state, action) {
     }
 
     case UPDATEDETAILS: {
+      localStorage.setItem(
+        "context",
+        JSON.stringify({
+          ...state,
+          details: action.newdetails,
+        }),
+      );
       return {
         ...state,
         details: action.newdetails,
       };
     }
     case UPDATEADRESS: {
+      localStorage.setItem(
+        "context",
+        JSON.stringify({
+          ...state,
+          adressData: action.newAdress,
+        }),
+      );
       return {
         ...state,
         adressData: action.newAdress,
       };
     }
     case UPDATEPAYMENT: {
+      localStorage.setItem(
+        "context",
+        JSON.stringify({
+          ...state,
+          paymentData: action.newPayment,
+        }),
+      );
       return {
         ...state,
         paymentData: action.newPayment,
+      };
+    }
+    case UPLOAD_LOCALSTORAGE: {
+      return {
+        progresBar: state.progresBar,
+        ...loadLocalStorageItems("context", state),
       };
     }
 
@@ -246,6 +283,14 @@ function App() {
       newPayment: newPayment,
     });
   }
+  function uploadLocatStorage() {
+    dispatch({ type: UPLOAD_LOCALSTORAGE });
+  }
+
+  useEffect(() => {
+    uploadLocatStorage();
+    console.log(state);
+  }, []);
   return (
     <ShoppingContext.Provider
       value={{
