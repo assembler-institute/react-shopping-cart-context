@@ -49,7 +49,7 @@ function SummaryItem({
                   </h4>
                   {handleRemove && (
                     <button type="button" onClick={onHandleRemove}>
-                      <i className="uil uil-times" />
+                      ×
                     </button>
                   )}
                 </div>

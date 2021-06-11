@@ -54,7 +54,11 @@ export const cardPayment = Yup.object().shape({
   cardCVV: Yup.string()
     .typeError("Not a valid CVV. Example: XXX")
     .length(3, "Not a valid CVV. Example: XXX")
-    .required("CVV code is required"),
+    .required("CVV code is required")
+    .matches(
+      /([000-999]{3})/,
+      "Not a valid card expiration date. Example: MM/YY",
+    ),
   cardTerms: Yup.bool().oneOf([true]),
 });
 

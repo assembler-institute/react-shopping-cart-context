@@ -102,6 +102,7 @@ function LoginModal({ setShowModal }) {
               form="loginForm"
               className="btn btn-primary"
               disabled={formik.isValidating || !formik.isValid}
+              // {formik.isValid && onClick=handleCloseModal}
             >
               {formik.isSubmitting ? "Loggin in..." : "Log in"}
             </Button>
