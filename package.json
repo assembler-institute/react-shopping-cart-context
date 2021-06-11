@@ -13,11 +13,14 @@
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^13.1.5",
     "bootstrap": "^4.6.0",
+    "classnames": "^2.3.1",
     "clsx": "^1.1.1",
     "formik": "^2.2.6",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-phone-input-2": "^2.14.0",
+    "react-phone-number-input": "^3.1.23",
     "react-redux": "^7.2.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
@@ -26,7 +29,8 @@
     "sass": "^1.32.11",
     "uuid": "^8.3.2",
     "web-vitals": "^1.1.1",
-    "yup": "^0.32.9"
+    "yup": "^0.32.9",
+    "yup-phone": "^1.2.19"
   },
   "devDependencies": {
     "@babel/core": "^7.13.16",

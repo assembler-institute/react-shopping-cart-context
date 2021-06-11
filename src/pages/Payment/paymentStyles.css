@@ -1,0 +1,227 @@
+.cardSection {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+}
+
+.wrappedCard {
+  margin-left: 100px;
+}
+
+.card {
+  font-family: 'PT Mono', monospace;
+  color: white;
+  position: relative;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 400px;
+  min-height: 250px;
+  min-width: 350px;
+  background-image: url("../../img/credicart.png");
+  background-position: center;
+  background-size: cover;
+  -webkit-animation-duration: 0.5s;
+          animation-duration: 0.5s;
+  -webkit-animation-timing-function: ease-out;
+          animation-timing-function: ease-out;
+}
+
+.radioButtons {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
+}
+
+.creditCardLabel {
+  background-image: url("../../img/visa.png");
+  background-position: center;
+  background-size: cover;
+  min-width: 150px;
+  min-height: 90px;
+  cursor: pointer;
+  margin: 20px 20px;
+}
+
+#creditCard {
+  visibility: hidden;
+}
+
+.payPalLabel {
+  background-image: url("../../img/paypal.png");
+  background-position: center;
+  background-size: cover;
+  min-width: 150px;
+  min-height: 90px;
+  cursor: pointer;
+  margin: 20px 20px;
+}
+
+#payPal {
+  visibility: hidden;
+}
+
+.applePayLabel {
+  background-image: url("../../img/applePay.png");
+  background-position: center;
+  background-size: cover;
+  min-width: 150px;
+  min-height: 90px;
+  cursor: pointer;
+  border-radius: 15px;
+  margin: 20px 20px;
+}
+
+#applePay {
+  visibility: hidden;
+}
+
+.cardBackLabel {
+  font-family: 'PT Mono', monospace;
+  color: black;
+  position: relative;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 400px;
+  min-height: 250px;
+  min-width: 350px;
+  background-image: url("../../img/cradiCardBack.png");
+  background-position: center;
+  background-size: cover;
+  -webkit-animation-name: backTheCard2;
+          animation-name: backTheCard2;
+  -webkit-animation-duration: 0.5s;
+          animation-duration: 0.5s;
+  -webkit-animation-timing-function: ease-out;
+          animation-timing-function: ease-out;
+}
+
+.shortImputs {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+}
+
+#cvvCode {
+  max-width: 100px;
+}
+
+#cardExpiryDate {
+  max-width: 100px;
+}
+
+.cardNum {
+  position: absolute;
+  top: 130px;
+  left: 22px;
+}
+
+.cardName {
+  position: absolute;
+  left: 22px;
+  top: 175px;
+}
+
+.payPal {
+  background-image: url("../../img/paypal.png");
+  background-position: center;
+  background-size: cover;
+  position: absolute;
+  top: 20px;
+  right: 22px;
+  min-width: 50px;
+  min-height: 30px;
+}
+
+.applePay {
+  background-image: url("../../img/applePay.png");
+  background-position: center;
+  background-size: cover;
+  position: absolute;
+  top: 20px;
+  right: 22px;
+  min-width: 50px;
+  min-height: 30px;
+}
+
+.visa {
+  background-image: url("../../img/visa.png");
+  background-position: center;
+  background-size: cover;
+  position: absolute;
+  top: 20px;
+  right: 22px;
+  min-width: 50px;
+  min-height: 30px;
+}
+
+.cardDate {
+  position: absolute;
+  top: 175px;
+  right: 25px;
+}
+
+.cardCvv {
+  position: absolute;
+  top: 100px;
+  right: 30px;
+}
+
+.cardCvvFront {
+  visibility: hidden;
+}
+
+.cardBackHide {
+  visibility: hidden;
+}
+
+@-webkit-keyframes backTheCard1 {
+  0% {
+    width: 100%;
+    min-width: 350px;
+  }
+  100% {
+    width: 0%;
+    min-width: 0px;
+  }
+}
+
+@keyframes backTheCard1 {
+  0% {
+    width: 100%;
+    min-width: 350px;
+  }
+  100% {
+    width: 0%;
+    min-width: 0px;
+  }
+}
+
+@-webkit-keyframes backTheCard2 {
+  0% {
+    width: 0%;
+    min-width: 0px;
+    -webkit-transform: skewY(30deg);
+            transform: skewY(30deg);
+  }
+  100% {
+    width: 100%;
+    min-width: 350px;
+  }
+}
+
+@keyframes backTheCard2 {
+  0% {
+    width: 0%;
+    min-width: 0px;
+    -webkit-transform: skewY(30deg);
+            transform: skewY(30deg);
+  }
+  100% {
+    width: 100%;
+    min-width: 350px;
+  }
+}
+/*# sourceMappingURL=paymentStyles.css.map */

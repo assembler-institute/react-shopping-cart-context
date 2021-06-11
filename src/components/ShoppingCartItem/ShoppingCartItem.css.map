@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AACG,AAAD,sBAAM,CAAC;EACL,KAAK,EAAE,IAAI;EACX,SAAS,EAAE,IAAI;EACf,MAAM,EAAE,IAAI;EACZ,aAAa,EAAE,GAAG;EAClB,UAAU,EAAE,KAAK;EACjB,mBAAmB,EAAE,MAAM;CAC5B",
+    "sources": [
+        "ShoppingCartItem.scss"
+    ],
+    "names": [],
+    "file": "ShoppingCartItem.css"
+}

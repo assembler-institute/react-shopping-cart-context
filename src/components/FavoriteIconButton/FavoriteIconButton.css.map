@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,mBAAmB,CAAC;EAClB,OAAO,EAAE,KAAK;EACd,OAAO,EAAE,OAAO;EAChB,QAAQ,EAAE,QAAQ;EAClB,GAAG,EAAE,MAAM;EACX,KAAK,EAAE,MAAM;CACd",
+    "sources": [
+        "FavoriteIconButton.scss"
+    ],
+    "names": [],
+    "file": "FavoriteIconButton.css"
+}
