@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Formik } from "formik";
 import { NavLink, Redirect } from "react-router-dom";
 
-import Checkout from "../../hoc/withCheckout";
+import Checkout from "../../hoc/withCheckoutt";
 import paymentSchema from "./payment-schema";
 import Input from "../../components/Input";
 import Button from "../../components/Button";

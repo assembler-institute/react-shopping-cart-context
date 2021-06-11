@@ -16,19 +16,21 @@ function Checkout(WrappedComponent) {
 
   function WrapperComponent() {
     return (
-      <section className="mainContainer">
-        <div className="checkoutContainer">
-          <CheckoutHeader />
-
-          <WrappedComponent />
-
-          <Footer />
-        </div>
-        <CheckoutSideBar />
-        <div>
-          <code>{JSON.stringify(useContext(ShoppingContext))}</code>
-        </div>
-      </section>
+      <>
+        <CheckoutHeader />
+        <section className="mainContainer">
+          <div className="checkoutContainer">
+            <div className="wrappedComponenet">
+              <WrappedComponent />
+            </div>
+          </div>
+          <CheckoutSideBar />
+          <div>
+            <code>{JSON.stringify(useContext(ShoppingContext))}</code>
+          </div>
+        </section>
+        <Footer />
+      </>
     );
   }
 

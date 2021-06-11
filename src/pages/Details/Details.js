@@ -7,7 +7,7 @@ import "./details.scss";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import ShoppingContext from "../../context";
-import Checkout from "../../hoc/withCheckout";
+import Checkout from "../../hoc/withCheckoutt";
 import detailsSchema from "./details-schema";
 // import loadLocalStorageItems from "../../utils/loadLocalStorageItems";
 
@@ -77,6 +77,7 @@ function Details() {
               errorMessage={errors.userEmail}
             />
             <div className="form-group">
+              <span>Write your phone number</span>
               <PhoneInput
                 type="number"
                 label="Write your phone number"
@@ -94,17 +95,21 @@ function Details() {
                 inputProps={{
                   id: "userPhone",
                   name: "userPhone",
-                  className:
+                  className: `form-control phone-input ${
                     touched.userPhone && errors.userPhone
-                      ? "form-control is-invalid phone-is-invalid"
-                      : "form-control",
-                  // onChange: handleChange,
-                  // onBlur: handleBlur,
+                      ? "is-invalid phone-is-invalid"
+                      : ""
+                  } ${
+                    touched.userPhone && !errors.userPhone
+                      ? "phone-is-checked"
+                      : ""
+                  }`,
                 }}
               />
               {touched.userPhone && errors.userPhone && (
                 <p className="invalid-feedback invalid-feedback-phone">
                   {errors.userPhone}
+                  {useContext(ShoppingContext)}
                 </p>
               )}
             </div>
