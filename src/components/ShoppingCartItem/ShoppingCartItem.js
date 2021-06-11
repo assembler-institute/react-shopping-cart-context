@@ -4,16 +4,7 @@ import "./ShoppingCartItem.scss";
 
 import Button from "../Button";
 
-function buildSelectOptions(unitsInStock) {
-  return Array.from({ length: unitsInStock }, (_value, index) => {
-    const currentIndex = index + 1;
-    return (
-      <option key={currentIndex} value={currentIndex}>
-        {currentIndex}
-      </option>
-    );
-  });
-}
+import buildSelectOptions from "../../utils/buildSelectOptions";
 
 function ShoppingCartItem({
   id,

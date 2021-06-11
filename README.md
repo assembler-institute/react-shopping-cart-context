@@ -155,3 +155,55 @@ Thanks goes to these wonderful people
 This project follows the
 [all-contributors](https://github.com/all-contributors/all-contributors)
 specification. Contributions of any kind welcome!
+
+## Notes
+
+### Components
+
+Components
+
+```
+Checkout
+
+Header (navlinks)
+  Navlinks
+  Checkout button (Remove)
+
+Main (using BrowseRouter)
+  Process
+  Form
+    Input(s)
+    Submit button
+
+  Footer (navigation buttons)
+    Navigation Button (Changing inside text depending on page)
+
+Sidebar
+
+
+States
+
+Checkout Checkout information (object using context)
+
+Sidebar Disccount code (Easter egg)
+```
+
+### States
+
+State of each form.
+
+### Images/SVG
+
+\*Tick/Cross
+
+\*Lock
+
+\*PayPal/ApplePay
+
+\*VISA/MasterCard/AmericanExpress
+
+\*Back of a card (CVV Code)
+
+### Resources
+
+[Material UI](https://material-ui.com/getting-started/installation/)

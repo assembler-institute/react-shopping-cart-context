@@ -1,15 +1,31 @@
-import React from "react";
+import React, { useEffect, useState, useContext } from "react";
+
+import { Link } from "react-router-dom";
 
 import ShoppingCartItem from "../ShoppingCartItem";
 import Button from "../Button";
 
-function getCartTotal(cart) {
-  return cart.reduce((accum, item) => {
-    return accum + item.price * item.quantity;
-  }, 0);
-}
+import { PROFILE_URL } from "../../utils/constants";
 
-function Cart({ cartItems, handleRemove, handleChange, ...props }) {
+import CartContext from "../../context/cart-context";
+import LoginContext from "../../context/login-context";
+
+import getCartTotal from "../../utils/getCartTotal";
+
+function Cart({ ...props }) {
+  const { cartItems, remove, change } = useContext(CartContext);
+  const [hasCartItems, setHasCartItems] = useState(false);
+
+  const { data: loginData } = useContext(LoginContext);
+
+  useEffect(() => {
+    if (cartItems.length > 0) {
+      setHasCartItems(true);
+    } else {
+      setHasCartItems(false);
+    }
+  }, [cartItems, loginData.isLogged]);
+
   return (
     <aside {...props}>
       <div className="row flex-column">
@@ -28,8 +44,8 @@ function Cart({ cartItems, handleRemove, handleChange, ...props }) {
               img={item.img}
               quantity={item.quantity}
               unitsInStock={item.unitsInStock}
-              handleRemove={handleRemove}
-              handleChange={handleChange}
+              handleRemove={remove}
+              handleChange={change}
             />
           ))
         ) : (
@@ -49,7 +65,11 @@ function Cart({ cartItems, handleRemove, handleChange, ...props }) {
               <hr />
             </div>
             <div className="col">
-              <Button>Checkout</Button>
+              <Link to={PROFILE_URL}>
+                <Button disabled={!hasCartItems || !loginData.isLogged}>
+                  Checkout
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

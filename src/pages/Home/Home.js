@@ -6,16 +6,12 @@ import withLayout from "../../hoc/withLayout";
 
 function Home({
   products,
-  cartItems,
   isLoading,
   hasError,
   loadingError,
   handleDownVote,
   handleUpVote,
   handleSetFavorite,
-  handleAddToCart,
-  handleRemove,
-  handleChange,
 }) {
   return (
     <div className="row">
@@ -51,19 +47,13 @@ function Home({
                 handleDownVote={handleDownVote}
                 handleUpVote={handleUpVote}
                 handleSetFavorite={handleSetFavorite}
-                handleAddToCart={handleAddToCart}
               />
             </div>
           )}
         </div>
       </div>
 
-      <Cart
-        className="col col-4"
-        cartItems={cartItems}
-        handleRemove={handleRemove}
-        handleChange={handleChange}
-      />
+      <Cart className="col col-4" />
     </div>
   );
 }

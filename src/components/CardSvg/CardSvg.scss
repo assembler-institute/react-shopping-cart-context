@@ -1,0 +1,29 @@
+.card-illustration {
+  position: relative;
+  min-width: 400px;
+  * {
+    position: absolute;
+  }
+  img {
+    width: 100%;
+    height: auto;
+  }
+  .card-name {
+    top: 200px;
+    left: 25px;
+  }
+  .card-number {
+    font-size: 24px;
+    top: 150px;
+    left: 25px;
+  }
+  .card-date {
+    top: 200px;
+    left: 330px;
+  }
+  .card-cvv {
+    font-style: italic;
+    top: 137px;
+    left: 45px;
+  }
+}

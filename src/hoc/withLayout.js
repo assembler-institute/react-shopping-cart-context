@@ -17,7 +17,7 @@ function withLayout(WrappedComponent) {
   function WrapperComponent({ ...props }) {
     return (
       <>
-        <AppHeader />
+        <AppHeader showNewProductForm={props.showNewProductForm} />
         <Main className={props.fullWidth ? "container-fluid" : "container"}>
           <WrappedComponent {...props} />
         </Main>
