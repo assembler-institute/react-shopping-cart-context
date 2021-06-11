@@ -45,7 +45,7 @@ function PaymentForm() {
 
   return (
     <div className="PaymentForm">
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} className="needs-validation">
         <p>
           <strong>How would you like to pay?</strong>
         </p>

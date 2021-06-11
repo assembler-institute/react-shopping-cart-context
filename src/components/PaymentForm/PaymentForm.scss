@@ -15,19 +15,7 @@ $iconBoxBorderRadius: 5px;
     border-radius: $iconBoxBorderRadius;
     height: 30px;
   }
-  &__creditCard {
-    margin-top: 10px;
-    input {
-      background: #f9f9f9;
-      padding: 10px;
-      width: 100%;
-      border: none;
-      font-size: 14px;
-      color: rgb(0, 0, 0);
-      outline: none;
-      font-weight: 300;
-    }
-  }
+
   &__checkbox {
     .form-group {
       margin-bottom: 0 !important;

@@ -13,12 +13,16 @@ function Input({
   ...props
 }) {
   const success =
-    !errorMessage && !hasErrorMessage && value ? "is-valid border-success" : "";
+    !errorMessage && hasErrorMessage && value !== 0
+      ? "is-valid border-success"
+      : "";
   const error =
     errorMessage && hasErrorMessage ? "is-invalid border border-danger" : "";
   return (
     <div className="form-group">
-      <label htmlFor={id}>{label}</label>
+      <label htmlFor={id} className="form-label">
+        {label}
+      </label>
       <input
         className={`form-control ${success} ${error}`}
         id={id}
@@ -33,7 +37,7 @@ function Input({
       {hasErrorMessage && errorMessage && (
         <p className="invalid-feedback">{errorMessage}</p>
       )}
-      {!hasErrorMessage && !errorMessage && (
+      {hasErrorMessage && !errorMessage && (
         <p className="valid-feedback">Looks good!</p>
       )}
     </div>

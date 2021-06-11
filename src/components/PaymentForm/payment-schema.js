@@ -7,8 +7,7 @@ const paymentSchema = Yup.object().shape({
     .max(50, "Cardholder Name is too long!")
     .required("Cardholder Name is required"),
   cardNumber: Yup.string()
-    .min(16, "Card Number has to be 16 digits!")
-    .max(16, "Card Number has to be 16 digits!")
+    .length(16, "Must be 16 digits!")
     .required("The price is required"),
   expiryDate: Yup.string()
     .typeError("Not a valid expiration date. Example: MM/YY")
@@ -59,7 +58,7 @@ const paymentSchema = Yup.object().shape({
         return true;
       },
     ),
-  cvvCode: Yup.string().max(3).required("CVV code is required!"),
+  cvvCode: Yup.string().length(3).required("CVV code is required!"),
   termCheck: Yup.boolean()
     .required("The terms and conditions must be accepted.")
     .oneOf([true], "The terms and conditions must be accepted."),
