@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
 import NewProduct from "./pages/NewProduct";
+import PaymentDetails from "./components/PaymentDetails";
 
 import * as api from "./api";
 
@@ -185,6 +186,10 @@ function App() {
         <Route path="/new-product">
           <NewProduct saveNewProduct={saveNewProduct} />
         </Route>
+        <Route path="/checkout/payment-details-page">
+          <PaymentDetails />
+        </Route>
+
         <Route path="/" exact>
           <Home
             fullWidth
@@ -207,3 +212,5 @@ function App() {
 }
 
 export default App;
+
+// /checkout/step-3
