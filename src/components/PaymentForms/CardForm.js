@@ -108,7 +108,7 @@ function CardForm({ paymentMethod, setProcessCompletedFlags }) {
             />
             <Input
               shortInput
-              type="password"
+              type="text"
               label="Exp. date"
               id="cardDate"
               placeholder="MM/YY"
