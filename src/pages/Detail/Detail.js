@@ -11,6 +11,7 @@ import detailSchema from "./Detail-schema";
 import { DETAIL, ADDRESS, HOME } from "../../constants/routes";
 import withCheckoutLayout from "../../hoc/withCheckoutLayout";
 import CheckoutContext from "../../context/checkout-context";
+import AuthContext from "../../context/auth-context";
 import ButtonLink from "../../components/ButtonLink";
 
 function Detail() {
@@ -18,6 +19,7 @@ function Detail() {
   const { updateCheckoutContext, actualPage, name, email, tel } = useContext(
     CheckoutContext,
   );
+  const { auth } = useContext(AuthContext);
   const formik = useFormik({
     initialValues: {
       name: name,
@@ -111,6 +113,7 @@ function Detail() {
           {skipRoutes && actualPage < getPageIndex(DETAIL) && (
             <Redirect to={HOME} />
           )}
+          {!auth.isAuthenticated && <Redirect to={HOME} />}
         </div>
       </div>
     </>

@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
+// import React, { useContext } from "react";
 
 import ShoppingCartItem from "../ShoppingCartItem";
 import ButtonLink from "../ButtonLink";
-import CheckoutContext from "../../context/checkout-context";
+// import CheckoutContext from "../../context/checkout-context";
 
 import { getFirsCheckoutPage } from "../../helpers/order-pages";
 
@@ -13,7 +14,7 @@ function getCartTotal(cart) {
 }
 
 function Cart({ cartItems, handleRemove, handleChange, checkout, ...props }) {
-  const { updateCheckoutContext } = useContext(CheckoutContext);
+  // const { updateCheckoutContext } = useContext(CheckoutContext);
 
   return (
     <aside {...props}>
@@ -58,7 +59,7 @@ function Cart({ cartItems, handleRemove, handleChange, checkout, ...props }) {
                 <ButtonLink
                   disabled={!cartItems.length}
                   page={getFirsCheckoutPage()}
-                  handleClick={() => updateCheckoutContext({ actualPage: 1 })}
+                  // handleClick={() => updateCheckoutContext({ actualPage: 1 })}
                 >
                   Checkout
                 </ButtonLink>

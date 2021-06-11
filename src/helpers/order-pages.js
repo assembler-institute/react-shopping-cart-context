@@ -1,7 +1,8 @@
 import * as routes from "../constants/routes";
 
 const orderRoutes = [
-  routes.HOME,
+  // routes.HOME,
+  routes.AUTH,
   routes.DETAIL,
   routes.ADDRESS,
   routes.PAYMENT,
@@ -13,7 +14,7 @@ export function getPageIndex(page) {
 }
 
 export function getFirsCheckoutPage() {
-  return orderRoutes[1];
+  return orderRoutes[0];
 }
 
 export const skipRoutes = false;
