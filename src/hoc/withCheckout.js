@@ -15,17 +15,18 @@ function Checkout(WrappedComponent) {
 
   function WrapperComponent() {
     return (
-      <section className="mainContainer">
-        <div className="checkoutContainer">
-          <CheckoutHeader />
-          <div className="wrappedComponenet">
-            <WrappedComponent />
+      <>
+        <CheckoutHeader />
+        <section className="mainContainer">
+          <div className="checkoutContainer">
+            <div className="wrappedComponenet">
+              <WrappedComponent />
+            </div>
           </div>
-
-          <Footer />
-        </div>
-        <CheckoutSideBar />
-      </section>
+          <CheckoutSideBar />
+        </section>
+        <Footer />
+      </>
     );
   }
 
