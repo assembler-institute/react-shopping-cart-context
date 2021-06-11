@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useFormik } from "formik";
 
@@ -36,6 +36,18 @@ function CheckoutBilling({ setProcessCompletedFlags }) {
   const { data: formData, setData: updateFormData } = useContext(FormContext);
   const { data: loginData } = useContext(LoginContext);
   const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [reload, setReload] = useState(false);
+
+  useEffect(() => {
+    if (window.performance) {
+      if (
+        performance.navigation.type === performance.navigation.TYPE_RELOAD &&
+        formData.name === ""
+      ) {
+        setReload(true);
+      }
+    }
+  }, [reload]);
 
   const formik = useFormik({
     initialValues: {
@@ -119,6 +131,7 @@ function CheckoutBilling({ setProcessCompletedFlags }) {
         </Button>
 
         {hasSubmitted && <Redirect to={PAYMENT_URL} />}
+        {reload && <Redirect to={PROFILE_URL} />}
         {!loginData.isLogged && <Redirect to={HOME_URL} />}
       </div>
     </>
