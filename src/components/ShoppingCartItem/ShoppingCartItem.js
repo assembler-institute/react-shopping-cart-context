@@ -24,6 +24,7 @@ function ShoppingCartItem({
   unitsInStock,
   handleChange,
   handleRemove,
+  isEditable = false,
 }) {
   function onHandleChange(event) {
     handleChange(event, id);
@@ -53,21 +54,23 @@ function ShoppingCartItem({
                   </p>
                 </div>
                 <div className="col mt-auto">
-                  <div className="row">
-                    <div className="col col-6 col-lg-4">
-                      <select
-                        className="custom-select"
-                        onChange={onHandleChange}
-                        onBlur={onHandleChange}
-                        value={quantity}
-                      >
-                        {buildSelectOptions(unitsInStock)}
-                      </select>
+                  {isEditable && (
+                    <div className="row">
+                      <div className="col col-6 col-lg-4">
+                        <select
+                          className="custom-select"
+                          onChange={onHandleChange}
+                          onBlur={onHandleChange}
+                          value={quantity}
+                        >
+                          {buildSelectOptions(unitsInStock)}
+                        </select>
+                      </div>
+                      <div className="col col-6 col-lg-8">
+                        <Button onClick={onHandleRemove}>Remove</Button>
+                      </div>
                     </div>
-                    <div className="col col-6 col-lg-8">
-                      <Button onClick={onHandleRemove}>Remove</Button>
-                    </div>
-                  </div>
+                  )}
                 </div>
               </div>
             </div>

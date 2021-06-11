@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 import ShoppingCartItem from "../ShoppingCartItem";
 import Button from "../Button";
 
@@ -21,6 +21,7 @@ function Cart({ cartItems, handleRemove, handleChange, ...props }) {
         {cartItems.length > 0 ? (
           cartItems.map((item) => (
             <ShoppingCartItem
+              isEditable
               key={item.id}
               id={item.id}
               title={item.title}
@@ -49,7 +50,13 @@ function Cart({ cartItems, handleRemove, handleChange, ...props }) {
               <hr />
             </div>
             <div className="col">
-              <Button>Checkout</Button>
+              {cartItems.length > 0 ? (
+                <Link to="/checkout/step-1">
+                  <Button>Checkout</Button>
+                </Link>
+              ) : (
+                <div> </div>
+              )}
             </div>
           </div>
         </div>

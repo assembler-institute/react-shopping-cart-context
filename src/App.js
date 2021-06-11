@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-
 import Home from "./pages/Home";
 import NewProduct from "./pages/NewProduct";
+import PaymentDetails from "./components/PaymentDetails";
 
 import * as api from "./api";
-
 import useLocalStorage from "./hooks/useLocalStorage";
 import loadLocalStorageItems from "./utils/loadLocalStorageItems";
+import PersonalDetails from "./pages/PersonalDetails/PersonalDetails";
+import Address from "./pages/Address/Address";
+import OrderSummary from "./pages/Summary/OrderSummary";
+// import { CreateContext } from "./StateProvider";
 
 function buildNewCartItem(cartItem) {
   if (cartItem.quantity >= cartItem.unitsInStock) {
@@ -180,10 +183,23 @@ function App() {
   }
 
   return (
+    // <CreateContext>
     <BrowserRouter>
       <Switch>
         <Route path="/new-product">
           <NewProduct saveNewProduct={saveNewProduct} />
+        </Route>
+        <Route path="/checkout/step-1">
+          <PersonalDetails cartItems={cartItems} />
+        </Route>
+        <Route path="/checkout/step-2">
+          <Address cartItems={cartItems} />
+        </Route>
+        <Route path="/checkout/step-3">
+          <PaymentDetails />
+        </Route>
+        <Route path="/checkout/order-summary">
+          <OrderSummary cartItems={cartItems} />
         </Route>
         <Route path="/" exact>
           <Home
@@ -203,6 +219,7 @@ function App() {
         </Route>
       </Switch>
     </BrowserRouter>
+    // </CreateContext>
   );
 }
 
