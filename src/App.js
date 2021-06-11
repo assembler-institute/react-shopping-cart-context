@@ -9,6 +9,8 @@ import * as api from "./api";
 
 import useLocalStorage from "./hooks/useLocalStorage";
 import loadLocalStorageItems from "./utils/loadLocalStorageItems";
+import PersonalDetails from "./pages/PersonalDetails/PersonalDetails";
+import Address from "./pages/Address/Address";
 
 function buildNewCartItem(cartItem) {
   if (cartItem.quantity >= cartItem.unitsInStock) {
@@ -186,10 +188,16 @@ function App() {
         <Route path="/new-product">
           <NewProduct saveNewProduct={saveNewProduct} />
         </Route>
-        <Route path="/checkout/payment-details-page">
+        <Route path="/checkout/step-1">
+          <PersonalDetails cartItems={cartItems} />
+        </Route>
+        <Route path="/checkout/step-2">
+          <Address cartItems={cartItems} />
+        </Route>
+        <Route path="/checkout/step-3">
           <PaymentDetails />
         </Route>
-
+        <Route path="/checkout/order-summary" />
         <Route path="/" exact>
           <Home
             fullWidth
@@ -212,5 +220,3 @@ function App() {
 }
 
 export default App;
-
-// /checkout/step-3

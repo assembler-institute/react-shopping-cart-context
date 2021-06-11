@@ -1,0 +1,31 @@
+.cartItemShopping__Main--container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0% 6%;
+}
+
+.cartItemShopping__Main--container div {
+    height: 100%;
+    max-height: 200px;
+    margin: 0;
+}
+
+.cartItemShopping__Main--container div img {
+    width: 60%;
+    max-width: 400px;
+    height: 100%;
+    border-radius: 4px;
+    object-fit: cover;
+    background-position: center;
+}
+
+.cartItemShopping__details {
+    width: 100%;
+    min-width: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
