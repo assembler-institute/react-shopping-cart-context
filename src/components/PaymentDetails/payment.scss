@@ -1,0 +1,110 @@
+*{
+    box-sizing: border-box;    
+}
+
+.container{
+    display:flex;
+    align-items:center;
+    flex-direction:column;
+    justify-content: space-between;
+}
+
+.creditCard{
+    top: 120px;
+    left:200px;
+}
+
+.info{
+    top:-100px;
+    left:200px;
+}
+
+.cardnumber, .cardname, .cardexpiry, .cardcvc{
+    margin-top: 1.5rem;
+    padding-left: 1em;
+    width: 300px;
+    height:35px;
+    
+}
+
+.creditanddebit{
+    height:45px;
+    border: 1px solid;
+    width:220px;
+    margin-left: 1.2em;
+    display: flex;
+    padding-left: 1em;
+    padding-top: .6em;
+    border-radius:5px;
+}
+
+.paypal, .apple{
+    height:45px;
+    border: 1px solid rgb(199, 199, 199);
+    width:220px;
+    margin-left: 1.2em;
+    padding-left: 1em;
+    border-radius:5px;
+}
+
+.creditparagrahp{
+    padding-left: .6em;
+}
+
+.paypalimg{
+    width:36%;
+    padding-left:1em;
+    padding-top: .4em;
+}
+
+.appleimg{
+    width:30%;
+    padding-left:1em;
+    padding-top: .9em;
+}
+
+.col-md-12{
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+}
+
+.visaicon, .americanexpressicon{
+    height:30px;
+    width:45px;
+    border:1px solid rgb(199, 199, 199);
+    border-radius:3px;
+    margin-left: .4em;
+}
+
+.visaimg, .americanexpressimg{
+    width:70%;
+    padding-left:.7em;
+}
+
+.firstparagraph{
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.secondparagraph{
+    font-size: .8em;
+}
+
+span{
+    font-size:.8em;
+}
+
+.certification{
+    font-size: .8em;
+    opacity: .6;
+}
+
+.sslcertifaction{
+    display:flex;
+}
+
+.fab{
+    color: rgb(84, 199, 84);
+}
+
