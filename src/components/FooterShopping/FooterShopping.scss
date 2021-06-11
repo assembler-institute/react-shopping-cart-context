@@ -1,0 +1,19 @@
+.footer_Shopping {
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  height: 100%;
+  padding: 0 0.8rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  color: rgb(66, 66, 66);
+  font-size: 0.8rem;
+  border-top: 2px solid rgb(230, 230, 230);
+}
+.fotter-right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}

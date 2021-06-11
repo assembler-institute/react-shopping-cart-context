@@ -1,0 +1,178 @@
+
+.container {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.btn__container{
+  width: 100%;
+  height: 10%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding-top: 2%;
+  gap: 2%;
+}
+
+.btn__SHopping{
+  width: 150px;
+  font-size: 1.3em;
+  font-weight: bold;
+  color: rgb(92, 92, 92);
+  border: 2px solid rgb(158, 158, 158);
+}
+
+.btnForm {
+  background-color: blue;
+  color: white;
+  width: 38%;
+}
+.headerPage {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.inputMediun {
+  width: 60%;
+}
+.form__container {
+  padding: 2% 10%;
+}
+
+.form__container--step-3{
+  padding: 2% 7%;
+}
+
+.payment-icons{
+  display:flex;
+  flex-direction:row;
+  list-style: none;
+  gap: 10px;
+  margin: 0;
+  padding: 2% 0;
+}
+
+/**
+** Step 3: Credit Card
+*/
+
+.flex__creditCard--container{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  gap: 10%;
+}
+.cardName__inputs--container{
+  width: 100%;
+}
+
+.cardName__inputs--ccv{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 10%;
+  font-size: .9em;
+  justify-content:center;
+  align-items: center;
+}
+
+.ccv__credit--card{
+  height: 30px;
+  object-fit: cover;
+  transform: translateY(10px);
+}
+
+.p__input--pay{
+  font-size: .8em;
+  font-weight: bold;
+  padding-bottom: 1%;
+}
+.p__input--creditCards{
+  font-size: .8em;
+  padding-top: 1%;
+}
+
+.botton__texts--container{
+  font-size: .8em;
+  width: 100%;
+  min-height: 50px;
+  padding: 1%;
+  display: flex;
+  flex-direction: column;
+  gap:10px;
+}
+
+.botton__texts--container div{
+ display: flex;
+ align-items: center;
+ gap:1%;
+}
+
+.p__input--padlock{
+  color: rgb(155, 155, 155);
+}
+
+.circle__padlock{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid rgb(95, 95, 95);
+  border-radius: 50px;
+  padding: 3px;
+  background-color: rgb(204, 204, 204);
+}
+
+.radio__options--input--container{
+  min-height: 50px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.radio__input{
+  width: 100%;
+  height: 45px;
+  border: 2px solid rgb(134, 134, 134);
+  border-radius: 5px;
+  margin: 0 auto;
+  padding: 0 1%;
+}
+
+.radio__input label{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+  margin: 0;
+  gap:5%;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.radio__input label input{
+  background-color: burlywood;
+  color:red;
+  border: 1px solid red;
+}
+
+.img__input--paypal, .img__input--applepay{
+  width: 40%;
+  object-fit: cover;
+}
+.img__input--applepay{
+  width: 30%;
+  object-fit: cover;
+}

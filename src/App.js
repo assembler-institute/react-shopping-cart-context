@@ -3,8 +3,13 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
 import NewProduct from "./pages/NewProduct";
+import Step1 from "./pages/Checkout/Step1";
+import Step2 from "./pages/Checkout/Step2";
+import Step3 from "./pages/Checkout/Step3";
+import Step4 from "./pages/Checkout/Step4";
 
 import * as api from "./api";
+import ShoppingContextProvider from "./components/ShoppingContextProvider";
 
 import useLocalStorage from "./hooks/useLocalStorage";
 import loadLocalStorageItems from "./utils/loadLocalStorageItems";
@@ -180,29 +185,55 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/new-product">
-          <NewProduct saveNewProduct={saveNewProduct} />
-        </Route>
-        <Route path="/" exact>
-          <Home
-            fullWidth
-            cartItems={cartItems}
-            products={products}
-            isLoading={isLoading}
-            hasError={hasError}
-            loadingError={loadingError}
-            handleDownVote={handleDownVote}
-            handleUpVote={handleUpVote}
-            handleSetFavorite={handleSetFavorite}
-            handleAddToCart={handleAddToCart}
-            handleRemove={handleRemove}
-            handleChange={handleChange}
+    <ShoppingContextProvider>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/new-product">
+            <NewProduct saveNewProduct={saveNewProduct} />
+          </Route>
+          <Route path="/" exact>
+            <Home
+              fullWidth
+              cartItems={cartItems}
+              products={products}
+              isLoading={isLoading}
+              hasError={hasError}
+              loadingError={loadingError}
+              handleDownVote={handleDownVote}
+              handleUpVote={handleUpVote}
+              handleSetFavorite={handleSetFavorite}
+              handleAddToCart={handleAddToCart}
+              handleRemove={handleRemove}
+              handleChange={handleChange}
+            />
+          </Route>
+          <Route
+            path="/checkout/step-1"
+            render={(routeProps) => (
+              <Step1 {...routeProps} cartItems={cartItems} />
+            )}
           />
-        </Route>
-      </Switch>
-    </BrowserRouter>
+          <Route
+            path="/checkout/step-2"
+            render={(routeProps) => (
+              <Step2 {...routeProps} cartItems={cartItems} />
+            )}
+          />
+          <Route
+            path="/checkout/step-3"
+            render={(routeProps) => (
+              <Step3 {...routeProps} cartItems={cartItems} />
+            )}
+          />
+          <Route
+            path="/checkout/order-summary"
+            render={(routeProps) => (
+              <Step4 {...routeProps} cartItems={cartItems} />
+            )}
+          />
+        </Switch>
+      </BrowserRouter>
+    </ShoppingContextProvider>
   );
 }
 

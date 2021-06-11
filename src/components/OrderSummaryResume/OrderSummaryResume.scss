@@ -1,0 +1,15 @@
+.cartItemsContainerResume {
+  max-height: 50vh;
+  overflow-y: scroll;
+}
+
+.cartItemsContainerResume::-webkit-scrollbar{
+  background-color: rgb(209, 209, 209);
+  width: 10px;
+}
+.cartItemsContainerResume::-webkit-scrollbar-thumb{
+  background-color: rgb(117, 117, 117);
+  border-radius: 2px;
+}
+
+

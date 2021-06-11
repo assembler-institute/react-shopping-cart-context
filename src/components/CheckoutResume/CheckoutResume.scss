@@ -1,0 +1,80 @@
+section.checkout__main--container{
+	padding: 2% 20%;
+	width: 100%;
+	height: 100%;
+}
+
+.headerPage--checkout {
+	width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+	padding: 0% 5%;
+}
+
+.checkout__resume--container{
+	background-color: rgb(255, 255, 255);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
+	height: fit-content;
+	grid-column: 10px;
+	border-radius: 10px;
+	padding: 2%;
+	border: 1px solid rgb(167, 167, 167);
+}
+
+.checkout__resume{
+	padding: 1% 4%;
+}
+
+.checkout__orderDate--section{
+	margin: 0;
+}
+.checkout__orderDate--section div{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding-bottom: 5px;
+}
+.checkout__productCard--section{
+	min-height: 100px;
+}
+
+.checkout__price--section{
+	margin: 0;
+}
+.checkout__price--section div{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding-bottom: 5px;
+}
+
+.checkout__personalDetail--section div{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding-bottom: 5px;
+}
+
+.checkout__total--section{
+	margin: 0;
+}
+.checkout__total--section div{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding-bottom: 5px;
+}
+
+.checkout__footer--section{
+	margin: 0;
+}
+
+.checkout__header--section div{
+	display: flex;
+	flex-direction: column;
+}

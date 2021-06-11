@@ -1,0 +1,46 @@
+@mixin flex_row {
+  display: flex;
+  flex-direction: row;
+  gap: 5%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.header__logo{
+  height: 40%;
+}
+
+header.header__Shopping {
+  background-color: rgb(255, 255, 255);
+  display: grid;
+  grid-template-columns: 1fr 5fr 70px;
+  width: 100%;
+  min-height: 50px;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+  padding:5px 10px;
+  border-bottom: 2px solid rgb(230, 230, 230);
+}
+
+.assembler__logo {
+  height: 100%;
+  z-index: 1000;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.header__icons{
+  @include flex_row();
+  cursor: pointer;
+  color: rgb(214, 214, 214);
+}
+
+.header__ul{
+  @include flex_row();
+  list-style: none;
+  margin-bottom: 0;
+  transform: translateX(-80px);
+  cursor: pointer;
+}
