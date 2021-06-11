@@ -39,15 +39,10 @@ function CheckoutBilling({ setProcessCompletedFlags }) {
   const [reload, setReload] = useState(false);
 
   useEffect(() => {
-    if (window.performance) {
-      if (
-        performance.navigation.type === performance.navigation.TYPE_RELOAD &&
-        formData.name === ""
-      ) {
-        setReload(true);
-      }
+    if (formData.name === "") {
+      setReload(true);
     }
-  }, [reload]);
+  });
 
   const formik = useFormik({
     initialValues: {
