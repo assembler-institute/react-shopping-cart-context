@@ -7,6 +7,7 @@ import withLayout from "../../hoc/withLayout";
 import { skipRoutes, getPageIndex } from "../../helpers/order-pages";
 
 import CheckoutContext from "../../context/checkout-context";
+import { CHECKOUT_CONTEXT_KEY } from "../../constants/local-storage-keys";
 import { HOME, SUMMARY } from "../../constants/routes";
 import ButtonLink from "../../components/ButtonLink";
 
@@ -43,6 +44,7 @@ function Summary({
   useEffect(() => {
     setTotal(getCartTotal(cartItems));
     window.history.pushState(null, document.title, window.location.href);
+    localStorage.removeItem(CHECKOUT_CONTEXT_KEY);
     return () => {
       clearCheckoutContext();
     };
