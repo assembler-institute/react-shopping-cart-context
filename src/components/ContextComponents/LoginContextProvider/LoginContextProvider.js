@@ -5,17 +5,19 @@ import LoginContext from "../../../context/login-context";
 
 import useLocalStorage from "../../../hooks/useLocalStorage";
 
+import loadLocalStorageItems from "../../../utils/loadLocalStorageItems";
+
 // Local storage key
 const LOGIN_LOCAL_STORAGE_KEY = "react-sc-state-login";
 
 // Dispatch case
 const UPDATE_LOGIN = "UPDATED_LOGIN";
 
-const initialState = {
+const initialState = loadLocalStorageItems(LOGIN_LOCAL_STORAGE_KEY, {
   loginName: "",
   loginPassword: "",
   isLogged: false,
-};
+});
 
 function reducerLogin(state, action) {
   switch (action.type) {

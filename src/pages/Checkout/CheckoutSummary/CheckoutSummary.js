@@ -7,10 +7,9 @@ import SummaryItem from "../../../components/SummaryItem";
 
 import "./CheckoutSummary.scss";
 
-function CheckoutSummary() {
+function CheckoutSummary({ hasDiscount }) {
   const { data: formData } = useContext(FormContext);
   const { cartItems, total } = useContext(CartContext);
-  const customTotal = total;
 
   return (
     <div id="summaryWrapper" className="d-flex justify-content-between">
@@ -60,7 +59,11 @@ function CheckoutSummary() {
           </div>
           <div className="summary-step">
             <h5 className="summary-subtitle">Total</h5>
-            <p className="summary-text">{customTotal}€</p>
+            <p className="summary-text">
+              {hasDiscount
+                ? `${(total * 0.8).toFixed(2)}€ (-20% discount applied)`
+                : `${total}€`}
+            </p>
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import React, { useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Redirect } from "react-router-dom";
 import { useFormik } from "formik";
 
@@ -12,11 +12,20 @@ import FormSchema from "./form-schema";
 import CartContext from "../../context/cart-context";
 
 import { HOME_URL } from "../../utils/constants";
+// import { HOME_URL } from "../../utils/constants";
 
-function Sidebar() {
+function Sidebar({ hasDiscount, sethasDiscount }) {
   const { cartItems, total, remove, change } = useContext(CartContext);
   const [customTotal, setCustomTotal] = useState(total);
-  const [hasDiscount, sethasDiscount] = useState(false);
+
+  useEffect(() => {
+    if (hasDiscount) {
+      setCustomTotal((total * 0.8).toFixed(2));
+    } else {
+      setCustomTotal(total);
+    }
+    console.log("this is total: ", total);
+  }, [total]);
 
   const formik = useFormik({
     initialValues: {
@@ -26,7 +35,7 @@ function Sidebar() {
     onSubmit: () => {
       if (!hasDiscount) {
         setCustomTotal((total * 0.8).toFixed(2));
-        sethasDiscount(false);
+        sethasDiscount(true);
       }
     },
   });
@@ -85,7 +94,7 @@ function Sidebar() {
       </div>
 
       <div className="col sidebar-totals d-flex justify-content-between">
-        <h4 className="h5">Total</h4>
+        <h4 className="h5">{hasDiscount ? "Total (-20%)" : "Total"}</h4>
         <h4>
           <strong>{customTotal}€</strong>
         </h4>

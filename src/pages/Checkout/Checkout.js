@@ -22,6 +22,7 @@ function Checkout({ processStep }) {
     billing: false,
     payment: false,
   });
+  const [hasDiscount, sethasDiscount] = useState(false);
 
   useEffect(() => {
     console.log(processCompletedFlags);
@@ -51,11 +52,16 @@ function Checkout({ processStep }) {
               )}
             </div>
             <div id="sidebar" className="col col-4">
-              <Sidebar />
+              <Sidebar
+                hasDiscount={hasDiscount}
+                sethasDiscount={sethasDiscount}
+              />
             </div>
           </>
         )}
-        {processStep === SUMMARY && <CheckoutSummary />}
+        {processStep === SUMMARY && (
+          <CheckoutSummary hasDiscount={hasDiscount} />
+        )}
       </div>
     </FormContextProvider>
   );
