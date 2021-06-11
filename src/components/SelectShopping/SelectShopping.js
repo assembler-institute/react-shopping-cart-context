@@ -2,14 +2,21 @@ import React from "react";
 
 import "./SelectShopping.scss";
 
-function SelectShopping() {
+function SelectShopping({ handleChange = () => {}, handleBlur = () => {} }) {
   return (
     <div className="form">
-      <select>
-        <option>España</option>
-        <option>Francia</option>
-        <option>Portugal</option>
-        <option>Italia</option>
+      <select
+        className="selectTel"
+        id="country"
+        name="country"
+        onChange={handleChange}
+        onBlur={handleBlur}
+      >
+        <option value="">Select country</option>
+        <option value="España">España</option>
+        <option value="Portugal">Portugal</option>
+        <option value="Francia">Francia</option>
+        <option value="Italia">Italia</option>
       </select>
     </div>
   );

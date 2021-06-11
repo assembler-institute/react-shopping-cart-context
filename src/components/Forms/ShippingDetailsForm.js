@@ -75,7 +75,12 @@ function ShippingDetailsForm() {
           hasErrorMessage={formik.touched.zipCode}
           errorMessage={formik.errors.zipCode}
         />
-        <SelectShopping />
+        <SelectShopping
+          handleChange={formik.handleChange}
+          handleBlur={formik.handleBlur}
+          hasErrorMessage={formik.touched.phoneNumber}
+          errorMessage={formik.errors.phoneNumber}
+        />
         <div className="btn__container">
           <Link to="/checkout/step-1">
             <ButtonShopping type="button">back</ButtonShopping>

@@ -20,12 +20,14 @@ function Select2Shopping({
         className="selectTel"
         id="countryPrefix"
         name="countryPrefix"
-        // onChange={handleChange}
+        onChange={handleChange}
+        onBlur={handleBlur}
       >
+        <option value=""> Select pre...</option>
         <option value="+34">ES +34</option>
-        <option value="+4">PO +34</option>
-        <option value="+3">FA +34</option>
-        <option value="+10">IT +34</option>
+        <option value="+4">PO +4</option>
+        <option value="+3">FA +3</option>
+        <option value="+10">IT +10</option>
       </select>
       <input
         className={
