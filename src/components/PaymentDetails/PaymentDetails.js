@@ -137,7 +137,7 @@ function PaymentDetails() {
               your personal information.
             </p>
           </div>
-          <Link to="/">
+          <Link to="/checkout/order-summary">
             <button type="button" className="mt-3 btn btn-primary">
               Complete Booking
             </button>
