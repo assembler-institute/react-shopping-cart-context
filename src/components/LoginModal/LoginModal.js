@@ -15,11 +15,12 @@ function LoginModal({ setShowModal }) {
   const handleCloseModal = () => {
     const modal = document.getElementById("loginModal");
     const modalBackdrops = document.getElementsByClassName("modal-backdrop");
+    setShowModal(false);
     modal.classList.remove("show");
     modal.setAttribute("aria-hidden", "true");
     modal.setAttribute("style", "display: none");
+    document.body.classList.remove("modal-open");
     document.body.removeChild(modalBackdrops[0]);
-    setShowModal(false);
   };
 
   const formik = useFormik({
@@ -102,7 +103,6 @@ function LoginModal({ setShowModal }) {
               form="loginForm"
               className="btn btn-primary"
               disabled={formik.isValidating || !formik.isValid}
-              // {formik.isValid && onClick=handleCloseModal}
             >
               {formik.isSubmitting ? "Loggin in..." : "Log in"}
             </Button>

@@ -62,13 +62,13 @@ function AppHeader({ showNewProductForm, ...props }) {
               )}
             </div>
             <div className="navbar-group right-nav">
-              {loginData.isLogged && (
-                <p className="login-name">{`Hello ${loginData.loginName}`}</p>
-              )}
               {loginData.isLogged ? (
-                <Button type="button" onClick={handleLogOut}>
-                  Log out
-                </Button>
+                <>
+                  <p className="login-name">{`Hello ${loginData.loginName}`}</p>
+                  <Button type="button" onClick={handleLogOut}>
+                    Log out
+                  </Button>
+                </>
               ) : (
                 <Button
                   type="button"
