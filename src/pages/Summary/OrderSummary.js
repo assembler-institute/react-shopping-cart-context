@@ -1,6 +1,10 @@
 import React from "react";
+import "../../components/OrderCart/OrderCart.scss";
+import "../layouts.scss";
+import withLayout from "../../hoc/withLayout";
+import SumaryCart from "../../components/SummaryCart";
 
-function OrderSummary() {
+function OrderSummary({ cartItems }) {
   return (
     <div className="col-12">
       <div className="row">
@@ -36,14 +40,7 @@ function OrderSummary() {
       <hr />
 
       <div className="row">
-        <h2>Cart</h2>
-      </div>
-
-      <hr />
-
-      <div className="row">
-        <h2>Total</h2>
-        <h4>$180.98</h4>
+        <SumaryCart cartItems={cartItems} />
       </div>
 
       <hr />
@@ -58,4 +55,4 @@ function OrderSummary() {
   );
 }
 
-export default OrderSummary;
+export default withLayout(OrderSummary);

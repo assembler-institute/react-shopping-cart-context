@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import "../../components/OrderCart/OrderCart.scss";
 import "../layouts.scss";
 import PhoneInput from "react-phone-input-2";
+import withLayout from "../../hoc/withLayout";
 import "react-phone-input-2/lib/style.css";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
@@ -72,6 +73,7 @@ function PersonalDetails({ cartItems }) {
               hasErrorMessage={formik.touched.phoneNumber}
               errorMessage={formik.errors.phoneNumber}
             /> */}
+
             <p>Mobile Phone Number</p>
             <PhoneInput
               id="phoneNumber"
@@ -105,4 +107,4 @@ function PersonalDetails({ cartItems }) {
     </section>
   );
 }
-export default PersonalDetails;
+export default withLayout(PersonalDetails);
