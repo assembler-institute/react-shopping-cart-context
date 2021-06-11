@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 
-const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+// const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
 const PersonalDetailsSchema = Yup.object().shape({
   name: Yup.string()
@@ -9,7 +9,7 @@ const PersonalDetailsSchema = Yup.object().shape({
     .required("The name is required"),
   email: Yup.string().email("Invalid email").required("The email is required"),
   phoneNumber: Yup.string()
-    .matches(phoneRegExp, "Phone number is not valid")
+    .min(9, "The phone number is to short!")
     .required("The phone number is required"),
 });
 

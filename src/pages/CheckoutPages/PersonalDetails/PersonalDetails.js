@@ -93,7 +93,7 @@ function PersonalDetails({ cartItems }) {
                   className={
                     formik.touched.phoneNumber && formik.errors.phoneNumber
                       ? "form-control is-invalid"
-                      : "form-control is-valid"
+                      : "form-control"
                   }
                   id="phoneNumber"
                   name="phoneNumber"

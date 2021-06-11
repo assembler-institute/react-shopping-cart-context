@@ -50,9 +50,7 @@ function Input({
                   : "form-control is-invalid"
               }`
             : `${
-                type === "checkbox"
-                  ? "form-check-input is-valid mt-4"
-                  : "form-control  is-valid"
+                type === "checkbox" ? "form-check-input mt-4" : "form-control"
               }`
         }
         id={id}
