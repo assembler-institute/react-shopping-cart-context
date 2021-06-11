@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 
 import Input from "../Input";
@@ -13,6 +14,7 @@ import "./StepThreeForm.scss";
 
 function StepThreeForm() {
   const { submitStepThree } = useContext(orderContext);
+  const history = useHistory();
 
   const formik = useFormik({
     initialValues: {
@@ -25,6 +27,7 @@ function StepThreeForm() {
     validationSchema: stepThreeSchema,
     onSubmit: (values) => {
       submitStepThree(values);
+      history.push("/checkout/order-summary");
     },
   });
   return (

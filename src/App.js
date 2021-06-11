@@ -198,13 +198,13 @@ function App() {
             <Route path="/signUp" exact>
               <SignUp fullWidth />
             </Route>
-            <Route path="/context/step-1" exact>
+            <Route path="/checkout/step-1" exact>
               <CheckoutStepOne />
             </Route>
-            <Route path="/context/step-2" exact>
+            <Route path="/checkout/step-2" exact>
               <CheckoutStepTwo />
             </Route>
-            <Route path="/context/step-3" exact>
+            <Route path="/checkout/step-3" exact>
               <CheckoutStepThree />
             </Route>
             <Route path="/checkout/order-summary" exact>

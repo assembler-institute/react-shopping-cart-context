@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import Select, { components } from "react-select";
 import { orderContext } from "../../CheckoutContext";
@@ -37,6 +38,7 @@ const options = [
 
 function StepOneForm() {
   const { submitStepOne } = useContext(orderContext);
+  const history = useHistory();
 
   const formik = useFormik({
     initialValues: {
@@ -48,6 +50,7 @@ function StepOneForm() {
     validationSchema: stepOneSchema,
     onSubmit: (values) => {
       submitStepOne(values);
+      history.push("/checkout/step-2");
     },
   });
   return (
