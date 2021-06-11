@@ -12,7 +12,7 @@ import detailsSchema from "./details-schema";
 // import loadLocalStorageItems from "../../utils/loadLocalStorageItems";
 
 function Details() {
-  const { cartItems, nextProgress, updateDetails } = useContext(
+  const { cartItems, nextProgress, updateDetails, details } = useContext(
     ShoppingContext,
   );
   const [redirect, setRedirect] = useState(false);
@@ -24,14 +24,15 @@ function Details() {
     alert("Chose at least one product");
     return <Redirect to="/" />;
   }
+
   return (
     <>
       <h1>Details</h1>
       <Formik
         initialValues={{
-          userName: "",
-          userEmail: "",
-          userPhone: "",
+          userName: details === undefined ? "" : details.userName,
+          userEmail: details === undefined ? "" : details.userEmail,
+          userPhone: details === undefined ? "" : details.userPhone,
         }}
         initialErrors={{ defaultIsValid: "false" }}
         validationSchema={detailsSchema}

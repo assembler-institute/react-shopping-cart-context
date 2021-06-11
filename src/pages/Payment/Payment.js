@@ -10,7 +10,7 @@ import ShoppingContext from "../../context";
 import "./paymentStyles.scss";
 
 function Payment() {
-  const { updatePayment } = useContext(ShoppingContext);
+  const { updatePayment, paymentData } = useContext(ShoppingContext);
   const [redirect, setRedirect] = useState(false);
 
   const [state, setClass] = useState(false);
@@ -47,11 +47,19 @@ function Payment() {
       <h1>Payment</h1>
       <Formik
         initialValues={{
-          paymentMethod: "",
-          cardholderName: "Holder name",
-          cardNumber: "XXXX XXXX XXXX XXXX",
-          cardExpiryDate: "../..",
-          cvvCode: "",
+          paymentMethod:
+            paymentData === undefined ? "" : paymentData.paymentMethod,
+          cardholderName:
+            paymentData === undefined
+              ? "Holder name"
+              : paymentData.cardholderName,
+          cardNumber:
+            paymentData === undefined
+              ? "XXXX XXXX XXXX XXXX"
+              : paymentData.cardNumber,
+          cardExpiryDate:
+            paymentData === undefined ? "../.." : paymentData.cardExpiryDate,
+          cvvCode: paymentData === undefined ? "..." : paymentData.cvvCode,
         }}
         initialErrors={{ defaultIsValid: "false" }}
         validationSchema={paymentSchema}

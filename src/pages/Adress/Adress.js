@@ -10,7 +10,9 @@ import ShoppingContext from "../../context";
 import "./adressStyles.scss";
 
 function Adress() {
-  const { updateAdress, nextProgress } = useContext(ShoppingContext);
+  const { updateAdress, nextProgress, adressData } = useContext(
+    ShoppingContext,
+  );
   const [redirect, setRedirect] = useState(false);
   if (redirect) {
     return <Redirect to="/Checkout/step-3" />;
@@ -21,10 +23,10 @@ function Adress() {
       <h1>Adress</h1>
       <Formik
         initialValues={{
-          streetName: "",
-          cityName: "",
-          postCode: 0,
-          country: "",
+          streetName: adressData === undefined ? "" : adressData.streetName,
+          cityName: adressData === undefined ? "" : adressData.cityName,
+          postCode: adressData === undefined ? 0 : adressData.postCode,
+          country: adressData === undefined ? "" : adressData.country,
         }}
         initialErrors={{ defaultIsValid: "false" }}
         validationSchema={adressSchema}
