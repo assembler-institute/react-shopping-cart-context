@@ -15,6 +15,7 @@ import paymentSchema from "./Payment-schema";
 
 import withCheckoutLayout from "../../hoc/withCheckoutLayout";
 import CheckoutContext from "../../context/checkout-context";
+import AuthContext from "../../context/auth-context";
 
 import CVV from "../../img/icons/payment/CVV.svg";
 import sslIcon from "../../img/icons/payment/ssl.svg";
@@ -29,6 +30,7 @@ function Payment() {
   const [flip, setFlip] = useState(false);
   const [cardType, setCardType] = useState("visa");
   const { updateCheckoutContext, actualPage } = useContext(CheckoutContext);
+  const { auth } = useContext(AuthContext);
 
   const formik = useFormik({
     initialValues: {
@@ -212,6 +214,7 @@ function Payment() {
           {skipRoutes && actualPage < getPageIndex(PAYMENT) && (
             <Redirect to={HOME} />
           )}
+          {!auth.isAuthenticated && <Redirect to={HOME} />}
         </div>
       </form>
     </>
