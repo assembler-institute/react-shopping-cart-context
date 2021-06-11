@@ -14,11 +14,11 @@ function HeaderShopping() {
         />
       </NavLink>
       <ul className="header__ul">
-        <li>No sé</li>
-        <li>que chuchas</li>
-        <li>poner aquí</li>
-        <li>Ayuda</li>
-        <li>plz</li>
+        <li>Home</li>
+        <li>Products</li>
+        <li>Promotion</li>
+        <li>Help</li>
+        <li>Contact</li>
         <li>
           <span role="img" aria-label="mi emoji">
             &#128561;

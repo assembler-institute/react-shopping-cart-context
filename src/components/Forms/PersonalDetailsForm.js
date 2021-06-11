@@ -37,7 +37,7 @@ function PersonalDetailsForm() {
   return (
     <section className="form__container">
       <div className="headerPage">
-        <h2>Billing address</h2>
+        <h2>Personal Details</h2>
         <span>Step 1 of 3</span>
       </div>
       <hr />

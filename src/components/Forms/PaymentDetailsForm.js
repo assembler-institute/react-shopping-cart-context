@@ -283,7 +283,7 @@ function PaymentDetails() {
                 label="Card name:"
                 id="cardHolderName"
                 value={formik.values.cardHolderName}
-                placeholder="Your fucking name bestio &#128539;"
+                placeholder="Your name"
                 handleChange={formik.handleChange}
                 handleBlur={formik.handleBlur}
                 hasErrorMessage={formik.touched.cardHolderName}
