@@ -28,7 +28,7 @@ function CheckoutSummary({ hasDiscount }) {
   }
 
   return (
-    <div id="summaryWrapper" className="d-flex justify-content-between">
+    <div id="summaryWrapper" className="row d-flex justify-content-between">
       <div className="summary-block summary-left col col-12 col-sm-6">
         <div className="summary-title px-3">Your products</div>
         <div className="col col-12 mb-4">
