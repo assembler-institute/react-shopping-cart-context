@@ -22,8 +22,8 @@ const billingSchema = Yup.object().shape({
     .required("Your post code is required"),
   clientCountry: Yup.string()
     .min(3, "Your country/region is too short!")
-    .max(10, "Your country/region is too long!")
-    .required("Your country/region is required"),
+    .max(10, "Your country/region is too long!"),
+  // .required("Your country/region is required"),
 });
 
 export default billingSchema;
