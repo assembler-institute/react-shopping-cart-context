@@ -1,5 +1,71 @@
 `#react.js` `#master-in-software-engineering`
 
+<!-- PROGRAMMING STRUCTURE -->
+
+## Pages
+
+1- Personal details Formulary (3 inputs) - Name input - Email inputs - Phone
+number input Formik library using (validation with schema) path:
+/checkout/step-1 EXTRA: Store info in Local Storage EXTRA: footer steps buttons
+
+2- Billing address pages Formulary (4 inputs) - Address inputs - City inputs -
+PC input - Country select input Formik library using (validation with schema)
+path: /checkout/step-2 EXTRA: Store info in Local Storage EXTRA: footer steps
+buttons
+
+3- Payment details Formulary (6 inputs) - Select for payment method - Cardholder
+Name - Card Number - Card expiry date - CVV Code - Accepting conditions path:
+/checkout/step-3 EXTRA: Store info in Local Storage EXTRA: footer steps buttons
+EXTRA: Credite card animation
+
+4- Order summary
+
+- Item information
+- User information
+- Addresss information path: /checkout/order-summary EXTRA: Store info in Local
+  Storage EXTRA: footer steps buttons
+
+(0)- Authentication (EXTRA) Login needed to go throught app
+
+## Pages components
+
+1- Personal details
+
+  <Header className=headerClass >
+  <Input className=inputClass component {type, key, label, value, placeholder, onChange, onBlur, ¿onSubmit?} />
+  <SidebarOverview>
+  <Footer>
+    <Button className=buttonClass component {urlPage, disabled, type, submit} />
+
+2- Billing address pages
+
+  <Header className=headerClass >
+  <Input className=inputClass component {type, key, label, value, placeholder, onChange, onBlur, ¿onSubmit?} />
+  <SidebarOverview>
+  <Footer>
+
+3- Payment details
+
+  <Header className=headerClass >
+  <Input className=inputClass component {type, key, label, value, placeholder, onChange, onBlur, ¿onSubmit?} />
+  <SidebarOverview>
+  <Footer>
+
+4- Order summary
+
+  <Header className=headerClass >
+  <OrderSummary>
+
+## States
+
+App:
+
+- products
+- cartItems
+- checkoutInfo{ userName, userPassword, name, lastName, email,  
+   phone prefix, phone number, address, city, ZC, country, paymentMethod, cardName,
+  cardNumber, cardExpiryDate, cardCVV, termsConditions }
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
@@ -138,20 +204,16 @@ for details
 Thanks goes to these wonderful people
 ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
 <table>
   <tr>
     <td align="center"><a href="http://www.danilucaci.com"><img src="https://avatars.githubusercontent.com/u/19062818?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Dani Lucaci</b></sub></a><br /><a href="https://github.com/assembler-school/vanilla-js-project-template/commits?author=danilucaci" title="Code">💻</a> <a href="https://github.com/assembler-school/vanilla-js-project-template/commits?author=danilucaci" title="Documentation">📖</a> <a href="#example-danilucaci" title="Examples">💡</a> <a href="#tool-danilucaci" title="Tools">🔧</a></td>
   </tr>
 </table>
 
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
-
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
 This project follows the
 [all-contributors](https://github.com/all-contributors/all-contributors)
 specification. Contributions of any kind welcome!
+
+## REVISAR:
+
+- Controlar isCheckoutDisabled.lenght === 1 de removeCartItem con useEffect

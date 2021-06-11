@@ -1,0 +1,14 @@
+.form-group{
+    .country-select{
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+        color: #495057;
+        font-size: 1rem;
+        font-weight: 400;
+        height: 38px;
+    }
+    .country-select:focus{
+        outline: none;
+    }
+
+}

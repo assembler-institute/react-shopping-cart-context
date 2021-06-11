@@ -1,13 +1,96 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+
+import "./style.scss";
+import "react-credit-cards/lib/styles.scss";
 
 import Home from "./pages/Home";
 import NewProduct from "./pages/NewProduct";
+import BillingAddress from "./pages/CheckoutPages/BillingAddress";
+import OrderSummary from "./pages/CheckoutPages/OrderSummary";
+import PaymentDetails from "./pages/CheckoutPages/PaymentDetails";
+import PersonalDetails from "./pages/CheckoutPages/PersonalDetails";
 
 import * as api from "./api";
 
 import useLocalStorage from "./hooks/useLocalStorage";
 import loadLocalStorageItems from "./utils/loadLocalStorageItems";
+
+import checkoutContext from "./context/checkoutData";
+
+const SETISCHECKOUT = "SETISCHECKOUT";
+const RESETISCHECKOUT = "RESETISCHECKOUT";
+const LOADCHECKOUTDATA = "LOADCHECKOUTDATA";
+const TEMPSTATEDATA = "TEMPSTATEDATA";
+
+const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
+const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
+const CHECKOUT_DATA_LOCAL_STORAGE_KEY = "react-sc-state-checkout-data";
+
+const initialCheckoutContext = {
+  isCheckoutDisabled: true,
+  userName: "",
+  userPassword: "",
+  name: "",
+  lastName: "",
+  email: "",
+  phonePrefix: "",
+  phoneNumber: "",
+  address: "",
+  city: "",
+  ZC: "",
+  country: "",
+  paymentMethod: "",
+  cardName: "",
+  cardNumber: "",
+  cardExpiryDate: "",
+  cvc: "",
+  termsConditions: false,
+  setPersonalDetails: () => {},
+  tempData: {},
+  navBar: 12.5,
+  disabledPersonalDetails: true,
+  disabledBillingAddress: true,
+  disabledPaymentDetails: true,
+  disabledOrderSummary: true,
+};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case SETISCHECKOUT: {
+      return {
+        ...state,
+        isCheckoutDisabled: true,
+        disabledPersonalDetails: true,
+      };
+    }
+    case RESETISCHECKOUT: {
+      return {
+        ...state,
+        isCheckoutDisabled: false,
+        disabledPersonalDetails: false,
+      };
+    }
+    case LOADCHECKOUTDATA: {
+      return {
+        ...state,
+        ...action.payload,
+      };
+    }
+    case TEMPSTATEDATA: {
+      return {
+        ...state,
+        tempData: {
+          ...state.tempData,
+          ...action.payload,
+        },
+      };
+    }
+    default: {
+      return state;
+    }
+  }
+}
 
 function buildNewCartItem(cartItem) {
   if (cartItem.quantity >= cartItem.unitsInStock) {
@@ -26,10 +109,10 @@ function buildNewCartItem(cartItem) {
   };
 }
 
-const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
-const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
-
 function App() {
+  const [state, dispatch] = useReducer(reducer, initialCheckoutContext);
+  const { isCheckoutDisabled } = state;
+
   const [products, setProducts] = useState(() =>
     loadLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY, []),
   );
@@ -44,7 +127,34 @@ function App() {
   const [hasError, setHasError] = useState(false);
   const [loadingError, setLoadingError] = useState(null);
 
+  function setLocalStorage(data, KEY_LOCAL_STORAGE) {
+    const prevData = JSON.parse(localStorage.getItem(KEY_LOCAL_STORAGE));
+    const updatedData = { ...prevData, ...data };
+    localStorage.setItem(KEY_LOCAL_STORAGE, JSON.stringify(updatedData));
+  }
+
+  function setIsCheckout() {
+    dispatch({ type: SETISCHECKOUT });
+  }
+  function resetIsCheckout() {
+    dispatch({ type: RESETISCHECKOUT });
+  }
+
+  function setCheckoutData(data) {
+    dispatch({ type: LOADCHECKOUTDATA, payload: data });
+    setLocalStorage(data, CHECKOUT_DATA_LOCAL_STORAGE_KEY);
+  }
+
+  function tempData(data) {
+    dispatch({ type: TEMPSTATEDATA, payload: data });
+  }
+
   useEffect(() => {
+    const checkoutData = loadLocalStorageItems(
+      CHECKOUT_DATA_LOCAL_STORAGE_KEY,
+      [],
+    );
+    dispatch({ type: LOADCHECKOUTDATA, payload: checkoutData });
     if (products.length === 0) {
       setIsLoading(true);
 
@@ -59,6 +169,12 @@ function App() {
           setHasError(true);
           setLoadingError(error.message);
         });
+    }
+
+    if (cartItems.length === 0) {
+      setIsCheckout();
+    } else {
+      resetIsCheckout();
     }
   }, []);
 
@@ -88,6 +204,10 @@ function App() {
 
     const updatedProduct = buildNewCartItem(foundProduct);
     setCartItems((prevState) => [...prevState, updatedProduct]);
+
+    if (cartItems) {
+      resetIsCheckout();
+    }
   }
 
   function handleChange(event, productId) {
@@ -109,6 +229,10 @@ function App() {
     const updatedCartItems = cartItems.filter((item) => item.id !== productId);
 
     setCartItems(updatedCartItems);
+
+    if (cartItems.length === 1) {
+      setIsCheckout();
+    }
   }
 
   function handleDownVote(productId) {
@@ -179,30 +303,60 @@ function App() {
     setProducts((prevState) => [newProduct, ...prevState]);
   }
 
+  function focusCreditCard(e) {
+    setCheckoutData({ cardFocus: e.target.name });
+  }
+
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/new-product">
-          <NewProduct saveNewProduct={saveNewProduct} />
-        </Route>
-        <Route path="/" exact>
-          <Home
-            fullWidth
-            cartItems={cartItems}
-            products={products}
-            isLoading={isLoading}
-            hasError={hasError}
-            loadingError={loadingError}
-            handleDownVote={handleDownVote}
-            handleUpVote={handleUpVote}
-            handleSetFavorite={handleSetFavorite}
-            handleAddToCart={handleAddToCart}
-            handleRemove={handleRemove}
-            handleChange={handleChange}
-          />
-        </Route>
-      </Switch>
-    </BrowserRouter>
+    <checkoutContext.Provider
+      value={{
+        isCheckoutDisabled: isCheckoutDisabled,
+        setCheckoutData: setCheckoutData,
+        tempData: tempData,
+        focusCreditCard: focusCreditCard,
+        state: state,
+      }}
+    >
+      <BrowserRouter>
+        <Switch>
+          <Route path="/checkout/step-1">
+            <PersonalDetails cartItems={cartItems} />
+          </Route>
+          <Route path="/checkout/step-2">
+            <BillingAddress cartItems={cartItems} />
+          </Route>
+          <Route path="/checkout/step-3">
+            <PaymentDetails />
+          </Route>
+          <Route path="/checkout/order-summary">
+            <OrderSummary cartItems={cartItems} />
+          </Route>
+          <Route path="/new-product">
+            <NewProduct saveNewProduct={saveNewProduct} />
+          </Route>
+          <Route path="/" exact>
+            <Home
+              fullWidth
+              cartItems={cartItems}
+              products={products}
+              isLoading={isLoading}
+              hasError={hasError}
+              loadingError={loadingError}
+              handleDownVote={handleDownVote}
+              handleUpVote={handleUpVote}
+              handleSetFavorite={handleSetFavorite}
+              handleAddToCart={handleAddToCart}
+              handleRemove={handleRemove}
+              handleChange={handleChange}
+            />
+          </Route>
+          <Route path="*">
+            {/* Change to 404 not foun */}
+            <NewProduct saveNewProduct={saveNewProduct} />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    </checkoutContext.Provider>
   );
 }
 

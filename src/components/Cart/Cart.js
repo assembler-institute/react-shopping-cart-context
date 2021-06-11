@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 
 import ShoppingCartItem from "../ShoppingCartItem";
 import Button from "../Button";
+
+import checkoutContext from "../../context/checkoutData";
 
 function getCartTotal(cart) {
   return cart.reduce((accum, item) => {
@@ -10,6 +13,7 @@ function getCartTotal(cart) {
 }
 
 function Cart({ cartItems, handleRemove, handleChange, ...props }) {
+  const { isCheckoutDisabled } = useContext(checkoutContext);
   return (
     <aside {...props}>
       <div className="row flex-column">
@@ -49,7 +53,9 @@ function Cart({ cartItems, handleRemove, handleChange, ...props }) {
               <hr />
             </div>
             <div className="col">
-              <Button>Checkout</Button>
+              <Link to="/checkout/step-1">
+                <Button disabled={isCheckoutDisabled}>Checkout</Button>
+              </Link>
             </div>
           </div>
         </div>
