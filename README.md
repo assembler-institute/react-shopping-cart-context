@@ -4,13 +4,7 @@
   
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-
-  
-
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-
-  
-
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
   
@@ -155,28 +149,17 @@ Thanks goes to these wonderful people
   
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-
 <!-- prettier-ignore-start -->
-
 <!-- markdownlint-disable -->
-
 <table>
-
-<tr>
-
-<td  align="center"><a  href="http://www.danilucaci.com"><img  src="https://avatars.githubusercontent.com/u/19062818?v=4?s=100"  width="100px;"  alt=""/><br /><sub><b>Dani Lucaci</b></sub></a><br /><a  href="https://github.com/assembler-school/vanilla-js-project-template/commits?author=danilucaci"  title="Code">💻</a> <a  href="https://github.com/assembler-school/vanilla-js-project-template/commits?author=danilucaci"  title="Documentation">📖</a> <a  href="#example-danilucaci"  title="Examples">💡</a> <a  href="#tool-danilucaci"  title="Tools">🔧</a></td>
-
-</tr>
-
+  <tr>
+    <td align="center"><a href="http://www.danilucaci.com"><img src="https://avatars.githubusercontent.com/u/19062818?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Dani Lucaci</b></sub></a><br /><a href="https://github.com/mhfortuna/react-shopping-cart-context/commits?author=danilucaci" title="Code">💻</a> <a href="https://github.com/mhfortuna/react-shopping-cart-context/commits?author=danilucaci" title="Documentation">📖</a> <a href="#example-danilucaci" title="Examples">💡</a> <a href="#tool-danilucaci" title="Tools">🔧</a></td>
+    <td align="center"><a href="https://github.com/bbenalia"><img src="https://avatars.githubusercontent.com/u/65949632?v=4?s=100" width="100px;" alt=""/><br /><sub><b>bbenalia</b></sub></a><br /><a href="https://github.com/mhfortuna/react-shopping-cart-context/commits?author=bbenalia" title="Code">💻</a> <a href="#design-bbenalia" title="Design">🎨</a> <a href="#ideas-bbenalia" title="Ideas, Planning, & Feedback">🤔</a> <a href="#projectManagement-bbenalia" title="Project Management">📆</a></td>
+  </tr>
 </table>
 
-  
-
 <!-- markdownlint-restore -->
-
 <!-- prettier-ignore-end -->
-
-  
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
