@@ -10,6 +10,7 @@ import useLocalStorage from "./hooks/useLocalStorage";
 import loadLocalStorageItems from "./utils/loadLocalStorageItems";
 import PersonalDetails from "./pages/PersonalDetails/PersonalDetails";
 import Address from "./pages/Address/Address";
+import OrderSummary from "./pages/Summary/OrderSummary";
 
 function buildNewCartItem(cartItem) {
   if (cartItem.quantity >= cartItem.unitsInStock) {
@@ -193,7 +194,9 @@ function App() {
         <Route path="/checkout/step-2">
           <Address cartItems={cartItems} />
         </Route>
-        {/* <Route path="/checkout/order-summary"></Route> */}
+        <Route path="/checkout/order-summary">
+          <OrderSummary />
+        </Route>
         <Route path="/" exact>
           <Home
             fullWidth
