@@ -171,6 +171,7 @@ function PaymentForm() {
             </div>
           </div>
           {/* <div className="w-50 bg-warning">Aquí va la tarjetAAAa</div> */}
+
           <Card />
           {/* NEW HERE */}
         </div>
