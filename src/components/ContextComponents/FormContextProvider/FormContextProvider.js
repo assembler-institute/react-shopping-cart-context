@@ -1,5 +1,4 @@
-/* eslint-disable no-console */
-import React, { useEffect, useReducer } from "react";
+import React, { useReducer } from "react";
 
 import FormContext from "../../../context/form-context";
 
@@ -48,10 +47,6 @@ function reducerForm(state, action) {
 
 function FormContextProvider({ children }) {
   const [formData, dispatch] = useReducer(reducerForm, initialValueFormData);
-
-  useEffect(() => {
-    console.log(formData);
-  }, [formData]);
 
   function updateFormData(newData) {
     dispatch({ type: UPDATE_FORM, payload: newData });

@@ -1,5 +1,4 @@
-/* eslint-disable no-console */
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
 
 import "./AppHeader.scss";
@@ -14,17 +13,12 @@ function AppHeader({ showNewProductForm, ...props }) {
   );
   const [showModal, setShowModal] = useState(false);
 
-  useEffect(() => {
-    console.log(loginData);
-  }, [loginData]);
-
   function handleLogOut() {
     updateLoginData({
       loginName: "",
       loginPassword: "",
       isLogged: false,
     });
-    console.log(loginData);
   }
 
   function handleShowModal() {
@@ -62,13 +56,13 @@ function AppHeader({ showNewProductForm, ...props }) {
               )}
             </div>
             <div className="navbar-group right-nav">
-              {loginData.isLogged && (
-                <p className="login-name">{`Hello ${loginData.loginName}`}</p>
-              )}
               {loginData.isLogged ? (
-                <Button type="button" onClick={handleLogOut}>
-                  Log out
-                </Button>
+                <>
+                  <p className="login-name">{`Hello ${loginData.loginName}`}</p>
+                  <Button type="button" onClick={handleLogOut}>
+                    Log out
+                  </Button>
+                </>
               ) : (
                 <Button
                   type="button"
@@ -86,7 +80,6 @@ function AppHeader({ showNewProductForm, ...props }) {
           </nav>
         </div>
       </div>
-      {/* {!loginData.isLogged && <Redirect to={HOME_URL} />} */}
     </header>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 
 import { Link } from "react-router-dom";
 
@@ -14,8 +14,17 @@ import getCartTotal from "../../utils/getCartTotal";
 
 function Cart({ ...props }) {
   const { cartItems, remove, change } = useContext(CartContext);
+  const [hasCartItems, setHasCartItems] = useState(false);
 
   const { data: loginData } = useContext(LoginContext);
+
+  useEffect(() => {
+    if (cartItems.length > 0) {
+      setHasCartItems(true);
+    } else {
+      setHasCartItems(false);
+    }
+  }, [cartItems, loginData.isLogged]);
 
   return (
     <aside {...props}>
@@ -57,9 +66,7 @@ function Cart({ ...props }) {
             </div>
             <div className="col">
               <Link to={PROFILE_URL}>
-                <Button
-                  disabled={cartItems.length !== 0 && !loginData.isLogged}
-                >
+                <Button disabled={!hasCartItems || !loginData.isLogged}>
                   Checkout
                 </Button>
               </Link>

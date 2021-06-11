@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { useState, useContext } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useFormik } from "formik";

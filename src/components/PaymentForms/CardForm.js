@@ -122,7 +122,7 @@ function CardForm({ paymentMethod, setProcessCompletedFlags }) {
             />
             <Input
               shortInput
-              type="text"
+              type="password"
               label="CVV"
               id="cardCVV"
               placeholder="XXX"

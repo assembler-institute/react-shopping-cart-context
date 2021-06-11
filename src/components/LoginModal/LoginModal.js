@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { useContext } from "react";
 import { useFormik } from "formik";
 
@@ -15,11 +14,12 @@ function LoginModal({ setShowModal }) {
   const handleCloseModal = () => {
     const modal = document.getElementById("loginModal");
     const modalBackdrops = document.getElementsByClassName("modal-backdrop");
+    setShowModal(false);
     modal.classList.remove("show");
     modal.setAttribute("aria-hidden", "true");
     modal.setAttribute("style", "display: none");
+    document.body.classList.remove("modal-open");
     document.body.removeChild(modalBackdrops[0]);
-    setShowModal(false);
   };
 
   const formik = useFormik({
@@ -30,7 +30,6 @@ function LoginModal({ setShowModal }) {
     validationSchema: formLogin,
     onSubmit: (values, { setSubmitting }) => {
       updateLoginData({ ...values, isLogged: true });
-      console.log(values);
       setSubmitting(true);
       setTimeout(() => {
         handleCloseModal();

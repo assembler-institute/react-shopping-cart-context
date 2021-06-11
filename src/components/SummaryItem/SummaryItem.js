@@ -1,20 +1,8 @@
 import React from "react";
 
-// import Button from "../Button";
-
 import buildSelectOptions from "../../utils/buildSelectOptions";
 
 import "./SummaryItem.scss";
-// function buildSelectOptions(unitsInStock) {
-//   return Array.from({ length: unitsInStock }, (_value, index) => {
-//     const currentIndex = index + 1;
-//     return (
-//       <option key={currentIndex} value={currentIndex}>
-//         {currentIndex}
-//       </option>
-//     );
-//   });
-// }
 
 function SummaryItem({
   id,
@@ -49,7 +37,7 @@ function SummaryItem({
                   </h4>
                   {handleRemove && (
                     <button type="button" onClick={onHandleRemove}>
-                      <i className="uil uil-times" />
+                      ×
                     </button>
                   )}
                 </div>
@@ -78,9 +66,6 @@ function SummaryItem({
             </div>
           </div>
         </div>
-        {/* <div className="col">
-          <hr />
-        </div> */}
       </div>
     </div>
   );

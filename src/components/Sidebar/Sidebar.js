@@ -1,7 +1,6 @@
-/* eslint-disable no-console */
-import React, { useState, useContext } from "react";
-import { useFormik } from "formik";
+import React, { useEffect, useState, useContext } from "react";
 import { Redirect } from "react-router-dom";
+import { useFormik } from "formik";
 
 import SummaryItem from "../SummaryItem";
 
@@ -13,10 +12,17 @@ import CartContext from "../../context/cart-context";
 
 import { HOME_URL } from "../../utils/constants";
 
-function Sidebar() {
+function Sidebar({ hasDiscount, sethasDiscount }) {
   const { cartItems, total, remove, change } = useContext(CartContext);
   const [customTotal, setCustomTotal] = useState(total);
-  const [hasDiscount, sethasDiscount] = useState(false);
+
+  useEffect(() => {
+    if (hasDiscount) {
+      setCustomTotal((total * 0.8).toFixed(2));
+    } else {
+      setCustomTotal(total);
+    }
+  }, [total]);
 
   const formik = useFormik({
     initialValues: {
@@ -26,7 +32,7 @@ function Sidebar() {
     onSubmit: () => {
       if (!hasDiscount) {
         setCustomTotal((total * 0.8).toFixed(2));
-        sethasDiscount(false);
+        sethasDiscount(true);
       }
     },
   });
@@ -35,7 +41,7 @@ function Sidebar() {
       <div className=" col sidebar-title mb-4">
         <h2>Checkout summary</h2>
       </div>
-      {cartItems.length > 0 ? (
+      {cartItems.length > 0 &&
         cartItems.map((item) => (
           <SummaryItem
             key={item.id}
@@ -48,10 +54,7 @@ function Sidebar() {
             handleRemove={remove}
             handleChange={change}
           />
-        ))
-      ) : (
-        <Redirect to={HOME_URL} />
-      )}
+        ))}
       <div className="col sidebar-disccount">
         <hr className="mt-0" />
 
@@ -88,11 +91,12 @@ function Sidebar() {
       </div>
 
       <div className="col sidebar-totals d-flex justify-content-between">
-        <h4 className="h5">Total</h4>
+        <h4 className="h5">{hasDiscount ? "Total (-20%)" : "Total"}</h4>
         <h4>
-          <strong> {customTotal}€</strong>
+          <strong>{customTotal}€</strong>
         </h4>
       </div>
+      {cartItems.length === 0 && <Redirect to={HOME_URL} />}
     </>
   );
 }

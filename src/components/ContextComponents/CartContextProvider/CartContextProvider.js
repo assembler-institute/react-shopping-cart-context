@@ -1,4 +1,3 @@
-/* eslint-disable import/extensions */
 import React, { useReducer } from "react";
 
 import CartContext from "../../../context/cart-context";

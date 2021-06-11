@@ -1,26 +1,28 @@
-#purchase-information {
-  padding: 20px;
-  height: fit-content;
-  border-radius: 5px;
-  background-color: rgb(239, 239, 239);
-  .sidebar-title {
-    h2 {
-      font-weight: bold;
+#summaryWrapper {
+  .summary-block {
+    padding: 30px;
+    width: 48%;
+  }
+
+  .summary-right {
+    background-color: rgb(239, 239, 239);
+    height: fit-content;
+    border-radius: 5px;
+  }
+
+  .summary-title {
+    font-weight: bold;
+    font-size: 34px;
+    margin-bottom: 20px;
+  }
+
+  .summary-step {
+    width: 50%;
+    min-height: 50px;
+    margin-bottom: 25px;
+    padding: 0;
+    .summary-text {
+      margin-bottom: 5px;
     }
   }
-  .sidebar-products {
-    max-height: 50%;
-    overflow: scroll;
-  }
-  .sidebar-disccount {
-    label {
-      flex-grow: 1;
-    }
-    button {
-      width: fit-content;
-      height: fit-content;
-    }
-  }
-  // .sidebar-totals {
-  // }
 }

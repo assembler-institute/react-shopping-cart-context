@@ -1,5 +1,4 @@
-/* eslint-disable no-console */
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import withLayout from "../../hoc/withLayout";
 
@@ -22,10 +21,7 @@ function Checkout({ processStep }) {
     billing: false,
     payment: false,
   });
-
-  useEffect(() => {
-    console.log(processCompletedFlags);
-  }, [processCompletedFlags]);
+  const [hasDiscount, sethasDiscount] = useState(false);
 
   return (
     <FormContextProvider>
@@ -51,11 +47,16 @@ function Checkout({ processStep }) {
               )}
             </div>
             <div id="sidebar" className="col col-4">
-              <Sidebar />
+              <Sidebar
+                hasDiscount={hasDiscount}
+                sethasDiscount={sethasDiscount}
+              />
             </div>
           </>
         )}
-        {processStep === SUMMARY && <CheckoutSummary />}
+        {processStep === SUMMARY && (
+          <CheckoutSummary hasDiscount={hasDiscount} />
+        )}
       </div>
     </FormContextProvider>
   );
