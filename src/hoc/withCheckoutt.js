@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import Footer from "../components/Footer";
 import CheckoutHeader from "../components/CheckoutHeader";
 import CheckoutSideBar from "../components/CheckoutSideBar";
 import "./CheckoutStyles.scss";
+import ShoppingContext from "../context";
 
 // function getDisplayName(WrappedComponent) {
 //   return WrappedComponent.displayName || WrappedComponent.name || "Component";
@@ -24,6 +25,9 @@ function Checkout(WrappedComponent) {
             </div>
           </div>
           <CheckoutSideBar />
+          <div>
+            <code>{JSON.stringify(useContext(ShoppingContext))}</code>
+          </div>
         </section>
         <Footer />
       </>

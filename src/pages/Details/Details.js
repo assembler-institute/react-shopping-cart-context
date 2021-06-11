@@ -7,8 +7,9 @@ import "./details.scss";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import ShoppingContext from "../../context";
-import Checkout from "../../hoc/withCheckout";
+import Checkout from "../../hoc/withCheckoutt";
 import detailsSchema from "./details-schema";
+// import loadLocalStorageItems from "../../utils/loadLocalStorageItems";
 
 function Details() {
   const { cartItems, nextProgress, updateDetails } = useContext(
@@ -36,8 +37,8 @@ function Details() {
         validationSchema={detailsSchema}
         onSubmit={(values) => {
           updateDetails(values);
-          setRedirect(true);
           nextProgress();
+          setRedirect(true);
         }}
       >
         {({
