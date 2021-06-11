@@ -13,7 +13,6 @@ function CheckoutSummary({ hasDiscount }) {
 
   return (
     <div id="summaryWrapper" className="d-flex justify-content-between">
-      {/* Left block */}
       <div className="summary-block summary-left col col-12 col-sm-6">
         <div className="summary-title px-3">Your products</div>
         <div className="col col-12 mb-4">
@@ -34,8 +33,6 @@ function CheckoutSummary({ hasDiscount }) {
             ))}
         </div>
       </div>
-
-      {/* Right block */}
       <div className="summary-block summary-right col col-12 col-sm-6">
         <div className="summary-title">Customer details</div>
         <div className="col col-12 p-0 mb-4">

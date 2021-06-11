@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { useContext } from "react";
 import { useFormik } from "formik";
 

@@ -1,8 +1,5 @@
-/* eslint-disable no-console */
-/* eslint-disable react/self-closing-comp */
 import React, { useState } from "react";
 
-// import Input from "../../../components/Input";
 import PaymentMethod from "../../../components/PaymentMethod";
 import CardForm from "../../../components/PaymentForms/CardForm";
 import PayPalForm from "../../../components/PaymentForms/PayPalForm";
@@ -23,7 +20,6 @@ function CheckoutPayment({ setProcessCompletedFlags }) {
   return (
     <>
       <div className="container-fluid">
-        {/* BOTTOM PART */}
         <div className="step-bottom d-flex flex-column">
           <p>How would you like to pay?</p>
           <div className="payment-methods d-flex justify-content-between mb-4">

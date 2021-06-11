@@ -7,7 +7,6 @@ function PaymentMethod({
   src = null,
   text,
   setPayment = () => {},
-  // checked,
   ...props
 }) {
   function handleChange() {
@@ -23,7 +22,6 @@ function PaymentMethod({
         value={id}
         onChange={handleChange}
         {...props}
-        // checked={checked}
       />
       <label
         htmlFor={id}

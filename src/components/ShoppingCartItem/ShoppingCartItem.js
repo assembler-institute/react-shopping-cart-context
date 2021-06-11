@@ -6,17 +6,6 @@ import Button from "../Button";
 
 import buildSelectOptions from "../../utils/buildSelectOptions";
 
-// function buildSelectOptions(unitsInStock) {
-//   return Array.from({ length: unitsInStock }, (_value, index) => {
-//     const currentIndex = index + 1;
-//     return (
-//       <option key={currentIndex} value={currentIndex}>
-//         {currentIndex}
-//       </option>
-//     );
-//   });
-// }
-
 function ShoppingCartItem({
   id,
   img,

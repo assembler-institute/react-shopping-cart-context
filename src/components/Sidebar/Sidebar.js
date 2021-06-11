@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { useEffect, useState, useContext } from "react";
 import { Redirect } from "react-router-dom";
 import { useFormik } from "formik";
@@ -12,7 +11,6 @@ import FormSchema from "./form-schema";
 import CartContext from "../../context/cart-context";
 
 import { HOME_URL } from "../../utils/constants";
-// import { HOME_URL } from "../../utils/constants";
 
 function Sidebar({ hasDiscount, sethasDiscount }) {
   const { cartItems, total, remove, change } = useContext(CartContext);

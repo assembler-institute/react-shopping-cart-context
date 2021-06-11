@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { useReducer } from "react";
 
 import FormContext from "../../../context/form-context";
