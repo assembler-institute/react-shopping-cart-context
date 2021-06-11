@@ -16,11 +16,33 @@
         "example",
         "tool"
       ]
+    },
+    {
+      "login": "bbenalia",
+      "name": "bbenalia",
+      "avatar_url": "https://avatars.githubusercontent.com/u/65949632?v=4",
+      "profile": "https://github.com/bbenalia",
+      "contributions": [
+        "code",
+        "design",
+        "ideas",
+        "projectManagement"
+      ]
+    },{
+    "login": "mhfortuna",
+      "name": "Mathias Fortuna",
+      "avatar_url": "https://avatars.githubusercontent.com/u/66578026?v=4",
+      "profile": "https://github.com/mhfortuna",
+      "contributions": [
+        "code",
+        "design",
+        "ideas",
+        "projectManagement"
     }
   ],
   "contributorsPerLine": 7,
-  "projectName": "vanilla-js-project-template",
-  "projectOwner": "assembler-school",
+  "projectName": "react-shopping-cart-context",
+  "projectOwner": "mhfortuna",
   "repoType": "github",
   "repoHost": "https://github.com",
   "skipCi": true

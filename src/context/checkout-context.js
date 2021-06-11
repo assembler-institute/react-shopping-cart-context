@@ -1,5 +1,7 @@
 import React, { createContext, useReducer } from "react";
 
+import { CHECKOUT_CONTEXT_KEY } from "../constants/local-storage-keys";
+
 const initialState = {
   name: "",
   email: "",
@@ -24,6 +26,10 @@ const CLEAR_CHECKOUT = "CLEAR_CHECKOUT";
 function CheckoutReducer(state, action) {
   switch (action.type) {
     case UPDATE_CHECKOUT:
+      localStorage.setItem(
+        CHECKOUT_CONTEXT_KEY,
+        JSON.stringify({ ...state, ...action.payload }),
+      );
       return { ...state, ...action.payload };
     case CLEAR_CHECKOUT:
       return initialState;
