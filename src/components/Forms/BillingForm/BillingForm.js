@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useFormik } from "formik";
+import Select from "react-select";
 import formHeader from "../../../hoc/formHeader";
 
 import Input from "../../Input";
@@ -11,9 +12,25 @@ import { ACTIONS } from "../../../context/state-reducer";
 import { StateContext } from "../../../context/state-context";
 
 function BillingForm() {
+  const options = [
+    {
+      value: "Spain",
+      label: "Spain",
+    },
+    {
+      value: "England",
+      label: "England",
+    },
+    {
+      value: "Portugal",
+      label: "Portugal",
+    },
+  ];
+
   const value = useContext(StateContext);
   const { dispatch, billing } = value;
   const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [country, setCountry] = useState();
 
   const formik = useFormik({
     initialValues: {
@@ -31,7 +48,7 @@ function BillingForm() {
             address: formik.values.clientAdress,
             city: formik.values.clientCity,
             postCode: formik.values.clientZip,
-            country: formik.values.clientCountry,
+            country: country.value,
           },
         });
         setHasSubmitted(true);
@@ -74,16 +91,14 @@ function BillingForm() {
           hasErrorMessage={formik.touched.clientZip}
           errorMessage={formik.errors.clientZip}
         />
-        <Input
-          type="text"
-          label="Country/region*"
+        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+        <label htmlFor="clientCountry">Country / region*</label>
+        <Select
+          className="form-group"
           id="clientCountry"
-          value={formik.values.clientCountry}
-          placeholder="insert your country/region"
-          handleChange={formik.handleChange}
-          handleBlur={formik.handleBlur}
-          hasErrorMessage={formik.touched.clientCountry}
-          errorMessage={formik.errors.clientCountry}
+          options={options}
+          value={country}
+          onChange={setCountry}
         />
         <div className="d-flex justify-content-between">
           <Link className="btn btn-primary px-5" to="/checkout/step-1">

@@ -1,7 +1,13 @@
-// const cartItems = JSON.parse(localStorage.getItem("react-sc-state-cart-items"));
+const cartItems = JSON.parse(localStorage.getItem("react-sc-state-cart-items"));
+// const account = JSON.parse(localStorage.getItem("react-sc-state-account"));
+// const billing = JSON.parse(localStorage.getItem("react-sc-state-billing"));
+// const payment = JSON.parse(localStorage.getItem("react-sc-state-payment"));
+// const currentStep = JSON.parse(
+//   localStorage.getItem("react-sc-state-currentStep"),
+// );
 
 export const initialState = {
-  cartItems: [],
+  cartItems: cartItems,
   account: {
     userName: "",
     emailAdress: "",

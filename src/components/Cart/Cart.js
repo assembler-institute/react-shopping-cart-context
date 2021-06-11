@@ -1,13 +1,9 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-// import { Link } from "react-router-dom";
 import { StateContext } from "../../context/state-context";
 import { ACTIONS } from "../../context/state-reducer";
-// import { ACTIONS } from "../../context/state-reducer";
-// import StateProvider from "../../context/state-context";
 
 import ShoppingCartItem from "../ShoppingCartItem";
-// import Button from "../Button";
 
 function getCartTotal(cart) {
   return cart.reduce((accum, item) => {

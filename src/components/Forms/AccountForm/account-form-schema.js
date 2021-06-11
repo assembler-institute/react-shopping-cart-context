@@ -11,8 +11,8 @@ const accountSchema = Yup.object().shape({
   clientPhone: Yup.number()
     .typeError("That doesn't look like a phone number")
     .positive("Your phone number can't start with a minus")
-    .integer("Your phone number can't include a decimal point")
-    .required("Your phone number is required"),
+    .integer("Your phone number can't include a decimal point"),
+  // .required("Your phone number is required"),
 });
 
 export default accountSchema;
