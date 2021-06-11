@@ -10,8 +10,9 @@ import CardSvg from "../CardSvg";
 import { cardPayment } from "../../pages/Checkout/form-schema";
 
 import FormContext from "../../context/form-context";
+import LoginContext from "../../context/login-context";
 
-import { BILLING_URL, SUMMARY_URL } from "../../utils/constants";
+import { HOME_URL, BILLING_URL, SUMMARY_URL } from "../../utils/constants";
 
 // Image routes
 import visa from "../../img/payment/visa-logo.svg";
@@ -21,6 +22,8 @@ import cvvIcon from "../../img/payment/cvv-icon.svg";
 
 function CardForm({ paymentMethod, setProcessCompletedFlags }) {
   const { data: formData, setData: updateFormData } = useContext(FormContext);
+  const { data: loginData } = useContext(LoginContext);
+
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [isFront, setIsFront] = useState(true);
 
@@ -179,6 +182,7 @@ function CardForm({ paymentMethod, setProcessCompletedFlags }) {
           </Button>
 
           {hasSubmitted && <Redirect to={SUMMARY_URL} />}
+          {!loginData.isLogged && <Redirect to={HOME_URL} />}
         </div>
       </div>
     </>

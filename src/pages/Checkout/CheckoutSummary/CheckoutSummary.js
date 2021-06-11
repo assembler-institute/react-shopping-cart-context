@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useContext } from "react";
 
 import FormContext from "../../../context/form-context";
@@ -10,6 +11,21 @@ import "./CheckoutSummary.scss";
 function CheckoutSummary({ hasDiscount }) {
   const { data: formData } = useContext(FormContext);
   const { cartItems, total } = useContext(CartContext);
+
+  let isCard = false;
+  let isPayPal = false;
+  let isApplePay = false;
+
+  if (formData.paymentMethod === "Card") {
+    isCard = true;
+    console.log("isCard");
+  } else if (formData.paymentMethod === "PayPal") {
+    isPayPal = true;
+    console.log("isPayPal");
+  } else {
+    isApplePay = true;
+    console.log("isApplePay");
+  }
 
   return (
     <div id="summaryWrapper" className="d-flex justify-content-between">
@@ -46,6 +62,26 @@ function CheckoutSummary({ hasDiscount }) {
             <p className="summary-text">
               {formData.phonePrefix} {formData.phone}
             </p>
+          </div>
+          <div className="summary-step col col-12 col-lg-6">
+            <h5 className="summary-subtitle">Payment</h5>
+            <p className="summary-text">{formData.paymentMethod}</p>
+            {isCard && (
+              <>
+                <p className="summary-text">{formData.cardName}</p>
+                <p className="summary-text">{formData.cardNumber}</p>
+              </>
+            )}
+            {isPayPal && (
+              <>
+                <p className="summary-text">{formData.payPalUser}</p>
+              </>
+            )}
+            {isApplePay && (
+              <>
+                <p className="summary-text">{formData.applePayUser}</p>
+              </>
+            )}
           </div>
           <div className="summary-step col col-12 col-lg-6">
             <h5 className="summary-subtitle">Billing</h5>
