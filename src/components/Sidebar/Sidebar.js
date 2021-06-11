@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 import React, { useState, useContext } from "react";
+import { Redirect } from "react-router-dom";
 import { useFormik } from "formik";
 
-// import ShoppingCartItem from "../ShoppingCartItem";
 import SummaryItem from "../SummaryItem";
 
 import "./Sidebar.scss";
@@ -10,6 +10,8 @@ import Button from "../Button";
 import FormSchema from "./form-schema";
 
 import CartContext from "../../context/cart-context";
+
+import { HOME_URL } from "../../utils/constants";
 
 function Sidebar() {
   const { cartItems, total, remove, change } = useContext(CartContext);
@@ -88,6 +90,7 @@ function Sidebar() {
           <strong>{customTotal}€</strong>
         </h4>
       </div>
+      {cartItems.length === 0 && <Redirect to={HOME_URL} />}
     </>
   );
 }

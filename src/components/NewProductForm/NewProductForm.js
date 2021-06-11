@@ -8,6 +8,8 @@ import Button from "../Button";
 
 import productSchema from "./product-schema";
 
+import { HOME_URL } from "../../utils/constants";
+
 function addProductDetails(product) {
   return {
     id: uuid(),
@@ -171,7 +173,7 @@ function NewProductForm({ saveNewProduct }) {
         </Button>
       </form>
 
-      {hasSubmitted && <Redirect to="/" />}
+      {hasSubmitted && <Redirect to={HOME_URL} />}
     </>
   );
 }
