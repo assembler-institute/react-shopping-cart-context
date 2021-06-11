@@ -50,13 +50,9 @@ function Cart({ cartItems, handleRemove, handleChange, ...props }) {
               <hr />
             </div>
             <div className="col">
-              {cartItems.length > 0 ? (
-                <Link to="/checkout/step-1">
-                  <Button>Checkout</Button>
-                </Link>
-              ) : (
-                <div> </div>
-              )}
+              <Button>
+                <Link to="/checkout/payment-details-page">Checkout</Link>
+              </Button>
             </div>
           </div>
         </div>
