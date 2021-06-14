@@ -1,0 +1,168 @@
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@300;400;500;600;700&display=swap");
+
+.CreditCard {
+  font-family: "Inconsolata", monospace;
+
+  &__img {
+    width: 100%;
+    border-radius: 15px;
+    position: relative;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
+  }
+  p {
+    position: absolute;
+    color: azure;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+  }
+  &__name {
+    top: 150px;
+    left: 20px;
+  }
+  &__number {
+    top: 120px;
+    left: 100px;
+    font-size: 23px;
+  }
+  &__expiry {
+    top: 185px;
+    right: 115px;
+    font-size: 16px;
+  }
+  &__cvv {
+    top: 11px;
+    right: 25px;
+  }
+}
+
+@media only screen and (max-width: 328px) {
+  .CreditCard {
+    &__img {
+      width: 100%;
+    }
+    &__name {
+      top: 100px;
+      font-size: 14px;
+      left: 30px;
+    }
+    &__number {
+      top: 70px;
+      left: 80px;
+      font-size: 16px;
+    }
+
+    &__expiry {
+      top: 135px;
+      right: 85px;
+      font-size: 12px;
+    }
+  }
+}
+
+// @media only screen and (min-width: 600px) {
+//   .CreditCard {
+//     &__img {
+//       width: 100%;
+//     }
+
+//     &__expiry {
+//       top: 240px;
+//       right: 85px;
+//       font-size: 14px;
+//     }
+//   }
+// }
+@media only screen and (min-width: 500px) {
+  .CreditCard {
+    &__img {
+      width: 100%;
+    }
+    &__name {
+      top: 180px;
+      font-size: 20px;
+      left: 30px;
+    }
+    &__number {
+      top: 130px;
+      left: 150px;
+      font-size: 24px;
+    }
+
+    &__expiry {
+      top: 240px;
+      right: 150px;
+      font-size: 18px;
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .CreditCard {
+    &__img {
+      width: 100%;
+    }
+    &__name {
+      top: 140px;
+      font-size: 18px;
+      left: 30px;
+    }
+    &__number {
+      top: 110px;
+      left: 150px;
+      font-size: 22px;
+    }
+
+    &__expiry {
+      top: 205px;
+      right: 125px;
+      font-size: 18px;
+    }
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .CreditCard {
+    text-align: center;
+    &__img {
+      width: 100%;
+    }
+    &__name {
+      top: 200px;
+      font-size: 25px;
+      left: 30px;
+    }
+    &__number {
+      top: 150px;
+      left: 220px;
+      font-size: 28px;
+    }
+    &__expiry {
+      top: 295px;
+      right: 191px;
+      font-size: 22px;
+    }
+  }
+}
+@media only screen and (min-width: 1193px) {
+  .CreditCard {
+    text-align: center;
+    &__img {
+      width: 100%;
+    }
+    &__name {
+      top: 120px;
+      font-size: 16px;
+      left: 30px;
+    }
+    &__number {
+      top: 90px;
+      left: 110px;
+      font-size: 20px;
+    }
+
+    &__expiry {
+      top: 170px;
+      right: 110px;
+      font-size: 17px;
+    }
+  }
+}

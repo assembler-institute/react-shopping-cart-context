@@ -1,0 +1,41 @@
+$iconBoxBorder: solid 1px rgb(220, 222, 223);
+$iconBoxBorderRadius: 5px;
+
+.PaymentForm {
+  &__method {
+    height: 40px;
+    .form-group {
+      margin: 0;
+      input {
+        margin-top: 10px;
+      }
+    }
+  }
+  &__cardIcon {
+    border-radius: $iconBoxBorderRadius;
+    height: 30px;
+  }
+
+  &__checkbox {
+    .form-group {
+      margin-bottom: 0 !important;
+      input {
+        width: 15px;
+      }
+    }
+  }
+  &__apple_pay {
+    height: 40px;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .PaymentForm {
+    &__methods {
+      flex-direction: column;
+    }
+    &__creditCard {
+      flex-direction: column !important;
+    }
+  }
+}

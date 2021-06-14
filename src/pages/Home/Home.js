@@ -33,7 +33,7 @@ function Home({
           </div>
           {isLoading && (
             <div className="col col-12">
-              <h2>Loading products...</h2>
+              <h2>Loading products..</h2>
             </div>
           )}
           {hasError && (

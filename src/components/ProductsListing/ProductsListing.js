@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import CartContext from "../../context/cartContext";
 
 import ItemCard from "../ItemCard";
 
@@ -7,11 +8,10 @@ function ProductsListing({
   handleDownVote,
   handleUpVote,
   handleSetFavorite,
-  handleAddToCart,
-  ...props
 }) {
+  const { handleAddToCart } = useContext(CartContext);
   return (
-    <section className="row" {...props}>
+    <section className="row">
       {products.map((product) => (
         <ItemCard
           key={product.id}
