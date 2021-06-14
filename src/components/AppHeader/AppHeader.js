@@ -4,11 +4,19 @@ import Button from "../Button";
 import AuthContext from "../../context/auth-context";
 
 // import { HOME } from "../../constants/routes";
+import CheckoutContext from "../../context/checkout-context";
+import { CHECKOUT_CONTEXT_KEY } from "../../constants/local-storage-keys";
 
 import "./AppHeader.scss";
 
 function AppHeader({ page, ...props }) {
   const { auth, logout } = useContext(AuthContext);
+  const { clearCheckoutContext } = useContext(CheckoutContext);
+  function handleClick() {
+    localStorage.removeItem(CHECKOUT_CONTEXT_KEY);
+    clearCheckoutContext();
+    logout();
+  }
 
   return (
     <header className="bg-primary mb-3" {...props}>
@@ -42,7 +50,7 @@ function AppHeader({ page, ...props }) {
             {auth.isAuthenticated && (
               <Button
                 className="align-center-center"
-                onClick={logout}
+                onClick={handleClick}
                 // handleClick={() => updateCheckoutContext({ actualPage: 1 })}
               >
                 Log out
