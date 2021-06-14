@@ -4,10 +4,9 @@ import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 
 function buildSelectOptions(arrOption = ["element 1", "element 2"]) {
-  return arrOption.map((element, index) => {
+  return arrOption.map((element) => {
     return (
-      // eslint-disable-next-line react/no-array-index-key
-      <MenuItem key={index} value={element}>
+      <MenuItem key={element.id} value={element}>
         {element}
       </MenuItem>
     );

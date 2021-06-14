@@ -2,7 +2,6 @@ import React from "react";
 import cn from "clsx";
 import { useHistory } from "react-router-dom";
 import ButtonMUI from "@material-ui/core/Button";
-// import { Link } from "react-router-dom";
 
 function ButtonLink({
   page = "",
@@ -38,10 +37,6 @@ function ButtonLink({
     >
       {children}
     </ButtonMUI>
-
-    // <Link className={classes} disabled={disabled} to={page} {...props}>
-    //   {children}
-    // </Link>
   );
 }
 

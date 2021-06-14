@@ -1,7 +1,6 @@
 import * as routes from "../constants/routes";
 
 const orderRoutes = [
-  // routes.HOME,
   routes.AUTH,
   routes.DETAIL,
   routes.ADDRESS,

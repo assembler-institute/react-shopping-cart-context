@@ -104,7 +104,6 @@ function Payment() {
                   hasErrorMessage={formik.touched.cardNumber}
                   errorMessage={formik.errors.cardNumber}
                   handleCardType={handleCardType}
-                  // type="number"
                   required
                 />
 
@@ -212,7 +211,6 @@ function Payment() {
                   !formik.values.cardAgreement
                 }
                 handleClick={() =>
-                  // formik.dirty &&
                   updateCheckoutContext({ actualPage: getPageIndex(SUMMARY) })
                 }
               >
