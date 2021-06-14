@@ -1,5 +1,7 @@
 import React from "react";
 
+import { makeStyles } from "@material-ui/core/styles";
+
 import FavoriteIconButton from "../FavoriteIconButton";
 import IconButton from "../IconButton";
 import Button from "../Button";
@@ -26,6 +28,12 @@ function getPopularityClasses(
   return prevClasses;
 }
 
+const useStyles = makeStyles((theme) => ({
+  padding: {
+    margin: theme.spacing(-1),
+  },
+}));
+
 function ItemCard({
   id,
   img,
@@ -39,6 +47,7 @@ function ItemCard({
   handleSetFavorite,
   handleAddToCart,
 }) {
+  const classes = useStyles();
   function onDownVote() {
     handleDownVote(id);
   }
@@ -101,7 +110,9 @@ function ItemCard({
           </div>
         </div>
         <div className="ItemCard__icon-row">
-          <Button onClick={onAddToCart}>Add to cart</Button>
+          <Button onClick={onAddToCart} className={classes.padding}>
+            Add to cart
+          </Button>
         </div>
       </footer>
     </article>

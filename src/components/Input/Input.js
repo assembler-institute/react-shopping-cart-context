@@ -1,4 +1,5 @@
 import React from "react";
+import cn from "clsx";
 
 function Input({
   type = "text",
@@ -12,15 +13,16 @@ function Input({
   hasErrorMessage,
   ...props
 }) {
+  const classes = cn({
+    "form-control": true,
+    "is-invalid": hasErrorMessage && errorMessage,
+    "is-valid": hasErrorMessage && !errorMessage,
+  });
   return (
-    <div className="form-group">
+    <div className="form-group mt-3">
       <label htmlFor={id}>{label}</label>
       <input
-        className={
-          hasErrorMessage && errorMessage
-            ? "form-control is-invalid"
-            : "form-control"
-        }
+        className={classes}
         id={id}
         name={id}
         type={type}

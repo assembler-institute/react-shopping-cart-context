@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
+import AuthContext from "../../context/auth-context";
 
 import ShoppingCartItem from "../ShoppingCartItem";
-import Button from "../Button";
+import ButtonLink from "../ButtonLink";
+
+import { getFirsCheckoutPage } from "../../helpers/order-pages";
+import { DETAIL } from "../../constants/routes";
 
 function getCartTotal(cart) {
   return cart.reduce((accum, item) => {
@@ -9,7 +13,9 @@ function getCartTotal(cart) {
   }, 0);
 }
 
-function Cart({ cartItems, handleRemove, handleChange, ...props }) {
+function Cart({ cartItems, handleRemove, handleChange, checkout, ...props }) {
+  const { auth } = useContext(AuthContext);
+
   return (
     <aside {...props}>
       <div className="row flex-column">
@@ -48,9 +54,16 @@ function Cart({ cartItems, handleRemove, handleChange, ...props }) {
               </div>
               <hr />
             </div>
-            <div className="col">
-              <Button>Checkout</Button>
-            </div>
+            {checkout && (
+              <div className="col col-12 d-flex justify-content-center">
+                <ButtonLink
+                  disabled={!cartItems.length}
+                  page={auth.isAuthenticated ? DETAIL : getFirsCheckoutPage()}
+                >
+                  Checkout
+                </ButtonLink>
+              </div>
+            )}
           </div>
         </div>
       </div>

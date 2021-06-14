@@ -1,13 +1,35 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
+import { ThemeProvider } from "@material-ui/core/styles";
+
 import Home from "./pages/Home";
 import NewProduct from "./pages/NewProduct";
+import Detail from "./pages/Detail";
+import Payment from "./pages/Payment";
+import Address from "./pages/Address";
 
 import * as api from "./api";
 
 import useLocalStorage from "./hooks/useLocalStorage";
 import loadLocalStorageItems from "./utils/loadLocalStorageItems";
+import { CheckoutContextProvider } from "./context/checkout-context";
+import AuthContextProvider from "./components/AuthContextProvider";
+
+import { getPageIndex } from "./helpers/order-pages";
+import { theme } from "./constants/materialUiColors";
+
+import {
+  HOME,
+  NEW_PRODUCT,
+  DETAIL,
+  PAYMENT,
+  ADDRESS,
+  SUMMARY,
+  AUTH,
+} from "./constants/routes";
+import Summary from "./pages/Summary";
+import AuthPage from "./pages/AuthPage/AuthPage";
 
 function buildNewCartItem(cartItem) {
   if (cartItem.quantity >= cartItem.unitsInStock) {
@@ -180,29 +202,69 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/new-product">
-          <NewProduct saveNewProduct={saveNewProduct} />
-        </Route>
-        <Route path="/" exact>
-          <Home
-            fullWidth
-            cartItems={cartItems}
-            products={products}
-            isLoading={isLoading}
-            hasError={hasError}
-            loadingError={loadingError}
-            handleDownVote={handleDownVote}
-            handleUpVote={handleUpVote}
-            handleSetFavorite={handleSetFavorite}
-            handleAddToCart={handleAddToCart}
-            handleRemove={handleRemove}
-            handleChange={handleChange}
-          />
-        </Route>
-      </Switch>
-    </BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <CheckoutContextProvider>
+        <AuthContextProvider>
+          <BrowserRouter>
+            <Switch>
+              <Route path={NEW_PRODUCT}>
+                <NewProduct saveNewProduct={saveNewProduct} />
+              </Route>
+              <Route path={DETAIL}>
+                <Detail
+                  cartItems={cartItems}
+                  handleRemove={handleRemove}
+                  handleChange={handleChange}
+                  page={getPageIndex(DETAIL)}
+                />
+              </Route>
+              <Route path={ADDRESS}>
+                <Address
+                  cartItems={cartItems}
+                  handleRemove={handleRemove}
+                  handleChange={handleChange}
+                  page={getPageIndex(ADDRESS)}
+                />
+              </Route>
+              <Route path={PAYMENT}>
+                <Payment
+                  cartItems={cartItems}
+                  handleRemove={handleRemove}
+                  handleChange={handleChange}
+                  page={getPageIndex(PAYMENT)}
+                />
+              </Route>
+              <Route path={SUMMARY}>
+                <Summary
+                  cartItems={cartItems}
+                  date={new Date().toLocaleDateString()}
+                  page={getPageIndex(SUMMARY)}
+                />
+              </Route>
+              <Route path={AUTH}>
+                <AuthPage />
+              </Route>
+              <Route path={HOME}>
+                <Home
+                  fullWidth
+                  cartItems={cartItems}
+                  products={products}
+                  isLoading={isLoading}
+                  hasError={hasError}
+                  loadingError={loadingError}
+                  handleDownVote={handleDownVote}
+                  handleUpVote={handleUpVote}
+                  handleSetFavorite={handleSetFavorite}
+                  handleAddToCart={handleAddToCart}
+                  handleRemove={handleRemove}
+                  handleChange={handleChange}
+                />
+              </Route>
+            </Switch>
+          </BrowserRouter>
+        </AuthContextProvider>
+      </CheckoutContextProvider>
+    </ThemeProvider>
   );
 }
 
