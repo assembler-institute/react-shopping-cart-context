@@ -10,15 +10,10 @@ import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 
 function UiInputPassword({
   fullWidth = true,
-  // label = "input-01",
   id = "input-01",
   value = "",
-  // name = "",
-  // options,
+
   handleChange = () => {},
-  // handleBlur = () => {},
-  // errorMessage,
-  // hasErrorMessage,
 }) {
   const [showPassword, setshowPassword] = React.useState(false);
 
@@ -34,7 +29,6 @@ function UiInputPassword({
     <FormControl fullWidth={fullWidth}>
       <InputLabel htmlFor={id}>Password</InputLabel>
       <Input
-        // fullWidth={fullWidth}
         label="password"
         id={id}
         name={id}

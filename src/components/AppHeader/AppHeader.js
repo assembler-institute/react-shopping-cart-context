@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import Button from "../Button";
 import AuthContext from "../../context/auth-context";
 
-// import { HOME } from "../../constants/routes";
 import CheckoutContext from "../../context/checkout-context";
 import { CHECKOUT_CONTEXT_KEY } from "../../constants/local-storage-keys";
 
@@ -43,16 +42,11 @@ function AppHeader({ page, ...props }) {
                     New Product
                   </NavLink>
                 </li>
-                {/* <li className="nav-item"></li> */}
               </ul>
             )}
 
             {auth.isAuthenticated && (
-              <Button
-                className="align-center-center"
-                onClick={handleClick}
-                // handleClick={() => updateCheckoutContext({ actualPage: 1 })}
-              >
+              <Button className="align-center-center" onClick={handleClick}>
                 Log out
               </Button>
             )}

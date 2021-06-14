@@ -11,7 +11,6 @@ export default function UiCustomRadio({
   formImage,
   color,
   ...props
-  //   disabled,
 }) {
   return (
     <div
@@ -26,7 +25,6 @@ export default function UiCustomRadio({
         control={<Radio inputProps={{ "aria-label": value }} color={color} />}
         label={formText || <img src={formImage} alt={value} />}
         props={props}
-        /* disabled={payment.disabled} */
       />
     </div>
   );

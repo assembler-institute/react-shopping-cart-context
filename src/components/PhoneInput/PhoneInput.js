@@ -4,7 +4,6 @@ import InputMask from "react-input-mask";
 import SelectCountryCode from "../SelectCountryCode";
 
 function PhoneInput({
-  // type = "text",
   label = "input-01",
   id = "input-01",
   value = "",

@@ -31,7 +31,6 @@ function AuthPage() {
         setHasSubmitted(true);
       }, 500);
     },
-    // validateOnMount: true,
   });
 
   return (
@@ -52,20 +51,6 @@ function AuthPage() {
             hasErrorMessage={formik.touched.email}
             errorMessage={formik.errors.email}
           />
-          {/* <UiInput
-            type="password"
-            label="Your password"
-            id="password"
-            name="password"
-            className="mb-4"
-            value={formik.values.name}
-            placeholder="User password"
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-            hasErrorMessage={formik.touched.name}
-            errorMessage={formik.errors.name}
-          /> */}
-
           <UiInputPassword
             id="password"
             name="password"
@@ -99,9 +84,6 @@ function AuthPage() {
         </form>
 
         {hasSubmitted && <Redirect to={DETAIL} />}
-        {/* {skipRoutes && actualPage < getPageIndex(DETAIL) && (
-          <Redirect to={HOME} />
-        )} */}
       </div>
     </div>
   );

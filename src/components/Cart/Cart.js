@@ -1,10 +1,8 @@
 import React, { useContext } from "react";
-// import React, { useContext } from "react";
 import AuthContext from "../../context/auth-context";
 
 import ShoppingCartItem from "../ShoppingCartItem";
 import ButtonLink from "../ButtonLink";
-// import CheckoutContext from "../../context/checkout-context";
 
 import { getFirsCheckoutPage } from "../../helpers/order-pages";
 import { DETAIL } from "../../constants/routes";
@@ -16,7 +14,6 @@ function getCartTotal(cart) {
 }
 
 function Cart({ cartItems, handleRemove, handleChange, checkout, ...props }) {
-  // const { updateCheckoutContext } = useContext(CheckoutContext);
   const { auth } = useContext(AuthContext);
 
   return (
@@ -62,7 +59,6 @@ function Cart({ cartItems, handleRemove, handleChange, checkout, ...props }) {
                 <ButtonLink
                   disabled={!cartItems.length}
                   page={auth.isAuthenticated ? DETAIL : getFirsCheckoutPage()}
-                  // handleClick={() => updateCheckoutContext({ actualPage: 1 })}
                 >
                   Checkout
                 </ButtonLink>
