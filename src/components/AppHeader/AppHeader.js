@@ -17,7 +17,6 @@ function AppHeader({ ...props }) {
             >
               Home
             </NavLink>
-
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
                 <NavLink

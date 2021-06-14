@@ -14,7 +14,6 @@ function Input({
 }) {
   return (
     <div className="form-group">
-      <label htmlFor={id}>{label}</label>
       <input
         className={
           hasErrorMessage && errorMessage
@@ -30,6 +29,9 @@ function Input({
         onBlur={handleBlur}
         {...props}
       />
+      <label htmlFor={id} className="ml-2">
+        {label}
+      </label>
       {hasErrorMessage && errorMessage && (
         <p className="invalid-feedback">{errorMessage}</p>
       )}
