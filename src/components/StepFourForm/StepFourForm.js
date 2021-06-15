@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 
 import ItemShowcase from "../ItemShowcase";
 import Button from "../Button/Button";
@@ -7,7 +8,10 @@ import { orderContext } from "../../CheckoutContext";
 
 function StepFourForm() {
   const checkoutCart = loadLocalStorageItems("react-sc-state-cart-items", []);
-  const { stepOne, stepTwo, stepThree } = useContext(orderContext);
+  const history = useHistory();
+  const { stepOne, stepTwo, stepThree, resetCheckoutForms } = useContext(
+    orderContext,
+  );
   const { name, email, countryCode, phone } = stepOne;
   const { address, city, zip, country } = stepTwo;
   const { cardHolder, cardNumber } = stepThree;
@@ -16,6 +20,11 @@ function StepFourForm() {
     return cart.reduce((accum, item) => {
       return accum + item.price * item.quantity;
     }, 0);
+  }
+
+  function goToHome() {
+    history.push("/");
+    resetCheckoutForms();
   }
 
   return (
@@ -42,7 +51,6 @@ function StepFourForm() {
                 <strong>{getTotal(checkoutCart)}€</strong>
               </h4>
             </div>
-            {/* <hr /> */}
           </div>
         </div>
       </div>
@@ -66,7 +74,7 @@ function StepFourForm() {
       </div>
 
       <div className="col shopping__cart__header">
-        <h2 className="h3 mt-2">Shipping information</h2>
+        <h2 className="h3 mt-2">Shipping information</h2> {}
         <hr className="mb-3" />
       </div>
       <div>
@@ -75,7 +83,9 @@ function StepFourForm() {
             <span className="h5">Address:</span>
             <br />
             {address}
+            <br />
             {city} - {zip}
+            <br />
             {country}
           </p>
         </div>
@@ -97,8 +107,8 @@ function StepFourForm() {
         </div>
       </div>
 
-      <div>
-        <Button>Back home</Button>
+      <div className="d-flex justify-content-center mt-4">
+        <Button onClick={goToHome}>Back home</Button>
       </div>
     </div>
   );

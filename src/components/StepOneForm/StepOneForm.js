@@ -37,15 +37,16 @@ const options = [
 ];
 
 function StepOneForm() {
-  const { submitStepOne } = useContext(orderContext);
+  const { submitStepOne, stepOne } = useContext(orderContext);
+  const { name, email, countryCode, phone } = stepOne;
   const history = useHistory();
 
   const formik = useFormik({
     initialValues: {
-      name: "",
-      email: "",
-      countryCode: "",
-      phone: "",
+      name: name,
+      email: email,
+      countryCode: countryCode,
+      phone: phone,
     },
     validationSchema: stepOneSchema,
     onSubmit: (values) => {

@@ -5,7 +5,7 @@ export const orderContext = createContext({
     completed: false,
     name: "",
     email: "",
-    countryCode: "",
+    countryCode: "+34",
     phone: "",
   },
   stepTwo: {
@@ -13,7 +13,7 @@ export const orderContext = createContext({
     address: "",
     city: "",
     zip: "",
-    country: "",
+    country: "Spain",
   },
   stepThree: {
     completed: false,
@@ -30,7 +30,7 @@ export const checkInitialState = {
     completed: false,
     name: "",
     email: "",
-    countryCode: "",
+    countryCode: "+34",
     phone: "",
   },
   stepTwo: {
@@ -38,7 +38,7 @@ export const checkInitialState = {
     address: "",
     city: "",
     zip: "",
-    country: "",
+    country: "Spain",
   },
   stepThree: {
     completed: false,
@@ -54,6 +54,7 @@ export const checkInitialState = {
 const SUBMITONE = "SUBMITONE";
 const SUBMITTWO = "SUBMITTWO";
 const SUBMITTHREE = "SUBMITTHREE";
+const RESET = "RESET";
 
 export function checkoutReducer(state, action) {
   switch (action.type) {
@@ -81,6 +82,32 @@ export function checkoutReducer(state, action) {
         stepThree: {
           ...action.payload,
           completed: true,
+        },
+      };
+    }
+    case RESET: {
+      return {
+        stepOne: {
+          completed: false,
+          name: "",
+          email: "",
+          countryCode: "+34",
+          phone: "",
+        },
+        stepTwo: {
+          completed: false,
+          address: "",
+          city: "",
+          zip: "",
+          country: "Spain",
+        },
+        stepThree: {
+          completed: false,
+          cardHolder: "",
+          cardNumber: "",
+          expiryDate: "",
+          cvv: "",
+          acceptedTerms: false,
         },
       };
     }
@@ -114,29 +141,22 @@ export function CheckoutContext({ children }) {
     });
   }
 
+  function resetCheckoutForms() {
+    dispatch({
+      type: RESET,
+    });
+  }
+
   return (
     <orderContext.Provider
       value={{
         stepOne: checkState.stepOne,
-        stepTwo: {
-          completed: false,
-          address: "",
-          city: "",
-          zip: "",
-          country: "",
-        },
-        stepThree: {
-          completed: false,
-          payMethod: "",
-          cardHolder: "",
-          cardNumber: "",
-          expiryDate: "",
-          cvv: "",
-          acceptedTerms: false,
-        },
+        stepTwo: checkState.stepTwo,
+        stepThree: checkState.stepThree,
         submitStepOne: submitStepOne,
         submitStepTwo: submitStepTwo,
         submitStepThree: submitStepThree,
+        resetCheckoutForms: resetCheckoutForms,
       }}
     >
       {children}

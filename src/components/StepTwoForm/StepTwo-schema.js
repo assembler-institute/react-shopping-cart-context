@@ -7,11 +7,11 @@ const stepTwoSchema = Yup.object().shape({
   city: Yup.string()
     .required("The city is required")
     .min(1, "Please insert a valid city"),
-  zip: Yup.number()
+  zip: Yup.string()
     .typeError("Zip must be a number")
-    .integer("Please insert a valid zip code")
-    .min(100000, "Please insert a valid zip code")
-    .max(999999999, "Please insert a valid zip code")
+    .matches(/\b\d{5}\b/, "Please insert a valid zip code")
+    .min(5, "Please insert a valid zip code")
+    .max(5, "Please insert a valid zip code")
     .required("Your zip code is required"),
 });
 

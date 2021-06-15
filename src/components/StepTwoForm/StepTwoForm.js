@@ -28,23 +28,24 @@ const countrySelect = (props) => (
 );
 
 const options = [
-  { img: spain, value: "spain", label: " Spain" },
-  { img: italy, value: "italy", label: " Italy" },
-  { img: greece, value: "greece", label: " Greece" },
-  { img: germany, value: "germany", label: " Germany" },
-  { img: france, value: "france", label: " France" },
+  { img: spain, value: "Spain", label: " Spain" },
+  { img: italy, value: "Italy", label: " Italy" },
+  { img: greece, value: "Greece", label: " Greece" },
+  { img: germany, value: "Germany", label: " Germany" },
+  { img: france, value: "France", label: " France" },
 ];
 
 function StepTwoForm() {
-  const { submitStepTwo } = useContext(orderContext);
+  const { submitStepTwo, stepTwo } = useContext(orderContext);
+  const { address, city, zip, country } = stepTwo;
   const history = useHistory();
 
   const formik = useFormik({
     initialValues: {
-      address: "",
-      city: "",
-      zip: "",
-      country: "",
+      address: address,
+      city: city,
+      zip: zip,
+      country: country,
     },
     validationSchema: stepTwoSchema,
     onSubmit: (values) => {
@@ -96,8 +97,8 @@ function StepTwoForm() {
       <span>Country</span>
       <Select
         options={options}
-        className="countryCode mt-2"
-        onChange={(value) => formik.setFieldValue("countryCode", value.value)}
+        className="mt-2 valid"
+        onChange={(value) => formik.setFieldValue("country", value.value)}
         defaultValue={options[0]}
         components={{
           Option: countryOption,

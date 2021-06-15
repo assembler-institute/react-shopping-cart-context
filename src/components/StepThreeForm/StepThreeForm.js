@@ -13,16 +13,17 @@ import american from "../../assets/img/American.svg";
 import "./StepThreeForm.scss";
 
 function StepThreeForm() {
-  const { submitStepThree } = useContext(orderContext);
+  const { submitStepThree, stepThree } = useContext(orderContext);
+  const { cardHolder, cardNumber, expiryDate, cvv, acceptedTerms } = stepThree;
   const history = useHistory();
 
   const formik = useFormik({
     initialValues: {
-      cardHolder: "",
-      cardNumber: "",
-      expiryDate: "",
-      cvv: "",
-      acceptedTerms: false,
+      cardHolder: cardHolder,
+      cardNumber: cardNumber,
+      expiryDate: expiryDate,
+      cvv: cvv,
+      acceptedTerms: acceptedTerms,
     },
     validationSchema: stepThreeSchema,
     onSubmit: (values) => {
@@ -35,7 +36,7 @@ function StepThreeForm() {
       <h5>How would you like to pay?</h5>
       <div className="d-flex justify-content-between mb-2">
         <div className="paymentCanvas">
-          <input type="radio" name="method" className="mr-2" />
+          <input type="radio" name="method" className="mr-2" required />
           <span>Credit / Debit Card</span>
         </div>
         <div className="paymentCanvas">
@@ -130,10 +131,7 @@ function StepThreeForm() {
               <p>{formik.values.cardHolder.toUpperCase()}</p>
               <div className="smallOutput">
                 {formik.values.expiryDate && (
-                  <div>
-                    {formik.values.expiryDate.slice(0, 2)}/
-                    {formik.values.expiryDate.slice(2, 4)}
-                  </div>
+                  <div>{formik.values.expiryDate}</div>
                 )}{" "}
                 <div>{formik.values.cvv}</div>
               </div>
@@ -158,6 +156,7 @@ function StepThreeForm() {
             value={formik.values.acceptedTerms}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
+            required
           />
           {formik.touched.acceptedTerms && formik.errors.acceptedTerms && (
             <p className="invalid-feedback">{formik.errors.acceptedTerms}</p>

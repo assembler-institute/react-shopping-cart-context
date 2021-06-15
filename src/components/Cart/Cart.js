@@ -56,7 +56,9 @@ function Cart({ cartItems, handleRemove, handleChange, ...props }) {
               <hr />
             </div>
             <div className="col">
-              <Button onClick={toCheckout}>Checkout</Button>
+              <Button onClick={toCheckout} disabled={!(cartItems.length > 0)}>
+                Checkout
+              </Button>
             </div>
           </div>
         </div>
