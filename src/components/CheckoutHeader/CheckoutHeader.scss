@@ -1,0 +1,18 @@
+.checkout-header {
+  color: grey;
+  padding: 10px;
+  & .steps-nav {
+    & .is-active {
+      color: #007bff;
+      font-weight: bold;
+    }
+    & > a {
+      color: grey;
+      &:hover {
+        color: rgb(16, 16, 16);
+        font-weight: bold;
+        text-decoration: none;
+      }
+    }
+  }
+}

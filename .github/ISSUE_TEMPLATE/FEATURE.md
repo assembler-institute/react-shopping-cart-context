@@ -2,7 +2,7 @@
 name: Feature Request
 about: Use this template for requesting new features
 title: "[FEATURE NAME]"
-labels: enhancement
+labels: "New feature"
 assignees:
 ---
 

@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 
 import ShoppingCartItem from "../ShoppingCartItem";
 import Button from "../Button";
@@ -10,6 +11,12 @@ function getCartTotal(cart) {
 }
 
 function Cart({ cartItems, handleRemove, handleChange, ...props }) {
+  const history = useHistory();
+
+  function toCheckout() {
+    history.push("/checkout/step-1");
+  }
+
   return (
     <aside {...props}>
       <div className="row flex-column">
@@ -49,7 +56,9 @@ function Cart({ cartItems, handleRemove, handleChange, ...props }) {
               <hr />
             </div>
             <div className="col">
-              <Button>Checkout</Button>
+              <Button onClick={toCheckout} disabled={!(cartItems.length > 0)}>
+                Checkout
+              </Button>
             </div>
           </div>
         </div>
