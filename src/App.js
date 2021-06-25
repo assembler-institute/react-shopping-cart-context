@@ -2,6 +2,11 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
+import CheckoutStepOne from "./pages/CheckoutStepOne";
+import CheckoutStepTwo from "./pages/CheckoutStepTwo";
+import CheckoutStepThree from "./pages/CheckoutStepThree";
+import CheckoutStepFour from "./pages/CheckoutStepFour";
+import OrderContextProvider from "./components/OrderContextProvider";
 import NewProduct from "./pages/NewProduct";
 
 import * as api from "./api";
@@ -180,29 +185,43 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/new-product">
-          <NewProduct saveNewProduct={saveNewProduct} />
-        </Route>
-        <Route path="/" exact>
-          <Home
-            fullWidth
-            cartItems={cartItems}
-            products={products}
-            isLoading={isLoading}
-            hasError={hasError}
-            loadingError={loadingError}
-            handleDownVote={handleDownVote}
-            handleUpVote={handleUpVote}
-            handleSetFavorite={handleSetFavorite}
-            handleAddToCart={handleAddToCart}
-            handleRemove={handleRemove}
-            handleChange={handleChange}
-          />
-        </Route>
-      </Switch>
-    </BrowserRouter>
+    <OrderContextProvider>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/new-product" exact>
+            <NewProduct saveNewProduct={saveNewProduct} />
+          </Route>
+          <Route path="/checkout/step-1" exact>
+            <CheckoutStepOne />
+          </Route>
+          <Route path="/checkout/step-2" exact>
+            <CheckoutStepTwo />
+          </Route>
+          <Route path="/checkout/step-3" exact>
+            <CheckoutStepThree />
+          </Route>
+          <Route path="/checkout/order-summary" exact>
+            <CheckoutStepFour />
+          </Route>
+          <Route path="/" exact>
+            <Home
+              fullWidth
+              cartItems={cartItems}
+              products={products}
+              isLoading={isLoading}
+              hasError={hasError}
+              loadingError={loadingError}
+              handleDownVote={handleDownVote}
+              handleUpVote={handleUpVote}
+              handleSetFavorite={handleSetFavorite}
+              handleAddToCart={handleAddToCart}
+              handleRemove={handleRemove}
+              handleChange={handleChange}
+            />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    </OrderContextProvider>
   );
 }
 
