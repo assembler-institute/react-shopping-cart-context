@@ -9,6 +9,9 @@ import * as api from "./api";
 import useLocalStorage from "./hooks/useLocalStorage";
 import loadLocalStorageItems from "./utils/loadLocalStorageItems";
 
+import HomeContext from "./context/HomeContext";
+import NewProductContext from "./context/NewProductContext";
+
 function buildNewCartItem(cartItem) {
   if (cartItem.quantity >= cartItem.unitsInStock) {
     return cartItem;
@@ -183,7 +186,13 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route path="/new-product">
-          <NewProduct saveNewProduct={saveNewProduct} />
+          <NewProductContext.Provider
+            value={{
+              saveNewProduct: saveNewProduct,
+            }}
+          >
+            <NewProduct />
+          </NewProductContext.Provider>
         </Route>
         <Route path="/" exact>
           <Home
@@ -201,6 +210,25 @@ function App() {
             handleChange={handleChange}
           />
         </Route>
+
+        {/* <HomeContext.Provider
+            value={{
+              fullWidth: fullWidth,
+              cartItems: cartItems,
+              products: products,
+              isLoading: isLoading,
+              hasError: hasError,
+              loadingError: loadingError,
+              handleDownVote: handleDownVote,
+              handleUpVote: handleUpVote,
+              handleSetFavorite: handleSetFavorite,
+              handleAddToCart: handleAddToCart,
+              handleRemove: handleRemove,
+              handleChange: handleChange,
+            }}
+          >
+            <Home />
+          </HomeContext.Provider> */}
       </Switch>
     </BrowserRouter>
   );
