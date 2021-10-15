@@ -195,25 +195,8 @@ function App() {
           </NewProductContext.Provider>
         </Route>
         <Route path="/" exact>
-          <Home
-            fullWidth
-            cartItems={cartItems}
-            products={products}
-            isLoading={isLoading}
-            hasError={hasError}
-            loadingError={loadingError}
-            handleDownVote={handleDownVote}
-            handleUpVote={handleUpVote}
-            handleSetFavorite={handleSetFavorite}
-            handleAddToCart={handleAddToCart}
-            handleRemove={handleRemove}
-            handleChange={handleChange}
-          />
-        </Route>
-
-        {/* <HomeContext.Provider
+          <HomeContext.Provider
             value={{
-              fullWidth: fullWidth,
               cartItems: cartItems,
               products: products,
               isLoading: isLoading,
@@ -227,8 +210,22 @@ function App() {
               handleChange: handleChange,
             }}
           >
-            <Home />
-          </HomeContext.Provider> */}
+            <Home
+              fullWidth
+              cartItems={cartItems}
+              products={products}
+              isLoading={isLoading}
+              hasError={hasError}
+              loadingError={loadingError}
+              handleDownVote={handleDownVote}
+              handleUpVote={handleUpVote}
+              handleSetFavorite={handleSetFavorite}
+              handleAddToCart={handleAddToCart}
+              handleRemove={handleRemove}
+              handleChange={handleChange}
+            />
+          </HomeContext.Provider>
+        </Route>
       </Switch>
     </BrowserRouter>
   );
