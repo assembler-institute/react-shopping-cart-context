@@ -210,20 +210,7 @@ function App() {
               handleChange: handleChange,
             }}
           >
-            <Home
-              fullWidth
-              cartItems={cartItems}
-              products={products}
-              isLoading={isLoading}
-              hasError={hasError}
-              loadingError={loadingError}
-              handleDownVote={handleDownVote}
-              handleUpVote={handleUpVote}
-              handleSetFavorite={handleSetFavorite}
-              handleAddToCart={handleAddToCart}
-              handleRemove={handleRemove}
-              handleChange={handleChange}
-            />
+            <Home />
           </HomeContext.Provider>
         </Route>
       </Switch>
