@@ -210,7 +210,7 @@ function App() {
               handleChange: handleChange,
             }}
           >
-            <Home />
+            <Home fullWidth />
           </HomeContext.Provider>
         </Route>
       </Switch>
