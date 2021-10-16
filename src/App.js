@@ -29,6 +29,11 @@ function buildNewCartItem(cartItem) {
 const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
 const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
 
+const initialValues = {
+  saveNewProduct: () => {},
+};
+export const NewProdContext = React.createContext(initialValues);
+
 function App() {
   const [products, setProducts] = useState(() =>
     loadLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY, []),
@@ -183,7 +188,13 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route path="/new-product">
-          <NewProduct saveNewProduct={saveNewProduct} />
+          <NewProdContext.Provider
+            value={{
+              saveNewProduct: saveNewProduct,
+            }}
+          >
+            <NewProduct />
+          </NewProdContext.Provider>
         </Route>
         <Route path="/" exact>
           <Home
