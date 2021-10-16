@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import eCommerceContext from "./context/eCommerceContext";
 
 import Home from "./pages/Home";
 import NewProduct from "./pages/NewProduct";
@@ -180,29 +181,35 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/new-product">
-          <NewProduct saveNewProduct={saveNewProduct} />
-        </Route>
-        <Route path="/" exact>
-          <Home
-            fullWidth
-            cartItems={cartItems}
-            products={products}
-            isLoading={isLoading}
-            hasError={hasError}
-            loadingError={loadingError}
-            handleDownVote={handleDownVote}
-            handleUpVote={handleUpVote}
-            handleSetFavorite={handleSetFavorite}
-            handleAddToCart={handleAddToCart}
-            handleRemove={handleRemove}
-            handleChange={handleChange}
-          />
-        </Route>
-      </Switch>
-    </BrowserRouter>
+    <eCommerceContext.Provider
+      value={{
+        cartItems: cartItems,
+        products: products,
+        updateProducts: saveNewProduct,
+      }}
+    >
+      <BrowserRouter>
+        <Switch>
+          <Route path="/new-product">
+            <NewProduct />
+          </Route>
+          <Route path="/" exact>
+            <Home
+              fullWidth
+              isLoading={isLoading}
+              hasError={hasError}
+              loadingError={loadingError}
+              handleDownVote={handleDownVote}
+              handleUpVote={handleUpVote}
+              handleSetFavorite={handleSetFavorite}
+              handleAddToCart={handleAddToCart}
+              handleRemove={handleRemove}
+              handleChange={handleChange}
+            />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    </eCommerceContext.Provider>
   );
 }
 

@@ -1,12 +1,10 @@
-import React from "react";
-
+import React, { useContext } from "react";
+import eCommerceContext from "../../context/eCommerceContext";
 import ProductsListing from "../../components/ProductsListing";
 import Cart from "../../components/Cart";
 import withLayout from "../../hoc/withLayout";
 
 function Home({
-  products,
-  cartItems,
   isLoading,
   hasError,
   loadingError,
@@ -17,6 +15,8 @@ function Home({
   handleRemove,
   handleChange,
 }) {
+  const { products, cartItems } = useContext(eCommerceContext);
+
   return (
     <div className="row">
       <div className="col col-8">
