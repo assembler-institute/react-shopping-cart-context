@@ -45,6 +45,7 @@ function App() {
   const [hasError, setHasError] = useState(false);
   const [loadingError, setLoadingError] = useState(null);
 
+  // just one useEffect
   useEffect(() => {
     if (products.length === 0) {
       setIsLoading(true);
