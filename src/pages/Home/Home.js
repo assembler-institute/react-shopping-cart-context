@@ -1,22 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import ProductsListing from "../../components/ProductsListing";
 import Cart from "../../components/Cart";
 import withLayout from "../../hoc/withLayout";
 
-function Home({
-  products,
-  cartItems,
-  isLoading,
-  hasError,
-  loadingError,
-  handleDownVote,
-  handleUpVote,
-  handleSetFavorite,
-  handleAddToCart,
-  handleRemove,
-  handleChange,
-}) {
+import HomeContext from "../../context/HomeContext";
+
+function Home() {
+  const { isLoading, hasError, loadingError } = useContext(HomeContext);
   return (
     <div className="row">
       <div className="col col-8">
@@ -46,24 +37,13 @@ function Home({
           )}
           {!isLoading && !hasError && (
             <div className="col col-12">
-              <ProductsListing
-                products={products}
-                handleDownVote={handleDownVote}
-                handleUpVote={handleUpVote}
-                handleSetFavorite={handleSetFavorite}
-                handleAddToCart={handleAddToCart}
-              />
+              <ProductsListing />
             </div>
           )}
         </div>
       </div>
 
-      <Cart
-        className="col col-4"
-        cartItems={cartItems}
-        handleRemove={handleRemove}
-        handleChange={handleChange}
-      />
+      <Cart />
     </div>
   );
 }
