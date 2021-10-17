@@ -3,6 +3,8 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
 import NewProduct from "./pages/NewProduct";
+import { NewProdContext } from "./context/NewProdContext";
+import { HomeContext } from "./context/HomeContext";
 
 import * as api from "./api";
 
@@ -28,11 +30,6 @@ function buildNewCartItem(cartItem) {
 
 const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
 const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
-
-const initialValues = {
-  saveNewProduct: () => {},
-};
-export const NewProdContext = React.createContext(initialValues);
 
 function App() {
   const [products, setProducts] = useState(() =>
@@ -197,20 +194,23 @@ function App() {
           </NewProdContext.Provider>
         </Route>
         <Route path="/" exact>
-          <Home
-            fullWidth
-            cartItems={cartItems}
-            products={products}
-            isLoading={isLoading}
-            hasError={hasError}
-            loadingError={loadingError}
-            handleDownVote={handleDownVote}
-            handleUpVote={handleUpVote}
-            handleSetFavorite={handleSetFavorite}
-            handleAddToCart={handleAddToCart}
-            handleRemove={handleRemove}
-            handleChange={handleChange}
-          />
+          <HomeContext.Provider
+            value={{
+              cartItems: cartItems,
+              products: products,
+              isLoading: isLoading,
+              hasError: hasError,
+              loadingError: loadingError,
+              handleDownVote: handleDownVote,
+              handleUpVote: handleUpVote,
+              handleSetFavorite: handleSetFavorite,
+              handleAddToCart: handleAddToCart,
+              handleRemove: handleRemove,
+              handleChange: handleChange,
+            }}
+          >
+            <Home fullWidth />
+          </HomeContext.Provider>
         </Route>
       </Switch>
     </BrowserRouter>

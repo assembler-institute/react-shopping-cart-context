@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Redirect } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import { useFormik } from "formik";
-import { NewProdContext } from "../../App";
+import { NewProdContext } from "../../context/NewProdContext";
 
 import Input from "../Input";
 import Button from "../Button";
