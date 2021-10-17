@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
@@ -8,202 +8,196 @@ import * as api from "./api";
 
 import useLocalStorage from "./hooks/useLocalStorage";
 import loadLocalStorageItems from "./utils/loadLocalStorageItems";
+import ProductsContext from "./context/ProductsContext";
+import CartItemsContext from "./context/CartItemsContext";
+import useLoadingStatus from "./hooks/useLoadingStatus";
 
 function buildNewCartItem(cartItem) {
-  if (cartItem.quantity >= cartItem.unitsInStock) {
-    return cartItem;
-  }
+	if (cartItem.quantity >= cartItem.unitsInStock) {
+		return cartItem;
+	}
 
-  return {
-    id: cartItem.id,
-    title: cartItem.title,
-    img: cartItem.img,
-    price: cartItem.price,
-    unitsInStock: cartItem.unitsInStock,
-    createdAt: cartItem.createdAt,
-    updatedAt: cartItem.updatedAt,
-    quantity: cartItem.quantity + 1,
-  };
+	return {
+		id: cartItem.id,
+		title: cartItem.title,
+		img: cartItem.img,
+		price: cartItem.price,
+		unitsInStock: cartItem.unitsInStock,
+		createdAt: cartItem.createdAt,
+		updatedAt: cartItem.updatedAt,
+		quantity: cartItem.quantity + 1,
+	};
 }
 
 const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
 const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
 
 function App() {
-  const [products, setProducts] = useState(() =>
-    loadLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY, []),
-  );
-  const [cartItems, setCartItems] = useState(() =>
-    loadLocalStorageItems(CART_ITEMS_LOCAL_STORAGE_KEY, []),
-  );
+	const [products, setProducts] = useState(() => loadLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY, []));
+	const [cartItems, setCartItems] = useState(() => loadLocalStorageItems(CART_ITEMS_LOCAL_STORAGE_KEY, []));
 
-  useLocalStorage(products, PRODUCTS_LOCAL_STORAGE_KEY);
-  useLocalStorage(cartItems, CART_ITEMS_LOCAL_STORAGE_KEY);
+	useLocalStorage(products, PRODUCTS_LOCAL_STORAGE_KEY);
+	useLocalStorage(cartItems, CART_ITEMS_LOCAL_STORAGE_KEY);
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [hasError, setHasError] = useState(false);
-  const [loadingError, setLoadingError] = useState(null);
+	const { hasLoaded, setHasLoaded, hasError, setHasError, loadingError, setLoadingError } = useLoadingStatus();
 
-  useEffect(() => {
-    if (products.length === 0) {
-      setIsLoading(true);
+	useEffect(() => {
+		if (products.length === 0) {
+			api
+				.getProducts()
+				.then((data) => {
+					setProducts(data);
+					setHasLoaded(false);
+				})
+				.catch((error) => {
+					setHasLoaded(false);
+					setHasError(true);
+					setLoadingError(error.message);
+				});
+		}
+	}, []);
 
-      api
-        .getProducts()
-        .then((data) => {
-          setProducts(data);
-          setIsLoading(false);
-        })
-        .catch((error) => {
-          setIsLoading(false);
-          setHasError(true);
-          setLoadingError(error.message);
-        });
-    }
-  }, []);
+	function handleDownVote(productId) {
+		const updatedProducts = products.map((product) => {
+			if (product.id === productId && product.votes.downVotes.currentValue < product.votes.downVotes.lowerLimit) {
+				return {
+					...product,
+					votes: {
+						...product.votes,
+						downVotes: {
+							...product.votes.downVotes,
+							currentValue: product.votes.downVotes.currentValue + 1,
+						},
+					},
+				};
+			}
 
-  function handleAddToCart(productId) {
-    const prevCartItem = cartItems.find((item) => item.id === productId);
-    const foundProduct = products.find((product) => product.id === productId);
+			return product;
+		});
 
-    if (prevCartItem) {
-      const updatedCartItems = cartItems.map((item) => {
-        if (item.id !== productId) {
-          return item;
-        }
+		setProducts(updatedProducts);
+	}
 
-        if (item.quantity >= item.unitsInStock) {
-          return item;
-        }
+	function handleUpVote(productId) {
+		const updatedProducts = products.map((product) => {
+			if (product.id === productId && product.votes.upVotes.currentValue < product.votes.upVotes.upperLimit) {
+				return {
+					...product,
+					votes: {
+						...product.votes,
+						upVotes: {
+							...product.votes.upVotes,
+							currentValue: product.votes.upVotes.currentValue + 1,
+						},
+					},
+				};
+			}
 
-        return {
-          ...item,
-          quantity: item.quantity + 1,
-        };
-      });
+			return product;
+		});
 
-      setCartItems(updatedCartItems);
-      return;
-    }
+		setProducts(updatedProducts);
+	}
 
-    const updatedProduct = buildNewCartItem(foundProduct);
-    setCartItems((prevState) => [...prevState, updatedProduct]);
-  }
+	function handleSetFavorite(productId) {
+		const updatedProducts = products.map((product) => {
+			if (product.id === productId) {
+				return {
+					...product,
+					isFavorite: !product.isFavorite,
+				};
+			}
 
-  function handleChange(event, productId) {
-    const updatedCartItems = cartItems.map((item) => {
-      if (item.id === productId && item.quantity <= item.unitsInStock) {
-        return {
-          ...item,
-          quantity: Number(event.target.value),
-        };
-      }
+			return product;
+		});
 
-      return item;
-    });
+		setProducts(updatedProducts);
+	}
 
-    setCartItems(updatedCartItems);
-  }
+	function handleSaveNewProduct(newProduct) {
+		setProducts((prevState) => [newProduct, ...prevState]);
+	}
 
-  function handleRemove(productId) {
-    const updatedCartItems = cartItems.filter((item) => item.id !== productId);
+	function handleAddCartItem(productId) {
+		const prevCartItem = cartItems.find((item) => item.id === productId);
+		const foundProduct = products.find((product) => product.id === productId);
 
-    setCartItems(updatedCartItems);
-  }
+		if (prevCartItem) {
+			const updatedCartItems = cartItems.map((item) => {
+				if (item.id !== productId) {
+					return item;
+				}
 
-  function handleDownVote(productId) {
-    const updatedProducts = products.map((product) => {
-      if (
-        product.id === productId &&
-        product.votes.downVotes.currentValue <
-          product.votes.downVotes.lowerLimit
-      ) {
-        return {
-          ...product,
-          votes: {
-            ...product.votes,
-            downVotes: {
-              ...product.votes.downVotes,
-              currentValue: product.votes.downVotes.currentValue + 1,
-            },
-          },
-        };
-      }
+				if (item.quantity >= item.unitsInStock) {
+					return item;
+				}
 
-      return product;
-    });
+				return {
+					...item,
+					quantity: item.quantity + 1,
+				};
+			});
 
-    setProducts(updatedProducts);
-  }
+			setCartItems(updatedCartItems);
+			return;
+		}
 
-  function handleUpVote(productId) {
-    const updatedProducts = products.map((product) => {
-      if (
-        product.id === productId &&
-        product.votes.upVotes.currentValue < product.votes.upVotes.upperLimit
-      ) {
-        return {
-          ...product,
-          votes: {
-            ...product.votes,
-            upVotes: {
-              ...product.votes.upVotes,
-              currentValue: product.votes.upVotes.currentValue + 1,
-            },
-          },
-        };
-      }
+		const updatedProduct = buildNewCartItem(foundProduct);
+		setCartItems((prevState) => [...prevState, updatedProduct]);
+	}
 
-      return product;
-    });
+	function handleEditCartItem(event, productId) {
+		const updatedCartItems = cartItems.map((item) => {
+			if (item.id === productId && item.quantity <= item.unitsInStock) {
+				return {
+					...item,
+					quantity: Number(event.target.value),
+				};
+			}
 
-    setProducts(updatedProducts);
-  }
+			return item;
+		});
 
-  function handleSetFavorite(productId) {
-    const updatedProducts = products.map((product) => {
-      if (product.id === productId) {
-        return {
-          ...product,
-          isFavorite: !product.isFavorite,
-        };
-      }
+		setCartItems(updatedCartItems);
+	}
 
-      return product;
-    });
+	function handleRemoveCartItem(productId) {
+		const updatedCartItems = cartItems.filter((item) => item.id !== productId);
 
-    setProducts(updatedProducts);
-  }
+		setCartItems(updatedCartItems);
+	}
 
-  function saveNewProduct(newProduct) {
-    setProducts((prevState) => [newProduct, ...prevState]);
-  }
-
-  return (
-    <BrowserRouter>
-      <Switch>
-        <Route path="/new-product">
-          <NewProduct saveNewProduct={saveNewProduct} />
-        </Route>
-        <Route path="/" exact>
-          <Home
-            fullWidth
-            cartItems={cartItems}
-            products={products}
-            isLoading={isLoading}
-            hasError={hasError}
-            loadingError={loadingError}
-            handleDownVote={handleDownVote}
-            handleUpVote={handleUpVote}
-            handleSetFavorite={handleSetFavorite}
-            handleAddToCart={handleAddToCart}
-            handleRemove={handleRemove}
-            handleChange={handleChange}
-          />
-        </Route>
-      </Switch>
-    </BrowserRouter>
-  );
+	return (
+		<ProductsContext.Provider
+			value={{
+				products,
+				handleDownVote,
+				handleUpVote,
+				handleSetFavorite,
+				handleSaveNewProduct,
+			}}
+		>
+			<CartItemsContext.Provider
+				value={{
+					cartItems,
+					handleAddCartItem,
+					handleRemoveCartItem,
+					handleEditCartItem,
+				}}
+			>
+				<BrowserRouter>
+					<Switch>
+						<Route path="/new-product">
+							<NewProduct />
+						</Route>
+						<Route path="/" exact>
+							<Home fullWidth hasLoaded={hasLoaded} hasError={hasError} loadingError={loadingError} />
+						</Route>
+					</Switch>
+				</BrowserRouter>
+			</CartItemsContext.Provider>
+		</ProductsContext.Provider>
+	);
 }
 
 export default App;
