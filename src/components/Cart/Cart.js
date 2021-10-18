@@ -1,5 +1,6 @@
 import React from "react";
-
+import { useContext } from "react";
+import { HomeContext } from "../../context/HomeContext";
 import ShoppingCartItem from "../ShoppingCartItem";
 import Button from "../Button";
 
@@ -9,7 +10,8 @@ function getCartTotal(cart) {
   }, 0);
 }
 
-function Cart({ cartItems, handleRemove, handleChange, ...props }) {
+function Cart({ ...props }) {
+  const { cartItems } = useContext(HomeContext);
   return (
     <aside {...props}>
       <div className="row flex-column">
@@ -28,8 +30,6 @@ function Cart({ cartItems, handleRemove, handleChange, ...props }) {
               img={item.img}
               quantity={item.quantity}
               unitsInStock={item.unitsInStock}
-              handleRemove={handleRemove}
-              handleChange={handleChange}
             />
           ))
         ) : (

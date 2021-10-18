@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Redirect } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import { useFormik } from "formik";
+import { NewProdContext } from "../../context/NewProdContext";
 
 import Input from "../Input";
 import Button from "../Button";
@@ -33,7 +34,8 @@ function addProductDetails(product) {
   };
 }
 
-function NewProductForm({ saveNewProduct }) {
+function NewProductForm() {
+  const { saveNewProduct } = useContext(NewProdContext);
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
   const formik = useFormik({
@@ -170,7 +172,6 @@ function NewProductForm({ saveNewProduct }) {
           {formik.isSubmitting ? "Submitting..." : "Submit"}
         </Button>
       </form>
-
       {hasSubmitted && <Redirect to="/" />}
     </>
   );

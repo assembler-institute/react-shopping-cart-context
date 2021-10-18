@@ -4,6 +4,8 @@ import FavoriteIconButton from "../FavoriteIconButton";
 import IconButton from "../IconButton";
 import Button from "../Button";
 import { ThumbDown, ThumbUp } from "../SVGIcons";
+import { useContext } from "react";
+import { HomeContext } from "../../context/HomeContext";
 
 import "./ItemCard.scss";
 
@@ -34,11 +36,13 @@ function ItemCard({
   isFavorite,
   upVotes,
   downVotes,
-  handleDownVote,
-  handleUpVote,
-  handleSetFavorite,
-  handleAddToCart,
 }) {
+  const {
+    handleDownVote,
+    handleUpVote,
+    handleSetFavorite,
+    handleAddToCart,
+  } = useContext(HomeContext);
   function onDownVote() {
     handleDownVote(id);
   }

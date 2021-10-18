@@ -1,5 +1,6 @@
 import React from "react";
-
+import { useContext } from "react";
+import { HomeContext } from "../../context/HomeContext";
 import "./ShoppingCartItem.scss";
 
 import Button from "../Button";
@@ -15,16 +16,8 @@ function buildSelectOptions(unitsInStock) {
   });
 }
 
-function ShoppingCartItem({
-  id,
-  img,
-  title,
-  price,
-  quantity,
-  unitsInStock,
-  handleChange,
-  handleRemove,
-}) {
+function ShoppingCartItem({ id, img, title, price, quantity, unitsInStock }) {
+  const { handleRemove, handleChange } = useContext(HomeContext);
   function onHandleChange(event) {
     handleChange(event, id);
   }
