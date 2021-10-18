@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
@@ -32,9 +32,14 @@ function buildNewCartItem(cartItem) {
 const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
 const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
 
-const FETCH_INIT = "FETCH_INIT";
-const FETCH_DONE = "FETCH_DONE";
-const FETCH_ERROR = "FETCH_ERROR";
+const actionTypes = {
+  FETCH_INIT: "FETCH_INIT",
+  FETCH_DONE: "FETCH_DONE",
+  FETCH_ERROR: "FETCH_ERROR",
+  CHANGE_PRODUCTS: "CHANGE_PRODUCTS",
+  CHANGE_CART: "CHANGE_CART",
+  SAVE_PRODUCT: "SAVE_PRODUCT",
+};
 
 const initialState = {
   products: loadLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY, []),
@@ -46,48 +51,47 @@ const initialState = {
 
 function reducer(state, action) {
   switch (action.type) {
-    case FETCH_INIT:
+    case actionTypes.FETCH_INIT:
       return { ...state, isLoading: true };
-    case FETCH_DONE:
+    case actionTypes.FETCH_DONE:
       return { ...state, products: [...action.payload], isLoading: false };
-    case FETCH_ERROR:
+    case actionTypes.FETCH_ERROR:
       return {
         ...state,
         isLoading: false,
         hasError: true,
         loadingError: action.payload,
       };
+    case actionTypes.CHANGE_PRODUCTS:
+      return { ...state, products: [...action.payload] };
+    case actionTypes.CHANGE_CART:
+      return { ...state, cartItems: [...action.payload] };
+    case actionTypes.SAVE_PRODUCT:
+      return { ...state, products: [...products, action.payload] };
+
     default:
       return state;
   }
 }
 
 function App() {
-  const [products, setProducts] = useState(() =>
-    loadLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY, []),
-  );
-  const [cartItems, setCartItems] = useState(() =>
-    loadLocalStorageItems(CART_ITEMS_LOCAL_STORAGE_KEY, []),
-  );
+  const [state, dispatch] = useReducer(reducer, initialState);
 
+  const { products, cartItems, isLoading, hasError, loadingError } = state;
   useLocalStorage(products, PRODUCTS_LOCAL_STORAGE_KEY);
   useLocalStorage(cartItems, CART_ITEMS_LOCAL_STORAGE_KEY);
 
-  const [state, dispatch] = useReducer(reducer, initialState);
-
-  const { isLoading, hasError, loadingError } = state;
-
   useEffect(() => {
     if (products.length === 0) {
-      dispatch({ type: FETCH_INIT });
+      dispatch({ type: actionTypes.FETCH_INIT });
 
       api
         .getProducts()
         .then((data) => {
-          dispatch({ type: FETCH_DONE, payload: data });
+          dispatch({ type: actionTypes.FETCH_DONE, payload: data });
         })
         .catch((error) => {
-          dispatch({ type: FETCH_ERROR, payload: error });
+          dispatch({ type: actionTypes.FETCH_ERROR, payload: error });
         });
     }
   }, []);
@@ -112,12 +116,17 @@ function App() {
         };
       });
 
-      setCartItems(updatedCartItems);
+      dispatch({ type: actionTypes.CHANGE_CART, payload: updatedCartItems });
+
       return;
     }
 
     const updatedProduct = buildNewCartItem(foundProduct);
-    setCartItems((prevState) => [...prevState, updatedProduct]);
+
+    dispatch({
+      type: actionTypes.CHANGE_CART,
+      payload: [...cartItems, updatedProduct],
+    });
   }
 
   function handleChange(event, productId) {
@@ -132,15 +141,13 @@ function App() {
       return item;
     });
 
-    setCartItems(updatedCartItems);
+    dispatch({ type: actionTypes.CHANGE_CART, payload: updatedCartItems });
   }
-
   function handleRemove(productId) {
     const updatedCartItems = cartItems.filter((item) => item.id !== productId);
 
-    setCartItems(updatedCartItems);
+    dispatch({ type: actionTypes.CHANGE_CART, payload: updatedCartItems });
   }
-
   function handleDownVote(productId) {
     const updatedProducts = products.map((product) => {
       if (
@@ -162,8 +169,7 @@ function App() {
 
       return product;
     });
-
-    setProducts(updatedProducts);
+    dispatch({ type: actionTypes.CHANGE_PRODUCTS, payload: updatedProducts });
   }
 
   function handleUpVote(productId) {
@@ -187,7 +193,7 @@ function App() {
       return product;
     });
 
-    setProducts(updatedProducts);
+    dispatch({ type: actionTypes.CHANGE_PRODUCTS, payload: updatedProducts });
   }
 
   function handleSetFavorite(productId) {
@@ -202,11 +208,14 @@ function App() {
       return product;
     });
 
-    setProducts(updatedProducts);
+    dispatch({ type: actionTypes.CHANGE_PRODUCTS, payload: updatedProducts });
   }
 
   function saveNewProduct(newProduct) {
-    setProducts((prevState) => [newProduct, ...prevState]);
+    dispatch({
+      type: actionTypes.CHANGE_PRODUCTS,
+      payload: [newProduct, ...products],
+    });
   }
 
   return (
