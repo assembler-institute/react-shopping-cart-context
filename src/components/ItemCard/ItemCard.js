@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import FavoriteIconButton from "../FavoriteIconButton";
 import IconButton from "../IconButton";
@@ -6,6 +6,7 @@ import Button from "../Button";
 import { ThumbDown, ThumbUp } from "../SVGIcons";
 
 import "./ItemCard.scss";
+import ProductsContext from "../Context/ProductsContext";
 
 function Divider() {
   return <hr className="ItemCard__divider" />;
@@ -34,11 +35,14 @@ function ItemCard({
   isFavorite,
   upVotes,
   downVotes,
-  handleDownVote,
+  /* handleDownVote,
   handleUpVote,
   handleSetFavorite,
-  handleAddToCart,
+  handleAddToCart, */
 }) {
+
+  const { handleDownVote,handleUpVote,handleSetFavorite,handleAddToCart } = useContext(ProductsContext);
+
   function onDownVote() {
     handleDownVote(id);
   }
@@ -51,7 +55,7 @@ function ItemCard({
   function onAddToCart() {
     handleAddToCart(id);
   }
-
+  
   return (
     <article className="ItemCard col col-12 col-md-6 col-lg-4">
       <header>

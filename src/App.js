@@ -9,6 +9,8 @@ import * as api from "./api";
 import useLocalStorage from "./hooks/useLocalStorage";
 import loadLocalStorageItems from "./utils/loadLocalStorageItems";
 
+import ProductsContext from "./components/Context/ProductsContext";
+
 function buildNewCartItem(cartItem) {
   if (cartItem.quantity >= cartItem.unitsInStock) {
     return cartItem;
@@ -185,22 +187,26 @@ function App() {
         <Route path="/new-product">
           <NewProduct saveNewProduct={saveNewProduct} />
         </Route>
-        <Route path="/" exact>
-          <Home
-            fullWidth
-            cartItems={cartItems}
-            products={products}
-            isLoading={isLoading}
-            hasError={hasError}
-            loadingError={loadingError}
-            handleDownVote={handleDownVote}
-            handleUpVote={handleUpVote}
-            handleSetFavorite={handleSetFavorite}
-            handleAddToCart={handleAddToCart}
-            handleRemove={handleRemove}
-            handleChange={handleChange}
-          />
-        </Route>
+        <ProductsContext.Provider
+          value={{
+            /* fullWidth: fullWidth, */
+            cartItems,
+            products,
+            isLoading,
+            hasError,
+            loadingError,
+            handleDownVote,
+            handleUpVote,
+            handleSetFavorite,
+            handleAddToCart,
+            handleRemove,
+            handleChange,
+          }}
+        >
+          <Route path="/" exact>
+            <Home />
+          </Route>
+        </ProductsContext.Provider>
       </Switch>
     </BrowserRouter>
   );

@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import "./ShoppingCartItem.scss";
 
 import Button from "../Button";
+import ProductsContext from "../Context/ProductsContext";
 
 function buildSelectOptions(unitsInStock) {
   return Array.from({ length: unitsInStock }, (_value, index) => {
@@ -22,15 +23,17 @@ function ShoppingCartItem({
   price,
   quantity,
   unitsInStock,
-  handleChange,
-  handleRemove,
+
 }) {
+  const { handleRemove,handleChange } = useContext(ProductsContext);
   function onHandleChange(event) {
     handleChange(event, id);
   }
   function onHandleRemove() {
     handleRemove(id);
   }
+
+  
 
   return (
     <div className="col">
