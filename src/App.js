@@ -73,29 +73,21 @@ function App() {
   useLocalStorage(products, PRODUCTS_LOCAL_STORAGE_KEY);
   useLocalStorage(cartItems, CART_ITEMS_LOCAL_STORAGE_KEY);
 
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [hasError, setHasError] = useState(false);
-  // const [loadingError, setLoadingError] = useState(null);
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const { isLoading, hasError, loadingError } = state;
-  // useLocalStorage(products, PRODUCTS_LOCAL_STORAGE_KEY);
-  // useLocalStorage(cartItems, CART_ITEMS_LOCAL_STORAGE_KEY);
 
   useEffect(() => {
     if (products.length === 0) {
       dispatch({ type: FETCH_INIT });
-      // Searching products
 
       api
         .getProducts()
         .then((data) => {
           dispatch({ type: FETCH_DONE, payload: data });
-          // Loading products
         })
         .catch((error) => {
           dispatch({ type: FETCH_ERROR, payload: error });
-          // Error loading
         });
     }
   }, []);
