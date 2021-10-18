@@ -35,6 +35,9 @@ const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
 const FETCH_INIT = "FETCH_INIT";
 const FETCH_DONE = "FETCH_DONE";
 const FETCH_ERROR = "FETCH_ERROR";
+const CHANGE_PRODUCTS = "CHANGE_PRODUCTS";
+const CHANGE_CART = "CHANGE_CART";
+const SAVE_PRODUCT = "SAVE_PRODUCT";
 
 const initialState = {
   products: loadLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY, []),
@@ -57,45 +60,36 @@ function reducer(state, action) {
         hasError: true,
         loadingError: action.payload,
       };
+    case CHANGE_PRODUCTS:
+      return { ...state, products: [...action.payload] };
+    case CHANGE_CART:
+      return { ...state, cartItems: [...action.payload] };
+    case SAVE_PRODUCT:
+      return { ...state, products: [...products, action.payload] };
+
     default:
       return state;
   }
 }
 
 function App() {
-  const [products, setProducts] = useState(() =>
-    loadLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY, []),
-  );
-  const [cartItems, setCartItems] = useState(() =>
-    loadLocalStorageItems(CART_ITEMS_LOCAL_STORAGE_KEY, []),
-  );
-
-  useLocalStorage(products, PRODUCTS_LOCAL_STORAGE_KEY);
-  useLocalStorage(cartItems, CART_ITEMS_LOCAL_STORAGE_KEY);
-
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [hasError, setHasError] = useState(false);
-  // const [loadingError, setLoadingError] = useState(null);
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const { isLoading, hasError, loadingError } = state;
-  // useLocalStorage(products, PRODUCTS_LOCAL_STORAGE_KEY);
-  // useLocalStorage(cartItems, CART_ITEMS_LOCAL_STORAGE_KEY);
+  const { products, cartItems, isLoading, hasError, loadingError } = state;
+  useLocalStorage(products, PRODUCTS_LOCAL_STORAGE_KEY);
+  useLocalStorage(cartItems, CART_ITEMS_LOCAL_STORAGE_KEY);
 
   useEffect(() => {
     if (products.length === 0) {
       dispatch({ type: FETCH_INIT });
-      // Searching products
 
       api
         .getProducts()
         .then((data) => {
           dispatch({ type: FETCH_DONE, payload: data });
-          // Loading products
         })
         .catch((error) => {
           dispatch({ type: FETCH_ERROR, payload: error });
-          // Error loading
         });
     }
   }, []);
@@ -120,12 +114,14 @@ function App() {
         };
       });
 
-      setCartItems(updatedCartItems);
+      dispatch({ type: CHANGE_CART, payload: updatedCartItems });
+
       return;
     }
 
     const updatedProduct = buildNewCartItem(foundProduct);
-    setCartItems((prevState) => [...prevState, updatedProduct]);
+
+    dispatch({ type: CHANGE_CART, payload: [...cartItems, updatedProduct] });
   }
 
   function handleChange(event, productId) {
@@ -140,15 +136,13 @@ function App() {
       return item;
     });
 
-    setCartItems(updatedCartItems);
+    dispatch({ type: CHANGE_CART, payload: updatedCartItems });
   }
-
   function handleRemove(productId) {
     const updatedCartItems = cartItems.filter((item) => item.id !== productId);
 
-    setCartItems(updatedCartItems);
+    dispatch({ type: CHANGE_CART, payload: updatedCartItems });
   }
-
   function handleDownVote(productId) {
     const updatedProducts = products.map((product) => {
       if (
@@ -170,8 +164,7 @@ function App() {
 
       return product;
     });
-
-    setProducts(updatedProducts);
+    dispatch({ type: CHANGE_PRODUCTS, payload: updatedProducts });
   }
 
   function handleUpVote(productId) {
@@ -195,7 +188,7 @@ function App() {
       return product;
     });
 
-    setProducts(updatedProducts);
+    dispatch({ type: CHANGE_PRODUCTS, payload: updatedProducts });
   }
 
   function handleSetFavorite(productId) {
@@ -210,11 +203,11 @@ function App() {
       return product;
     });
 
-    setProducts(updatedProducts);
+    dispatch({ type: CHANGE_PRODUCTS, payload: updatedProducts });
   }
 
   function saveNewProduct(newProduct) {
-    setProducts((prevState) => [newProduct, ...prevState]);
+    dispatch({ type: CHANGE_PRODUCTS, payload: [newProduct, ...products] });
   }
 
   return (
