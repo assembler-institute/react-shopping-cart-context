@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
@@ -32,6 +32,36 @@ function buildNewCartItem(cartItem) {
 const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
 const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
 
+const FETCH_INIT = "FETCH_INIT";
+const FETCH_DONE = "FETCH_DONE";
+const FETCH_ERROR = "FETCH_ERROR";
+
+const initialState = {
+  products: loadLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY, []),
+  cartItems: loadLocalStorageItems(CART_ITEMS_LOCAL_STORAGE_KEY, []),
+  isLoading: false,
+  hasError: false,
+  loadingError: null,
+};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case FETCH_INIT:
+      return { ...state, isLoading: true };
+    case FETCH_DONE:
+      return { ...state, products: [...action.payload], isLoading: false };
+    case FETCH_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        hasError: true,
+        loadingError: action.payload,
+      };
+    default:
+      return state;
+  }
+}
+
 function App() {
   const [products, setProducts] = useState(() =>
     loadLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY, []),
@@ -43,24 +73,29 @@ function App() {
   useLocalStorage(products, PRODUCTS_LOCAL_STORAGE_KEY);
   useLocalStorage(cartItems, CART_ITEMS_LOCAL_STORAGE_KEY);
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [hasError, setHasError] = useState(false);
-  const [loadingError, setLoadingError] = useState(null);
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [hasError, setHasError] = useState(false);
+  // const [loadingError, setLoadingError] = useState(null);
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  const { isLoading, hasError, loadingError } = state;
+  // useLocalStorage(products, PRODUCTS_LOCAL_STORAGE_KEY);
+  // useLocalStorage(cartItems, CART_ITEMS_LOCAL_STORAGE_KEY);
 
   useEffect(() => {
     if (products.length === 0) {
-      setIsLoading(true);
+      dispatch({ type: FETCH_INIT });
+      // Searching products
 
       api
         .getProducts()
         .then((data) => {
-          setProducts(data);
-          setIsLoading(false);
+          dispatch({ type: FETCH_DONE, payload: data });
+          // Loading products
         })
         .catch((error) => {
-          setIsLoading(false);
-          setHasError(true);
-          setLoadingError(error.message);
+          dispatch({ type: FETCH_ERROR, payload: error });
+          // Error loading
         });
     }
   }, []);
