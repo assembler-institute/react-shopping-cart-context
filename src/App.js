@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useReducer } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
@@ -10,6 +10,51 @@ import * as api from "./api";
 
 import useLocalStorage from "./hooks/useLocalStorage";
 import loadLocalStorageItems from "./utils/loadLocalStorageItems";
+
+const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
+const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
+
+const initialState = {
+  loadingError: null,
+  hasError: false,
+  isLoading: false,
+  products: loadLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY, []),
+  cartItems: loadLocalStorageItems(CART_ITEMS_LOCAL_STORAGE_KEY, []),
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "PRODUCTS_LOADING": {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+    case "PRODUCTS_LOADED": {
+      return {
+        ...state,
+        products: action.payload,
+        isLoading: false,
+      };
+    }
+    case "PRODUCTS_ERROR": {
+      return {
+        ...state,
+        isLoading: false,
+        hasError: true,
+        loadingError: action.payload,
+      };
+    }
+    case "CARTITEMS_LOADED": {
+      return {
+        ...state,
+        cartItems: action.payload,
+      };
+    }
+    default:
+      return state;
+  }
+};
 
 function buildNewCartItem(cartItem) {
   if (cartItem.quantity >= cartItem.unitsInStock) {
@@ -28,38 +73,24 @@ function buildNewCartItem(cartItem) {
   };
 }
 
-const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
-const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
-
 function App() {
-  const [products, setProducts] = useState(() =>
-    loadLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY, []),
-  );
-  const [cartItems, setCartItems] = useState(() =>
-    loadLocalStorageItems(CART_ITEMS_LOCAL_STORAGE_KEY, []),
-  );
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { loadingError, isLoading, hasError, cartItems, products } = state;
 
   useLocalStorage(products, PRODUCTS_LOCAL_STORAGE_KEY);
   useLocalStorage(cartItems, CART_ITEMS_LOCAL_STORAGE_KEY);
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [hasError, setHasError] = useState(false);
-  const [loadingError, setLoadingError] = useState(null);
-
   useEffect(() => {
     if (products.length === 0) {
-      setIsLoading(true);
+      dispatch({ type: "PRODUCTS_LOADING" });
 
       api
         .getProducts()
         .then((data) => {
-          setProducts(data);
-          setIsLoading(false);
+          dispatch({ type: "PRODUCTS_LOADED", payload: data });
         })
         .catch((error) => {
-          setIsLoading(false);
-          setHasError(true);
-          setLoadingError(error.message);
+          dispatch({ type: "PRODUCTS_ERROR", payload: error });
         });
     }
   }, []);
@@ -84,12 +115,17 @@ function App() {
         };
       });
 
-      setCartItems(updatedCartItems);
+      //setCartItems(updatedCartItems);
+      dispatch({ type: "CARTITEMS_LOADED", payload: updatedCartItems });
       return;
     }
 
     const updatedProduct = buildNewCartItem(foundProduct);
-    setCartItems((prevState) => [...prevState, updatedProduct]);
+    //setCartItems((prevState) => [...prevState, updatedProduct]);
+    dispatch({
+      type: "CARTITEMS_LOADED",
+      payload: [...cartItems, updatedProduct],
+    });
   }
 
   function handleChange(event, productId) {
