@@ -3,13 +3,42 @@ import React from "react";
 import ShoppingCartItem from "../ShoppingCartItem";
 import Button from "../Button";
 
+import { useProducts } from "../../context/products/reducer";
+
 function getCartTotal(cart) {
-  return cart.reduce((accum, item) => {
-    return accum + item.price * item.quantity;
-  }, 0);
+  const {
+    cartItems,
+    cartItemIds,
+  } = useProducts();
+
+  return cartItemIds.reduce((accum, cartItemId) => {
+    const product = cartItems[cartItemId]
+    return accum + product.price * product.quantity;
+  }, 0)
 }
 
-function Cart({ cartItems, handleRemove, handleChange, ...props }) {
+function Cart({
+  // cartItems, 
+  handleRemove,
+  handleChange,
+  ...props
+}) {
+
+  const {
+    // products,
+    // productIds,
+    cartItems,
+    cartItemIds,
+    // isLoading,
+    // hasError,
+    // loadingError,
+    // handleAddToCart,
+    // handleDownVote,
+    // handleUpVote,
+    // handleSetFavorite,
+    // saveNewProduct
+  } = useProducts();
+
   return (
     <aside {...props}>
       <div className="row flex-column">
@@ -18,20 +47,24 @@ function Cart({ cartItems, handleRemove, handleChange, ...props }) {
           <hr className="mb-3" />
         </div>
 
-        {cartItems.length > 0 ? (
-          cartItems.map((item) => (
-            <ShoppingCartItem
-              key={item.id}
-              id={item.id}
-              title={item.title}
-              price={item.price}
-              img={item.img}
-              quantity={item.quantity}
-              unitsInStock={item.unitsInStock}
-              handleRemove={handleRemove}
-              handleChange={handleChange}
-            />
-          ))
+        {cartItemIds.length > 0 ? (
+          cartItemIds.map((itemId) => {
+            const item = cartItems[itemId]
+
+            return (
+              <ShoppingCartItem
+                key={item.id}
+                id={item.id}
+                title={item.title}
+                price={item.price}
+                img={item.img}
+                quantity={item.quantity}
+                unitsInStock={item.unitsInStock}
+              // handleRemove={handleRemove}
+              // handleChange={handleChange}
+              />
+            )
+          })
         ) : (
           <div className="col mb-4">
             <h4>Your cart is empty</h4>
@@ -43,7 +76,7 @@ function Cart({ cartItems, handleRemove, handleChange, ...props }) {
               <div className="d-flex justify-content-between">
                 <h4 className="h5">Total</h4>
                 <h4>
-                  <strong>{getCartTotal(cartItems)}€</strong>
+                  <strong>{getCartTotal(cartItemIds)}€</strong>
                 </h4>
               </div>
               <hr />

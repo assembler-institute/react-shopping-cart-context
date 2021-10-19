@@ -5,15 +5,15 @@ import Cart from "../../components/Cart";
 import withLayout from "../../hoc/withLayout";
 
 function Home({
-  products,
+  // products,
   cartItems,
   isLoading,
   hasError,
   loadingError,
-  handleDownVote,
-  handleUpVote,
-  handleSetFavorite,
-  handleAddToCart,
+  // handleDownVote,
+  // handleUpVote,
+  // handleSetFavorite,
+  // handleAddToCart,
   handleRemove,
   handleChange,
 }) {
@@ -47,11 +47,11 @@ function Home({
           {!isLoading && !hasError && (
             <div className="col col-12">
               <ProductsListing
-                products={products}
-                handleDownVote={handleDownVote}
-                handleUpVote={handleUpVote}
-                handleSetFavorite={handleSetFavorite}
-                handleAddToCart={handleAddToCart}
+              // products={products}
+              // handleDownVote={handleDownVote}
+              // handleUpVote={handleUpVote}
+              // handleSetFavorite={handleSetFavorite}
+              // handleAddToCart={handleAddToCart}
               />
             </div>
           )}

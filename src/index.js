@@ -3,12 +3,16 @@ import ReactDOM from "react-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import { ProductsProvider } from "./context/products/reducer";
+
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ProductsProvider>
+      <App />
+    </ProductsProvider>
   </React.StrictMode>,
   document.getElementById("root"),
 );

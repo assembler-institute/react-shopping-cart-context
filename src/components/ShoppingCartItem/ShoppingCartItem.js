@@ -4,6 +4,8 @@ import "./ShoppingCartItem.scss";
 
 import Button from "../Button";
 
+import { useProducts } from "../../context/products/reducer";
+
 function buildSelectOptions(unitsInStock) {
   return Array.from({ length: unitsInStock }, (_value, index) => {
     const currentIndex = index + 1;
@@ -22,9 +24,15 @@ function ShoppingCartItem({
   price,
   quantity,
   unitsInStock,
-  handleChange,
-  handleRemove,
+  // handleChange,
+  // handleRemove,
 }) {
+
+  const {
+    handleChange,
+    handleRemove,
+  } = useProducts();
+
   function onHandleChange(event) {
     handleChange(event, id);
   }
