@@ -22,7 +22,7 @@ const reduce = (prevState, action) => {
   const handler = Object.keys(actionTypes).find(action.type)
   if (!handler) return prevState;
   // This handler execute the logic and returns the new state
-  handler(prevState, action.payload)
+  handler({prevState, payload: action.payload})
 }
 
 

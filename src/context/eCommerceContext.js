@@ -1,4 +1,5 @@
 import { createContext } from "react";
+import reducer from "../store/EcommerceReducer";
 
 const eCommerce = {
   products: [{}],
@@ -8,6 +9,12 @@ const eCommerce = {
 
 const eCommerceContext = createContext(eCommerce);
 
-export default eCommerceContext;
+export default function EcommerceContextProvider({children}) {
+  return (
+    <eCommerceContext.Provider value={reducer}>
+      {children}
+    </eCommerceContext.Provider>
+  )
+}
 
 // Y context toma las variables del reducer y hacer return -> eCommerceContext 
