@@ -7,6 +7,7 @@ import Input from "../Input";
 import Button from "../Button";
 
 import productSchema from "./product-schema";
+import { useProducts } from "../Context/reducer";
 
 function addProductDetails(product) {
   return {
@@ -33,8 +34,9 @@ function addProductDetails(product) {
   };
 }
 
-function NewProductForm({ saveNewProduct }) {
+function NewProductForm() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
+  const { setProducts } = useProducts();
 
   const formik = useFormik({
     initialValues: {
@@ -51,7 +53,7 @@ function NewProductForm({ saveNewProduct }) {
     validationSchema: productSchema,
     onSubmit: (values, { setSubmitting }) => {
       const newProduct = addProductDetails(values);
-      saveNewProduct(newProduct);
+      setProducts(newProduct);
       setSubmitting(true);
 
       setTimeout(() => {
