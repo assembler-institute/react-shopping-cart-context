@@ -111,26 +111,22 @@ export const reducer = (state, action) => {
         },
         isFetching: false
       };
-
     }
     case actionTypes.CHANGE: {
-      // const updatedCartItems = cartItems.map((item) => {
-      //     if (item.id === productId && item.quantity <= item.unitsInStock) {
-      //       return {
-      //         ...item,
-      //         quantity: Number(event.target.value),
-      //       };
-      //     }
-
-      //     return item;
-      //   });
-
-      //   setCartItems(updatedCartItems);
-
+      const { cartItems } = state
+      const { event, productId } = action.payload;
 
       return {
         ...state,
-        products: action.payload,
+        cartItems: {
+          ...cartItems,
+          [productId]: {
+            ...cartItems[productId],
+            quantity: (cartItems[productId].id === productId && cartItems[productId].quantity <= cartItems[productId].unitsInStock)
+              ? Number(event.target.value)
+              : cartItems[productId].quantity
+          },
+        },
         isFetching: false
       };
     }
@@ -138,29 +134,9 @@ export const reducer = (state, action) => {
       const { cartItems, cartItemIds } = state
       const cartItemId = action.payload;
 
-      console.log(cartItemId);
+      const updatedCartItemIds = cartItemIds.filter((itemId) => itemId !== cartItemId);
 
-      const updatedCartItemIds = cartItemIds.find((itemId) => itemId !== cartItemId);
-      const updatedCartItems = cartItemIds.map((itemId) => {
-        if (itemId !== cartItemId) {
-          const product = cartItems[cartItemId]
-          console.log(product)
-          return product
-        }
-      });
-
-      console.log(updatedCartItems)
-
-      console.log(updatedCartItemIds)
-
-      // action.payload.forEach((cartItemId) => {
-      //   updatedCartItemIds.filter(cartItemId);
-      //   updatedCartItems[e.id] = e;
-      // });
-
-      //   const updatedCartItems = cartItems.filter((item) => item.id !== productId);
-
-      //   setCartItems(updatedCartItems);
+      delete cartItems[cartItemId]
 
       return {
         ...state,
@@ -395,7 +371,7 @@ function ProductsProvider({ children }) {
   const value = {
     ...state,
     handleAddToCart: (productId) => dispatch({ type: actionTypes.ADD_TO_CART, payload: productId }),
-    handleChange: (productId) => dispatch({ type: actionTypes.CHANGE, payload: productId }),
+    handleChange: (event, productId) => dispatch({ type: actionTypes.CHANGE, payload: { event, productId } }),
     handleRemove: (productId) => dispatch({ type: actionTypes.REMOVE, payload: productId }),
     handleDownVote: (productId) => dispatch({ type: actionTypes.DOWN_VOTE, payload: productId }),
     handleUpVote: (productId) => dispatch({ type: actionTypes.UP_VOTE, payload: productId }),
