@@ -1,0 +1,13 @@
+export const actionTypes = {
+    DOWN_VOTE: "DOWN_VOTE",
+    UP_VOTE: "UP_VOTE",
+    SET_FAVORITE: "SET_FAVORITE",
+    ADD_TO_CART: "ADD_TO_CART",
+    REMOVE: "REMOVE",
+    CHANGE: "CHANGE",
+    PRODUCTS: "PRODUCTS",
+    IS_LOADING: "IS_LOADING",
+    HAS_ERROR: "HAS_ERROR",
+    LOADING_ERROR: "LOADING_ERROR"
+  };
+  

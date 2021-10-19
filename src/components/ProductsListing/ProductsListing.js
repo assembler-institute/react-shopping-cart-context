@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
 import ProductsContext from "../Context/ProductsContext";
+import { useProducts } from "../Context/reducer";
 
 import ItemCard from "../ItemCard";
-
-
 
 function ProductsListing({
   /* products,
@@ -11,13 +10,13 @@ function ProductsListing({
   handleUpVote,
   handleSetFavorite,
   handleAddToCart, */
-  ...props 
+  ...props
 }) {
+  const { products } = useProducts();
 
-  const { products } = useContext(ProductsContext);
   return (
     <section className="row" {...props}>
-      {products.map((product) => (
+      {products && products.map((product) => (
         <ItemCard
           key={product.id}
           id={product.id}

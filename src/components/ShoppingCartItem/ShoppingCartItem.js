@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import "./ShoppingCartItem.scss";
 
 import Button from "../Button";
-import ProductsContext from "../Context/ProductsContext";
+import { useProducts } from "../Context/reducer";
 
 function buildSelectOptions(unitsInStock) {
   return Array.from({ length: unitsInStock }, (_value, index) => {
@@ -25,12 +25,12 @@ function ShoppingCartItem({
   unitsInStock,
 
 }) {
-  const { handleRemove,handleChange } = useContext(ProductsContext);
+  const { remove,change } = useProducts();
   function onHandleChange(event) {
-    handleChange(event, id);
+    change(event, id);
   }
   function onHandleRemove() {
-    handleRemove(id);
+    remove(id);
   }
 
   

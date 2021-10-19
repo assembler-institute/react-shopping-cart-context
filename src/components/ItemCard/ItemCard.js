@@ -7,6 +7,7 @@ import { ThumbDown, ThumbUp } from "../SVGIcons";
 
 import "./ItemCard.scss";
 import ProductsContext from "../Context/ProductsContext";
+import { useProducts } from "../Context/reducer";
 
 function Divider() {
   return <hr className="ItemCard__divider" />;
@@ -34,35 +35,33 @@ function ItemCard({
   shortDescription,
   isFavorite,
   upVotes,
-  downVotes,
-  /* handleDownVote,
-  handleUpVote,
-  handleSetFavorite,
-  handleAddToCart, */
+  downVotes
 }) {
 
-  const { handleDownVote,handleUpVote,handleSetFavorite,handleAddToCart } = useContext(ProductsContext);
-
+  const { setFavorite,setUpVotes,setDownVotes,addToCart } = useProducts();
+  
   function onDownVote() {
-    handleDownVote(id);
+    setDownVotes(id);
   }
   function onUpVote() {
-    handleUpVote(id);
+    setUpVotes(id);
   }
   function onSetFavorite() {
-    handleSetFavorite(id);
-  }
+    setFavorite(id);
+  } 
   function onAddToCart() {
-    handleAddToCart(id);
+    console.log('saD'+id);
+    addToCart(id);
   }
-  
+
   return (
     <article className="ItemCard col col-12 col-md-6 col-lg-4">
       <header>
         <div className="ItemCard__image-wrapper">
           <img src={img} className="ItemCard__image" alt={title} />
           <FavoriteIconButton
-            handleSetFavorite={onSetFavorite}
+             handleSetFavorite={onSetFavorite} 
+            /* onClick={() => setFavorite(id)} */
             isFavorite={isFavorite}
           />
         </div>
