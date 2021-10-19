@@ -9,3 +9,5 @@ const eCommerce = {
 const eCommerceContext = createContext(eCommerce);
 
 export default eCommerceContext;
+
+// Y context toma las variables del reducer y hacer return -> eCommerceContext 

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import eCommerceContext from "../../context/eCommerceContext";
+import eCommerceContext from "../../context/EcommerceContext";
 import ProductsListing from "../../components/ProductsListing";
 import Cart from "../../components/Cart";
 import withLayout from "../../hoc/withLayout";

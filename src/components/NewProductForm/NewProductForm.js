@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import { useFormik } from "formik";
 
-import eCommerceContext from "../../context/eCommerceContext";
+import eCommerceContext from "../../context/EcommerceContext";
 import Input from "../Input";
 import Button from "../Button";
 

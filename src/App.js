@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import eCommerceContext from "./context/eCommerceContext";
+import EcommerceContextProvider from "./context/EcommerceContext";
 
 import Home from "./pages/Home";
 import NewProduct from "./pages/NewProduct";
@@ -182,13 +182,7 @@ function App() {
   }
 
   return (
-    <eCommerceContext.Provider
-      value={{
-        cartItems: cartItems,
-        products: products,
-        updateProducts: saveNewProduct,
-      }}
-    >
+    <EcommerceContextProvider>
       <BrowserRouter>
         <Switch>
           <Route path="/new-product">
@@ -210,7 +204,7 @@ function App() {
           </Route>
         </Switch>
       </BrowserRouter>
-    </eCommerceContext.Provider>
+    </EcommerceContextProvider>
   );
 }
 

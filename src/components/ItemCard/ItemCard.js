@@ -6,6 +6,7 @@ import Button from "../Button";
 import { ThumbDown, ThumbUp } from "../SVGIcons";
 
 import "./ItemCard.scss";
+import {dispatch, actionTypes} from "../../store/EcommerceReducer";
 
 function Divider() {
   return <hr className="ItemCard__divider" />;
@@ -33,23 +34,11 @@ function ItemCard({
   shortDescription,
   isFavorite,
   upVotes,
-  downVotes,
-  handleDownVote,
-  handleUpVote,
-  handleSetFavorite,
-  handleAddToCart,
+  downVotes
 }) {
-  function onDownVote() {
-    handleDownVote(id);
-  }
-  function onUpVote() {
-    handleUpVote(id);
-  }
-  function onSetFavorite() {
-    handleSetFavorite(id);
-  }
-  function onAddToCart() {
-    handleAddToCart(id);
+  
+  function sendDispatch(type){
+    dispatch({type: type, payload: id})
   }
 
   return (
@@ -58,7 +47,7 @@ function ItemCard({
         <div className="ItemCard__image-wrapper">
           <img src={img} className="ItemCard__image" alt={title} />
           <FavoriteIconButton
-            handleSetFavorite={onSetFavorite}
+            handleSetFavorite={() => sendDispatch(actionTypes.HANDLER_SET_FAVORITE)}
             isFavorite={isFavorite}
           />
         </div>
@@ -70,7 +59,7 @@ function ItemCard({
       <footer className="ItemCard__meta">
         <div className="ItemCard__icons">
           <div className="ItemCard__icon-row">
-            <IconButton aria-label="up vote product" handleClick={onUpVote}>
+            <IconButton aria-label="up vote product" handleClick={() => sendDispatch(actionTypes.HANDLER_UP_VOTE)}>
               <ThumbUp />
             </IconButton>
             <p
@@ -85,7 +74,7 @@ function ItemCard({
             </p>
           </div>
           <div className="ItemCard__icon-row">
-            <IconButton aria-label="down vote product" handleClick={onDownVote}>
+            <IconButton aria-label="down vote product" handleClick={() => sendDispatch(actionTypes.HANDLER_DOWN_VOTE)}>
               <ThumbDown />
             </IconButton>
             <p
@@ -101,7 +90,7 @@ function ItemCard({
           </div>
         </div>
         <div className="ItemCard__icon-row">
-          <Button onClick={onAddToCart}>Add to cart</Button>
+          <Button onClick={() => sendDispatch(actionTypes.HANDLER_ADD_TO_CART)}>Add to cart</Button>
         </div>
       </footer>
     </article>
