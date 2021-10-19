@@ -9,6 +9,7 @@ import * as api from "./api";
 
 import useLocalStorage from "./hooks/useLocalStorage";
 import loadLocalStorageItems from "./utils/loadLocalStorageItems";
+import { actionTypes, dispatch } from "./store/EcommerceReducer";
 
 function buildNewCartItem(cartItem) {
   if (cartItem.quantity >= cartItem.unitsInStock) {
@@ -27,8 +28,8 @@ function buildNewCartItem(cartItem) {
   };
 }
 
-const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
-const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
+const PRODUCTS_LOCAL_STORAGE_KEY = "products";
+const CART_ITEMS_LOCAL_STORAGE_KEY = "cartItems";
 
 function App() {
   const [products, setProducts] = useState(() =>
@@ -48,7 +49,11 @@ function App() {
   // just one useEffect
   useEffect(() => {
     if (products.length === 0) {
-      setIsLoading(true);
+      //setIsLoading(true);
+      dispatch({
+        type:actionTypes.LOAD_LOCAL_STORAGE,
+        payload:PRODUCTS_LOCAL_STORAGE_KEY
+      })
 
       api
         .getProducts()

@@ -1,6 +1,7 @@
-export function handleAddToCart({prevState, productId}) {
-  const prevCartItem = cartItems.find((item) => item.id === productId);
-  const foundProduct = products.find((product) => product.id === productId);
+export function handleAddToCart({prevState, payload:productId}) {
+
+  const prevCartItem = prevState.cartItems.find((item) => item.id === productId);
+  const foundProduct = prevState.products.find((product) => product.id === productId);
 
   if (prevCartItem) {
     const updatedCartItems = cartItems.map((item) => {
@@ -18,12 +19,12 @@ export function handleAddToCart({prevState, productId}) {
       };
     });
 
-    setCartItems(updatedCartItems);
-    return;
+    return {...prevState,cartItems:updatedCartItems}
   }
 
   const updatedProduct = buildNewCartItem(foundProduct);
-  setCartItems((prevState) => [...prevState, updatedProduct]);
+
+  return {...prevState, cartItems:[...prevState.cartItems, updatedProduct]}
 }
 
 export function handleChange({prevState, event, productId}) {
