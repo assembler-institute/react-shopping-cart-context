@@ -1,15 +1,33 @@
-function loadLocalStorageItems(storageKey, defaultValue) {
-  const data = localStorage.getItem(storageKey);
+//function loadLocalStorageItems(storageKey, defaultValue) {
+
+  function getLocalStorageItems({prevState, payload:storageKey}) {
+    const data = localStorage.getItem(storageKey);
+
+    //const dataParsed=JSON.parse(data);
+    const newState=JSON.parse(`{"${storageKey}":"${data}"}`);
 
   if (data) {
     try {
-      return JSON.parse(data);
+      return {...prevState, ...newState };
     } catch (error) {
-      return defaultValue;
+      return prevState;
     }
   } else {
-    return defaultValue;
+    return prevState;
   }
 }
 
-export default loadLocalStorageItems;
+
+
+
+function setLocalStorageItems({prevState, payload:storageKey}){
+
+  localStorage.setItem(storageKey, JSON.stringify(prevState));
+
+
+return
+}
+
+
+
+export {getLocalStorageItems, setLocalStorageItems}
