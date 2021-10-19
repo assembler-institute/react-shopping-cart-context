@@ -115,3 +115,30 @@ export function handleSetFavorite(productId) {
 export function saveNewProduct(newProduct) {
   setProducts((prevState) => [newProduct, ...prevState]);
 }
+
+export function handleDataFetch({prevState}) {
+  api
+  .getProducts()
+  .then((data) => {
+    // Set products state 
+    return {
+      ...prevState,
+      products: data,
+      dataFetch: {
+        isLoading: false,
+        hasError: false,
+        loadingError: null
+      }
+    }
+  })
+  .catch((error) => {
+    return {
+      ...prevState,
+      dataFetch: {
+        isLoading: false,
+        hasError: true,
+        loadingError: error
+      }
+    }
+  });
+}

@@ -8,7 +8,7 @@
 
   if (data) {
     try {
-      return {...prevState, ...newState };
+      return {...prevState, ...newState};
     } catch (error) {
       return prevState;
     }
@@ -19,15 +19,11 @@
 
 
 
+// Terminar de revisar los parametros de la función
+function setLocalStorageItems({prevState, payload}){
+  localStorage.setItem(payload.storageKey, JSON.stringify(payload.data));
 
-function setLocalStorageItems({prevState, payload:storageKey}){
-
-  localStorage.setItem(storageKey, JSON.stringify(prevState));
-
-
-return
+  return {...prevState, }
 }
-
-
 
 export {getLocalStorageItems, setLocalStorageItems}

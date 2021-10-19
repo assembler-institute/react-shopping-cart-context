@@ -1,16 +1,18 @@
 import { object } from "prop-types";
 import { useReducer } from "react"
 import {getLocalStorageItems, setLocalStorageItems} from "../utils/loadLocalStorageItems";
-import { handleSetFavorite, handleUpVote, handleDownVote, handleAddToCart, handleRemove, handleChange } from "./EcommerceHandlers";
+import { handleSetFavorite, handleUpVote, handleDownVote, handleAddToCart, handleRemove, handleChange, handleDataFetch } from "./EcommerceHandlers";
 
 
 const initialState = {
-  products: [{}],
-  cartItems: [{}],
-  updateProducts: () => {},
-  isLoading: false,
-  hasError: false,
-  loadingError:null
+  products: [],
+  cartItems: [],
+  //updateProducts: () => {},
+  dataFetch: {
+    isLoading: false,
+    hasError: false,
+    loadingError:null  
+  }
 }
 
 const actionTypes = {
@@ -21,7 +23,8 @@ const actionTypes = {
   HANDLER_REMOVE: handleRemove,
   HANDLER_CHANGE: handleChange,
   LOAD_LOCAL_STORAGE: getLocalStorageItems,
-  SET_LOCAL_STORAGE: setLocalStorageItems
+  SET_LOCAL_STORAGE: setLocalStorageItems,
+  FETCH_API: handleDataFetch
 }
 
 const reduce = (prevState, action) => {

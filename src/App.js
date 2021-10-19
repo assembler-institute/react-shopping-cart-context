@@ -9,7 +9,7 @@ import * as api from "./api";
 
 import useLocalStorage from "./hooks/useLocalStorage";
 import loadLocalStorageItems from "./utils/loadLocalStorageItems";
-import { actionTypes, dispatch } from "./store/EcommerceReducer";
+import { actionTypes, dispatch, state } from "./store/EcommerceReducer";
 
 function buildNewCartItem(cartItem) {
   if (cartItem.quantity >= cartItem.unitsInStock) {
@@ -32,6 +32,7 @@ const PRODUCTS_LOCAL_STORAGE_KEY = "products";
 const CART_ITEMS_LOCAL_STORAGE_KEY = "cartItems";
 
 function App() {
+  /*
   const [products, setProducts] = useState(() =>
     loadLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY, []),
   );
@@ -45,29 +46,37 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [loadingError, setLoadingError] = useState(null);
+  */
+  const {cartItems, products} = state
 
-  // just one useEffect
+  // First render 
   useEffect(() => {
-    if (products.length === 0) {
-      //setIsLoading(true);
-      dispatch({
-        type:actionTypes.LOAD_LOCAL_STORAGE,
-        payload:PRODUCTS_LOCAL_STORAGE_KEY
-      })
+    
+    dispatch({
+      type:actionTypes.LOAD_LOCAL_STORAGE,
+      payload:CART_ITEMS_LOCAL_STORAGE_KEY
+    })
+    // Get products local storage -> [...products] || []
+    dispatch({
+      type:actionTypes.LOAD_LOCAL_STORAGE,
+      payload:PRODUCTS_LOCAL_STORAGE_KEY
+    })
 
-      api
-        .getProducts()
-        .then((data) => {
-          setProducts(data);
-          setIsLoading(false);
-        })
-        .catch((error) => {
-          setIsLoading(false);
-          setHasError(true);
-          setLoadingError(error.message);
-        });
-    }
+    
+    // Get products from API
+    if (products.length === 0) dispatch({type: actionTypes.FETCH_API})
+    
   }, []);
+
+  useEffect(() => {
+
+  }, [products])
+
+
+  useEffect(() => {
+
+  }, [cartItems])
+
 
   return (
     <eCommerceContext.Provider>
