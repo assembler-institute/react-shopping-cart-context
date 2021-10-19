@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 
 import ShoppingCartItem from "../ShoppingCartItem";
 import Button from "../Button";
-import CartItemsContext from "../../context/CartItemsContext";
+import { AppContext } from "../../providers/AppProvider";
 
 function getCartTotal(cart) {
 	return cart.reduce((accum, item) => {
@@ -11,7 +11,7 @@ function getCartTotal(cart) {
 }
 
 function Cart({ ...props }) {
-	const { cartItems } = useContext(CartItemsContext);
+	const { cartItems } = useContext(AppContext);
 
 	return (
 		<aside {...props}>

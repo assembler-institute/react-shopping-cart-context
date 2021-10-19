@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import "./ShoppingCartItem.scss";
 
 import Button from "../Button";
-import CartItemsContext from "../../context/CartItemsContext";
+import { AppContext } from "../../providers/AppProvider";
 
 function buildSelectOptions(unitsInStock) {
 	return Array.from({ length: unitsInStock }, (_value, index) => {
@@ -17,10 +17,11 @@ function buildSelectOptions(unitsInStock) {
 }
 
 function ShoppingCartItem({ id, img, title, price, quantity, unitsInStock }) {
-	const { handleEditCartItem, handleRemoveCartItem } = useContext(CartItemsContext);
+	const { handleEditCartItem, handleRemoveCartItem } = useContext(AppContext);
 
 	function onHandleChange(event) {
-		handleEditCartItem(event, id);
+		const quantity = Number(event.target.value);
+		handleEditCartItem(id, quantity);
 	}
 	function onHandleRemove() {
 		handleRemoveCartItem(id);

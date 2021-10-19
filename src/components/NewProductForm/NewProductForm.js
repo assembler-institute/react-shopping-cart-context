@@ -7,7 +7,7 @@ import Input from "../Input";
 import Button from "../Button";
 
 import productSchema from "./product-schema";
-import ProductsContext from "../../context/ProductsContext";
+import { AppContext } from "../../providers/AppProvider";
 
 function addProductDetails(product) {
 	return {
@@ -36,7 +36,7 @@ function addProductDetails(product) {
 
 function NewProductForm(props) {
 	const [hasSubmitted, setHasSubmitted] = useState(false);
-	const { handleSaveNewProduct } = useContext(ProductsContext);
+	const { handleSaveNewProduct } = useContext(AppContext);
 
 	const formik = useFormik({
 		initialValues: {

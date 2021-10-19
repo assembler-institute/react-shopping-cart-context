@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import ProductsListing from "../../components/ProductsListing";
 import Cart from "../../components/Cart";
 import withLayout from "../../hoc/withLayout";
+import { AppContext } from "../../providers/AppProvider";
 
-function Home({ hasLoaded, hasError, loadingError }) {
+function Home() {
+	const {
+		products,
+		cartItems,
+		loading: { hasLoaded, hasError, loadingError },
+	} = useContext(AppContext);
+
 	return (
 		<div className="row">
 			<div className="col col-8">
@@ -16,12 +23,12 @@ function Home({ hasLoaded, hasError, loadingError }) {
 							<p className="font-weight-bold">Buy now!</p>
 						</header>
 					</div>
-					{hasLoaded && (
+					{!hasLoaded && (
 						<div className="col col-12">
 							<h2>Loading products...</h2>
 						</div>
 					)}
-					{hasError && (
+					{hasLoaded && hasError && (
 						<div className="col col-12">
 							<h2>Something went wrong...</h2>
 							<pre>
@@ -29,7 +36,7 @@ function Home({ hasLoaded, hasError, loadingError }) {
 							</pre>
 						</div>
 					)}
-					{!hasLoaded && !hasError && (
+					{hasLoaded && !hasError && (
 						<div className="col col-12">
 							<ProductsListing />
 						</div>

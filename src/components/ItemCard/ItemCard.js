@@ -6,8 +6,7 @@ import Button from "../Button";
 import { ThumbDown, ThumbUp } from "../SVGIcons";
 
 import "./ItemCard.scss";
-import ProductsContext from "../../context/ProductsContext";
-import CartItemsContext from "../../context/CartItemsContext";
+import { AppContext } from "../../providers/AppProvider";
 
 function Divider() {
 	return <hr className="ItemCard__divider" />;
@@ -24,8 +23,8 @@ function getPopularityClasses(currentValue, limit, prevClasses, popularityClassN
 }
 
 function ItemCard({ id, img, title, shortDescription, isFavorite, upVotes, downVotes }) {
-	const { handleDownVote, handleUpVote, handleSetFavorite } = useContext(ProductsContext);
-	const { handleAddCartItem } = useContext(CartItemsContext);
+	const { handleDownVote, handleUpVote, handleSetFavorite } = useContext(AppContext);
+	const { handleAddCartItem } = useContext(AppContext);
 
 	function onDownVote() {
 		handleDownVote(id);

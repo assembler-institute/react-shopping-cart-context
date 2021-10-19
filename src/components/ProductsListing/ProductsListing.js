@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import ProductsContext from "../../context/ProductsContext";
+import { AppContext } from "../../providers/AppProvider";
 
 import ItemCard from "../ItemCard";
 
 function ProductsListing(props) {
-	const { products } = useContext(ProductsContext);
+	const { products } = useContext(AppContext);
 
 	return (
 		<section className="row" {...props}>
