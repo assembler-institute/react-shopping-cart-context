@@ -60,7 +60,7 @@ function App() {
     // handleDownVote,
     // handleUpVote,
     // handleSetFavorite,
-    saveNewProduct
+    saveNewProduct,
   } = useProducts();
 
   // useEffect(() => {
@@ -196,7 +196,7 @@ function App() {
   // function saveNewProduct(newProduct) {
   //   const request = async () => {
   //     dispatch({ type: actionTypes.ADD_PRODUCT_FETCHING });
-  //     const { data, hasError, error } = await api.postProduct(newProduct);
+  //  const { data, hasError, error } = await api.postProduct(newProduct);
 
   //     if (hasError) dispatch({ type: actionTypes.ADD_PRODUCT_ERROR, payload: error });
   //     else dispatch({ type: actionTypes.ADD_PRODUCT_SUCCESS, payload: data });

@@ -210,11 +210,14 @@ export const reducer = (state, action) => {
       }
     }
     case actionTypes.SAVE_NEW_PRODUCT: {
-      return {
-        ...state,
-        products: action.payload,
-        isFetching: false
-      };
+   //   function saveNewProduct(newProduct) {
+  //   const request = async () => {
+  //     dispatch({ type: actionTypes.ADD_PRODUCT_FETCHING });
+  //     const { data, hasError, error } = await api.postProduct(newProduct);
+
+  //     if (hasError) dispatch({ type: actionTypes.ADD_PRODUCT_ERROR, payload: error });
+  //     else dispatch({ type: actionTypes.ADD_PRODUCT_SUCCESS, payload: data });
+  //   };
     }
     default: {
       return state;
