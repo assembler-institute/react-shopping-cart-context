@@ -74,7 +74,7 @@ function NewProductForm(props) {
 				<Input type="text" label="Author first name" id="authorFirstName" value={formik.values.authorFirstName} placeholder="Author first name" handleChange={formik.handleChange} handleBlur={formik.handleBlur} hasErrorMessage={formik.touched.authorFirstName} errorMessage={formik.errors.authorFirstName} />
 				<Input type="text" label="Author last name" id="authorLastName" value={formik.values.authorLastName} placeholder="Author last name" handleChange={formik.handleChange} handleBlur={formik.handleBlur} hasErrorMessage={formik.touched.authorLastName} errorMessage={formik.errors.authorLastName} />
 				<Input type="email" label="Author email" id="authorEmail" value={formik.values.authorEmail} placeholder="Author email" handleChange={formik.handleChange} handleBlur={formik.handleBlur} hasErrorMessage={formik.touched.authorEmail} errorMessage={formik.errors.authorEmail} />
-				<Button submitButton block disabled={formik.isValidating || !formik.isValid}>
+				<Button isSubmit block disabled={formik.isValidating || !formik.isValid}>
 					{formik.isSubmitting ? "Submitting..." : "Submit"}
 				</Button>
 			</form>

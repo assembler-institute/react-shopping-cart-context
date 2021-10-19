@@ -1,5 +1,4 @@
 import { useReducer, useEffect, createContext } from "react";
-import products from "../utils/demo-data";
 import loadLocalStorageItems from "../utils/loadLocalStorageItems";
 import useLocalStorage from "../hooks/useLocalStorage";
 
@@ -37,7 +36,7 @@ function buildNewCartItem(cartItem) {
 	};
 }
 
-function handleDownVote(products, productId) {
+function downVote(products, productId) {
 	const updatedProducts = products.map((product) => {
 		if (product.id === productId && product.votes.downVotes.currentValue < product.votes.downVotes.lowerLimit) {
 			return {
@@ -58,7 +57,7 @@ function handleDownVote(products, productId) {
 	return updatedProducts;
 }
 
-function handleUpVote(products, productId) {
+function upVote(products, productId) {
 	const updatedProducts = products.map((product) => {
 		if (product.id === productId && product.votes.upVotes.currentValue < product.votes.upVotes.upperLimit) {
 			return {
@@ -79,7 +78,7 @@ function handleUpVote(products, productId) {
 	return updatedProducts;
 }
 
-function handleSetFavorite(products, productId) {
+function setFavorite(products, productId) {
 	const updatedProducts = products.map((product) => {
 		if (product.id === productId) {
 			return {
@@ -94,11 +93,11 @@ function handleSetFavorite(products, productId) {
 	return updatedProducts;
 }
 
-function handleSaveNewProduct(products, newProduct) {
+function saveNewProduct(products, newProduct) {
 	return [newProduct, ...products];
 }
 
-function handleAddCartItem(products, cartItems, productId) {
+function addCartItem(products, cartItems, productId) {
 	const prevCartItem = cartItems.find((item) => item.id === productId);
 	const foundProduct = products.find((product) => product.id === productId);
 
@@ -126,7 +125,7 @@ function handleAddCartItem(products, cartItems, productId) {
 	return [...cartItems, updatedProduct];
 }
 
-function handleEditCartItem(cartItems, productId, quantity) {
+function editCartItem(cartItems, productId, quantity) {
 	const updatedCartItems = cartItems.map((item) => {
 		if (item.id === productId && item.quantity <= item.unitsInStock) {
 			return {
@@ -141,7 +140,7 @@ function handleEditCartItem(cartItems, productId, quantity) {
 	return updatedCartItems;
 }
 
-function handleRemoveCartItem(cartItems, productId) {
+function removeCartItem(cartItems, productId) {
 	const updatedCartItems = cartItems.filter((item) => item.id !== productId);
 
 	return updatedCartItems;
@@ -165,37 +164,37 @@ function reducer(state, action) {
 		case actionTypes.PRODUCT_DOWNVOTE:
 			return {
 				...state,
-				products: handleDownVote(products, payload.id),
+				products: downVote(products, payload.id),
 			};
 		case actionTypes.PRODUCT_UPVOTE:
 			return {
 				...state,
-				products: handleUpVote(products, payload.id),
+				products: upVote(products, payload.id),
 			};
 		case actionTypes.PRODUCT_SET_FAVORITE:
 			return {
 				...state,
-				products: handleSetFavorite(products, payload.id),
+				products: setFavorite(products, payload.id),
 			};
 		case actionTypes.PRODUCT_SAVE_NEW_PRODUCT:
 			return {
 				...state,
-				products: handleSaveNewProduct(products, payload.product),
+				products: saveNewProduct(products, payload.product),
 			};
 		case actionTypes.CARTITEM_ADD:
 			return {
 				...state,
-				cartItems: handleAddCartItem(products, cartItems, payload.id),
+				cartItems: addCartItem(products, cartItems, payload.id),
 			};
 		case actionTypes.CARTITEM_DELETE:
 			return {
 				...state,
-				cartItems: handleRemoveCartItem(cartItems, payload.id),
+				cartItems: removeCartItem(cartItems, payload.id),
 			};
 		case actionTypes.CARTITEM_EDIT:
 			return {
 				...state,
-				cartItems: handleEditCartItem(cartItems, payload.id, payload.quantity),
+				cartItems: editCartItem(cartItems, payload.id, payload.quantity),
 			};
 		case actionTypes.LOADING_SUCCESS:
 			return {
@@ -204,7 +203,7 @@ function reducer(state, action) {
 					...state.loading,
 					hasLoaded: true,
 				},
-				products: payload?.data || state.products,
+				products: (payload && payload.data) || state.products,
 			};
 		case actionTypes.LOADING_ERROR:
 			return {
