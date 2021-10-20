@@ -8,6 +8,7 @@ function Input({
   placeholder = "",
   handleChange = () => {},
   handleBlur = () => {},
+  handleFocus = () => {},
   errorMessage,
   hasErrorMessage,
   ...props
@@ -28,6 +29,7 @@ function Input({
         value={value}
         onChange={handleChange}
         onBlur={handleBlur}
+        onFocus={handleFocus}
         {...props}
       />
       {hasErrorMessage && errorMessage && (

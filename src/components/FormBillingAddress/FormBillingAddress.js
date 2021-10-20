@@ -9,6 +9,7 @@ import billingAddressSchema from "./billing-address-schema";
 
 function FormBillingAddress() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
+
   const formik = useFormik({
     initialValues: {
       address: "",
@@ -122,7 +123,7 @@ function FormBillingAddress() {
         </div>
       </form>
 
-      {hasSubmitted && <Redirect to="/" />}
+      {hasSubmitted && <Redirect to="/checkout/step-3" />}
     </>
   );
 }

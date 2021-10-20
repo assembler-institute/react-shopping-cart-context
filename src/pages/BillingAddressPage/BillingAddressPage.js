@@ -1,10 +1,7 @@
 import React from "react";
-import Cart from "../../components/Cart";
 import FormBillingAddress from "../../components/FormBillingAddress/FormBillingAddress";
 import SummaryOrder from "../../components/SummaryOrder";
 import withLayout from "../../hoc/withLayout";
-
-
 
 function BillingAddressPage() {
   return (

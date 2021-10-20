@@ -58,6 +58,7 @@ function App() {
         <Route path="/new-product">
           <NewProduct />
         </Route>
+        
         <Route path="/checkout/step-2">
           <BillingAddressPage />
         </Route>
