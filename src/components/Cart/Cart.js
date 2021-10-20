@@ -2,6 +2,7 @@ import React from "react";
 
 import ShoppingCartItem from "../ShoppingCartItem";
 import Button from "../Button";
+import { NavLink } from "react-router-dom";
 
 import { useProducts } from "../../context/products/reducer";
 
@@ -61,7 +62,16 @@ function Cart({ ...props }) {
               <hr />
             </div>
             <div className="col">
-              <Button>Checkout</Button>
+              <NavLink
+                exact
+                activeClassName="active"
+                className="navbar-brand"
+                to="/checkout"
+              >
+                <Button>
+                  Checkout
+                </Button>
+              </NavLink>
             </div>
           </div>
         </div>
