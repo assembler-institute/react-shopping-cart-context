@@ -2,26 +2,18 @@ import React, { useContext } from "react";
 import { useFormik } from "formik";
 
 import UserSchema from "./User-schema"
-import userContext  from "../../Contexts/UserContext"
+import userContext from "../../Contexts/UserContext"
 import Input from "../Input";
-
-const options = [
-    {value: "+34", label: " +34" },
-    {value: "+39", label: " +39" },
-    {value: "+30", label: " +30" },
-    {value: "+49", label: " +49" },
-    {value: "+33", label: " +33" },
-  ];
+import  Button from "../Button";
 
 
 function UserForm(){
-    const { name, email, phone, countryCode } = useContext(userContext);
+    const { name, email, phone, saveUser } = useContext(userContext);
 
     const formik = useFormik({
         initialValues: {
             name: name,
             email: email,
-            countryCode: countryCode,
             phone: phone,
         },
         validationSchema: UserSchema,
@@ -29,13 +21,14 @@ function UserForm(){
             updateFormData(values);
             setSubmitting(true);
             setTimeout(() => {
-              setProcessCompletedFlags(({ ...prev }) => ({
+            saveUser(({ ...prev }) => ({
                 ...prev,
                 completed: true,
-              }));
-              setHasSubmitted(true);
+            }));
+            setHasSubmitted(true);
+            console.log(user)
             }, 500);
-          },
+        },
         
     })
     
@@ -57,7 +50,7 @@ function UserForm(){
                     handleBlur={formik.handleBlur}
                     hasErrorMessage={formik.touched.name}
                     errorMessage={formik.errors.name}
-                    isTouched={formik.touched.name}
+                    
                 />
                 <Input
                     type="text"
@@ -69,7 +62,7 @@ function UserForm(){
                     handleBlur={formik.handleBlur}
                     hasErrorMessage={formik.touched.email}
                     errorMessage={formik.errors.email}
-                    isTouched={formik.touched.email}
+                    
                 />
 
                 <span>Phone number</span>

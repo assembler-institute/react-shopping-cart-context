@@ -24,6 +24,7 @@ function App() {
   const [cartItems, setCartItems] = useState(() =>
     loadLocalStorageItems(CART_ITEMS_LOCAL_STORAGE_KEY, []),
   ); */
+  const [user, setUser] = useState([]);
 
   const {
     localStorageProducts,
@@ -59,21 +60,26 @@ function App() {
         });
     }
   }, []);
+  
+  function saveUser(userData) {
+    setUser((prevState) => [...prevState, userData]);
+  }
 
   return (
     <BrowserRouter>
       <Switch>
-        <UserContext.Provider value={user}>
+        
         <Route path="/new-product">
           <NewProduct/>
         </Route>
         <Route path="/" exact>
           <Home />
         </Route>
+        <UserContext.Provider value={user, saveUser}>
         <Route path="/user-info" exact>
           <UserInfo />
         </Route>
-        </UserContext.Provider> 
+        </UserContext.Provider>
       </Switch>
     </BrowserRouter>
   );

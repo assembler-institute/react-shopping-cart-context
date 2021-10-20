@@ -1,6 +1,7 @@
 import React, { createContext } from "react";
 
-const initUserValues = {
+
+const userContext = createContext ({
     completed: false,
     name: "",
     email: "",
@@ -15,9 +16,12 @@ const initUserValues = {
     expiryDate: "",
     cvv: "",
     acceptedTerms: false,
-}
-
-const userContext = createContext(initUserValues)
+    saveUser: ()=>{},
+    saveAddress: ()=>{},
+    savePayment: ()=>{},
+})
 
 export default userContext
+
+
 
