@@ -1,6 +1,6 @@
 import "./IconImg.scss";
 
-function IconImg({ src, alt = "icon-image" }) {
+function IconImg({ src, alt = "icon" }) {
 	return <img className="IconImg" src={src} alt={alt} />;
 }
 

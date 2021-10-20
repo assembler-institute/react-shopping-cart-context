@@ -7,6 +7,7 @@ const actionTypes = {
 };
 
 const initialState = {
+	step: 1,
 	personalDetails: {
 		fullname: "",
 		email: "",
@@ -34,16 +35,19 @@ function reducer(state, actions) {
 		case actionTypes.CHECKOUT_PERSONAL_DETAILS:
 			return {
 				...state,
+				step: state.step + 1,
 				personalDetails: { ...payload },
 			};
 		case actionTypes.CHECKOUT_BILLING_DETAILS:
 			return {
 				...state,
+				step: state.step + 1,
 				billingDetails: { ...payload },
 			};
 		case actionTypes.CHECKOUT_PAYMENT_DETAILS:
 			return {
 				...state,
+				step: state.step + 1,
 				paymentDetails: { ...payload },
 			};
 		default:
@@ -60,13 +64,13 @@ function CheckoutProvider({ children }) {
 		<CheckoutContext.Provider
 			value={{
 				state,
-				savePersonalDetails: (values) => {
+				setPersonalDetails: (values) => {
 					dispatch({ type: actionTypes.CHECKOUT_PERSONAL_DETAILS, payload: values });
 				},
-				saveBillingDetails: (values) => {
+				setBillingDetails: (values) => {
 					dispatch({ type: actionTypes.CHECKOUT_PERSONAL_DETAILS, payload: values });
 				},
-				savePaymentDetails: (values) => {
+				setPaymentDetails: (values) => {
 					dispatch({ type: actionTypes.CHECKOUT_PERSONAL_DETAILS, payload: values });
 				},
 			}}
