@@ -1,33 +1,16 @@
 import React from 'react';
 
-import { useFormik, Formik } from 'formik';
+import { Formik } from 'formik';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 
-import AppForm from '../AppForm';
 import Input from "../Input";
 import Button from "../Button";
 
 import detailsSchema from "./details-schema";
 
 const DetailsForm = () => {
-  const formik = useFormik({
-    initialValues: {
-      firstName: 'yes',
-      lastName: '',
-      email: '',
-      phoneNumber: '',
-    },
-    onSubmit: values => {
-      console.log(values);
-      alert(JSON.stringify(values, null, 2));
-
-      resetForm();
-    },
-  });
-
   return (
-
     <Formik
       initialValues={{
         firstName: "",
@@ -79,8 +62,9 @@ const DetailsForm = () => {
           <p>The shop will only reach you in case of an emergency.</p>
           <PhoneInput
             id="phoneNumber"
-            country={'us'}
-            onlyCountries={['es', 'us', 'fr', 'at']}
+            country={'es'}
+            onlyCountries={['es', 'de', 'fr']}
+            localization={{ de: 'Germany', es: 'Spain', fr: 'France' }}
             value={values.phoneNumber}
             placeholder="Enter phone number"
             // isValid={(value, country) => {
@@ -92,9 +76,8 @@ const DetailsForm = () => {
             //     return true;
             //   }
             // }}
-            onChange={handleChange}
             inputProps={{ name: "phoneNumber" }}
-            onChange={(phoneNumber, country, e) => { handleChange(e) }}
+            onChange={(phoneNumber, country, e) => { handleChange(phoneNumber, country, e) }}
             handleBlur={handleBlur}
             hasErrorMessage={touched.phoneNumber}
             errorMessage={errors.phoneNumber}
