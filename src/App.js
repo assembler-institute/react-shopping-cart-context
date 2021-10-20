@@ -8,6 +8,10 @@ import * as api from "./api";
 
 import useLocalStorage from "./hooks/useLocalStorage";
 import loadLocalStorageItems from "./utils/loadLocalStorageItems";
+import CheckoutStepOne from "./pages/CheckoutStepOne/index"
+import CheckoutStepTwo from "./pages/CheckoutStepTwo/index";
+import CheckoutStepThree from "./pages/CheckoutStepThree/index"
+import CheckoutStepFour from "./pages/CheckoutStepFour/index";
 
 import HomeContext from "./context/HomeContext";
 import NewProductContext from "./context/NewProductContext";
@@ -249,6 +253,18 @@ function App() {
             <Home fullWidth />
           </HomeContext.Provider>
         </Route>
+        <Route path="/checkout/step-1" exact>
+            <CheckoutStepOne />
+          </Route>
+          <Route path="/checkout/step-2" exact>
+            <CheckoutStepTwo />
+          </Route>
+          <Route path="/checkout/step-3" exact>
+            <CheckoutStepThree />
+          </Route>
+          <Route path="/checkout/order-summary" exact>
+            <CheckoutStepFour />
+          </Route>
       </Switch>
     </BrowserRouter>
   );
