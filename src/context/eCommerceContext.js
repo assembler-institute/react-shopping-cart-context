@@ -4,15 +4,21 @@ import { actionTypes } from "../store/EcommerceReducer";
 
 const eCommerceContext = createContext();
 
+//*TODO revisar los dispatch
+
 export default function EcommerceContextProvider({children}) {
 
   const value = {
+    products:state.products,
+    cartItems:state.cartItems,
+    hasError:state.hasError,
+    isLoading:state.isLoading,
     handleDownVote: (id) => dispatch({type: actionTypes.HANDLER_DOWN_VOTE, payload: id}),
     handleUpVote: (id) => dispatch({type: actionTypes.HANDLER_UP_VOTE, payload: id}),
     handleSetFavorite: (id) => dispatch({type: actionTypes.HANDLER_SET_FAVORITE, payload: id}),
     handleAddToCart: (id) => dispatch({type: actionTypes.HANDLER_ADD_TO_CART, payload: id}),
     handleRemove: (id) => dispatch({type: actionTypes.HANDLER_REMOVE, payload: id}),
-    handleChange: (id) => dispatch({type: actionTypes.HANDLER_CHANGE, payload: id})
+    handleChange: (id, event) => dispatch({type: actionTypes.HANDLER_CHANGE, payload: {id, event}})
   }
 
   return (
@@ -27,4 +33,4 @@ export function useEcommerce() {
   if (!ctx) return null
   return ctx
 }
-// Y context toma las variables del reducer y hacer return -> eCommerceContext 
+// Y context toma las variables del reducer y hacer return -> eCommerceContext

@@ -6,8 +6,10 @@ import Button from "../Button";
 import { ThumbDown, ThumbUp } from "../SVGIcons";
 
 import "./ItemCard.scss";
-import {dispatch, actionTypes} from "../../store/EcommerceReducer";
 import { useEcommerce } from "../../context/EcommerceContext";
+
+import { getPopularityClasses} from "../../store/EcommerceHandlers"
+
 
 function ItemCard({
   id,
@@ -18,8 +20,8 @@ function ItemCard({
   upVotes,
   downVotes
 }) {
-  
-  const {handleDownVote} = useEcommerce()
+
+  const {handleDownVote, handleSetFavorite,handleUpVote, handleAddToCart} = useEcommerce()
 
   return (
     <article className="ItemCard col col-12 col-md-6 col-lg-4">
@@ -27,7 +29,7 @@ function ItemCard({
         <div className="ItemCard__image-wrapper">
           <img src={img} className="ItemCard__image" alt={title} />
           <FavoriteIconButton
-            handleSetFavorite={() => sendDispatch(actionTypes.HANDLER_SET_FAVORITE)}
+            handleSetFavorite={() => handleSetFavorite(id)}
             isFavorite={isFavorite}
           />
         </div>
@@ -70,7 +72,7 @@ function ItemCard({
           </div>
         </div>
         <div className="ItemCard__icon-row">
-          <Button onClick={() => sendDispatch(actionTypes.HANDLER_ADD_TO_CART)}>Add to cart</Button>
+          <Button onClick={() => handleAddToCart(id)}>Add to cart</Button>
         </div>
       </footer>
     </article>

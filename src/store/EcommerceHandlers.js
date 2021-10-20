@@ -1,3 +1,6 @@
+
+//*TODO fix FUCKING EVERYTHING !!!! -------
+
 export function handleAddToCart({prevState, payload:productId}) {
 
   const prevCartItem = prevState.cartItems.find((item) => item.id === productId);
@@ -137,7 +140,7 @@ export function handleDataFetch({prevState}) {
   api
   .getProducts()
   .then((data) => {
-    // Set products state 
+    // Set products state
     return {
       ...prevState,
       products: data,
@@ -179,4 +182,16 @@ export function getPopularityClasses(
   }
 
   return prevClasses;
+}
+
+
+export function buildSelectOptions(unitsInStock) {
+  return Array.from({ length: unitsInStock }, (_value, index) => {
+    const currentIndex = index + 1;
+    return (
+      <option key={currentIndex} value={currentIndex}>
+        {currentIndex}
+      </option>
+    );
+  });
 }

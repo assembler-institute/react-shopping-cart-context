@@ -3,11 +3,13 @@ import React from "react";
 import ShoppingCartItem from "../ShoppingCartItem";
 import Button from "../Button";
 import { getCartTotal } from "../../store/EcommerceHandlers";
+import { useEcommerce } from "../../context/EcommerceContext";
+
 
 function Cart() {
 
-  const { cartItems } = useContext(EcommerceContext);
-  
+  const { cartItems } = useEcommerce();
+
   return (
     <aside>
       <div className="row flex-column">

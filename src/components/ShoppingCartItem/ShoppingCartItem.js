@@ -1,19 +1,10 @@
 import React from "react";
 
 import "./ShoppingCartItem.scss";
-
+import { buildSelectOptions } from "../../store/EcommerceHandlers";
 import Button from "../Button";
+import { useEcommerce } from "../../context/EcommerceContext";
 
-function buildSelectOptions(unitsInStock) {
-  return Array.from({ length: unitsInStock }, (_value, index) => {
-    const currentIndex = index + 1;
-    return (
-      <option key={currentIndex} value={currentIndex}>
-        {currentIndex}
-      </option>
-    );
-  });
-}
 
 function ShoppingCartItem({
   id,
@@ -22,11 +13,12 @@ function ShoppingCartItem({
   price,
   quantity,
   unitsInStock,
-  handleChange,
-  handleRemove,
 }) {
+
+  const {handleChange, handleRemove}=useEcommerce();
+
   function onHandleChange(event) {
-    handleChange(event, id);
+    handleChange(id, event);
   }
   function onHandleRemove() {
     handleRemove(id);
