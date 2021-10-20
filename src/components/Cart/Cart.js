@@ -49,7 +49,7 @@ function Cart({ cartItems, handleRemove, handleChange, ...props }) {
               <hr />
             </div>
             <div className="col">
-              <Button>Checkout</Button>
+              <Button disabled={cartItems.length === 0 && true}>Checkout</Button>
             </div>
           </div>
         </div>
