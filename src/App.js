@@ -1,16 +1,12 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-<<<<<<< HEAD
-
-=======
->>>>>>> fabb7dfad45385d6ba84dc018378b78f27fe4e3e
 import { useProducts } from "./context/products/reducer";
 
 import Home from "./pages/Home";
 import Checkout from "./pages/Checkout";
 import NewProduct from "./pages/NewProduct";
-
-// import { Checkout, Home, NewProduct} from "./pages/NewProduct";
+import AddressForm from "./components/AddressForm";
+//import { Checkout, Home, NewProduct } from "./pages/index";
 
 import useLocalStorage from "./hooks/useLocalStorage";
 // import loadLocalStorageItems from "./utils/loadLocalStorageItems";
@@ -30,7 +26,8 @@ function App() {
         <Route path="/new-product">
           <NewProduct />
         </Route>
-        <Route path="/checkout" exact>
+
+        <Route path="/checkout/" exact>
           <Checkout fullWidth />
         </Route>
         <Route path="/" exact>
