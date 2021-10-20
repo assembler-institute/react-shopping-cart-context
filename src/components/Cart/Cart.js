@@ -1,9 +1,8 @@
-import React, { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import React from "react";
 
 import ShoppingCartItem from "../ShoppingCartItem";
 import Button from "../Button";
-import ProductsContext from "../Context/ProductsContext";
+import { useProducts } from "../Context/reducer";
 
 
 
@@ -14,7 +13,7 @@ function getCartTotal(cart) {
 }
 
 function Cart({...props }) {
-  const { cartItems } = useContext(ProductsContext);
+  const { cartItems } = useProducts();
   return (
     <aside {...props}>
       <div className="row flex-column">
