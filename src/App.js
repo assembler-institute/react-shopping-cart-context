@@ -9,6 +9,7 @@ import * as api from "./api";
 
 import useLocalStorage from "./hooks/useLocalStorage";
 import BillingAddressPage from "./pages/BillingAddressPage/BillingAddressPage";
+import PaymentDetailsPage from "./pages/PaymentDetailsPage/PaymentDetailsPage";
 
 /* import ProductsContext from "./components/Context/ProductsContext"; */
 
@@ -57,8 +58,11 @@ function App() {
         <Route path="/new-product">
           <NewProduct />
         </Route>
-        <Route path="/billing-address">
+        <Route path="/checkout/step-2">
           <BillingAddressPage />
+        </Route>
+        <Route path="/checkout/step-3">
+          <PaymentDetailsPage />
         </Route>
         <Route path="/" exact>
           <Home />
