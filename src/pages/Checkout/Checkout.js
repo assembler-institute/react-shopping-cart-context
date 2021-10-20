@@ -20,13 +20,13 @@ function Checkout() {
 			<section className="vh-100">
 				<Switch>
 					<Route exact path={url}>
-						<Redirect to={`${url}/step-1`} />
+						<Redirect to={`${url}/step-2`} />
 					</Route>
 					<Route exact path={`${url}/step-1`}>
 						{/* <PersonalDetailsForm /> */}
 					</Route>
 					<Route exact path={`${url}/step-2`}>
-						{/* <BillingDetailsForm /> */}
+						{/* {<BillingDetailsForm />} */}
 					</Route>
 					<Route exact path={`${url}/step-3`}>
 						{/* <PaymentDetailsForm /> */}
