@@ -7,7 +7,7 @@ import { ThumbDown, ThumbUp } from "../SVGIcons";
 
 import "./ItemCard.scss";
 import {dispatch, actionTypes} from "../../store/EcommerceReducer";
-import { Divider, getPopularityClasses } from "../../store/EcommerceHandlers";
+import { useEcommerce } from "../../context/EcommerceContext";
 
 function ItemCard({
   id,
@@ -19,9 +19,7 @@ function ItemCard({
   downVotes
 }) {
   
-  function sendDispatch(type){
-    dispatch({type: type, payload: id})
-  }
+  const {handleDownVote} = useEcommerce()
 
   return (
     <article className="ItemCard col col-12 col-md-6 col-lg-4">
@@ -41,7 +39,7 @@ function ItemCard({
       <footer className="ItemCard__meta">
         <div className="ItemCard__icons">
           <div className="ItemCard__icon-row">
-            <IconButton aria-label="up vote product" handleClick={() => sendDispatch(actionTypes.HANDLER_UP_VOTE)}>
+            <IconButton aria-label="up vote product" handleClick={() => handleUpVote(id)}>
               <ThumbUp />
             </IconButton>
             <p
@@ -56,7 +54,7 @@ function ItemCard({
             </p>
           </div>
           <div className="ItemCard__icon-row">
-            <IconButton aria-label="down vote product" handleClick={() => sendDispatch(actionTypes.HANDLER_DOWN_VOTE)}>
+            <IconButton aria-label="down vote product" handleClick={() => handleDownVote(id)}>
               <ThumbDown />
             </IconButton>
             <p
