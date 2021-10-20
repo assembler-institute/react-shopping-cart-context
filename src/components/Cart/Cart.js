@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { NavLink } from "react-router-dom";
 
 import ShoppingCartItem from "../ShoppingCartItem";
 import Button from "../Button";
@@ -51,8 +52,15 @@ function Cart({...props }) {
               <hr />
             </div>
             <div className="col">
-              <Button>Checkout</Button>
-            </div>
+              <NavLink
+                  exact
+                  activeClassName="active"
+                  className="nav-link"
+                  to="/user-info"
+              >
+                <Button>Checkout</Button>
+              </NavLink>
+              </div>
           </div>
         </div>
       </div>

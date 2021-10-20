@@ -4,11 +4,13 @@ import { useProducts } from "./components/Context/reducer";
 
 import Home from "./pages/Home";
 import NewProduct from "./pages/NewProduct";
+import UserInfo from "./pages/UserInfo";
 
 import * as api from "./api";
 
 import useLocalStorage from "./hooks/useLocalStorage";
 import loadLocalStorageItems from "./utils/loadLocalStorageItems";
+import UserContext from "./Contexts/UserContext";
 
 /* import ProductsContext from "./components/Context/ProductsContext"; */
 
@@ -167,15 +169,24 @@ function App() {
     setProducts((prevState) => [newProduct, ...prevState]);
   }
 
+  function saveUser(userData) {
+    setUser((prevState) => [...prevState, userData]);
+  }
+
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/new-product">
+        <UserContext.Provider value={user}>
+        <Route path="/new-product" exact>
           <NewProduct saveNewProduct={saveNewProduct} />
         </Route>
         <Route path="/" exact>
           <Home />
         </Route>
+        <Route path="/user-info" exact>
+          <UserInfo />
+        </Route>
+        </UserContext.Provider> 
       </Switch>
     </BrowserRouter>
   );
