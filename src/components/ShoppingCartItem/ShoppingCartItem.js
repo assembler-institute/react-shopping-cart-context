@@ -27,15 +27,15 @@ function ShoppingCartItem({
 }) {
 
   const {
-    handleChange,
-    handleRemove,
+    handleChangeQuantity,
+    handleRemoveItem,
   } = useProducts();
 
   function onHandleChange(event) {
-    handleChange(event, id);
+    handleChangeQuantity(event, id);
   }
   function onHandleRemove() {
-    handleRemove(id);
+    handleRemoveItem(id);
   }
 
   return (

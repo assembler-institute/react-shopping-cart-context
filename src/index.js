@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { ProductsProvider } from "./context/products/reducer";
+import { CartItemsProvider } from "./context/cartItems/reducer";
 
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
@@ -11,7 +12,9 @@ import reportWebVitals from "./reportWebVitals";
 ReactDOM.render(
   <React.StrictMode>
     <ProductsProvider>
-      <App />
+      <CartItemsProvider>
+        <App />
+      </CartItemsProvider>
     </ProductsProvider>
   </React.StrictMode>,
   document.getElementById("root"),

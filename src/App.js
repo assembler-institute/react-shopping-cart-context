@@ -1,13 +1,12 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { getProducts } from "./services/shoppingCart";
 import { useProducts } from "./context/products/reducer";
 
 import Home from "./pages/Home";
 import NewProduct from "./pages/NewProduct";
 
 import useLocalStorage from "./hooks/useLocalStorage";
-import loadLocalStorageItems from "./utils/loadLocalStorageItems";
+// import loadLocalStorageItems from "./utils/loadLocalStorageItems";
 
 const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
 const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
