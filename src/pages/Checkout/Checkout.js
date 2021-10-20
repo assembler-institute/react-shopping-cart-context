@@ -1,6 +1,8 @@
 import { Redirect, Route, Switch, useRouteMatch } from "react-router";
+
 import CheckoutHeader from "../../components/CheckoutHeader";
 import CheckoutPersonalDetails from "../../components/CheckoutPersonalDetails";
+import CheckoutBillingDetails from "../../components/CheckoutBillingDetails";
 import withLayout from "../../hoc/withLayout";
 import { CheckoutProvider } from "../../providers/CheckoutProvider";
 
@@ -20,11 +22,10 @@ function Checkout() {
 						<CheckoutPersonalDetails />
 					</Route>
 					<Route exact path={`${url}/step-2`}>
-						{/* <BillingDetailsForm /> */}
-						<div>Pere rules</div>
+						<CheckoutBillingDetails />
 					</Route>
 					<Route exact path={`${url}/step-3`}>
-						{/* <PaymentDetailsForm /> */}
+						{/* <PaymentForm /> */}
 					</Route>
 					<Route exact path={`${url}/step-4`}>
 						{/* <OrderSummaryForm /> */}
