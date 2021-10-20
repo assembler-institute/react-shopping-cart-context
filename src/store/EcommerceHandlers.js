@@ -27,6 +27,23 @@ export function handleAddToCart({prevState, payload:productId}) {
   return {...prevState, cartItems:[...prevState.cartItems, updatedProduct]}
 }
 
+function buildNewCartItem(cartItem) {
+  if (cartItem.quantity >= cartItem.unitsInStock) {
+    return cartItem;
+  }
+
+  return {
+    id: cartItem.id,
+    title: cartItem.title,
+    img: cartItem.img,
+    price: cartItem.price,
+    unitsInStock: cartItem.unitsInStock,
+    createdAt: cartItem.createdAt,
+    updatedAt: cartItem.updatedAt,
+    quantity: cartItem.quantity + 1,
+  };
+}
+
 export function handleChange({prevState, event, productId}) {
   const updatedCartItems = cartItems.map((item) => {
     if (item.id === productId && item.quantity <= item.unitsInStock) {
@@ -124,21 +141,42 @@ export function handleDataFetch({prevState}) {
     return {
       ...prevState,
       products: data,
-      dataFetch: {
-        isLoading: false,
-        hasError: false,
-        loadingError: null
-      }
+      hasError: null
     }
   })
   .catch((error) => {
     return {
       ...prevState,
-      dataFetch: {
-        isLoading: false,
-        hasError: true,
-        loadingError: error
-      }
+      hasError: error
     }
   });
+}
+
+export function handleLoadingState({prevState, payload}) {
+  return {...prevState, isLoading: payload}
+}
+
+export function getCartTotal(cart) {
+  return cart.reduce((accum, item) => {
+    return accum + item.price * item.quantity;
+  }, 0);
+}
+
+export function Divider() {
+  return <hr className="ItemCard__divider" />;
+}
+
+export function getPopularityClasses(
+  currentValue,
+  limit,
+  prevClasses,
+  popularityClassName,
+) {
+  const halfLimit = Math.floor(limit / 2);
+
+  if (currentValue >= halfLimit) {
+    return `${prevClasses} ${popularityClassName}`;
+  }
+
+  return prevClasses;
 }

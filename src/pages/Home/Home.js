@@ -1,21 +1,12 @@
 import React, { useContext } from "react";
-import eCommerceContext from "../../context/EcommerceContext";
+import EcommerceContext from "../../context/EcommerceContext";
 import ProductsListing from "../../components/ProductsListing";
 import Cart from "../../components/Cart";
 import withLayout from "../../hoc/withLayout";
 
-function Home({
-  isLoading,
-  hasError,
-  loadingError,
-  handleDownVote,
-  handleUpVote,
-  handleSetFavorite,
-  handleAddToCart,
-  handleRemove,
-  handleChange,
-}) {
-  const { products, cartItems } = useContext(eCommerceContext);
+function Home() {
+
+  const { products, cartItems, isLoading, hasError } = useContext(EcommerceContext);
 
   return (
     <div className="row">
@@ -40,19 +31,13 @@ function Home({
             <div className="col col-12">
               <h2>Something went wrong...</h2>
               <pre>
-                <code>{loadingError}</code>
+                <code>{hasError}</code>
               </pre>
             </div>
           )}
           {!isLoading && !hasError && (
             <div className="col col-12">
-              <ProductsListing
-                products={products}
-                handleDownVote={handleDownVote}
-                handleUpVote={handleUpVote}
-                handleSetFavorite={handleSetFavorite}
-                handleAddToCart={handleAddToCart}
-              />
+              <ProductsListing products={products} />
             </div>
           )}
         </div>

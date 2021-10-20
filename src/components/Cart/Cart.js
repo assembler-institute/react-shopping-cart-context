@@ -2,16 +2,14 @@ import React from "react";
 
 import ShoppingCartItem from "../ShoppingCartItem";
 import Button from "../Button";
+import { getCartTotal } from "../../store/EcommerceHandlers";
 
-function getCartTotal(cart) {
-  return cart.reduce((accum, item) => {
-    return accum + item.price * item.quantity;
-  }, 0);
-}
+function Cart() {
 
-function Cart({ cartItems, handleRemove, handleChange, ...props }) {
+  const { cartItems } = useContext(EcommerceContext);
+  
   return (
-    <aside {...props}>
+    <aside>
       <div className="row flex-column">
         <div className="col shopping__cart__header">
           <h2 className="h3 mt-2">Shopping Cart</h2>
@@ -28,8 +26,6 @@ function Cart({ cartItems, handleRemove, handleChange, ...props }) {
               img={item.img}
               quantity={item.quantity}
               unitsInStock={item.unitsInStock}
-              handleRemove={handleRemove}
-              handleChange={handleChange}
             />
           ))
         ) : (

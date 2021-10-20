@@ -7,25 +7,7 @@ import { ThumbDown, ThumbUp } from "../SVGIcons";
 
 import "./ItemCard.scss";
 import {dispatch, actionTypes} from "../../store/EcommerceReducer";
-
-function Divider() {
-  return <hr className="ItemCard__divider" />;
-}
-
-function getPopularityClasses(
-  currentValue,
-  limit,
-  prevClasses,
-  popularityClassName,
-) {
-  const halfLimit = Math.floor(limit / 2);
-
-  if (currentValue >= halfLimit) {
-    return `${prevClasses} ${popularityClassName}`;
-  }
-
-  return prevClasses;
-}
+import { Divider, getPopularityClasses } from "../../store/EcommerceHandlers";
 
 function ItemCard({
   id,

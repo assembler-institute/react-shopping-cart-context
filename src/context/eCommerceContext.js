@@ -1,17 +1,11 @@
 import { createContext } from "react";
-import reducer from "../store/EcommerceReducer";
+import { dispatch, state } from "../store/EcommerceReducer";
 
-const eCommerce = {
-  products: [{}],
-  cartItems: [{}],
-  updateProducts: () => {},
-};
-
-const eCommerceContext = createContext(eCommerce);
+const eCommerceContext = createContext();
 
 export default function EcommerceContextProvider({children}) {
   return (
-    <eCommerceContext.Provider value={reducer}>
+    <eCommerceContext.Provider value={state, dispatch}>
       {children}
     </eCommerceContext.Provider>
   )
