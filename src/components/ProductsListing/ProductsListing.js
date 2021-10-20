@@ -5,15 +5,10 @@ import { useProducts } from "../Context/reducer";
 import ItemCard from "../ItemCard";
 
 function ProductsListing({
-  /* products,
-  handleDownVote,
-  handleUpVote,
-  handleSetFavorite,
-  handleAddToCart, */
   ...props
 }) {
   const { products } = useProducts();
-  console.log(products);
+
   return (
     <section className="row" {...props}>
       {products && products.map((product) => (

@@ -1,11 +1,10 @@
 import React, { useReducer, useContext, createContext } from "react";
-import { act } from "react-dom/test-utils";
-import NewProduct from "../../pages/NewProduct";
 import loadLocalStorageItems from "../../utils/loadLocalStorageItems";
 import { actionTypes } from "./types";
 
 const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
 const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
+const IVA = 1.21;
 
 const initValues = {
   cartItems: loadLocalStorageItems(CART_ITEMS_LOCAL_STORAGE_KEY, []),
@@ -13,6 +12,8 @@ const initValues = {
   isLoading: false,
   hasError: false,
   loadingError: false,
+  IVA: IVA,
+  totalPrice: 0,
 };
 
 const ProductsContext = createContext(initValues);
@@ -121,13 +122,9 @@ function reducer(state, action) {
 
       if (prevCartItem) {
         const updatedCartItems = cartItems.map((item) => {
-          if (item.id !== productId) {
-            return item;
-          }
+          if (item.id !== productId) return item;
 
-          if (item.quantity >= item.unitsInStock) {
-            return item;
-          }
+          if (item.quantity >= item.unitsInStock) return item;
 
           return {
             ...item,
@@ -147,7 +144,7 @@ function reducer(state, action) {
         ...state,
         cartItems: [...cartItems, updatedProduct],
       };
-      //setCartItems((prevState) => [...prevState, updatedProduct]);
+    
     }
     case actionTypes.REMOVE: {
       const productId = action.payload;

@@ -1,24 +1,11 @@
-import React from "react";
-
-import ShoppingCartItem from "../ShoppingCartItem";
-import Button from "../Button";
+import react from "react";
 import { useProducts } from "../Context/reducer";
+import ShoppingCartItem from "../ShoppingCartItem";
 
-export function getCartTotal(cart) {
-  console.log("entra");
-  return cart.reduce((accum, item) => {
-    return accum + item.price * item.quantity;
-  }, 0);
-}
+import { getCartTotal,getCartTotalIVA } from '../Cart/'
 
-export function getCartTotalIVA(cart, IVA = 1.21) {
-  return cart.reduce((accum, item) => {
-    return accum + item.price * IVA * item.quantity;
-  }, 0);
-}
-
-function Cart({ ...props }) {
-  const { cartItems, IVA } = useProducts();
+function SummaryOrder({ ...props }) {
+  const { cartItems } = useProducts();
   return (
     <aside {...props}>
       <div className="row flex-column">
@@ -35,8 +22,8 @@ function Cart({ ...props }) {
               title={item.title}
               price={item.price}
               img={item.img}
-              quantity={item.quantity}
-              unitsInStock={item.unitsInStock}
+              quantity={item.quantity} 
+             /*  unitsInStock={item.unitsInStock}*/
             />
           ))
         ) : (
@@ -44,6 +31,7 @@ function Cart({ ...props }) {
             <h4>Your cart is empty</h4>
           </div>
         )}
+        <hr />
         <div className="col shopping__cart__footer">
           <div className="row row-cols-1 flex-column">
             <div className="col">
@@ -52,26 +40,23 @@ function Cart({ ...props }) {
                   <span>Subtotal</span>
                   <span> {getCartTotal(cartItems)} €</span>
                 </div>
-
-                <div className="d-flex justify-content-between">
-                  <span>Shipping</span>
-                  <span>0 €</span>
-                </div>
                 <div className="d-flex justify-content-between">
                   <span>21% IVA</span>
-                  <span>
-                    {(getCartTotal(cartItems) * (IVA - 1)).toFixed(2)} €
-                  </span>
+                  <span>{ (getCartTotal(cartItems) * 0.21).toFixed(2) } €</span>
+                </div>
+                <div className="d-flex justify-content-between">
+                  <span>Shipping</span>
+                  <span>Calculted to the next step</span>
                 </div>
                 <div className="d-flex justify-content-between">
                   <span>Total</span>
-                  <span>{getCartTotalIVA(cartItems, IVA).toFixed(2)} €</span>
+                  <span> {getCartTotalIVA(cartItems).toFixed(2) }€</span>
                 </div>
               </div>
               <hr />
             </div>
             <div className="col">
-              <Button disabled={cartItems.length <= 0 && true}>Checkout</Button>
+              {/* <Button disabled={cartItems.length <= 0 && true}>Checkout</Button> */}
             </div>
           </div>
         </div>
@@ -80,4 +65,4 @@ function Cart({ ...props }) {
   );
 }
 
-export default Cart;
+export default SummaryOrder;

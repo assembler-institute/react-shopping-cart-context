@@ -16,24 +16,14 @@ function buildSelectOptions(unitsInStock) {
   });
 }
 
-function ShoppingCartItem({
-  id,
-  img,
-  title,
-  price,
-  quantity,
-  unitsInStock,
-
-}) {
-  const { remove,change } = useProducts();
+function ShoppingCartItem({ id, img, title, price, quantity, unitsInStock }) {
+  const { remove, change } = useProducts();
   function onHandleChange(event) {
     change(event, id);
   }
   function onHandleRemove() {
     remove(id);
   }
-
-  
 
   return (
     <div className="col">
@@ -56,21 +46,23 @@ function ShoppingCartItem({
                   </p>
                 </div>
                 <div className="col mt-auto">
-                  <div className="row">
-                    <div className="col col-6 col-lg-4">
-                      <select
-                        className="custom-select"
-                        onChange={onHandleChange}
-                        onBlur={onHandleChange}
-                        value={quantity}
-                      >
-                        {buildSelectOptions(unitsInStock)}
-                      </select>
+                  {unitsInStock ? (
+                    <div className="row">
+                      <div className="col col-6 col-lg-4">
+                        <select
+                          className="custom-select"
+                          onChange={onHandleChange}
+                          onBlur={onHandleChange}
+                          value={quantity}
+                        >
+                          {buildSelectOptions(unitsInStock)}
+                        </select>
+                      </div>
+                      <div className="col col-6 col-lg-8">
+                        <Button onClick={onHandleRemove}>Remove</Button>
+                      </div>
                     </div>
-                    <div className="col col-6 col-lg-8">
-                      <Button onClick={onHandleRemove}>Remove</Button>
-                    </div>
-                  </div>
+                  ):`Quantity: ${quantity}`}
                 </div>
               </div>
             </div>

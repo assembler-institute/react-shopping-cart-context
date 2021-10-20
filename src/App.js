@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { useProducts } from "./components/Context/reducer";
 
@@ -8,7 +8,7 @@ import NewProduct from "./pages/NewProduct";
 import * as api from "./api";
 
 import useLocalStorage from "./hooks/useLocalStorage";
-import loadLocalStorageItems from "./utils/loadLocalStorageItems";
+import BillingAddressPage from "./pages/BillingAddressPage/BillingAddressPage";
 
 /* import ProductsContext from "./components/Context/ProductsContext"; */
 
@@ -16,13 +16,6 @@ const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
 const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
 
 function App() {
-  /* const [products, setProducts] = useState(() =>
-    loadLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY, []),
-  );
-  const [cartItems, setCartItems] = useState(() =>
-    loadLocalStorageItems(CART_ITEMS_LOCAL_STORAGE_KEY, []),
-  ); */
-
   const {
     localStorageProducts,
     fetchProducts,
@@ -62,7 +55,10 @@ function App() {
     <BrowserRouter>
       <Switch>
         <Route path="/new-product">
-          <NewProduct/>
+          <NewProduct />
+        </Route>
+        <Route path="/billing-address">
+          <BillingAddressPage />
         </Route>
         <Route path="/" exact>
           <Home />

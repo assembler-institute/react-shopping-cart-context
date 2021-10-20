@@ -6,7 +6,6 @@ import Button from "../Button";
 import { ThumbDown, ThumbUp } from "../SVGIcons";
 
 import "./ItemCard.scss";
-import ProductsContext from "../Context/ProductsContext";
 import { useProducts } from "../Context/reducer";
 
 function Divider() {
@@ -61,7 +60,6 @@ function ItemCard({
           <img src={img} className="ItemCard__image" alt={title} />
           <FavoriteIconButton
              handleSetFavorite={onSetFavorite} 
-            /* onClick={() => setFavorite(id)} */
             isFavorite={isFavorite}
           />
         </div>
