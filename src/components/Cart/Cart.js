@@ -65,7 +65,9 @@ function Cart({ ...props }) {
                 className="navbar-brand"
                 to="/checkout"
               >
-                <Button>Checkout</Button>
+                <Button disabled={cartItemIds.length == 0 ? true : false}>
+                  Checkout
+                </Button>
               </NavLink>
             </div>
           </div>

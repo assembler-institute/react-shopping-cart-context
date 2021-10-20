@@ -1,12 +1,15 @@
 import React from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { useProducts } from "./context/products/reducer";
 
 import Home from "./pages/Home";
 import Checkout from "./pages/Checkout";
 import NewProduct from "./pages/NewProduct";
 import AddressForm from "./components/AddressForm";
-//import { Checkout, Home, NewProduct } from "./pages/index";
+import DetailsForm from "./components/DetailsForm";
+import PaymentForm from "./components/PaymentForm";
+
+//import { Checkout, Home, NewProduct, AddressForm, DetailsForm, PaymentForm } from "./pages/index";
 
 import useLocalStorage from "./hooks/useLocalStorage";
 // import loadLocalStorageItems from "./utils/loadLocalStorageItems";
@@ -23,16 +26,15 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/new-product">
-          <NewProduct />
-        </Route>
-
-        <Route path="/checkout/" exact>
-          <Checkout fullWidth />
-        </Route>
+        <Route exact path="/checkout/step-1" component={DetailsForm} />
+        <Route exact path="/checkout/step-2" component={AddressForm} />
+        <Route exact path="/checkout/step-3" component={PaymentForm} />
+        <Route path="/new-product" component={NewProduct} />
         <Route path="/" exact>
           <Home fullWidth />
         </Route>
+        <Redirect from="/checkout" exact to="/checkout/step-1" />
+        <Redirect to="/" />
       </Switch>
     </BrowserRouter>
   );

@@ -3,11 +3,12 @@ import React from "react";
 function Input({
   type = "text",
   label = "input-01",
+  subtitle,
   id = "input-01",
   value = "",
   placeholder = "",
-  handleChange = () => {},
-  handleBlur = () => {},
+  handleChange = () => { },
+  handleBlur = () => { },
   errorMessage,
   hasErrorMessage,
   ...props
@@ -15,6 +16,7 @@ function Input({
   return (
     <div className="form-group">
       <label htmlFor={id}>{label}</label>
+      {subtitle && <p className="form-subtitle">{subtitle}</p>}
       <input
         className={
           hasErrorMessage && errorMessage
