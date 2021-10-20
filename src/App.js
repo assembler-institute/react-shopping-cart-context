@@ -1,13 +1,19 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+<<<<<<< HEAD
 
+=======
+>>>>>>> fabb7dfad45385d6ba84dc018378b78f27fe4e3e
 import { useProducts } from "./context/products/reducer";
 
 import Home from "./pages/Home";
+import Checkout from "./pages/Checkout";
 import NewProduct from "./pages/NewProduct";
 
+// import { Checkout, Home, NewProduct} from "./pages/NewProduct";
+
 import useLocalStorage from "./hooks/useLocalStorage";
-import loadLocalStorageItems from "./utils/loadLocalStorageItems";
+// import loadLocalStorageItems from "./utils/loadLocalStorageItems";
 
 const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
 const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
@@ -23,6 +29,9 @@ function App() {
       <Switch>
         <Route path="/new-product">
           <NewProduct />
+        </Route>
+        <Route path="/checkout" exact>
+          <Checkout fullWidth />
         </Route>
         <Route path="/" exact>
           <Home fullWidth />

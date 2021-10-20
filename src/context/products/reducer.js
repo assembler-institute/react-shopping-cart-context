@@ -3,6 +3,10 @@ import React, { createContext, useContext, useReducer, useEffect } from "react";
 import { actionTypes } from "./types";
 
 import * as api from "../../api";
+import loadLocalStorageItems from '../../utils/loadLocalStorageItems';
+
+const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
+const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
 
 export const initialState = {
   products: {},
@@ -12,33 +16,25 @@ export const initialState = {
   isLoading: false,
   hasError: false,
   loadingError: null,
-  handleAddToCart: () => {},
-  handleChange: () => {},
-  handleRemove: () => {},
-  handleDownVote: () => {},
-  handleUpVote: () => {},
-  handleSetFavorite: () => {},
-  saveNewProduct: () => {},
+  handleAddToCart: () => { },
+  handleChangeQuantity: () => { },
+  handleRemoveItem: () => { },
+  handleDownVote: () => { },
+  handleUpVote: () => { },
+  handleSetFavorite: () => { },
+  saveNewProduct: () => { },
 };
 
 const ProductsContext = createContext(initialState);
 
 export const reducer = (state, action) => {
   switch (action.type) {
-    case actionTypes.ADD_PRODUCT_FETCHING:
     case actionTypes.PRODUCTS_FETCHING: {
       return {
         ...state,
         isFetching: true,
         hasError: false,
         error: null,
-      };
-    }
-    case actionTypes.ADD_PRODUCT_SUCCESS: {
-      return {
-        ...state,
-        products: action.payload,
-        isFetching: false,
       };
     }
     case actionTypes.PRODUCTS_SUCCESS: {
@@ -57,7 +53,6 @@ export const reducer = (state, action) => {
         isFetching: false,
       };
     }
-    case actionTypes.ADD_PRODUCT_ERROR:
     case actionTypes.PRODUCTS_ERROR: {
       return {
         ...state,
@@ -103,8 +98,8 @@ export const reducer = (state, action) => {
             isFetching: false,
           };
     }
-    case actionTypes.CHANGE: {
-      const { cartItems } = state;
+    case actionTypes.CHANGE_QUANTITY: {
+      const { cartItems } = state
       const { event, productId } = action.payload;
 
       return {
@@ -123,8 +118,8 @@ export const reducer = (state, action) => {
         isFetching: false,
       };
     }
-    case actionTypes.REMOVE: {
-      const { cartItems, cartItemIds } = state;
+    case actionTypes.REMOVE_ITEM: {
+      const { cartItems, cartItemIds } = state
       const cartItemId = action.payload;
 
       const updatedCartItemIds = cartItemIds.filter(
@@ -232,14 +227,7 @@ export const reducer = (state, action) => {
 
 function ProductsProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const {
-    products,
-    productIds,
-    cartItems,
-    isLoading,
-    hasError,
-    loadingError,
-  } = state;
+  const { productIds } = state;
 
   useEffect(() => {
     if (productIds.length === 0) {
@@ -258,20 +246,13 @@ function ProductsProvider({ children }) {
 
   const value = {
     ...state,
-    handleAddToCart: (productId) =>
-      dispatch({ type: actionTypes.ADD_TO_CART, payload: productId }),
-    handleChange: (event, productId) =>
-      dispatch({ type: actionTypes.CHANGE, payload: { event, productId } }),
-    handleRemove: (productId) =>
-      dispatch({ type: actionTypes.REMOVE, payload: productId }),
-    handleDownVote: (productId) =>
-      dispatch({ type: actionTypes.DOWN_VOTE, payload: productId }),
-    handleUpVote: (productId) =>
-      dispatch({ type: actionTypes.UP_VOTE, payload: productId }),
-    handleSetFavorite: (productId) =>
-      dispatch({ type: actionTypes.SET_FAVORITE, payload: productId }),
-    saveNewProduct: (newProduct) =>
-      dispatch({ type: actionTypes.SAVE_NEW_PRODUCT, payload: newProduct }),
+    handleAddToCart: (productId) => dispatch({ type: actionTypes.ADD_TO_CART, payload: productId }),
+    handleChangeQuantity: (event, productId) => dispatch({ type: actionTypes.CHANGE_QUANTITY, payload: { event, productId } }),
+    handleRemoveItem: (productId) => dispatch({ type: actionTypes.REMOVE_ITEM, payload: productId }),
+    handleDownVote: (productId) => dispatch({ type: actionTypes.DOWN_VOTE, payload: productId }),
+    handleUpVote: (productId) => dispatch({ type: actionTypes.UP_VOTE, payload: productId }),
+    handleSetFavorite: (productId) => dispatch({ type: actionTypes.SET_FAVORITE, payload: productId }),
+    saveNewProduct: (newProduct) => dispatch({ type: actionTypes.SAVE_NEW_PRODUCT, payload: newProduct })
   };
 
   return (
