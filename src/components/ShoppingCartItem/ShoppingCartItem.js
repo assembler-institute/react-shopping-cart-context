@@ -24,8 +24,6 @@ function ShoppingCartItem({
   price,
   quantity,
   unitsInStock,
-  // handleChange,
-  // handleRemove,
 }) {
 
   const {

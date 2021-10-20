@@ -4,29 +4,14 @@ import ItemCard from "../ItemCard";
 
 import { useProducts } from "../../context/products/reducer";
 
-function ProductsListing({
-  // products,
-  // handleDownVote,
-  // handleUpVote,
-  // handleSetFavorite,
-  // handleAddToCart,
-  ...props
-}) {
-
+function ProductsListing({ ...props }) {
   const {
     products,
     productIds,
-    // cartItems,
-    // isLoading,
-    // hasError,
-    // loadingError,
     handleAddToCart,
-    // handleChange,
-    // handleRemove,
     handleDownVote,
     handleUpVote,
     handleSetFavorite,
-    // saveNewProduct
   } = useProducts();
 
   return (

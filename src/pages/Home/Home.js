@@ -4,19 +4,11 @@ import ProductsListing from "../../components/ProductsListing";
 import Cart from "../../components/Cart";
 import withLayout from "../../hoc/withLayout";
 
-function Home({
-  // products,
-  cartItems,
-  isLoading,
-  hasError,
-  loadingError,
-  // handleDownVote,
-  // handleUpVote,
-  // handleSetFavorite,
-  // handleAddToCart,
-  handleRemove,
-  handleChange,
-}) {
+import { useProducts } from "../../context/products/reducer";
+
+function Home() {
+  const { isLoading, hasError, loadingError } = useProducts();
+
   return (
     <div className="row">
       <div className="col col-8">
@@ -46,24 +38,13 @@ function Home({
           )}
           {!isLoading && !hasError && (
             <div className="col col-12">
-              <ProductsListing
-              // products={products}
-              // handleDownVote={handleDownVote}
-              // handleUpVote={handleUpVote}
-              // handleSetFavorite={handleSetFavorite}
-              // handleAddToCart={handleAddToCart}
-              />
+              <ProductsListing />
             </div>
           )}
         </div>
       </div>
 
-      <Cart
-        className="col col-4"
-        cartItems={cartItems}
-        handleRemove={handleRemove}
-        handleChange={handleChange}
-      />
+      <Cart className="col col-4" />
     </div>
   );
 }

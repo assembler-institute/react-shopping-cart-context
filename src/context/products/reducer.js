@@ -1,14 +1,8 @@
-import React, { createContext, useContext, useReducer, useEffect } from 'react';
-
-import useLocalStorage from "../../hooks/useLocalStorage";
-// import loadLocalStorageItems from "./utils/loadLocalStorageItems";
+import React, { createContext, useContext, useReducer, useEffect } from "react";
 
 import { actionTypes } from "./types";
 
 import * as api from "../../api";
-
-const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
-const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
 
 export const initialState = {
   products: {},
@@ -18,13 +12,13 @@ export const initialState = {
   isLoading: false,
   hasError: false,
   loadingError: null,
-  handleAddToCart: () => { },
-  handleChange: () => { },
-  handleRemove: () => { },
-  handleDownVote: () => { },
-  handleUpVote: () => { },
-  handleSetFavorite: () => { },
-  saveNewProduct: () => { },
+  handleAddToCart: () => {},
+  handleChange: () => {},
+  handleRemove: () => {},
+  handleDownVote: () => {},
+  handleUpVote: () => {},
+  handleSetFavorite: () => {},
+  saveNewProduct: () => {},
 };
 
 const ProductsContext = createContext(initialState);
@@ -37,18 +31,17 @@ export const reducer = (state, action) => {
         ...state,
         isFetching: true,
         hasError: false,
-        error: null
+        error: null,
       };
     }
     case actionTypes.ADD_PRODUCT_SUCCESS: {
       return {
         ...state,
         products: action.payload,
-        isFetching: false
+        isFetching: false,
       };
     }
     case actionTypes.PRODUCTS_SUCCESS: {
-
       const newIds = [...state.productIds];
       const newObjs = { ...state.products };
 
@@ -61,7 +54,7 @@ export const reducer = (state, action) => {
         ...state,
         products: newObjs,
         productIds: newIds,
-        isFetching: false
+        isFetching: false,
       };
     }
     case actionTypes.ADD_PRODUCT_ERROR:
@@ -70,50 +63,48 @@ export const reducer = (state, action) => {
         ...state,
         isFetching: false,
         hasError: true,
-        error: action.payload
+        error: action.payload,
       };
     }
     case actionTypes.ADD_TO_CART: {
-      const { products, cartItems, cartItemIds } = state
+      const { products, cartItems, cartItemIds } = state;
       const cartItemId = action.payload;
 
       const prevCartItem = cartItemIds.find((itemId) => itemId === cartItemId);
 
       // @joan => hi ha dos returns
-      if (prevCartItem) {
-        return {
-          ...state,
-          cartItems: {
-            ...cartItems,
-            [cartItemId]: {
-              ...cartItems[cartItemId],
-              quantity: (cartItems[cartItemId].quantity < cartItems[cartItemId].unitsInStock)
-                ? cartItems[cartItemId].quantity + 1
-                : cartItems[cartItemId].quantity
-            }
-          },
-          isFetching: false
-        };
-      }
 
-      return {
-        ...state,
-        cartItemIds: [
-          ...cartItemIds,
-          cartItemId
-        ],
-        cartItems: {
-          ...cartItems,
-          [cartItemId]: {
-            ...products[cartItemId],
-            quantity: 1
+      return prevCartItem
+        ? {
+            ...state,
+            cartItems: {
+              ...cartItems,
+              [cartItemId]: {
+                ...cartItems[cartItemId],
+                quantity:
+                  cartItems[cartItemId].quantity <
+                  cartItems[cartItemId].unitsInStock
+                    ? cartItems[cartItemId].quantity + 1
+                    : cartItems[cartItemId].quantity,
+              },
+            },
+            isFetching: false,
           }
-        },
-        isFetching: false
-      };
+        : {
+            ...state,
+            cartItemIds: [...cartItemIds, cartItemId],
+            cartItems: {
+              ...cartItems,
+              [cartItemId]: {
+                ...products[cartItemId],
+                quantity: 1,
+              },
+            },
+            isFetching: false,
+          };
     }
     case actionTypes.CHANGE: {
-      const { cartItems } = state
+      const { cartItems } = state;
       const { event, productId } = action.payload;
 
       return {
@@ -122,31 +113,35 @@ export const reducer = (state, action) => {
           ...cartItems,
           [productId]: {
             ...cartItems[productId],
-            quantity: (cartItems[productId].id === productId && cartItems[productId].quantity <= cartItems[productId].unitsInStock)
-              ? Number(event.target.value)
-              : cartItems[productId].quantity
+            quantity:
+              cartItems[productId].id === productId &&
+              cartItems[productId].quantity <= cartItems[productId].unitsInStock
+                ? Number(event.target.value)
+                : cartItems[productId].quantity,
           },
         },
-        isFetching: false
+        isFetching: false,
       };
     }
     case actionTypes.REMOVE: {
-      const { cartItems, cartItemIds } = state
+      const { cartItems, cartItemIds } = state;
       const cartItemId = action.payload;
 
-      const updatedCartItemIds = cartItemIds.filter((itemId) => itemId !== cartItemId);
+      const updatedCartItemIds = cartItemIds.filter(
+        (itemId) => itemId !== cartItemId,
+      );
 
-      delete cartItems[cartItemId]
+      delete cartItems[cartItemId];
 
       return {
         ...state,
         cartItemIds: updatedCartItemIds,
         cartItems: cartItems,
-        isFetching: false
+        isFetching: false,
       };
     }
     case actionTypes.DOWN_VOTE: {
-      const { products } = state
+      const { products } = state;
       const productId = action.payload;
 
       return {
@@ -159,18 +154,20 @@ export const reducer = (state, action) => {
               ...products[productId].votes,
               downVotes: {
                 ...products[productId].votes.downVotes,
-                currentValue: (products[productId].votes.downVotes.currentValue < products[productId].votes.downVotes.lowerLimit)
-                  ? products[productId].votes.downVotes.currentValue + 1
-                  : products[productId].votes.downVotes.currentValue
-              }
-            }
+                currentValue:
+                  products[productId].votes.downVotes.currentValue <
+                  products[productId].votes.downVotes.lowerLimit
+                    ? products[productId].votes.downVotes.currentValue + 1
+                    : products[productId].votes.downVotes.currentValue,
+              },
+            },
           },
         },
         isFetching: false,
       };
     }
     case actionTypes.UP_VOTE: {
-      const { products } = state
+      const { products } = state;
       const productId = action.payload;
 
       return {
@@ -183,18 +180,20 @@ export const reducer = (state, action) => {
               ...products[productId].votes,
               upVotes: {
                 ...products[productId].votes.upVotes,
-                currentValue: (products[productId].votes.upVotes.currentValue < products[productId].votes.upVotes.upperLimit)
-                  ? products[productId].votes.upVotes.currentValue + 1
-                  : products[productId].votes.upVotes.currentValue
-              }
-            }
+                currentValue:
+                  products[productId].votes.upVotes.currentValue <
+                  products[productId].votes.upVotes.upperLimit
+                    ? products[productId].votes.upVotes.currentValue + 1
+                    : products[productId].votes.upVotes.currentValue,
+              },
+            },
           },
         },
         isFetching: false,
       };
     }
     case actionTypes.SET_FAVORITE: {
-      const { products } = state
+      const { products } = state;
       const productId = action.payload;
 
       return {
@@ -203,31 +202,44 @@ export const reducer = (state, action) => {
           ...products,
           [productId]: {
             ...products[productId],
-            isFavorite: !products[productId].isFavorite
+            isFavorite: !products[productId].isFavorite,
           },
         },
         isFetching: false,
-      }
+      };
     }
     case actionTypes.SAVE_NEW_PRODUCT: {
-   //   function saveNewProduct(newProduct) {
-  //   const request = async () => {
-  //     dispatch({ type: actionTypes.ADD_PRODUCT_FETCHING });
-  //     const { data, hasError, error } = await api.postProduct(newProduct);
+      const { products, productIds } = state;
 
-  //     if (hasError) dispatch({ type: actionTypes.ADD_PRODUCT_ERROR, payload: error });
-  //     else dispatch({ type: actionTypes.ADD_PRODUCT_SUCCESS, payload: data });
-  //   };
+      const product = action.payload;
+      productIds.push(product.id);
+
+      return {
+        ...state,
+        productIds: productIds,
+        products: {
+          ...products,
+          [product.id]: product,
+        },
+        isFetching: false,
+      };
     }
     default: {
       return state;
     }
   }
-}
+};
 
 function ProductsProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { products, productIds, cartItems, isLoading, hasError, loadingError } = state;
+  const {
+    products,
+    productIds,
+    cartItems,
+    isLoading,
+    hasError,
+    loadingError,
+  } = state;
 
   useEffect(() => {
     if (productIds.length === 0) {
@@ -235,7 +247,8 @@ function ProductsProvider({ children }) {
         dispatch({ type: actionTypes.PRODUCTS_FETCHING });
         const { data, hasError, loadingError } = await api.getProducts();
 
-        if (hasError) dispatch({ type: actionTypes.PRODUCTS_ERROR, payload: loadingError });
+        if (hasError)
+          dispatch({ type: actionTypes.PRODUCTS_ERROR, payload: loadingError });
         else dispatch({ type: actionTypes.PRODUCTS_SUCCESS, payload: data });
       };
 
@@ -243,147 +256,28 @@ function ProductsProvider({ children }) {
     }
   }, [dispatch]);
 
-  useLocalStorage(products, PRODUCTS_LOCAL_STORAGE_KEY);
-  useLocalStorage(cartItems, CART_ITEMS_LOCAL_STORAGE_KEY);
-
-  // function handleAddToCart(productId) {
-  //   const prevCartItem = cartItems.find((item) => item.id === productId);
-  //   const foundProduct = products.find((product) => product.id === productId);
-
-  //   if (prevCartItem) {
-  //     const updatedCartItems = cartItems.map((item) => {
-  //       if (item.id !== productId) {
-  //         return item;
-  //       }
-
-  //       if (item.quantity >= item.unitsInStock) {
-  //         return item;
-  //       }
-
-  //       return {
-  //         ...item,
-  //         quantity: item.quantity + 1,
-  //       };
-  //     });
-
-  //     setCartItems(updatedCartItems);
-  //     return;
-  //   }
-
-  //   const updatedProduct = buildNewCartItem(foundProduct);
-  //   setCartItems((prevState) => [...prevState, updatedProduct]);
-  // }
-
-  // function handleChange(event, productId) {
-  //   const updatedCartItems = cartItems.map((item) => {
-  //     if (item.id === productId && item.quantity <= item.unitsInStock) {
-  //       return {
-  //         ...item,
-  //         quantity: Number(event.target.value),
-  //       };
-  //     }
-
-  //     return item;
-  //   });
-
-  //   setCartItems(updatedCartItems);
-  // }
-
-  // function handleRemove(productId) {
-  //   const updatedCartItems = cartItems.filter((item) => item.id !== productId);
-
-  //   setCartItems(updatedCartItems);
-  // }
-
-  // function handleDownVote(productId) {
-  //   const updatedProducts = products.map((product) => {
-  //     if (
-  //       product.id === productId &&
-  //       product.votes.downVotes.currentValue <
-  //       product.votes.downVotes.lowerLimit
-  //     ) {
-  //       return {
-  //         ...product,
-  //         votes: {
-  //           ...product.votes,
-  //           downVotes: {
-  //             ...product.votes.downVotes,
-  //             currentValue: product.votes.downVotes.currentValue + 1,
-  //           },
-  //         },
-  //       };
-  //     }
-
-  //     return product;
-  //   });
-
-  //   setProducts(updatedProducts);
-  // }
-
-  // function handleUpVote(productId) {
-  //   const updatedProducts = products.map((product) => {
-  //     if (
-  //       product.id === productId &&
-  //       product.votes.upVotes.currentValue < product.votes.upVotes.upperLimit
-  //     ) {
-  //       return {
-  //         ...product,
-  //         votes: {
-  //           ...product.votes,
-  //           upVotes: {
-  //             ...product.votes.upVotes,
-  //             currentValue: product.votes.upVotes.currentValue + 1,
-  //           },
-  //         },
-  //       };
-  //     }
-
-  //     return product;
-  //   });
-
-  //   setProducts(updatedProducts);
-  // }
-
-  // function handleSetFavorite(productId) {
-  //   const updatedProducts = products.map((product) => {
-  //     if (product.id === productId) {
-  //       return {
-  //         ...product,
-  //         isFavorite: !product.isFavorite,
-  //       };
-  //     }
-
-  //     return product;
-  //   });
-
-  //   setProducts(updatedProducts);
-  // }
-
-  // function saveNewProduct(newProduct) {
-  //   const request = async () => {
-  //     dispatch({ type: actionTypes.ADD_PRODUCT_FETCHING });
-  //     const { data, hasError, error } = await api.postProduct(newProduct);
-
-  //     if (hasError) dispatch({ type: actionTypes.ADD_PRODUCT_ERROR, payload: error });
-  //     else dispatch({ type: actionTypes.ADD_PRODUCT_SUCCESS, payload: data });
-  //   };
-
-  //   request();
-  // }
-
   const value = {
     ...state,
-    handleAddToCart: (productId) => dispatch({ type: actionTypes.ADD_TO_CART, payload: productId }),
-    handleChange: (event, productId) => dispatch({ type: actionTypes.CHANGE, payload: { event, productId } }),
-    handleRemove: (productId) => dispatch({ type: actionTypes.REMOVE, payload: productId }),
-    handleDownVote: (productId) => dispatch({ type: actionTypes.DOWN_VOTE, payload: productId }),
-    handleUpVote: (productId) => dispatch({ type: actionTypes.UP_VOTE, payload: productId }),
-    handleSetFavorite: (productId) => dispatch({ type: actionTypes.SET_FAVORITE, payload: productId }),
-    saveNewProduct: (newProduct) => dispatch({ type: actionTypes.SAVE_NEW_PRODUCT, payload: newProduct })
+    handleAddToCart: (productId) =>
+      dispatch({ type: actionTypes.ADD_TO_CART, payload: productId }),
+    handleChange: (event, productId) =>
+      dispatch({ type: actionTypes.CHANGE, payload: { event, productId } }),
+    handleRemove: (productId) =>
+      dispatch({ type: actionTypes.REMOVE, payload: productId }),
+    handleDownVote: (productId) =>
+      dispatch({ type: actionTypes.DOWN_VOTE, payload: productId }),
+    handleUpVote: (productId) =>
+      dispatch({ type: actionTypes.UP_VOTE, payload: productId }),
+    handleSetFavorite: (productId) =>
+      dispatch({ type: actionTypes.SET_FAVORITE, payload: productId }),
+    saveNewProduct: (newProduct) =>
+      dispatch({ type: actionTypes.SAVE_NEW_PRODUCT, payload: newProduct }),
   };
 
   return (
-    <ProductsContext.Provider value={value}>{children}</ProductsContext.Provider>
+    <ProductsContext.Provider value={value}>
+      {children}
+    </ProductsContext.Provider>
   );
 }
 
@@ -394,3 +288,5 @@ function useProducts() {
 }
 
 export { ProductsProvider, useProducts };
+
+

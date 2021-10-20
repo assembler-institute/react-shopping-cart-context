@@ -5,7 +5,7 @@ import Button from "../Button";
 
 import { useProducts } from "../../context/products/reducer";
 
-function getCartTotal(cart) {
+function getCartTotal() {
   const {
     cartItems,
     cartItemIds,
@@ -17,27 +17,8 @@ function getCartTotal(cart) {
   }, 0)
 }
 
-function Cart({
-  // cartItems, 
-  handleRemove,
-  handleChange,
-  ...props
-}) {
-
-  const {
-    // products,
-    // productIds,
-    cartItems,
-    cartItemIds,
-    // isLoading,
-    // hasError,
-    // loadingError,
-    // handleAddToCart,
-    // handleDownVote,
-    // handleUpVote,
-    // handleSetFavorite,
-    // saveNewProduct
-  } = useProducts();
+function Cart({ ...props }) {
+  const { cartItems, cartItemIds } = useProducts();
 
   return (
     <aside {...props}>
@@ -60,8 +41,6 @@ function Cart({
                 img={item.img}
                 quantity={item.quantity}
                 unitsInStock={item.unitsInStock}
-              // handleRemove={handleRemove}
-              // handleChange={handleChange}
               />
             )
           })
@@ -76,7 +55,7 @@ function Cart({
               <div className="d-flex justify-content-between">
                 <h4 className="h5">Total</h4>
                 <h4>
-                  <strong>{getCartTotal(cartItemIds)}€</strong>
+                  <strong>{getCartTotal()}€</strong>
                 </h4>
               </div>
               <hr />
