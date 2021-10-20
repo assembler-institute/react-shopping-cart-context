@@ -2,7 +2,7 @@ import { Formik, validateYupSchema } from 'formik';
 import React, { useState, useEffect } from 'react';
 import * as Yup from 'yup';
 
-function BillingDetails() {
+function BillingDetailsForm() {
     return ( 
         <div className="div">
             <Formik
@@ -23,6 +23,7 @@ function BillingDetails() {
                   country: Yup.string()
                   .required('Come on, do not be lazy and input your zip code here')
               })}
+
               onSubmit={(values, { setSubmitting }) => {
                 setTimeout(() => {
                   alert(JSON.stringify(values, null, 2));
@@ -30,17 +31,24 @@ function BillingDetails() {
                 }, 400);
               }}
             >
-              <label htmlFor="address">Address*</label>
-              <field placeholder="input your address here" name="address" type="text"></field>
-              <label htmlFor="city"></label>
-              <field placeholder="input your city here" name="city" type="text">City*</field>
-              <label htmlFor="zipCode"></label>
-              <field placeholder="input your zip code here" name="zipCode" type="number">Zip/post code*</field>
-              <label htmlFor="country"></label>
-              <field placeholder="input your country/region here" name="country" type="text">Country/region*</field>
+              {({handleSubmit, getFieldProps, isValid, isValidating, errors}) => 
+                <form onSubmit={handleSubmit}>
+                <label htmlFor="address"  className="control-label">Address*</label> <br/>
+                <input placeholder="Input your address" name="address" type="text" className="form-control" {...getFieldProps}></input><br/>
+                <label htmlFor="city" className="control-label">City*</label><br/>
+                <input placeholder="Input your city" name="city" type="text" {...getFieldProps} className="form-control"></input><br/>
+                <label htmlFor="zipCode" className="control-label">Zip/post code*</label><br/>
+                <input placeholder="Input your zip code" name="zipCode" type="number" {...getFieldProps} className="form-control"></input><br/>
+                <label htmlFor="country" className="control-label">Country/region*</label><br/>
+                <input placeholder="Input country/region" name="country" type="text" {...getFieldProps} className="form-control"></input><br/>
+                <button type="submit" className="btn btn-primary">Submit</button>
+              </form>
+              }
+                          
+              
             </Formik>
         </div>
      );
 }
 
-export default BillingDetails;
+export default BillingDetailsForm;
