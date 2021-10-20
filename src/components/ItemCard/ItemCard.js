@@ -6,7 +6,7 @@ import Button from "../Button";
 import { ThumbDown, ThumbUp } from "../SVGIcons";
 
 import "./ItemCard.scss";
-import HomeContext from "../../context/HomeContext";
+import HomeContext from "../../context/homeContext/HomeContext";
 
 function Divider() {
   return <hr className="ItemCard__divider" />;

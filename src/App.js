@@ -13,8 +13,8 @@ import CheckoutStepTwo from "./pages/CheckoutStepTwo/index";
 import CheckoutStepThree from "./pages/CheckoutStepThree/index"
 import CheckoutStepFour from "./pages/CheckoutStepFour/index";
 
-import HomeContext from "./context/HomeContext";
-import NewProductContext from "./context/NewProductContext";
+import HomeContext from "./context/homeContext/HomeContext";
+import NewProductContext from "./context/homeContext/NewProductContext";
 
 function buildNewCartItem(cartItem) {
   if (cartItem.quantity >= cartItem.unitsInStock) {

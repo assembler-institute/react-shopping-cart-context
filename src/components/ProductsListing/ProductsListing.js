@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import HomeContext from "../../context/HomeContext";
+import HomeContext from "../../context/homeContext/HomeContext";
 
 import ItemCard from "../ItemCard";
 

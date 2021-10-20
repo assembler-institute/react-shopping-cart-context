@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 
 import ShoppingCartItem from "../ShoppingCartItem";
 import Button from "../Button";
-import HomeContext from "../../context/HomeContext";
+import HomeContext from "../../context/homeContext/HomeContext";
 
 function getCartTotal(cart) {
   return cart.reduce((accum, item) => {

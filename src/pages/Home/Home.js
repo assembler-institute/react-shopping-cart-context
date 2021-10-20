@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import ProductsListing from "../../components/ProductsListing";
 import Cart from "../../components/Cart";
 import withLayout from "../../hoc/withLayout";
-import HomeContext from "../../context/HomeContext";
+import HomeContext from "../../context/homeContext/HomeContext";
 
 function Home() {
   const { isLoading, hasError, loadingError } = useContext(HomeContext);

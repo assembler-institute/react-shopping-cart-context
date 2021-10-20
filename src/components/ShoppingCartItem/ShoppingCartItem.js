@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import "./ShoppingCartItem.scss";
 
 import Button from "../Button";
-import HomeContext from "../../context/HomeContext";
+import HomeContext from "../../context/homeContext/HomeContext";
 
 function buildSelectOptions(unitsInStock) {
   return Array.from({ length: unitsInStock }, (_value, index) => {

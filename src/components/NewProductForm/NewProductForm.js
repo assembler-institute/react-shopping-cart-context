@@ -7,7 +7,7 @@ import Input from "../Input";
 import Button from "../Button";
 
 import productSchema from "./product-schema";
-import NewProductContext from "../../context/NewProductContext";
+import NewProductContext from "../../context/homeContext/NewProductContext";
 import { useContext } from "react";
 
 function addProductDetails(product) {
