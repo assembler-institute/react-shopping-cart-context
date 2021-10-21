@@ -6,9 +6,12 @@ import Input from "../Input";
 import Button from "../Button";
 
 import billingAddressSchema from "./billing-address-schema";
+import { useUsers } from "../Context/UserContext";
 
 function FormBillingAddress() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
+
+  const { saveAddress } = useUsers();
 
   const formik = useFormik({
     initialValues: {
@@ -22,6 +25,7 @@ function FormBillingAddress() {
       console.log(values);
       /* const newProduct = addProductDetails(values);
       setProducts(newProduct); */
+      saveAddress(values);
       setSubmitting(true);
 
       setTimeout(() => {
@@ -104,11 +108,14 @@ function FormBillingAddress() {
         </div>
         <div className="form-group">
           <label>Country/region*</label>
-          <select name="country" id="country" className="form-control">
-            <option value="spain">Spain</option>
-            <option value="france">France</option>
-            <option value="germany">Germany</option>
-            <option value="italy">Italy</option>
+          <select name="country" id="country"
+           className="form-control"
+           onChange={formik.handleChange}>
+           
+            <option value="Spain">Spain</option>
+            <option value="France">France</option>
+            <option value="Germany">Germany</option>
+            <option value="Italy">Italy</option>
           </select>
         </div>
         <div className="form-group">

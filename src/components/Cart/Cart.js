@@ -1,12 +1,11 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import ShoppingCartItem from "../ShoppingCartItem";
 import Button from "../Button";
 import { useProducts } from "../Context/reducer";
 
 export function getCartTotal(cart) {
-  console.log("entra");
   return cart.reduce((accum, item) => {
     return accum + item.price * item.quantity;
   }, 0);
@@ -72,7 +71,11 @@ function Cart({ ...props }) {
               <hr />
             </div>
             <div className="col">
-              <Button disabled={cartItems.length <= 0 && true}>Checkout</Button>
+              <Link to="/checkout/step-1">
+                <Button disabled={cartItems.length <= 0 && true}>
+                  Checkout
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

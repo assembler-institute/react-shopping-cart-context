@@ -29,7 +29,7 @@ function FormPaymentDetails() {
         <div>Step 3 of 3</div>
       </div>
       <hr />
-      <div className="d-flex justify-content-around">
+      {/* <div className="d-flex justify-content-around">
         <div className="form-check border p-1">
           <input
             className="form-check-input"
@@ -63,16 +63,16 @@ function FormPaymentDetails() {
             <img src={applePay} style={{ width: "50px" }} />
           </label>
         </div>
-      </div>
-      <div>
+      </div> */}
+      {/* <div>
         <div>We accept the folling debit/credit cards</div>
         <img src={visa} style={{ width: "50px",border: "1px solid #EEE"}} />
         <img src={mastercard} style={{ width: "50px" ,border: "1px solid #EEE"}} />
         <img src={american} style={{ width: "50px",border: "1px solid #EEE" }} />
-      </div>
+      </div> */}
       <CreditCard />
-      <input type="checkbox" /> I have read and I accept the booking conditions,
-      general terms and privacy policy.
+      {/* <input type="checkbox" /> I have read and I accept the booking conditions,
+      general terms and privacy policy. */}
     </>
   );
 }

@@ -4,9 +4,10 @@ import ProductsListing from "../../components/ProductsListing";
 import Cart from "../../components/Cart";
 import withLayout from "../../hoc/withLayout";
 import ProductsContext from "../../components/Context/ProductsContext";
+import { useProducts } from "../../components/Context/reducer";
 
 function Home() {
-  const { isLoading, hasError, loadingError } = useContext(ProductsContext);
+  const { isLoading, hasError, loadingError } = useProducts();
   return (
     <div className="row">
       <div className="col col-8">
@@ -41,7 +42,6 @@ function Home() {
           )}
         </div>
       </div>
-
       <Cart className="col col-4" />
     </div>
   );
