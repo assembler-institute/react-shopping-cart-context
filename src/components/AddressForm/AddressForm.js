@@ -17,6 +17,7 @@ function AddressForm() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [country, setCountry] = useState("");
   const [region, setRegion] = useState("");
+
   let history = useHistory();
   const {
     handleAddressChange,
