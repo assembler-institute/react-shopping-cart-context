@@ -2,7 +2,7 @@ import React, { createContext, useContext, useReducer } from 'react';
 
 import { actionTypes } from "./types";
 
-import { useProducts } from "context/products/reducer";
+import { useProducts } from "context";
 
 export const initialState = {
   cartItems: {},

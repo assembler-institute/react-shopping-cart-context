@@ -1,2 +1,2 @@
-export { DataProvider, useData } from "./CheckoutFormContext";
+export { DataProvider, useData } from "./CheckoutForm";
 export { actionTypes } from "./actionTypes";

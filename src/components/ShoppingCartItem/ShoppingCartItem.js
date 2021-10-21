@@ -2,7 +2,7 @@ import React from "react";
 
 import { Button } from "components";
 
-import { useCartItems } from "context/cartItems/reducer";
+import { useCartItems } from "context";
 
 import "./ShoppingCartItem.scss";
 

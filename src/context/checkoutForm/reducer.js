@@ -13,14 +13,14 @@ const initialState = {
   City: "",
   ZipCode: "",
   DeliveryInstrucctions: "",
-  handleNameChange: () => {},
-  handleLastNameChange: () => {},
-  handlePhoneNumber: () => {},
-  handleEmailChange: () => {},
-  handleCountryChange: () => {},
-  handleCityChange: () => {},
-  handleZipCode: () => {},
-  handleDelivery: () => {},
+  handleNameChange: () => { },
+  handleLastNameChange: () => { },
+  handlePhoneNumber: () => { },
+  handleEmailChange: () => { },
+  handleCountryChange: () => { },
+  handleCityChange: () => { },
+  handleZipCode: () => { },
+  handleDelivery: () => { },
 };
 
 export const CheckoutFormContext = createContext(initialState);
@@ -40,7 +40,7 @@ const reducer = (state, action) => {
   }
 };
 
-export const DataProvider = ({ children }) => {
+const DataProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const value = {
@@ -72,8 +72,10 @@ export const DataProvider = ({ children }) => {
   );
 };
 
-export function useData() {
+function useData() {
   const context = useContext(CheckoutFormContext);
   if (!context) return null;
   return context;
 }
+
+export { DataProvider, useData };

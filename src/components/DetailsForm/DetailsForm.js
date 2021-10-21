@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 
 import { Formik } from "formik";
 import { useHistory } from "react-router-dom";
@@ -85,6 +85,15 @@ const DetailsForm = () => {
             value={values.phoneNumber}
             placeholder="Enter phone number"
             inputProps={{ name: "phoneNumber" }}
+            isValid={(value, country) => {
+              if (value.match(/12345/)) {
+                return 'Invalid value: ' + value + ', ' + country.name;
+              } else if (value.match(/1234/)) {
+                return false;
+              } else {
+                return true;
+              }
+            }}
             onChange={(phoneNumber, country, e) => {
               handleChange(phoneNumber, country, e);
             }}

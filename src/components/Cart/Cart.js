@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 import { Button, ShoppingCartItem } from "components"
 
-import { useCartItems } from "context/cartItems/reducer";
+import { useCartItems } from "context";
 
 function getCartTotal() {
   const { cartItems, cartItemIds } = useCartItems();

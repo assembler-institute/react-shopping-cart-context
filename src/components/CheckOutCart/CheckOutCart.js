@@ -2,7 +2,7 @@ import React from "react";
 
 import { ShoppingCartItem } from "components";
 
-import { useCartItems } from "context/cartItems/reducer";
+import { useCartItems } from "context";
 
 function getCartTotal() {
   const { cartItems, cartItemIds } = useCartItems();

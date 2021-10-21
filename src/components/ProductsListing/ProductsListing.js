@@ -2,8 +2,7 @@ import React from "react";
 
 import { ItemCard } from "components";
 
-import { useProducts } from "context/products/reducer";
-import { useCartItems } from "context/cartItems/reducer";
+import { useProducts, useCartItems } from "context";
 
 function ProductsListing({ ...props }) {
   const {
