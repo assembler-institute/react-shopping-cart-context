@@ -82,7 +82,7 @@ const reducer = (state, action) => {
   }
 };
 
-export const DataProvider = ({ children }) => {
+const DataProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const value = {
@@ -114,8 +114,10 @@ export const DataProvider = ({ children }) => {
   );
 };
 
-export function useData() {
+function useData() {
   const context = useContext(CheckoutForm);
   if (!context) return null;
   return context;
 }
+
+export { DataProvider, useData };

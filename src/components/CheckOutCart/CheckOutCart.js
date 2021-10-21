@@ -2,10 +2,10 @@ import React from "react";
 
 import { ShoppingCartItem } from "components";
 
-import { useProducts } from "context/products/reducer";
+import { useCartItems } from "context";
 
 function getCartTotal() {
-  const { cartItems, cartItemIds } = useProducts();
+  const { cartItems, cartItemIds } = useCartItems();
 
   return cartItemIds.reduce((accum, cartItemId) => {
     const product = cartItems[cartItemId];
@@ -14,7 +14,7 @@ function getCartTotal() {
 }
 
 function CheckOutCart({ ...props }) {
-  const { cartItems, cartItemIds } = useProducts();
+  const { cartItems, cartItemIds } = useCartItems();
 
   return (
     <aside {...props}>

@@ -3,7 +3,7 @@ import React from "react";
 import withLayout from "hoc/withLayout";
 import { Cart, ProductsListing } from "components";
 
-import { useProducts } from "context/products/reducer";
+import { useProducts } from "context";
 
 function Home() {
   const { isLoading, hasError, loadingError } = useProducts();

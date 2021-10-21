@@ -10,9 +10,8 @@ import { Button, Input } from "components";
 
 import detailsSchema from "./details-schema";
 
-import { useProducts } from "../../context/products/reducer";
-
 import { useData } from "context/checkoutForm/reducer";
+import { useCartItems } from "context/cartItems/reducer";
 
 const DetailsForm = () => {
   let history = useHistory();
@@ -24,7 +23,7 @@ const DetailsForm = () => {
     handleEmailChange,
   } = useData();
 
-  const { cartItemIds } = useProducts();
+  const { cartItemIds } = useCartItems();
 
   if (cartItemIds.length > 0) {
     return (

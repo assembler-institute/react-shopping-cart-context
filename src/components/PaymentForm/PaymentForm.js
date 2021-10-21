@@ -4,11 +4,13 @@ import { useHistory, Redirect } from "react-router-dom";
 
 import { withCheckout, withLayout } from "hoc";
 import { Button, PaymentInputs } from "components";
-import { useProducts } from "context/products/reducer";
+import { useCartItems } from "context/cartItems/reducer";
 
 const PaymentForm = () => {
   let history = useHistory();
-  const { cartItemIds } = useProducts();
+
+  const { cartItemIds } = useCartItems();
+
   if (cartItemIds.length > 0) {
     return (
       <Formik

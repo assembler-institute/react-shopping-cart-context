@@ -3,19 +3,19 @@ import { NavLink } from "react-router-dom";
 
 import { Button, ShoppingCartItem } from "components"
 
-import { useProducts } from "context/products/reducer";
+import { useCartItems } from "context";
 
 function getCartTotal() {
-  const { cartItems, cartItemIds } = useProducts();
+  const { cartItems, cartItemIds } = useCartItems();
 
   return cartItemIds.reduce((accum, cartItemId) => {
-    const product = cartItems[cartItemId];
-    return accum + product.price * product.quantity;
+    const carItem = cartItems[cartItemId];
+    return accum + carItem.price * carItem.quantity;
   }, 0);
 }
 
 function Cart({ ...props }) {
-  const { cartItems, cartItemIds } = useProducts();
+  const { cartItems, cartItemIds } = useCartItems();
 
   return (
     <aside {...props}>

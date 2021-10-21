@@ -2,17 +2,18 @@ import React from "react";
 
 import { ItemCard } from "components";
 
-import { useProducts } from "context/products/reducer";
+import { useProducts, useCartItems } from "context";
 
 function ProductsListing({ ...props }) {
   const {
     products,
     productIds,
-    handleAddToCart,
     handleDownVote,
     handleUpVote,
     handleSetFavorite,
   } = useProducts();
+
+  const { handleAddToCart } = useCartItems();
 
   return (
     <section className="row" {...props}>

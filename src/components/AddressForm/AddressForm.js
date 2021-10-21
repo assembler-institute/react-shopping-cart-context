@@ -10,13 +10,13 @@ import { Button, Input } from "components";
 import { useData } from "context/checkoutForm/reducer";
 
 import AddressSchema from "./AddressSchema";
-
-import { useProducts } from "context/products/reducer";
+import { useCartItems } from "context/cartItems/reducer";
 
 function AddressForm() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [country, setCountry] = useState("");
   const [region, setRegion] = useState("");
+  const { cartItemIds } = useCartItems();
 
   let history = useHistory();
   const {
@@ -26,7 +26,6 @@ function AddressForm() {
     handleZipCode,
     handleDelivery,
   } = useData();
-  const { cartItemIds } = useProducts();
 
   const formik = useFormik({
     initialValues: {

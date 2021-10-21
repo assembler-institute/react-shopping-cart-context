@@ -3,8 +3,7 @@ import ReactDOM from "react-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import { ProductsProvider } from "./context/products/reducer";
-import { CartItemsProvider } from "./context/cartItems/reducer";
+import { CartItemsProvider, DataProvider, ProductsProvider } from "context";
 
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
@@ -13,7 +12,9 @@ ReactDOM.render(
   <React.StrictMode>
     <ProductsProvider>
       <CartItemsProvider>
-        <App />
+        <DataProvider>
+          <App />
+        </DataProvider>
       </CartItemsProvider>
     </ProductsProvider>
   </React.StrictMode>,
