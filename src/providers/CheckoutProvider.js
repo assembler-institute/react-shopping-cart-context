@@ -50,24 +50,18 @@ function reducer(state, actions) {
 		case actionTypes.CHECKOUT_BILLING_DETAILS:
 			return {
 				...state,
-				step: state.step + 1,
+				step: state.step + 2,
 				billingDetails: { ...payload },
 			};
 		case actionTypes.CHECKOUT_PAYMENT_DETAILS:
-			return {
-				...state,
-				step: state.step + 1,
-				paymentDetails: { ...payload },
-			};
-		case actionTypes.CHECKOUT_ADD_COSTS:
 			const { cartItems } = useContext(AppContext);
 			const country = state.billingDetails.country;
-
 			const subtotal = getCartTotal(cartItems);
 
 			return {
 				...state,
 				step: state.step + 1,
+				paymentDetails: { ...payload },
 				orderCosts: {
 					subtotal,
 					shipping: COUNTRY_SHIPPING_LIST[country],
@@ -95,10 +89,10 @@ function CheckoutProvider({ children }) {
 					dispatch({ type: actionTypes.CHECKOUT_PERSONAL_DETAILS, payload: values });
 				},
 				setBillingDetails: (values) => {
-					dispatch({ type: actionTypes.CHECKOUT_PERSONAL_DETAILS, payload: values });
+					dispatch({ type: actionTypes.CHECKOUT_BILLING_DETAILS, payload: values });
 				},
 				setPaymentDetails: (values) => {
-					dispatch({ type: actionTypes.CHECKOUT_PERSONAL_DETAILS, payload: values });
+					dispatch({ type: actionTypes.CHECKOUT_PAYMENT_DETAILS, payload: values });
 				},
 			}}
 		>

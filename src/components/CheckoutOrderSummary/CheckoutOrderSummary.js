@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { Redirect } from "react-router";
+import { useEffect } from "react/cjs/react.development";
 import { CheckoutContext } from "../../providers/CheckoutProvider";
 import CheckoutTotal from "../CheckoutTotal/CheckoutTotal";
 
