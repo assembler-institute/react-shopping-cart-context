@@ -7,12 +7,12 @@ const stepOneSchema = Yup.object().shape({
   email: Yup.string()
     .email("The address is not valid")
     .required("Your email is equired"),
-  phone: Yup.number()
-    .typeError("Phone must be a number")
-    .integer("Please insert a valid phone number")
-    .min(100000000, "Please insert a valid phone number")
-    .max(99999999999, "Please insert a valid phone number")
-    .required("Your phone number is required"),
+    phone: Yup.number()
+      .typeError("Phone must be a number")
+      .integer("Please insert a valid phone number")
+      .min(100000000, "Please insert a valid phone number")
+      .max(99999999999, "Please insert a valid phone number")
+      .required("Your phone number is required"),
 });
 
 export default stepOneSchema;

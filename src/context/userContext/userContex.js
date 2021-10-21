@@ -38,19 +38,19 @@ function checkoutReducer(state, action) {
         countryCode:countryCode
       };
     }
-    // case actionTypes.SUBMIT_SECOND_PAGE: {
-    //   return {
-    //     ...state,
-    //     ...action.payload,
-    //   };
-    // }
-    // case actionTypes.SUBMIT_THIRD_PAGE: {
-    //   return {
-    //     ...state,
-    //     ...action.payload,
-    //     completed: true,
-    //   }
-    // }
+    case actionTypes.SUBMIT_SECOND_PAGE: {
+      return {
+        ...state,
+        ...action.payload,
+      };
+    }
+    case actionTypes.SUBMIT_THIRD_PAGE: {
+      return {
+        ...state,
+        ...action.payload,
+        completed: true,
+      }
+    }
     default: {
       return state;
     }
