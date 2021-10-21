@@ -49,7 +49,7 @@ function Cart() {
               <hr />
             </div>
             <div className="col">
-              <Button>Checkout</Button>
+              <Button >Checkout</Button>
             </div>
           </div>
         </div>

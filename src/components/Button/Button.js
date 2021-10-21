@@ -18,6 +18,7 @@ function Button({
 
   return (
     <button
+    onClick={()=>to=""}
       className={classes}
       type={submitButton ? "submit" : "button"}
       disabled={disabled}

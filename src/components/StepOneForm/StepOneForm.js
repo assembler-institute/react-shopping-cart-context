@@ -1,62 +1,61 @@
 import React from "react";
 import Input from "../Input";
-import  stepOneSchema from "./schema"
+import stepOneSchema from "./schema"
 import { useFormik } from 'formik';
-import {useContext} from "react"
+import{ useUser } from "../../context/userContext/userContex"
 
 
 
 
-function StepOneForm(){
-  // const { submitStepOne, stepOne } = useContext(userContext);
-  // const { name, email, countryCode, phone } = stepOne;
-  //   const formik = useFormik({
-    //   initialValues: {
-    //     name: name,
-    //     email: email,
-    //     countryCode: countryCode,
-    //     phone: phone,
-    //   },
-    //   validationSchema: stepOneSchema,
-    //   onSubmit: (values) => {
-    //     submitStepOne(values);
-    //     console.log(values)
-    //   },
-    // });
+function StepOneForm() {
+  const { name,email,countryCode,phone,submitStepOne} = useUser();
   
+  const formik = useFormik({
+    initialValues: {
+      name: name,
+      email: email,
+      countryCode: countryCode,
+      phone: phone,
+    },
+    validationSchema: stepOneSchema,
+    onSubmit: (values) => {
+      submitStepOne(values);
+      console.log(values)
+    },
+  });
 
 
-return(
+  return (
     <>
-    <div>
-    <form 
-     id="stepOne">
+      <div>
+      <form onSubmit={formik.handleSubmit} id="stepOne">
       <Input
         type="text"
         label="Name"
         id="name"
-        // value={value}
+        value={formik.values.name}
         placeholder="Your name"
-    //  handleChange={handleChange}
-       />
+        handleChange={formik.handleChange}
+        handleBlur={formik.handleBlur}
+        hasErrorMessage={formik.touched.name}
+        errorMessage={formik.errors.name}
+        isTouched={formik.touched.name}
+      />
       <Input
         type="text"
         label="Email"
         id="email"
+        value={formik.values.email}
+        placeholder="Your email address"
+        handleChange={formik.handleChange}
+        handleBlur={formik.handleBlur}
+        hasErrorMessage={formik.touched.email}
+        errorMessage={formik.errors.email}
+        isTouched={formik.touched.email}
       />
 
-      <span>Phone number</span>
-        <label htmlFor="phone">
-          <input
-            id="phone"
-            name="phone"
-            type="text"
-            placeholder="Your phone number"
-            className="phone"
-          />
-        </label>
-    </form>
-    </div>
+      </form>
+      </div>
     </>
-)
+  )
 } export default StepOneForm

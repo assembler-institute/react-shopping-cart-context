@@ -31,18 +31,7 @@ function AppHeader({ ...props }) {
               </li>
             </ul>
 
-            <ul className="navbar-nav mr-auto">
-              <li className="nav-item">
-                <NavLink
-                  exact
-                  activeClassName="active"
-                  className="nav-link"
-                  to="/checkout/step-1"
-                >
-                  Step one
-                </NavLink>
-              </li>
-            </ul>
+
 
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
