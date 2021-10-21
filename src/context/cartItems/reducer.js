@@ -2,8 +2,8 @@ import React, { createContext, useContext, useReducer, useEffect } from 'react';
 
 import { actionTypes } from "./types";
 
-import * as api from "../../api";
-import loadLocalStorageItems from '../../utils/loadLocalStorageItems';
+import * as api from "api";
+import loadLocalStorageItems from 'utils/loadLocalStorageItems';
 
 const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
 const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";

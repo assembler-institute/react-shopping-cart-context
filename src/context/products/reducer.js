@@ -2,8 +2,8 @@ import React, { createContext, useContext, useReducer, useEffect } from "react";
 
 import { actionTypes } from "./types";
 
-import * as api from "../../api";
-import loadLocalStorageItems from '../../utils/loadLocalStorageItems';
+import * as api from "api";
+import loadLocalStorageItems from 'utils/loadLocalStorageItems';
 
 const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
 const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
@@ -71,32 +71,32 @@ export const reducer = (state, action) => {
 
       return prevCartItem
         ? {
-            ...state,
-            cartItems: {
-              ...cartItems,
-              [cartItemId]: {
-                ...cartItems[cartItemId],
-                quantity:
-                  cartItems[cartItemId].quantity <
+          ...state,
+          cartItems: {
+            ...cartItems,
+            [cartItemId]: {
+              ...cartItems[cartItemId],
+              quantity:
+                cartItems[cartItemId].quantity <
                   cartItems[cartItemId].unitsInStock
-                    ? cartItems[cartItemId].quantity + 1
-                    : cartItems[cartItemId].quantity,
-              },
+                  ? cartItems[cartItemId].quantity + 1
+                  : cartItems[cartItemId].quantity,
             },
-            isFetching: false,
-          }
+          },
+          isFetching: false,
+        }
         : {
-            ...state,
-            cartItemIds: [...cartItemIds, cartItemId],
-            cartItems: {
-              ...cartItems,
-              [cartItemId]: {
-                ...products[cartItemId],
-                quantity: 1,
-              },
+          ...state,
+          cartItemIds: [...cartItemIds, cartItemId],
+          cartItems: {
+            ...cartItems,
+            [cartItemId]: {
+              ...products[cartItemId],
+              quantity: 1,
             },
-            isFetching: false,
-          };
+          },
+          isFetching: false,
+        };
     }
     case actionTypes.CHANGE_QUANTITY: {
       const { cartItems } = state
@@ -110,7 +110,7 @@ export const reducer = (state, action) => {
             ...cartItems[productId],
             quantity:
               cartItems[productId].id === productId &&
-              cartItems[productId].quantity <= cartItems[productId].unitsInStock
+                cartItems[productId].quantity <= cartItems[productId].unitsInStock
                 ? Number(event.target.value)
                 : cartItems[productId].quantity,
           },
@@ -151,7 +151,7 @@ export const reducer = (state, action) => {
                 ...products[productId].votes.downVotes,
                 currentValue:
                   products[productId].votes.downVotes.currentValue <
-                  products[productId].votes.downVotes.lowerLimit
+                    products[productId].votes.downVotes.lowerLimit
                     ? products[productId].votes.downVotes.currentValue + 1
                     : products[productId].votes.downVotes.currentValue,
               },
@@ -177,7 +177,7 @@ export const reducer = (state, action) => {
                 ...products[productId].votes.upVotes,
                 currentValue:
                   products[productId].votes.upVotes.currentValue <
-                  products[productId].votes.upVotes.upperLimit
+                    products[productId].votes.upVotes.upperLimit
                     ? products[productId].votes.upVotes.currentValue + 1
                     : products[productId].votes.upVotes.currentValue,
               },

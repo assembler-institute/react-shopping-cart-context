@@ -1,10 +1,10 @@
 import React from "react";
 
+import { Button } from "components";
+
+import { useProducts } from "context/products/reducer";
+
 import "./ShoppingCartItem.scss";
-
-import Button from "../Button";
-
-import { useProducts } from "../../context/products/reducer";
 
 function buildSelectOptions(unitsInStock) {
   return Array.from({ length: unitsInStock }, (_value, index) => {

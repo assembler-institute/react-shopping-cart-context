@@ -1,18 +1,15 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useFormik } from "formik";
+import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 
-import { FormikContext, useFormik } from "formik";
-import withLayout from "../../hoc/withLayout";
-
-import Input from "../Input";
-import Button from "../Button";
+import withCheckout from "hoc/withCheckout";
+import withLayout from "hoc/withLayout";
+import { Button, Input } from "components";
 
 import AddressSchema from "./AddressSchema";
-import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
-import CheckOutCart from "../CheckOutCart";
-import NavList from "../NavList";
 
-function AddressForm({ saveNewProduct }) {
+function AddressForm() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [country, setCountry] = useState("");
   const [region, setRegion] = useState("");
@@ -38,77 +35,70 @@ function AddressForm({ saveNewProduct }) {
   });
 
   return (
-    <div className="row">
-      <div className="d-flex flex-column">
-        <NavList />
-        <form onSubmit={formik.handleSubmit} className="col col-8">
-          <Input
-            type="text"
-            label="Address"
-            id="Address"
-            value={formik.values.Address}
-            placeholder="Please type your full Address"
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-            hasErrorMessage={formik.touched.Address}
-            errorMessage={formik.errors.Address}
-          />
-          <div class="form-group">
-            <label for="Country">Country</label>
-            <CountryDropdown
-              className="form-control"
-              id="Country"
-              value={country}
-              onChange={(val) => setCountry(val)}
-              required
-            />
-          </div>
-          <div class="form-group">
-            <label for="City">City</label>
-            <RegionDropdown
-              className="form-control"
-              id="City"
-              required
-              country={country}
-              value={region}
-              onChange={(val) => setRegion(val)}
-            />
-          </div>
-          <Input
-            type="text"
-            label="Zipcode"
-            id="ZipCode"
-            value={formik.values.ZipCode}
-            placeholder=""
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-            hasErrorMessage={formik.touched.ZipCode}
-            errorMessage={formik.errors.ZipCode}
-          />
-          <Input
-            type="text"
-            label="Instructions"
-            id="Instructions"
-            value={formik.values.Instructions}
-            placeholder="Delivery Instructions"
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-            hasErrorMessage={formik.touched.Instructions}
-            errorMessage={formik.errors.Instructions}
-          />
-
-          <Button
-            submitButton
-            block
-            disabled={formik.isValidating || !formik.isValid}
-          >
-            {formik.isSubmitting ? "Submitting..." : "Submit"}
-          </Button>
-        </form>
+    <form onSubmit={formik.handleSubmit} className="col col-8">
+      <Input
+        type="text"
+        label="Address"
+        id="Address"
+        value={formik.values.Address}
+        placeholder="Please type your full Address"
+        handleChange={formik.handleChange}
+        handleBlur={formik.handleBlur}
+        hasErrorMessage={formik.touched.Address}
+        errorMessage={formik.errors.Address}
+      />
+      <div class="form-group">
+        <label for="Country">Country</label>
+        <CountryDropdown
+          className="form-control"
+          id="Country"
+          value={country}
+          onChange={(val) => setCountry(val)}
+          required
+        />
       </div>
-      <CheckOutCart className="col col-4" />
-    </div>
+      <div class="form-group">
+        <label for="City">City</label>
+        <RegionDropdown
+          className="form-control"
+          id="City"
+          required
+          country={country}
+          value={region}
+          onChange={(val) => setRegion(val)}
+        />
+      </div>
+      <Input
+        type="text"
+        label="Zipcode"
+        id="ZipCode"
+        value={formik.values.ZipCode}
+        placeholder=""
+        handleChange={formik.handleChange}
+        handleBlur={formik.handleBlur}
+        hasErrorMessage={formik.touched.ZipCode}
+        errorMessage={formik.errors.ZipCode}
+      />
+      <Input
+        type="text"
+        label="Instructions"
+        id="Instructions"
+        value={formik.values.Instructions}
+        placeholder="Delivery Instructions"
+        handleChange={formik.handleChange}
+        handleBlur={formik.handleBlur}
+        hasErrorMessage={formik.touched.Instructions}
+        errorMessage={formik.errors.Instructions}
+      />
+      <Button
+        submitButton
+        block
+        disabled={formik.isValidating || !formik.isValid}
+      >
+        {formik.isSubmitting ? "Submitting..." : "Submit"}
+      </Button>
+    </form>
   );
 }
 
-export default withLayout(AddressForm);
+export default withLayout(withCheckout(AddressForm));
