@@ -1,19 +1,29 @@
 import React from "react";
 import Input from "../Input";
+import  stepOneSchema from "./schema"
+import { useFormik } from 'formik';
+import {useContext} from "react"
 
 
-function StepOneForm({
-    type = "text",
-    label = "input-01",
-    id = "input-01",
-    value = "fdgdfgfdg",
-    placeholder = "",
-    handleChange = () => {},
-    handleBlur = () => {},
-    errorMessage,
-    hasErrorMessage,
-    ...props
-  }){
+
+
+function StepOneForm(){
+  // const { submitStepOne, stepOne } = useContext(userContext);
+  // const { name, email, countryCode, phone } = stepOne;
+  //   const formik = useFormik({
+      initialValues: {
+        name: name,
+        email: email,
+        countryCode: countryCode,
+        phone: phone,
+      },
+      validationSchema: stepOneSchema,
+      onSubmit: (values) => {
+        submitStepOne(values);
+        console.log(values)
+      },
+    });
+  
 
 
 return(
