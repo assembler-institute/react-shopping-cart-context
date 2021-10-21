@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import EcommerceContext from "./context/EcommerceContext";
+import EcommerceContextProvider from "./context/EcommerceContext";
 
 import Home from "./pages/Home";
 import NewProduct from "./pages/NewProduct";
@@ -12,9 +12,9 @@ const CART_ITEMS_LOCAL_STORAGE_KEY = "cartItems";
 
 function App() {
   const {cartItems, products} = state
-  // First render 
+  // First render
   useEffect(() => {
-    
+
     dispatch({
       type:actionTypes.LOAD_LOCAL_STORAGE,
       payload:CART_ITEMS_LOCAL_STORAGE_KEY
@@ -52,7 +52,7 @@ function App() {
 
 
   return (
-    <EcommerceContext.Provider>
+    <EcommerceContextProvider>
       <BrowserRouter>
         <Switch>
           <Route path="/new-product">
@@ -63,7 +63,7 @@ function App() {
           </Route>
         </Switch>
       </BrowserRouter>
-    </EcommerceContext.Provider>
+    </EcommerceContextProvider>
   );
 }
 

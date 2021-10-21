@@ -1,15 +1,15 @@
 import { useReducer } from "react"
 import {getLocalStorageItems, setLocalStorageItems} from "../utils/loadLocalStorageItems";
-import { 
-  handleLoadingState, 
-  handleSetFavorite, 
-  handleUpVote, 
-  handleDownVote, 
-  handleAddToCart, 
-  handleRemove, 
-  handleChange, 
-  handleDataFetch 
-} from "./EcommerceHandlers";
+import {
+  handleLoadingState,
+  handleSetFavorite,
+  handleUpVote,
+  handleDownVote,
+  handleAddToCart,
+  handleRemove,
+  handleChange,
+  handleDataFetch
+} from "../store/EcommerceHandlers";
 
 
 const initialState = {
@@ -33,6 +33,7 @@ const actionTypes = {
 }
 
 const reduce = (prevState, action) => {
+
   const handler = Object.keys(actionTypes).find(action.type)
   if (!handler) return prevState;
   // This handler execute the logic and returns the new state
@@ -41,10 +42,11 @@ const reduce = (prevState, action) => {
 
 
 const reducer = useReducer(reduce, initialState)
-const dispatch = reducer()[1]
-const state = reducer()[0]
+export default reducer
+
+const{state, dispatch} = reducer;
 
 export {dispatch, state, actionTypes}
-export default reducer
+
 /// Aquí va el reducer donde initialState son las variables de state
 /// Y donde los type actions son los handlers de state
