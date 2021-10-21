@@ -1,7 +1,22 @@
 
-//*TODO fix FUCKING EVERYTHING !!!! -------
+import { buildNewCartItem } from "./generics";
 
-export function handleAddToCart({prevState, payload:productId}) {
+export function handleChange({prevState, payload: {id:productId, event}}) {
+
+  const updatedCartItems = prevState.cartItems.map((item) => {
+    if (item.id === productId && item.quantity <= item.unitsInStock) {
+      return {
+        ...item,
+        quantity: Number(event.target.value),
+      };
+    }
+
+    return item;
+  });
+
+  return {...prevState, cartItems:updatedCartItems};
+}
+export function handleAddToCart({prevState, payload: productId}) {
 
   const prevCartItem = prevState.cartItems.find((item) => item.id === productId);
   const foundProduct = prevState.products.find((product) => product.id === productId);
@@ -29,47 +44,14 @@ export function handleAddToCart({prevState, payload:productId}) {
 
   return {...prevState, cartItems:[...prevState.cartItems, updatedProduct]}
 }
+export function handleRemove({prevState, payload:productId}) {
 
-function buildNewCartItem(cartItem) {
-  if (cartItem.quantity >= cartItem.unitsInStock) {
-    return cartItem;
-  }
+  const updatedCartItems = prevState.cartItems.filter((item) => item.id !== productId);
 
-  return {
-    id: cartItem.id,
-    title: cartItem.title,
-    img: cartItem.img,
-    price: cartItem.price,
-    unitsInStock: cartItem.unitsInStock,
-    createdAt: cartItem.createdAt,
-    updatedAt: cartItem.updatedAt,
-    quantity: cartItem.quantity + 1,
-  };
+  return {...prevState, cartItems:updatedCartItems}
 }
-
-export function handleChange({prevState, event, productId}) {
-  const updatedCartItems = cartItems.map((item) => {
-    if (item.id === productId && item.quantity <= item.unitsInStock) {
-      return {
-        ...item,
-        quantity: Number(event.target.value),
-      };
-    }
-
-    return item;
-  });
-
-  setCartItems(updatedCartItems);
-}
-
-export function handleRemove({prevState, event, productId}) {
-  const updatedCartItems = cartItems.filter((item) => item.id !== productId);
-
-  setCartItems(updatedCartItems);
-}
-
-export function handleDownVote({prevState, event, productId}) {
-  const updatedProducts = products.map((product) => {
+export function handleDownVote({prevState, payload:productId}) {
+  const updatedProducts = prevState.products.map((product) => {
     if (
       product.id === productId &&
       product.votes.downVotes.currentValue <
@@ -90,11 +72,11 @@ export function handleDownVote({prevState, event, productId}) {
     return product;
   });
 
-  setProducts(updatedProducts);
+  return {...prevState, products:updatedProducts}
 }
 
-export function handleUpVote({prevState, event, productId}) {
-  const updatedProducts = products.map((product) => {
+export function handleUpVote({prevState, payload:productId}) {
+  const updatedProducts = prevState.products.map((product) => {
     if (
       product.id === productId &&
       product.votes.upVotes.currentValue < product.votes.upVotes.upperLimit
@@ -114,11 +96,14 @@ export function handleUpVote({prevState, event, productId}) {
     return product;
   });
 
-  setProducts(updatedProducts);
+  return {...prevState, products:updatedProducts};
 }
 
-export function handleSetFavorite(productId) {
-  const updatedProducts = products.map((product) => {
+//*TODO fix FUCKING EVERYTHING !!!! ----- MANEJAR ERROR DE propiedades de objeto de prevstate--
+
+
+export function handleSetFavorite({prevState, payload:productId}) {
+  const updatedProducts = prevState.products.map((product) => {
     if (product.id === productId) {
       return {
         ...product,
@@ -129,11 +114,8 @@ export function handleSetFavorite(productId) {
     return product;
   });
 
-  setProducts(updatedProducts);
-}
 
-export function saveNewProduct(newProduct) {
-  setProducts((prevState) => [newProduct, ...prevState]);
+  return {...prevState, products:updatedProducts};
 }
 
 export function handleDataFetch({prevState}) {
@@ -159,39 +141,4 @@ export function handleLoadingState({prevState, payload}) {
   return {...prevState, isLoading: payload}
 }
 
-export function getCartTotal(cart) {
-  return cart.reduce((accum, item) => {
-    return accum + item.price * item.quantity;
-  }, 0);
-}
 
-export function Divider() {
-  return <hr className="ItemCard__divider" />;
-}
-
-export function getPopularityClasses(
-  currentValue,
-  limit,
-  prevClasses,
-  popularityClassName,
-) {
-  const halfLimit = Math.floor(limit / 2);
-
-  if (currentValue >= halfLimit) {
-    return `${prevClasses} ${popularityClassName}`;
-  }
-
-  return prevClasses;
-}
-
-
-export function buildSelectOptions(unitsInStock) {
-  return Array.from({ length: unitsInStock }, (_value, index) => {
-    const currentIndex = index + 1;
-    return (
-      <option key={currentIndex} value={currentIndex}>
-        {currentIndex}
-      </option>
-    );
-  });
-}

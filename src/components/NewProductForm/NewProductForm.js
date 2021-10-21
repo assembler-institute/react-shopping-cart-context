@@ -8,7 +8,7 @@ import Input from "../Input";
 import Button from "../Button";
 
 import productSchema from "./product-schema";
-
+//*TODO fix !
 function addProductDetails(product) {
   return {
     id: uuid(),
