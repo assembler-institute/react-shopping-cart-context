@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useReducer, useEffect } from "react";
+import PropTypes from "prop-types";
 
 import { actionTypes } from "./types";
 
@@ -10,13 +11,13 @@ export const initialState = {
   isLoading: false,
   hasError: false,
   loadingError: null,
-  handleAddToCart: () => {},
-  handleChangeQuantity: () => {},
-  handleRemoveItem: () => {},
-  handleDownVote: () => {},
-  handleUpVote: () => {},
-  handleSetFavorite: () => {},
-  saveNewProduct: () => {},
+  handleAddToCart: () => { },
+  handleChangeQuantity: () => { },
+  handleRemoveItem: () => { },
+  handleDownVote: () => { },
+  handleUpVote: () => { },
+  handleSetFavorite: () => { },
+  saveNewProduct: () => { },
 };
 
 const ProductsContext = createContext(initialState);
@@ -71,7 +72,7 @@ export const reducer = (state, action) => {
                 ...products[productId].votes.downVotes,
                 currentValue:
                   products[productId].votes.downVotes.currentValue <
-                  products[productId].votes.downVotes.lowerLimit
+                    products[productId].votes.downVotes.lowerLimit
                     ? products[productId].votes.downVotes.currentValue + 1
                     : products[productId].votes.downVotes.currentValue,
               },
@@ -97,7 +98,7 @@ export const reducer = (state, action) => {
                 ...products[productId].votes.upVotes,
                 currentValue:
                   products[productId].votes.upVotes.currentValue <
-                  products[productId].votes.upVotes.upperLimit
+                    products[productId].votes.upVotes.upperLimit
                     ? products[productId].votes.upVotes.currentValue + 1
                     : products[productId].votes.upVotes.currentValue,
               },
@@ -183,6 +184,10 @@ function useProducts() {
   const context = useContext(ProductsContext);
   if (!context) return null;
   return context;
+}
+
+ProductsProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 }
 
 export { ProductsProvider, useProducts };

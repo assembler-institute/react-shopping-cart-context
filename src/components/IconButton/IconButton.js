@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function IconButton({ submit, handleClick, children, ...props }) {
   return (
@@ -12,5 +13,16 @@ function IconButton({ submit, handleClick, children, ...props }) {
     </button>
   );
 }
+
+IconButton.propTypes = {
+  submit: PropTypes.any,
+  handleClick: PropTypes.func,
+  children: PropTypes.node.isRequired,
+};
+
+IconButton.defaultProps = {
+  submit: undefined,
+  handleClick: null,
+};
 
 export default IconButton;

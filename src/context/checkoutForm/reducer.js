@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useReducer, useEffect } from "react";
+import React, { createContext, useContext, useReducer } from "react";
+import PropTypes from "prop-types";
 
 import { actionTypes } from "./actionTypes";
 
@@ -12,15 +13,15 @@ const initialState = {
   City: "",
   ZipCode: "",
   DeliveryInstrucctions: "",
-  handleNameChange: () => {},
-  handleLastNameChange: () => {},
-  handlePhoneNumber: () => {},
-  handleEmailChange: () => {},
-  handleAddressChange: () => {},
-  handleCountryChange: () => {},
-  handleCityChange: () => {},
-  handleZipCode: () => {},
-  handleDelivery: () => {},
+  handleNameChange: () => { },
+  handleLastNameChange: () => { },
+  handlePhoneNumber: () => { },
+  handleEmailChange: () => { },
+  handleAddressChange: () => { },
+  handleCountryChange: () => { },
+  handleCityChange: () => { },
+  handleZipCode: () => { },
+  handleDelivery: () => { },
 };
 
 export const CheckoutForm = createContext(initialState);
@@ -118,6 +119,10 @@ function useData() {
   const context = useContext(CheckoutForm);
   if (!context) return null;
   return context;
+}
+
+DataProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 }
 
 export { DataProvider, useData };

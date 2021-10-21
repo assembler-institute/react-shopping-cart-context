@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import { Button } from "components";
 
@@ -31,7 +32,8 @@ function ShoppingCartItem({
     handleRemoveItem,
   } = useCartItems();
 
-  function onHandleChange(event) {
+  function onHandleChange(event, id) {
+    event.persist();
     handleChangeQuantity(event, id);
   }
   function onHandleRemove() {
@@ -63,8 +65,8 @@ function ShoppingCartItem({
                     <div className="col col-6 col-lg-4">
                       <select
                         className="custom-select"
-                        onChange={onHandleChange}
-                        onBlur={onHandleChange}
+                        onChange={(event) => onHandleChange(event, id)}
+                        onBlur={(event) => onHandleChange(event, id)}
                         value={quantity}
                       >
                         {buildSelectOptions(unitsInStock)}
@@ -86,5 +88,14 @@ function ShoppingCartItem({
     </div>
   );
 }
+
+ShoppingCartItem.propTypes = {
+  id: PropTypes.string.isRequired,
+  img: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  quantity: PropTypes.number.isRequired,
+  unitsInStock: PropTypes.number.isRequired
+};
 
 export default ShoppingCartItem;

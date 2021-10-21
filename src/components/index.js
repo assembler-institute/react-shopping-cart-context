@@ -13,6 +13,7 @@ import ItemCard from "./ItemCard";
 import Main from "./Main";
 import NavList from "./NavList";
 import NewProductForm from "./NewProductForm";
+import PaymentCardForm from "./PaymentCardForm";
 import PaymentForm from "./PaymentForm";
 import PaymentInputs from "./PaymentInputs";
 import PhoneInputField from "./PhoneInputField";
@@ -35,6 +36,7 @@ export {
   Main,
   NavList,
   NewProductForm,
+  PaymentCardForm,
   PaymentForm,
   PaymentInputs,
   PhoneInputField,

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import { Button, FavoriteIconButton, IconButton } from 'components'
 import { ThumbDown, ThumbUp } from "../SVGIcons";
@@ -37,18 +38,10 @@ function ItemCard({
   handleSetFavorite,
   handleAddToCart,
 }) {
-  function onDownVote() {
-    handleDownVote(id);
-  }
-  function onUpVote() {
-    handleUpVote(id);
-  }
-  function onSetFavorite() {
-    handleSetFavorite(id);
-  }
-  function onAddToCart() {
-    handleAddToCart(id);
-  }
+  const onDownVote = () => handleDownVote(id);
+  const onUpVote = () => handleUpVote(id);
+  const onSetFavorite = () => handleSetFavorite(id);
+  const onAddToCart = () => handleAddToCart(id);
 
   return (
     <article className="ItemCard col col-12 col-md-6 col-lg-4">
@@ -105,5 +98,37 @@ function ItemCard({
     </article>
   );
 }
+
+getPopularityClasses.propTypes = {
+  currentValue: PropTypes.number.isRequired,
+  limit: PropTypes.number.isRequired,
+  prevClasses: PropTypes.string,
+  popularityClassName: PropTypes.string,
+};
+
+getPopularityClasses.defaultProps = {
+  prevClasses: "",
+  popularityClassName: "",
+};
+
+ItemCard.propTypes = {
+  id: PropTypes.string.isRequired,
+  img: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  shortDescription: PropTypes.string.isRequired,
+  isFavorite: PropTypes.bool.isRequired,
+  upVotes: PropTypes.shape({
+    currentValue: PropTypes.number.isRequired,
+    upperLimit: PropTypes.number.isRequired,
+  }),
+  downVotes: PropTypes.shape({
+    currentValue: PropTypes.number.isRequired,
+    lowerLimit: PropTypes.number.isRequired,
+  }),
+  handleDownVote: PropTypes.func.isRequired,
+  handleUpVote: PropTypes.func.isRequired,
+  handleSetFavorite: PropTypes.func.isRequired,
+  handleAddToCart: PropTypes.func.isRequired,
+};
 
 export default ItemCard;

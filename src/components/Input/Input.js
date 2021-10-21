@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function Input({
   type = "text",
@@ -13,6 +14,7 @@ function Input({
   hasErrorMessage,
   ...props
 }) {
+
   return (
     <div className="form-group">
       <label htmlFor={id}>{label}</label>
@@ -38,5 +40,27 @@ function Input({
     </div>
   );
 }
+
+Input.propTypes = {
+  type: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  subtitle: PropTypes.string,
+  id: PropTypes.string.isRequired,
+  value: PropTypes.any.isRequired,
+  placeholder: PropTypes.string,
+  handleChange: PropTypes.func,
+  handleBlur: PropTypes.func,
+  errorMessage: PropTypes.string,
+  hasErrorMessage: PropTypes.bool,
+};
+
+Input.defaultProps = {
+  subtitle: "",
+  placeholder: "",
+  handleChange: null,
+  handleBlur: null,
+  errorMessage: "",
+  hasErrorMessage: false,
+};
 
 export default Input;

@@ -1,5 +1,6 @@
 import React from "react";
 import { SavedIcon, UnsavedIcon } from "../SVGIcons";
+import PropTypes from "prop-types";
 
 import "./FavoriteIconButton.scss";
 
@@ -15,5 +16,15 @@ function FavoriteIconButton({ handleSetFavorite, isFavorite }) {
     </button>
   );
 }
+
+FavoriteIconButton.propTypes = {
+  handleSetFavorite: PropTypes.func,
+  isFavorite: PropTypes.bool.isRequired,
+};
+
+FavoriteIconButton.defaultProps = {
+  handleSetFavorite: null,
+  isFavorite: false,
+};
 
 export default FavoriteIconButton;
