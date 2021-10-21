@@ -105,7 +105,7 @@ const DetailsForm = () => {
                 value={values.email}
                 placeholder="email"
                 handleChange={handleChange}
-                handleBlur={handleBlur}
+                handleBlur={handleEmailChange}
                 hasErrorMessage={touched.email}
                 errorMessage={errors.email}
               />

@@ -11,12 +11,20 @@ import AddressSchema from "./AddressSchema";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 import CheckOutCart from "../CheckOutCart";
 import NavList from "../NavList";
+import { useData } from "../../context/checkoutFormContext/reducer";
 
-function AddressForm({ saveNewProduct }) {
+function AddressForm() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [country, setCountry] = useState("");
   const [region, setRegion] = useState("");
   let history = useHistory();
+  const {
+    handleAddressChange,
+    handleCountryChange,
+    handleCityChange,
+    handleZipCode,
+    handleDelivery,
+  } = useData();
 
   const formik = useFormik({
     initialValues: {
@@ -49,7 +57,7 @@ function AddressForm({ saveNewProduct }) {
             value={formik.values.Address}
             placeholder="Please type your full Address"
             handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
+            handleBlur={handleAddressChange}
             hasErrorMessage={formik.touched.Address}
             errorMessage={formik.errors.Address}
           />
@@ -59,7 +67,10 @@ function AddressForm({ saveNewProduct }) {
               className="form-control"
               id="Country"
               value={country}
-              onChange={(val) => setCountry(val)}
+              onChange={(val) => {
+                setCountry(val);
+              }}
+              onBlur={handleCountryChange}
               required
             />
           </div>
@@ -72,6 +83,7 @@ function AddressForm({ saveNewProduct }) {
               country={country}
               value={region}
               onChange={(val) => setRegion(val)}
+              onBlur={handleCityChange}
             />
           </div>
           <Input
@@ -81,7 +93,7 @@ function AddressForm({ saveNewProduct }) {
             value={formik.values.ZipCode}
             placeholder=""
             handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
+            handleBlur={handleZipCode}
             hasErrorMessage={formik.touched.ZipCode}
             errorMessage={formik.errors.ZipCode}
           />
@@ -92,7 +104,7 @@ function AddressForm({ saveNewProduct }) {
             value={formik.values.Instructions}
             placeholder="Delivery Instructions"
             handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
+            handleBlur={handleDelivery}
             hasErrorMessage={formik.touched.Instructions}
             errorMessage={formik.errors.Instructions}
           />

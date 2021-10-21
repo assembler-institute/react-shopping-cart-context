@@ -17,6 +17,7 @@ const initialState = {
   handleLastNameChange: () => {},
   handlePhoneNumber: () => {},
   handleEmailChange: () => {},
+  handleAddressChange: () => {},
   handleCountryChange: () => {},
   handleCityChange: () => {},
   handleZipCode: () => {},
@@ -28,13 +29,55 @@ export const CheckoutFormContext = createContext(initialState);
 const reducer = (state, action) => {
   switch (action.type) {
     case actionTypes.FIRST_NAME:
-      console.log(action.payload);
+      return {
+        ...state,
+        name: action.payload,
+      };
     case actionTypes.LAST_NAME:
-      console.log(action.payload);
-
+      return {
+        ...state,
+        lastName: action.payload,
+      };
     case actionTypes.PHONE_NUMBER:
-      console.log(action.payload);
+      return {
+        ...state,
+        phoneNumber: action.payload,
+      };
 
+    case actionTypes.EMAIL:
+      return {
+        ...state,
+        email: action.payload,
+      };
+
+    case actionTypes.ADDRESS:
+      return {
+        ...state,
+        Address: action.payload,
+      };
+
+    case actionTypes.COUNTRY:
+      return {
+        ...state,
+        Country: action.payload,
+      };
+    case actionTypes.CITY:
+      return {
+        ...state,
+        City: action.payload,
+      };
+
+    case actionTypes.ZIPCODE:
+      return {
+        ...state,
+        ZipCode: action.payload,
+      };
+
+    case actionTypes.INSTRUCTIONS:
+      return {
+        ...state,
+        DeliveryInstrucctions: action.payload,
+      };
     default:
       return { ...state };
   }
@@ -53,10 +96,12 @@ export const DataProvider = ({ children }) => {
       dispatch({ type: actionTypes.PHONE_NUMBER, payload: event.target.value }),
     handleEmailChange: (event) =>
       dispatch({ type: actionTypes.EMAIL, payload: event.target.value }),
-    handleCountryChange: (event) =>
-      dispatch({ type: actionTypes.COUNTRY, payload: event.target.value }),
-    handleCityChange: (event) =>
-      dispatch({ type: actionTypes.CITY, payload: event.target.value }),
+    handleAddressChange: (event) =>
+      dispatch({ type: actionTypes.ADDRESS, payload: event.target.value }),
+    handleCountryChange: (val) =>
+      dispatch({ type: actionTypes.COUNTRY, payload: val }),
+    handleCityChange: (val) =>
+      dispatch({ type: actionTypes.CITY, payload: val }),
     handleZipCode: (event) =>
       dispatch({ type: actionTypes.ZIPCODE, payload: event.target.value }),
     handleDelivery: (event) =>
