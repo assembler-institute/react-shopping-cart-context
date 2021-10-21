@@ -15,7 +15,7 @@ import CheckoutStepFour from "./pages/CheckoutStepFour/index";
 
 import HomeContext from "./context/homeContext/HomeContext";
 import NewProductContext from "./context/homeContext/NewProductContext";
-import UserContextProvider from "./context/userContext/userContex";
+
 
 function buildNewCartItem(cartItem) {
   if (cartItem.quantity >= cartItem.unitsInStock) {
@@ -254,7 +254,7 @@ function App() {
             <Home fullWidth />
           </HomeContext.Provider>
         </Route>
-          <UserContextProvider>
+
         <Route path="/checkout/step-1" exact>
           <CheckoutStepOne />
         </Route>
@@ -267,7 +267,7 @@ function App() {
         <Route path="/checkout/order-summary" exact>
           <CheckoutStepFour />
         </Route>
-          </UserContextProvider>
+
       </Switch>
     </BrowserRouter>
   );

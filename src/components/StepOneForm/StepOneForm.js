@@ -11,18 +11,18 @@ function StepOneForm(){
   // const { submitStepOne, stepOne } = useContext(userContext);
   // const { name, email, countryCode, phone } = stepOne;
   //   const formik = useFormik({
-      initialValues: {
-        name: name,
-        email: email,
-        countryCode: countryCode,
-        phone: phone,
-      },
-      validationSchema: stepOneSchema,
-      onSubmit: (values) => {
-        submitStepOne(values);
-        console.log(values)
-      },
-    });
+    //   initialValues: {
+    //     name: name,
+    //     email: email,
+    //     countryCode: countryCode,
+    //     phone: phone,
+    //   },
+    //   validationSchema: stepOneSchema,
+    //   onSubmit: (values) => {
+    //     submitStepOne(values);
+    //     console.log(values)
+    //   },
+    // });
   
 
 
@@ -35,9 +35,9 @@ return(
         type="text"
         label="Name"
         id="name"
-        value={value}
+        // value={value}
         placeholder="Your name"
-     handleChange={handleChange}
+    //  handleChange={handleChange}
        />
       <Input
         type="text"
