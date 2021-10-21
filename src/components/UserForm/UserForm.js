@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 
 import UserSchema from "./User-schema";
+import "./userFormStyle.scss"
 /* import userContext from "../../Contexts/UserContext" */
 import Input from "../Input";
 import Button from "../Button";
@@ -22,17 +23,10 @@ function UserForm() {
     },
     validationSchema: UserSchema,
     onSubmit: (values, { setSubmitting }) => {
-      /* updateFormData(values);
-            setSubmitting(true); */
       console.log(values);
-
       saveUser(values);
       setSubmitting(true);
       setTimeout(() => {
-        /* saveUser(({ ...prev }) => ({
-                ...prev,
-                completed: true,
-            })); */
         setHasSubmitted(true);
       }, 500);
     },
@@ -81,10 +75,9 @@ function UserForm() {
               errorMessage={formik.errors.email}
             />
 
-            <span>Phone number</span>
-            <div>
+            <label htmlFor="phone">Phone number</label>
+            <div className="row align-items-center">
               <select
-                className="countryCode"
                 name="countryCode"
                 id="countryCode"
                 onChange={formik.handleChange}
@@ -94,25 +87,24 @@ function UserForm() {
                 <option value="+49">Germany</option>
                 <option value="+33">France</option>
               </select>
-              <label htmlFor="phone">
-                <input
+                <Input
                   id="phone"
-                  name="phone"
+                  label=""
                   type="text"
                   placeholder="Your phone number"
-                  className="phone"
                   value={formik.values.phone}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
+                  hasErrorMessage={formik.touched.phone}
+                  errorMessage={formik.errors.phone}
                 />
-              </label>
             </div>
             <Button
               submitButton
               block
               disabled={formik.isValidating || !formik.isValid}
             >
-              {formik.isSubmitting ? "Submitting..." : "Submit"}
+              {formik.isSubmitting ? "Submitting..." : "Continue to Billing Address"}
             </Button>
           </form>
 
