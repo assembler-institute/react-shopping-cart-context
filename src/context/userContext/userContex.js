@@ -1,35 +1,56 @@
-import React, { createContext, useReducer } from "react";
+import React, { createContext, useContext, useReducer } from "react";
+
+export const actionTypes = {
+  SUBMIT_ONE_PAGE: "SUBMIT_ONE_PAGE",
+  SUBMIT_SECOND_PAGE: "SUBMIT_ONE_PAGE",
+  SUBMIT_THIRD_PAGE: "SUBMIT_ONE_PAGE",
+};
 
 
+const initialState = {
 
-const checkInitialState = {
-  stepOne: {
-    completed: false,
-    name: "",
-    email: "",
-    countryCode: "+34",
-    phone: "",
-  }
+  name: "",
+  email: "",
+  countryCode: "+34",
+  phone: "",
+
+  address: "",
+  city: "",
+  zip: "",
+  country: "Cat",
+
+  cardHolder: "",
+  cardNumber: "",
+  expiryDate: "",
+  cvv: "",
+  acceptedTerms: false,
 }
-
-const SUBMITONE = "SUBMITONE";
-const SUBMITTWO = "SUBMITTWO";
-const SUBMITTHREE = "SUBMITTHREE";
-const RESET = "RESET";
-
-export const userContext = createContext(checkInitialState)
-
-function userReducer(state, action) {
+const userContext = createContext(initialState);
+function checkoutReducer(state, action) {
   switch (action.type) {
-    case SUBMITONE: {
+    case actionTypes.SUBMIT_ONE_PAGE: {
+      const { name, email, phone, countryCode } = action.payload
       return {
         ...state,
-        stepOne: {
-          ...action.payload,
-          completed: true,
-        },
+        name: name,
+        email:email,
+        phone:phone,
+        countryCode:countryCode
       };
     }
+    // case actionTypes.SUBMIT_SECOND_PAGE: {
+    //   return {
+    //     ...state,
+    //     ...action.payload,
+    //   };
+    // }
+    // case actionTypes.SUBMIT_THIRD_PAGE: {
+    //   return {
+    //     ...state,
+    //     ...action.payload,
+    //     completed: true,
+    //   }
+    // }
     default: {
       return state;
     }
@@ -37,26 +58,27 @@ function userReducer(state, action) {
 }
 
 function UserContextProvider({ children }) {
-  const [checkState, dispatch] = useReducer(useReducer, checkInitialState);
+  const [state, dispatch] = useReducer(checkoutReducer, initialState);
 
-  function submitStepOne(formOne) {
-    dispatch({
-      type: SUBMITONE,
-      payload: formOne,
-    });
+  const value = {
+    submitStepOne: (data) => dispatch({
+      type: actionTypes.SUBMIT_ONE_PAGE,
+      payload: data
+    })
   }
 
-
   return (
-    <UserContext.Provider
-      value={{
-        stepOne: checkState.stepOne,
-        submitStepOne: submitStepOne,
-      }}
+    <userContext.Provider
+      value={value}
     >
       {children}
-    </UserContext.Provider>
+    </userContext.Provider>
   );
 }
 
-export default UserContextProvider;
+function useUser() {
+  const context = useContext(userContext);
+  if (!context) return null;
+  return context;
+}
+export { UserContextProvider, useUser };
