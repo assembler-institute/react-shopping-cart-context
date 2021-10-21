@@ -12,6 +12,7 @@ const schema = Yup.object({
         .required("Come on, don't be so Catalan and input your card expiry date"),
     CVVCode: Yup.string()
         .required("Come on, don't be so Catalan and input your CVV code"),
+    acceptTerms: Yup.boolean().oneOf([true], "The terms and conditions must be accepted."),
 })
 
 function PaymentForm(props) {
@@ -22,7 +23,7 @@ function PaymentForm(props) {
             cardNumber: "",
             cardExpiryDate: "",
             CVVCode: "",
-            hasRead: false,
+            acceptTerms: false,
         },
         validationSchema: schema,
         validateOnBlur: true,
@@ -36,27 +37,34 @@ function PaymentForm(props) {
     return (
         <div>
             <form onSubmit={handleSubmit}>
+                {errors.paymentType && touched.paymentType && <div className="text-danger">{errors.paymentType}</div>}
+                {errors.cardHolderName && touched.cardHolderName && <div className="text-danger">{errors.cardHolderName}</div>}
+                {errors.cardNumber && touched.cardNumber && <div className="text-danger">{errors.cardNumber}</div>}
+                {errors.cardExpiryDate && touched.cardExpiryDate && <div className="text-danger">{errors.cardExpiryDate}</div>}
+                {errors.CVVCode && touched.CVVCode && <div className="text-danger">{errors.CVVCode}</div>}
+                {errors.acceptTerms && touched.acceptTerms && <div className="text-danger">{errors.acceptTerms}</div>}
+
                 <label className="control-label">How would you like to pay?</label><br />
-                <div className="form-check form-check-inline">
+                <div role="group" className="form-check form-check-inline">
                     <input
                         className="form-check-input"
                         type="radio"
                         name="paymentType"
-                        value={values.paymentType}
+                        value="visa"
                         onChange={handleChange}
                     />
                     <input
                         className="form-check-input"
                         type="radio"
                         name="paymentType"
-                        value={values.paymentType}
+                        value="masterCard"
                         onChange={handleChange}
                     />
                     <input
                         className="form-check-input"
                         type="radio"
                         name="paymentType"
-                        value={values.paymentType}
+                        value="americanExpress"
                         onChange={handleChange}
                     />
                 </div>
@@ -102,12 +110,12 @@ function PaymentForm(props) {
                 <input
                     type="checkbox"
                     className="form-check-input"
-                    name="hasRead"
-                    value={values.hasRead}
+                    name="acceptTerms"
+                    value={values.acceptTerms}
                     onChange={handleChange}
                     onBlur={handleBlur}
                 /><label>I have read and accept the booking conditions general terms  and privacy policy</label><br />
-                <img></img> <span>We use secure SSL transmission and encrypted storage to protect your personal information.</span><br />
+                <span>We use secure SSL transmission and encrypted storage to protect your personal information.</span><br />
                 <span></span><br />
                 <button type="submit" className="btn btn-primary">Complete booking</button>
             </form>
