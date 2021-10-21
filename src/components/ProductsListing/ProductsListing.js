@@ -1,8 +1,8 @@
 import React from "react";
 
-import ItemCard from "../ItemCard";
+import { ItemCard } from "components";
 
-import { useProducts } from "../../context/products/reducer";
+import { useProducts } from "context/products/reducer";
 
 function ProductsListing({ ...props }) {
   const {

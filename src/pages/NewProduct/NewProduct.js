@@ -1,9 +1,9 @@
 import React from "react";
 
-import NewProductForm from "../../components/NewProductForm";
-import withLayout from "../../hoc/withLayout";
+import { withLayout } from "hoc";
+import { NewProductForm } from "components";
 
-import { useProducts } from "../../context/products/reducer";
+import { useProducts } from "context/products/reducer";
 
 function NewProduct() {
   const { saveNewProduct } = useProducts();

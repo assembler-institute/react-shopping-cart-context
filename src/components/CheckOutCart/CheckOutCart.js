@@ -1,8 +1,8 @@
 import React from "react";
 
-import ShoppingCartItem from "../ShoppingCartItem";
+import { ShoppingCartItem } from "components";
 
-import { useProducts } from "../../context/products/reducer";
+import { useProducts } from "context/products/reducer";
 
 function getCartTotal() {
   const { cartItems, cartItemIds } = useProducts();

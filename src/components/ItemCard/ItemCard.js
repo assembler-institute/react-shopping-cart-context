@@ -1,8 +1,6 @@
 import React from "react";
 
-import FavoriteIconButton from "../FavoriteIconButton";
-import IconButton from "../IconButton";
-import Button from "../Button";
+import { Button, FavoriteIconButton, IconButton } from 'components'
 import { ThumbDown, ThumbUp } from "../SVGIcons";
 
 import "./ItemCard.scss";

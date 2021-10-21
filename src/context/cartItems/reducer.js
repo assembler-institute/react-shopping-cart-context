@@ -1,9 +1,9 @@
-import React, { createContext, useContext, useReducer, useEffect } from 'react';
+import React, { createContext, useContext, useReducer, useEffect } from "react";
 
 import { actionTypes } from "./types";
 
-import * as api from "../../api";
-import loadLocalStorageItems from '../../utils/loadLocalStorageItems';
+import * as api from "../../api/index";
+import loadLocalStorageItems from "utils/loadLocalStorageItems";
 
 const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
 const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
@@ -16,9 +16,9 @@ export const initialState = {
   isLoading: false,
   hasError: false,
   loadingError: null,
-  handleAddToCart: () => { },
-  handleChangeQuantity: () => { },
-  handleRemoveItem: () => { },
+  handleAddToCart: () => {},
+  handleChangeQuantity: () => {},
+  handleRemoveItem: () => {},
 };
 
 const CartItemsContext = createContext(initialState);
@@ -30,11 +30,10 @@ export const reducer = (state, action) => {
         ...state,
         isFetching: true,
         hasError: false,
-        error: null
+        error: null,
       };
     }
     case actionTypes.PRODUCTS_SUCCESS: {
-
       const newIds = [...state.productIds];
       const newObjs = { ...state.products };
 
@@ -47,7 +46,7 @@ export const reducer = (state, action) => {
         ...state,
         products: newObjs,
         productIds: newIds,
-        isFetching: false
+        isFetching: false,
       };
     }
     case actionTypes.PRODUCTS_ERROR: {
@@ -55,11 +54,11 @@ export const reducer = (state, action) => {
         ...state,
         isFetching: false,
         hasError: true,
-        error: action.payload
+        error: action.payload,
       };
     }
     case actionTypes.ADD_TO_CART: {
-      const { products, cartItems, cartItemIds } = state
+      const { products, cartItems, cartItemIds } = state;
       const cartItemId = action.payload;
 
       const prevCartItem = cartItemIds.find((itemId) => itemId === cartItemId);
@@ -72,33 +71,32 @@ export const reducer = (state, action) => {
             ...cartItems,
             [cartItemId]: {
               ...cartItems[cartItemId],
-              quantity: (cartItems[cartItemId].quantity < cartItems[cartItemId].unitsInStock)
-                ? cartItems[cartItemId].quantity + 1
-                : cartItems[cartItemId].quantity
-            }
+              quantity:
+                cartItems[cartItemId].quantity <
+                cartItems[cartItemId].unitsInStock
+                  ? cartItems[cartItemId].quantity + 1
+                  : cartItems[cartItemId].quantity,
+            },
           },
-          isFetching: false
+          isFetching: false,
         };
       }
 
       return {
         ...state,
-        cartItemIds: [
-          ...cartItemIds,
-          cartItemId
-        ],
+        cartItemIds: [...cartItemIds, cartItemId],
         cartItems: {
           ...cartItems,
           [cartItemId]: {
             ...products[cartItemId],
-            quantity: 1
-          }
+            quantity: 1,
+          },
         },
-        isFetching: false
+        isFetching: false,
       };
     }
     case actionTypes.CHANGE_QUANTITY: {
-      const { cartItems } = state
+      const { cartItems } = state;
       const { event, productId } = action.payload;
 
       return {
@@ -107,34 +105,38 @@ export const reducer = (state, action) => {
           ...cartItems,
           [productId]: {
             ...cartItems[productId],
-            quantity: (cartItems[productId].id === productId && cartItems[productId].quantity <= cartItems[productId].unitsInStock)
-              ? Number(event.target.value)
-              : cartItems[productId].quantity
+            quantity:
+              cartItems[productId].id === productId &&
+              cartItems[productId].quantity <= cartItems[productId].unitsInStock
+                ? Number(event.target.value)
+                : cartItems[productId].quantity,
           },
         },
-        isFetching: false
+        isFetching: false,
       };
     }
     case actionTypes.REMOVE_ITEM: {
-      const { cartItems, cartItemIds } = state
+      const { cartItems, cartItemIds } = state;
       const cartItemId = action.payload;
 
-      const updatedCartItemIds = cartItemIds.filter((itemId) => itemId !== cartItemId);
+      const updatedCartItemIds = cartItemIds.filter(
+        (itemId) => itemId !== cartItemId,
+      );
 
-      delete cartItems[cartItemId]
+      delete cartItems[cartItemId];
 
       return {
         ...state,
         cartItemIds: updatedCartItemIds,
         cartItems: cartItems,
-        isFetching: false
+        isFetching: false,
       };
     }
     default: {
       return state;
     }
   }
-}
+};
 
 function CartItemsProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -146,24 +148,32 @@ function CartItemsProvider({ children }) {
         dispatch({ type: actionTypes.PRODUCTS_FETCHING });
         const { data, hasError, loadingError } = await api.getProducts();
 
-        if (hasError) dispatch({ type: actionTypes.PRODUCTS_ERROR, payload: loadingError });
+        if (hasError)
+          dispatch({ type: actionTypes.PRODUCTS_ERROR, payload: loadingError });
         else dispatch({ type: actionTypes.PRODUCTS_SUCCESS, payload: data });
       };
 
       request();
     }
-
   }, [dispatch]);
 
   const value = {
     ...state,
-    handleAddToCart: (productId) => dispatch({ type: actionTypes.ADD_TO_CART, payload: productId }),
-    handleChangeQuantity: (event, productId) => dispatch({ type: actionTypes.CHANGE_QUANTITY, payload: { event, productId } }),
-    handleRemoveItem: (productId) => dispatch({ type: actionTypes.REMOVE_ITEM, payload: productId }),
+    handleAddToCart: (productId) =>
+      dispatch({ type: actionTypes.ADD_TO_CART, payload: productId }),
+    handleChangeQuantity: (event, productId) =>
+      dispatch({
+        type: actionTypes.CHANGE_QUANTITY,
+        payload: { event, productId },
+      }),
+    handleRemoveItem: (productId) =>
+      dispatch({ type: actionTypes.REMOVE_ITEM, payload: productId }),
   };
 
   return (
-    <CartItemsContext.Provider value={value}>{children}</CartItemsContext.Provider>
+    <CartItemsContext.Provider value={value}>
+      {children}
+    </CartItemsContext.Provider>
   );
 }
 

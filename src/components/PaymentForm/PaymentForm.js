@@ -1,61 +1,54 @@
-import React from 'react';
+import React from "react";
+import { Formik } from "formik";
+import { useHistory, Redirect } from "react-router-dom";
 
-import { Formik } from 'formik';
-import { useHistory } from "react-router-dom";
-import withLayout from "../../hoc/withLayout";
-
-import Input from "../Input";
-import Button from "../Button";
-
-import CheckOutCart from '../CheckOutCart';
-import NavList from '../NavList';
-import PaymentInputs from '../PaymentInputs';
+import { withCheckout, withLayout } from "hoc";
+import { Button, PaymentInputs } from "components";
+import { useProducts } from "context/products/reducer";
 
 const PaymentForm = () => {
   let history = useHistory();
+  const { cartItemIds } = useProducts();
+  if (cartItemIds.length > 0) {
+    return (
+      <Formik
+        initialValues={{
+          firstName: "",
+          lastName: "",
+          phoneNumber: "",
+          email: "",
+        }}
+        onSubmit={(values, { setSubmitting }) => {
+          setTimeout(() => {
+            console.log(values);
 
-  return (
-    <div className="row">
-      <div className="d-flex flex-column">
-        <NavList />
-        <Formik
-          initialValues={{
-            firstName: "",
-            lastName: "",
-            phoneNumber: '',
-            email: "",
-          }}
-          onSubmit={(values, { setSubmitting }) => {
-            setTimeout(() => {
-              console.log(values);
-
-              setSubmitting(false);
-              history.push("/checkout/step-2");
-            }, 250);
-          }}
-        >
-          {({
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            errors,
-            values,
-            touched,
-            isValidating,
-            isValid,
-          }) => (
-            <form onSubmit={handleSubmit}>
-              <PaymentInputs />
-              <Button submitButton block disabled={isValidating || !isValid}>
-                Submit
-              </Button>
-            </form>
-          )}
-        </Formik>
-      </div>
-      <CheckOutCart className="col col-4" />
-    </div>
-  );
+            setSubmitting(false);
+            history.push("/checkout/step-2");
+          }, 250);
+        }}
+      >
+        {({
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          errors,
+          values,
+          touched,
+          isValidating,
+          isValid,
+        }) => (
+          <form onSubmit={handleSubmit}>
+            <PaymentInputs />
+            <Button submitButton block disabled={isValidating || !isValid}>
+              Submit
+            </Button>
+          </form>
+        )}
+      </Formik>
+    );
+  } else {
+    return <Redirect to="/" />;
+  }
 };
 
-export default withLayout(PaymentForm);
+export default withLayout(withCheckout(PaymentForm));

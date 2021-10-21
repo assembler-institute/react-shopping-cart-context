@@ -1,5 +1,5 @@
 import axios from "axios";
-import { handleResponse } from "../utils/handle-response";
+import { handleResponse } from "utils/handle-response";
 
 export const BASE_URL = "https://rickandmortyapi.com/api";
 

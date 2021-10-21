@@ -1,20 +1,15 @@
-import React, { useContext } from "react";
+import React from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import { useProducts } from "./context/products/reducer";
 
-import Home from "./pages/Home";
-import Checkout from "./pages/Checkout";
-import NewProduct from "./pages/NewProduct";
-import AddressForm from "./components/AddressForm";
-import DetailsForm from "./components/DetailsForm";
-import PaymentForm from "./components/PaymentForm";
+import { Home, NewProduct } from "pages";
+import { AddressForm, DetailsForm, PaymentForm } from "./components";
 
-//import { Checkout, Home, NewProduct, AddressForm, DetailsForm, PaymentForm } from "./pages/index";
+import { useProducts } from "context/products/reducer";
+import { DataProvider } from "context/checkoutForm/reducer";
 
-import useLocalStorage from "./hooks/useLocalStorage";
-import { DataProvider } from "./context/checkoutFormContext/reducer";
+import useLocalStorage from "hooks/useLocalStorage";
 
-// import loadLocalStorageItems from "./utils/loadLocalStorageItems";
+// import loadLocalStorageItems from "utils/loadLocalStorageItems";
 
 const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
 const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";

@@ -1,10 +1,9 @@
 import React from "react";
 
-import ProductsListing from "../../components/ProductsListing";
-import Cart from "../../components/Cart";
-import withLayout from "../../hoc/withLayout";
+import withLayout from "hoc/withLayout";
+import { Cart, ProductsListing } from "components";
 
-import { useProducts } from "../../context/products/reducer";
+import { useProducts } from "context/products/reducer";
 
 function Home() {
   const { isLoading, hasError, loadingError } = useProducts();

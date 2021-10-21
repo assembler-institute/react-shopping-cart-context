@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useReducer, useEffect } from "react";
-import { act } from "react-dom/test-utils";
 
 import { actionTypes } from "./actionTypes";
 
@@ -24,7 +23,7 @@ const initialState = {
   handleDelivery: () => {},
 };
 
-export const CheckoutFormContext = createContext(initialState);
+export const CheckoutForm = createContext(initialState);
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -111,14 +110,12 @@ export const DataProvider = ({ children }) => {
       }),
   };
   return (
-    <CheckoutFormContext.Provider value={value}>
-      {children}
-    </CheckoutFormContext.Provider>
+    <CheckoutForm.Provider value={value}>{children}</CheckoutForm.Provider>
   );
 };
 
 export function useData() {
-  const context = useContext(CheckoutFormContext);
+  const context = useContext(CheckoutForm);
   if (!context) return null;
   return context;
 }
