@@ -38,7 +38,7 @@ function AddressForm() {
     validationSchema: AddressSchema,
     onSubmit: (values, { setSubmitting }) => {
       setSubmitting(true);
-      console.log(values);
+
       setTimeout(() => {
         setHasSubmitted(true);
         history.push("/checkout/step-3");

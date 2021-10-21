@@ -22,8 +22,6 @@ const PaymentForm = () => {
         }}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
-            console.log(values);
-
             setSubmitting(false);
             history.push("/checkout/step-2");
           }, 250);
