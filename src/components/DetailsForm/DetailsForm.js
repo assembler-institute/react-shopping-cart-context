@@ -5,7 +5,6 @@ import { useHistory, Redirect } from "react-router-dom";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 
-import { withCheckout, withLayout } from "hoc";
 import { Button, Input } from "components";
 
 import detailsSchema from "./details-schema";
@@ -129,4 +128,4 @@ const DetailsForm = () => {
   }
 };
 
-export default withLayout(withCheckout(DetailsForm));
+export default DetailsForm;

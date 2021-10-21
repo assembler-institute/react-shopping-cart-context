@@ -2,7 +2,6 @@ import React from "react";
 import { Formik } from "formik";
 import { useHistory, Redirect } from "react-router-dom";
 
-import { withCheckout, withLayout } from "hoc";
 import { Button, PaymentInputs } from "components";
 import { useCartItems } from "context/cartItems/reducer";
 
@@ -51,4 +50,4 @@ const PaymentForm = () => {
   }
 };
 
-export default withLayout(withCheckout(PaymentForm));
+export default PaymentForm;

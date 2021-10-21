@@ -3,14 +3,11 @@ import { useHistory, Redirect } from "react-router-dom";
 import { useFormik } from "formik";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 
-import withCheckout from "hoc/withCheckout";
-import withLayout from "hoc/withLayout";
 import { Button, Input } from "components";
 
-import { useData } from "context/checkoutForm/reducer";
+import { useCartItems, useData } from "context";
 
 import AddressSchema from "./AddressSchema";
-import { useCartItems } from "context/cartItems/reducer";
 
 function AddressForm() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -88,7 +85,7 @@ function AddressForm() {
               setRegion(val);
               handleCityChange(val);
             }}
-            // onBlur={handleCityChange}
+          // onBlur={handleCityChange}
           />
         </div>
         <Input
@@ -134,4 +131,4 @@ function AddressForm() {
   }
 }
 
-export default withLayout(withCheckout(AddressForm));
+export default AddressForm;
