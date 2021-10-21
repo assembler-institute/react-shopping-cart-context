@@ -5,13 +5,13 @@ const schema = Yup.object({
   address: Yup.string()
     .required("Come on, don't be lazy and input your address here"),
   city: Yup.string()
-    .required("Come on, don't be lazy and input your address here"),
+    .required("Come on, don't be lazy and input your city here"),
   zipCode: Yup.string()
     .required("Come on, don't be lazy and input your zip code here")
     .matches(/\d+/, "zip code must be numeric")
     .max(10, "must not be longer than 10 digits"),
   country: Yup.string()
-    .required("Come on, don't be lazy and input your zip code here")
+    .required("Come on, be a good patriot and input your country here")
 });
 
 function BillingDetailsForm(props) {
@@ -43,7 +43,7 @@ function BillingDetailsForm(props) {
           value={values.address}
           onBlur={handleBlur}
           onChange={handleChange} /><br />
-        {errors.address && touched.address && <div>{errors.address}</div>}
+        {errors.address && touched.address && <div className="text-danger">{errors.address}</div>}
         <label htmlFor="city" className="control-label">City*</label><br />
         <input
           placeholder="Input your city"
@@ -54,8 +54,9 @@ function BillingDetailsForm(props) {
           onBlur={handleBlur}
           onChange={handleChange} />
         <br />
+        {errors.city && touched.city && <div className="text-danger">{errors.city}</div>}
         <label htmlFor="zipCode" className="control-label">Zip/post code*</label><br />
-        {errors.city && touched.city && <div>{errors.city}</div>}
+
         <input
           placeholder="Input your zip code"
           name="zipCode"
@@ -65,7 +66,7 @@ function BillingDetailsForm(props) {
           onBlur={handleBlur}
           onChange={handleChange} />
         <br />
-        {errors.zipCode && touched.zipCode && <div>{errors.zipCode}</div>}
+        {errors.zipCode && touched.zipCode && <div className="text-danger">{errors.zipCode}</div>}
         <label htmlFor="country" className="control-label">Country/region*</label><br />
         <input
           placeholder="Input country/region"
@@ -76,7 +77,7 @@ function BillingDetailsForm(props) {
           onBlur={handleBlur}
           onChange={handleChange} />
         <br />
-        {errors.country && touched.country && <div>{errors.country}</div>}
+        {errors.country && touched.country && <div className="text-danger">{errors.country}</div>}
         <button type="submit" className="btn btn-primary">Submit</button>
 
       </form>
