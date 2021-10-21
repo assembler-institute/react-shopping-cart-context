@@ -5,6 +5,7 @@ import { Home, NewProduct } from "pages";
 import { AddressForm, DetailsForm, PaymentForm } from "components";
 
 import { useProducts } from "context/products/reducer";
+import { useCartItems } from "context/cartItems/reducer";
 import { DataProvider } from "context/checkoutForm/reducer";
 
 import useLocalStorage from "hooks/useLocalStorage";
@@ -15,7 +16,8 @@ const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
 const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
 
 function App() {
-  const { products, cartItems } = useProducts();
+  const { products } = useProducts();
+  const { cartItems } = useCartItems();
 
   useLocalStorage(products, PRODUCTS_LOCAL_STORAGE_KEY);
   useLocalStorage(cartItems, CART_ITEMS_LOCAL_STORAGE_KEY);

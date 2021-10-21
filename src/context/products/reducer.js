@@ -3,22 +3,13 @@ import React, { createContext, useContext, useReducer, useEffect } from "react";
 import { actionTypes } from "./types";
 
 import * as api from "api";
-import loadLocalStorageItems from 'utils/loadLocalStorageItems';
-
-const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
-const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
 
 export const initialState = {
   products: {},
   productIds: [],
-  cartItems: {},
-  cartItemIds: [],
   isLoading: false,
   hasError: false,
   loadingError: null,
-  handleAddToCart: () => { },
-  handleChangeQuantity: () => { },
-  handleRemoveItem: () => { },
   handleDownVote: () => { },
   handleUpVote: () => { },
   handleSetFavorite: () => { },
@@ -59,80 +50,6 @@ export const reducer = (state, action) => {
         isFetching: false,
         hasError: true,
         error: action.payload,
-      };
-    }
-    case actionTypes.ADD_TO_CART: {
-      const { products, cartItems, cartItemIds } = state;
-      const cartItemId = action.payload;
-
-      const prevCartItem = cartItemIds.find((itemId) => itemId === cartItemId);
-
-      // @joan => hi ha dos returns
-
-      return prevCartItem
-        ? {
-          ...state,
-          cartItems: {
-            ...cartItems,
-            [cartItemId]: {
-              ...cartItems[cartItemId],
-              quantity:
-                cartItems[cartItemId].quantity <
-                  cartItems[cartItemId].unitsInStock
-                  ? cartItems[cartItemId].quantity + 1
-                  : cartItems[cartItemId].quantity,
-            },
-          },
-          isFetching: false,
-        }
-        : {
-          ...state,
-          cartItemIds: [...cartItemIds, cartItemId],
-          cartItems: {
-            ...cartItems,
-            [cartItemId]: {
-              ...products[cartItemId],
-              quantity: 1,
-            },
-          },
-          isFetching: false,
-        };
-    }
-    case actionTypes.CHANGE_QUANTITY: {
-      const { cartItems } = state
-      const { event, productId } = action.payload;
-
-      return {
-        ...state,
-        cartItems: {
-          ...cartItems,
-          [productId]: {
-            ...cartItems[productId],
-            quantity:
-              cartItems[productId].id === productId &&
-                cartItems[productId].quantity <= cartItems[productId].unitsInStock
-                ? Number(event.target.value)
-                : cartItems[productId].quantity,
-          },
-        },
-        isFetching: false,
-      };
-    }
-    case actionTypes.REMOVE_ITEM: {
-      const { cartItems, cartItemIds } = state
-      const cartItemId = action.payload;
-
-      const updatedCartItemIds = cartItemIds.filter(
-        (itemId) => itemId !== cartItemId,
-      );
-
-      delete cartItems[cartItemId];
-
-      return {
-        ...state,
-        cartItemIds: updatedCartItemIds,
-        cartItems: cartItems,
-        isFetching: false,
       };
     }
     case actionTypes.DOWN_VOTE: {
@@ -246,9 +163,6 @@ function ProductsProvider({ children }) {
 
   const value = {
     ...state,
-    handleAddToCart: (productId) => dispatch({ type: actionTypes.ADD_TO_CART, payload: productId }),
-    handleChangeQuantity: (event, productId) => dispatch({ type: actionTypes.CHANGE_QUANTITY, payload: { event, productId } }),
-    handleRemoveItem: (productId) => dispatch({ type: actionTypes.REMOVE_ITEM, payload: productId }),
     handleDownVote: (productId) => dispatch({ type: actionTypes.DOWN_VOTE, payload: productId }),
     handleUpVote: (productId) => dispatch({ type: actionTypes.UP_VOTE, payload: productId }),
     handleSetFavorite: (productId) => dispatch({ type: actionTypes.SET_FAVORITE, payload: productId }),

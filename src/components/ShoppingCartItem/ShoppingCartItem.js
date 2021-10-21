@@ -2,7 +2,7 @@ import React from "react";
 
 import { Button } from "components";
 
-import { useProducts } from "context/products/reducer";
+import { useCartItems } from "context/cartItems/reducer";
 
 import "./ShoppingCartItem.scss";
 
@@ -29,7 +29,7 @@ function ShoppingCartItem({
   const {
     handleChangeQuantity,
     handleRemoveItem,
-  } = useProducts();
+  } = useCartItems();
 
   function onHandleChange(event) {
     handleChangeQuantity(event, id);
