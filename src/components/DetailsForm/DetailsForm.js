@@ -1,20 +1,27 @@
-import React from 'react';
+import React, { useContext } from "react";
 
-import { Formik } from 'formik';
+import { Formik } from "formik";
 import { useHistory } from "react-router-dom";
-import PhoneInput from 'react-phone-input-2';
-import 'react-phone-input-2/lib/style.css';
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 import withLayout from "../../hoc/withLayout";
 
 import Input from "../Input";
 import Button from "../Button";
 
 import detailsSchema from "./details-schema";
-import CheckOutCart from '../CheckOutCart';
-import NavList from '../NavList';
-
+import CheckOutCart from "../CheckOutCart";
+import NavList from "../NavList";
+import { useData } from "../../context/checkoutFormContext/reducer";
 const DetailsForm = () => {
   let history = useHistory();
+
+  const {
+    handleNameChange,
+    handleLastNameChange,
+    handlePhoneNumber,
+    handleEmailChange,
+  } = useData();
 
   return (
     <div className="row">
@@ -24,7 +31,7 @@ const DetailsForm = () => {
           initialValues={{
             firstName: "",
             lastName: "",
-            phoneNumber: '',
+            phoneNumber: "",
             email: "",
           }}
           validationSchema={detailsSchema}
@@ -56,7 +63,7 @@ const DetailsForm = () => {
                 value={values.firstName}
                 placeholder="First name"
                 handleChange={handleChange}
-                handleBlur={handleBlur}
+                handleBlur={handleNameChange}
                 hasErrorMessage={touched.firstName}
                 errorMessage={errors.firstName}
               />
@@ -68,7 +75,7 @@ const DetailsForm = () => {
                 value={values.lastName}
                 placeholder="Last name"
                 handleChange={handleChange}
-                handleBlur={handleBlur}
+                handleBlur={handleLastNameChange}
                 hasErrorMessage={touched.lastName}
                 errorMessage={errors.lastName}
               />
@@ -76,23 +83,17 @@ const DetailsForm = () => {
               <p>The shop will only reach you in case of an emergency.</p>
               <PhoneInput
                 id="phoneNumber"
-                country={'es'}
-                onlyCountries={['es', 'de', 'fr']}
-                localization={{ de: 'Germany', es: 'Spain', fr: 'France' }}
+                country={"es"}
+                onlyCountries={["es", "de", "fr"]}
+                localization={{ de: "Germany", es: "Spain", fr: "France" }}
                 value={values.phoneNumber}
                 placeholder="Enter phone number"
-                // isValid={(value, country) => {
-                //   if (value.match(/12345/)) {
-                //     return 'Invalid value: ' + value + ', ' + country.name;
-                //   } else if (value.match(/1234/)) {
-                //     return false;
-                //   } else {
-                //     return true;
-                //   }
-                // }}
                 inputProps={{ name: "phoneNumber" }}
-                handleChange={(phoneNumber, country, e) => { handleChange(phoneNumber, country, e) }}
-                handleBlur={handleBlur}
+                onChange={(phoneNumber, country, e) => {
+                  handleChange(phoneNumber, country, e);
+                }}
+                onBlur={handlePhoneNumber}
+                // handleInputBlur={handlePhoneNumber}
                 hasErrorMessage={touched.phoneNumber}
                 errorMessage={errors.phoneNumber}
               />

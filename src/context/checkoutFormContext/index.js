@@ -1,1 +1,2 @@
-export { default } from "./CheckoutFormContext";
+export { DataProvider, useData } from "./CheckoutFormContext";
+export { actionTypes } from "./actionTypes";

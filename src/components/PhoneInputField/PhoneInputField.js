@@ -1,16 +1,14 @@
-import React, { useState } from 'react';
-import PhoneInput from 'react-phone-number-input';
-import PropTypes from 'prop-types';
-import 'react-phone-number-input/style.css';
-import { getIn } from 'formik';
+import React, { useState } from "react";
+import PhoneInput from "react-phone-number-input";
+import PropTypes from "prop-types";
+import "react-phone-number-input/style.css";
+import { getIn } from "formik";
 
 const PhoneInputField = (props) => {
   const {
     className,
     field: { name, value },
-    form: {
-      errors, handleBlur, setFieldValue, touched,
-    },
+    form: { errors, handleBlur, setFieldValue, touched },
     form,
     label,
     country,
@@ -20,12 +18,11 @@ const PhoneInputField = (props) => {
 
   const [isFocused, setFocused] = useState(false);
   const isError = getIn(touched, name) && getIn(errors, name);
-  const errorStyle = isError ? 'error' : '';
-  const filledStyle = (isFocused || value) ? 'filled' : '';
-  const disabledStyle = disabled ? 'disabled' : '';
+  const errorStyle = isError ? "error" : "";
+  const filledStyle = isFocused || value ? "filled" : "";
+  const disabledStyle = disabled ? "disabled" : "";
 
   const handleInputBlur = (e) => {
-    setFocused(false);
     handleBlur(e);
   };
 
@@ -40,13 +37,16 @@ const PhoneInputField = (props) => {
   };
 
   return (
-    <div className={`${className} ${errorStyle} ${filledStyle} ${disabledStyle} text-input-group`}>
+    <div
+      className={`${className} ${errorStyle} ${filledStyle} ${disabledStyle} text-input-group`}
+    >
       <PhoneInput
         placeholder="Enter phone number"
         name={name}
         value={value}
         onChange={onValueChange}
         country={country}
+        onBlur={handleInputBlur}
       />
       <label className="transition ml-10" htmlFor={name}>
         {label}
@@ -69,10 +69,10 @@ PhoneInputField.propTypes = {
 };
 
 PhoneInputField.defaultProps = {
-  className: '',
-  label: '',
+  className: "",
+  label: "",
   onChange: null,
-  country: 'AU',
+  country: "AU",
   disabled: false,
 };
 
