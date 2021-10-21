@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 
 import ShoppingCartItem from "../ShoppingCartItem";
 import Button from "../Button";
@@ -49,7 +50,9 @@ function Cart() {
               <hr />
             </div>
             <div className="col">
-              <Button>Checkout</Button>
+            <Link to="/checkout/step-1" >
+              <Button disabled={cartItems.length === 0 && true}>Checkout</Button>
+            </Link>
             </div>
           </div>
         </div>
