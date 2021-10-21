@@ -1,9 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 
-import ShoppingCartItem from "../ShoppingCartItem";
-import Button from "../Button";
 import { AppContext } from "../../providers/AppProvider";
-import { Redirect } from "react-router";
+import CheckoutItem from "../CheckoutItem/CheckoutItem";
 
 function getCartTotal(cart) {
 	return cart.reduce((accum, item) => {
@@ -11,30 +9,27 @@ function getCartTotal(cart) {
 	}, 0);
 }
 
-function Cart({ ...props }) {
+function CheckoutItemList({ ...props }) {
 	const { cartItems } = useContext(AppContext);
-	const [redirect, setRedirect] = useState(false);
 
 	return (
 		<>
-			{redirect && <Redirect to="/checkout" />}
 			<aside {...props}>
 				<div className="row flex-column">
 					<div className="col shopping__cart__header">
-						<h2 className="h3 mt-2">Shopping Cart</h2>
+						<h5 className="d-block my-2 fw-normal">Cart Items</h5>
 						<hr className="mb-3" />
 					</div>
 
 					{cartItems.length > 0 ? (
 						cartItems.map((item) => (
-							<ShoppingCartItem
+							<CheckoutItem
 								key={item.id}
 								id={item.id}
 								title={item.title}
 								price={item.price}
 								img={item.img}
 								quantity={item.quantity}
-								unitsInStock={item.unitsInStock}
 							/>
 						))
 					) : (
@@ -46,17 +41,9 @@ function Cart({ ...props }) {
 						<div className="row row-cols-1 flex-column">
 							<div className="col">
 								<div className="d-flex justify-content-between">
-									<h4 className="h5">Total</h4>
-									<h4>
-										<strong>{getCartTotal(cartItems)}€</strong>
-									</h4>
+									<h5 className="my-0">Total</h5>
+									<h5 className="my-0">{getCartTotal(cartItems)}€</h5>
 								</div>
-								<hr />
-							</div>
-							<div className="col">
-								<Button disabled={cartItems.length === 0} onClick={() => setRedirect(true)}>
-									Checkout
-								</Button>
 							</div>
 						</div>
 					</div>
@@ -66,4 +53,4 @@ function Cart({ ...props }) {
 	);
 }
 
-export default Cart;
+export default CheckoutItemList;

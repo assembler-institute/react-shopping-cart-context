@@ -19,7 +19,7 @@ const initialState = {
 		address: "",
 		city: "",
 		zipcode: "",
-		country: "",
+		country: "Spain",
 	},
 	paymentDetails: {
 		method: "",

@@ -4,6 +4,8 @@ import { Redirect } from "react-router";
 import { CheckoutContext } from "../../providers/CheckoutProvider";
 import * as Yup from "yup";
 
+const COUNTRIES = ["France", "Spain", "Switzerland", "United Kingdom", "Germany"];
+
 const schema = Yup.object({
 	address: Yup.string().required("Address is required."),
 	city: Yup.string().required("City is required."),
@@ -112,18 +114,23 @@ function CheckoutBillingDetails() {
 					<h5 className="d-block my-2 fw-normal">Country*</h5>
 				</label>
 				<div className="input-group mb-3 has-validation">
-					<input
+					<select
 						type="text"
 						name="country"
 						id="country"
-						className={`form-control ${touched.country && errors.country ? "is-invalid" : null} ${
+						className={`form-select ${touched.country && errors.country ? "is-invalid" : null} ${
 							touched.country && !errors.country ? "is-valid" : null
 						}`}
-						placeholder="Your country..."
 						value={values.country}
 						onChange={handleChange}
 						onBlur={handleBlur}
-					/>
+					>
+						{COUNTRIES.map((value, index) => (
+							<option key={index} value={value}>
+								{value}
+							</option>
+						))}
+					</select>
 					{touched.country && errors.country && <div className="invalid-feedback">{errors.country}</div>}
 				</div>
 				<div className="d-flex justify-content-center gap-2">

@@ -4,13 +4,6 @@ import { Redirect } from "react-router";
 import { CheckoutContext } from "../../providers/CheckoutProvider";
 import * as Yup from "yup";
 
-import IconImg from "../IconImg";
-import flagES from "../../img/flag-icons/spain.png";
-import flagFR from "../../img/flag-icons/france.png";
-import flagCH from "../../img/flag-icons/switzerland.png";
-import flagUK from "../../img/flag-icons/united-kingdom.png";
-import flagDE from "../../img/flag-icons/germany.png";
-
 const PHONE_PREFIXES = ["+33", "+34", "+41", "+44", "+49"];
 
 const schema = Yup.object({
@@ -116,11 +109,6 @@ function CheckoutPersonalDetails() {
 								{value}
 							</option>
 						))}
-						<option value="+33">+33</option>
-						<option value="+34">+34</option>
-						<option value="+41">+41</option>
-						<option value="+44">+44</option>
-						<option value="+49">+49</option>
 					</select>
 					<input
 						type="tel"
