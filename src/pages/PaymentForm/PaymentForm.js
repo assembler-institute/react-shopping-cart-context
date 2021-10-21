@@ -4,7 +4,6 @@ import * as Yup from 'yup';
 import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
 import valid from 'card-validator'
-import validator from 'validator'
 
 const schema = Yup.object({
     paymentType: Yup.string()
@@ -17,7 +16,7 @@ const schema = Yup.object({
     number: Yup.string()
         .required("Come on, don't be so Catalan and input your card number")
         .test('test-number', // this is used internally by yup
-            'Credit Card number is invalid', //validation message
+            "Come on, don't be so Catalan and input a valid credit card number", //validation message
             number => valid.number(number).isValid) // return true false based on validation
         .required(),
     expiry: Yup.string()
@@ -52,108 +51,112 @@ function PaymentForm(props) {
     })
     const { handleSubmit, handleBlur, handleChange, values, touched, errors, isValid, isValidating } = formik;
     return (
-        <div>
-            <Cards
-                number={values.number}
-                name={values.name}
-                expiry={values.expiry}
-                cvc={values.cvc}
-                focused={focus}
-            />
-            <form onSubmit={handleSubmit}>
-                <label className="control-label">How would you like to pay?</label><br />
-                <div role="group" className="form-check form-check-inline">
-                    <input
-                        className="form-check-input"
-                        type="radio"
-                        name="paymentType"
-                        value="visa"
-                        onChange={handleChange}
-                    />
-                    <input
-                        className="form-check-input"
-                        type="radio"
-                        name="paymentType"
-                        value="masterCard"
-                        disabled="true"
-                        onChange={handleChange}
-                    />
-                    <input
-                        className="form-check-input"
-                        type="radio"
-                        name="paymentType"
-                        value="americanExpress"
-                        disabled="true"
-                        onChange={handleChange}
-                    />
-                </div>
-                {errors.paymentType && touched.paymentType && <div className="text-danger">{errors.paymentType}</div>}
-                <span>We accept the following debit/credit cards</span><br />
-                <img alt="visa"></img ><img alt="mastercard"></img><img alt="american express"></img><br />
-                <label htmlFor="name" className="control-label">Cardholder name*</label><br />
-                <input
-                    className="form-control"
-                    type="text"
-                    name="name"
-                    placeholder="Name"
-                    value={values.name}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    onFocus={e => setFocus(e.target.name)}
-                /><br />
-                {errors.name && touched.name && <div className="text-danger">{errors.name}</div>}
-                <label htmlFor="number" className="control-label">Card number*</label><br />
-                <input
-                    placeholder="Card Number"
-                    type="tel"
-                    className="form-control"
-                    name="number"
-                    value={values.number}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    onFocus={e => setFocus(e.target.name)}
-                /><br />
-                {errors.number && touched.number && <div className="text-danger">{errors.number}</div>}
-                <label htmlFor="expiry" className="control-label">Card expiry date*</label>
-                <input
-                    type="text"
-                    className="form-control"
-                    name="expiry"
-                    placeholder="mm/yy"
-                    value={values.expiry}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    onFocus={e => setFocus(e.target.name)}
+        <>
+            <div>
+                <Cards
+                    number={values.number}
+                    name={values.name}
+                    expiry={values.expiry}
+                    cvc={values.cvc}
+                    focused={focus}
                 />
-                {errors.expiry && touched.expiry && <div className="text-danger">{errors.expiry}</div>}
-                <label htmlFor="cvc" className="control-label">CVV Code*</label><img alt="cvv pic" />
-                <input
-                    placeholder="CVV"
-                    type="tel"
-                    className="form-control"
-                    name="cvc"
-                    value={values.cvc}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    onFocus={e => setFocus(e.target.name)}
-                /><br />
-                {errors.cvc && touched.cvc && <div className="text-danger">{errors.cvc}</div>}
-                <input
-                    type="checkbox"
-                    className="form-check-input"
-                    name="acceptTerms"
-                    value={values.acceptTerms}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    onFocus={e => setFocus(e.target.name)} />
-                <label>I have read and accept the booking conditions general terms  and privacy policy</label><br />
-                <span>We use secure SSL transmission and encrypted storage to protect your personal information.</span><br />
-                <br />
-                {errors.acceptTerms && touched.acceptTerms && <div className="text-danger">{errors.acceptTerms}</div>}
+            </div >
+            <div>
+                <form onSubmit={handleSubmit}>
+                    <label className="control-label">How would you like to pay?</label><br />
+                    <div role="group" className="form-check form-check-inline">
+                        <input
+                            className="form-check-input"
+                            type="radio"
+                            name="paymentType"
+                            value="visa"
+                            onChange={handleChange}
+                        />
+                        <input
+                            className="form-check-input"
+                            type="radio"
+                            name="paymentType"
+                            value="masterCard"
+                            disabled={true}
+                            onChange={handleChange}
+                        />
+                        <input
+                            className="form-check-input"
+                            type="radio"
+                            name="paymentType"
+                            value="americanExpress"
+                            disabled={true}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    {errors.paymentType && touched.paymentType && <div className="text-danger">{errors.paymentType}</div>}
+                    <span>We accept the following debit/credit cards</span><br />
+                    <img src="../../img/Visa_Inc._logo.svg" alt="visa"></img ><img src="../../img/Mastercard-logo.svg" alt="mastercard"></img><img src="src/img/American_Express_logo_(2018).svg" alt="american express"></img><br />
+                    <label htmlFor="name" className="control-label">Cardholder name*</label><br />
+                    <input
+                        className="form-control"
+                        type="text"
+                        name="name"
+                        placeholder="Name"
+                        value={values.name}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        onFocus={e => setFocus(e.target.name)}
+                    /><br />
+                    {errors.name && touched.name && <div className="text-danger">{errors.name}</div>}
+                    <label htmlFor="number" className="control-label">Card number*</label><br />
+                    <input
+                        placeholder="Card Number"
+                        type="tel"
+                        className="form-control"
+                        name="number"
+                        value={values.number}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        onFocus={e => setFocus(e.target.name)}
+                    /><br />
+                    {errors.number && touched.number && <div className="text-danger">{errors.number}</div>}
+                    <label htmlFor="expiry" className="control-label">Card expiry date*</label>
+                    <input
+                        type="text"
+                        className="form-control"
+                        name="expiry"
+                        placeholder="mm/yy"
+                        value={values.expiry}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        onFocus={e => setFocus(e.target.name)}
+                    />
+                    {errors.expiry && touched.expiry && <div className="text-danger">{errors.expiry}</div>}
+                    <label htmlFor="cvc" className="control-label">CVV Code*</label><img alt="cvv pic" />
+                    <input
+                        placeholder="CVV"
+                        type="tel"
+                        className="form-control"
+                        name="cvc"
+                        value={values.cvc}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        onFocus={e => setFocus(e.target.name)}
+                    /><br />
+                    {errors.cvc && touched.cvc && <div className="text-danger">{errors.cvc}</div>}
+                    <input
+                        type="checkbox"
+                        className="form-check-input"
+                        name="acceptTerms"
+                        value={values.acceptTerms}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        onFocus={e => setFocus(e.target.name)} />
+                    <label>I have read and I accept the <u>booking conditions</u>, <u>general terms</u>  and <u>privacy policy</u></label><br />
+                    <span>We use secure SSL transmission and encrypted storage to protect your personal information.</span><br />
+                    <br />
+                    {errors.acceptTerms && touched.acceptTerms && <div className="text-danger">{errors.acceptTerms}</div>}
 
-                <button type="submit" className="btn btn-primary">Complete booking</button>
-            </form>
-        </div >
+                    <button type="submit" className="btn btn-primary">Complete booking</button>
+                </form>
+            </div >
+        </>
     );
 }
 
