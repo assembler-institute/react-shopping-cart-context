@@ -37,7 +37,7 @@ const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
 const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
 
 const actionTypes = {
-  FETCH_INIT: "FETCH_INIT",
+  FETCHING: "FETCHING",
   FETCH_DONE: "FETCH_DONE",
   FETCH_ERROR: "FETCH_ERROR",
   CHANGE_PRODUCTS: "CHANGE_PRODUCTS",
@@ -55,7 +55,7 @@ const initialState = {
 
 function reducer(state, action) {
   switch (action.type) {
-    case actionTypes.FETCH_INIT:
+    case actionTypes.FETCHING:
       return { ...state, isLoading: true };
     case actionTypes.FETCH_DONE:
       return { ...state, products: [...action.payload], isLoading: false };
@@ -87,7 +87,7 @@ function App() {
 
   useEffect(() => {
     if (products.length === 0) {
-      dispatch({ type: actionTypes.FETCH_INIT });
+      dispatch({ type: actionTypes.FETCHING });
 
       api
         .getProducts()
@@ -157,7 +157,7 @@ function App() {
       if (
         product.id === productId &&
         product.votes.downVotes.currentValue <
-          product.votes.downVotes.lowerLimit
+        product.votes.downVotes.lowerLimit
       ) {
         return {
           ...product,
@@ -254,17 +254,17 @@ function App() {
           </HomeContext.Provider>
         </Route>
         <Route path="/checkout/step-1" exact>
-            <CheckoutStepOne />
-          </Route>
-          <Route path="/checkout/step-2" exact>
-            <CheckoutStepTwo />
-          </Route>
-          <Route path="/checkout/step-3" exact>
-            <CheckoutStepThree />
-          </Route>
-          <Route path="/checkout/order-summary" exact>
-            <CheckoutStepFour />
-          </Route>
+          <CheckoutStepOne />
+        </Route>
+        <Route path="/checkout/step-2" exact>
+          <CheckoutStepTwo />
+        </Route>
+        <Route path="/checkout/step-3" exact>
+          <CheckoutStepThree />
+        </Route>
+        <Route path="/checkout/order-summary" exact>
+          <CheckoutStepFour />
+        </Route>
       </Switch>
     </BrowserRouter>
   );
