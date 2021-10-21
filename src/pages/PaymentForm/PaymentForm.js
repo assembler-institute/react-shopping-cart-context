@@ -3,6 +3,8 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
+import valid from 'card-validator'
+import validator from 'validator'
 
 const schema = Yup.object({
     paymentType: Yup.string()
@@ -10,34 +12,36 @@ const schema = Yup.object({
     payment: Yup.string()
         .required("Come on, don't be so Catalan and choose your payment type"),
     name: Yup.string()
-        .required("Come on, don't be so Catalan and input your name"),
+        .required("Come on, don't be so Catalan and input your name")
+        .matches("[a-zA-Z]", "Please input only alphanumeric caracters"),
     number: Yup.string()
         .required("Come on, don't be so Catalan and input your card number")
-        .matches(/\d+/, "Card number must be numeric"),
+        .test('test-number', // this is used internally by yup
+            'Credit Card number is invalid', //validation message
+            number => valid.number(number).isValid) // return true false based on validation
+        .required(),
     expiry: Yup.string()
-        .required("Come on, don't be so Catalan and input your card expiry date"),
+        .required("Come on, don't be so Catalan and input your card expiry date")
+        .test('test-expiry', // this is used internally by yup
+            'This date is not valid!', //validation message
+            expiry => valid.expirationDate(expiry).isValid), // return true false based on validation
     cvc: Yup.string()
         .required("Come on, don't be so Catalan and input your CVV code")
+        .max(3)
         .matches(/\d+/, "Card number must be numeric"),
     acceptTerms: Yup.boolean().oneOf([true], "The terms and conditions must be accepted."),
 })
 
 function PaymentForm(props) {
-
-    const [number, setNumber] = useState('');
-    const [name, setName] = useState('');
-    const [expiry, setExpiry] = useState('');
-    const [cvc, setCvc] = useState('');
-    const [focus, setFocus] = useState('');
-
+    const [focus, setFocus] = useState("")
 
     const formik = useFormik({
         initialValues: {
             paymentType: "",
-            name: name,
-            number: number,
-            expiry: expiry,
-            cvc: cvc,
+            name: "",
+            number: "",
+            expiry: "",
+            cvc: "",
             acceptTerms: false,
         },
         validationSchema: schema,
@@ -50,10 +54,10 @@ function PaymentForm(props) {
     return (
         <div>
             <Cards
-                number={number}
-                name={name}
-                expiry={expiry}
-                cvc={cvc}
+                number={values.number}
+                name={values.name}
+                expiry={values.expiry}
+                cvc={values.cvc}
                 focused={focus}
             />
             <form onSubmit={handleSubmit}>
@@ -92,8 +96,9 @@ function PaymentForm(props) {
                     type="text"
                     name="name"
                     placeholder="Name"
-                    value={name}
-                    onChange={e => setName(e.target.value)}
+                    value={values.name}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
                     onFocus={e => setFocus(e.target.name)}
                 /><br />
                 {errors.name && touched.name && <div className="text-danger">{errors.name}</div>}
@@ -103,8 +108,9 @@ function PaymentForm(props) {
                     type="tel"
                     className="form-control"
                     name="number"
-                    value={number}
-                    onChange={e => setNumber(e.target.value)}
+                    value={values.number}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
                     onFocus={e => setFocus(e.target.name)}
                 /><br />
                 {errors.number && touched.number && <div className="text-danger">{errors.number}</div>}
@@ -114,8 +120,9 @@ function PaymentForm(props) {
                     className="form-control"
                     name="expiry"
                     placeholder="mm/yy"
-                    value={expiry}
-                    onChange={e => setExpiry(e.target.value)}
+                    value={values.expiry}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
                     onFocus={e => setFocus(e.target.name)}
                 />
                 {errors.expiry && touched.expiry && <div className="text-danger">{errors.expiry}</div>}
@@ -125,8 +132,9 @@ function PaymentForm(props) {
                     type="tel"
                     className="form-control"
                     name="cvc"
-                    value={cvc}
-                    onChange={e => setCvc(e.target.value)}
+                    value={values.cvc}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
                     onFocus={e => setFocus(e.target.name)}
                 /><br />
                 {errors.cvc && touched.cvc && <div className="text-danger">{errors.cvc}</div>}
@@ -136,6 +144,7 @@ function PaymentForm(props) {
                     name="acceptTerms"
                     value={values.acceptTerms}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                     onFocus={e => setFocus(e.target.name)} />
                 <label>I have read and accept the booking conditions general terms  and privacy policy</label><br />
                 <span>We use secure SSL transmission and encrypted storage to protect your personal information.</span><br />
