@@ -12,6 +12,9 @@ const schema = Yup.object({
 		.required("Phone number is required.")
 		.matches(/\d+/, "Phone number must be numeric.")
 		.max(10, "Phone number must not be longer than 14 digits."),
+	phonePrefix: Yup.string()
+		.required("Phone prefix is required.")
+		.oneOf(Object.values(COUNTRY_PHONE_PREFIX_LIST), "The terms and conditions must be accepted."),
 });
 
 function CheckoutPersonalDetails() {

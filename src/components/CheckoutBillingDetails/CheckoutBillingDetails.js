@@ -13,7 +13,9 @@ const schema = Yup.object({
 		.required("Zip code is required.")
 		.matches(/^\d+$/, "Zip code must be numeric.")
 		.max(10, "Zip code must not be longer than 10 digits."),
-	country: Yup.string().required("Country is required."),
+	country: Yup.string()
+		.required("Country is required.")
+		.oneOf(Object.keys(COUNTRY_NAME_LIST), "The terms and conditions must be accepted."),
 });
 
 function CheckoutBillingDetails(props) {
