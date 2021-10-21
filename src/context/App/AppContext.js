@@ -1,35 +1,32 @@
 import { createContext } from "react";
-import { dispatch, state } from "../store/EcommerceReducer";
-import { actionTypes } from "../store/EcommerceReducer";
+import { dispatch, state } from "../App/AppReducer";
+import { actionTypes } from "../App/AppHandlers";
 
-const eCommerceContext = createContext();
+const AppContext = createContext();
 
 //*TODO revisar los dispatch
 
-export default function EcommerceContextProvider({children}) {
+export default function AppContextProvider({children}) {
 
   const value = {
     products:state.products,
     cartItems:state.cartItems,
     hasError:state.hasError,
     isLoading:state.isLoading,
-    handleDownVote: (id) => dispatch({type: actionTypes.HANDLER_DOWN_VOTE, payload: id}),
-    handleUpVote: (id) => dispatch({type: actionTypes.HANDLER_UP_VOTE, payload: id}),
-    handleSetFavorite: (id) => dispatch({type: actionTypes.HANDLER_SET_FAVORITE, payload: id}),
-    handleAddToCart: (id) => dispatch({type: actionTypes.HANDLER_ADD_TO_CART, payload: id}),
-    handleRemove: (id) => dispatch({type: actionTypes.HANDLER_REMOVE, payload: id}),
-    handleChange: (id, event) => dispatch({type: actionTypes.HANDLER_CHANGE, payload: {id, event}})
+    handleDataFetch:()=>dispatch({type: actionTypes.FETCH_API}),
+    handleLoadingState:(value)=>dispatch({type: actionTypes.SET_LOADING, payload:value}),
+    getLocalStorageItems:(storageKey)=> dispatch({type:actionTypes.LOAD_LOCAL_STORAGE, payload: storageKey}),
+    setLocalStorageItems:(storageKey, data)=>dispatch({type: actionTypes.SET_LOCAL_STORAGE, payload: {storageKey, data}})
   }
-
   return (
-    <eCommerceContext.Provider value={value}>
+    <AppContext.Provider value={value}>
       {children}
-    </eCommerceContext.Provider>
+    </AppContext.Provider>
   )
 }
 
-export function useEcommerce() {
-  const ctx = useContext(eCommerceContext)
+export function useAppContext() {
+  const ctx = useContext(AppContext)
   if (!ctx) return null
   return ctx
 }

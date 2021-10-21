@@ -1,25 +1,8 @@
 
 import { getProducts } from "../../api/getProducts";
 
-export function handleSetFavorite({prevState, payload:productId}) {
-  const updatedProducts = prevState.products.map((product) => {
-    if (product.id === productId) {
-      return {
-        ...product,
-        isFavorite: !product.isFavorite,
-      };
-    }
-
-    return product;
-  });
-
-
-  return {...prevState, products:updatedProducts};
-}
-
 export function handleDataFetch({prevState}) {
-  api
-  .getProducts()
+  getProducts()
   .then((data) => {
     // Set products state
     return {
@@ -36,8 +19,8 @@ export function handleDataFetch({prevState}) {
   });
 }
 
-export function handleLoadingState({prevState, payload}) {
-  return {...prevState, isLoading: payload}
+export function handleLoadingState({prevState, payload:value}) {
+  return {...prevState, isLoading: value}
 }
 
 

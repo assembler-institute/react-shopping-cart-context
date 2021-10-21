@@ -1,53 +1,48 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { useAppContext } from "./context/App/AppContext";
 import EcommerceContextProvider from "./context/Ecoomerce/eCommerceContext";
 
 import Home from "./pages/Home";
 import NewProduct from "./pages/NewProduct";
 
-import { actionTypes, dispatch, state } from "./store/EcommerceReducer";
-
 const PRODUCTS_LOCAL_STORAGE_KEY = "products";
 const CART_ITEMS_LOCAL_STORAGE_KEY = "cartItems";
 
 function App() {
-  const {cartItems, products} = state
+
+  const {cartItems,
+    products,
+    handleDataFetch,
+    handleLoadingState,
+    getLocalStorageItems,
+    setLocalStorageItems
+  } = useAppContext();
+
   // First render
   useEffect(() => {
 
-    dispatch({
-      type:actionTypes.LOAD_LOCAL_STORAGE,
-      payload:CART_ITEMS_LOCAL_STORAGE_KEY
-    })
+    getLocalStorageItems(CART_ITEMS_LOCAL_STORAGE_KEY);
     // Get products local storage -> [...products] || []
-    dispatch({
-      type:actionTypes.LOAD_LOCAL_STORAGE,
-      payload:PRODUCTS_LOCAL_STORAGE_KEY
-    })
+    getLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY)
 
     // Get products from API
     if (products.length === 0) {
       // Set loading true
-      dispatch({type: actionTypes.SET_LOADING, payload: true})
+      handleLoadingState(true);
       // Get products -> hasError
-      dispatch({type: actionTypes.FETCH_API})
+      handleDataFetch();
       // Set loading false
-      dispatch({type: actionTypes.SET_LOADING, payload: false})
+      handleLoadingState(false);
     }
   }, []);
 
   useEffect(() => {
-    dispatch({type: actionTypes.SET_LOCAL_STORAGE, payload: {
-      key: PRODUCTS_LOCAL_STORAGE_KEY,
-      data: cartItems
-    }})
+    setLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY, products)
   }, [products])
 
   useEffect(() => {
-    dispatch({type: actionTypes.SET_LOCAL_STORAGE, payload: {
-      key: CART_ITEMS_LOCAL_STORAGE_KEY,
-      data: cartItems
-    }})
+    setLocalStorageItems(CART_ITEMS_LOCAL_STORAGE_KEY, cartItems)
   }, [cartItems])
 
 

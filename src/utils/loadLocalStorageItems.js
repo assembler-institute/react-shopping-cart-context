@@ -17,8 +17,8 @@ function getLocalStorageItems({prevState, payload:storageKey}) {
   }
 }
 
-function setLocalStorageItems({prevState, payload}){
-  localStorage.setItem(payload.storageKey, JSON.stringify(payload.data));
+function setLocalStorageItems({prevState, payload:{storageKey, data}}){
+  localStorage.setItem(storageKey, JSON.stringify(data));
   return prevState
 }
 

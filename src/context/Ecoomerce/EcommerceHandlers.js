@@ -97,3 +97,19 @@ export function handleUpVote({prevState, payload:productId}) {
 
   return {...prevState, products:updatedProducts};
 }
+
+export function handleSetFavorite({prevState, payload:productId}) {
+  const updatedProducts = prevState.products.map((product) => {
+    if (product.id === productId) {
+      return {
+        ...product,
+        isFavorite: !product.isFavorite,
+      };
+    }
+
+    return product;
+  });
+
+
+  return {...prevState, products:updatedProducts};
+}
