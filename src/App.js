@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { useProducts } from "./context/products/reducer";
 
@@ -12,6 +12,7 @@ import PaymentForm from "./components/PaymentForm";
 //import { Checkout, Home, NewProduct, AddressForm, DetailsForm, PaymentForm } from "./pages/index";
 
 import useLocalStorage from "./hooks/useLocalStorage";
+import CheckoutFormContext from "./context/checkoutFormContext/CheckoutFormContext";
 // import loadLocalStorageItems from "./utils/loadLocalStorageItems";
 
 const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
@@ -20,15 +21,41 @@ const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
 function App() {
   const { products, cartItems } = useProducts();
 
+  const {
+    name,
+    lastName,
+    phoneNumber,
+    email,
+    Address,
+    Country,
+    City,
+    ZipCode,
+    DeliveryInstrucctions,
+  } = useContext(CheckoutFormContext);
+
   useLocalStorage(products, PRODUCTS_LOCAL_STORAGE_KEY);
   useLocalStorage(cartItems, CART_ITEMS_LOCAL_STORAGE_KEY);
 
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/checkout/step-1" component={DetailsForm} />
-        <Route exact path="/checkout/step-2" component={AddressForm} />
-        <Route exact path="/checkout/step-3" component={PaymentForm} />
+        <CheckoutFormContext.Provider
+          value={{
+            name,
+            lastName,
+            phoneNumber,
+            email,
+            Address,
+            Country,
+            City,
+            ZipCode,
+            DeliveryInstrucctions,
+          }}
+        >
+          <Route exact path="/checkout/step-1" component={DetailsForm} />
+          <Route exact path="/checkout/step-2" component={AddressForm} />
+          <Route exact path="/checkout/step-3" component={PaymentForm} />
+        </CheckoutFormContext.Provider>
         <Route path="/new-product" component={NewProduct} />
         <Route path="/" exact>
           <Home fullWidth />

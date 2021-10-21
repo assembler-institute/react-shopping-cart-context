@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
-import { v4 as uuid } from "uuid";
+import { useHistory } from "react-router-dom";
+
 import { FormikContext, useFormik } from "formik";
 import withLayout from "../../hoc/withLayout";
 
@@ -12,10 +12,11 @@ import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 import CheckOutCart from "../CheckOutCart";
 import NavList from "../NavList";
 
-function NewProductForm({ saveNewProduct }) {
+function AddressForm({ saveNewProduct }) {
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [country, setCountry] = useState("");
   const [region, setRegion] = useState("");
+  let history = useHistory();
 
   const formik = useFormik({
     initialValues: {
@@ -31,6 +32,7 @@ function NewProductForm({ saveNewProduct }) {
       console.log(values);
       setTimeout(() => {
         setHasSubmitted(true);
+        history.push("/checkout/step-3");
       }, 500);
     },
   });
@@ -105,8 +107,8 @@ function NewProductForm({ saveNewProduct }) {
         </form>
       </div>
       <CheckOutCart className="col col-4" />
-    </div >
+    </div>
   );
 }
 
-export default withLayout(NewProductForm);
+export default withLayout(AddressForm);
