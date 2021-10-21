@@ -3,7 +3,7 @@ import Cards from "react-credit-cards";
 import "react-credit-cards/es/styles-compiled.css";
 
 import { useFormik } from "formik";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 import Input from "../Input";
 import Button from "../Button";
@@ -146,13 +146,20 @@ function CreditCard() {
         />
         <input type="checkbox" /> I have read and I accept the booking
         conditions, general terms and privacy policy.
+        <hr />
+        <div className="row justify-content-between">
+        <Link to="/checkout/step-2">
+          <Button>
+            Back to Billing Address
+          </Button>
+          </Link>
         <Button
           submitButton
-          block
           disabled={formik.isValidating || !formik.isValid}
         >
           Complete
         </Button>
+        </div>
       </form>
             {hasSubmitted && <Redirect to="/" />}
     </div>
@@ -160,76 +167,3 @@ function CreditCard() {
 }
 
 export default CreditCard;
-
-/* import React from 'react';
-import Cards from 'react-credit-cards';
-import "react-credit-cards/es/styles-compiled.css";
- 
-export default class PaymentForm extends React.Component {
-  state = {
-    cvc: '',
-    expiry: '',
-    focus: '',
-    name: '',
-    number: '',
-  };
- 
-  handleInputFocus = (e) => {
-    this.setState({ focus: e.target.name });
-  }
-  
-  handleInputChange = (e) => {
-    const { name, value } = e.target;
-    
-    this.setState({ [name]: value });
-  }
-  
-  render() {
-    return (
-      <div id="PaymentForm">
-        <Cards
-          cvc={this.state.cvc}
-          expiry={this.state.expiry}
-          focused={this.state.focus}
-          name={this.state.name}
-          number={this.state.number}
-        />
-        <form>
-        	<input
-            type="string"
-            name="name"
-            id="name"
-            placeholder="Name"
-            onChange={this.handleInputChange}
-            onFocus={this.handleInputFocus}
-          />
-          <input
-            type="number"
-            name="number"
-            id="number"
-            placeholder="Card Number"
-            onChange={this.handleInputChange}
-            onFocus={this.handleInputFocus}
-          />
-          <input
-            type="number"
-            name="expiry"
-            id="expiry"
-            placeholder="Expiry"
-            onChange={this.handleInputChange}
-            onFocus={this.handleInputFocus}
-          />
-          <input
-            type="number"
-            name="cvc"
-            id="cvc"
-            placeholder="CVC"
-            onChange={this.handleInputChange}
-            onFocus={this.handleInputFocus}
-            maxLength="3"
-          />
-        </form>
-      </div>
-    );
-  }
-} */

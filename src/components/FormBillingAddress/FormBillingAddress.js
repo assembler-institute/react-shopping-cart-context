@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useFormik } from "formik";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 import Input from "../Input";
 import Button from "../Button";
@@ -118,11 +118,14 @@ function FormBillingAddress() {
             <option value="Italy">Italy</option>
           </select>
         </div>
-        <div className="form-group">
-          {/* <input type="submit" value="Continue to delivery" /> */}
+        <div className="row justify-content-between">
+          <Link to="/checkout/step-1">
+          <Button>
+            Back to User Information
+          </Button>
+          </Link>
           <Button
             submitButton
-            block
             disabled={formik.isValidating || !formik.isValid}
           >
             Continue to delivery
