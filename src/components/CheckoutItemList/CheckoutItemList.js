@@ -1,23 +1,17 @@
-import React, { useContext } from "react";
-
+import { useContext } from "react";
 import { AppContext } from "../../providers/AppProvider";
+import getCartTotal from "../../utils/getCartTotal";
 import CheckoutItem from "../CheckoutItem/CheckoutItem";
 
-function getCartTotal(cart) {
-	return cart.reduce((accum, item) => {
-		return accum + item.price * item.quantity;
-	}, 0);
-}
-
-function CheckoutItemList({ ...props }) {
+function CheckoutItemList(props) {
 	const { cartItems } = useContext(AppContext);
 
 	return (
 		<>
-			<aside {...props}>
+			<aside>
 				<div className="row flex-column">
 					<div className="col shopping__cart__header">
-						<h5 className="d-block my-2 fw-normal">Cart Items</h5>
+						<h5 className="my-2 fw-normal">Cart Items</h5>
 						<hr className="mb-3" />
 					</div>
 
@@ -41,8 +35,8 @@ function CheckoutItemList({ ...props }) {
 						<div className="row row-cols-1 flex-column">
 							<div className="col">
 								<div className="d-flex justify-content-between">
-									<h5 className="my-0">Total</h5>
-									<h5 className="my-0">{getCartTotal(cartItems)}€</h5>
+									<h6 className="my-0">Subtotal</h6>
+									<h6 className="my-0">{getCartTotal(cartItems)}€</h6>
 								</div>
 							</div>
 						</div>

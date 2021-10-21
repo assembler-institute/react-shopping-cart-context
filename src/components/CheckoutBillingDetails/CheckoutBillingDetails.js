@@ -4,24 +4,26 @@ import { Redirect } from "react-router";
 import { CheckoutContext } from "../../providers/CheckoutProvider";
 import * as Yup from "yup";
 
-const COUNTRIES = ["France", "Spain", "Switzerland", "United Kingdom", "Germany"];
+import { COUNTRY_NAME_LIST } from "../../constants";
 
 const schema = Yup.object({
 	address: Yup.string().required("Address is required."),
 	city: Yup.string().required("City is required."),
-	zipcode: Yup.string()
+	zipCode: Yup.string()
 		.required("Zip code is required.")
 		.matches(/^\d+$/, "Zip code must be numeric.")
 		.max(10, "Zip code must not be longer than 10 digits."),
 	country: Yup.string().required("Country is required."),
 });
 
-function CheckoutBillingDetails() {
+function CheckoutBillingDetails(props) {
 	const {
 		state: { step, billingDetails },
 		setBillingDetails,
 		goBack,
 	} = useContext(CheckoutContext);
+
+	console.log(step);
 
 	const formik = useFormik({
 		initialValues: {
@@ -92,23 +94,23 @@ function CheckoutBillingDetails() {
 					/>
 					{touched.city && errors.city && <div className="invalid-feedback">{errors.city}</div>}
 				</div>
-				<label htmlFor="zipcode" className="control-label">
+				<label htmlFor="zipCode" className="control-label">
 					<h5 className="d-block my-2 fw-normal">Zip Code*</h5>
 				</label>
 				<div className="input-group mb-3 has-validation">
 					<input
 						type="text"
-						name="zipcode"
-						id="zipcode"
-						className={`form-control ${touched.zipcode && errors.zipcode ? "is-invalid" : null} ${
-							touched.zipcode && !errors.zipcode ? "is-valid" : null
+						name="zipCode"
+						id="zipCode"
+						className={`form-control ${touched.zipCode && errors.zipCode ? "is-invalid" : null} ${
+							touched.zipCode && !errors.zipCode ? "is-valid" : null
 						}`}
-						placeholder="City zipcode"
-						value={values.zipcode}
+						placeholder="City zipCode"
+						value={values.zipCode}
 						onChange={handleChange}
 						onBlur={handleBlur}
 					/>
-					{touched.zipcode && errors.zipcode && <div className="invalid-feedback">{errors.zipcode}</div>}
+					{touched.zipCode && errors.zipCode && <div className="invalid-feedback">{errors.zipCode}</div>}
 				</div>
 				<label htmlFor="country" className="control-label">
 					<h5 className="d-block my-2 fw-normal">Country*</h5>
@@ -125,9 +127,9 @@ function CheckoutBillingDetails() {
 						onChange={handleChange}
 						onBlur={handleBlur}
 					>
-						{COUNTRIES.map((value, index) => (
-							<option key={index} value={value}>
-								{value}
+						{Object.entries(COUNTRY_NAME_LIST).map(([code, name], index) => (
+							<option key={index} value={code}>
+								{name}
 							</option>
 						))}
 					</select>

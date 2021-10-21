@@ -1,15 +1,11 @@
-import React, { useContext, useState } from "react";
-
-import ShoppingCartItem from "../ShoppingCartItem";
-import Button from "../Button";
+import { useContext, useState } from "react";
 import { AppContext } from "../../providers/AppProvider";
 import { Redirect } from "react-router";
 
-function getCartTotal(cart) {
-	return cart.reduce((accum, item) => {
-		return accum + item.price * item.quantity;
-	}, 0);
-}
+import ShoppingCartItem from "../ShoppingCartItem";
+import Button from "../Button";
+
+import getCartTotal from "../../utils/getCartTotal";
 
 function Cart({ ...props }) {
 	const { cartItems } = useContext(AppContext);
@@ -42,7 +38,7 @@ function Cart({ ...props }) {
 							<h4>Your cart is empty</h4>
 						</div>
 					)}
-					<div className="col shopping__cart__footer">
+					<div className="col">
 						<div className="row row-cols-1 flex-column">
 							<div className="col">
 								<div className="d-flex justify-content-between">

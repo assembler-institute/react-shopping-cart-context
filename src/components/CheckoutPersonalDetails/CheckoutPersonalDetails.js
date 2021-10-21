@@ -3,8 +3,7 @@ import { useFormik } from "formik";
 import { Redirect } from "react-router";
 import { CheckoutContext } from "../../providers/CheckoutProvider";
 import * as Yup from "yup";
-
-const PHONE_PREFIXES = ["+33", "+34", "+41", "+44", "+49"];
+import { COUNTRY_PHONE_PREFIX_LIST } from "../../constants";
 
 const schema = Yup.object({
 	fullname: Yup.string().required("Personal name is required."),
@@ -20,6 +19,8 @@ function CheckoutPersonalDetails() {
 		state: { step, personalDetails },
 		setPersonalDetails,
 	} = useContext(CheckoutContext);
+
+	console.log(step);
 
 	const formik = useFormik({
 		initialValues: {
@@ -104,7 +105,7 @@ function CheckoutPersonalDetails() {
 						value={values.phonePrefix}
 						onChange={handleChange}
 					>
-						{PHONE_PREFIXES.map((value, index) => (
+						{Object.values(COUNTRY_PHONE_PREFIX_LIST).map((value, index) => (
 							<option key={index} value={value}>
 								{value}
 							</option>

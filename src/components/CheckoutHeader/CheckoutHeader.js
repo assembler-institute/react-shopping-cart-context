@@ -3,7 +3,7 @@ import { CheckoutContext } from "../../providers/CheckoutProvider";
 
 const CHECKOUT_STEPS = ["Your details", "Billing address", "Payment details", "Order summary"];
 
-function CheckoutHeader() {
+function CheckoutHeader(props) {
 	const {
 		state: { step },
 	} = useContext(CheckoutContext);

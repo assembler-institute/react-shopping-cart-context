@@ -1,11 +1,8 @@
-import { useReducer, createContext } from "react";
+import { useReducer, createContext, useContext } from "react";
+import { AppContext } from "./AppProvider";
+import { actionTypes, COUNTRY_SHIPPING_LIST, COUNTRY_TAXES_LIST } from "../constants";
 
-const actionTypes = {
-	CHECKOUT_PERSONAL_DETAILS: Symbol(),
-	CHECKOUT_BILLING_DETAILS: Symbol(),
-	CHECKOUT_PAYMENT_DETAILS: Symbol(),
-	CHECKOUT_GO_BACK: Symbol(),
-};
+import getCartTotal from "../utils/getCartTotal";
 
 const initialState = {
 	step: 1,
@@ -18,8 +15,8 @@ const initialState = {
 	billingDetails: {
 		address: "",
 		city: "",
-		zipcode: "",
-		country: "Spain",
+		zipCode: "",
+		country: "ES",
 	},
 	paymentDetails: {
 		method: "",
@@ -27,6 +24,11 @@ const initialState = {
 		cardNumber: "",
 		cardExpiryDate: "",
 		cardCVV: "",
+	},
+	orderCosts: {
+		subtotal: 0,
+		shipping: 0,
+		taxes: 0,
 	},
 };
 
@@ -56,6 +58,21 @@ function reducer(state, actions) {
 				...state,
 				step: state.step + 1,
 				paymentDetails: { ...payload },
+			};
+		case actionTypes.CHECKOUT_ADD_COSTS:
+			const { cartItems } = useContext(AppContext);
+			const country = state.billingDetails.country;
+
+			const subtotal = getCartTotal(cartItems);
+
+			return {
+				...state,
+				step: state.step + 1,
+				orderCosts: {
+					subtotal,
+					shipping: COUNTRY_SHIPPING_LIST[country],
+					taxes: subtotal * COUNTRY_TAXES_LIST[country],
+				},
 			};
 		default:
 			throw new Error();

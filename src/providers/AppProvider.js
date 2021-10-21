@@ -1,23 +1,9 @@
 import { useReducer, useEffect, createContext } from "react";
+import { actionTypes, PRODUCTS_LOCAL_STORAGE_KEY, CART_ITEMS_LOCAL_STORAGE_KEY } from "../constants";
+
 import loadLocalStorageItems from "../utils/loadLocalStorageItems";
 import useLocalStorage from "../hooks/useLocalStorage";
-
 import * as api from "../api";
-
-const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
-const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
-
-const actionTypes = {
-	PRODUCT_DOWNVOTE: Symbol(),
-	PRODUCT_UPVOTE: Symbol(),
-	PRODUCT_SET_FAVORITE: Symbol(),
-	PRODUCT_SAVE_NEW_PRODUCT: Symbol(),
-	CARTITEM_ADD: Symbol(),
-	CARTITEM_DELETE: Symbol(),
-	CARTITEM_EDIT: Symbol(),
-	LOADING_SUCCESS: Symbol(),
-	LOADING_ERROR: Symbol(),
-};
 
 function buildNewCartItem(cartItem) {
 	if (cartItem.quantity >= cartItem.unitsInStock) {

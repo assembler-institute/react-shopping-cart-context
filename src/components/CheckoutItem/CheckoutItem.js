@@ -1,4 +1,5 @@
-function CheckoutItem({ id, img, title, price, quantity }) {
+function CheckoutItem(props) {
+	const { img, title, price, quantity } = props;
 	return (
 		<div className="col">
 			<div className="row flex-column">
