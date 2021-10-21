@@ -6,7 +6,7 @@ import Button from "../Button";
 import { ThumbDown, ThumbUp } from "../SVGIcons";
 
 import "./ItemCard.scss";
-import { useEcommerce } from "../../context/EcommerceContext";
+import { useEcommerce } from "../../context/Ecoomerce/eCommerceContext";
 
 import { getPopularityClasses} from "../../store/EcommerceHandlers"
 

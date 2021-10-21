@@ -1,5 +1,5 @@
 import React from "react";
-import { useEcommerce } from "../../context/EcommerceContext";
+import { useEcommerce } from "../../context/Ecoomerce/eCommerceContext";
 
 import ItemCard from "../ItemCard";
 

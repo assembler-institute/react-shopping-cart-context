@@ -3,7 +3,7 @@ import React from "react";
 import ShoppingCartItem from "../ShoppingCartItem";
 import Button from "../Button";
 import { getCartTotal } from "../../store/EcommerceHandlers";
-import { useEcommerce } from "../../context/EcommerceContext";
+import { useEcommerce } from "../../context/Ecoomerce/eCommerceContext";
 
 
 function Cart() {

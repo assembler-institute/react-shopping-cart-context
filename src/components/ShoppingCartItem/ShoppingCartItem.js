@@ -3,7 +3,7 @@ import React from "react";
 import "./ShoppingCartItem.scss";
 import { buildSelectOptions } from "../../store/EcommerceHandlers";
 import Button from "../Button";
-import { useEcommerce } from "../../context/EcommerceContext";
+import { useEcommerce } from "../../context/Ecoomerce/eCommerceContext";
 
 
 function ShoppingCartItem({

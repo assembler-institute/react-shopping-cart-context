@@ -1,5 +1,5 @@
 import React from "react";
-import { useEcommerce } from "../../context/EcommerceContext";
+import { useEcommerce } from "../../context/Ecoomerce/eCommerceContext";
 import ProductsListing from "../../components/ProductsListing";
 import Cart from "../../components/Cart";
 import withLayout from "../../hoc/withLayout";

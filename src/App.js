@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import EcommerceContextProvider from "./context/EcommerceContext";
+import EcommerceContextProvider from "./context/Ecoomerce/eCommerceContext";
 
 import Home from "./pages/Home";
 import NewProduct from "./pages/NewProduct";
