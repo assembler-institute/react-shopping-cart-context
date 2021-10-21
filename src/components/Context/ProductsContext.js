@@ -1,7 +1,6 @@
-import { createContext } from "react";
+/* import { createContext } from "react";
 
 const initValues = {
- /*  fullWidth: false, */
   cartItems:[],
   products:[],
   isLoading: false,
@@ -18,3 +17,4 @@ const initValues = {
 const ProductsContext = createContext(initValues);
 
 export default ProductsContext;
+ */
