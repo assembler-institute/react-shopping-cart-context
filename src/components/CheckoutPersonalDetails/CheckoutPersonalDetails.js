@@ -23,8 +23,6 @@ function CheckoutPersonalDetails() {
 		setPersonalDetails,
 	} = useContext(CheckoutContext);
 
-	console.log(step);
-
 	const formik = useFormik({
 		initialValues: {
 			...personalDetails,
@@ -35,7 +33,6 @@ function CheckoutPersonalDetails() {
 			const { setSubmitting } = actions;
 
 			setSubmitting(true);
-
 			setTimeout(() => {
 				setPersonalDetails(values);
 			}, 250);
@@ -74,6 +71,7 @@ function CheckoutPersonalDetails() {
 						value={values.fullname}
 						onChange={handleChange}
 						onBlur={handleBlur}
+						autoFocus
 					/>
 					{touched.fullname && errors.fullname && <div className="invalid-feedback">{errors.fullname}</div>}
 				</div>

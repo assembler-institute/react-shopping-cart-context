@@ -1,7 +1,10 @@
-import "./IconImg.scss";
+function IconImg({ src, alt = "icon", width = 1, height = 1 }) {
+	const style = {
+		width: `${width}rem`,
+		height: `${height}rem`,
+	};
 
-function IconImg({ src, alt = "icon" }) {
-	return <img className="IconImg" src={src} alt={alt} />;
+	return <img style={style} src={src} alt={alt} />;
 }
 
 export default IconImg;

@@ -6,7 +6,6 @@ function CheckoutRedirect() {
 	const {
 		state: { step },
 	} = useContext(CheckoutContext);
-	console.log(step);
 
 	return <Redirect to={`/checkout/step-${step}`} />;
 }

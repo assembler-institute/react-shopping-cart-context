@@ -25,8 +25,6 @@ function CheckoutBillingDetails(props) {
 		goBack,
 	} = useContext(CheckoutContext);
 
-	console.log(step);
-
 	const formik = useFormik({
 		initialValues: {
 			...billingDetails,
@@ -37,7 +35,6 @@ function CheckoutBillingDetails(props) {
 			const { setSubmitting } = actions;
 
 			setSubmitting(true);
-
 			setTimeout(() => {
 				setBillingDetails(values);
 			}, 250);
@@ -75,8 +72,9 @@ function CheckoutBillingDetails(props) {
 						value={values.address}
 						onChange={handleChange}
 						onBlur={handleBlur}
+						autoFocus
 					/>
-					{touched.fullname && errors.fullname && <div className="invalid-feedback">{errors.fullname}</div>}
+					{touched.address && errors.address && <div className="invalid-feedback">{errors.address}</div>}
 				</div>
 				<label htmlFor="city" className="control-label">
 					<h5 className="d-block my-1 fw-normal">City*</h5>

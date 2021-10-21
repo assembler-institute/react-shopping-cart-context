@@ -1,6 +1,6 @@
 import { useReducer, createContext, useContext } from "react";
 import { AppContext } from "./AppProvider";
-import { actionTypes, COUNTRY_SHIPPING_LIST, COUNTRY_TAXES_LIST } from "../constants";
+import { actionTypes, COUNTRY_PHONE_PREFIX_LIST, COUNTRY_SHIPPING_LIST, COUNTRY_TAXES_LIST } from "../constants";
 
 import getCartTotal from "../utils/getCartTotal";
 
@@ -10,7 +10,7 @@ const initialState = {
 		fullname: "",
 		email: "",
 		phone: "",
-		phonePrefix: "+34",
+		phonePrefix: COUNTRY_PHONE_PREFIX_LIST.ES,
 	},
 	billingDetails: {
 		address: "",
@@ -20,9 +20,11 @@ const initialState = {
 	},
 	paymentDetails: {
 		method: "",
+		cardProvider: "",
 		cardholderName: "",
 		cardNumber: "",
-		cardExpiryDate: "",
+		cardExpirationMonth: "",
+		cardExpirationYear: "",
 		cardCVV: "",
 	},
 	orderCosts: {
@@ -50,7 +52,7 @@ function reducer(state, actions) {
 		case actionTypes.CHECKOUT_BILLING_DETAILS:
 			return {
 				...state,
-				step: state.step + 2,
+				step: state.step + 1,
 				billingDetails: { ...payload },
 			};
 		case actionTypes.CHECKOUT_PAYMENT_DETAILS:

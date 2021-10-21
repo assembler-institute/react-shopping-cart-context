@@ -11,6 +11,7 @@ import { CheckoutProvider } from "../../providers/CheckoutProvider";
 import { useContext } from "react";
 import { AppContext } from "../../providers/AppProvider";
 import CheckoutRedirect from "../../components/CheckoutRedirect";
+import PaymentForm from "../../components/PaymentForm";
 
 function Checkout() {
 	const { cartItems } = useContext(AppContext);
@@ -21,7 +22,7 @@ function Checkout() {
 			<CheckoutProvider>
 				<CheckoutHeader />
 				<hr className="mt-0 mb-2" />
-				<div className="vh-100 row">
+				<div className="min-vh-100 row">
 					<div className="col-8">
 						<Switch>
 							<Route exact path="/checkout">
@@ -32,6 +33,9 @@ function Checkout() {
 							</Route>
 							<Route exact path={`/checkout/step-2`}>
 								<CheckoutBillingDetails />
+							</Route>
+							<Route exact path={`/checkout/step-3`}>
+								<PaymentForm />
 							</Route>
 							<Route exact path={`/checkout/step-4`}>
 								<CheckoutOrderSummary />
