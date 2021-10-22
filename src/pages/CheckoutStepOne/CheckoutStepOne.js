@@ -5,9 +5,12 @@ import withLayout from "../../hoc/withLayout";
 
 function CheckOutStepOne() {
     return (
+<>
+        <div>n.mgghcxfghdfzxhfxn</div>
         <div>
            <StepOneForm/>
         </div>
+</>
     )
 }
 export default withLayout(CheckOutStepOne);

@@ -34,7 +34,7 @@ function StepOneForm() {
 
   return (
     <>
-      <div>
+      <div class="d-flex flex-column min-vh-100">
         <form onSubmit={formik.handleSubmit} id="stepOne">
           <Input
             type="text"
@@ -64,8 +64,8 @@ function StepOneForm() {
           <Input
             id="phone"
             name="phone"
-            type="text"
-            label="phone"
+            type="number"
+            label="Phone"
             placeholder="Your phone number"
             value={formik.values.phone}
             onChange={formik.handleChange}
