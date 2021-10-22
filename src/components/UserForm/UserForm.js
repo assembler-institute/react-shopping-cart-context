@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 
 import UserSchema from "./User-schema";
-/* import userContext from "../../Contexts/UserContext" */
+
 import Input from "../Input";
 import Button from "../Button";
 import { useUsers } from "../Context/UserContext";
@@ -11,32 +11,31 @@ import { Redirect } from "react-router";
 function UserForm() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
-  const { saveUser } = useUsers();
+  const { name, email, phone, countryCode, saveUser,userDataValid, nextStep } = useUsers();
 
   const formik = useFormik({
     initialValues: {
-      name: "",
-      email: "",
-      phone: "",
-      countryCode: "+34",
+      name: name,
+      email: email,
+      phone: phone,
+      countryCode: countryCode,
+      userDataValid: false  
     },
     validationSchema: UserSchema,
     onSubmit: (values, { setSubmitting }) => {
-      /* updateFormData(values);
-            setSubmitting(true); */
       console.log(values);
-
-      saveUser(values);
-      setSubmitting(true);
-      setTimeout(() => {
-        /* saveUser(({ ...prev }) => ({
-                ...prev,
-                completed: true,
-            })); */
+      
+      setSubmitting(true); 
+      /* setTimeout(() => {
         setHasSubmitted(true);
-      }, 500);
+      }, 5000); */
+       saveUser(values); 
     },
   });
+
+  if(userDataValid){
+    return (<Redirect to="/checkout/step-2" />);
+  }
 
   return (
     <>
@@ -115,8 +114,8 @@ function UserForm() {
               {formik.isSubmitting ? "Submitting..." : "Submit"}
             </Button>
           </form>
-
-          {hasSubmitted && <Redirect to="/checkout/step-2" />}
+{/* 
+          {hasSubmitted && <Redirect to="/checkout/step-2" />} */}
         </div>
       </div>
     </>

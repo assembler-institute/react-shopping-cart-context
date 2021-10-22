@@ -14,6 +14,9 @@ const creditCardSchema = Yup.object().shape({
   cvc: Yup.number()
     .max(999, "Required max 3 characters")
     .required("The cvc is required"),
+  rules: Yup.boolean()
+    .required("The terms and conditions must be accepted.")
+    .oneOf([true], "The terms and conditions must be accepted."),
 });
 
 export default creditCardSchema;

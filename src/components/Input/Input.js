@@ -1,3 +1,4 @@
+
 import React from "react";
 
 function Input({
@@ -9,6 +10,7 @@ function Input({
   handleChange = () => {},
   handleBlur = () => {},
   handleFocus = () => {},
+  handleClick = () => {},
   errorMessage,
   hasErrorMessage,
   ...props
@@ -30,6 +32,7 @@ function Input({
         onChange={handleChange}
         onBlur={handleBlur}
         onFocus={handleFocus}
+        onClick={handleClick}
         {...props}
       />
       {hasErrorMessage && errorMessage && (

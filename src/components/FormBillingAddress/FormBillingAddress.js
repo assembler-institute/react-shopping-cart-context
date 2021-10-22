@@ -11,20 +11,18 @@ import { useUsers } from "../Context/UserContext";
 function FormBillingAddress() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
-  const { saveAddress } = useUsers();
+  const { address,city,zip,country,saveAddress } = useUsers();
 
   const formik = useFormik({
     initialValues: {
-      address: "",
-      city: "",
-      zip: "",
-      country: "",
+      address: address,
+      city: city,
+      zip: zip,
+      country: country,
     },
     validationSchema: billingAddressSchema,
     onSubmit: (values, { setSubmitting }) => {
       console.log(values);
-      /* const newProduct = addProductDetails(values);
-      setProducts(newProduct); */
       saveAddress(values);
       setSubmitting(true);
 
@@ -112,10 +110,10 @@ function FormBillingAddress() {
            className="form-control"
            onChange={formik.handleChange}>
            
-            <option value="Spain">Spain</option>
-            <option value="France">France</option>
-            <option value="Germany">Germany</option>
-            <option value="Italy">Italy</option>
+            <option value="ES">Spain</option>
+            <option value="FR">France</option>
+            <option value="DE">Germany</option>
+            <option value="IT">Italy</option>
           </select>
         </div>
         <div className="form-group">
@@ -124,6 +122,7 @@ function FormBillingAddress() {
             submitButton
             block
             disabled={formik.isValidating || !formik.isValid}
+    
           >
             Continue to delivery
           </Button>

@@ -3,7 +3,6 @@ import React, { useContext } from "react";
 import ProductsListing from "../../components/ProductsListing";
 import Cart from "../../components/Cart";
 import withLayout from "../../hoc/withLayout";
-import ProductsContext from "../../components/Context/ProductsContext";
 import { useProducts } from "../../components/Context/reducer";
 
 function Home() {

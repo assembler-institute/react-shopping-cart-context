@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import ProductsContext from "../Context/ProductsContext";
 import { useProducts } from "../Context/reducer";
 
 import ItemCard from "../ItemCard";

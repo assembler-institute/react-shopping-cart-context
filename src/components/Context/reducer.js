@@ -119,6 +119,7 @@ function reducer(state, action) {
 
       const prevCartItem = cartItems.find((item) => item.id === productId);
       const foundProduct = products.find((product) => product.id === productId);
+      console.log("entra "+foundProduct);
 
       if (prevCartItem) {
         const updatedCartItems = cartItems.map((item) => {
@@ -186,6 +187,8 @@ function reducer(state, action) {
         products: [...products, newProduct],
       };
     }
+    default:
+      return state;
   }
 }
 

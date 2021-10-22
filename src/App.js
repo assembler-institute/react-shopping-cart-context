@@ -13,7 +13,8 @@ import BillingAddressPage from "./pages/BillingAddressPage/BillingAddressPage";
 import PaymentDetailsPage from "./pages/PaymentDetailsPage/PaymentDetailsPage";
 import { UsersProvider } from "./components/Context/UserContext";
 
-/* import ProductsContext from "./components/Context/ProductsContext"; */
+import { Redirect } from "react-router";
+import ResumePurchasePage from "./pages/ResumePurchasePage";
 
 const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
 const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
@@ -63,22 +64,28 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/new-product">
+        <Route path="/new-product" exact>
           <NewProduct />
         </Route>
         <UsersProvider>
-          <Route path="/checkout/step-1">
+          <Route path="/checkout/step-1" exact>
             <UserInfo />
           </Route>
-          <Route path="/checkout/step-2">
+          <Route path="/checkout/step-2" exact>
             <BillingAddressPage />
           </Route>
-          <Route path="/checkout/step-3">
+          <Route path="/checkout/step-3" exact>
             <PaymentDetailsPage />
+          </Route>
+          <Route path="/checkout/order-summary" exact>
+            <ResumePurchasePage />
           </Route>
           <Route path="/" exact>
             <Home />
           </Route>
+       {/*    <Route path="*">
+            <Home  />
+          </Route> */}
         </UsersProvider>
       </Switch>
     </BrowserRouter>
