@@ -4,7 +4,6 @@ import { actionTypes } from "./types";
 
 const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
 const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
-const IVA = 1.21;
 
 const initValues = {
   cartItems: loadLocalStorageItems(CART_ITEMS_LOCAL_STORAGE_KEY, []),
@@ -12,7 +11,6 @@ const initValues = {
   isLoading: false,
   hasError: false,
   loadingError: false,
-  IVA: IVA,
   totalPrice: 0,
 };
 
@@ -173,6 +171,12 @@ function reducer(state, action) {
         products: [...products, newProduct],
       };
     }
+    case actionTypes.RESET_CART_ITEMS: {
+      return {
+        ...state,
+        cartItems: [],
+      };
+    }
     default:
       return state;
   }
@@ -210,6 +214,7 @@ function ProductsProvider({ children }) {
     setProducts: (newProduct) =>
       dispatch({ type: actionTypes.SET_PRODUCTS, payload: newProduct }),
     setCartItems: () => dispatch({ type: actionTypes.SET_CART_ITEMS }),
+    resetCartItems: () => dispatch({ type: actionTypes.RESET_CART_ITEMS }),
   };
 
   return (

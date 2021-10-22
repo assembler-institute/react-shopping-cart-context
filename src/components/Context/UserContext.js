@@ -20,7 +20,7 @@ const initValues = {
   paymentMethod: "Visa",
   taxes: 0,
   shipping: 0,
-  discount: 0
+  discount: 0,
 };
 
 const UserContext = createContext(initValues);
@@ -76,10 +76,27 @@ function reducer(state, action) {
         completed: true,
       };
     }
-    case actionTypes.NEXT_STEP: {
+    case actionTypes.RESET: {
       return {
         ...state,
-        step: step + 1,
+        completed: false,
+        name: "",
+        email: "",
+        countryCode: "+34",
+        phone: "",
+        address: "",
+        city: "",
+        zip: "",
+        country: "Spain",
+        cardHolder: "",
+        cardNumber: "",
+        expiryDate: "",
+        cvc: "",
+        rules: false,
+        paymentMethod: "Visa",
+        taxes: 0,
+        shipping: 0,
+        discount: 0,
       };
     }
     default:
@@ -98,6 +115,7 @@ function UsersProvider({ children }) {
       dispatch({ type: actionTypes.SAVE_ADDRESS, payload: data }),
     savePayment: (data) =>
       dispatch({ type: actionTypes.SAVE_PAYMENT, payload: data }),
+    reset: () => dispatch({ type: actionTypes.RESET }),
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

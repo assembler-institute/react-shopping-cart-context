@@ -5,7 +5,8 @@ import { useProducts } from "../Context/reducer";
 import { useUsers } from "../Context/UserContext";
 
 function ResumePurchase() {
-  const { cartItems } = useProducts();
+  const { cartItems, resetCartItems } = useProducts();
+  const { reset } = useUsers();
 
   const {
     name,
@@ -97,7 +98,14 @@ function ResumePurchase() {
         </div>
       </div>
       <Link to="/">
-        <Button>Home</Button>
+        <button
+          onClick={() => {
+            resetCartItems();
+            reset();
+          }}
+        >
+          Home
+        </button>
       </Link>
     </>
   );
