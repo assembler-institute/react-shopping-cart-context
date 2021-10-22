@@ -1,44 +1,52 @@
-import { useState } from "react";
-import { Redirect, Route, Switch, useRouteMatch } from "react-router";
+import { Redirect, Route, Switch, useHistory, useRouteMatch } from "react-router";
+
+import CheckoutHeader from "../../components/CheckoutHeader";
+import CheckoutItemList from "../../components/CheckoutItemList";
 import CheckoutPersonalDetails from "../../components/CheckoutPersonalDetails";
+import CheckoutBillingDetails from "../../components/CheckoutBillingDetails";
+import CheckoutOrderSummary from "../../components/CheckoutOrderSummary/CheckoutOrderSummary";
+
 import withLayout from "../../hoc/withLayout";
-import BillingDetailsForm from "../../components/BillingDetails/BillingDetailsForm";
+import { CheckoutProvider } from "../../providers/CheckoutProvider";
+import { useContext } from "react";
+import { AppContext } from "../../providers/AppProvider";
+import CheckoutRedirect from "../../components/CheckoutRedirect";
 import PaymentForm from "../../components/PaymentForm";
-const CHECKOUT_STEPS = ["Your details", "Billing address", "Payment details", "Order summary"];
 
 function Checkout() {
-	const { url } = useRouteMatch();
-
-	const [checkoutStepTitle, setCheckoutStepTitle] = useState(CHECKOUT_STEPS[0]);
-	const [checkoutStepNum, setCheckoutStepNum] = useState(0);
+	const { cartItems } = useContext(AppContext);
 
 	return (
 		<>
-			<header className="d-flex align-items-center justify-content-between ">
-				<h3 className="fw-light">{checkoutStepTitle}</h3>
-				<span>Step {checkoutStepNum + 1} of 4</span>
-			</header>
-			<hr className="my-0" />
-			<section className="vh-100">
-				<Switch>
-					<Route exact path={url}>
-						<Redirect to={`${url}/step-2`} />
-					</Route>
-					<Route exact path={`${url}/step-1`}>
-						<CheckoutPersonalDetails />
-					</Route>
-					<Route exact path={`${url}/step-2`}>
-						<BillingDetailsForm />
-					</Route>
-					<Route exact path={`${url}/step-3`}>
-						{<PaymentForm />}
-					</Route>
-					<Route exact path={`${url}/step-4`}>
-						{/* <OrderSummaryForm /> */}
-					</Route>
-				</Switch>
-				<aside>{/* Renderizar products */}</aside>
-			</section>
+			{!cartItems.length && <Redirect to="/" />}
+			<CheckoutProvider>
+				<CheckoutHeader />
+				<hr className="mt-0 mb-2" />
+				<div className="min-vh-100 row">
+					<div className="col-8">
+						<Switch>
+							<Route exact path="/checkout">
+								<CheckoutRedirect />
+							</Route>
+							<Route exact path="/checkout/step-1">
+								<CheckoutPersonalDetails />
+							</Route>
+							<Route exact path={`/checkout/step-2`}>
+								<CheckoutBillingDetails />
+							</Route>
+							<Route exact path={`/checkout/step-3`}>
+								<PaymentForm />
+							</Route>
+							<Route exact path={`/checkout/step-4`}>
+								<CheckoutOrderSummary />
+							</Route>
+						</Switch>
+					</div>
+					<div className="col-4">
+						<CheckoutItemList />
+					</div>
+				</div>
+			</CheckoutProvider>
 		</>
 	);
 }
