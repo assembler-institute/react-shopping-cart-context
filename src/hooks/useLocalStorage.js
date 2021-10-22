@@ -6,4 +6,9 @@ function useLocalStorage(data, storageKey) {
   }, [data]);
 }
 
+async function writeLocalStorage(data, storageKey) {
+  console.log(data)
+  localStorage.setItem(storageKey, JSON.stringify(data));
+}
+
 export default useLocalStorage;

@@ -1,4 +1,7 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
+
+import { useCartItems } from "context";
 
 import { CheckOutCart } from "components/UI/organisms";
 import { NavList } from "components/UI/molecules";
@@ -14,6 +17,12 @@ function withCheckout(WrappedComponent) {
   )})`;
 
   function WrapperComponent({ ...props }) {
+    const { cartItemIds } = useCartItems();
+
+    if (cartItemIds.length <= 0) {
+      return <Redirect to="/" />;
+    }
+
     return (
       <div className="row">
         <div className="row flex justify-content-between">

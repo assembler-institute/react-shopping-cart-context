@@ -12,6 +12,7 @@ import {
 import { useCartItems, useProducts } from "context";
 
 import useLocalStorage from "hooks/useLocalStorage";
+// import writeLocalStorage from "hooks/useLocalStorage";
 
 // import loadLocalStorageItems from "utils/loadLocalStorageItems";
 
@@ -22,6 +23,7 @@ function App() {
   const { products } = useProducts();
   const { cartItems } = useCartItems();
 
+  // writeLocalStorage(products, PRODUCTS_LOCAL_STORAGE_KEY)
   useLocalStorage(products, PRODUCTS_LOCAL_STORAGE_KEY);
   useLocalStorage(cartItems, CART_ITEMS_LOCAL_STORAGE_KEY);
 
