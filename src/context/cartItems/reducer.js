@@ -1,5 +1,7 @@
-import { useProducts } from "context/products/reducer";
-import React, { createContext, useContext, useReducer, useEffect } from "react";
+import React, { createContext, useContext, useReducer } from "react";
+import PropTypes from "prop-types";
+
+import { useProducts } from "context";
 
 import { actionTypes } from "./types";
 
@@ -9,9 +11,9 @@ export const initialState = {
   isLoading: false,
   hasError: false,
   loadingError: null,
-  handleAddToCart: () => {},
-  handleChangeQuantity: () => {},
-  handleRemoveItem: () => {},
+  handleAddToCart: () => { },
+  handleChangeQuantity: () => { },
+  handleRemoveItem: () => { },
 };
 
 const CartItemsContext = createContext(initialState);
@@ -35,7 +37,7 @@ export const reducer = (state, action) => {
               ...cartItems[cartItemId],
               quantity:
                 cartItems[cartItemId].quantity <
-                cartItems[cartItemId].unitsInStock
+                  cartItems[cartItemId].unitsInStock
                   ? cartItems[cartItemId].quantity + 1
                   : cartItems[cartItemId].quantity,
             },
@@ -69,7 +71,7 @@ export const reducer = (state, action) => {
             ...cartItems[cartItemId],
             quantity:
               cartItems[cartItemId].id === cartItemId &&
-              cartItems[cartItemId].quantity <=
+                cartItems[cartItemId].quantity <=
                 cartItems[cartItemId].unitsInStock
                 ? Number(event.target.value)
                 : cartItems[cartItemId].quantity,
@@ -132,6 +134,10 @@ function useCartItems() {
   const context = useContext(CartItemsContext);
   if (!context) return null;
   return context;
+}
+
+CartItemsProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 }
 
 export { CartItemsProvider, useCartItems };
