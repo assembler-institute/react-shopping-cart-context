@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 
 import UserSchema from "./User-schema";
-import "./userFormStyle.scss"
-/* import userContext from "../../Contexts/UserContext" */
+import "./userFormStyle.scss";
 import Input from "../Input";
 import Button from "../Button";
 import { useUsers } from "../Context/UserContext";
@@ -12,7 +11,7 @@ import { Redirect } from "react-router";
 function UserForm() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
-  const { name, email, phone, countryCode, saveUser,userDataValid, nextStep } = useUsers();
+  const { name, email, phone, countryCode, saveUser } = useUsers();
 
   const formik = useFormik({
     initialValues: {
@@ -23,15 +22,15 @@ function UserForm() {
     },
     validationSchema: UserSchema,
     onSubmit: (values, { setSubmitting }) => {
-      console.log(values);
       saveUser(values);
-       setSubmitting(true);
+      setSubmitting(true);
 
-       setTimeout(() => {
-         setHasSubmitted(true);
-       }, 500);
+      setTimeout(() => {
+        setHasSubmitted(true);
+      }, 500);
     },
   });
+
   return (
     <>
       <div className="col">
@@ -56,6 +55,7 @@ function UserForm() {
               type="text"
               label="Name"
               id="name"
+              name="name"
               value={formik.values.name}
               placeholder="Your name"
               handleChange={formik.handleChange}
@@ -67,6 +67,7 @@ function UserForm() {
               type="text"
               label="Email"
               id="email"
+              name="email"
               value={formik.values.email}
               placeholder="Your email address"
               handleChange={formik.handleChange}
@@ -87,29 +88,31 @@ function UserForm() {
                 <option value="+49">Germany</option>
                 <option value="+33">France</option>
               </select>
-                <Input
-                  id="phone"
-                  name="phone"
-                  label=""
-                  type="text"
-                  placeholder="Your phone number"
-                  value={formik.values.phone}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  hasErrorMessage={formik.touched.phone}
-                  errorMessage={formik.errors.phone}
-                />
+              <Input
+                id="phone"
+                name="phone"
+                label=""
+                type="text"
+                placeholder="Your phone number"
+                value={formik.values.phone}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                hasErrorMessage={formik.touched.phone}
+                errorMessage={formik.errors.phone}
+              />
             </div>
             <Button
               submitButton
-              block
+              /* block */
               disabled={formik.isValidating || !formik.isValid}
             >
-              {formik.isSubmitting ? "Submitting..." : "Continue to Billing Address"}
+              {formik.isSubmitting
+                ? "Submitting..."
+                : "Continue to Billing Address"}
             </Button>
           </form>
- 
-          {hasSubmitted && <Redirect to="/checkout/step-2" />} 
+
+          {hasSubmitted && <Redirect to="/checkout/step-2" />}
         </div>
       </div>
     </>

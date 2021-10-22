@@ -6,7 +6,7 @@ import { useUsers } from "../Context/UserContext";
 
 function ResumePurchase() {
   const { cartItems } = useProducts();
-  
+
   const {
     name,
     shipping,
@@ -16,7 +16,6 @@ function ResumePurchase() {
     paymentMethod,
   } = useUsers();
 
-  console.log(cardNumber);
   return (
     <>
       <div className="card p-3">
@@ -38,7 +37,9 @@ function ResumePurchase() {
           <div style={{ width: "25%" }}>
             <div>Payment</div>
             <div>
-              {cardNumber != "" && paymentMethod === "Visa" ? paymentMethod + " - " + (cardNumber % 10000) : paymentMethod}
+              {cardNumber != "" && paymentMethod === "Visa"
+                ? paymentMethod + " - " + (cardNumber % 10000)
+                : paymentMethod}
             </div>
           </div>
           <div style={{ width: "25%" }}>
@@ -86,7 +87,9 @@ function ResumePurchase() {
         <div>IVA: {taxes && taxes * 100 - 100} %</div>
         <div>Discount:</div>
         <hr />
-        <div>Total: {getCartTotalIVA(cartItems, taxes) + shipping} €</div>
+        <div>
+          Total: {(getCartTotalIVA(cartItems, taxes) + shipping).toFixed(2)} €
+        </div>
         <hr />
         <div>
           We'll send you shipping confirmation when your item(s) are on the way!

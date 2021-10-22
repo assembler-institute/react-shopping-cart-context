@@ -21,7 +21,6 @@ const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
 const CART_ITEMS_LOCAL_STORAGE_KEY = "react-sc-state-cart-items";
 
 function App() {
-  //const [user, setUser] = useState([]);
 
   const {
     localStorageProducts,
@@ -50,17 +49,13 @@ function App() {
           setIsLoading(false);
         })
         .catch((error) => {
-          console.log(error);
+  
           setIsLoading(false);
           setHasError(true);
           setLoadingError(error.message);
         });
     }
   }, []);
-
-  function saveUser(userData) {
-    setUser((prevState) => [...prevState, userData]);
-  }
 
   return (
     <BrowserRouter>

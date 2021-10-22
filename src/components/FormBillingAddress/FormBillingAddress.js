@@ -22,7 +22,6 @@ function FormBillingAddress() {
     },
     validationSchema: billingAddressSchema,
     onSubmit: (values, { setSubmitting }) => {
-      console.log(values);
       saveAddress(values);
       setSubmitting(true);
 
@@ -69,7 +68,6 @@ function FormBillingAddress() {
           />
         </div>
         <div className="form-group">
-          {/*  <input type="text" className="form-control" name="city" id="city" /> */}
           <Input
             type="text"
             label="City*"
@@ -84,7 +82,6 @@ function FormBillingAddress() {
           />
         </div>
         <div className="form-group">
-          {/* <input type="text" className="form-control" name="zip" id="zip" /> */}
           <Input
             type="number"
             label="Zip/post code*"
@@ -120,7 +117,7 @@ function FormBillingAddress() {
             submitButton
             disabled={formik.isValidating || !formik.isValid}
           >
-            Continue to delivery
+            {formik.isSubmitting ? "Submitting..." : "Continue to delivery"}
           </Button>
         </div>
       </form>

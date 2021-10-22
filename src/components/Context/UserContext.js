@@ -18,13 +18,9 @@ const initValues = {
   cvc: "",
   rules: false,
   paymentMethod: "Visa",
-  step: 1,
-  subTotal: 0,
   taxes: 0,
   shipping: 0,
-  discount: 0,
-  total: 0,
-  userDataValid: false,
+  discount: 0
 };
 
 const UserContext = createContext(initValues);
@@ -35,16 +31,14 @@ function reducer(state, action) {
   switch (action.type) {
     case actionTypes.SAVE_USER: {
       const { name, email, countryCode, phone } = action.payload;
-      console.log('hola')
-      console.log(name,email,countryCode,phone);
+
       return {
         ...state,
         name: name,
         email: email,
         countryCode: countryCode,
         phone: phone,
-       /*  userDataValid: true, */
-        /* step: step + 1, */
+        userDataValid: true,
       };
     }
     case actionTypes.SAVE_ADDRESS: {
@@ -66,14 +60,11 @@ function reducer(state, action) {
         shipping: shipping,
         taxes: taxes,
         userDataValid: true,
-        /* step: step + 1, */
       };
     }
     case actionTypes.SAVE_PAYMENT: {
-      console.log("hola");
       const { cvc, expiry, name, rules, number, pay } = action.payload;
-      /* const { cvc, cardNumber, expiryDate, rules } = action.payload; */
-      
+
       return {
         ...state,
         cvc,
@@ -81,7 +72,8 @@ function reducer(state, action) {
         cardHolder: name,
         cardNumber: number,
         rules,
-        paymentMethod: pay
+        paymentMethod: pay,
+        completed: true,
       };
     }
     case actionTypes.NEXT_STEP: {
@@ -106,7 +98,6 @@ function UsersProvider({ children }) {
       dispatch({ type: actionTypes.SAVE_ADDRESS, payload: data }),
     savePayment: (data) =>
       dispatch({ type: actionTypes.SAVE_PAYMENT, payload: data }),
-    nextStep: () => dispatch({ type: actionTypes.NEXT_STEP }),
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

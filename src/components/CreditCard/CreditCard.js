@@ -25,7 +25,6 @@ function toogleCard(method) {
     $div.classList.add("d-none");
     $div2.classList.add("d-none");
   } else {
-    console.log(method);
     $div.classList.toggle("d-none");
     $div2.classList.toggle("d-none");
   }
@@ -33,6 +32,7 @@ function toogleCard(method) {
 
 function CreditCard() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [methodPayment, setMethodPayment] = useState("card");
   const [focus, setFocus] = useState();
   const { cvc, expiry, name, number, paymentMethod, savePayment } = useUsers();
 
@@ -46,12 +46,11 @@ function CreditCard() {
       pay: paymentMethod || "",
       rules: false,
     },
-    validationSchema: creditCardSchema,
+    validationSchema: methodPayment === "card" && creditCardSchema,
     onSubmit: (values, { setSubmitting }) => {
-      console.log(values);
       savePayment(values);
       setSubmitting(true);
-      console.log(values);
+
       setTimeout(() => {
         setHasSubmitted(true);
       }, 500);
@@ -82,7 +81,10 @@ function CreditCard() {
             handleBlur={formik.handleBlur}
             hasErrorMessage={formik.touched.pay}
             errorMessage={formik.errors.pay}
-            handleClick={() => toogleCard("visa")}
+            handleClick={() => {
+              toogleCard("visa");
+              setMethodPayment("card");
+            }}
           />
           <label className="form-check-label" htmlFor="card">
             Credit/Debit Card
@@ -99,7 +101,10 @@ function CreditCard() {
             handleBlur={formik.handleBlur}
             hasErrorMessage={formik.touched.pay}
             errorMessage={formik.errors.pay}
-            handleClick={() => toogleCard("paypal")}
+            handleClick={() => {
+              toogleCard("paypal");
+              setMethodPayment("other");
+            }}
           />
           <label className="form-check-label" htmlFor="paypal">
             <img src={paypal} />
@@ -116,7 +121,10 @@ function CreditCard() {
             handleBlur={formik.handleBlur}
             hasErrorMessage={formik.touched.pay}
             errorMessage={formik.errors.pay}
-            handleClick={() => toogleCard("apple")}
+            handleClick={() => {
+              toogleCard("apple");
+              setMethodPayment("other");
+            }}
           />
           <label className="form-check-label" htmlFor="apple">
             <img src={applePay} style={{ width: "50px" }} />

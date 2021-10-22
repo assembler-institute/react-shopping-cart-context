@@ -52,7 +52,6 @@ function NewProductForm() {
     },
     validationSchema: productSchema,
     onSubmit: (values, { setSubmitting }) => {
-      console.log('hola')
       const newProduct = addProductDetails(values);
       setProducts(newProduct);
       setSubmitting(true);

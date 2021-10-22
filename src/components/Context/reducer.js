@@ -97,19 +97,9 @@ function reducer(state, action) {
       const productId = action.payload;
 
       const updatedProducts = products.map((product) => {
-        if (product.id === productId) {
-          product.isFavorite = !product.isFavorite;
-        }
-        return product;
-        /* if (product.id === productId) {
-          console.log(product.isFavorite);
-          return {
-            ...product,
-            isFavorite: !product.isFavorite,
-          };
-        }
+        if (product.id === productId) product.isFavorite = !product.isFavorite;
 
-        return product; */
+        return product;
       });
 
       return { ...state, products: updatedProducts };
@@ -119,7 +109,6 @@ function reducer(state, action) {
 
       const prevCartItem = cartItems.find((item) => item.id === productId);
       const foundProduct = products.find((product) => product.id === productId);
-      console.log("entra "+foundProduct);
 
       if (prevCartItem) {
         const updatedCartItems = cartItems.map((item) => {
@@ -145,11 +134,10 @@ function reducer(state, action) {
         ...state,
         cartItems: [...cartItems, updatedProduct],
       };
-    
     }
     case actionTypes.REMOVE: {
       const productId = action.payload;
-      console.log("product " + productId);
+
       const updatedCartItems = cartItems.filter(
         (item) => item.id !== productId,
       );
@@ -179,9 +167,7 @@ function reducer(state, action) {
       };
     }
     case actionTypes.SET_PRODUCTS: {
-      //setProducts((prevState) => [newProduct, ...prevState]);
       const newProduct = action.payload;
-      console.log(newProduct);
       return {
         ...state,
         products: [...products, newProduct],

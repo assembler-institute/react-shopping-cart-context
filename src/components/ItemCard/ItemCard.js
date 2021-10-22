@@ -34,11 +34,10 @@ function ItemCard({
   shortDescription,
   isFavorite,
   upVotes,
-  downVotes
+  downVotes,
 }) {
+  const { setFavorite, setUpVotes, setDownVotes, addToCart } = useProducts();
 
-  const { setFavorite,setUpVotes,setDownVotes,addToCart } = useProducts();
-  
   function onDownVote() {
     setDownVotes(id);
   }
@@ -47,9 +46,8 @@ function ItemCard({
   }
   function onSetFavorite() {
     setFavorite(id);
-  } 
+  }
   function onAddToCart() {
-    console.log('saD'+id);
     addToCart(id);
   }
 
@@ -59,7 +57,7 @@ function ItemCard({
         <div className="ItemCard__image-wrapper">
           <img src={img} className="ItemCard__image" alt={title} />
           <FavoriteIconButton
-             handleSetFavorite={onSetFavorite} 
+            handleSetFavorite={onSetFavorite}
             isFavorite={isFavorite}
           />
         </div>

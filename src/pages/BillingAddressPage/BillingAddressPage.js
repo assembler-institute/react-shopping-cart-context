@@ -6,18 +6,14 @@ import SummaryOrder from "../../components/SummaryOrder";
 import withLayout from "../../hoc/withLayout";
 
 function BillingAddressPage() {
-  const { step } = useUsers();
-/*   if (step === 2) { */
-    return (
-      <div className="row">
-        <div className="col col-8">
-          <FormBillingAddress />
-        </div>
-        <SummaryOrder className="col col-4" />
+  return (
+    <div className="row">
+      <div className="col col-8">
+        <FormBillingAddress />
       </div>
-    );
-/*   }
-  return <Redirect to="/" />; */
+      <SummaryOrder className="col col-4" />
+    </div>
+  );
 }
 
 export default withLayout(BillingAddressPage);
