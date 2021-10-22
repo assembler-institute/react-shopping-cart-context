@@ -12,6 +12,7 @@ import { useContext } from "react";
 import { AppContext } from "../../providers/AppProvider";
 import CheckoutRedirect from "../../components/CheckoutRedirect";
 import PaymentForm from "../../components/PaymentForm";
+import PurchaseCompleted from "../../components/PurchaseCompleted";
 
 function Checkout() {
 	const { cartItems } = useContext(AppContext);
@@ -39,6 +40,9 @@ function Checkout() {
 							</Route>
 							<Route exact path={`/checkout/step-4`}>
 								<CheckoutOrderSummary />
+							</Route>
+							<Route exact path={`/checkout/step-5`}>
+								<PurchaseCompleted />
 							</Route>
 						</Switch>
 					</div>

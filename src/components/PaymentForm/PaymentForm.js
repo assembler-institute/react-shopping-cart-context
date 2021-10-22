@@ -1,157 +1,273 @@
-import React, { useState } from 'react';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import Cards from 'react-credit-cards';
-import 'react-credit-cards/es/styles-compiled.css';
-import valid from 'card-validator'
+import { useContext, useState } from "react";
+import { useFormik } from "formik";
+import { Redirect } from "react-router";
+import { CheckoutContext } from "../../providers/CheckoutProvider";
+import * as Yup from "yup";
+
+import cardValidator from "card-validator";
+import Cards from "react-credit-cards";
+import IconImg from "../IconImg/IconImg";
+import "react-credit-cards/es/styles-compiled.css";
+
+import PaymentCardIcon from "../../img/icons/payment-card.svg";
+import ApplePayLogo from "../../img/logos/ApplePay-logo.svg";
+import PayPalLogo from "../../img/logos/PayPal-logo.svg";
+import VisaLogo from "../../img/logos/Visa-logo.svg";
+import MasterCardLogo from "../../img/logos/MasterCard-logo.svg";
+import AmericanExpressLogo from "../../img/logos/AmericanExpress-logo.svg";
+
+const cardProviders = [
+	{ value: "Visa", img: VisaLogo, disabled: false, checked: false },
+	{ value: "MasterCard", img: MasterCardLogo, disabled: false, checked: false },
+	{ value: "AmericanExpress", img: AmericanExpressLogo, disabled: false, checked: false },
+];
+const paymentMethods = [
+	{ value: "Card", img: PaymentCardIcon, disabled: false, checked: true },
+	{ value: "ApplePay", img: ApplePayLogo, disabled: true, checked: false },
+	{ value: "PayPal", img: PayPalLogo, disabled: true, checked: false },
+];
 
 const schema = Yup.object({
-    paymentType: Yup.string()
-        .required("Come on, don't be so Catalan and choose your payment type"),
-    payment: Yup.string()
-        .required("Come on, don't be so Catalan and choose your payment type"),
-    name: Yup.string()
-        .required("Come on, don't be so Catalan and input your name")
-        .matches("[a-zA-Z]", "Please input only alphanumeric caracters"),
-    number: Yup.string()
-        .required("Come on, don't be so Catalan and input your card number")
-        .test('test-number', // this is used internally by yup
-            "Come on, don't be so Catalan and input a valid credit card number", //validation message
-            number => valid.number(number).isValid) // return true false based on validation
-        .required(),
-    expiry: Yup.string()
-        .required("Come on, don't be so Catalan and input your card expiry date")
-        .test('test-expiry', // this is used internally by yup
-            'This date is not valid!', //validation message
-            expiry => valid.expirationDate(expiry).isValid), // return true false based on validation
-    cvc: Yup.string()
-        .required("Come on, don't be so Catalan and input your CVV code")
-        .max(3)
-        .matches(/\d+/, "Card number must be numeric"),
-    acceptTerms: Yup.boolean().oneOf([true], "The terms and conditions must be accepted."),
-})
+	method: Yup.string().required("Select a payment method."),
+	cardProvider: Yup.string().required("Select a card provider."),
+	cardHolderName: Yup.string()
+		.required("Cardholder name is required.")
+		.test("test-cardHolderName", "Invalid cardholder name.", (value) => cardValidator.cardholderName(value).isValid),
+	cardNumber: Yup.string()
+		.required("Card number is required.")
+		.matches(/^3[47]|4|5[1-5]/, "Only MasterCard, Visa or AmericanExpress")
+		.test("test-cardNumber-withCardValidator", "Invalid card number.", (value) => cardValidator.number(value).isValid),
+	cardExpirationMonth: Yup.string()
+		.required("Month is required.")
+		.test("test-cardExpirationMonth", "Invalid month.", (value) => cardValidator.expirationMonth(value).isValid),
+	cardExpirationYear: Yup.string()
+		.required("Year is required.")
+		.test("test-cardExpirationYear", "Invalid year.", (value) => cardValidator.expirationYear(value).isValid),
+	cardCVV: Yup.string()
+		.required("CVC is required.")
+		.test("test-cardCVV", "Invalid CVC", (value) => cardValidator.cvv(value).isValid),
+	acceptTerms: Yup.boolean().oneOf([true], "The terms and conditions must be accepted."),
+});
 
 function PaymentForm(props) {
-    const [focus, setFocus] = useState("")
+	const [focus, setFocus] = useState("");
+	const {
+		state: { step, paymentDetails },
+		setPaymentDetails,
+		goBack,
+	} = useContext(CheckoutContext);
 
-    const formik = useFormik({
-        initialValues: {
-            paymentType: "",
-            name: "",
-            number: "",
-            expiry: "",
-            cvc: "",
-            acceptTerms: false,
-        },
-        validationSchema: schema,
-        validateOnBlur: true,
-        onSubmit: (values, actions) => {
-            console.log(values)
-        },
-    })
-    const { handleSubmit, handleBlur, handleChange, values, touched, errors, isValid, isValidating } = formik;
-    return (
-        <>
-            <div>
-                <Cards
-                    number={values.number}
-                    name={values.name}
-                    expiry={values.expiry}
-                    cvc={values.cvc}
-                    focused={focus}
-                />
-            </div >
-            <div>
-                <form onSubmit={handleSubmit}>
-                    <label className="control-label">How would you like to pay?</label><br />
-                    <div role="group" className="form-check form-check-inline">
-                        <input
-                            className="form-check-input"
-                            type="radio"
-                            name="paymentType"
-                            value="visa"
-                            onChange={handleChange}
-                        />
-                        <input
-                            className="form-check-input"
-                            type="radio"
-                            name="paymentType"
-                            value="masterCard"
-                            disabled={true}
-                            onChange={handleChange}
-                        />
-                        <input
-                            className="form-check-input"
-                            type="radio"
-                            name="paymentType"
-                            value="americanExpress"
-                            disabled={true}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    {errors.paymentType && touched.paymentType && <div className="text-danger">{errors.paymentType}</div>}
-                    <span>We accept the following debit/credit cards</span><br />
-                    <img src="../../img/Visa_Inc._logo.svg" alt="visa"></img ><img src="../../img/Mastercard-logo.svg" alt="mastercard"></img><img src="src/img/American_Express_logo_(2018).svg" alt="american express"></img><br />
-                    <label htmlFor="name" className="control-label">Cardholder name*</label><br />
-                    <input
-                        className="form-control"
-                        type="text"
-                        name="name"
-                        placeholder="Name"
-                        value={values.name}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        onFocus={e => setFocus(e.target.name)}
-                    /><br />
-                    {errors.name && touched.name && <div className="text-danger">{errors.name}</div>}
-                    <label htmlFor="number" className="control-label">Card number*</label><br />
-                    <input
-                        placeholder="Card Number"
-                        type="tel"
-                        className="form-control"
-                        name="number"
-                        value={values.number}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        onFocus={e => setFocus(e.target.name)}
-                    /><br />
-                    {errors.number && touched.number && <div className="text-danger">{errors.number}</div>}
-                    <label htmlFor="expiry" className="control-label">Card expiry date*</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        name="expiry"
-                        placeholder="mm/yy"
-                        value={values.expiry}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        onFocus={e => setFocus(e.target.name)}
-                    />
-                    {errors.expiry && touched.expiry && <div className="text-danger">{errors.expiry}</div>}
-                    <label htmlFor="cvc" className="control-label">CVV Code*</label><img alt="cvv pic" />
-                    <input
-                        placeholder="CVV"
-                        type="tel"
-                        className="form-control"
-                        name="cvc"
-                        value={values.cvc}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        onFocus={e => setFocus(e.target.name)}
-                    /><br />
-                    {errors.cvc && touched.cvc && <div className="text-danger">{errors.cvc}</div>}
-                    <input
-                        type="checkbox"
-                        className="form-check-input"
-                        name="acceptTerms"
-                        value={values.acceptTerms}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        onFocus={e => setFocus(e.target.name)} />
-                    <label>I have read and I accept the <u>booking conditions</u>, <u>general terms</u>  and <u>privacy policy</u></label><br />
-                    <span>We use secure SSL transmission and encrypted storage to protect your personal information.</span><br />
-                    <br />
-                    {errors.acceptTerms && touched.acceptTerms && <div className="text-danger">{errors.acceptTerms}</div>}
+	const formik = useFormik({
+		initialValues: {
+			...paymentDetails,
+			acceptTerms: false,
+		},
+		validationSchema: schema,
+		validateOnBlur: true,
+		onSubmit: (values, actions) => {
+			const { setSubmitting } = actions;
+
+			setSubmitting(true);
+			setTimeout(() => {
+				setPaymentDetails(values);
+			}, 250);
+		},
+	});
+	const {
+		handleSubmit,
+		handleBlur,
+		handleChange,
+		values,
+		touched,
+		errors,
+		isValid,
+		isValidating,
+		isSubmitting,
+	} = formik;
+	return (
+		<>
+			<div>
+				<form onSubmit={handleSubmit}>
+					<h5 className="my-3">How would you like to pay</h5>
+					<div className="mb-3 has-validation">
+						<div role="group" className="row">
+							{paymentMethods.map(({ value, img, disabled }, index) => (
+								<div key={index} className="col">
+									<input
+										type="radio"
+										className="btn-check"
+										name="method"
+										id={`method-${value}`}
+										value={value}
+										onChange={handleChange}
+										autocomplete="off"
+										disabled={disabled}
+									/>
+									<label
+										className={`btn w-100 ${!disabled ? "btn-outline-info" : "btn-secondary"} `}
+										for={`method-${value}`}
+									>
+										<IconImg src={img} height={2.5} width={2.5} />
+									</label>
+								</div>
+							))}
+						</div>
+						{errors.method && touched.method && <div className="text-danger">{errors.method}</div>}
+					</div>
+					<h6 className="my-3">We accept the following debit/credit cards</h6>
+					<div className="mb-3 has-validation">
+						<div role="group" className="row">
+							{cardProviders.map(({ value, img, disabled }, index) => (
+								<div key={index} className="col">
+									<input
+										type="radio"
+										className="btn-check"
+										name="cardProvider"
+										id={`cardProvider-${value}`}
+										value={value}
+										onChange={handleChange}
+										autocomplete="off"
+										disabled={disabled}
+									/>
+									<label className="btn btn-outline-info w-100" for={`cardProvider-${value}`}>
+										<IconImg src={img} height={2.5} width={2.5} />
+									</label>
+								</div>
+							))}
+						</div>
+						<div className="row">
+							<div className="col-12 col-lg-6 order-2 order-lg-1 ">
+								<label htmlFor="cardHolderName" className="control-label">
+									<h6>Cardholder name*</h6>
+								</label>
+								<div className="input-group mb-3 has-validation">
+									<input
+										className={`form-control ${touched.cardHolderName && errors.cardHolderName ? "is-invalid" : null} ${
+											touched.cardHolderName && !errors.cardHolderName ? "is-valid" : null
+										}`}
+										type="text"
+										name="cardHolderName"
+										id="cardHolderName"
+										placeholder="Name..."
+										value={values.cardHolderName}
+										onChange={handleChange}
+										onBlur={handleBlur}
+										onFocus={(e) => setFocus("name")}
+									/>
+									{errors.cardHolderName && touched.cardHolderName && (
+										<div className="invalid-feedback">{errors.cardHolderName}</div>
+									)}
+								</div>
+								<label htmlFor="cardNumber" className="control-label">
+									<h6>Card number*</h6>
+								</label>
+								<div className="input-group mb-3 has-validation">
+									<input
+										className={`form-control ${touched.cardNumber && errors.cardNumber ? "is-invalid" : null} ${
+											touched.cardNumber && !errors.cardNumber ? "is-valid" : null
+										}`}
+										type="text"
+										name="cardNumber"
+										id="cardNumber"
+										placeholder="0000 0000 0000 0000"
+										value={values.cardNumber}
+										onChange={handleChange}
+										onBlur={handleBlur}
+										onFocus={(e) => setFocus("number")}
+									/>
+									{errors.cardNumber && touched.cardNumber && (
+										<div className="invalid-feedback">{errors.cardNumber}</div>
+									)}
+								</div>
+							</div>
+							<div className="col-12 col-lg-6 d-flex py-4 order-1 order-lg-2 align-items-center">
+								<Cards
+									number={values.cardNumber}
+									name={values.cardHolderName}
+									expiry={values.cardExpirationMonth + values.cardExpirationYear}
+									cvc={values.cardCVV}
+									focused={focus}
+								/>
+							</div>
+						</div>
+						<div className="row">
+							<div className="col-6 col-lg-4">
+								<label htmlFor="cardExpirationMonth" className="control-label">
+									<h6>Expiration month*</h6>
+								</label>
+								<div className="input-group mb-3 has-validation">
+									<input
+										className={`form-control ${
+											touched.cardExpirationMonth && errors.cardExpirationMonth ? "is-invalid" : null
+										} ${touched.cardExpirationMonth && !errors.cardExpirationMonth ? "is-valid" : null}`}
+										type="text"
+										name="cardExpirationMonth"
+										id="cardExpirationMonth"
+										placeholder="00"
+										value={values.cardExpirationMonth}
+										onChange={handleChange}
+										onBlur={handleBlur}
+										onFocus={(e) => setFocus("expiry")}
+									/>
+									{errors.cardExpirationMonth && touched.cardExpirationMonth && (
+										<div className="invalid-feedback">{errors.cardExpirationMonth}</div>
+									)}
+								</div>
+							</div>
+							<div className="col-6 col-lg-4">
+								<label htmlFor="cardExpirationYear" className="control-label">
+									<h6>Expiration year*</h6>
+								</label>
+								<div className="input-group mb-3 has-validation">
+									<input
+										className={`form-control ${
+											touched.cardExpirationYear && errors.cardExpirationYear ? "is-invalid" : null
+										} ${touched.cardExpirationYear && !errors.cardExpirationYear ? "is-valid" : null}`}
+										type="text"
+										name="cardExpirationYear"
+										id="cardExpirationYear"
+										placeholder="00"
+										value={values.cardExpirationYear}
+										onChange={handleChange}
+										onBlur={handleBlur}
+										onFocus={(e) => setFocus("expiry")}
+									/>
+									{errors.cardExpirationYear && touched.cardExpirationYear && (
+										<div className="invalid-feedback">{errors.cardExpirationYear}</div>
+									)}
+								</div>
+							</div>
+							<div className="col-12 col-lg-4">
+								<label htmlFor="cardCVV" className="control-label">
+									<h6>CVV*</h6>
+								</label>
+								<div className="input-group mb-3 has-validation">
+									<input
+										className={`form-control ${touched.cardCVV && errors.cardCVV ? "is-invalid" : null} ${
+											touched.cardCVV && !errors.cardCVV ? "is-valid" : null
+										}`}
+										type="text"
+										name="cardCVV"
+										id="cardCVV"
+										placeholder="00"
+										value={values.cardCVV}
+										onChange={handleChange}
+										onBlur={handleBlur}
+										onFocus={(e) => setFocus("cvc")}
+									/>
+									{errors.cardCVV && touched.cardCVV && <div className="invalid-feedback">{errors.cardCVV}</div>}
+								</div>
+							</div>
+						</div>
+					</div>
+					<label>
+						I have read and I accept the <u>booking conditions</u>, <u>general terms</u> and <u>privacy policy</u>
+					</label>
+					<br />
+					<span>We use secure SSL transmission and encrypted storage to protect your personal information.</span>
+					<br />
+					<br />
+					{errors.acceptTerms && touched.acceptTerms && <div className="text-danger">{errors.acceptTerms}</div>}
 
                     <button type="submit" className="btn btn-primary">Complete booking</button>
                 </form>
