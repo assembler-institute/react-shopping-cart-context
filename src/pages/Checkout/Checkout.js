@@ -3,7 +3,7 @@ import { Redirect, Route, Switch, useRouteMatch } from "react-router";
 import CheckoutPersonalDetails from "../../components/CheckoutPersonalDetails";
 import withLayout from "../../hoc/withLayout";
 import BillingDetailsForm from "../../components/BillingDetails/BillingDetailsForm";
-import PaymentForm from "../PaymentForm";
+import PaymentForm from "../../components/PaymentForm";
 const CHECKOUT_STEPS = ["Your details", "Billing address", "Payment details", "Order summary"];
 
 function Checkout() {
