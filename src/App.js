@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { Redirect } from "react-router";
 import { useProducts } from "./components/Context/reducer";
 
 import Home from "./pages/Home";
@@ -12,8 +13,8 @@ import useLocalStorage from "./hooks/useLocalStorage";
 import BillingAddressPage from "./pages/BillingAddressPage/BillingAddressPage";
 import PaymentDetailsPage from "./pages/PaymentDetailsPage/PaymentDetailsPage";
 import { UsersProvider } from "./components/Context/UserContext";
+import Input from "./components/Input";
 
-import { Redirect } from "react-router";
 import ResumePurchasePage from "./pages/ResumePurchasePage";
 
 const PRODUCTS_LOCAL_STORAGE_KEY = "react-sc-state-products";
@@ -83,9 +84,9 @@ function App() {
           <Route path="/" exact>
             <Home />
           </Route>
-       {/*    <Route path="*">
-            <Home  />
-          </Route> */}
+          <Route>
+            <Redirect to="/"/>
+          </Route>
         </UsersProvider>
       </Switch>
     </BrowserRouter>

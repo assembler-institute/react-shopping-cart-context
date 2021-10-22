@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useFormik } from "formik";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 import Input from "../Input";
 import Button from "../Button";
@@ -11,7 +11,7 @@ import { useUsers } from "../Context/UserContext";
 function FormBillingAddress() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
-  const { address,city,zip,country,saveAddress } = useUsers();
+  const { address, city, zip, country, saveAddress } = useUsers();
 
   const formik = useFormik({
     initialValues: {
@@ -55,12 +55,6 @@ function FormBillingAddress() {
 
       <form onSubmit={formik.handleSubmit}>
         <div className="form-group">
-          {/*        <input
-            type="text"
-            className="form-control"
-            name="address"
-            id="address"
-          /> */}
           <Input
             type="text"
             label="Address*"
@@ -106,23 +100,25 @@ function FormBillingAddress() {
         </div>
         <div className="form-group">
           <label>Country/region*</label>
-          <select name="country" id="country"
-           className="form-control"
-           onChange={formik.handleChange}>
-           
+          <select
+            name="country"
+            id="country"
+            className="form-control"
+            onChange={formik.handleChange}
+          >
             <option value="ES">Spain</option>
             <option value="FR">France</option>
             <option value="DE">Germany</option>
             <option value="IT">Italy</option>
           </select>
         </div>
-        <div className="form-group">
-          {/* <input type="submit" value="Continue to delivery" /> */}
+        <div className="row justify-content-between">
+          <Link to="/checkout/step-1">
+            <Button>Back to User Information</Button>
+          </Link>
           <Button
             submitButton
-            block
             disabled={formik.isValidating || !formik.isValid}
-    
           >
             Continue to delivery
           </Button>

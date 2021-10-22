@@ -2,8 +2,8 @@ import { useState } from "react";
 import Cards from "react-credit-cards";
 import "react-credit-cards/es/styles-compiled.css";
 
-import { Field, useFormik } from "formik";
-import { Redirect } from "react-router-dom";
+import { useFormik } from "formik";
+import { Link, Redirect } from "react-router-dom";
 
 import Input from "../Input";
 import Button from "../Button";
@@ -196,24 +196,28 @@ function CreditCard() {
           type="checkbox"
           name="rules"
           id="rules"
-          label=""
+          label="I have read and I accept the booking
+          conditions, general terms and privacy policy."
           value={formik.values.rules}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           hasErrorMessage={formik.touched.rules}
           errorMessage={formik.errors.rules}
         />
-        <span>
-          I have read and I accept the booking conditions, general terms and
-          privacy policy.
-        </span>
-        <Button
-          submitButton
-          block
-          disabled={formik.isValidating || !formik.isValid}
-        >
-          Complete
-        </Button>
+        {/*  <input type="checkbox" /> I have read and I accept the booking
+        conditions, general terms and privacy policy. */}
+        <hr />
+        <div className="row justify-content-between">
+          <Link to="/checkout/step-2">
+            <Button>Back to Billing Address</Button>
+          </Link>
+          <Button
+            submitButton
+            disabled={formik.isValidating || !formik.isValid}
+          >
+            Complete
+          </Button>
+        </div>
       </form>
             {hasSubmitted && <Redirect to="/checkout/order-summary" />}
     </div>

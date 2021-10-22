@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 
 import UserSchema from "./User-schema";
-
+import "./userFormStyle.scss"
+/* import userContext from "../../Contexts/UserContext" */
 import Input from "../Input";
 import Button from "../Button";
 import { useUsers } from "../Context/UserContext";
@@ -19,24 +20,18 @@ function UserForm() {
       email: email,
       phone: phone,
       countryCode: countryCode,
-      userDataValid: false  
     },
     validationSchema: UserSchema,
     onSubmit: (values, { setSubmitting }) => {
       console.log(values);
-      
-      setSubmitting(true); 
-      /* setTimeout(() => {
-        setHasSubmitted(true);
-      }, 5000); */
-       saveUser(values); 
+      saveUser(values);
+       setSubmitting(true);
+
+       setTimeout(() => {
+         setHasSubmitted(true);
+       }, 500);
     },
   });
-
-  if(userDataValid){
-    return (<Redirect to="/checkout/step-2" />);
-  }
-
   return (
     <>
       <div className="col">
@@ -80,10 +75,9 @@ function UserForm() {
               errorMessage={formik.errors.email}
             />
 
-            <span>Phone number</span>
-            <div>
+            <label htmlFor="phone">Phone number</label>
+            <div className="row align-items-center">
               <select
-                className="countryCode"
                 name="countryCode"
                 id="countryCode"
                 onChange={formik.handleChange}
@@ -93,29 +87,29 @@ function UserForm() {
                 <option value="+49">Germany</option>
                 <option value="+33">France</option>
               </select>
-              <label htmlFor="phone">
-                <input
+                <Input
                   id="phone"
                   name="phone"
+                  label=""
                   type="text"
                   placeholder="Your phone number"
-                  className="phone"
                   value={formik.values.phone}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
+                  hasErrorMessage={formik.touched.phone}
+                  errorMessage={formik.errors.phone}
                 />
-              </label>
             </div>
             <Button
               submitButton
               block
               disabled={formik.isValidating || !formik.isValid}
             >
-              {formik.isSubmitting ? "Submitting..." : "Submit"}
+              {formik.isSubmitting ? "Submitting..." : "Continue to Billing Address"}
             </Button>
           </form>
-{/* 
-          {hasSubmitted && <Redirect to="/checkout/step-2" />} */}
+ 
+          {hasSubmitted && <Redirect to="/checkout/step-2" />} 
         </div>
       </div>
     </>

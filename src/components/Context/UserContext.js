@@ -35,14 +35,15 @@ function reducer(state, action) {
   switch (action.type) {
     case actionTypes.SAVE_USER: {
       const { name, email, countryCode, phone } = action.payload;
-
+      console.log('hola')
+      console.log(name,email,countryCode,phone);
       return {
         ...state,
         name: name,
         email: email,
         countryCode: countryCode,
         phone: phone,
-        userDataValid: true,
+       /*  userDataValid: true, */
         /* step: step + 1, */
       };
     }
