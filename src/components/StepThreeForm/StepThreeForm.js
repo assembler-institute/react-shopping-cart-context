@@ -1,5 +1,4 @@
 import { useFormik } from "formik";
-import { useState } from "react";
 import { Redirect } from "react-router";
 import { useUser } from "../../context/userContext/userContex";
 import Input from "../Input";
@@ -7,8 +6,7 @@ import stepThreeSchema from "./schema";
 import Button from "../Button/index"
 
 function StepThreeForm() {
-    const { cardNumber, cvc, nameOnCard, expiryMonth, expiryYear} = useUser();
-    const [hasSubmitted, setHasSubmitted] = useState(false);
+    const { cardNumber, cvc, nameOnCard, expiryMonth, expiryYear,userDataValidPage3,submitStepThree} = useUser();
 
     const formik = useFormik({
         initialValues: {
@@ -21,14 +19,16 @@ function StepThreeForm() {
         validationSchema: stepThreeSchema,
         onSubmit: (values) => {
             submitStepThree(values);
-            
+            useUser(values)
             console.log(values)
             setTimeout(() => {
                 setHasSubmitted(true);
             }, 500);
         },
-
     });
+    if(userDataValidPage3){
+        return(<Redirect to="/checkout/order-summary"/>)
+      }
 
     return (
         <>
@@ -46,31 +46,31 @@ function StepThreeForm() {
                     isTouched={formik.touched.cardNumber}
                 />
 
-                {/* <Input
-                    type="text"
-                    label="City"
-                    id="city"
-                    value={formik.values.city}
-                    placeholder="Your city"
+                <Input
+                    type="number"
+                    label="CVC"
+                    id="cvc"
+                    value={formik.values.cvc}
+                    placeholder="Your CVC"
                     handleChange={formik.handleChange}
                     handleBlur={formik.handleBlur}
-                    hasErrorMessage={formik.touched.city}
-                    errorMessage={formik.errors.city}
-                    isTouched={formik.touched.city}
+                    hasErrorMessage={formik.touched.cvc}
+                    errorMessage={formik.errors.cvc}
+                    isTouched={formik.touched.cvc}
                 />
 
                 <Input
                     type="text"
-                    label="Zip code"
-                    id="zip"
-                    value={formik.values.zip}
-                    placeholder="Your zip code"
+                    label="Name on card"
+                    id="nameOnCard"
+                    value={formik.values.nameOnCard}
+                    placeholder="Your Name On Card"
                     handleChange={formik.handleChange}
                     handleBlur={formik.handleBlur}
-                    hasErrorMessage={formik.touched.zip}
-                    errorMessage={formik.errors.zip}
-                    isTouched={formik.touched.zip}
-                /> */}
+                    hasErrorMessage={formik.touched.nameOnCard}
+                    errorMessage={formik.errors.nameOnCard}
+                    isTouched={formik.touched.nameOnCard}
+                />
 
                 <Button
                     submitButton
@@ -79,7 +79,6 @@ function StepThreeForm() {
                 >
                     {formik.isSubmitting ? "Submitting..." : "Submit"}
                 </Button>
-                {hasSubmitted && <Redirect to="/checkout/step-4" />}
             </form>
         </>
     ) 

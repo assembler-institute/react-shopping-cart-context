@@ -24,15 +24,16 @@ const initialState = {
   expiryDate: "",
   cvv: "",
   acceptedTerms: false,
-  userDataValidPagae1:false,
-  userDataValidPagae2:false,
+  userDataValidPage1:false,
+  userDataValidPage2:false,
+  userDataValidPage3:false,
 }
 const userContext = createContext(initialState);
 function checkoutReducer(state, action) {
   switch (action.type) {
     case actionTypes.SUBMIT_ONE_PAGE: {
       // console.log(action.payload)
-      const { name, email, phone, countryCode,userDataValidPagae1 } = action.payload
+      const { name, email, phone, countryCode,userDataValidPage1 } = action.payload
       const data = action.payload
       console.log(data);
       return {
@@ -41,11 +42,11 @@ function checkoutReducer(state, action) {
         email: email,
         phone: phone,
         countryCode: countryCode,
-        userDataValidPagae1:true
+        userDataValidPage1:true
       };
     }
     case actionTypes.SUBMIT_SECOND_PAGE: {
-      const { address, city, zip, country,userDataValidPagae2 } = action.payload
+      const { address, city, zip, country,userDataValidPage2 } = action.payload
       const data = action.payload
       console.log(action.payload)
       return {
@@ -54,7 +55,7 @@ function checkoutReducer(state, action) {
         city: city,
         zip: zip,
         country: country,
-        userDataValidPagae2:true
+        userDataValidPage2:true
       };
     }
     case actionTypes.SUBMIT_THIRD_PAGE: {
@@ -67,7 +68,7 @@ function checkoutReducer(state, action) {
         cardNumber: cardNumber,
         expiryDate: expiryDate,
         cvv: cvv,
-        acceptedTerms: false,
+        userDataValidPage3:true,
       }
     }
     default: {

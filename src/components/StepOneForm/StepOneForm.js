@@ -9,15 +9,15 @@ import { useFormik } from "formik";
 
 
 function StepOneForm() {
-  const { name, email, countryCode, phone, submitStepOne,userDataValidPagae1 } = useUser();
+  const { name, email, countryCode, phone, submitStepOne,userDataValidPage1 } = useUser();
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
   const formik = useFormik({
     initialValues: {
-      name: name,
-      email: email,
-      countryCode: countryCode,
-      phone: phone,
+      name: "",
+      email: "email",
+      countryCode: "countryCode",
+      phone: "phone",
           },
     validationSchema: stepOneSchema,
     onSubmit: (values) => {
@@ -29,7 +29,7 @@ function StepOneForm() {
     },
     
   });
-  if(userDataValidPagae1){
+  if(userDataValidPage1){
     return(<Redirect to="/checkout/step-2"/>)
   }
 

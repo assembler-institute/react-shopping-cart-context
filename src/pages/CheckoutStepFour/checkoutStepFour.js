@@ -12,7 +12,7 @@ import {useUser} from "../../context/userContext/userContex"
 //   }
 
 function CheckoutStepFour() {
-    const { name, email, countryCode, phone,address, city,zip,country} = useUser();
+    const { name, email, countryCode, phone,address, city,zip,country,cardNumber} = useUser();
      return(<div>
     <div className="summary">
       <h1>Order completed!</h1>
@@ -78,6 +78,7 @@ function CheckoutStepFour() {
           </p>
           <p>
             <span className="h5">Card number:</span> **** **** ****{" "}
+            {cardNumber}
             {/* {cardNumber.slice(12, 16)} */}
           </p>
         </div>
