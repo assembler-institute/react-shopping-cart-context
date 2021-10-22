@@ -1,6 +1,7 @@
 import React from "react";
 import Card from "react-credit-cards";
 import "react-credit-cards/es/styles-compiled.css";
+import { NavLink, useHistory } from "react-router-dom";
 
 import { Button } from "components/UI/atoms";
 
@@ -47,6 +48,7 @@ class PaymentForm extends React.Component {
   };
 
   handleSubmit = (e) => {
+    const history = useHistory();
     e.preventDefault();
     const { issuer } = this.state;
     const formData = [...e.target.elements]
@@ -58,6 +60,8 @@ class PaymentForm extends React.Component {
 
     this.setState({ formData });
     this.form.reset();
+
+    history.push("/checkout/complete");
   };
 
   render() {
