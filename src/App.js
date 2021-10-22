@@ -1,8 +1,13 @@
 import React from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
-import { Home, NewProduct } from "pages";
-import { AddressForm, DetailsForm, PaymentForm } from "./components";
+import {
+  CheckoutDelivery,
+  CheckoutInfo,
+  CheckoutPayment,
+  Home,
+  NewProduct,
+} from "components/pages";
 
 import { useCartItems, useProducts } from "context";
 
@@ -23,9 +28,9 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/checkout/step-1" component={DetailsForm} />
-        <Route exact path="/checkout/step-2" component={AddressForm} />
-        <Route exact path="/checkout/step-3" component={PaymentForm} />
+        <Route exact path="/checkout/step-1" component={CheckoutInfo} />
+        <Route exact path="/checkout/step-2" component={CheckoutDelivery} />
+        <Route exact path="/checkout/step-3" component={CheckoutPayment} />
         <Route path="/new-product" component={NewProduct} />
         <Route path="/" exact>
           <Home fullWidth />

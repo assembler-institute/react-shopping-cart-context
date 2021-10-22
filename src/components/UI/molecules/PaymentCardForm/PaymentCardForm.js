@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "react-credit-cards";
+import "react-credit-cards/es/styles-compiled.css";
 
 import {
   formatCreditCardNumber,
@@ -7,8 +8,6 @@ import {
   formatExpirationDate,
   formatFormData,
 } from "utils/payment";
-
-import "react-credit-cards/es/styles-compiled.css";
 
 class PaymentCardForm extends React.Component {
   state = {
@@ -73,7 +72,13 @@ class PaymentCardForm extends React.Component {
             focused={focused}
             callback={this.handleCallback}
           />
-          <form ref={(c) => (this.form = c)} onSubmit={this.handleSubmit}>
+          <form
+            ref={(c) => (this.form = c)}
+            onSubmit={(e) => {
+              this.handleSubmit(e);
+            }}
+            className=" mt-5 mb-2"
+          >
             <div className="form-group">
               <input
                 type="tel"
@@ -125,9 +130,6 @@ class PaymentCardForm extends React.Component {
               </div>
             </div>
             <input type="hidden" name="issuer" value={issuer} />
-            <div className="form-actions">
-              <button className="btn btn-primary btn-block">PAY</button>
-            </div>
           </form>
         </div>
       </div>
