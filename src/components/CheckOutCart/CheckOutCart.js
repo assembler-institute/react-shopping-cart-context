@@ -29,15 +29,38 @@ function CheckOutCart({ ...props }) {
             const item = cartItems[itemId];
 
             return (
-              <ShoppingCartItem
-                key={item.id}
-                id={item.id}
-                title={item.title}
-                price={item.price}
-                img={item.img}
-                quantity={item.quantity}
-                unitsInStock={item.unitsInStock}
-              />
+              <div className="col">
+                <div className="row flex-column ">
+                  <div className="col">
+                    <div className="row ">
+                      <img
+                        className="ShoppingCartItem__img col-6"
+                        src={item.img}
+                        alt=""
+                      />
+
+                      <div className="col-6 col-xl-6">
+                        <div className="row flex-column">
+                          <div className="col">
+                            <p>
+                              <strong>{item.title}</strong>
+                            </p>
+                            <p>
+                              Price: <strong>{item.price}€</strong>
+                            </p>
+                            <p>
+                              Quantity:<strong> {item.quantity}</strong>
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col">
+                    <hr />
+                  </div>
+                </div>
+              </div>
             );
           })
         ) : (

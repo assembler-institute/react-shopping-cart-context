@@ -15,11 +15,14 @@ function withCheckout(WrappedComponent) {
   function WrapperComponent({ ...props }) {
     return (
       <div className="row">
-        <div className="d-flex flex-column">
-          <NavList />
-          <WrappedComponent {...props} />
+        <div className="row flex justify-content-between">
+          <div className="flex-grow-1">
+            <NavList />
+            <WrappedComponent {...props} />
+          </div>
+
+          <CheckOutCart className="col col-4" />
         </div>
-        <CheckOutCart className="col col-4" />
       </div>
     );
   }
