@@ -5,31 +5,20 @@ import applePay from "../../img/apple_pay.png";
 import visa from "../../img/visa.png";
 import mastercard from "../../img/mastercard.png";
 import american from "../../img/american.png";
+import Breadcrumbs from "../Breadcrumbs";
 
 function FormPaymentDetails() {
   return (
     <>
-      <nav aria-label="breadcrumb">
-        <ol className="breadcrumb">
-          <li className="breadcrumb-item" aria-current="page">
-            Information
-          </li>
-          <li className="breadcrumb-item" aria-current="page">
-            Delivery
-          </li>
-          <li className="breadcrumb-item active" aria-current="page">
-            Payment
-          </li>
-        </ol>
-      </nav>
+      <Breadcrumbs active="payment" />
       <div className="d-flex justify-content-between">
         <div>
           <b>Payment Details</b>
         </div>
-        <div>Step 3 of 3</div>
+        <div>Step 3 of 4</div>
       </div>
       <hr />
-       <CreditCard /> 
+      <CreditCard />
     </>
   );
 }

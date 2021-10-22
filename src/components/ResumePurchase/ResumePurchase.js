@@ -1,5 +1,6 @@
 import Button from "@restart/ui/esm/Button";
 import { Link } from "react-router-dom";
+import Breadcrumbs from "../Breadcrumbs";
 import { getCartTotal, getCartTotalIVA } from "../Cart";
 import { useProducts } from "../Context/reducer";
 import { useUsers } from "../Context/UserContext";
@@ -19,7 +20,15 @@ function ResumePurchase() {
 
   return (
     <>
-      <div className="card p-3">
+      <Breadcrumbs active="resume" />
+      <div className="d-flex justify-content-between">
+        <div>
+          <b>Payment Details</b>
+        </div>
+        <div>Step 3 of 4</div>
+      </div>
+      <hr />
+      <div className="card p-3" style={{ background: "#eee" }}>
         <div>
           <h3>Your Order Confirmed</h3>
           <div>Hi {name}</div>

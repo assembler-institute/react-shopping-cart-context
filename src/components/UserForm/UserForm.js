@@ -7,6 +7,7 @@ import Input from "../Input";
 import Button from "../Button";
 import { useUsers } from "../Context/UserContext";
 import { Redirect } from "react-router";
+import Breadcrumbs from "../Breadcrumbs";
 
 function UserForm() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -34,19 +35,20 @@ function UserForm() {
   return (
     <>
       <div className="col">
-        <nav aria-label="breadcrumb">
+        <Breadcrumbs active="info"/>
+       {/*  <nav aria-label="breadcrumb">
           <ol className="breadcrumb">
             <li className="breadcrumb-item" aria-current="page">
               Information
             </li>
           </ol>
-        </nav>
+        </nav> */}
 
         <div className="d-flex justify-content-between">
           <div>
             <b>User Information</b>
           </div>
-          <div>Step 1 of 3</div>
+          <div>Step 1 of 4</div>
         </div>
         <hr />
         <div>

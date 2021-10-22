@@ -7,6 +7,7 @@ import Button from "../Button";
 
 import billingAddressSchema from "./billing-address-schema";
 import { useUsers } from "../Context/UserContext";
+import Breadcrumbs from "../Breadcrumbs";
 
 function FormBillingAddress() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -33,22 +34,13 @@ function FormBillingAddress() {
 
   return (
     <>
-      <nav aria-label="breadcrumb">
-        <ol className="breadcrumb">
-          <li className="breadcrumb-item" aria-current="page">
-            Information
-          </li>
-          <li className="breadcrumb-item active" aria-current="page">
-            Delivery
-          </li>
-        </ol>
-      </nav>
+      <Breadcrumbs active="address"/>
 
       <div className="d-flex justify-content-between">
         <div>
           <b>Billing Address</b>
         </div>
-        <div>Step 2 of 3</div>
+        <div>Step 2 of 4</div>
       </div>
       <hr />
 
