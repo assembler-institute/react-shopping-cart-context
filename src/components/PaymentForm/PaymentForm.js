@@ -17,14 +17,14 @@ import MasterCardLogo from "../../img/logos/MasterCard-logo.svg";
 import AmericanExpressLogo from "../../img/logos/AmericanExpress-logo.svg";
 
 const cardProviders = [
-	{ value: "Visa", img: VisaLogo },
-	{ value: "MasterCard", img: MasterCardLogo },
-	{ value: "AmericanExpress", img: AmericanExpressLogo },
+	{ value: "Visa", img: VisaLogo, disabled: false, checked: false },
+	{ value: "MasterCard", img: MasterCardLogo, disabled: false, checked: false },
+	{ value: "AmericanExpress", img: AmericanExpressLogo, disabled: false, checked: false },
 ];
 const paymentMethods = [
-	{ value: "Card", img: PaymentCardIcon },
-	{ value: "ApplePay", img: ApplePayLogo },
-	{ value: "PayPal", img: PayPalLogo },
+	{ value: "Card", img: PaymentCardIcon, disabled: false, checked: true },
+	{ value: "ApplePay", img: ApplePayLogo, disabled: true, checked: false },
+	{ value: "PayPal", img: PayPalLogo, disabled: true, checked: false },
 ];
 
 const schema = Yup.object({
@@ -35,7 +35,8 @@ const schema = Yup.object({
 		.test("test-cardHolderName", "Invalid cardholder name.", (value) => cardValidator.cardholderName(value).isValid),
 	cardNumber: Yup.string()
 		.required("Card number is required.")
-		.test("test-cardNumber", "Invalid card number.", (value) => cardValidator.number(value).isValid),
+		.matches(/^3[47]|4|5[1-5]/, "Only MasterCard, Visa or AmericanExpress")
+		.test("test-cardNumber-withCardValidator", "Invalid card number.", (value) => cardValidator.number(value).isValid),
 	cardExpirationMonth: Yup.string()
 		.required("Month is required.")
 		.test("test-cardExpirationMonth", "Invalid month.", (value) => cardValidator.expirationMonth(value).isValid),
@@ -51,20 +52,14 @@ const schema = Yup.object({
 function PaymentForm(props) {
 	const [focus, setFocus] = useState("");
 	const {
-		state: { step, billingDetails },
+		state: { step, paymentDetails },
 		setPaymentDetails,
 		goBack,
 	} = useContext(CheckoutContext);
 
 	const formik = useFormik({
 		initialValues: {
-			method: "",
-			cardProvider: "",
-			cardHolderName: "",
-			cardNumber: "",
-			cardExpirationMonth: "",
-			cardExpirationYear: "",
-			cardCVV: "",
+			...paymentDetails,
 			acceptTerms: false,
 		},
 		validationSchema: schema,
@@ -96,18 +91,22 @@ function PaymentForm(props) {
 					<h5 className="my-3">How would you like to pay</h5>
 					<div className="mb-3 has-validation">
 						<div role="group" className="row">
-							{paymentMethods.map(({ value, img }, index) => (
+							{paymentMethods.map(({ value, img, disabled }, index) => (
 								<div key={index} className="col">
 									<input
 										type="radio"
-										class="btn-check"
+										className="btn-check"
 										name="method"
 										id={`method-${value}`}
 										value={value}
 										onChange={handleChange}
 										autocomplete="off"
+										disabled={disabled}
 									/>
-									<label class="btn btn-outline-info w-100" for={`method-${value}`}>
+									<label
+										className={`btn w-100 ${!disabled ? "btn-outline-info" : "btn-secondary"} `}
+										for={`method-${value}`}
+									>
 										<IconImg src={img} height={2.5} width={2.5} />
 									</label>
 								</div>
@@ -118,18 +117,19 @@ function PaymentForm(props) {
 					<h6 className="my-3">We accept the following debit/credit cards</h6>
 					<div className="mb-3 has-validation">
 						<div role="group" className="row">
-							{cardProviders.map(({ value, img }, index) => (
+							{cardProviders.map(({ value, img, disabled }, index) => (
 								<div key={index} className="col">
 									<input
 										type="radio"
-										class="btn-check"
+										className="btn-check"
 										name="cardProvider"
 										id={`cardProvider-${value}`}
 										value={value}
 										onChange={handleChange}
 										autocomplete="off"
+										disabled={disabled}
 									/>
-									<label class="btn btn-outline-info w-100" for={`cardProvider-${value}`}>
+									<label className="btn btn-outline-info w-100" for={`cardProvider-${value}`}>
 										<IconImg src={img} height={2.5} width={2.5} />
 									</label>
 								</div>
@@ -180,7 +180,7 @@ function PaymentForm(props) {
 									)}
 								</div>
 							</div>
-							<div className="col-12 col-lg-6 d-flex py-3 py-lg-0 order-1 order-lg-2 align-items-center">
+							<div className="col-12 col-lg-6 d-flex py-4 order-1 order-lg-2 align-items-center">
 								<Cards
 									number={values.cardNumber}
 									name={values.cardHolderName}

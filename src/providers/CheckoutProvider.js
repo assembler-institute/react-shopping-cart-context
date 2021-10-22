@@ -21,7 +21,7 @@ const initialState = {
 	paymentDetails: {
 		method: "",
 		cardProvider: "",
-		cardholderName: "",
+		cardHolderName: "",
 		cardNumber: "",
 		cardExpirationMonth: "",
 		cardExpirationYear: "",
