@@ -133,7 +133,7 @@ function CreditCard() {
                
         <Input
           label="CVV Code*"
-          type="number"
+          type="password"
           name="cvc"
           id="cvc"
           value={formik.values.cvc}
@@ -144,8 +144,9 @@ function CreditCard() {
           hasErrorMessage={formik.touched.cvc}
           errorMessage={formik.errors.cvc}
         />
-        <input type="checkbox" /> I have read and I accept the booking
-        conditions, general terms and privacy policy.
+        <div>
+            
+        
         <hr />
         <div className="row justify-content-between">
         <Link to="/checkout/step-2">

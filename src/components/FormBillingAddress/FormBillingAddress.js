@@ -94,7 +94,7 @@ function FormBillingAddress() {
         <div className="form-group">
           {/* <input type="text" className="form-control" name="zip" id="zip" /> */}
           <Input
-            type="number"
+            type="text"
             label="Zip/post code*"
             id="zip"
             name="zip"
