@@ -7,7 +7,7 @@ import {
   CheckoutPayment,
   Home,
   NewProduct,
-} from "pages";
+} from "components/pages";
 
 import { useCartItems, useProducts } from "context";
 
