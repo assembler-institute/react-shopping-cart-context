@@ -1,15 +1,15 @@
 import React ,{useState}from "react";
 import Input from "../Input";
 import stepOneSchema from "./schema"
-import { useFormik } from 'formik';
 import { useUser } from "../../context/userContext/userContex"
 import { Redirect } from "react-router";
 import Button from "../Button/index";
+import { useFormik } from "formik";
 
 
 
 function StepOneForm() {
-  const { name, email, countryCode, phone, submitStepOne } = useUser();
+  const { name, email, countryCode, phone, submitStepOne,userDataValidPagae1 } = useUser();
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
   const formik = useFormik({
@@ -18,19 +18,20 @@ function StepOneForm() {
       email: email,
       countryCode: countryCode,
       phone: phone,
-    },
+          },
     validationSchema: stepOneSchema,
     onSubmit: (values) => {
       submitStepOne(values);
-      console.log(values)
+      useUser(values)
       setTimeout(() => {
         setHasSubmitted(true);
       }, 500);
     },
     
   });
-
-
+  if(userDataValidPagae1){
+    return(<Redirect to="/checkout/step-2"/>)
+  }
 
   return (
     <>
@@ -79,7 +80,7 @@ function StepOneForm() {
           >
             {formik.isSubmitting ? "Submitting..." : "Submit"}
           </Button>
-          {hasSubmitted && <Redirect to="/checkout/step-2"/>}
+          {/* {hasSubmitted && <Redirect to="/checkout/step-2"/>} */}
         </form>
       </div>
     </>

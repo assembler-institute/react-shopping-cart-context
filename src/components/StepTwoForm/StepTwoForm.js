@@ -10,7 +10,7 @@ import Button from "../Button/index"
 
 
 function StepTwoForm() {
-    const { address, city,zip,country,submitStepOne } = useUser();
+    const { address, city,zip,country,userDataValidPagae2,submitStepTwo } = useUser();
     const [hasSubmitted, setHasSubmitted] = useState(false);
 
     const formik = useFormik({
@@ -22,14 +22,17 @@ function StepTwoForm() {
         },
         validationSchema: stepTwoSchema,
         onSubmit: (values) => {
-            submitStepOne(values);
+            submitStepTwo(values);
+            useUser(values)
             console.log(values)
             setTimeout(() => {
                 setHasSubmitted(true);
             }, 500);
         },
-
     });
+    if(userDataValidPagae2){
+        return(<Redirect to="/checkout/order-summary"/>)
+      }
 
     return (
         <>
@@ -80,7 +83,7 @@ function StepTwoForm() {
                 >
                     {formik.isSubmitting ? "Submitting..." : "Submit"}
                 </Button>
-                {hasSubmitted && <Redirect to="/checkout/step-3" />}
+                {/* {hasSubmitted && <Redirect to="/checkout/order-summary" />} */}
             </form>
         </>
     )

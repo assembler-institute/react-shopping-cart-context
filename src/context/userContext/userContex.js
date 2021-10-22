@@ -2,8 +2,8 @@ import React, { createContext, useContext, useReducer } from "react";
 
 export const actionTypes = {
   SUBMIT_ONE_PAGE: "SUBMIT_ONE_PAGE",
-  SUBMIT_SECOND_PAGE: "SUBMIT_ONE_PAGE",
-  SUBMIT_THIRD_PAGE: "SUBMIT_ONE_PAGE",
+  SUBMIT_SECOND_PAGE: "SUBMIT_SECOND_PAGE",
+  SUBMIT_THIRD_PAGE: "SUBMIT_THIRD_PAGE",
 };
 
 
@@ -24,31 +24,50 @@ const initialState = {
   expiryDate: "",
   cvv: "",
   acceptedTerms: false,
+  userDataValidPagae1:false,
+  userDataValidPagae2:false,
 }
 const userContext = createContext(initialState);
 function checkoutReducer(state, action) {
   switch (action.type) {
     case actionTypes.SUBMIT_ONE_PAGE: {
-      const { name, email, phone, countryCode } = action.payload
+      // console.log(action.payload)
+      const { name, email, phone, countryCode,userDataValidPagae1 } = action.payload
+      const data = action.payload
+      console.log(data);
       return {
         ...state,
         name: name,
-        email:email,
-        phone:phone,
-        countryCode:countryCode
+        email: email,
+        phone: phone,
+        countryCode: countryCode,
+        userDataValidPagae1:true
       };
     }
     case actionTypes.SUBMIT_SECOND_PAGE: {
+      const { address, city, zip, country,userDataValidPagae2 } = action.payload
+      const data = action.payload
+      console.log(action.payload)
       return {
         ...state,
-        ...action.payload,
+        address: address,
+        city: city,
+        zip: zip,
+        country: country,
+        userDataValidPagae2:true
       };
     }
     case actionTypes.SUBMIT_THIRD_PAGE: {
+      const { cardHolder, cardNumber, expiryDate, cvv,acceptedTerms } = action.payload
+      const data = action.payload
+      console.log(action.payload)
       return {
         ...state,
-        ...action.payload,
-        completed: true,
+        cardHolder: cardHolder,
+        cardNumber: cardNumber,
+        expiryDate: expiryDate,
+        cvv: cvv,
+        acceptedTerms: false,
       }
     }
     default: {
@@ -61,11 +80,22 @@ function UserContextProvider({ children }) {
   const [state, dispatch] = useReducer(checkoutReducer, initialState);
 
   const value = {
+    ...state,
     submitStepOne: (data) => dispatch({
       type: actionTypes.SUBMIT_ONE_PAGE,
       payload: data
+    }),
+    submitStepTwo: (data) => dispatch({
+      type: actionTypes.SUBMIT_SECOND_PAGE,
+      payload: data
+    }),
+  
+    submitStepThree: (data) => dispatch({
+      type: actionTypes.SUBMIT_THIRD_PAGE,
+      payload: data
     })
   }
+
 
   return (
     <userContext.Provider
