@@ -1,3 +1,5 @@
+import React from "react";
+
 export function buildNewCartItem(cartItem) {
   if (cartItem.quantity >= cartItem.unitsInStock) {
     return cartItem;
@@ -15,18 +17,15 @@ export function buildNewCartItem(cartItem) {
   };
 }
 
-
-export function saveNewProduct(newProduct) {
+/* export function saveNewProduct(newProduct) {
   setProducts((prevState) => [newProduct, ...prevState]);
 }
-
-
+ */
 export function getCartTotal(cart) {
   return cart.reduce((accum, item) => {
     return accum + item.price * item.quantity;
   }, 0);
 }
-
 
 export function Divider() {
   return <hr className="ItemCard__divider" />;
@@ -46,7 +45,6 @@ export function getPopularityClasses(
 
   return prevClasses;
 }
-
 
 export function buildSelectOptions(unitsInStock) {
   return Array.from({ length: unitsInStock }, (_value, index) => {

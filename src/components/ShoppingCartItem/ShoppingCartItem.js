@@ -1,21 +1,12 @@
 import React from "react";
 
 import "./ShoppingCartItem.scss";
-import { buildSelectOptions } from "../../store/EcommerceHandlers";
+import { buildSelectOptions } from "../../store/generics";
 import Button from "../Button";
-import { useEcommerce } from "../../context/Ecoomerce/eCommerceContext";
+import { useEcommerce } from "../../context/Ecommerce/eCommerceContext";
 
-
-function ShoppingCartItem({
-  id,
-  img,
-  title,
-  price,
-  quantity,
-  unitsInStock,
-}) {
-
-  const {handleChange, handleRemove}=useEcommerce();
+function ShoppingCartItem({ id, img, title, price, quantity, unitsInStock }) {
+  const { handleChange, handleRemove } = useEcommerce();
 
   function onHandleChange(event) {
     handleChange(id, event);

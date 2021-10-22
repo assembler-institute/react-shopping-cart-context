@@ -1,33 +1,39 @@
-import { createContext } from "react";
-import { dispatchApp, stateApp } from "../App/AppReducer";
-import { actionTypes } from "../App/AppHandlers";
+import React, { createContext, useContext } from "react";
+import { useReducerApp, actionTypes } from "./AppReducer";
 
 const AppContext = createContext();
 
-//*TODO revisar los dispatchApp
-
-export default function AppContextProvider({children}) {
-
+export default function AppContextProvider({ children }) {
+  const { stateApp, dispatchApp } = useReducerApp();
   const value = {
     products: stateApp.products,
     cartItems: stateApp.cartItems,
     hasError: stateApp.hasError,
     isLoading: stateApp.isLoading,
-    handleDataFetch:() => dispatchApp({type: actionTypes.FETCH_API}),
-    handleLoadingState:(value) => dispatchApp({type: actionTypes.SET_LOADING, payload:value}),
-    getLocalStorageItems:(storageKey) => dispatchApp({type:actionTypes.LOAD_LOCAL_STORAGE, payload: storageKey}),
-    setLocalStorageItems:(storageKey, data) => dispatchApp({type: actionTypes.SET_LOCAL_STORAGE, payload: {storageKey, data}})
-  }
+    handleDataFetch: () => dispatchApp({ type: actionTypes.FETCH_API }),
+    handleLoadingState: (valueBoolean) =>
+      dispatchApp({ type: actionTypes.SET_LOADING, payload: valueBoolean }),
+    getLocalStorageItems: (storageKey) =>
+      dispatchApp({
+        type: actionTypes.LOAD_LOCAL_STORAGE,
+        payload: storageKey,
+      }),
+    setLocalStorageItems: (storageKey, data) =>
+      dispatchApp({
+        type: actionTypes.SET_LOCAL_STORAGE,
+        payload: { storageKey, data },
+      }),
+  };
   return (
-    <AppContext.Provider value={value}>
-      {children}
-    </AppContext.Provider>
-  )
+    <>
+      <AppContext.Provider value={value}>{children}</AppContext.Provider>
+    </>
+  );
 }
 
 export function useAppContext() {
-  const ctx = useContext(AppContext)
-  if (!ctx) return null
-  return ctx
+  const ctx = useContext(AppContext);
+  if (!ctx) return null;
+  return ctx;
 }
 // Y context toma las variables del reducer y hacer return -> eCommerceContext

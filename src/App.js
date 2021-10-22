@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { useAppContext } from "./context/App/AppContext";
-import EcommerceContextProvider from "./context/Ecoomerce/eCommerceContext";
+import EcommerceContextProvider from "./context/Ecommerce/eCommerceContext";
 
 import Home from "./pages/Home";
 import NewProduct from "./pages/NewProduct";
@@ -10,24 +10,20 @@ const PRODUCTS_LOCAL_STORAGE_KEY = "products";
 const CART_ITEMS_LOCAL_STORAGE_KEY = "cartItems";
 
 function App() {
-
   const {
     cartItems,
     products,
     handleDataFetch,
     handleLoadingState,
     getLocalStorageItems,
-    setLocalStorageItems
+    setLocalStorageItems,
   } = useAppContext();
-
-  
 
   // First render
   useEffect(() => {
-
     getLocalStorageItems(CART_ITEMS_LOCAL_STORAGE_KEY);
     // Get products local storage -> [...products] || []
-    getLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY)
+    getLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY);
 
     // Get products from API
     if (products.length === 0) {
@@ -41,13 +37,12 @@ function App() {
   }, []);
 
   useEffect(() => {
-    setLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY, products)
-  }, [products])
+    setLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY, products);
+  }, [products]);
 
   useEffect(() => {
-    setLocalStorageItems(CART_ITEMS_LOCAL_STORAGE_KEY, cartItems)
-  }, [cartItems])
-
+    setLocalStorageItems(CART_ITEMS_LOCAL_STORAGE_KEY, cartItems);
+  }, [cartItems]);
 
   return (
     <EcommerceContextProvider>
@@ -57,7 +52,7 @@ function App() {
             <NewProduct />
           </Route>
           <Route path="/" exact>
-            <Home fullWidth/>
+            <Home fullWidth />
           </Route>
         </Switch>
       </BrowserRouter>

@@ -3,12 +3,12 @@ import { Redirect } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import { useFormik } from "formik";
 
-import eCommerceContext from "../../context/Ecoomerce/eCommerceContext";
+import eCommerceContext from "../../context/Ecommerce/eCommerceContext";
 import Input from "../Input";
 import Button from "../Button";
 
 import productSchema from "./product-schema";
-//*TODO fix !
+//* TODO fix !
 function addProductDetails(product) {
   return {
     id: uuid(),

@@ -1,9 +1,12 @@
 import { useReducer } from "react";
 import {
-  getLocalStorageItems,
-  setLocalStorageItems,
-} from "../../utils/loadLocalStorageItems";
-import { handleLoadingState, handleDataFetch } from "./AppHandlers";
+  handleUpVote,
+  handleDownVote,
+  handleAddToCart,
+  handleRemove,
+  handleChange,
+  handleSetFavorite,
+} from "./EcommerceHandlers";
 
 const initialState = {
   products: [],
@@ -13,10 +16,12 @@ const initialState = {
 };
 
 const actionTypes = {
-  FETCH_API: handleDataFetch,
-  SET_LOADING: handleLoadingState,
-  LOAD_LOCAL_STORAGE: getLocalStorageItems,
-  SET_LOCAL_STORAGE: setLocalStorageItems,
+  HANDLER_DOWN_VOTE: handleDownVote,
+  HANDLER_UP_VOTE: handleUpVote,
+  HANDLER_ADD_TO_CART: handleAddToCart,
+  HANDLER_REMOVE: handleRemove,
+  HANDLER_CHANGE: handleChange,
+  HANDLER_SET_FAVORITE: handleSetFavorite,
 };
 
 const checkMismatchElements = (correctArray, randomArray) => {
@@ -52,18 +57,18 @@ const reduce = (prevState, action) => {
   }
 
   const handler = Object.keys(actionTypes).find(action.type);
-
-  if (!handler) {
-    return prevState;
-  }
+  if (!handler) return prevState;
   // This handler execute the logic and returns the new state
 
-  return handler({ prevState: prevState, payload: action.payload });
+  return handler({
+    prevState: prevState,
+    payload: action.payload,
+  });
 };
 
-export function useReducerApp() {
-  const [stateApp, dispatchApp] = useReducer(reduce, initialState);
-  return { stateApp, dispatchApp };
+export function useReducerECommerce() {
+  const [state, dispatch] = useReducer(reduce, initialState);
+  return { state, dispatch };
 }
 
 export { actionTypes };

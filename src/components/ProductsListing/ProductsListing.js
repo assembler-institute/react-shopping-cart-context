@@ -1,12 +1,10 @@
 import React from "react";
-import { useEcommerce } from "../../context/Ecoomerce/eCommerceContext";
+import { useEcommerce } from "../../context/Ecommerce/eCommerceContext";
 
 import ItemCard from "../ItemCard";
 
-
 function ProductsListing() {
-
-  const {products}=useEcommerce();
+  const { products } = useEcommerce();
 
   return (
     <section className="row">

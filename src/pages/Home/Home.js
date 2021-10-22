@@ -1,11 +1,10 @@
 import React from "react";
-import { useEcommerce } from "../../context/Ecoomerce/eCommerceContext";
+import { useEcommerce } from "../../context/Ecommerce/eCommerceContext";
 import ProductsListing from "../../components/ProductsListing";
 import Cart from "../../components/Cart";
 import withLayout from "../../hoc/withLayout";
 
 function Home() {
-
   const { isLoading, hasError } = useEcommerce();
 
   return (
@@ -38,7 +37,8 @@ function Home() {
           {!isLoading && !hasError && (
             <div className="col col-12">
               <ProductsListing />
-            </div>)}
+            </div>
+          )}
         </div>
       </div>
       <Cart className="col col-4" />

@@ -1,8 +1,6 @@
+import { buildNewCartItem } from "../../store/generics";
 
-import { buildNewCartItem } from "./generics";
-
-export function handleChange({prevState, payload: {id:productId, event}}) {
-
+export function handleChange({ prevState, payload: { id: productId, event } }) {
   const updatedCartItems = prevState.cartItems.map((item) => {
     if (item.id === productId && item.quantity <= item.unitsInStock) {
       return {
@@ -14,15 +12,18 @@ export function handleChange({prevState, payload: {id:productId, event}}) {
     return item;
   });
 
-  return {...prevState, cartItems:updatedCartItems};
+  return { ...prevState, cartItems: updatedCartItems };
 }
-export function handleAddToCart({prevState, payload: productId}) {
-
-  const prevCartItem = prevState.cartItems.find((item) => item.id === productId);
-  const foundProduct = prevState.products.find((product) => product.id === productId);
+export function handleAddToCart({ prevState, payload: productId }) {
+  const prevCartItem = prevState.cartItems.find(
+    (item) => item.id === productId,
+  );
+  const foundProduct = prevState.products.find(
+    (product) => product.id === productId,
+  );
 
   if (prevCartItem) {
-    const updatedCartItems = cartItems.map((item) => {
+    const updatedCartItems = prevState.cartItems.map((item) => {
       if (item.id !== productId) {
         return item;
       }
@@ -37,25 +38,25 @@ export function handleAddToCart({prevState, payload: productId}) {
       };
     });
 
-    return {...prevState,cartItems:updatedCartItems}
+    return { ...prevState, cartItems: updatedCartItems };
   }
 
   const updatedProduct = buildNewCartItem(foundProduct);
 
-  return {...prevState, cartItems:[...prevState.cartItems, updatedProduct]}
+  return { ...prevState, cartItems: [...prevState.cartItems, updatedProduct] };
 }
-export function handleRemove({prevState, payload:productId}) {
+export function handleRemove({ prevState, payload: productId }) {
+  const updatedCartItems = prevState.cartItems.filter(
+    (item) => item.id !== productId,
+  );
 
-  const updatedCartItems = prevState.cartItems.filter((item) => item.id !== productId);
-
-  return {...prevState, cartItems:updatedCartItems}
+  return { ...prevState, cartItems: updatedCartItems };
 }
-export function handleDownVote({prevState, payload:productId}) {
+export function handleDownVote({ prevState, payload: productId }) {
   const updatedProducts = prevState.products.map((product) => {
     if (
       product.id === productId &&
-      product.votes.downVotes.currentValue <
-        product.votes.downVotes.lowerLimit
+      product.votes.downVotes.currentValue < product.votes.downVotes.lowerLimit
     ) {
       return {
         ...product,
@@ -72,9 +73,9 @@ export function handleDownVote({prevState, payload:productId}) {
     return product;
   });
 
-  return {...prevState, products:updatedProducts}
+  return { ...prevState, products: updatedProducts };
 }
-export function handleUpVote({prevState, payload:productId}) {
+export function handleUpVote({ prevState, payload: productId }) {
   const updatedProducts = prevState.products.map((product) => {
     if (
       product.id === productId &&
@@ -95,10 +96,10 @@ export function handleUpVote({prevState, payload:productId}) {
     return product;
   });
 
-  return {...prevState, products:updatedProducts};
+  return { ...prevState, products: updatedProducts };
 }
 
-export function handleSetFavorite({prevState, payload:productId}) {
+export function handleSetFavorite({ prevState, payload: productId }) {
   const updatedProducts = prevState.products.map((product) => {
     if (product.id === productId) {
       return {
@@ -110,6 +111,5 @@ export function handleSetFavorite({prevState, payload:productId}) {
     return product;
   });
 
-
-  return {...prevState, products:updatedProducts};
+  return { ...prevState, products: updatedProducts };
 }

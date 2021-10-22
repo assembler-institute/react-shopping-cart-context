@@ -11,5 +11,3 @@ export function getProducts(fail = false) {
     }, 1000);
   });
 }
-
-

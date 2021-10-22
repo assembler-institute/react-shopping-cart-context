@@ -6,10 +6,8 @@ import Button from "../Button";
 import { ThumbDown, ThumbUp } from "../SVGIcons";
 
 import "./ItemCard.scss";
-import { useEcommerce } from "../../context/Ecoomerce/eCommerceContext";
-
-import { getPopularityClasses} from "../../store/EcommerceHandlers"
-
+import { useEcommerce } from "../../context/Ecommerce/eCommerceContext";
+import { getPopularityClasses, Divider } from "../../store/generics";
 
 function ItemCard({
   id,
@@ -18,10 +16,14 @@ function ItemCard({
   shortDescription,
   isFavorite,
   upVotes,
-  downVotes
+  downVotes,
 }) {
-
-  const {handleDownVote, handleSetFavorite,handleUpVote, handleAddToCart} = useEcommerce()
+  const {
+    handleDownVote,
+    handleSetFavorite,
+    handleUpVote,
+    handleAddToCart,
+  } = useEcommerce();
 
   return (
     <article className="ItemCard col col-12 col-md-6 col-lg-4">
@@ -41,7 +43,10 @@ function ItemCard({
       <footer className="ItemCard__meta">
         <div className="ItemCard__icons">
           <div className="ItemCard__icon-row">
-            <IconButton aria-label="up vote product" handleClick={() => handleUpVote(id)}>
+            <IconButton
+              aria-label="up vote product"
+              handleClick={() => handleUpVote(id)}
+            >
               <ThumbUp />
             </IconButton>
             <p
@@ -56,7 +61,10 @@ function ItemCard({
             </p>
           </div>
           <div className="ItemCard__icon-row">
-            <IconButton aria-label="down vote product" handleClick={() => handleDownVote(id)}>
+            <IconButton
+              aria-label="down vote product"
+              handleClick={() => handleDownVote(id)}
+            >
               <ThumbDown />
             </IconButton>
             <p

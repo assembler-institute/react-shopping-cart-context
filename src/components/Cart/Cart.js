@@ -2,12 +2,10 @@ import React from "react";
 
 import ShoppingCartItem from "../ShoppingCartItem";
 import Button from "../Button";
-import { getCartTotal } from "../../store/EcommerceHandlers";
-import { useEcommerce } from "../../context/Ecoomerce/eCommerceContext";
-
+import { getCartTotal } from "../../store/generics";
+import { useEcommerce } from "../../context/Ecommerce/eCommerceContext";
 
 function Cart() {
-
   const { cartItems } = useEcommerce();
 
   return (
