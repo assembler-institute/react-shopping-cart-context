@@ -3,18 +3,19 @@ import { Redirect } from "react-router";
 import { useUser } from "../../context/userContext/userContex";
 import Input from "../Input";
 import stepThreeSchema from "./schema";
-import Button from "../Button/index"
+import Button from "../Button/index";
+import Cards from "react-credit-cards";
+import 'react-credit-cards/es/styles-compiled.css';
 
 function StepThreeForm() {
-    const { cardNumber, cvc, nameOnCard, expiryMonth, expiryYear, userDataValidPage3, submitStepThree} = useUser();
+    const { cardNumber, cvc, nameOnCard,expiryDate , userDataValidPage3, submitStepThree} = useUser();
 
     const formik = useFormik({
         initialValues: {
             cardNumber: cardNumber,
             cvc: cvc,
             nameOnCard: nameOnCard,
-            expiryMonth: expiryMonth,
-            expiryYear: expiryYear,
+            expiryDate:expiryDate
         },
         validationSchema: stepThreeSchema,
         onSubmit: (values) => {
@@ -33,6 +34,14 @@ function StepThreeForm() {
     return (
         <>
             <form onSubmit={formik.handleSubmit} id="stepThree">
+
+            <Cards
+          cvc={formik.values.cvc}
+          name={formik.values.nameOnCard}
+          number= {formik.values.cardNumber}
+          expiry={formik.values.expiryDate}
+        />
+
                 <Input
                     type="number"
                     label="Card Number"
@@ -74,29 +83,18 @@ function StepThreeForm() {
 
                 <Input
                     type="number"
-                    label="Expiry Month"
-                    id="expiryMonth"
-                    value={formik.values.expiryMonth}
+                    label="expiryDate"
+                    id="expiryDate"
+                    value={formik.values.expiryDate}
                     placeholder="Your Expiry Month"
                     handleChange={formik.handleChange}
                     handleBlur={formik.handleBlur}
-                    hasErrorMessage={formik.touched.expiryMonth}
-                    errorMessage={formik.errors.expiryMonth}
-                    isTouched={formik.touched.expiryMonth}
+                    hasErrorMessage={formik.touched.expiryDate}
+                    errorMessage={formik.errors.expiryDate}
+                    isTouched={formik.touched.expiryDate}
                 />
 
-                <Input
-                    type="number"
-                    label="Expiry Year"
-                    id="expiryYear"
-                    value={formik.values.expiryYear}
-                    placeholder="Your Expiry Year"
-                    handleChange={formik.handleChange}
-                    handleBlur={formik.handleBlur}
-                    hasErrorMessage={formik.touched.expiryYear}
-                    errorMessage={formik.errors.expiryYear}
-                    isTouched={formik.touched.expiryYear}
-                />
+
 
                 <Button
                     submitButton

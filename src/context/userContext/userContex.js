@@ -22,7 +22,9 @@ const initialState = {
   cardHolder: "",
   cardNumber: "",
   expiryDate: "",
-  cvv: "",
+  nameOnCard:"",
+  cvc: "",
+  
   acceptedTerms: false,
   userDataValidPage1:false,
   userDataValidPage2:false,
