@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { Redirect } from "react-router";
 import { useProducts } from "./components/Context/reducer";
 
 import Home from "./pages/Home";
@@ -12,6 +13,7 @@ import useLocalStorage from "./hooks/useLocalStorage";
 import BillingAddressPage from "./pages/BillingAddressPage/BillingAddressPage";
 import PaymentDetailsPage from "./pages/PaymentDetailsPage/PaymentDetailsPage";
 import { UsersProvider } from "./components/Context/UserContext";
+import Input from "./components/Input";
 
 /* import ProductsContext from "./components/Context/ProductsContext"; */
 
@@ -63,21 +65,24 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/new-product">
+        <Route path="/new-product" exact>
           <NewProduct />
         </Route>
         <UsersProvider>
-          <Route path="/checkout/step-1">
+          <Route path="/checkout/step-1" exact>
             <UserInfo />
           </Route>
-          <Route path="/checkout/step-2">
+          <Route path="/checkout/step-2" exact>
             <BillingAddressPage />
           </Route>
-          <Route path="/checkout/step-3">
+          <Route path="/checkout/step-3" exact>
             <PaymentDetailsPage />
           </Route>
           <Route path="/" exact>
             <Home />
+          </Route>
+          <Route>
+            <Redirect to="/"/>
           </Route>
         </UsersProvider>
       </Switch>
