@@ -52,7 +52,7 @@ const DetailsForm = () => {
           isValidating,
           isValid,
         }) => (
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="col">
             <Input
               type="text"
               id="firstName"

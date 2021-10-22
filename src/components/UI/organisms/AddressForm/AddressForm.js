@@ -45,7 +45,7 @@ function AddressForm() {
   });
   if (cartItemIds.length > 0) {
     return (
-      <form onSubmit={formik.handleSubmit} className="col col-8">
+      <form onSubmit={formik.handleSubmit} className="col">
         <Input
           type="text"
           label="Address"
@@ -86,7 +86,7 @@ function AddressForm() {
               setRegion(val);
               handleCityChange(val);
             }}
-          // onBlur={handleCityChange}
+            // onBlur={handleCityChange}
           />
         </div>
         <Input

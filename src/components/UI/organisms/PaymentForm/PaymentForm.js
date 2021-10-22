@@ -39,7 +39,7 @@ const PaymentForm = () => {
             isValidating,
             isValid,
           }) => (
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="col">
               <PaymentCardForm />
               <button
                 className="btn btn-primary btn-block mt-2 mb-2"
