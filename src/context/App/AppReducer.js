@@ -13,7 +13,6 @@ const initialState = {
 }
 
 const actionTypes = {
-
   FETCH_API: handleDataFetch,
   SET_LOADING: handleLoadingState,
   LOAD_LOCAL_STORAGE: getLocalStorageItems,
@@ -51,12 +50,12 @@ const reduce = (prevState, action) => {
   handler({prevState: prevState, payload: action.payload})
 }
 
-const reducer = useReducer(reduce, initialState)
-export default reducer
+const reducerApp = useReducer(reduce, initialState)
+export default reducerApp
 
-const[state, dispatch] = reducer;
+const [stateApp, dispatchApp] = reducerApp;
 
-export {dispatch, state, actionTypes}
+export {dispatchApp, stateApp, actionTypes}
 
 /// Aquí va el reducer donde initialState son las variables de state
 /// Y donde los type actions son los handlers de state

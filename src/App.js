@@ -11,13 +11,16 @@ const CART_ITEMS_LOCAL_STORAGE_KEY = "cartItems";
 
 function App() {
 
-  const {cartItems,
+  const {
+    cartItems,
     products,
     handleDataFetch,
     handleLoadingState,
     getLocalStorageItems,
     setLocalStorageItems
   } = useAppContext();
+
+  
 
   // First render
   useEffect(() => {

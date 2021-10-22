@@ -1,6 +1,7 @@
 import { createContext } from "react";
 import { dispatch, state } from "../store/EcommerceReducer";
 import { actionTypes } from "../store/EcommerceReducer";
+import { stateApp } from "../App/AppReducer";
 
 const eCommerceContext = createContext();
 
@@ -9,8 +10,8 @@ const eCommerceContext = createContext();
 export default function EcommerceContextProvider({children}) {
 
   const value = {
-    products:state.products,
-    cartItems:state.cartItems,
+    products: stateApp.products,
+    cartItems: stateApp.cartItems,
     hasError:state.hasError,
     isLoading:state.isLoading,
     handleDownVote: (id) => dispatch({type: actionTypes.HANDLER_DOWN_VOTE, payload: id}),
