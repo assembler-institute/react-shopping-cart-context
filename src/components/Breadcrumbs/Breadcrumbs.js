@@ -1,7 +1,6 @@
 import './style.scss'
 
 function Breadcrumbs({active}) {
-    console.log(active)
   return (
     <div className="wrapper">
       <ul>
