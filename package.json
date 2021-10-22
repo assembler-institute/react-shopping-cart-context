@@ -16,6 +16,7 @@
     "bootstrap": "^4.6.0",
     "clsx": "^1.1.1",
     "formik": "^2.2.6",
+    "node-sass": "^5.0.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-country-region-selector": "^3.3.0",
