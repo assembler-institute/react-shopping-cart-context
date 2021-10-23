@@ -8,7 +8,7 @@ function CheckoutTotal(props) {
 		},
 	} = useContext(CheckoutContext);
 
-	const total = subtotal + shipping + taxes;
+	const total = (subtotal + shipping + taxes).toFixed(2);
 
 	return (
 		<div>
@@ -24,9 +24,9 @@ function CheckoutTotal(props) {
 				<span>Taxes</span>
 				<span>{taxes || "---"}€</span>
 			</div>
-			<div className="d-flex justify-content-between my-1 border-top">
+			<div className="d-flex justify-content-between my-3">
 				<span>Total</span>
-				<span>{total || "---"}€</span>
+				<span className="fw-bold">{total || "---"}€</span>
 			</div>
 		</div>
 	);

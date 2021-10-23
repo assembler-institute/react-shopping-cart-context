@@ -2,32 +2,21 @@ import { useContext } from "react";
 import { useFormik } from "formik";
 import { Redirect } from "react-router";
 import { CheckoutContext } from "../../providers/CheckoutProvider";
-import * as Yup from "yup";
+import CheckoutNav from "../CheckoutNav/CheckoutNav";
+import { customerDetailsSchema } from "../../validation";
 import { COUNTRY_PHONE_PREFIX_LIST } from "../../constants";
 
-const schema = Yup.object({
-	fullname: Yup.string().required("Personal name is required."),
-	email: Yup.string().required("Email address is required.").email("Invalid email."),
-	phone: Yup.string()
-		.required("Phone number is required.")
-		.matches(/\d+/, "Phone number must be numeric.")
-		.max(10, "Phone number must not be longer than 14 digits."),
-	phonePrefix: Yup.string()
-		.required("Phone prefix is required.")
-		.oneOf(Object.values(COUNTRY_PHONE_PREFIX_LIST), "The terms and conditions must be accepted."),
-});
-
-function CheckoutPersonalDetails() {
+function CheckoutCustomerDetails() {
 	const {
-		state: { step, personalDetails },
+		state: { step, customerDetails },
 		setPersonalDetails,
 	} = useContext(CheckoutContext);
 
 	const formik = useFormik({
 		initialValues: {
-			...personalDetails,
+			...customerDetails,
 		},
-		validationSchema: schema,
+		validationSchema: customerDetailsSchema,
 		validateOnBlur: true,
 		onSubmit: (values, actions) => {
 			const { setSubmitting } = actions;
@@ -64,8 +53,8 @@ function CheckoutPersonalDetails() {
 						type="text"
 						name="fullname"
 						id="fullname"
-						className={`form-control ${touched.fullname && errors.fullname ? "is-invalid" : null} ${
-							touched.fullname && !errors.fullname ? "is-valid" : null
+						className={`form-control ${touched.fullname && errors.fullname && "is-invalid"} ${
+							touched.fullname && !errors.fullname && "is-valid"
 						}`}
 						placeholder="Your name..."
 						value={values.fullname}
@@ -84,8 +73,8 @@ function CheckoutPersonalDetails() {
 						type="text"
 						name="email"
 						id="email"
-						className={`form-control ${touched.email && errors.email ? "is-invalid" : null} ${
-							touched.email && !errors.email ? "is-valid" : null
+						className={`form-control ${touched.email && errors.email && "is-invalid"} ${
+							touched.email && !errors.email && "is-valid"
 						}`}
 						placeholder="Email address..."
 						value={values.email}
@@ -94,7 +83,7 @@ function CheckoutPersonalDetails() {
 					/>
 					{touched.email && errors.email && <div className="invalid-feedback">{errors.email}</div>}
 				</div>
-				<label htmlFor="phone" className="control-label">
+				<label htmlFor="phoneNumber" className="control-label">
 					<h5 className="d-block my-2 fw-normal">Phone number</h5>
 					<span className="d-block my-1 fw-light">The shop will only reach you in case of an emergency.</span>
 				</label>
@@ -114,26 +103,25 @@ function CheckoutPersonalDetails() {
 					</select>
 					<input
 						type="tel"
-						name="phone"
-						id="phone"
-						className={`form-control ${touched.phone && errors.phone ? "is-invalid" : null} ${
-							touched.phone && !errors.phone ? "is-valid" : null
+						name="phoneNumber"
+						id="phoneNumber"
+						className={`form-control ${touched.phoneNumber && errors.phoneNumber && "is-invalid"} ${
+							touched.phoneNumber && !errors.phoneNumber && "is-valid"
 						}`}
 						placeholder="Phone number..."
-						value={values.phone}
+						value={values.phoneNumber}
 						onChange={handleChange}
 						onBlur={handleBlur}
 					/>
-					{touched.phone && errors.phone && <div className="invalid-feedback">{errors.phone}</div>}
+					{touched.phoneNumber && errors.phoneNumber && <div className="invalid-feedback">{errors.phoneNumber}</div>}
 				</div>
-				<div className="d-grid">
-					<button className="btn btn-primary" type="submit" disabled={isValidating || isSubmitting || !isValid}>
-						Proceed with the billing address
-					</button>
-				</div>
+				<CheckoutNav
+					nextButtonMsg="Proceed with the billing address"
+					nextButtonDisabled={!isValid || isValidating || isSubmitting}
+				/>
 			</form>
 		</>
 	);
 }
 
-export default CheckoutPersonalDetails;
+export default CheckoutCustomerDetails;

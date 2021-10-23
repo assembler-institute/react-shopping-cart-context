@@ -3,24 +3,25 @@ import { AppContext } from "./AppProvider";
 import { actionTypes, COUNTRY_PHONE_PREFIX_LIST, COUNTRY_SHIPPING_LIST, COUNTRY_TAXES_LIST } from "../constants";
 
 import getCartTotal from "../utils/getCartTotal";
+import { v4 as uuid } from "uuid";
 
 const initialState = {
 	step: 1,
-	personalDetails: {
+	orderId: uuid(),
+	customerDetails: {
 		fullname: "",
 		email: "",
-		phone: "",
+		phoneNumber: "",
 		phonePrefix: COUNTRY_PHONE_PREFIX_LIST.ES,
 	},
-	billingDetails: {
+	billingAddress: {
 		address: "",
 		city: "",
 		zipCode: "",
 		country: "ES",
 	},
 	paymentDetails: {
-		method: "",
-		cardProvider: "",
+		method: "Card",
 		cardHolderName: "",
 		cardNumber: "",
 		cardExpirationMonth: "",
@@ -38,36 +39,37 @@ function reducer(state, actions) {
 	const { type, payload } = actions;
 
 	switch (type) {
-		case actionTypes.CHECKOUT_GO_BACK:
+		case actionTypes.CHECKOUT_BACK:
 			return {
 				...state,
 				step: state.step - 1,
+			};
+		case actionTypes.CHECKOUT_NEXT:
+			return {
+				...state,
+				step: state.step + 1,
 			};
 		case actionTypes.CHECKOUT_PERSONAL_DETAILS:
 			return {
 				...state,
 				step: state.step + 1,
-				personalDetails: { ...payload },
+				customerDetails: { ...payload },
 			};
 		case actionTypes.CHECKOUT_BILLING_DETAILS:
 			return {
 				...state,
 				step: state.step + 1,
-				billingDetails: { ...payload },
+				billingAddress: { ...payload },
 			};
 		case actionTypes.CHECKOUT_PAYMENT_DETAILS:
-			const { cartItems } = useContext(AppContext);
-			const country = state.billingDetails.country;
-			const subtotal = getCartTotal(cartItems);
-
 			return {
 				...state,
 				step: state.step + 1,
 				paymentDetails: { ...payload },
 				orderCosts: {
-					subtotal,
-					shipping: COUNTRY_SHIPPING_LIST[country],
-					taxes: subtotal * COUNTRY_TAXES_LIST[country],
+					...state.orderCosts,
+					shipping: COUNTRY_SHIPPING_LIST[state.billingAddress.country],
+					taxes: state.orderCosts.subtotal * COUNTRY_TAXES_LIST[state.billingAddress.country],
 				},
 			};
 		default:
@@ -78,14 +80,24 @@ function reducer(state, actions) {
 const CheckoutContext = createContext();
 
 function CheckoutProvider({ children }) {
-	const [state, dispatch] = useReducer(reducer, initialState);
+	const { cartItems } = useContext(AppContext);
+	const [state, dispatch] = useReducer(reducer, {
+		...initialState,
+		orderCosts: {
+			...initialState.orderCosts,
+			subtotal: getCartTotal(cartItems),
+		},
+	});
 
 	return (
 		<CheckoutContext.Provider
 			value={{
 				state,
 				goBack: () => {
-					dispatch({ type: actionTypes.CHECKOUT_GO_BACK });
+					dispatch({ type: actionTypes.CHECKOUT_BACK });
+				},
+				goNext: () => {
+					dispatch({ type: actionTypes.CHECKOUT_NEXT });
 				},
 				setPersonalDetails: (values) => {
 					dispatch({ type: actionTypes.CHECKOUT_PERSONAL_DETAILS, payload: values });

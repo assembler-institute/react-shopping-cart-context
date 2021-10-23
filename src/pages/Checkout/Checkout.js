@@ -2,8 +2,8 @@ import { Redirect, Route, Switch, useHistory, useRouteMatch } from "react-router
 
 import CheckoutHeader from "../../components/CheckoutHeader";
 import CheckoutItemList from "../../components/CheckoutItemList";
-import CheckoutPersonalDetails from "../../components/CheckoutPersonalDetails";
-import CheckoutBillingDetails from "../../components/CheckoutBillingDetails";
+import CheckoutCustomerDetails from "../../components/CheckoutCustomerDetails";
+import CheckoutBillingAddress from "../../components/CheckoutBillingAddress";
 import CheckoutOrderSummary from "../../components/CheckoutOrderSummary/CheckoutOrderSummary";
 
 import withLayout from "../../hoc/withLayout";
@@ -29,10 +29,10 @@ function Checkout() {
 								<CheckoutRedirect />
 							</Route>
 							<Route exact path="/checkout/step-1">
-								<CheckoutPersonalDetails />
+								<CheckoutCustomerDetails />
 							</Route>
 							<Route exact path={`/checkout/step-2`}>
-								<CheckoutBillingDetails />
+								<CheckoutBillingAddress />
 							</Route>
 							<Route exact path={`/checkout/step-3`}>
 								<PaymentForm />

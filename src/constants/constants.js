@@ -14,7 +14,8 @@ const actionTypes = {
 	CHECKOUT_PERSONAL_DETAILS: Symbol(),
 	CHECKOUT_BILLING_DETAILS: Symbol(),
 	CHECKOUT_PAYMENT_DETAILS: Symbol(),
-	CHECKOUT_GO_BACK: Symbol(),
+	CHECKOUT_BACK: Symbol(),
+	CHECKOUT_NEXT: Symbol(),
 	CHECKOUT_ADD_COSTS: Symbol(),
 };
 
@@ -35,8 +36,8 @@ const COUNTRY_SHIPPING_LIST = {
 };
 
 const COUNTRY_PHONE_PREFIX_LIST = {
-	ES: "+33",
-	FR: "+34",
+	ES: "+34",
+	FR: "+33",
 	DE: "+49",
 	CH: "+41",
 	UK: "+44",

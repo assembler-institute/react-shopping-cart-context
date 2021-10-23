@@ -1,84 +1,89 @@
+import { useFormik } from "formik";
 import { useContext } from "react";
 import { Redirect } from "react-router";
-import { useEffect } from "react/cjs/react.development";
 import { CheckoutContext } from "../../providers/CheckoutProvider";
+import CheckoutNav from "../CheckoutNav/CheckoutNav";
 import CheckoutTotal from "../CheckoutTotal/CheckoutTotal";
 
 function CheckoutOrderSummary(props) {
-	const { state } = useContext(CheckoutContext);
-	const { step, personalDetails, billingDetails, paymentDetails } = state;
+	const { state, goNext } = useContext(CheckoutContext);
+	const { step, customerDetails, billingAddress, paymentDetails } = state;
+	const formik = useFormik({
+		initialValues: {},
+		onSubmit: (values, actions) => {
+			const { setSubmitting } = actions;
+
+			setSubmitting(true);
+			setTimeout(() => {
+				goNext();
+				console.log("test");
+			}, 250);
+		},
+	});
+
+	const { handleSubmit } = formik;
+
+	const summary = [
+		{
+			step: "Customer details",
+			details: [
+				{ property: "Customer name", value: customerDetails.fullname },
+				{ property: "Email address", value: customerDetails.email },
+				{ property: "Phone prefix", value: customerDetails.phonePrefix },
+				{ property: "Phone number", value: customerDetails.phoneNumber },
+			],
+		},
+		{
+			step: "Billing address",
+			details: [
+				{ property: "Address", value: billingAddress.address },
+				{ property: "City", value: billingAddress.city },
+				{ property: "Zip/Postal code", value: billingAddress.zipCode },
+				{ property: "Country", value: billingAddress.country },
+			],
+		},
+		{
+			step: "Payment details",
+			details: [
+				{ property: "Payment method", value: paymentDetails.method },
+				{ property: "Cardholder name", value: paymentDetails.cardHolderName },
+				{ property: "Card number", value: paymentDetails.cardNumber },
+			],
+		},
+	];
 
 	return (
 		<>
 			{step !== 4 && <Redirect to={`/checkout/step-${step}`} />}
-			<div className="row">
-				<div className="col-12">
-					<h5 className="my-2 py-2 fw-normal border-bottom">Payment details</h5>
-				</div>
-				<div className="col-4">
-					<h6 className="my-1 fw-normal">Customer name</h6>
-					<span className="fw-light">{personalDetails.fullname || "---"}</span>
-				</div>
-				<div className="col-4">
-					<h6 className="my-1 fw-normal">Email address</h6>
-					<span className="fw-light">{personalDetails.email || "---"}</span>
-				</div>
-				<div className="col-4">
-					<h6 className="my-1 fw-normal">Phone number</h6>
-					<span className="fw-light">
-						{personalDetails.phonePrefix || "---"} {personalDetails.phone || "---"}
-					</span>
-				</div>
-				<div className="col-12">
-					<h5 className="my-2 py-2 fw-normal border-bottom">Billing details</h5>
-				</div>
-				<div className="col-3">
-					<h6 className="my-1 fw-normal">Address</h6>
-					<span className="fw-light">{billingDetails.address || "---"}</span>
-				</div>
-				<div className="col-3">
-					<h6 className="my-1 fw-normal">City</h6>
-					<span className="fw-light">{billingDetails.city || "---"}</span>
-				</div>
-				<div className="col-3">
-					<h6 className="my-1 fw-normal">Zip code</h6>
-					<span className="fw-light">{billingDetails.zipCode || "---"}</span>
-				</div>
-				<div className="col-3">
-					<h6 className="my-1 fw-normal">Country</h6>
-					<span className="fw-light">{billingDetails.country || "---"}</span>
-				</div>
-				<div className="col-12">
-					<h5 className="my-2 py-2 fw-normal border-bottom">Payment details</h5>
-				</div>
-				{paymentDetails.method === "card" && (
-					<>
-						<div className="col-4">
-							<h6 className="my-1 fw-normal">Payment method</h6>
-							<span className="fw-light">{paymentDetails.method || "---"}</span>
-						</div>
-						<div className="col-4">
-							<h6 className="my-1 fw-normal">Card number</h6>
-							<span className="fw-light">{paymentDetails.address || "---"}</span>
-						</div>
-						<div className="col-4">
-							<h6 className="my-1 fw-normal">Card holder</h6>
-							<span className="fw-light">{paymentDetails.city || "---"}</span>
-						</div>
-					</>
-				)}
-				{paymentDetails.method !== "card" && (
+			{summary.map(({ step, details }, index) => (
+				<div key={index} className="row">
 					<div className="col-12">
-						<h5 className="my-1 fw-light text-center text-muted">Payment method not available</h5>
+						<h4 className="my-2 py-2 fw-normal">{step}</h4>
 					</div>
-				)}
+					{details.map(({ property, value }, index) => (
+						<div key={index} className="col-6 col-lg-3">
+							<div className="w-100 p-2 m-1 rounded bg-light border">
+								<h6 className="my-1 fw-normal">{property}</h6>
+								<span className="fw-light">{value}</span>
+							</div>
+						</div>
+					))}
+				</div>
+			))}
+			<div className="row">
+				<div>
+					<hr className="mt-3" />
+				</div>
 				<div className="col-12">
-					<h5 className="my-2 py-2 fw-normal border-bottom">Order total</h5>
+					<h4 className="py-2 fw-normal">Order total</h4>
 				</div>
 				<div className="col-12">
 					<CheckoutTotal />
 				</div>
 			</div>
+			<form onSubmit={handleSubmit}>
+				<CheckoutNav backButtonMsg="Return to payment details" nextButtonMsg="Confirm purchase" />
+			</form>
 		</>
 	);
 }

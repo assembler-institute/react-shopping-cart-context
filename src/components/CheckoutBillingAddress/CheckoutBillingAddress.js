@@ -2,34 +2,22 @@ import { useContext } from "react";
 import { useFormik } from "formik";
 import { Redirect } from "react-router";
 import { CheckoutContext } from "../../providers/CheckoutProvider";
-import * as Yup from "yup";
+import CheckoutNav from "../CheckoutNav/CheckoutNav";
 
+import { billingAddressSchema } from "../../validation";
 import { COUNTRY_NAME_LIST } from "../../constants";
 
-const schema = Yup.object({
-	address: Yup.string().required("Address is required."),
-	city: Yup.string().required("City is required."),
-	zipCode: Yup.string()
-		.required("Zip code is required.")
-		.matches(/^\d+$/, "Zip code must be numeric.")
-		.max(10, "Zip code must not be longer than 10 digits."),
-	country: Yup.string()
-		.required("Country is required.")
-		.oneOf(Object.keys(COUNTRY_NAME_LIST), "The terms and conditions must be accepted."),
-});
-
-function CheckoutBillingDetails(props) {
+function CheckoutBillingAddress(props) {
 	const {
-		state: { step, billingDetails },
+		state: { step, billingAddress },
 		setBillingDetails,
-		goBack,
 	} = useContext(CheckoutContext);
 
 	const formik = useFormik({
 		initialValues: {
-			...billingDetails,
+			...billingAddress,
 		},
-		validationSchema: schema,
+		validationSchema: billingAddressSchema,
 		validateOnBlur: true,
 		onSubmit: (values, actions) => {
 			const { setSubmitting } = actions;
@@ -65,8 +53,8 @@ function CheckoutBillingDetails(props) {
 						type="text"
 						name="address"
 						id="address"
-						className={`form-control ${touched.address && errors.address ? "is-invalid" : null} ${
-							touched.address && !errors.address ? "is-valid" : null
+						className={`form-control ${touched.address && errors.address && "is-invalid"} ${
+							touched.address && !errors.address && "is-valid"
 						}`}
 						placeholder="Your address..."
 						value={values.address}
@@ -84,8 +72,8 @@ function CheckoutBillingDetails(props) {
 						type="text"
 						name="city"
 						id="city"
-						className={`form-control ${touched.city && errors.city ? "is-invalid" : null} ${
-							touched.city && !errors.city ? "is-valid" : null
+						className={`form-control ${touched.city && errors.city && "is-invalid"} ${
+							touched.city && !errors.city && "is-valid"
 						}`}
 						placeholder="Your city..."
 						value={values.city}
@@ -102,10 +90,10 @@ function CheckoutBillingDetails(props) {
 						type="text"
 						name="zipCode"
 						id="zipCode"
-						className={`form-control ${touched.zipCode && errors.zipCode ? "is-invalid" : null} ${
-							touched.zipCode && !errors.zipCode ? "is-valid" : null
+						className={`form-control ${touched.zipCode && errors.zipCode && "is-invalid"} ${
+							touched.zipCode && !errors.zipCode && "is-valid"
 						}`}
-						placeholder="City zipCode"
+						placeholder="City zip code"
 						value={values.zipCode}
 						onChange={handleChange}
 						onBlur={handleBlur}
@@ -120,8 +108,8 @@ function CheckoutBillingDetails(props) {
 						type="text"
 						name="country"
 						id="country"
-						className={`form-select ${touched.country && errors.country ? "is-invalid" : null} ${
-							touched.country && !errors.country ? "is-valid" : null
+						className={`form-select ${touched.country && errors.country && "is-invalid"} ${
+							touched.country && !errors.country && "is-valid"
 						}`}
 						value={values.country}
 						onChange={handleChange}
@@ -135,17 +123,14 @@ function CheckoutBillingDetails(props) {
 					</select>
 					{touched.country && errors.country && <div className="invalid-feedback">{errors.country}</div>}
 				</div>
-				<div className="d-flex justify-content-center gap-2">
-					<button type="button" className="btn btn-outline-primary" onClick={goBack}>
-						Return to personal details
-					</button>
-					<button type="submit" className="btn btn-primary" disabled={isValidating || isSubmitting || !isValid}>
-						Proceed with the payment details
-					</button>
-				</div>
+				<CheckoutNav
+					backButtonMsg="Return to billing address"
+					nextButtonMsg="Proceed with the payment details"
+					nextButtonDisabled={!isValid || isValidating || isSubmitting}
+				/>
 			</form>
 		</>
 	);
 }
 
-export default CheckoutBillingDetails;
+export default CheckoutBillingAddress;
