@@ -1,7 +1,9 @@
-import { useContext, useState } from "react";
+import { useEffect, useContext, useState } from "react";
 import { useFormik } from "formik";
-import { Redirect } from "react-router";
+import { Redirect, useHistory } from "react-router";
 import { CheckoutContext } from "../../providers/CheckoutProvider";
+import { paymentDetailsSchema } from "../../validation";
+import CheckoutNav from "../CheckoutNav/CheckoutNav";
 import Cards from "react-credit-cards";
 import IconImg from "../IconImg/IconImg";
 import "react-credit-cards/es/styles-compiled.css";
@@ -13,8 +15,6 @@ import VisaLogo from "../../img/logos/Visa-logo.svg";
 import MasterCardLogo from "../../img/logos/MasterCard-logo.svg";
 import AmericanExpressLogo from "../../img/logos/AmericanExpress-logo.svg";
 import SSLIcon from "../../img/icons/lock-green.svg";
-import CheckoutNav from "../CheckoutNav/CheckoutNav";
-import { paymentDetailsSchema } from "../../validation";
 
 const cardProviders = [
 	{ value: "Visa", img: VisaLogo, disabled: false },
@@ -28,13 +28,18 @@ const paymentMethods = [
 	{ value: "PayPal", img: PayPalLogo, disabled: true },
 ];
 
-function PaymentForm(props) {
-	const [focus, setFocus] = useState("");
+function CheckoutPaymentDetails(props) {
+	const history = useHistory();
 	const {
 		state: { step, paymentDetails },
 		setPaymentDetails,
 	} = useContext(CheckoutContext);
 
+	useEffect(() => {
+		step !== 3 && history.push(`step-${step}`);
+	}, [step]);
+
+	const [focus, setFocus] = useState("");
 	const formik = useFormik({
 		initialValues: {
 			...paymentDetails,
@@ -65,7 +70,7 @@ function PaymentForm(props) {
 
 	return (
 		<>
-			{step !== 3 && <Redirect to={`/checkout/step-${step}`} />}
+			{/* {step !== 3 && <Redirect to={`/checkout`} />} */}
 			<form onSubmit={handleSubmit}>
 				<h5 className="my-3">How would you like to pay</h5>
 				<div className="mb-3 has-validation">
@@ -152,7 +157,7 @@ function PaymentForm(props) {
 								number={values.cardNumber}
 								name={values.cardHolderName}
 								expiry={values.cardExpirationMonth + values.cardExpirationYear}
-								cvc={values.cardCVV}
+								cvc={values.cardCVV.replace(/./g, "*")}
 								focused={focus}
 							/>
 						</div>
@@ -215,11 +220,11 @@ function PaymentForm(props) {
 									className={`form-control ${touched.cardCVV && errors.cardCVV && "is-invalid"} ${
 										touched.cardCVV && !errors.cardCVV && "is-valid"
 									}`}
-									type="text"
+									type="password"
 									name="cardCVV"
 									id="cardCVV"
-									placeholder="Code"
-									maxLength="4"
+									placeholder="***"
+									maxLength="3"
 									value={values.cardCVV}
 									onChange={handleChange}
 									onBlur={handleBlur}
@@ -262,4 +267,4 @@ function PaymentForm(props) {
 	);
 }
 
-export default PaymentForm;
+export default CheckoutPaymentDetails;

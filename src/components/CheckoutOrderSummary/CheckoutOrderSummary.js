@@ -1,13 +1,21 @@
+import { useEffect, useContext } from "react";
 import { useFormik } from "formik";
-import { useContext } from "react";
-import { Redirect } from "react-router";
+import { Redirect, useHistory } from "react-router";
 import { CheckoutContext } from "../../providers/CheckoutProvider";
 import CheckoutNav from "../CheckoutNav/CheckoutNav";
 import CheckoutTotal from "../CheckoutTotal/CheckoutTotal";
 
 function CheckoutOrderSummary(props) {
-	const { state, goNext } = useContext(CheckoutContext);
-	const { step, customerDetails, billingAddress, paymentDetails } = state;
+	const history = useHistory();
+	const {
+		state: { step, customerDetails, billingAddress, paymentDetails },
+		goNext,
+	} = useContext(CheckoutContext);
+
+	useEffect(() => {
+		step !== 4 && history.push(`step-${step}`);
+	}, [step]);
+
 	const formik = useFormik({
 		initialValues: {},
 		onSubmit: (values, actions) => {
@@ -54,15 +62,15 @@ function CheckoutOrderSummary(props) {
 
 	return (
 		<>
-			{step !== 4 && <Redirect to={`/checkout/step-${step}`} />}
+			{/* {step !== 4 && <Redirect to={`/checkout`} />} */}
 			{summary.map(({ step, details }, index) => (
 				<div key={index} className="row">
 					<div className="col-12">
 						<h4 className="my-2 py-2 fw-normal">{step}</h4>
 					</div>
 					{details.map(({ property, value }, index) => (
-						<div key={index} className="col-6 col-lg-3">
-							<div className="w-100 p-2 m-1 rounded bg-light border">
+						<div key={index} className="col-12 col-md-6 col-xl-3">
+							<div className="w-100 p-2 mb-2 rounded bg-light border">
 								<h6 className="my-1 fw-normal">{property}</h6>
 								<span className="fw-light">{value}</span>
 							</div>

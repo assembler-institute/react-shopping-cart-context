@@ -69,7 +69,7 @@ function reducer(state, actions) {
 				orderCosts: {
 					...state.orderCosts,
 					shipping: COUNTRY_SHIPPING_LIST[state.billingAddress.country],
-					taxes: state.orderCosts.subtotal * COUNTRY_TAXES_LIST[state.billingAddress.country],
+					taxes: Number((state.orderCosts.subtotal * COUNTRY_TAXES_LIST[state.billingAddress.country]).toFixed(2)),
 				},
 			};
 		default:

@@ -1,16 +1,21 @@
-import { useContext } from "react";
 import { useFormik } from "formik";
-import { Redirect } from "react-router";
+import { Redirect, useHistory } from "react-router";
 import { CheckoutContext } from "../../providers/CheckoutProvider";
 import CheckoutNav from "../CheckoutNav/CheckoutNav";
 import { customerDetailsSchema } from "../../validation";
 import { COUNTRY_PHONE_PREFIX_LIST } from "../../constants";
+import { useEffect, useContext } from "react";
 
 function CheckoutCustomerDetails() {
+	const history = useHistory();
 	const {
 		state: { step, customerDetails },
 		setPersonalDetails,
 	} = useContext(CheckoutContext);
+
+	useEffect(() => {
+		step !== 1 && history.push(`step-${step}`);
+	}, [step]);
 
 	const formik = useFormik({
 		initialValues: {
@@ -42,7 +47,7 @@ function CheckoutCustomerDetails() {
 
 	return (
 		<>
-			{step !== 1 && <Redirect to={`/checkout/step-${step}`} />}
+			{/* {step !== 1 && <Redirect to={`/checkout`} />} */}
 			<form onSubmit={handleSubmit}>
 				<label htmlFor="fullname" className="control-label">
 					<h5 className="d-block my-2 fw-normal">Your name*</h5>
@@ -105,6 +110,7 @@ function CheckoutCustomerDetails() {
 						type="tel"
 						name="phoneNumber"
 						id="phoneNumber"
+						maxLength="9"
 						className={`form-control ${touched.phoneNumber && errors.phoneNumber && "is-invalid"} ${
 							touched.phoneNumber && !errors.phoneNumber && "is-valid"
 						}`}

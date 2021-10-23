@@ -6,8 +6,8 @@ const schema = Yup.object({
 	email: Yup.string().required("Email address is required.").email("Invalid email."),
 	phoneNumber: Yup.string()
 		.required("Phone number is required.")
-		.matches(/\d+/, "Phone number must be numeric.")
-		.max(10, "Phone number must not be longer than 14 digits."),
+		.matches(/^\d+$/, "Phone number must be numeric.")
+		.length(9, "Phone number length must be of 9 digits."),
 	phonePrefix: Yup.string()
 		.required("Phone prefix is required.")
 		.oneOf(Object.values(COUNTRY_PHONE_PREFIX_LIST), "The terms and conditions must be accepted."),

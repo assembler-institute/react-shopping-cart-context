@@ -167,6 +167,11 @@ function reducer(state, action) {
 				...state,
 				products: saveNewProduct(products, payload.product),
 			};
+		case actionTypes.CART_CLEAR:
+			return {
+				...state,
+				cartItems: [],
+			};
 		case actionTypes.CARTITEM_ADD:
 			return {
 				...state,
@@ -183,6 +188,8 @@ function reducer(state, action) {
 				cartItems: editCartItem(cartItems, payload.id, payload.quantity),
 			};
 		case actionTypes.LOADING_SUCCESS:
+			console.log(payload);
+
 			return {
 				...state,
 				loading: {
@@ -256,6 +263,9 @@ function AppProvider({ children }) {
 				},
 				handleSaveNewProduct: (product) => {
 					dispatch({ type: actionTypes.PRODUCT_SAVE_NEW_PRODUCT, payload: { product } });
+				},
+				handleClearCart: () => {
+					dispatch({ type: actionTypes.CART_CLEAR });
 				},
 			}}
 		>

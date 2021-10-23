@@ -1,6 +1,6 @@
-import { useContext } from "react";
+import { useEffect, useContext } from "react";
 import { useFormik } from "formik";
-import { Redirect } from "react-router";
+import { Redirect, useHistory } from "react-router";
 import { CheckoutContext } from "../../providers/CheckoutProvider";
 import CheckoutNav from "../CheckoutNav/CheckoutNav";
 
@@ -8,10 +8,15 @@ import { billingAddressSchema } from "../../validation";
 import { COUNTRY_NAME_LIST } from "../../constants";
 
 function CheckoutBillingAddress(props) {
+	const history = useHistory();
 	const {
 		state: { step, billingAddress },
 		setBillingDetails,
 	} = useContext(CheckoutContext);
+
+	useEffect(() => {
+		step !== 2 && history.push(`step-${step}`);
+	}, [step]);
 
 	const formik = useFormik({
 		initialValues: {
@@ -43,7 +48,7 @@ function CheckoutBillingAddress(props) {
 
 	return (
 		<>
-			{step !== 2 && <Redirect to={`/checkout/step-${step}`} />}
+			{/* {step !== 2 && <Redirect to={`/checkout`} />} */}
 			<form onSubmit={handleSubmit}>
 				<label htmlFor="address" className="control-label">
 					<h5 className="d-block my-2 fw-normal">Address*</h5>

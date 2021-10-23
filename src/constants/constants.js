@@ -6,6 +6,7 @@ const actionTypes = {
 	PRODUCT_UPVOTE: Symbol(),
 	PRODUCT_SET_FAVORITE: Symbol(),
 	PRODUCT_SAVE_NEW_PRODUCT: Symbol(),
+	CART_CLEAR: Symbol(),
 	CARTITEM_ADD: Symbol(),
 	CARTITEM_DELETE: Symbol(),
 	CARTITEM_EDIT: Symbol(),
