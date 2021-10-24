@@ -1,25 +1,24 @@
 import { getProducts } from "../../api/getProducts";
 
-export function handleDataFetch({ prevState }) {
+export async function handleDataFetch({ prevState }) {
   // eslint-disable-next-line
-  console.log("fetching data");
-  getProducts()
-    .then((data) => {
-      // Set products state
-      return {
-        ...prevState,
-        products: data,
-        hasError: null,
-      };
-    })
-    .catch((error) => {
-      return {
-        ...prevState,
-        hasError: error,
-      };
-    });
+  console.log("fetching data", prevState);
+  try {
+    const products = await getProducts()
+    return {
+      ...prevState,
+      products: products,
+      hasError: false,
+    };
+  } catch (error) {
+    return {
+      ...prevState,
+      hasError: error,
+    };
+  }
+
 }
 
-export function handleLoadingState({ prevState, value }) {
-  return { ...prevState, isLoading: value };
+export function handleLoadingState({ prevState, payload: valueBoolean }) {
+  return { ...prevState, isLoading: valueBoolean };
 }

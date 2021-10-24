@@ -3,6 +3,14 @@ import {
   getLocalStorageItems,
   setLocalStorageItems,
 } from "../../utils/loadLocalStorageItems";
+import { 
+  handleChange, 
+  handleRemove, 
+  handleSetFavorite, 
+  handleUpVote, 
+  handleAddToCart, 
+  handleDownVote 
+} from "../Ecommerce/EcommerceHandlers";
 import { handleLoadingState, handleDataFetch } from "./AppHandlers";
 
 const initialState = {
@@ -17,13 +25,18 @@ const actionTypes = {
   SET_LOADING: handleLoadingState,
   LOAD_LOCAL_STORAGE: getLocalStorageItems,
   SET_LOCAL_STORAGE: setLocalStorageItems,
+  HANDLER_DOWN_VOTE: handleDownVote,
+  HANDLER_UP_VOTE: handleUpVote,
+  HANDLER_ADD_TO_CART: handleAddToCart,
+  HANDLER_REMOVE: handleRemove,
+  HANDLER_CHANGE: handleChange,
+  HANDLER_SET_FAVORITE: handleSetFavorite
 };
 
 const reduce = (prevState, action) => {
-  const handler = () => Object.keys(actionTypes).find(action.type);
-
+  /* 
   if (prevState != null) {
-    /* const mismatch = checkMismatchElements(
+  const mismatch = checkMismatchElements(
       Object.keys(initialState),
       Object.keys(prevState),
     );
@@ -35,14 +48,10 @@ const reduce = (prevState, action) => {
         array: mismatch,
       });
       return prevState;
-    } */
-
-    if (!handler) {
-      return prevState;
-    }
-    // This handler execute the logic and returns the new state
+    } 
   }
-  return handler({ prevState: prevState, payload: action.payload });
+  */
+  return (action.type)({ prevState: prevState, payload: action.payload });
 };
 
 function useReducerApp() {

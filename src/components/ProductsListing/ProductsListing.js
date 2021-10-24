@@ -1,14 +1,14 @@
 import React from "react";
-import { useEcommerce } from "../../context/Ecommerce/eCommerceContext";
+import { useAppContext } from "../../context/App/AppContext";
 
 import ItemCard from "../ItemCard";
 
 function ProductsListing() {
-  const { products } = useEcommerce();
+  const { products } = useAppContext();
 
   return (
     <section className="row">
-      {products.map((product) => (
+      {products && products.length > 0 && products.map((product) => (
         <ItemCard
           key={product.id}
           id={product.id}

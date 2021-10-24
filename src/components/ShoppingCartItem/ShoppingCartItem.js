@@ -3,10 +3,10 @@ import React from "react";
 import "./ShoppingCartItem.scss";
 import { buildSelectOptions } from "../../store/generics";
 import Button from "../Button";
-import { useEcommerce } from "../../context/Ecommerce/eCommerceContext";
+import { useAppContext } from "../../context/App/AppContext";
 
 function ShoppingCartItem({ id, img, title, price, quantity, unitsInStock }) {
-  const { handleChange, handleRemove } = useEcommerce();
+  const { handleChange, handleRemove } = useAppContext();
 
   function onHandleChange(event) {
     handleChange(id, event);

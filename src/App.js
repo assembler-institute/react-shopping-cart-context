@@ -5,49 +5,60 @@ import EcommerceContextProvider from "./context/Ecommerce/eCommerceContext";
 
 import Home from "./pages/Home";
 import NewProduct from "./pages/NewProduct";
+import { setApiProducts } from "./utils/loadLocalStorageItems";
 
 const PRODUCTS_LOCAL_STORAGE_KEY = "products";
 const CART_ITEMS_LOCAL_STORAGE_KEY = "cartItems";
 
 function App() {
   const {
-    // cartItems,
+    cartItems,
     products,
-    handleDataFetch,
+    //handleDataFetch,
     handleLoadingState,
     getLocalStorageItems,
-    // setLocalStorageItems,
+    setLocalStorageItems,
   } = useAppContext();
 
   // First render
   useEffect(() => {
+
+    handleLoadingState(true);
+    setApiProducts()
+    handleLoadingState(false);
+
     // eslint-disable-next-line
-    console.log("cargando productos de la API");
-    getLocalStorageItems(CART_ITEMS_LOCAL_STORAGE_KEY);
+
     // Get products local storage -> [...products] || []
     getLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY);
+    getLocalStorageItems(CART_ITEMS_LOCAL_STORAGE_KEY);
+
 
     // Get products from API
+    /*
     if (products.length === 0) {
       // Set loading true
       // eslint-disable-next-line
-      console.log("voy a poner el loading state to true ");
-      handleLoadingState(true);
+      //console.log("Voy a poner el loading state to true ");
+ 
       // Get products -> hasError
+
       handleDataFetch();
+
       // Set loading false
       handleLoadingState(false);
-    }
+    }*/
+
   }, []);
 
-  /*   useEffect(() => {
-    setLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY, products);
+  useEffect(() => {
+    //setLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY, products);
   }, [products]);
 
   useEffect(() => {
-    setLocalStorageItems(CART_ITEMS_LOCAL_STORAGE_KEY, cartItems);
-  }, [cartItems]); */
-
+    //setLocalStorageItems(CART_ITEMS_LOCAL_STORAGE_KEY, cartItems);
+  }, [cartItems]);
+  
   return (
     <EcommerceContextProvider>
       <BrowserRouter>

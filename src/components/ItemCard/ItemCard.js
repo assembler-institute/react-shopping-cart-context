@@ -6,8 +6,8 @@ import Button from "../Button";
 import { ThumbDown, ThumbUp } from "../SVGIcons";
 
 import "./ItemCard.scss";
-import { useEcommerce } from "../../context/Ecommerce/eCommerceContext";
 import { getPopularityClasses, Divider } from "../../store/generics";
+import { useAppContext } from "../../context/App/AppContext";
 
 function ItemCard({
   id,
@@ -23,7 +23,7 @@ function ItemCard({
     handleSetFavorite,
     handleUpVote,
     handleAddToCart,
-  } = useEcommerce();
+  } = useAppContext();
 
   return (
     <article className="ItemCard col col-12 col-md-6 col-lg-4">

@@ -1,11 +1,11 @@
 import React from "react";
-import { useEcommerce } from "../../context/Ecommerce/eCommerceContext";
 import ProductsListing from "../../components/ProductsListing";
 import Cart from "../../components/Cart";
 import withLayout from "../../hoc/withLayout";
+import { useAppContext } from "../../context/App/AppContext";
 
 function Home() {
-  const { isLoading, hasError } = useEcommerce();
+  const { isLoading, hasError } = useAppContext();
 
   return (
     <div className="row">

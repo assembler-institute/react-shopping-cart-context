@@ -1,28 +1,29 @@
-// function loadLocalStorageItems(storageKey, defaultValue) {
+import products from "./demo-data";
+
+export function setApiProducts() {
+  // eslint-disable-next-line
+  localStorage.setItem('products', JSON.stringify(products));
+}
 
 function getLocalStorageItems({ prevState, payload: storageKey }) {
   // eslint-disable-next-line
-  console.log("voy a cargar los prodcutos");
   const data = localStorage.getItem(storageKey);
-  // eslint-disable-next-line
-  console.log(data, "data obtenida de localStorage");
-  // const dataParsed=JSON.parse(data);
-  const newState = JSON.parse(`{"${storageKey}":"${data}"}`);
 
+  // eslint-disable-next-line
+  // const dataParsed=JSON.parse(data);
+  
   if (data) {
-    try {
-      return { ...prevState, ...newState };
-    } catch (error) {
-      return prevState;
-    }
+    prevState[storageKey] = JSON.parse(data)
+    return prevState;
   } else {
     return prevState;
   }
+ 
 }
 
 function setLocalStorageItems({ prevState, payload: { storageKey, data } }) {
   // eslint-disable-next-line
-  console.log("im the storageKey", storageKey);
+  console.log(data)
   localStorage.setItem(storageKey, JSON.stringify(data));
   return prevState;
 }
