@@ -8,7 +8,7 @@ const stepThreeSchema = Yup.object().shape({
     cvc: Yup.string()
       .label('CVC')
       .min(3, 'Minimum 3 digits!')
-      .max(4, 'Maximum 4 digits!')
+      .max(3, 'Maximum 3 digits!')
       .required(),
     nameOnCard: Yup.string()
       .label('Name on card')
