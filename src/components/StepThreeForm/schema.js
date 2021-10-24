@@ -13,11 +13,11 @@ const stepThreeSchema = Yup.object().shape({
     nameOnCard: Yup.string()
       .label('Name on card')
       .required(),
-    expiryMonth: Yup.string()
-      .label('expiryDate')
-      .min(2)
-      .max(2)
-      .required(),
+    expiryDate: Yup.string()
+      .label('Expiry Date')
+      .min(4)
+      .max(4)
+      .required()
   });
   
   export default stepThreeSchema;

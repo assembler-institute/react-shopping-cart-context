@@ -70,7 +70,7 @@ function StepThreeForm() {
 
                 <Input
                     type="text"
-                    label="Name on card"
+                    label="Name on Card"
                     id="nameOnCard"
                     value={formik.values.nameOnCard}
                     placeholder="Your Name On Card"
@@ -83,18 +83,17 @@ function StepThreeForm() {
 
                 <Input
                     type="number"
-                    label="expiryDate"
+                    label="Expiry Date"
                     id="expiryDate"
+                    
                     value={formik.values.expiryDate}
-                    placeholder="Your Expiry Month"
+                    placeholder="MM/YY" 
                     handleChange={formik.handleChange}
                     handleBlur={formik.handleBlur}
                     hasErrorMessage={formik.touched.expiryDate}
                     errorMessage={formik.errors.expiryDate}
                     isTouched={formik.touched.expiryDate}
                 />
-
-
 
                 <Button
                     submitButton
