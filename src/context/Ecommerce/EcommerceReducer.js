@@ -56,7 +56,7 @@ const reduce = (prevState, action) => {
     return prevState;
   }
 
-  const handler = Object.keys(actionTypes).find(action.type);
+  const handler = () => Object.keys(actionTypes).find(action.type);
   if (!handler) return prevState;
   // This handler execute the logic and returns the new state
 
@@ -66,12 +66,12 @@ const reduce = (prevState, action) => {
   });
 };
 
-export function useReducerECommerce() {
+function useReducerECommerce() {
   const [state, dispatch] = useReducer(reduce, initialState);
   return { state, dispatch };
 }
 
-export { actionTypes };
+export { actionTypes, useReducerECommerce };
 
 /// Aquí va el reducer donde initialState son las variables de state
 /// Y donde los type actions son los handlers de state

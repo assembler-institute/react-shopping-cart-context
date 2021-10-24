@@ -11,16 +11,18 @@ const CART_ITEMS_LOCAL_STORAGE_KEY = "cartItems";
 
 function App() {
   const {
-    cartItems,
+    // cartItems,
     products,
     handleDataFetch,
     handleLoadingState,
     getLocalStorageItems,
-    setLocalStorageItems,
+    // setLocalStorageItems,
   } = useAppContext();
 
   // First render
   useEffect(() => {
+    // eslint-disable-next-line
+    console.log("cargando productos de la API");
     getLocalStorageItems(CART_ITEMS_LOCAL_STORAGE_KEY);
     // Get products local storage -> [...products] || []
     getLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY);
@@ -28,6 +30,8 @@ function App() {
     // Get products from API
     if (products.length === 0) {
       // Set loading true
+      // eslint-disable-next-line
+      console.log("voy a poner el loading state to true ");
       handleLoadingState(true);
       // Get products -> hasError
       handleDataFetch();
@@ -36,13 +40,13 @@ function App() {
     }
   }, []);
 
-  useEffect(() => {
+  /*   useEffect(() => {
     setLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY, products);
   }, [products]);
 
   useEffect(() => {
     setLocalStorageItems(CART_ITEMS_LOCAL_STORAGE_KEY, cartItems);
-  }, [cartItems]);
+  }, [cartItems]); */
 
   return (
     <EcommerceContextProvider>

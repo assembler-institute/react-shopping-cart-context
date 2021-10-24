@@ -1,6 +1,8 @@
 import { getProducts } from "../../api/getProducts";
 
 export function handleDataFetch({ prevState }) {
+  // eslint-disable-next-line
+  console.log("fetching data");
   getProducts()
     .then((data) => {
       // Set products state
@@ -18,6 +20,6 @@ export function handleDataFetch({ prevState }) {
     });
 }
 
-export function handleLoadingState({ prevState, payload: value }) {
+export function handleLoadingState({ prevState, value }) {
   return { ...prevState, isLoading: value };
 }

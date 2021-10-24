@@ -1,8 +1,11 @@
 // function loadLocalStorageItems(storageKey, defaultValue) {
 
 function getLocalStorageItems({ prevState, payload: storageKey }) {
+  // eslint-disable-next-line
+  console.log("voy a cargar los prodcutos");
   const data = localStorage.getItem(storageKey);
-
+  // eslint-disable-next-line
+  console.log(data, "data obtenida de localStorage");
   // const dataParsed=JSON.parse(data);
   const newState = JSON.parse(`{"${storageKey}":"${data}"}`);
 
@@ -18,6 +21,8 @@ function getLocalStorageItems({ prevState, payload: storageKey }) {
 }
 
 function setLocalStorageItems({ prevState, payload: { storageKey, data } }) {
+  // eslint-disable-next-line
+  console.log("im the storageKey", storageKey);
   localStorage.setItem(storageKey, JSON.stringify(data));
   return prevState;
 }

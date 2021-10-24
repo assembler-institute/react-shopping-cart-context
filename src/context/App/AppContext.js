@@ -5,6 +5,9 @@ const AppContext = createContext();
 
 export default function AppContextProvider({ children }) {
   const { stateApp, dispatchApp } = useReducerApp();
+
+  // eslint-disable-next-line
+  console.log(stateApp, dispatchApp);
   const value = {
     products: stateApp.products,
     cartItems: stateApp.cartItems,

@@ -56,3 +56,29 @@ export function buildSelectOptions(unitsInStock) {
     );
   });
 }
+
+export const checkMismatchElements = (correctArray, randomArray) => {
+  let misMatchElements;
+
+  if (correctArray.length >= randomArray.length) {
+    misMatchElements = correctArray.filter(
+      (item) => !randomArray.find((item2) => item === item2),
+    );
+    // eslint-disable-next-line
+    console.log({
+      message: "elements missing in randomArray",
+      array: misMatchElements,
+    });
+  } else {
+    misMatchElements = randomArray.filter(
+      (item) => !correctArray.find((item2) => item === item2),
+    );
+    // eslint-disable-next-line
+    console.log({
+      message: "extra elements in randomArray",
+      array: misMatchElements,
+    });
+  }
+
+  return misMatchElements.length > 0 ? misMatchElements : null;
+};
