@@ -6,45 +6,33 @@ import Home from "./pages/Home";
 import NewProduct from "./pages/NewProduct";
 import { setApiProducts } from "./utils/loadLocalStorageItems";
 
-const PRODUCTS_LOCAL_STORAGE_KEY = "products";
-const CART_ITEMS_LOCAL_STORAGE_KEY = "cartItems";
-
 function App() {
   const {
-    cartItems,
-    products,
-    // handleDataFetch,
     handleLoadingState,
     getLocalStorageItems,
     setLocalStorageItems,
   } = useAppContext();
 
-  // First render
+  const stateKey = [
+    { state: useAppContext().products, key: "products" },
+    { state: useAppContext().cartItems, key: "cartItems" },
+  ];
+
   useEffect(() => {
     handleLoadingState(true);
     setApiProducts();
     handleLoadingState(false);
 
-    // Get products local storage -> [...products] || []
-    getLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY);
-    getLocalStorageItems(CART_ITEMS_LOCAL_STORAGE_KEY);
+    stateKey.forEach((item) => getLocalStorageItems(item.key));
   }, []);
 
-  useEffect(() => {
-    if (products.length > 0) {
-      // eslint-disable-next-line
-      console.log(products, "im in the update section for prod");
-      setLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY, products);
-    }
-  }, [products]);
-
-  useEffect(() => {
-    if (cartItems.length > 0) {
-      // eslint-disable-next-line
-      console.log(cartItems, "im in the update section for cart Items");
-      setLocalStorageItems(CART_ITEMS_LOCAL_STORAGE_KEY, cartItems);
-    }
-  }, [cartItems]);
+  stateKey.forEach((item) => {
+    useEffect(() => {
+      if (item.state.length > 0) {
+        setLocalStorageItems(item.key, item.state);
+      }
+    }, [item.state]);
+  });
 
   return (
     <BrowserRouter>
