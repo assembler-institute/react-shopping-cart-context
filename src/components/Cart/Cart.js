@@ -5,7 +5,7 @@ import ShoppingCartItem from "../ShoppingCartItem";
 import Button from "../Button";
 import HomeContext from "../../context/homeContext/HomeContext";
 
-function getCartTotal(cart) {
+export function getCartTotal(cart) {
   return cart.reduce((accum, item) => {
     return accum + item.price * item.quantity;
   }, 0);
