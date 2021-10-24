@@ -3,13 +3,13 @@ import {
   getLocalStorageItems,
   setLocalStorageItems,
 } from "../../utils/loadLocalStorageItems";
-import { 
-  handleChange, 
-  handleRemove, 
-  handleSetFavorite, 
-  handleUpVote, 
-  handleAddToCart, 
-  handleDownVote 
+import {
+  handleChange,
+  handleRemove,
+  handleSetFavorite,
+  handleUpVote,
+  handleAddToCart,
+  handleDownVote,
 } from "../Ecommerce/EcommerceHandlers";
 import { handleLoadingState, handleDataFetch } from "./AppHandlers";
 
@@ -30,11 +30,11 @@ const actionTypes = {
   HANDLER_ADD_TO_CART: handleAddToCart,
   HANDLER_REMOVE: handleRemove,
   HANDLER_CHANGE: handleChange,
-  HANDLER_SET_FAVORITE: handleSetFavorite
+  HANDLER_SET_FAVORITE: handleSetFavorite,
 };
 
 const reduce = (prevState, action) => {
-  /* 
+  /*
   if (prevState != null) {
   const mismatch = checkMismatchElements(
       Object.keys(initialState),
@@ -48,16 +48,14 @@ const reduce = (prevState, action) => {
         array: mismatch,
       });
       return prevState;
-    } 
+    }
   }
   */
-  return (action.type)({ prevState: prevState, payload: action.payload });
+  return action.type({ prevState: prevState, payload: action.payload });
 };
 
 function useReducerApp() {
   const [stateApp, dispatchApp] = useReducer(reduce, initialState);
-  // eslint-disable-next-line
-  console.log(stateApp);
   return { stateApp: stateApp, dispatchApp: dispatchApp };
 }
 

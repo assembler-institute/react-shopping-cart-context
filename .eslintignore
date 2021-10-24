@@ -1,2 +1,2 @@
 package-lock.json
-src/*
+src/utils/loadLocalStorageItems.js

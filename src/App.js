@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { useAppContext } from "./context/App/AppContext";
-import EcommerceContextProvider from "./context/Ecommerce/eCommerceContext";
 
 import Home from "./pages/Home";
 import NewProduct from "./pages/NewProduct";
@@ -14,7 +13,7 @@ function App() {
   const {
     cartItems,
     products,
-    //handleDataFetch,
+    // handleDataFetch,
     handleLoadingState,
     getLocalStorageItems,
     setLocalStorageItems,
@@ -22,56 +21,42 @@ function App() {
 
   // First render
   useEffect(() => {
-
     handleLoadingState(true);
-    setApiProducts()
+    setApiProducts();
     handleLoadingState(false);
-
-    // eslint-disable-next-line
 
     // Get products local storage -> [...products] || []
     getLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY);
     getLocalStorageItems(CART_ITEMS_LOCAL_STORAGE_KEY);
-
-
-    // Get products from API
-    /*
-    if (products.length === 0) {
-      // Set loading true
-      // eslint-disable-next-line
-      //console.log("Voy a poner el loading state to true ");
- 
-      // Get products -> hasError
-
-      handleDataFetch();
-
-      // Set loading false
-      handleLoadingState(false);
-    }*/
-
   }, []);
 
   useEffect(() => {
-    //setLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY, products);
+    if (products.length > 0) {
+      // eslint-disable-next-line
+      console.log(products, "im in the update section for prod");
+      setLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY, products);
+    }
   }, [products]);
 
   useEffect(() => {
-    //setLocalStorageItems(CART_ITEMS_LOCAL_STORAGE_KEY, cartItems);
+    if (cartItems.length > 0) {
+      // eslint-disable-next-line
+      console.log(cartItems, "im in the update section for cart Items");
+      setLocalStorageItems(CART_ITEMS_LOCAL_STORAGE_KEY, cartItems);
+    }
   }, [cartItems]);
-  
+
   return (
-    <EcommerceContextProvider>
-      <BrowserRouter>
-        <Switch>
-          <Route path="/new-product">
-            <NewProduct />
-          </Route>
-          <Route path="/" exact>
-            <Home fullWidth />
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    </EcommerceContextProvider>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/new-product">
+          <NewProduct />
+        </Route>
+        <Route path="/" exact>
+          <Home fullWidth />
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
 }
 

@@ -8,18 +8,20 @@ function ProductsListing() {
 
   return (
     <section className="row">
-      {products && products.length > 0 && products.map((product) => (
-        <ItemCard
-          key={product.id}
-          id={product.id}
-          img={product.img}
-          title={product.title}
-          shortDescription={product.shortDescription}
-          upVotes={product.votes.upVotes}
-          downVotes={product.votes.downVotes}
-          isFavorite={product.isFavorite}
-        />
-      ))}
+      {products &&
+        products.length > 0 &&
+        products.map((product) => (
+          <ItemCard
+            key={product.id}
+            id={product.id}
+            img={product.img}
+            title={product.title}
+            shortDescription={product.shortDescription}
+            upVotes={product.votes.upVotes}
+            downVotes={product.votes.downVotes}
+            isFavorite={product.isFavorite}
+          />
+        ))}
     </section>
   );
 }
