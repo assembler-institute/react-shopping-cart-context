@@ -1,0 +1,9 @@
+.ShoppingCartItem__img {
+  width: 100%;
+  min-width: 4rem;
+  height: 100%;
+  border-radius: 4px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  background-position: center;
+}/*# sourceMappingURL=ShoppingCartItem.css.map */
