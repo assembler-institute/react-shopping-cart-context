@@ -188,8 +188,6 @@ function reducer(state, action) {
 				cartItems: editCartItem(cartItems, payload.id, payload.quantity),
 			};
 		case actionTypes.LOADING_SUCCESS:
-			console.log(payload);
-
 			return {
 				...state,
 				loading: {
