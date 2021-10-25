@@ -1,7 +1,7 @@
 import React from "react";
+import { withRouter } from "react-router";
 import Card from "react-credit-cards";
 import "react-credit-cards/es/styles-compiled.css";
-import { NavLink, useHistory } from "react-router-dom";
 
 import { Button } from "components/UI/atoms";
 
@@ -11,8 +11,14 @@ import {
   formatExpirationDate,
   formatFormData,
 } from "utils/payment";
+import { log } from "debug";
 
 class PaymentForm extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
   state = {
     number: "",
     name: "",
@@ -47,9 +53,8 @@ class PaymentForm extends React.Component {
     this.setState({ [target.name]: target.value });
   };
 
-  handleSubmit = (e) => {
-    const history = useHistory();
-    e.preventDefault();
+  handleSubmit(e) {
+    const { history } = this.props;
     const { issuer } = this.state;
     const formData = [...e.target.elements]
       .filter((d) => d.name)
@@ -60,9 +65,8 @@ class PaymentForm extends React.Component {
 
     this.setState({ formData });
     this.form.reset();
-
     history.push("/checkout/complete");
-  };
+  }
 
   render() {
     const { name, number, expiry, cvc, focused, issuer, formData } = this.state;
@@ -80,10 +84,8 @@ class PaymentForm extends React.Component {
           />
           <form
             ref={(c) => (this.form = c)}
-            onSubmit={(e) => {
-              this.handleSubmit(e);
-            }}
             className=" mt-5 mb-2"
+            onSubmit={this.handleSubmit}
           >
             <div className="form-group">
               <input
@@ -150,4 +152,4 @@ class PaymentForm extends React.Component {
   }
 }
 
-export default PaymentForm;
+export default withRouter(PaymentForm);

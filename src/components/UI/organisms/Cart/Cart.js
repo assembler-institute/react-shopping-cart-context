@@ -1,12 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-import { ShoppingCartItem } from "components/UI/molecules"
-import { Button } from "components/UI/atoms"
+import { ShoppingCartItem } from "components/UI/molecules";
+import { Button } from "components/UI/atoms";
 
 import { useCartItems } from "context";
 
-function getCartTotal() {
+export function getCartTotal() {
   const { cartItems, cartItemIds } = useCartItems();
 
   return cartItemIds.reduce((accum, cartItemId) => {

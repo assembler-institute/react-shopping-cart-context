@@ -7,6 +7,7 @@ import {
   CheckoutPayment,
   Home,
   NewProduct,
+  CheckoutCompleted,
 } from "components/pages";
 
 import { useCartItems, useProducts } from "context";
@@ -31,7 +32,7 @@ function App() {
         <Route exact path="/checkout/step-1" component={CheckoutInfo} />
         <Route exact path="/checkout/step-2" component={CheckoutDelivery} />
         <Route exact path="/checkout/step-3" component={CheckoutPayment} />
-        <Route exact path="/checkout/complete" component={CheckoutInfo} />
+        <Route exact path="/checkout/complete" component={CheckoutCompleted} />
         <Route path="/new-product" component={NewProduct} />
         <Route path="/" exact>
           <Home fullWidth />
