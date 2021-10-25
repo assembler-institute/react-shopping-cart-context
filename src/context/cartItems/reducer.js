@@ -8,9 +8,6 @@ import { actionTypes } from "./types";
 export const initialState = {
   cartItems: {},
   cartItemIds: [],
-  isLoading: false,
-  hasError: false,
-  loadingError: null,
   handleAddToCart: () => { },
   handleChangeQuantity: () => { },
   handleRemoveItem: () => { },
@@ -42,7 +39,6 @@ export const reducer = (state, action) => {
                   : cartItems[cartItemId].quantity,
             },
           },
-          isFetching: false,
         };
       }
 
@@ -56,7 +52,6 @@ export const reducer = (state, action) => {
             quantity: 1,
           },
         },
-        isFetching: false,
       };
     }
     case actionTypes.CHANGE_QUANTITY: {
@@ -77,7 +72,6 @@ export const reducer = (state, action) => {
                 : cartItems[cartItemId].quantity,
           },
         },
-        isFetching: false,
       };
     }
     case actionTypes.REMOVE_ITEM: {
@@ -94,7 +88,6 @@ export const reducer = (state, action) => {
         ...state,
         cartItemIds: updatedCartItemIds,
         cartItems: cartItems,
-        isFetching: false,
       };
     }
     default: {
