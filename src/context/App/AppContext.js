@@ -55,4 +55,3 @@ export function useAppContext() {
   if (!ctx) return null;
   return ctx;
 }
-// Y context toma las variables del reducer y hacer return -> eCommerceContext

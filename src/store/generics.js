@@ -17,10 +17,6 @@ export function buildNewCartItem(cartItem) {
   };
 }
 
-/* export function saveNewProduct(newProduct) {
-  setProducts((prevState) => [newProduct, ...prevState]);
-}
- */
 export function getCartTotal(cart) {
   return cart.reduce((accum, item) => {
     return accum + item.price * item.quantity;
@@ -65,19 +61,13 @@ export const checkMismatchElements = (correctArray, randomArray) => {
       (item) => !randomArray.find((item2) => item === item2),
     );
     // eslint-disable-next-line
-    console.log({
-      message: "elements missing in randomArray",
-      array: misMatchElements,
-    });
+    // console.log({message: "elements missing in randomArray",array: misMatchElements});
   } else {
     misMatchElements = randomArray.filter(
       (item) => !correctArray.find((item2) => item === item2),
     );
     // eslint-disable-next-line
-    console.log({
-      message: "extra elements in randomArray",
-      array: misMatchElements,
-    });
+    // console.log({ message: "extra elements in randomArray", array: misMatchElements});
   }
 
   return misMatchElements.length > 0 ? misMatchElements : null;

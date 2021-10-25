@@ -1,5 +1,4 @@
 import { useReducer } from "react";
-import { checkMismatchElements } from "../../store/generics";
 import {
   getLocalStorageItems,
   setLocalStorageItems,
@@ -19,6 +18,10 @@ const initialState = {
   cartItems: [],
   isLoading: false,
   hasError: false,
+  stateKey: [
+    { state: [], key: "" },
+    { state: [], key: "" },
+  ],
 };
 
 const actionTypes = {
@@ -36,19 +39,18 @@ const actionTypes = {
 
 const reduce = (prevState, action) => {
   if (prevState != null) {
-    const mismatch = checkMismatchElements(
+    /* const mismatch = checkMismatchElements(
       Object.keys(initialState),
       Object.keys(prevState),
     );
 
     if (mismatch) {
       // eslint-disable-next-line
-      console.error({
+      console.log({
         message: "There is a mismatch, see the array",
         array: mismatch,
       });
-      return prevState;
-    }
+    } */
   }
 
   return action.type({ prevState: prevState, payload: action.payload });

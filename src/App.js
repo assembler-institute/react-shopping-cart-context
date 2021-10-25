@@ -4,11 +4,11 @@ import { useAppContext } from "./context/App/AppContext";
 
 import Home from "./pages/Home";
 import NewProduct from "./pages/NewProduct";
-import { setApiProducts } from "./utils/loadLocalStorageItems";
 
 function App() {
   const {
     stateKey,
+    handleDataFetch,
     handleLoadingState,
     getLocalStorageItems,
     setLocalStorageItems,
@@ -16,7 +16,7 @@ function App() {
 
   useEffect(() => {
     handleLoadingState(true);
-    setApiProducts();
+    handleDataFetch();
     handleLoadingState(false);
 
     stateKey.forEach((item) => getLocalStorageItems(item.key));

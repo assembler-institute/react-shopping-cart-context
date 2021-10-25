@@ -1,12 +1,10 @@
-import { getProducts } from "../../api/getProducts";
+import { setApiProducts } from "../../utils/loadLocalStorageItems";
 
 export async function handleDataFetch({ prevState }) {
-  // eslint-disable-next-line
   try {
-    const products = await getProducts();
+    setApiProducts();
     return {
       ...prevState,
-      products: products,
       hasError: false,
     };
   } catch (error) {
