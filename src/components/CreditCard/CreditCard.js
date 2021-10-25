@@ -15,40 +15,22 @@ import applePay from "../../img/apple_pay.png";
 import visa from "../../img/visa.png";
 import mastercard from "../../img/mastercard.png";
 import american from "../../img/american.png";
-import { useUsers } from "../Context/UserContext";
-
-function toogleCard(method) {
-  const $div = document.querySelector("#payment1");
-  const $div2 = document.querySelector("#payment2");
-
-  if (method === "paypal" || method === "apple") {
-    $div.classList.add("d-none");
-    $div2.classList.add("d-none");
-  } else {
-    $div.classList.toggle("d-none");
-    $div2.classList.toggle("d-none");
-  }
-}
 
 function CreditCard() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
-  const [methodPayment, setMethodPayment] = useState("card");
   const [focus, setFocus] = useState();
-  const { cvc, expiry, name, number, paymentMethod, savePayment } = useUsers();
 
   const formik = useFormik({
     initialValues: {
-      cvc: cvc || "",
-      expiry: expiry || "",
+      cvc: "",
+      expiry: "",
       focus: "",
-      name: name || "",
-      number: number || "",
-      pay: paymentMethod || "",
-      rules: false,
+      name: "",
+      number: "",
     },
-    validationSchema: methodPayment === "card" && creditCardSchema,
+    validationSchema: creditCardSchema,
     onSubmit: (values, { setSubmitting }) => {
-      savePayment(values);
+      console.log(values);
       setSubmitting(true);
 
       setTimeout(() => {
@@ -59,175 +41,125 @@ function CreditCard() {
 
   return (
     <div>
-      <div id="payment1">
-        <Cards
-          cvc={formik.values.cvc}
-          expiry={formik.values.expiry}
-          focused={focus}
-          name={formik.values.name}
-          number={formik.values.number}
-        />
-      </div>
-        
-      <form onSubmit={formik.handleSubmit}>
-        <div className="form-check">
-          <Input
-            label=""
+      <div className="d-flex justify-content-around">
+        <div className="form-check border p-1">
+          <input
+            className="form-check-input"
             type="radio"
             name="pay"
-            value="Visa"
-            checked={formik.values.pay === "Visa"}
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-            hasErrorMessage={formik.touched.pay}
-            errorMessage={formik.errors.pay}
-            handleClick={() => {
-              toogleCard("visa");
-              setMethodPayment("card");
-            }}
+            id="card"
           />
           <label className="form-check-label" htmlFor="card">
             Credit/Debit Card
           </label>
         </div>
         <div className="form-check">
-          <Input
-            label=""
+          <input
+            className="form-check-input"
             type="radio"
             name="pay"
-            value="Paypal"
-            checked={formik.values.pay === "Paypal"}
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-            hasErrorMessage={formik.touched.pay}
-            errorMessage={formik.errors.pay}
-            handleClick={() => {
-              toogleCard("paypal");
-              setMethodPayment("other");
-            }}
+            id="paypal"
           />
           <label className="form-check-label" htmlFor="paypal">
             <img src={paypal} />
           </label>
         </div>
         <div className="form-check">
-          <Input
-            label=""
+          <input
+            className="form-check-input"
             type="radio"
             name="pay"
-            value="Apple Pay"
-            checked={formik.values.pay === "Apple Pay"}
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-            hasErrorMessage={formik.touched.pay}
-            errorMessage={formik.errors.pay}
-            handleClick={() => {
-              toogleCard("apple");
-              setMethodPayment("other");
-            }}
+            id="apple"
           />
           <label className="form-check-label" htmlFor="apple">
             <img src={applePay} style={{ width: "50px" }} />
           </label>
         </div>
-        <div id="payment2">
-          <div>
-            <div>We accept the folling debit/credit cards</div>
-            <img
-              src={visa}
-              style={{ width: "50px", border: "1px solid #EEE" }}
-            />
-            <img
-              src={mastercard}
-              style={{ width: "50px", border: "1px solid #EEE" }}
-            />
-            <img
-              src={american}
-              style={{ width: "50px", border: "1px solid #EEE" }}
-            />
-          </div>
-          <Input
-            label="Cardholder name*"
-            type="text"
-            name="name"
-            id="name"
-            value={formik.values.name}
-            placeholder="Alberto"
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-            hasErrorMessage={formik.touched.name}
-            errorMessage={formik.errors.name}
-            handleFocus={() => setFocus("name")}
-          />
-          <Input
-            label="Card number*"
-            type="number"
-            name="number"
-            value={formik.values.number}
-            placeholder="Card Number"
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-            hasErrorMessage={formik.touched.number}
-            errorMessage={formik.errors.number}
-            handleFocus={() => setFocus("number")}
-          />
-                 
-          <Input
-            label="Card expiry date*"
-            type="string"
-            name="expiry"
-            value={formik.values.expiry}
-            placeholder="Card expiry date"
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-            hasErrorMessage={formik.touched.expiry}
-            errorMessage={formik.errors.expiry}
-            handleFocus={() => setFocus("expiry")}
-          />
-                 
-          <Input
-            label="CVV Code*"
-            type="number"
-            name="cvc"
-            id="cvc"
-            value={formik.values.cvc}
-            placeholder="CVC"
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-            handleFocus={() => setFocus("cvc")}
-            hasErrorMessage={formik.touched.cvc}
-            errorMessage={formik.errors.cvc}
-          />
-        </div>
+      </div>
+
+      <div>
+        <div>We accept the folling debit/credit cards</div>
+        <img src={visa} style={{ width: "50px",border: "1px solid #EEE"}} />
+        <img src={mastercard} style={{ width: "50px" ,border: "1px solid #EEE"}} />
+        <img src={american} style={{ width: "50px",border: "1px solid #EEE" }} />
+      </div>
+      <Cards
+        cvc={formik.values.cvc}
+        expiry={formik.values.expiry}
+        focused={focus}
+        name={formik.values.name}
+        number={formik.values.number}
+      />
+              
+      <form onSubmit={formik.handleSubmit}>
         <Input
-          style={{ display: "inline", width: "3%", float: "left" }}
-          type="checkbox"
-          name="rules"
-          id="rules"
-          label="I have read and I accept the booking
-          conditions, general terms and privacy policy."
-          value={formik.values.rules}
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          hasErrorMessage={formik.touched.rules}
-          errorMessage={formik.errors.rules}
+          label="Cardholder name*"
+          type="text"
+          name="name"
+          id="name"
+          value={formik.values.name}
+          placeholder="Alberto"
+          handleChange={formik.handleChange}
+          handleBlur={formik.handleBlur}
+          hasErrorMessage={formik.touched.name}
+          errorMessage={formik.errors.name}
+          handleFocus={() => setFocus("name")}
         />
-        {/*  <input type="checkbox" /> I have read and I accept the booking
-        conditions, general terms and privacy policy. */}
+        <Input
+          label="Card number*"
+          type="number"
+          name="number"
+          value={formik.values.number}
+          placeholder="Card Number"
+          handleChange={formik.handleChange}
+          handleBlur={formik.handleBlur}
+          hasErrorMessage={formik.touched.number}
+          errorMessage={formik.errors.number}
+          handleFocus={() => setFocus("number")}
+        />
+               
+        <Input
+          label="Card expiry date*"
+          type="string"
+          name="expiry"
+          value={formik.values.expiry}
+          placeholder="Card expiry date"
+          handleChange={formik.handleChange}
+          handleBlur={formik.handleBlur}
+          hasErrorMessage={formik.touched.expiry}
+          errorMessage={formik.errors.expiry}
+          handleFocus={() => setFocus("expiry")}
+        />
+               
+        <Input
+          label="CVV Code*"
+          type="password"
+          name="cvc"
+          id="cvc"
+          value={formik.values.cvc}
+          placeholder="CVC"
+          handleChange={formik.handleChange}
+          handleBlur={formik.handleBlur}
+          handleFocus={() => setFocus("cvc")}
+          hasErrorMessage={formik.touched.cvc}
+          errorMessage={formik.errors.cvc}
+        />
         <hr />
         <div className="row justify-content-between">
-          <Link to="/checkout/step-2">
-            <Button>Back to Billing Address</Button>
-          </Link>
-          <Button
-            submitButton
-            disabled={formik.isValidating || !formik.isValid}
-          >
-            Complete
+        <Link to="/checkout/step-2">
+          <Button>
+            Back to Billing Address
           </Button>
+          </Link>
+        <Button
+          submitButton
+          disabled={formik.isValidating || !formik.isValid}
+        >
+          Complete
+        </Button>
         </div>
       </form>
-            {hasSubmitted && <Redirect to="/checkout/order-summary" />}
+            {hasSubmitted && <Redirect to="/" />}
     </div>
   );
 }
