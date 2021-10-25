@@ -7,15 +7,16 @@ import Button from "../Button/index";
 import Cards from "react-credit-cards";
 import 'react-credit-cards/es/styles-compiled.css';
 
+
 function StepThreeForm() {
     const { cardNumber, cvc, nameOnCard,expiryDate , userDataValidPage3, submitStepThree} = useUser();
-
+ 
     const formik = useFormik({
         initialValues: {
             cardNumber: cardNumber,
             cvc: cvc,
             nameOnCard: nameOnCard,
-            expiryDate:expiryDate
+            expiryDate:expiryDate,
         },
         validationSchema: stepThreeSchema,
         onSubmit: (values) => {
@@ -85,7 +86,7 @@ function StepThreeForm() {
                     type="number"
                     label="Expiry Date"
                     id="expiryDate"
-                    
+                    // format="MM-YY"
                     value={formik.values.expiryDate}
                     placeholder="MM/YY" 
                     handleChange={formik.handleChange}

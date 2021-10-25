@@ -6,7 +6,7 @@ function CheckoutHeader (){
     return (
         <>
             <header>
-                <div className="justify-content-between checkout-header">
+                <div className="justify-content-between checkout-header mb-5">
                     <nav className="d-flex justify-content-around steps-nav">
                         <NavLink exact activeClassName="is-active" to="/checkout/step-1">
                             Information

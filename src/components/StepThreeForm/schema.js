@@ -2,7 +2,8 @@ import * as Yup from "yup";
 
 const stepThreeSchema = Yup.object().shape({
     cardNumber: Yup.string()
-      .label('Card number')
+      .label('Card number') 
+      .matches('^4[0-9]{12}(?:[0-9]{3})?$', 'Please introduce a valid credit card')
       .max(16)
       .required(),
     cvc: Yup.string()
