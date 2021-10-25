@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Redirect } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import { useFormik } from "formik";
 
+import eCommerceContext from "../../context/Ecommerce/eCommerceContext";
 import Input from "../Input";
 import Button from "../Button";
 
 import productSchema from "./product-schema";
-
+//* TODO fix !
 function addProductDetails(product) {
   return {
     id: uuid(),
@@ -33,9 +34,10 @@ function addProductDetails(product) {
   };
 }
 
-function NewProductForm({ saveNewProduct }) {
+function NewProductForm() {
   const [hasSubmitted, setHasSubmitted] = useState(false);
 
+  const { updateProducts } = useContext(eCommerceContext);
   const formik = useFormik({
     initialValues: {
       title: "",
@@ -51,7 +53,7 @@ function NewProductForm({ saveNewProduct }) {
     validationSchema: productSchema,
     onSubmit: (values, { setSubmitting }) => {
       const newProduct = addProductDetails(values);
-      saveNewProduct(newProduct);
+      updateProducts(newProduct);
       setSubmitting(true);
 
       setTimeout(() => {

@@ -1,33 +1,27 @@
 import React from "react";
+import { useAppContext } from "../../context/App/AppContext";
 
 import ItemCard from "../ItemCard";
 
-function ProductsListing({
-  products,
-  handleDownVote,
-  handleUpVote,
-  handleSetFavorite,
-  handleAddToCart,
-  ...props
-}) {
+function ProductsListing() {
+  const { products } = useAppContext();
+
   return (
-    <section className="row" {...props}>
-      {products.map((product) => (
-        <ItemCard
-          key={product.id}
-          id={product.id}
-          img={product.img}
-          title={product.title}
-          shortDescription={product.shortDescription}
-          upVotes={product.votes.upVotes}
-          handleUpVote={handleUpVote}
-          downVotes={product.votes.downVotes}
-          handleDownVote={handleDownVote}
-          isFavorite={product.isFavorite}
-          handleSetFavorite={handleSetFavorite}
-          handleAddToCart={handleAddToCart}
-        />
-      ))}
+    <section className="row">
+      {products &&
+        products.length > 0 &&
+        products.map((product) => (
+          <ItemCard
+            key={product.id}
+            id={product.id}
+            img={product.img}
+            title={product.title}
+            shortDescription={product.shortDescription}
+            upVotes={product.votes.upVotes}
+            downVotes={product.votes.downVotes}
+            isFavorite={product.isFavorite}
+          />
+        ))}
     </section>
   );
 }

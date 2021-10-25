@@ -2,16 +2,14 @@ import React from "react";
 
 import ShoppingCartItem from "../ShoppingCartItem";
 import Button from "../Button";
+import { getCartTotal } from "../../store/generics";
+import { useAppContext } from "../../context/App/AppContext";
 
-function getCartTotal(cart) {
-  return cart.reduce((accum, item) => {
-    return accum + item.price * item.quantity;
-  }, 0);
-}
+function Cart() {
+  const { cartItems } = useAppContext();
 
-function Cart({ cartItems, handleRemove, handleChange, ...props }) {
   return (
-    <aside {...props}>
+    <aside className="col col-md-4">
       <div className="row flex-column">
         <div className="col shopping__cart__header">
           <h2 className="h3 mt-2">Shopping Cart</h2>
@@ -28,8 +26,6 @@ function Cart({ cartItems, handleRemove, handleChange, ...props }) {
               img={item.img}
               quantity={item.quantity}
               unitsInStock={item.unitsInStock}
-              handleRemove={handleRemove}
-              handleChange={handleChange}
             />
           ))
         ) : (

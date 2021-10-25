@@ -1,32 +1,15 @@
 import React from "react";
 
 import "./ShoppingCartItem.scss";
-
+import { buildSelectOptions } from "../../store/generics";
 import Button from "../Button";
+import { useAppContext } from "../../context/App/AppContext";
 
-function buildSelectOptions(unitsInStock) {
-  return Array.from({ length: unitsInStock }, (_value, index) => {
-    const currentIndex = index + 1;
-    return (
-      <option key={currentIndex} value={currentIndex}>
-        {currentIndex}
-      </option>
-    );
-  });
-}
+function ShoppingCartItem({ id, img, title, price, quantity, unitsInStock }) {
+  const { handleChange, handleRemove } = useAppContext();
 
-function ShoppingCartItem({
-  id,
-  img,
-  title,
-  price,
-  quantity,
-  unitsInStock,
-  handleChange,
-  handleRemove,
-}) {
   function onHandleChange(event) {
-    handleChange(event, id);
+    handleChange(id, event);
   }
   function onHandleRemove() {
     handleRemove(id);

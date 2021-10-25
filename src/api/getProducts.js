@@ -1,6 +1,6 @@
 import products from "../utils/demo-data";
 
-function getProducts(fail = false) {
+export function getProducts(fail = false) {
   return new Promise((res, rej) => {
     setTimeout(() => {
       if (fail) {
@@ -11,5 +11,3 @@ function getProducts(fail = false) {
     }, 1000);
   });
 }
-
-export { getProducts };

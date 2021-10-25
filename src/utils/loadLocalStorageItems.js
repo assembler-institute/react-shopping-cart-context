@@ -1,15 +1,25 @@
-function loadLocalStorageItems(storageKey, defaultValue) {
-  const data = localStorage.getItem(storageKey);
+import { getProducts } from "../api/getProducts";
 
-  if (data) {
-    try {
-      return JSON.parse(data);
-    } catch (error) {
-      return defaultValue;
-    }
-  } else {
-    return defaultValue;
-  }
+export async function setApiProducts() {
+  const data = await getProducts();
+  localStorage.setItem("products", JSON.stringify(data));
 }
 
-export default loadLocalStorageItems;
+function getLocalStorageItems({ prevState, payload: storageKey }) {
+  const data = localStorage.getItem(storageKey);
+  const newState = prevState;
+
+  if (data) {
+    newState[storageKey] = JSON.parse(data);
+
+    return newState;
+  }
+  return newState;
+}
+
+function setLocalStorageItems({ prevState, payload }) {
+  localStorage.setItem(payload.storageKey, JSON.stringify(payload.data));
+  return prevState;
+}
+
+export { getLocalStorageItems, setLocalStorageItems };

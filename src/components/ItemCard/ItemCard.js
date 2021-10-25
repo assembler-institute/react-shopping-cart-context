@@ -6,25 +6,8 @@ import Button from "../Button";
 import { ThumbDown, ThumbUp } from "../SVGIcons";
 
 import "./ItemCard.scss";
-
-function Divider() {
-  return <hr className="ItemCard__divider" />;
-}
-
-function getPopularityClasses(
-  currentValue,
-  limit,
-  prevClasses,
-  popularityClassName,
-) {
-  const halfLimit = Math.floor(limit / 2);
-
-  if (currentValue >= halfLimit) {
-    return `${prevClasses} ${popularityClassName}`;
-  }
-
-  return prevClasses;
-}
+import { getPopularityClasses, Divider } from "../../store/generics";
+import { useAppContext } from "../../context/App/AppContext";
 
 function ItemCard({
   id,
@@ -34,23 +17,13 @@ function ItemCard({
   isFavorite,
   upVotes,
   downVotes,
-  handleDownVote,
-  handleUpVote,
-  handleSetFavorite,
-  handleAddToCart,
 }) {
-  function onDownVote() {
-    handleDownVote(id);
-  }
-  function onUpVote() {
-    handleUpVote(id);
-  }
-  function onSetFavorite() {
-    handleSetFavorite(id);
-  }
-  function onAddToCart() {
-    handleAddToCart(id);
-  }
+  const {
+    handleDownVote,
+    handleSetFavorite,
+    handleUpVote,
+    handleAddToCart,
+  } = useAppContext();
 
   return (
     <article className="ItemCard col col-12 col-md-6 col-lg-4">
@@ -58,7 +31,7 @@ function ItemCard({
         <div className="ItemCard__image-wrapper">
           <img src={img} className="ItemCard__image" alt={title} />
           <FavoriteIconButton
-            handleSetFavorite={onSetFavorite}
+            handleSetFavorite={() => handleSetFavorite(id)}
             isFavorite={isFavorite}
           />
         </div>
@@ -70,7 +43,10 @@ function ItemCard({
       <footer className="ItemCard__meta">
         <div className="ItemCard__icons">
           <div className="ItemCard__icon-row">
-            <IconButton aria-label="up vote product" handleClick={onUpVote}>
+            <IconButton
+              aria-label="up vote product"
+              handleClick={() => handleUpVote(id)}
+            >
               <ThumbUp />
             </IconButton>
             <p
@@ -85,7 +61,10 @@ function ItemCard({
             </p>
           </div>
           <div className="ItemCard__icon-row">
-            <IconButton aria-label="down vote product" handleClick={onDownVote}>
+            <IconButton
+              aria-label="down vote product"
+              handleClick={() => handleDownVote(id)}
+            >
               <ThumbDown />
             </IconButton>
             <p
@@ -101,7 +80,7 @@ function ItemCard({
           </div>
         </div>
         <div className="ItemCard__icon-row">
-          <Button onClick={onAddToCart}>Add to cart</Button>
+          <Button onClick={() => handleAddToCart(id)}>Add to cart</Button>
         </div>
       </footer>
     </article>
