@@ -7,6 +7,7 @@
     "assembler school"
   ],
   "private": true,
+  "homepage": "https://Joselito.github.io/react-shopping-cart-context",
   "license": "MIT",
   "dependencies": {
     "@testing-library/jest-dom": "^5.12.0",
@@ -73,6 +74,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "test:watch": "react-scripts test --watchAll",
     "test:ci:all": "cross-env CI=true react-scripts test --all --env=jsdom",
     "test:related": "cross-env CI=true react-scripts test --bail --findRelatedTests --env=jsdom",
