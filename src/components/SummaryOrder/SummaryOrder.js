@@ -42,8 +42,8 @@ function SummaryOrder({ ...props }) {
                     <span> {getCartTotal(cartItems)} €</span>
                   </div>
                   <div className="d-flex justify-content-between">
-                    <span>21% IVA</span>
-                    <span>{(getCartTotal(cartItems) * 0.21).toFixed(2)} €</span>
+                    <span>IVA</span>
+                    <span>Calculted to the next step</span>
                   </div>
                   <div className="d-flex justify-content-between">
                     <span>Shipping</span>

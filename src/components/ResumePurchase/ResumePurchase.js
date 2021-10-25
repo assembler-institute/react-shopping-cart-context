@@ -7,7 +7,6 @@ import { useUsers } from "../Context/UserContext";
 
 function ResumePurchase() {
   const { cartItems, resetCartItems } = useProducts();
-  const { reset } = useUsers();
 
   const {
     name,
@@ -16,6 +15,7 @@ function ResumePurchase() {
     taxes,
     cardNumber,
     paymentMethod,
+    reset
   } = useUsers();
 
   return (
@@ -94,7 +94,7 @@ function ResumePurchase() {
         <hr />
         <div>Subtotal: {getCartTotal(cartItems)} €</div>
         <div>Shipping: {shipping} €</div>
-        <div>IVA: {taxes && taxes * 100 - 100} %</div>
+        <div>IVA: {taxes && taxes * 100 - 100} %:  {(getCartTotal(cartItems) * (taxes - 1)).toFixed(2)} €</div>
         <div>Discount:</div>
         <hr />
         <div>

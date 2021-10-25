@@ -26,7 +26,7 @@ const initValues = {
 const UserContext = createContext(initValues);
 
 function reducer(state, action) {
-  const { step } = state;
+  /* const { step } = state; */
 
   switch (action.type) {
     case actionTypes.SAVE_USER: {

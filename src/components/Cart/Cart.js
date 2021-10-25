@@ -60,12 +60,12 @@ function Cart({ ...props }) {
                     <span>Shipping</span>
                     <span>0 €</span>
                   </div>
-                  <div className="d-flex justify-content-between">
+                  {/* <div className="d-flex justify-content-between">
                     <span>21% IVA</span>
                     <span>
                       {(getCartTotal(cartItems) * (IVA - 1)).toFixed(2)} €
                     </span>
-                  </div>
+                  </div> */}
                   <div className="d-flex justify-content-between">
                     <span>Total</span>
                     <span>{getCartTotalIVA(cartItems, IVA).toFixed(2)} €</span>
