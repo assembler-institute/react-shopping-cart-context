@@ -8,15 +8,11 @@ import { setApiProducts } from "./utils/loadLocalStorageItems";
 
 function App() {
   const {
+    stateKey,
     handleLoadingState,
     getLocalStorageItems,
     setLocalStorageItems,
   } = useAppContext();
-
-  const stateKey = [
-    { state: useAppContext().products, key: "products" },
-    { state: useAppContext().cartItems, key: "cartItems" },
-  ];
 
   useEffect(() => {
     handleLoadingState(true);

@@ -9,6 +9,10 @@ export default function AppContextProvider({ children }) {
   const value = {
     products: stateApp.products,
     cartItems: stateApp.cartItems,
+    stateKey: [
+      { state: stateApp.products, key: "products" },
+      { state: stateApp.cartItems, key: "cartItems" },
+    ],
     hasError: stateApp.hasError,
     isLoading: stateApp.isLoading,
 

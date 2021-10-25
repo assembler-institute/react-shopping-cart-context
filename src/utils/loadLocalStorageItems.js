@@ -1,14 +1,21 @@
-import products from "./demo-data";
+import { getProducts } from "../api/getProducts";
+// import products from "./demo-data";
 
-export function setApiProducts() {
-  localStorage.setItem("products", JSON.stringify(products));
+export async function setApiProducts() {
+  const data = await getProducts();
+  localStorage.setItem("products", JSON.stringify(data));
+  // localStorage.setItem("products", JSON.stringify(products));
 }
 
 function getLocalStorageItems({ prevState, payload: storageKey }) {
   const data = localStorage.getItem(storageKey);
   const newState = prevState;
+  // eslint-disable-next-line
+  console.log("hey get local", data);
   if (data) {
     newState[storageKey] = JSON.parse(data);
+    // eslint-disable-next-line
+    console.log("hey get local new state", newState);
     return newState;
   }
   return newState;
@@ -19,12 +26,4 @@ function setLocalStorageItems({ prevState, payload }) {
   return prevState;
 }
 
-/* function updateLocalStorage(state) {
-  useEffect(() => {
-    if (state.length > 0) {
-      setLocalStorageItems(PRODUCTS_LOCAL_STORAGE_KEY, item);
-    }
-  }, [state]);
-}
- */
 export { getLocalStorageItems, setLocalStorageItems };

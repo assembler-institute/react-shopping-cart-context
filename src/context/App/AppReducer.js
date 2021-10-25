@@ -1,4 +1,5 @@
 import { useReducer } from "react";
+import { checkMismatchElements } from "../../store/generics";
 import {
   getLocalStorageItems,
   setLocalStorageItems,
@@ -34,9 +35,8 @@ const actionTypes = {
 };
 
 const reduce = (prevState, action) => {
-  /*
   if (prevState != null) {
-  const mismatch = checkMismatchElements(
+    const mismatch = checkMismatchElements(
       Object.keys(initialState),
       Object.keys(prevState),
     );
@@ -50,7 +50,7 @@ const reduce = (prevState, action) => {
       return prevState;
     }
   }
-  */
+
   return action.type({ prevState: prevState, payload: action.payload });
 };
 
@@ -60,6 +60,3 @@ function useReducerApp() {
 }
 
 export { actionTypes, useReducerApp };
-
-/// Aquí va el reducer donde initialState son las variables de state
-/// Y donde los type actions son los handlers de state
