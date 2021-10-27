@@ -11,7 +11,6 @@ import { Button } from "components/UI/atoms";
 
 import detailsSchema from "./details-schema";
 
-
 const DetailsForm = () => {
   let history = useHistory();
 

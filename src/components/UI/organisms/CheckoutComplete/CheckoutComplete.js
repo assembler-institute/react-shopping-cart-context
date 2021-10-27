@@ -1,6 +1,8 @@
-import { CartItemsProvider, useCartItems, useData, useProducts } from "context";
 import React from "react";
-import { getCartTotal } from "../Cart";
+
+import { getCartTotal } from "components/UI/organisms/Cart";
+
+import { useCartItems, useData } from "context";
 
 const CheckoutComplete = () => {
   const {
@@ -12,7 +14,7 @@ const CheckoutComplete = () => {
     Country,
     City,
     ZipCode,
-    DeliveryInstrucctions,
+    DeliveryInstructions,
   } = useData();
 
   const orderNumber = Math.floor(Math.random() * Math.random() * 1000000);
@@ -26,7 +28,7 @@ const CheckoutComplete = () => {
           Order Number: <strong>{orderNumber}</strong>
         </span>
         <span>
-          Date: <strong>{new Date().toLocaleDateString("es-ES")} </strong> at
+          Date: <strong>{new Date().toLocaleDateString("es-ES")} </strong>&nbsp;at&nbsp;
           <strong>{new Date().toLocaleTimeString("es-ES")}</strong>
         </span>
       </div>
@@ -49,7 +51,6 @@ const CheckoutComplete = () => {
               <span>
                 {product.quantity} x {product.title}
               </span>
-
               <strong>
                 <span>{product.quantity * product.price} €</span>
               </strong>
@@ -71,29 +72,36 @@ const CheckoutComplete = () => {
       <hr />
 
       <div>
-        <p>
-          Name:{" "}
-          <strong>
-            {name} {lastName}
-          </strong>{" "}
-        </p>
-        {phoneNumber && (
+        {name && lastName && (
           <p>
-            <strong>Phone Number: {phoneNumber}</strong>
+            Name:&nbsp;
+            <strong>
+              {name} {lastName}
+            </strong>
           </p>
         )}
-        <p>
-          Email: <strong>{email}</strong>
-        </p>
-        <p>
-          Address:
-          <strong>
-            {Address}, {City}, {Country}, {ZipCode}
-          </strong>
-        </p>
-        {DeliveryInstrucctions && (
+        {phoneNumber && (
           <p>
-            Delivery Instructions: <strong>{DeliveryInstrucctions}</strong>
+            Phone Number:&nbsp;
+            <strong>{phoneNumber}</strong>
+          </p>
+        )}
+        {email && (
+          <p>
+            Email: <strong>{email}</strong>
+          </p>
+        )}
+        {Address && City && Country && ZipCode && (
+          <p>
+            Address:&nbsp;
+            <strong>
+              {Address}, {City}, {Country}, {ZipCode}
+            </strong>
+          </p>
+        )}
+        {DeliveryInstructions && (
+          <p>
+            Delivery Instructions: <strong>{DeliveryInstructions}</strong>
           </p>
         )}
       </div>

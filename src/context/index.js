@@ -1,6 +1,6 @@
 import { CartItemsProvider, useCartItems } from "./cartItems/reducer";
 import { ProductsProvider, useProducts } from "./products/reducer";
-import { DataProvider, useData } from "./checkoutForm/reducer";
+import { DataProvider, useData } from "./checkout/reducer";
 
 export {
   CartItemsProvider,

@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter } from "react-router";
+import { withRouter } from "react-router-dom";
 import Card from "react-credit-cards";
 import "react-credit-cards/es/styles-compiled.css";
 

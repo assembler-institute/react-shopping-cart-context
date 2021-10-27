@@ -1,12 +1,15 @@
 import React from 'react';
 
-import { withCheckout, withLayout } from "components/HOC";
+import { withLayout } from "components/HOC";
+import { Checkout } from 'components/templates';
 import { DetailsForm } from 'components/UI/organisms';
 
 function CheckoutInfo() {
   return (
-    <DetailsForm />
+    <Checkout>
+      <DetailsForm />
+    </Checkout>
   );
 }
 
-export default withLayout(withCheckout(CheckoutInfo));
+export default withLayout(CheckoutInfo);

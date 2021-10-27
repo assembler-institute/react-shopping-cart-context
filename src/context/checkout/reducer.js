@@ -12,7 +12,7 @@ const initialState = {
   Country: "",
   City: "",
   ZipCode: "",
-  DeliveryInstrucctions: "",
+  DeliveryInstructions: "",
   handleNameChange: () => { },
   handleLastNameChange: () => { },
   handlePhoneNumber: () => { },
@@ -24,7 +24,7 @@ const initialState = {
   handleDelivery: () => { },
 };
 
-export const CheckoutForm = createContext(initialState);
+export const CheckoutContext = createContext(initialState);
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -76,7 +76,7 @@ const reducer = (state, action) => {
     case actionTypes.INSTRUCTIONS:
       return {
         ...state,
-        DeliveryInstrucctions: action.payload,
+        DeliveryInstructions: action.payload,
       };
     default:
       return { ...state };
@@ -111,12 +111,12 @@ const DataProvider = ({ children }) => {
       }),
   };
   return (
-    <CheckoutForm.Provider value={value}>{children}</CheckoutForm.Provider>
+    <CheckoutContext.Provider value={value}>{children}</CheckoutContext.Provider>
   );
 };
 
 function useData() {
-  const context = useContext(CheckoutForm);
+  const context = useContext(CheckoutContext);
   if (!context) return null;
   return context;
 }

@@ -11,12 +11,12 @@ export default function NavList() {
             "step levering" +
             (location.pathname === "/checkout/step-1" ? " active" : "") +
             (location.pathname === "/checkout/step-2" ||
-            location.pathname === "/checkout/step-3"
+              location.pathname === "/checkout/step-3"
               ? " complete"
               : "")
           }
         >
-          <span>1.</span> <Link to="/checkout/step-1">Personal Details</Link>
+          <Link to="/checkout/step-1">Personal Details</Link>
         </div>
         <div
           className={
@@ -25,7 +25,7 @@ export default function NavList() {
             (location.pathname === "/checkout/step-3" ? " complete" : "")
           }
         >
-          <span>2.</span> <Link to="/checkout/step-2">Address</Link>
+          <Link to="/checkout/step-2">Address</Link>
         </div>
         <div
           className={
@@ -34,7 +34,7 @@ export default function NavList() {
             (location.pathname === "/checkout/step-4" ? " complete" : "")
           }
         >
-          <span>3.</span> <Link to="/checkout/step-3">Payment Information</Link>
+          <Link to="/checkout/step-3">Payment Info</Link>
         </div>
         <div
           className={
@@ -42,7 +42,7 @@ export default function NavList() {
             (location.pathname === "/checkout/complete" ? " complete" : "")
           }
         >
-          <span>4.</span> Order Completed
+          Order Completed
         </div>
       </div>
     </>

@@ -121,7 +121,7 @@ function AddressForm() {
         block
         disabled={formik.isValidating || !formik.isValid}
       >
-        {formik.isSubmitting ? "Submitting..." : "Submit"}
+        {formik.isSubmitting ? "Submitting..." : "Next step"}
       </Button>
     </form>
   );

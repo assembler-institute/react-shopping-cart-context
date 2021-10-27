@@ -1,11 +1,13 @@
 import React from 'react';
 
-function Checkout(props) {
-  return (
-    <div>
+import { withCheckout } from "components/HOC";
 
-    </div>
+function Checkout({ children }) {
+  return (
+    <>
+      {children}
+    </>
   );
 }
 
-export default Checkout;
+export default withCheckout(Checkout);
