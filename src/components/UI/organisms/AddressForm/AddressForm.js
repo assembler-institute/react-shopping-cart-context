@@ -26,11 +26,11 @@ function AddressForm() {
 
   const formik = useFormik({
     initialValues: {
-      Address: "",
-      City: "",
-      ZipCode: "",
-      Country: "",
-      Instructions: "",
+      address: "",
+      city: "",
+      zipCode: "",
+      country: "",
+      instructions: "",
     },
     validationSchema: AddressSchema,
     onSubmit: (values, { setSubmitting }) => {
@@ -48,22 +48,22 @@ function AddressForm() {
       <Input
         type="text"
         label="Address"
-        id="Address"
-        value={formik.values.Address}
-        placeholder="Please type your full Address"
+        id="address"
+        value={formik.values.address}
+        placeholder="Please type your full address"
         handleChange={(e) => {
           formik.handleChange(e);
           handleAddressChange(e);
         }}
         //handleBlur={handleAddressChange}
-        hasErrorMessage={formik.touched.Address}
-        errorMessage={formik.errors.Address}
+        hasErrorMessage={formik.touched.address}
+        errorMessage={formik.errors.address}
       />
       <div className="form-group">
-        <label for="Country">Country</label>
+        <label htmlFor="country">Country</label>
         <CountryDropdown
           className="form-control"
-          id="Country"
+          id="country"
           value={country}
           onChange={(val) => {
             setCountry(val);
@@ -74,10 +74,10 @@ function AddressForm() {
         />
       </div>
       <div className="form-group">
-        <label for="City">City</label>
+        <label htmlFor="city">City</label>
         <RegionDropdown
           className="form-control"
-          id="City"
+          id="city"
           required
           country={country}
           value={region}
@@ -91,30 +91,30 @@ function AddressForm() {
       <Input
         type="text"
         label="Zipcode"
-        id="ZipCode"
-        value={formik.values.ZipCode}
+        id="zipCode"
+        value={formik.values.zipCode}
         placeholder=""
         handleChange={(e) => {
           formik.handleChange(e);
           handleZipCode(e);
         }}
         //handleBlur={handleZipCode}
-        hasErrorMessage={formik.touched.ZipCode}
-        errorMessage={formik.errors.ZipCode}
+        hasErrorMessage={formik.touched.zipCode}
+        errorMessage={formik.errors.zipCode}
       />
       <Input
         type="text"
         label="Instructions"
-        id="Instructions"
-        value={formik.values.Instructions}
-        placeholder="Delivery Instructions"
+        id="instructions"
+        value={formik.values.instructions}
+        placeholder="Delivery instructions"
         handleChange={(e) => {
           formik.handleChange(e);
           handleDelivery(e);
         }}
         //handleBlur={handleDelivery}
-        hasErrorMessage={formik.touched.Instructions}
-        errorMessage={formik.errors.Instructions}
+        hasErrorMessage={formik.touched.instructions}
+        errorMessage={formik.errors.instructions}
       />
       <Button
         submitButton

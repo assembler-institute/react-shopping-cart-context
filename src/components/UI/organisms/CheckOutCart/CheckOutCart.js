@@ -25,11 +25,11 @@ function CheckOutCart({ ...props }) {
         </div>
 
         {cartItemIds.length > 0 ? (
-          cartItemIds.map((itemId) => {
+          cartItemIds.map((itemId, index) => {
             const item = cartItems[itemId];
 
             return (
-              <div className="col">
+              <div className="col" key={index}>
                 <div className="row flex-column ">
                   <div className="col">
                     <div className="row ">

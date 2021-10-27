@@ -31,9 +31,6 @@ const DetailsForm = () => {
       }}
       validationSchema={detailsSchema}
       onSubmit={(values, { setSubmitting }) => {
-
-        console.log(values);
-
         setTimeout(() => {
           setSubmitting(false);
           history.push("/checkout/step-2");

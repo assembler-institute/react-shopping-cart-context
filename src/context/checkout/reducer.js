@@ -8,11 +8,11 @@ const initialState = {
   lastName: "",
   phoneNumber: null,
   email: "",
-  Address: "",
-  Country: "",
-  City: "",
-  ZipCode: "",
-  DeliveryInstructions: "",
+  address: "",
+  country: "",
+  city: "",
+  zipCode: "",
+  instructions: "",
   handleNameChange: () => { },
   handleLastNameChange: () => { },
   handlePhoneNumber: () => { },
@@ -53,30 +53,30 @@ const reducer = (state, action) => {
     case actionTypes.ADDRESS:
       return {
         ...state,
-        Address: action.payload,
+        address: action.payload,
       };
 
     case actionTypes.COUNTRY:
       return {
         ...state,
-        Country: action.payload,
+        country: action.payload,
       };
     case actionTypes.CITY:
       return {
         ...state,
-        City: action.payload,
+        city: action.payload,
       };
 
     case actionTypes.ZIPCODE:
       return {
         ...state,
-        ZipCode: action.payload,
+        zipCode: action.payload,
       };
 
     case actionTypes.INSTRUCTIONS:
       return {
         ...state,
-        DeliveryInstructions: action.payload,
+        instructions: action.payload,
       };
     default:
       return { ...state };

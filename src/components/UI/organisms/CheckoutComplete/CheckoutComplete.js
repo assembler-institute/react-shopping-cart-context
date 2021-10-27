@@ -10,11 +10,11 @@ const CheckoutComplete = () => {
     lastName,
     phoneNumber,
     email,
-    Address,
-    Country,
-    City,
-    ZipCode,
-    DeliveryInstructions,
+    address,
+    country,
+    city,
+    zipCode,
+    instructions,
   } = useData();
 
   const orderNumber = Math.floor(Math.random() * Math.random() * 1000000);
@@ -91,17 +91,17 @@ const CheckoutComplete = () => {
             Email: <strong>{email}</strong>
           </p>
         )}
-        {Address && City && Country && ZipCode && (
+        {address && city && country && zipCode && (
           <p>
             Address:&nbsp;
             <strong>
-              {Address}, {City}, {Country}, {ZipCode}
+              {address}, {city}, {country}, {zipCode}
             </strong>
           </p>
         )}
-        {DeliveryInstructions && (
+        {instructions && (
           <p>
-            Delivery Instructions: <strong>{DeliveryInstructions}</strong>
+            Delivery Instructions: <strong>{instructions}</strong>
           </p>
         )}
       </div>
