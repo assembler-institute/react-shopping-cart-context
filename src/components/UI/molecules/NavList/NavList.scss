@@ -1,0 +1,32 @@
+$red: #007bff;
+$base: #f4f3f0;
+$mute: silver;
+
+#checkout-steps {
+  margin-top: 0.2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+
+  & .step {
+    display: inline-block;
+    color: $mute;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+    padding: 15px 25px;
+    margin-left: -5px;
+    &:first-of-type {
+      padding-left: 0;
+    }
+    &:last-of-type {
+      padding-right: 0;
+    }
+    &.active {
+      border-color: #007bff;
+      color: #007bff;
+      font-weight: bolder;
+    }
+    &.complete {
+      border-color: #007bff;
+      color: #007bff;
+    }
+  }
+}

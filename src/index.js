@@ -3,12 +3,20 @@ import ReactDOM from "react-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import { CartItemsProvider, DataProvider, ProductsProvider } from "context";
+
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ProductsProvider>
+      <CartItemsProvider>
+        <DataProvider>
+          <App />
+        </DataProvider>
+      </CartItemsProvider>
+    </ProductsProvider>
   </React.StrictMode>,
   document.getElementById("root"),
 );
