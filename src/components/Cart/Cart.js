@@ -12,6 +12,7 @@ function getCartTotal(cart) {
 }
 
 function Cart({ cartItems, handleRemove, handleChange, ...props }) {
+  console.log(cartItems)
   const history = useHistory();
 
   const goToCheckout = () => {
@@ -57,7 +58,7 @@ function Cart({ cartItems, handleRemove, handleChange, ...props }) {
               <hr />
             </div>
             <div className="col">
-              <Button onClick={goToCheckout} >Checkout</Button>
+              <Button disabled={cartItems.length === 0} onClick={goToCheckout} >Checkout</Button>
             </div>
           </div>
         </div>
