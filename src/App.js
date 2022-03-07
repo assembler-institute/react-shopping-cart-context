@@ -8,6 +8,7 @@ import * as api from "./api";
 
 import useLocalStorage from "./hooks/useLocalStorage";
 import loadLocalStorageItems from "./utils/loadLocalStorageItems";
+import Checkout from "./pages/Checkout/Checkout";
 
 function buildNewCartItem(cartItem) {
   if (cartItem.quantity >= cartItem.unitsInStock) {
@@ -200,6 +201,9 @@ function App() {
             handleRemove={handleRemove}
             handleChange={handleChange}
           />
+        </Route>
+        <Route path="/checkout">
+          <Checkout/>
         </Route>
       </Switch>
     </BrowserRouter>
