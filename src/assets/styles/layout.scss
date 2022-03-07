@@ -1,0 +1,18 @@
+.mflex {
+  display: flex;
+}
+.mrow {
+  flex-direction: row;
+}
+.mcol {
+  flex-direction: column;
+}
+.mjustify-center {
+  justify-content: center;
+}
+.mjustify-around {
+  justify-content: space-around;
+}
+.mjustify-between {
+  justify-content: space-between;
+}

@@ -15,7 +15,7 @@ function Cart({ cartItems, handleRemove, handleChange, ...props }) {
   const history = useHistory();
 
   const goToCheckout = () => {
-    history.push("/checkout")
+    history.push("/checkout/step-1")
   }
 
   return (
