@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
+// context
+import { CheckoutContext } from "./context/CheckoutContext";
+
 import Home from "./pages/Home";
 import NewProduct from "./pages/NewProduct";
 
@@ -117,7 +120,7 @@ function App() {
       if (
         product.id === productId &&
         product.votes.downVotes.currentValue <
-          product.votes.downVotes.lowerLimit
+        product.votes.downVotes.lowerLimit
       ) {
         return {
           ...product,
@@ -202,9 +205,17 @@ function App() {
             handleChange={handleChange}
           />
         </Route>
+
         <Route path="/checkout">
-          <Checkout/>
+          <CheckoutContext.Provider value={{
+            cartItems: cartItems,
+            handleChange: handleChange,
+            handleRemove: handleRemove
+          }}>
+            <Checkout />
+          </CheckoutContext.Provider>
         </Route>
+
       </Switch>
     </BrowserRouter>
   );

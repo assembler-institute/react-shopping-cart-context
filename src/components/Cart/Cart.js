@@ -12,7 +12,6 @@ function getCartTotal(cart) {
 }
 
 function Cart({ cartItems, handleRemove, handleChange, ...props }) {
-  console.log(cartItems)
   const history = useHistory();
 
   const goToCheckout = () => {
