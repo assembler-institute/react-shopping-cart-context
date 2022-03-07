@@ -1,3 +1,3 @@
-export { Step1 } from "./Step1";
-export { Step2 } from "./Step2";
-export { Step3 } from "./Step3";
+export { PersonalForm } from "./PersonalForm";
+export { BillingForm } from "./BillingForm";
+export { PaymentForm } from "./PaymentForm";

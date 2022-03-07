@@ -1,0 +1,35 @@
+@use "../../assets/styles/variables.scss" as v;
+@use "../../assets/styles/layout.scss" as l;
+.progressBar {
+  width: 90%;
+  position: relative;
+  .stepSecondaryLine,
+  .stepLine {
+    border-radius: 10px;
+    transition: 1.5s;
+    content: "";
+    position: absolute;
+    right: 10px;
+    height: 10px;
+    z-index: -1;
+  }
+  .stepSecondaryLine {
+    background-color: gray;
+    width: 90%;
+    top: 15px;
+  }
+
+  .stepLine {
+    background-color: v.$skyBlue;
+  }
+}
+.stepContainer {
+  text-align: left;
+}
+.stepButton {
+  border-radius: 9999px;
+  border: 2px solid v.$lightPurpledBlue;
+  font-size: 1.5rem;
+  width: 1.8em;
+  background-color: #ffff;
+}

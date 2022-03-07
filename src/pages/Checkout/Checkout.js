@@ -1,33 +1,43 @@
 import React, { useContext, useState } from "react";
 import { Route, useHistory } from "react-router-dom";
 
+// styles
+import "./checkout.scss"
+
 // steps import
-import { Step1, Step2, Step3 } from "./steps"
+import { PersonalForm, BillingForm, PaymentForm } from "./steps"
 
 import { CheckoutContext } from "../../context/CheckoutContext";
 import withLayout from "../../hoc/withLayout";
+import ProgressBar from "../../components/ProgressBar";
+
+const INITIAL_NEXT_STEP = 2
 
 function Checkout() {
-    const [stepCount, setStepCount] = useState(2)
+    const [nextStep, setNextStep] = useState(INITIAL_NEXT_STEP)
     const { cartItems } = useContext(CheckoutContext)
     const history = useHistory()
 
-    const handleSteps = () => {
-        setStepCount(stepCount + 1)
-        history.push(`/checkout/step-${stepCount}`)
+    const handleSteps = (step = null) => {
+        if (!step) {
+            console.log("hi")
+            setNextStep(nextStep + 1)
+            history.push(`/checkout/step-${nextStep}`)
+        }
+
     }
 
     console.log(cartItems)
     return (
         <main>
             <header className="checkoutHeader">
-                Header
+                <ProgressBar />
             </header>
             <article className="checkoutForm">
                 Article
-                <Route path="/checkout/step-1"><Step1 /></Route>
-                <Route path="/checkout/step-2"><Step2 /></Route>
-                <Route path="/checkout/step-3"><Step3 /></Route>
+                <Route path="/checkout/step-1"><PersonalForm /></Route>
+                <Route path="/checkout/step-2"><BillingForm /></Route>
+                <Route path="/checkout/step-3"><PaymentForm /></Route>
                 <button type="button" onClick={handleSteps}>Next</button>
             </article>
             <aside className="" />
