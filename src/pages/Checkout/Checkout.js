@@ -20,7 +20,6 @@ function Checkout() {
 
     const { cartItems } = useContext(OverviewContext)
     // const history = useHistory()
-
     console.log(cartItems)
     return (
         <CheckoutContextProvider>

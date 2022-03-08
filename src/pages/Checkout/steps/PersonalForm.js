@@ -103,7 +103,7 @@ export function PersonalForm() {
                                 onClick={() => history.push("/")}
                                 className="formButton cancelForm"
                             >
-                                Go back home page
+                                Back home page
                             </button>
                             <button
                                 className="formButton submitForm"
