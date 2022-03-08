@@ -26,7 +26,7 @@ const personalFormSchema = Yup.object().shape({
 
 export function PersonalForm() {
     const history = useHistory()
-    const { personalInfo, setFormInfo, actualStep } = useContext(CheckoutContext)
+    const { personalInfo, setFormInfo, actualStep, setStep } = useContext(CheckoutContext)
     console.log("render: PersonalForm")
     return (
         <section className="mflex mcol malign-center">
@@ -98,8 +98,20 @@ export function PersonalForm() {
                         />
 
                         <div className="formBtnWrapper mflex mjustify-between">
-                            <button type="button" className="formButton cancelForm">Go back home page</button>
-                            <button className="formButton submitForm" type="submit" disabled={isSubmitting || isValidating} >Continue to delivery</button>
+                            <button
+                                type="button"
+                                onClick={() => { setStep(actualStep - 1) }}
+                                className="formButton cancelForm"
+                            >
+                                Go back home page
+                            </button>
+                            <button
+                                className="formButton submitForm"
+                                type="submit"
+                                disabled={isSubmitting || isValidating}
+                            >
+                                Continue to delivery
+                            </button>
                         </div>
 
                     </form>
