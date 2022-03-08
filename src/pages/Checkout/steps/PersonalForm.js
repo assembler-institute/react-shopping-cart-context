@@ -25,8 +25,8 @@ const personalFormSchema = Yup.object().shape({
 })
 
 export function PersonalForm() {
+    const { personalInfo, setFormInfo, actualStep } = useContext(CheckoutContext)
     const history = useHistory()
-    const { personalInfo, setFormInfo, actualStep, setStep } = useContext(CheckoutContext)
     console.log("render: PersonalForm")
     return (
         <section className="mflex mcol malign-center">
@@ -97,10 +97,10 @@ export function PersonalForm() {
                             errorMessage={errors.phone}
                         />
 
-                        <div className="formBtnWrapper mflex mjustify-between">
+                        <div className="formBtnWrapper">
                             <button
                                 type="button"
-                                onClick={() => { setStep(actualStep - 1) }}
+                                onClick={() => history.push("/")}
                                 className="formButton cancelForm"
                             >
                                 Go back home page

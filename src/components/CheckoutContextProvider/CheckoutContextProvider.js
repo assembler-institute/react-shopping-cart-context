@@ -48,9 +48,7 @@ export default function CheckoutContextProvider({ children }) {
             type: "SET_STEP",
             payload: step
         })
-        if (step === 0) {
-            return history.push("/")
-        }
+
         return history.push(`/checkout/step-${step}`)
     }
 

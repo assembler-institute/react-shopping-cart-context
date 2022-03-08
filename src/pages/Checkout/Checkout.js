@@ -13,32 +13,31 @@ import CheckoutContextProvider from "../../components/CheckoutContextProvider"
 
 import withLayout from "../../hoc/withLayout";
 import ProgressBar from "../../components/ProgressBar";
+import Overview from "../../components/Overview/Overview";
 
 
 function Checkout() {
 
     const { cartItems } = useContext(OverviewContext)
     // const history = useHistory()
-    console.log("render: checkout")
+
     console.log(cartItems)
     return (
-        <main>
-            <CheckoutContextProvider>
-                <header className="checkoutHeader">
-                    <ProgressBar />
-                </header>
+        <CheckoutContextProvider>
+            <header className="checkoutHeader">
+                <ProgressBar />
+            </header>
+
+            <main className="CheckoutWrapper mflex mrow mjustify-between">
                 <article className="checkoutForm">
                     <Route path="/checkout/step-1"><PersonalForm /></Route>
                     <Route path="/checkout/step-2"><BillingForm /></Route>
                     <Route path="/checkout/step-3"><PaymentForm /></Route>
                 </article>
-            </CheckoutContextProvider>
-            <aside className="checkoutList" />
-            <footer className="checkoutFooter">
-                Footer
-            </footer>
-        </main>
+                <Overview />
+            </main>
 
+        </CheckoutContextProvider>
 
     )
 }
