@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { Route, useHistory } from "react-router-dom";
+import React, { useContext } from "react";
+import { Route } from "react-router-dom";
 
 // styles
 import "./checkout.scss"
@@ -8,32 +8,22 @@ import "./checkout.scss"
 import { PersonalForm, BillingForm, PaymentForm } from "./steps"
 // contexts
 import { OverviewContext } from "../../context/OverviewContext";
-import { CheckoutContext } from "../../context/CheckoutContext";
+// reducer provider
+import CheckoutContextProvider from "../../components/CheckoutContextProvider"
 
 import withLayout from "../../hoc/withLayout";
 import ProgressBar from "../../components/ProgressBar";
 
-const INITIAL_NEXT_STEP = 2
 
 function Checkout() {
-    const [nextStep, setNextStep] = useState(INITIAL_NEXT_STEP)
+
     const { cartItems } = useContext(OverviewContext)
-    const history = useHistory()
-
-    const handleSteps = (step = null) => {
-        if (!step) {
-            setNextStep(nextStep + 1)
-            return history.push(`/checkout/step-${nextStep}`)
-        }
-        return history.push(`/checkout/step-${step}`)
-    }
-
+    // const history = useHistory()
+    console.log("render: checkout")
     console.log(cartItems)
     return (
         <main>
-            <CheckoutContext.Provider value={{
-                handleSteps: handleSteps
-            }}>
+            <CheckoutContextProvider>
                 <header className="checkoutHeader">
                     <ProgressBar />
                 </header>
@@ -42,7 +32,7 @@ function Checkout() {
                     <Route path="/checkout/step-2"><BillingForm /></Route>
                     <Route path="/checkout/step-3"><PaymentForm /></Route>
                 </article>
-            </CheckoutContext.Provider>
+            </CheckoutContextProvider>
             <aside className="checkoutList" />
             <footer className="checkoutFooter">
                 Footer

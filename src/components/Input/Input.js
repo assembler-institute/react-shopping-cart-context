@@ -6,20 +6,29 @@ function Input({
   id = "input-01",
   value = "",
   placeholder = "",
-  handleChange = () => {},
-  handleBlur = () => {},
+  handleChange = () => { },
+  handleBlur = () => { },
   errorMessage,
   hasErrorMessage,
   ...props
 }) {
+
+  const classNameCondition = () => {
+    if (hasErrorMessage && errorMessage) {
+      return "form-control is-invalid"
+    }
+    if (hasErrorMessage && !errorMessage) {
+      return "form-control is-valid"
+    }
+    return "form-control"
+  }
+
   return (
     <div className="form-group">
       <label htmlFor={id}>{label}</label>
       <input
         className={
-          hasErrorMessage && errorMessage
-            ? "form-control is-invalid"
-            : "form-control"
+          classNameCondition()
         }
         id={id}
         name={id}

@@ -1,6 +1,10 @@
 import { createContext } from "react";
 
 export const CheckoutContext = createContext({
-    handleSteps: () => { },
-    userInfo: {}
+    setFormInfo: () => { },
+    setStep: () => { },
+    personalInfo: {},
+    billingAddress: {},
+    payment: {},
+    actualStep: 1
 })

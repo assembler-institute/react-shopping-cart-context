@@ -1,2 +1,25 @@
 @use "../../assets/styles/variables.scss" as v;
 @use "../../assets/styles/layout.scss" as l;
+
+form {
+  width: 30%;
+}
+.formBtnWrapper {
+}
+.formButton {
+  color: white;
+  background-color: v.$purple;
+  border-radius: 5px;
+  border: none;
+  padding: 10px;
+  justify-self: center;
+  &:disabled {
+    opacity: 0.5;
+  }
+  &:hover {
+  }
+}
+
+.cancelForm {
+  background-color: v.$lightBlue;
+}
