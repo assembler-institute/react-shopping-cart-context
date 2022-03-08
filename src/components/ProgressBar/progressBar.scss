@@ -1,7 +1,7 @@
 @use "../../assets/styles/variables.scss" as v;
 @use "../../assets/styles/layout.scss" as l;
 .progressBar {
-  width: 90%;
+  width: 100%;
   position: relative;
   .stepSecondaryLine,
   .stepLine {
@@ -15,16 +15,13 @@
   }
   .stepSecondaryLine {
     background-color: gray;
-    width: 90%;
+    width: 95%;
     top: 15px;
   }
 
   .stepLine {
     background-color: v.$skyBlue;
   }
-}
-.stepContainer {
-  text-align: left;
 }
 .stepButton {
   border-radius: 9999px;

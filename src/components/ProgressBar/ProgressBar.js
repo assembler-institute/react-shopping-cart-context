@@ -12,11 +12,11 @@ export default function ProgressBar() {
             </div>
             <div className="stepContainer mflex mcol malign-center  ">
                 <button className="mnoButton stepButton" type="button">1</button>
-                <p>Personal Information</p>
+                <p>Account</p>
             </div>
             <div className="stepContainer mflex mcol malign-center ">
                 <button className="mnoButton stepButton" type="button">2</button>
-                <p>Billing address</p>
+                <p>Shipping</p>
             </div>
             <div className="stepContainer mflex mcol malign-center ">
                 <button className="mnoButton stepButton" type="button">3</button>

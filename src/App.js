@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 // context
-import { CheckoutContext } from "./context/CheckoutContext";
+import { OverviewContext } from "./context/OverviewContext";
 
 import Home from "./pages/Home";
 import NewProduct from "./pages/NewProduct";
@@ -207,13 +207,13 @@ function App() {
         </Route>
 
         <Route path="/checkout">
-          <CheckoutContext.Provider value={{
+          <OverviewContext.Provider value={{
             cartItems: cartItems,
             handleChange: handleChange,
             handleRemove: handleRemove
           }}>
             <Checkout />
-          </CheckoutContext.Provider>
+          </OverviewContext.Provider>
         </Route>
 
       </Switch>
