@@ -1,26 +1,50 @@
 @use "../../assets/styles/variables.scss" as v;
 @use "../../assets/styles/layout.scss" as l;
-form {
-  width: 30%;
+
+.checkoutHeader {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
-.checkoutForm {
-  width: 70%;
+
+.checkoutFormWrapper {
+  width: 100%;
   .formBtnWrapper {
     display: flex;
+    justify-content: space-between;
   }
-}
-.formButton {
-  color: white;
-  background-color: v.$purple;
-  border-radius: 5px;
-  border: none;
-  padding: 5px;
-  justify-self: center;
-  &:disabled {
-    opacity: 0.5;
+
+  section {
+    width: 100%;
   }
 }
 
-.cancelForm {
-  background-color: v.$lightBlue;
+form {
+  width: 30%;
+  .selectContainer {
+    margin: 30px 0;
+  }
+  .formButton {
+    color: white;
+    background-color: v.$purple;
+    border-radius: 5px;
+    border: none;
+    padding: 5px;
+    justify-self: center;
+    &:disabled {
+      opacity: 0.5;
+    }
+    &:hover {
+      transition: 0.5;
+      opacity: 0.8;
+    }
+  }
+  .backLink {
+    color: inherit;
+    font-size: 14px;
+    text-align: center;
+  }
+  .cancelFormBtn:hover {
+    text-decoration: underline;
+  }
 }

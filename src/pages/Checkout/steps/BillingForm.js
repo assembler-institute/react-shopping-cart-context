@@ -1,12 +1,13 @@
-import React, { useContext, useEffect } from "react"
-import { useHistory } from "react-router-dom"
+import React, { useContext } from "react"
+import { Redirect } from "react-router-dom"
 
 import { Formik } from "formik"
 import * as Yup from "yup"
 
 // components
-import Input from "../../../components/Input"
+import Input, { classNameInputCondition } from "../../../components/Input"
 import { CheckoutContext } from "../../../context/CheckoutContext"
+
 
 const personalFormSchema = Yup.object().shape({
     address: Yup.string()
@@ -21,22 +22,12 @@ const personalFormSchema = Yup.object().shape({
         .min(4, "Your postal code is invalid")
         .required("Please, write your postal code"),
     country: Yup.string()
-        .min("5", "Your country name is too short!")
-        .max("50", "Your country name is too long!")
         .required("Please, introudce your country or region")
 
 })
 
 export function BillingForm() {
     const { billingAddress, setFormInfo, actualStep, setStep } = useContext(CheckoutContext)
-    const history = useHistory()
-    useEffect(() => {
-        // Checks if the user refresh the page
-        // btw, search other form
-        if (actualStep === 1) {
-            history.push("/checkout/step-1")
-        }
-    }, [])
     console.log("render: BillingAddress")
     console.log(actualStep)
     return (
@@ -102,22 +93,30 @@ export function BillingForm() {
                             hasErrorMessage={touched.postalCode}
                             errorMessage={errors.postalCode}
                         />
-                        <Input
-                            type="text"
-                            name="country"
-                            id="country"
-                            label="Country"
-                            value={values.country}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            hasErrorMessage={touched.country}
-                            errorMessage={errors.country} />
-
+                        <div className="selectContainer">
+                            <select
+                                id="countrySelect"
+                                name="country"
+                                className={classNameInputCondition(touched.country, errors.country)}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                            >
+                                <option value="" defaultChecked>Select country</option>
+                                <option value="Spain">Spain</option>
+                                <option value="Andorra">Andorra</option>
+                                <option value="Germany">Germany</option>
+                                <option value="United Kingdom">United Kingdom</option>
+                                <option value="Sweden">Sweden</option>
+                            </select>
+                            {errors.country && touched.country &&
+                                (<p className="invalid-feedback">{errors.country}</p>)
+                            }
+                        </div>
                         <div className="formBtnWrapper mflex mjustify-between">
                             <button
                                 type="button"
                                 onClick={() => setStep(actualStep - 1)}
-                                className="formButton cancelForm"
+                                className="mnoButton cancelFormBtn"
                             >
                                 Back to account
                             </button>
@@ -133,7 +132,7 @@ export function BillingForm() {
                     </form>
                 )}
             </Formik>
-            {actualStep === 3 && history.push("/checkout/step-3")}
+            {actualStep === 3 && <Redirect to="/checkout/step-3" />}
         </section>
 
     )

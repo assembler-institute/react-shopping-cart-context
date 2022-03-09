@@ -1,5 +1,15 @@
 import React from "react";
 
+export const classNameInputCondition = (hasErrorMessage, errorMessage) => {
+  if (hasErrorMessage && errorMessage) {
+    return "form-control is-invalid"
+  }
+  if (hasErrorMessage && !errorMessage) {
+    return "form-control is-valid"
+  }
+  return "form-control"
+}
+
 function Input({
   type = "text",
   label = "input-01",
@@ -13,22 +23,13 @@ function Input({
   ...props
 }) {
 
-  const classNameCondition = () => {
-    if (hasErrorMessage && errorMessage) {
-      return "form-control is-invalid"
-    }
-    if (hasErrorMessage && !errorMessage) {
-      return "form-control is-valid"
-    }
-    return "form-control"
-  }
 
   return (
     <div className="form-group">
       <label htmlFor={id}>{label}</label>
       <input
         className={
-          classNameCondition()
+          classNameInputCondition(hasErrorMessage, errorMessage)
         }
         id={id}
         name={id}

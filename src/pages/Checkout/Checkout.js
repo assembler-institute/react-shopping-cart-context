@@ -28,7 +28,7 @@ function Checkout() {
             </header>
 
             <main className="CheckoutWrapper mflex mrow mjustify-between">
-                <article className="checkoutForm">
+                <article className="checkoutFormWrapper">
                     <Route path="/checkout/step-1"><PersonalForm /></Route>
                     <Route path="/checkout/step-2"><BillingForm /></Route>
                     <Route path="/checkout/step-3"><PaymentForm /></Route>

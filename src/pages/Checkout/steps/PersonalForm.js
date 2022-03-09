@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { useHistory } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { CheckoutContext } from "../../../context/CheckoutContext";
 
 // components
 import Input from "../../../components/Input";
+
+
 
 
 const phoneRegex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
@@ -26,7 +28,6 @@ const personalFormSchema = Yup.object().shape({
 
 export function PersonalForm() {
     const { personalInfo, setFormInfo, actualStep } = useContext(CheckoutContext)
-    const history = useHistory()
     console.log("render: PersonalForm")
     return (
         <section className="mflex mcol malign-center">
@@ -98,13 +99,10 @@ export function PersonalForm() {
                         />
 
                         <div className="formBtnWrapper">
-                            <button
-                                type="button"
-                                onClick={() => history.push("/")}
-                                className="formButton cancelForm"
-                            >
+                            <Link className="link backLink" to="/" >
                                 Back home page
-                            </button>
+                            </Link>
+
                             <button
                                 className="formButton submitForm"
                                 type="submit"
@@ -117,8 +115,8 @@ export function PersonalForm() {
                     </form>
                 )}
             </Formik>
-            {actualStep === 2 && history.push("/checkout/step-2")}
-        </section>
+            {actualStep === 2 && <Redirect to="/checkout/step-2" />}
+        </section >
 
     )
 }

@@ -1,6 +1,6 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 // context
-import { useHistory } from "react-router-dom"
 import { CheckoutContext } from "../../context/CheckoutContext";
 
 const checkoutInitialState = {
@@ -35,6 +35,15 @@ function checkoutReducer(state, action) {
 export default function CheckoutContextProvider({ children }) {
     const [checkoutState, dispatch] = useReducer(checkoutReducer, checkoutInitialState)
     const history = useHistory()
+
+    useEffect(() => {
+        // Checks if the user refresh the page
+        // btw, search other form
+        if (checkoutState.actualStep === 1) {
+            history.push("/checkout/step-1")
+        }
+    }, [])
+
     const setFormInfo = (nameForm, data) => {
         dispatch({
             type: "SET_INFO",

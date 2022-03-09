@@ -212,7 +212,7 @@ function App() {
             handleChange: handleChange,
             handleRemove: handleRemove
           }}>
-            <Checkout />
+            <Checkout fullWidth />
           </OverviewContext.Provider>
         </Route>
 
