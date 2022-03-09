@@ -48,3 +48,33 @@ form {
     text-decoration: underline;
   }
 }
+
+// pay methods
+.methodsContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+@media screen and (max-width: 1000px) {
+  .methodsContainer {
+    flex-direction: column;
+  }
+}
+.secretFields {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  input {
+    width: 50%;
+  }
+}
+.conditionsContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  font-size: 12px;
+  #conditions {
+    align-self: flex-start;
+    width: 20px;
+  }
+}

@@ -24,10 +24,10 @@ function Checkout() {
 
             <main className="CheckoutWrapper ">
                 <article className="checkoutFormWrapper mflex mrow mjustify-between">
-                    <Route path="/checkout/step-1"><PersonalForm /></Route>
+                    <Route path="/checkout/step-3"><PersonalForm /></Route>
                     <Route path="/checkout/step-2"><BillingForm /></Route>
-                    <Route path="/checkout/step-3"><PaymentForm /></Route>
-                    {actualStep <= 2 && <Overview />}
+                    <Route path="/checkout/step-1"><PaymentForm /></Route>
+                    {actualStep === 2 && <Overview />}
                 </article>
 
             </main>

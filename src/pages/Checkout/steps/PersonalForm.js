@@ -1,30 +1,14 @@
 import React, { useContext } from "react";
 import { Formik } from "formik";
-import * as Yup from "yup";
+
 import { Redirect, Link } from "react-router-dom";
+// schema
+import { personalFormSchema } from "./formSchemas/formSchemas";
+
 import { CheckoutContext } from "../../../context/CheckoutContext";
 
 // components
 import Input from "../../../components/Input";
-
-
-
-
-const phoneRegex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-
-const personalFormSchema = Yup.object().shape({
-    name: Yup.string()
-        .min("3", "Your name is too short!")
-        .max("30", "Your name is too long!")
-        .required("Please, introduce your name"),
-    email: Yup.string()
-        .email()
-        .required("Please, introduce your email address"),
-    phone: Yup.string()
-        .matches(phoneRegex, "Phone number not valid")
-        .required("Please, introduce your phone number"),
-
-})
 
 export function PersonalForm() {
     const { personalInfo, setFormInfo, actualStep } = useContext(CheckoutContext)

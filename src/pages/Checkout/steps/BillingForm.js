@@ -2,32 +2,17 @@ import React, { useContext } from "react"
 import { Redirect } from "react-router-dom"
 
 import { Formik } from "formik"
-import * as Yup from "yup"
-
+import { billingFormSchema } from "./formSchemas/formSchemas";
 // components
 import Input, { classNameInputCondition } from "../../../components/Input"
 import { CheckoutContext } from "../../../context/CheckoutContext"
 
 
-const personalFormSchema = Yup.object().shape({
-    address: Yup.string()
-        .min("3", "Your address is too short!")
-        .max("40", "Your address is too long!")
-        .required("Please, introduce your address"),
-    city: Yup.string()
-        .min("3", "Your city is too short!")
-        .max("20", "Your city is too long!")
-        .required("Please, introduce your city"),
-    postalCode: Yup.number()
-        .min(4, "Your postal code is invalid")
-        .required("Please, write your postal code"),
-    country: Yup.string()
-        .required("Please, introudce your country or region")
 
-})
 
 export function BillingForm() {
     const { billingAddress, setFormInfo, actualStep, setStep } = useContext(CheckoutContext)
+    console.log(billingAddress)
     console.log("render: BillingAddress")
     return (
         <section className="mflex mcol malign-center">
@@ -40,14 +25,12 @@ export function BillingForm() {
                     country: billingAddress.country ? billingAddress.country : ""
 
                 }}
-                validationSchema={personalFormSchema}
+                validationSchema={billingFormSchema}
 
                 onSubmit={(values) => {
                     /* send values to reducer */
                     setFormInfo("billingAddress", values)
-
                 }}
-
             >
                 {({
                     values,
@@ -99,8 +82,9 @@ export function BillingForm() {
                                 className={classNameInputCondition(touched.country, errors.country)}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
+                                defaultValue={values.country}
                             >
-                                <option value="" defaultChecked>Select country</option>
+                                <option value="" >Select country</option>
                                 <option value="Spain">Spain</option>
                                 <option value="Andorra">Andorra</option>
                                 <option value="Germany">Germany</option>
