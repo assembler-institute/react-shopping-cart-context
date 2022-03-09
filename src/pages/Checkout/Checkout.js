@@ -6,37 +6,32 @@ import "./checkout.scss"
 
 // steps import
 import { PersonalForm, BillingForm, PaymentForm } from "./steps"
-// contexts
-import { OverviewContext } from "../../context/OverviewContext";
-// reducer provider
-import CheckoutContextProvider from "../../components/CheckoutContextProvider"
 
 import withLayout from "../../hoc/withLayout";
 import ProgressBar from "../../components/ProgressBar";
 import Overview from "../../components/Overview/Overview";
+import { CheckoutContext } from "../../context/CheckoutContext";
 
 
 function Checkout() {
-
-    const { cartItems } = useContext(OverviewContext)
-    // const history = useHistory()
-    console.log(cartItems)
+    const { actualStep } = useContext(CheckoutContext)
+    console.log("render: checkout")
     return (
-        <CheckoutContextProvider>
+        <>
             <header className="checkoutHeader">
                 <ProgressBar />
             </header>
 
-            <main className="CheckoutWrapper mflex mrow mjustify-between">
-                <article className="checkoutFormWrapper">
+            <main className="CheckoutWrapper ">
+                <article className="checkoutFormWrapper mflex mrow mjustify-between">
                     <Route path="/checkout/step-1"><PersonalForm /></Route>
                     <Route path="/checkout/step-2"><BillingForm /></Route>
                     <Route path="/checkout/step-3"><PaymentForm /></Route>
+                    {actualStep <= 2 && <Overview />}
                 </article>
-                <Overview />
-            </main>
 
-        </CheckoutContextProvider>
+            </main>
+        </>
 
     )
 }

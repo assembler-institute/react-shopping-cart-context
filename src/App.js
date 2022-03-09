@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 // context
 import { OverviewContext } from "./context/OverviewContext";
-
+import CheckoutContextProvider from "./components/CheckoutContextProvider"
 import Home from "./pages/Home";
 import NewProduct from "./pages/NewProduct";
 
@@ -207,13 +207,17 @@ function App() {
         </Route>
 
         <Route path="/checkout">
+
           <OverviewContext.Provider value={{
             cartItems: cartItems,
             handleChange: handleChange,
             handleRemove: handleRemove
           }}>
-            <Checkout fullWidth />
+            <CheckoutContextProvider>
+              <Checkout fullWidth />
+            </CheckoutContextProvider>
           </OverviewContext.Provider>
+
         </Route>
 
       </Switch>

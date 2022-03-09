@@ -29,7 +29,6 @@ const personalFormSchema = Yup.object().shape({
 export function BillingForm() {
     const { billingAddress, setFormInfo, actualStep, setStep } = useContext(CheckoutContext)
     console.log("render: BillingAddress")
-    console.log(actualStep)
     return (
         <section className="mflex mcol malign-center">
             <h1 className="formTitle">Billing address</h1>

@@ -16,7 +16,7 @@ export default function ProgressBar() {
         if (actualStep === stepNum) return "mnoButton stepButton stepActive"
         return "mnoButton stepButton"
     }
-
+    console.log("render: Progress Bar")
     return (
         <div className="progressBar mflex mrow mjustify-between">
             <div className="stepSecondaryLine ">

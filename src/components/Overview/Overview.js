@@ -1,4 +1,5 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { OverviewContext } from "../../context/OverviewContext";
 
 // components
@@ -11,10 +12,14 @@ import { getCartTotal } from "../Cart/Cart";
 import "./overview.scss"
 
 export default function Overview() {
+    const history = useHistory()
     const { cartItems, handleChange, handleRemove } = useContext(OverviewContext)
     const subTotal = getCartTotal(cartItems)
     const shippingCost = Math.round(subTotal * 0.05)
 
+    useEffect(() => {
+        if (cartItems.length === 0) history.push("/")
+    }, [cartItems])
     console.log("render:overview")
 
     return (
