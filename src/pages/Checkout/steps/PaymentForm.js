@@ -3,6 +3,7 @@ import React, { useContext } from "react"
 
 import { Formik } from "formik"
 // schema
+import { Redirect } from "react-router-dom"
 import { paymentFormSchema } from "./formSchemas/formSchemas"
 // context
 import { CheckoutContext } from "../../../context/CheckoutContext"
@@ -43,7 +44,13 @@ export function PaymentForm() {
 
                 onSubmit={(values) => {
                     /* send values to reducer */
-                    setFormInfo("payment", values)
+                    /* condition if user selects type of credit card, and after that, change method */
+                    if (values.method !== "credit") {
+                        setFormInfo("payment", { ...values, creditCard: "" })
+                    } else {
+                        setFormInfo("payment", values)
+                    }
+
 
                 }}
 
@@ -243,7 +250,7 @@ export function PaymentForm() {
                     </CreditCardContext.Provider>
                 )}
             </Formik>
-
+            {actualStep === 4 && <Redirect to="/checkout/step-4" />}
         </section>
 
 

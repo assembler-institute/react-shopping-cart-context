@@ -5,6 +5,8 @@ export const CheckoutContext = createContext({
     setStep: () => { },
     personalInfo: {},
     billingAddress: {},
-    payment: {},
+    payment: {
+        cardNumber: 0
+    },
     actualStep: 1
 })

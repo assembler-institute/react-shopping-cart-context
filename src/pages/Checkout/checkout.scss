@@ -102,3 +102,36 @@ form {
     }
   }
 }
+
+// review component
+.reviewContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.reviewSection {
+  border-radius: 5px;
+  width: 50% !important;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  border: 1px solid black;
+  background-color: rgb(255, 255, 255);
+  .orderConfirmed {
+    h1 {
+      color: v.$lightBlue;
+      margin-bottom: 10px;
+    }
+  }
+  .orderInfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .orderItem {
+    display: block;
+    .orderItemTitle {
+      color: #adb3bc;
+    }
+  }
+}
