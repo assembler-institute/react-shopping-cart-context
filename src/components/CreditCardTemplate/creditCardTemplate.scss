@@ -12,17 +12,20 @@
   }
 }
 .cardContainer {
+  align-self: center;
   display: flex;
   flex-direction: column;
   position: relative;
   padding: 20px 35px;
-  min-width: 27vw;
-  width: 30vw;
-  min-height: 25vh;
-  height: 30vh;
+  width: 400px;
+  height: 250px;
   border-radius: 15px;
   gap: 10px;
-  background-color: v.$lightBlue;
+  background: linear-gradient(
+    127deg,
+    rgba(0, 212, 255, 1),
+    rgba(71, 71, 97, 1)
+  );
   color: white;
 
   .cardType {
@@ -34,8 +37,7 @@
   }
   .CardNumbersField {
     z-index: 1;
-    font-size: 25px;
-    justify-self: flex-end;
+    font-size: 30px;
   }
   .cardFooter {
     display: inline-flex;
