@@ -1,10 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./creditCardTemplate.scss";
+
+// context
+import { CreditCardContext } from "../../context/CreditCardContext";
 
 import creditChip from "../../assets/img/creditChip.png"
 import background from "../../assets/img/worldCard.png"
 
 export default function CreditCardTemplate() {
+    const { cardHolderName, cardNumber, expireDate, cvv } = useContext(CreditCardContext)
+
+    const replaceAllExceptLast = (str, n) => {
+        const token = "*";
+        if (str.length >= 17) {
+            return str.replace(/[0-9]/g, (match, offset) => {
+                return offset < str.length - n ? token : match;
+            });
+        }
+        return str.replace(/[0-9]/g, "*")
+    }
+
+    console.log("render: credit card template")
     return (
         <div className="cardContainer">
             <div className="backgroundCard">
@@ -12,10 +28,11 @@ export default function CreditCardTemplate() {
             </div>
             <h3 className="cardType">CARD TYPE</h3>
             <img className="chip" src={creditChip} alt="chip" />
-            <p className="CardNumbersField">0301 2301 2043 1231</p>
+            <p className="CardNumbersField">{replaceAllExceptLast(cardNumber, 4) || "**** **** **** ****"}</p>
             <div className="cardFooter">
-                <p className="CardHolderField">Luis Molina Mateo</p>
-                <p className="expireField">06/24</p>
+                <p className="CardHolderField">{cardHolderName}</p>
+                <p className="expireField">Expires: {expireDate || "MM/YY"}</p>
+                <p>CVV:{cvv.replace(/[0-9]/g, "#")}</p>
             </div>
 
         </div>

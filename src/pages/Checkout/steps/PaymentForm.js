@@ -4,10 +4,11 @@ import React, { useContext } from "react"
 import { Formik } from "formik"
 // schema
 import { paymentFormSchema } from "./formSchemas/formSchemas"
-
+// context
+import { CheckoutContext } from "../../../context/CheckoutContext"
+import { CreditCardContext } from "../../../context/CreditCardContext"
 // components
 import Input from "../../../components/Input"
-import { CheckoutContext } from "../../../context/CheckoutContext"
 import CreditCardTemplate from "../../../components/CreditCardTemplate"
 // images improt
 import applePay from "../../../assets/img/applePay.png";
@@ -25,219 +26,225 @@ export function PaymentForm() {
     console.log("render: PaymentForm")
     console.log(payment)
     return (
-        <div className="paymentFormWrapper">
-            <section className="paymentSection mflex mcol malign-center">
-                <h1 className="formTitle">Payment details</h1>
-                <Formik
-                    initialValues={{
-                        method: payment.method ? payment.method : "",
-                        creditCard: payment.creditCard ? payment.creditCard : "",
-                        cardHolderName: payment.cardHolderName ? payment.cardHolderName : "",
-                        cardNumber: payment.cardNumber ? payment.cardNumber : "",
-                        expireDate: payment.expireDate ? payment.expireDate : "",
-                        cvv: payment.cvv ? payment.cvv : "",
-                        conditions: false
+        <section className="paymentSection">
 
-                    }}
-                    validationSchema={paymentFormSchema}
+            <Formik
+                initialValues={{
+                    method: payment.method ? payment.method : "",
+                    creditCard: payment.creditCard ? payment.creditCard : "",
+                    cardHolderName: payment.cardHolderName ? payment.cardHolderName : "",
+                    cardNumber: payment.cardNumber ? payment.cardNumber : "",
+                    expireDate: payment.expireDate ? payment.expireDate : "",
+                    cvv: payment.cvv ? payment.cvv : "",
+                    conditions: false
 
-                    onSubmit={(values) => {
-                        /* send values to reducer */
-                        setFormInfo("payment", values)
+                }}
+                validationSchema={paymentFormSchema}
 
-                    }}
+                onSubmit={(values) => {
+                    /* send values to reducer */
+                    setFormInfo("payment", values)
 
-                >
-                    {({
-                        values,
-                        touched,
-                        errors,
-                        handleChange,
-                        handleBlur,
-                        handleSubmit,
-                    }) => (
-                        <form className="paymentForm" onSubmit={handleSubmit}>
-                            <p className="bolder">How would you like to pay?</p>
-                            <div className="methodsContainer">
-                                {/* pay methods */}
-                                <Input
-                                    type="radio"
-                                    name="method"
-                                    id="method"
-                                    label="Credit / Debit card"
-                                    payMethod
-                                    value="credit"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                                <Input
-                                    type="radio"
-                                    name="method"
-                                    id="paypalPay"
-                                    label={paypalPay}
-                                    payMethod
-                                    imageLabel
-                                    value="paypalPay"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                                <Input
-                                    type="radio"
-                                    name="method"
-                                    id="applePay"
-                                    label={applePay}
-                                    payMethod
-                                    imageLabel
-                                    value="applePay"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                            </div>
-                            {errors.method
-                                && (<p className="text-danger">{errors.method}</p>)}
+                }}
 
-                            {values.method === "credit" &&
-                                <>
-                                    {/* credit cards */}
-                                    <p>We accept the following debit/credit cards</p>
-                                    <div className="creditCompanyContainer">
-                                        <Input
-                                            type="radio"
-                                            name="creditCard"
-                                            id="visa"
-                                            radioChecked={values.creditCard === "visa"}
-                                            label={visa}
-                                            creditCardRadios
-                                            value="visa"
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                        />
-                                        <Input
-                                            type="radio"
-                                            name="creditCard"
-                                            id="mastercard"
-                                            radioChecked={values.creditCard === "mastercard"}
-                                            label={mastercard}
-                                            creditCardRadios
-                                            value="mastercard"
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                        />
-                                        <Input
-                                            type="radio"
-                                            name="creditCard"
-                                            id="americanExpress"
-                                            radioChecked={values.creditCard === "americanExpress"}
-                                            label={americanExpress}
-                                            creditCardRadios
-                                            value="americanExpress"
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                        />
-                                    </div>
-                                </>
-                            }
-                            {errors.creditCard
-                                && (<p className="text-danger">{errors.creditCard}</p>)}
-                            {/* field inputs for credit card */}
-                            {values.method &&
-                                <>
+            >
+                {({
+                    values,
+                    touched,
+                    errors,
+                    handleChange,
+                    handleBlur,
+                    handleSubmit,
+                }) => (
+                    <CreditCardContext.Provider value={{
+                        cardHolderName: values.cardHolderName,
+                        cardNumber: values.cardNumber,
+                        expireDate: values.expireDate,
+                        cvv: values.cvv
+                    }}>
+                        <div className="paymentFormWrapper">
+                            <form className="paymentForm" onSubmit={handleSubmit}>
+                                <h1 className="formTitle">Payment details</h1>
+                                <p className="bolder">How would you like to pay?</p>
+                                <div className="methodsContainer">
+                                    {/* pay methods */}
                                     <Input
-                                        type="text"
-                                        name="cardHolderName"
-                                        id="cardHolderName"
-                                        label="Cardholder name*"
-                                        value={values.cardHolderName}
+                                        type="radio"
+                                        name="method"
+                                        id="method"
+                                        label="Credit / Debit card"
+                                        payMethod
+                                        value="credit"
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        hasErrorMessage={touched.cardHolderName}
-                                        errorMessage={errors.cardHolderName}
                                     />
-
                                     <Input
-                                        type="text"
-                                        name="cardNumber"
-                                        id="cardNumber"
-                                        label="Card number*"
-                                        value={
-                                            values.cardNumber
-                                                .replace(/\s/g, "")
-                                                .replace(/(\d{4})/g, "$1 ")
-                                                .trim()
-                                        }
-                                        maxlength="19"
+                                        type="radio"
+                                        name="method"
+                                        id="paypalPay"
+                                        label={paypalPay}
+                                        payMethod
+                                        imageLabel
+                                        value="paypalPay"
                                         onChange={handleChange}
                                         onBlur={handleBlur}
-                                        hasErrorMessage={touched.cardNumber}
-                                        errorMessage={errors.cardNumber}
                                     />
-                                    <div className="secretFields">
+                                    <Input
+                                        type="radio"
+                                        name="method"
+                                        id="applePay"
+                                        label={applePay}
+                                        payMethod
+                                        imageLabel
+                                        value="applePay"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                    />
+                                </div>
+                                {errors.method
+                                    && (<p className="text-danger">{errors.method}</p>)}
+
+                                {values.method === "credit" &&
+                                    <>
+                                        {/* credit cards */}
+                                        <p>We accept the following debit/credit cards</p>
+                                        <div className="creditCompanyContainer">
+                                            <Input
+                                                type="radio"
+                                                name="creditCard"
+                                                id="visa"
+                                                radioChecked={values.creditCard === "visa"}
+                                                label={visa}
+                                                creditCardRadios
+                                                value="visa"
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                            />
+                                            <Input
+                                                type="radio"
+                                                name="creditCard"
+                                                id="mastercard"
+                                                radioChecked={values.creditCard === "mastercard"}
+                                                label={mastercard}
+                                                creditCardRadios
+                                                value="mastercard"
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                            />
+                                            <Input
+                                                type="radio"
+                                                name="creditCard"
+                                                id="americanExpress"
+                                                radioChecked={values.creditCard === "americanExpress"}
+                                                label={americanExpress}
+                                                creditCardRadios
+                                                value="americanExpress"
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                            />
+                                        </div>
+                                        {errors.creditCard && touched.creditCard
+                                            && (<p className="text-danger">{errors.creditCard}</p>)}
+                                    </>
+                                }
+                                {/* field inputs for credit card */}
+                                {values.method &&
+                                    <>
                                         <Input
                                             type="text"
-                                            name="expireDate"
-                                            id="expireDate"
-                                            label="Expiration date*"
-                                            maxlength="5"
-                                            value={expirationDateFormat(values.expireDate)}
+                                            name="cardHolderName"
+                                            id="cardHolderName"
+                                            label="Cardholder name*"
+                                            value={values.cardHolderName}
                                             onChange={handleChange}
                                             onBlur={handleBlur}
-                                            hasErrorMessage={touched.expireDate}
-                                            errorMessage={errors.expireDate}
+                                            hasErrorMessage={touched.cardHolderName}
+                                            errorMessage={errors.cardHolderName}
                                         />
+
                                         <Input
-                                            type="password"
-                                            name="cvv"
-                                            id="cvv"
-                                            label="CVV*"
-                                            maxlength="3"
-                                            value={values.cvv}
+                                            type="text"
+                                            name="cardNumber"
+                                            id="cardNumber"
+                                            label="Card number*"
+                                            value={
+                                                values.cardNumber
+                                                    .replace(/\s/g, "")
+                                                    .replace(/(\d{4})/g, "$1 ")
+                                                    .trim()
+                                            }
+                                            maxLength="19"
                                             onChange={handleChange}
                                             onBlur={handleBlur}
-                                            hasErrorMessage={touched.cvv}
-                                            errorMessage={errors.cvv}
+                                            hasErrorMessage={touched.cardNumber}
+                                            errorMessage={errors.cardNumber}
                                         />
-                                    </div>
-                                    <div className="conditionsContainer">
-                                        <Input
-                                            type="checkbox"
-                                            name="conditions"
-                                            id="conditions"
-                                            value={values.conditions}
-                                            conditionsCheckbox
-                                            label=""
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                        />
-                                        <p>I have read and I accept the booking conditions, general terms and privacy policy.</p>
-                                    </div>
-                                    {errors.conditions
-                                        && (<p className="text-danger">{errors.conditions}</p>)}
-                                </>
-                            }
+                                        <div className="secretFields">
+                                            <Input
+                                                type="text"
+                                                name="expireDate"
+                                                id="expireDate"
+                                                label="Expiration date*"
+                                                maxLength="5"
+                                                value={expirationDateFormat(values.expireDate)}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                hasErrorMessage={touched.expireDate}
+                                                errorMessage={errors.expireDate}
+                                            />
+                                            <Input
+                                                type="password"
+                                                name="cvv"
+                                                id="cvv"
+                                                label="CVV*"
+                                                maxLength="3"
+                                                value={values.cvv}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                hasErrorMessage={touched.cvv}
+                                                errorMessage={errors.cvv}
+                                            />
+                                        </div>
+                                        <div className="conditionsContainer">
+                                            <Input
+                                                type="checkbox"
+                                                name="conditions"
+                                                id="conditions"
+                                                value={values.conditions}
+                                                label=""
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                            />
+                                            <p>I have read and I accept the booking conditions, general terms and privacy policy.</p>
+                                        </div>
+                                        {errors.conditions
+                                            && (<p className="text-danger">{errors.conditions}</p>)}
+                                    </>
+                                }
 
-                            <div className="formBtnWrapper mflex mjustify-between">
-                                <button
-                                    type="button"
-                                    onClick={() => setStep(actualStep - 1)}
-                                    className="mnoButton cancelFormBtn"
-                                >
-                                    Back to shipping address
-                                </button>
-                                <button
-                                    className="formButton submitForm"
-                                    type="submit"
-                                >
-                                    Confirm checkout
-                                </button>
-                            </div>
+                                <div className="formBtnWrapper mflex mjustify-between">
+                                    <button
+                                        type="button"
+                                        onClick={() => setStep(actualStep - 1)}
+                                        className="mnoButton cancelFormBtn"
+                                    >
+                                        Back to shipping address
+                                    </button>
+                                    <button
+                                        className="formButton submitForm"
+                                        type="submit"
+                                    >
+                                        Confirm checkout
+                                    </button>
+                                </div>
+                            </form>
+                            <CreditCardTemplate />
+                        </div>
+                    </CreditCardContext.Provider>
+                )}
+            </Formik>
 
-                        </form>
-                    )}
-                </Formik>
-
-            </section>
-            <CreditCardTemplate />
-        </div>
+        </section>
 
 
     )

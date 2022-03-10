@@ -50,27 +50,27 @@ form {
 }
 
 // pay methods
+.paymentSection {
+  width: 45%;
+  .formTitle {
+    text-align: center;
+  }
+}
 .paymentFormWrapper {
-  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  .paymentSection {
-    width: 45%;
-  }
+  gap: 5.5em;
   .paymentForm {
-    width: 60%;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
   }
 }
 .methodsContainer {
   display: flex;
   flex-direction: row;
   gap: 20px;
-}
-@media screen and (max-width: 1000px) {
-  .methodsContainer {
-    flex-direction: column;
-  }
 }
 .secretFields {
   display: flex;
@@ -88,5 +88,17 @@ form {
   #conditions {
     align-self: flex-start;
     width: 20px;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .methodsContainer {
+    flex-direction: column;
+  }
+  .paymentFormWrapper {
+    flex-direction: column;
+    align-items: center;
+    .paymentForm {
+      width: 40%;
+    }
   }
 }

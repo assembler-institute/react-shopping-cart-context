@@ -1,9 +1,11 @@
 import { createContext } from "react"
 
 // implement type of card :D
-export const creditCardContext = createContext({
+export const CreditCardContext = createContext({
+    cardType: "",
     cardHolderName: "",
-    cardNumber: 0,
+    cardNumber: "**** **** **** ****",
     expireDate: "MM/YY",
-    cvv: 0
+    cvv: "***",
+    flippedCard: false
 })
