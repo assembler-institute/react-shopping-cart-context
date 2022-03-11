@@ -1,5 +1,7 @@
 import React, { useReducer, useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+// uuid 
+import { v4 as uuid } from "uuid"
 // context
 import { CheckoutContext } from "../../context/CheckoutContext";
 import { OverviewContext } from "../../context/OverviewContext";
@@ -10,6 +12,7 @@ const checkoutInitialState = {
     personalInfo: {},
     billingAddress: {},
     payment: {},
+    orderID: uuid(),
     actualStep: 1
 }
 
@@ -18,6 +21,7 @@ function checkoutReducer(state, action) {
     switch (type) {
         case "FINISH_CHECKOUT":
             return {
+                ...state,
                 actualStep: 1
             }
 
@@ -47,11 +51,21 @@ const checkInitialState = () => {
 }
 
 export default function CheckoutContextProvider({ children }) {
-    const [checkoutState, dispatch] = useReducer(checkoutReducer, { ...checkInitialState() })
+    const [checkoutState, dispatch] = useReducer(
+        checkoutReducer,
+        { ...checkInitialState() }
+    )
     const { setCartItems } = useContext(OverviewContext)
     const history = useHistory()
 
-    const { personalInfo, billingAddress, payment, actualStep } = checkoutState
+    const {
+        personalInfo,
+        billingAddress,
+        payment,
+        actualStep,
+        orderID
+    } = checkoutState
+    console.log("paso")
     useLocalStorage(
         { personalInfo, billingAddress, payment, actualStep },
         "checkoutInfo"
@@ -89,8 +103,10 @@ export default function CheckoutContextProvider({ children }) {
         dispatch({
             type: "FINISH_CHECKOUT"
         })
+        /* this state returns us to home, because condition in overview,
+            if cart is empty, go back to home
+        */
         setCartItems([])
-        return history.push(`/`)
     }
 
     return (
@@ -98,6 +114,7 @@ export default function CheckoutContextProvider({ children }) {
             setFormInfo: setFormInfo,
             setCheckoutDone: setCheckoutDone,
             setStep: setStep,
+            orderID: orderID,
             personalInfo: personalInfo,
             billingAddress: billingAddress,
             payment: payment,

@@ -4,14 +4,14 @@ import React, { useContext } from "react"
 import { Formik } from "formik"
 // schema
 import { Redirect } from "react-router-dom"
-import { paymentFormSchema } from "./formSchemas/formSchemas"
+import { paymentFormSchema } from "./paymentFormSchema"
 // context
 import { CheckoutContext } from "../../../context/CheckoutContext"
 import { CreditCardContext } from "../../../context/CreditCardContext"
 // components
-import Input from "../../../components/Input"
-import CreditCardTemplate from "../../../components/CreditCardTemplate"
-// images improt
+import Input from "../../Input"
+import CreditCardTemplate from "../../CreditCardTemplate"
+// images import
 import applePay from "../../../assets/img/applePay.png";
 import paypalPay from "../../../assets/img/paypalPay.png";
 import visa from "../../../assets/img/visa.png";

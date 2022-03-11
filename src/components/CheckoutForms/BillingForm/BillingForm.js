@@ -2,9 +2,9 @@ import React, { useContext } from "react"
 import { Redirect } from "react-router-dom"
 
 import { Formik } from "formik"
-import { billingFormSchema } from "./formSchemas/formSchemas";
+import { billingFormSchema } from "./billingFormSchema";
 // components
-import Input, { classNameInputCondition } from "../../../components/Input"
+import Input, { classNameInputCondition } from "../../Input"
 import { CheckoutContext } from "../../../context/CheckoutContext"
 
 

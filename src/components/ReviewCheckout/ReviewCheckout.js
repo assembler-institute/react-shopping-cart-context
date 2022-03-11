@@ -1,15 +1,17 @@
 import React, { useContext, useState } from "react"
-import Button from "../../../components/Button"
-import ReviewProductItem from "../../../components/ReviewProductItem/ReviewProductItem"
-import { CheckoutContext } from "../../../context/CheckoutContext"
-import { OverviewContext } from "../../../context/OverviewContext"
 
-export function Review() {
+import Button from "../Button"
+import ReviewProductItem from "../ReviewProductItem/ReviewProductItem"
+import { CheckoutContext } from "../../context/CheckoutContext"
+import { OverviewContext } from "../../context/OverviewContext"
+
+export function ReviewCheckout() {
     const [saveUserInfo, setSaveUserInfo] = useState(false)
     const {
         personalInfo,
         billingAddress,
         payment,
+        orderID,
         setCheckoutDone
     } = useContext(CheckoutContext)
     const {
@@ -19,7 +21,6 @@ export function Review() {
         taxes
     } = useContext(OverviewContext)
     const totalCalculated = subTotal + shippingCost + taxes
-    const orderNumber = Math.round(Math.random(1, 9999) * 10)
     const typePayment = payment.method === "credit" ? payment.creditCard : payment.method
     const lastNumbersCard = payment.cardNumber
         .substring(payment.cardNumber.length - 4, payment.cardNumber.length)
@@ -56,7 +57,7 @@ export function Review() {
                             Order number:
                         </p>
                         <p className="orderItemDescription">
-                            {orderNumber}
+                            {orderID}
                         </p>
                     </div>
                     <div className="orderItem">

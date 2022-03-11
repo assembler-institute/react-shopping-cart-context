@@ -1,20 +1,20 @@
 import React, { useContext } from "react";
 import { Formik } from "formik";
-import PhoneInput from 'react-phone-input-2'
-import 'react-phone-input-2/lib/style.css'
 import { Redirect, Link } from "react-router-dom";
 // schema
-import { personalFormSchema } from "./formSchemas/formSchemas";
+import PhoneInput from 'react-phone-input-2'
+import { personalFormSchema } from "./personalFormSchema";
 
 import { CheckoutContext } from "../../../context/CheckoutContext";
 
 // components
-import Input from "../../../components/Input";
+import Input from "../../Input";
+// input phone
+import 'react-phone-input-2/lib/style.css'
 
 export function PersonalForm() {
     const { personalInfo, setFormInfo, actualStep } = useContext(CheckoutContext)
     console.log("render: PersonalForm")
-    console.log(personalInfo)
     return (
         <section className="mflex mcol malign-center">
             <h1 className="formTitle">Personal information</h1>

@@ -4,6 +4,7 @@ export const CheckoutContext = createContext({
     setFormInfo: () => { },
     setStep: () => { },
     setCheckoutDone: () => { },
+    orderID: "",
     personalInfo: {},
     billingAddress: {},
     payment: {

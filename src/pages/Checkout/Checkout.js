@@ -5,7 +5,9 @@ import { Route } from "react-router-dom";
 import "./checkout.scss"
 
 // steps import
-import { PersonalForm, BillingForm, PaymentForm, Review } from "./steps"
+import { PersonalForm, BillingForm, PaymentForm } from "../../components/CheckoutForms"
+
+import { ReviewCheckout } from "../../components/ReviewCheckout";
 
 import withLayout from "../../hoc/withLayout";
 import ProgressBar from "../../components/ProgressBar";
@@ -27,7 +29,7 @@ function Checkout() {
                     <Route path="/checkout/step-1"><PersonalForm /></Route>
                     <Route path="/checkout/step-2"><BillingForm /></Route>
                     <Route path="/checkout/step-3"><PaymentForm /></Route>
-                    <Route path="/checkout/step-4"><Review /></Route>
+                    <Route path="/checkout/step-4"><ReviewCheckout /></Route>
                     {actualStep <= 2 && <Overview />}
                 </article>
 
