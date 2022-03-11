@@ -5,17 +5,12 @@ import { OverviewContext } from "../../context/OverviewContext";
 // components
 import ShoppingCartItem from "../ShoppingCartItem";
 
-// functions
-import { getCartTotal } from "../Cart/Cart";
-
 // styles
 import "./overview.scss"
 
 export default function Overview() {
     const history = useHistory()
-    const { cartItems, handleChange, handleRemove } = useContext(OverviewContext)
-    const subTotal = getCartTotal(cartItems)
-    const shippingCost = Math.round(subTotal * 0.05)
+    const { cartItems, subTotal, shippingCost, handleChange, handleRemove } = useContext(OverviewContext)
 
     useEffect(() => {
         if (cartItems.length === 0) history.push("/")

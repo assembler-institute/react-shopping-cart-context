@@ -1,7 +1,10 @@
-import React, { useReducer, useEffect } from "react";
+import React, { useReducer, useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 // context
 import { CheckoutContext } from "../../context/CheckoutContext";
+import { OverviewContext } from "../../context/OverviewContext";
+// local storage hook
+import useLocalStorage from "../../hooks/useLocalStorage"
 
 const checkoutInitialState = {
     personalInfo: {},
@@ -13,6 +16,11 @@ const checkoutInitialState = {
 function checkoutReducer(state, action) {
     const { type, nameForm, payload } = action
     switch (type) {
+        case "FINISH_CHECKOUT":
+            return {
+                actualStep: 1
+            }
+
         case "SET_INFO":
             // sets the info dynamiclly, and sums 1 to go for next step
             return {
@@ -32,15 +40,28 @@ function checkoutReducer(state, action) {
     }
 }
 
+const checkInitialState = () => {
+    return localStorage.getItem("checkoutInfo") ?
+        JSON.parse(localStorage.getItem("checkoutInfo"))
+        : checkoutInitialState
+}
+
 export default function CheckoutContextProvider({ children }) {
-    const [checkoutState, dispatch] = useReducer(checkoutReducer, checkoutInitialState)
+    const [checkoutState, dispatch] = useReducer(checkoutReducer, { ...checkInitialState() })
+    const { setCartItems } = useContext(OverviewContext)
     const history = useHistory()
 
+    const { personalInfo, billingAddress, payment, actualStep } = checkoutState
+    useLocalStorage(
+        { personalInfo, billingAddress, payment, actualStep },
+        "checkoutInfo"
+    )
+
     useEffect(() => {
-        // Checks if the user refresh the page
-        // btw, search other form
-        if (checkoutState.actualStep === 1) {
-            history.push("/checkout/step-1")
+        const location = history.location.pathname.split("/")[2]
+        // const step = parseInt(location.substring(5, 6), 10)
+        if (location !== `step-${actualStep}`) {
+            history.push(`/checkout/step-${actualStep}`)
         }
     }, [])
 
@@ -61,13 +82,25 @@ export default function CheckoutContextProvider({ children }) {
         return history.push(`/checkout/step-${step}`)
     }
 
+    const setCheckoutDone = (saveUserInfo) => {
+        if (!saveUserInfo) localStorage.removeItem("checkoutInfo")
+
+        localStorage.removeItem("react-sc-state-cart-items")
+        dispatch({
+            type: "FINISH_CHECKOUT"
+        })
+        setCartItems([])
+        return history.push(`/`)
+    }
+
     return (
         <CheckoutContext.Provider value={{
             setFormInfo: setFormInfo,
+            setCheckoutDone: setCheckoutDone,
             setStep: setStep,
-            personalInfo: checkoutState.personalInfo,
-            billingAddress: checkoutState.billingAddress,
-            payment: checkoutState.payment,
+            personalInfo: personalInfo,
+            billingAddress: billingAddress,
+            payment: payment,
             actualStep: checkoutState.actualStep
         }}>
             {children}

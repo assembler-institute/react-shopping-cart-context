@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 // context
-import { OverviewContext } from "./context/OverviewContext";
 import CheckoutContextProvider from "./components/CheckoutContextProvider"
 import Home from "./pages/Home";
 import NewProduct from "./pages/NewProduct";
@@ -12,6 +11,7 @@ import * as api from "./api";
 import useLocalStorage from "./hooks/useLocalStorage";
 import loadLocalStorageItems from "./utils/loadLocalStorageItems";
 import Checkout from "./pages/Checkout/Checkout";
+import OverviewContextProvider from "./components/OverviewContextProvider/OverviewContextProvider";
 
 function buildNewCartItem(cartItem) {
   if (cartItem.quantity >= cartItem.unitsInStock) {
@@ -208,20 +208,21 @@ function App() {
 
         <Route path="/checkout">
 
-          <OverviewContext.Provider value={{
-            cartItems: cartItems,
-            handleChange: handleChange,
-            handleRemove: handleRemove
-          }}>
+          <OverviewContextProvider
+            cartItems={cartItems}
+            setCartItems={setCartItems}
+            handleChange={handleChange}
+            handleRemove={handleRemove}
+          >
             <CheckoutContextProvider>
               <Checkout fullWidth />
             </CheckoutContextProvider>
-          </OverviewContext.Provider>
+          </OverviewContextProvider>
 
         </Route>
 
       </Switch>
-    </BrowserRouter>
+    </BrowserRouter >
   );
 }
 

@@ -1,7 +1,11 @@
 import { createContext } from "react";
 
 export const OverviewContext = createContext({
-    cartItems: [],
     handleRemove: () => { },
-    handleChange: () => { }
+    handleChange: () => { },
+    setCartItems: () => { },
+    subTotal: "",
+    cartItems: [],
+    shippingCost: 0,
+    taxes: 0
 })

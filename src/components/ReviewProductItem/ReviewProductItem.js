@@ -3,13 +3,11 @@ import React from "react";
 import "./reviewProductItem.scss"
 
 export default function ReviewProductItem({
-    id,
     img,
     title,
     price,
     quantity,
 }) {
-    console.log(id, title, price, quantity)
     return (
         <div className="productReview">
             <div className="productMainInfo">

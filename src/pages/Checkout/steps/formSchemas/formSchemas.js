@@ -1,6 +1,6 @@
 import * as Yup from "yup"
 
-import { phoneRegex } from "../../../../helper/regex";
+// import { phoneRegex } from "../../../../helper/regex";
 
 export const personalFormSchema = Yup.object().shape({
     name: Yup.string()
@@ -11,8 +11,9 @@ export const personalFormSchema = Yup.object().shape({
         .email()
         .required("Please, introduce your email address"),
     phone: Yup.string()
-        .matches(phoneRegex, "Phone number not valid")
         .required("Please, introduce your phone number"),
+    country: Yup.string()
+        .required("Please, select country!")
 
 })
 
@@ -36,7 +37,12 @@ export const paymentFormSchema = Yup.object().shape({
     method: Yup.string()
         .required("First, introduce a method"),
     creditCard: Yup.string()
-        .required("Introduce your card"),
+        .when("method", {
+            is: "credit",
+            then: schema => schema.required("Introduce your card"),
+        })
+
+    ,
     cardHolderName: Yup.string()
         .min("5", "Your card name it's too short!")
         .required("Introduce the name of your credit card"),

@@ -11,7 +11,7 @@ import { CheckoutContext } from "../../../context/CheckoutContext"
 
 
 export function BillingForm() {
-    const { billingAddress, setFormInfo, actualStep, setStep } = useContext(CheckoutContext)
+    const { billingAddress, personalInfo: { country }, setFormInfo, actualStep, setStep } = useContext(CheckoutContext)
     console.log(billingAddress)
     console.log("render: BillingAddress")
     return (
@@ -84,7 +84,7 @@ export function BillingForm() {
                                 onBlur={handleBlur}
                                 defaultValue={values.country}
                             >
-                                <option value="" >Select country</option>
+                                <option value={country} >{country}</option>
                                 <option value="Spain">Spain</option>
                                 <option value="Andorra">Andorra</option>
                                 <option value="Germany">Germany</option>

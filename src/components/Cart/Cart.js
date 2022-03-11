@@ -20,7 +20,7 @@ function Cart({ cartItems, handleRemove, handleChange, ...props }) {
 
   return (
     <aside {...props}>
-      <div className="row flex-column">
+      <div className="row flex-column" data-testid="Cart">
         <div className="col shopping__cart__header">
           <h2 className="h3 mt-2">Shopping Cart</h2>
           <hr className="mb-3" />

@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Formik } from "formik";
-
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
 import { Redirect, Link } from "react-router-dom";
 // schema
 import { personalFormSchema } from "./formSchemas/formSchemas";
@@ -13,6 +14,7 @@ import Input from "../../../components/Input";
 export function PersonalForm() {
     const { personalInfo, setFormInfo, actualStep } = useContext(CheckoutContext)
     console.log("render: PersonalForm")
+    console.log(personalInfo)
     return (
         <section className="mflex mcol malign-center">
             <h1 className="formTitle">Personal information</h1>
@@ -21,6 +23,7 @@ export function PersonalForm() {
                     name: personalInfo.name ? personalInfo.name : "",
                     email: personalInfo.email ? personalInfo.email : "",
                     phone: personalInfo.phone ? personalInfo.phone : "",
+                    country: personalInfo.country ? personalInfo.country : ""
                 }}
                 validationSchema={personalFormSchema}
 
@@ -35,11 +38,10 @@ export function PersonalForm() {
                     values,
                     errors,
                     touched,
+                    setValues,
                     handleChange,
                     handleBlur,
                     handleSubmit,
-                    isValidating,
-                    isSubmitting
                 }) => (
                     <form onSubmit={handleSubmit}>
 
@@ -59,28 +61,30 @@ export function PersonalForm() {
                             id="email"
                             label="Email"
                             value={values.email}
+
                             onChange={handleChange}
                             onBlur={handleBlur}
                             hasErrorMessage={touched.email}
                             errorMessage={errors.email} />
-                        <select className="flagSelect">
-                            <option value="Spain">+34</option>
-                            <option value="Andorra">+376</option>
-                            <option value="Germany">+49</option>
-                            <option value="United Kingdom">+44</option>
-                            <option value="Sweden">+46</option>
-                        </select>
-                        <Input
-                            type="number"
-                            name="phone"
+
+                        <PhoneInput
+                            defaultCountry={values.country}
                             id="phone"
-                            label="Phone"
-                            value={values.phone}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            hasErrorMessage={touched.phone}
-                            errorMessage={errors.phone}
+                            className="phoneInput"
+                            placeholder="Introduce your phone!"
+                            value={personalInfo.phone}
+                            onChange={(phone, country) => (
+                                setValues({
+                                    ...values,
+                                    phone: phone,
+                                    country: country.name
+                                })
+                            )}
                         />
+                        {errors.phone && touched.phone
+                            && <p className="text-danger">
+                                {errors.phone}
+                            </p>}
 
                         <div className="formBtnWrapper">
                             <Link className="link backLink" to="/" >
@@ -90,7 +94,6 @@ export function PersonalForm() {
                             <button
                                 className="formButton submitForm"
                                 type="submit"
-                                disabled={isSubmitting || isValidating}
                             >
                                 Continue to delivery
                             </button>

@@ -25,13 +25,12 @@ import { expirationDateFormat } from "../../../helper/regex"
 export function PaymentForm() {
     const { payment, setFormInfo, actualStep, setStep } = useContext(CheckoutContext)
     console.log("render: PaymentForm")
-    console.log(payment)
     return (
         <section className="paymentSection">
 
             <Formik
                 initialValues={{
-                    method: payment.method ? payment.method : "",
+                    method: payment.method ? payment.method.toString() : "",
                     creditCard: payment.creditCard ? payment.creditCard : "",
                     cardHolderName: payment.cardHolderName ? payment.cardHolderName : "",
                     cardNumber: payment.cardNumber ? payment.cardNumber : "",
@@ -80,6 +79,9 @@ export function PaymentForm() {
                                         name="method"
                                         id="method"
                                         label="Credit / Debit card"
+                                        checked={
+                                            values.method === "credit"
+                                        }
                                         payMethod
                                         value="credit"
                                         onChange={handleChange}
@@ -90,6 +92,9 @@ export function PaymentForm() {
                                         name="method"
                                         id="paypalPay"
                                         label={paypalPay}
+                                        checked={
+                                            values.method === "paypalPay"
+                                        }
                                         payMethod
                                         imageLabel
                                         value="paypalPay"
@@ -101,6 +106,9 @@ export function PaymentForm() {
                                         name="method"
                                         id="applePay"
                                         label={applePay}
+                                        checked={
+                                            values.method === "applePay"
+                                        }
                                         payMethod
                                         imageLabel
                                         value="applePay"

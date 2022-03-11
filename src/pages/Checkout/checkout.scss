@@ -49,6 +49,14 @@ form {
   }
 }
 
+.phoneInput {
+  margin: 20px 0;
+
+  input {
+    width: 100% !important;
+  }
+}
+
 // pay methods
 .paymentSection {
   width: 45%;
@@ -122,6 +130,11 @@ form {
       color: v.$lightBlue;
       margin-bottom: 10px;
     }
+    .saveInfoCheckbox {
+      width: 20px;
+      height: 20px;
+      margin-right: 5px;
+    }
   }
   .orderInfo {
     display: flex;
@@ -133,5 +146,27 @@ form {
     .orderItemTitle {
       color: #adb3bc;
     }
+  }
+  .reviewProducts {
+    margin: 10px 0;
+    border-top: 1px solid rgb(221, 221, 221);
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .subtotalSummary {
+    border-top: 1px solid rgb(221, 221, 221);
+    border-bottom: 1px solid rgb(221, 221, 221);
+  }
+  .subtotal,
+  .shippingCost,
+  .taxes,
+  .totalContainer {
+    display: flex;
+    justify-content: space-between;
+  }
+  .totalContainer {
+    margin-top: 15px;
   }
 }
