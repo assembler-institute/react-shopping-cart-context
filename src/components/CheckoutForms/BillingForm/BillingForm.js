@@ -12,8 +12,6 @@ import { CheckoutContext } from "../../../context/CheckoutContext"
 
 export function BillingForm() {
     const { billingAddress, personalInfo: { country }, setFormInfo, actualStep, setStep } = useContext(CheckoutContext)
-    console.log(billingAddress)
-    console.log("render: BillingAddress")
     return (
         <section className="mflex mcol malign-center">
             <h1 className="formTitle">Billing address</h1>
@@ -82,7 +80,6 @@ export function BillingForm() {
                                 className={classNameInputCondition(touched.country, errors.country)}
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                defaultValue={values.country}
                             >
                                 <option value={country} >{country}</option>
                                 <option value="Spain">Spain</option>

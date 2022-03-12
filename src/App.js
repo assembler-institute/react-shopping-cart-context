@@ -182,7 +182,6 @@ function App() {
   function saveNewProduct(newProduct) {
     setProducts((prevState) => [newProduct, ...prevState]);
   }
-
   return (
     <BrowserRouter>
       <Switch>

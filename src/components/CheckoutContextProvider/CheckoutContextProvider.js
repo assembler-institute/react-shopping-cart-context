@@ -13,8 +13,9 @@ const checkoutInitialState = {
     billingAddress: {},
     payment: {},
     orderID: uuid(),
-    actualStep: 1
+    actualStep: 1,
 }
+
 
 function checkoutReducer(state, action) {
     const { type, nameForm, payload } = action
@@ -22,9 +23,8 @@ function checkoutReducer(state, action) {
         case "FINISH_CHECKOUT":
             return {
                 ...state,
-                actualStep: 1
+                actualStep: 1,
             }
-
         case "SET_INFO":
             // sets the info dynamiclly, and sums 1 to go for next step
             return {
@@ -37,6 +37,10 @@ function checkoutReducer(state, action) {
                 ...state,
                 actualStep: payload
             }
+        case "RESET":
+            return {
+                checkoutInitialState
+            }
         default:
             return {
                 ...state
@@ -45,19 +49,19 @@ function checkoutReducer(state, action) {
 }
 
 const checkInitialState = () => {
-    return localStorage.getItem("checkoutInfo") ?
+
+    const initialItems = localStorage.getItem("checkoutInfo") ?
         JSON.parse(localStorage.getItem("checkoutInfo"))
         : checkoutInitialState
+    return initialItems
 }
 
 export default function CheckoutContextProvider({ children }) {
     const [checkoutState, dispatch] = useReducer(
-        checkoutReducer,
-        { ...checkInitialState() }
+        checkoutReducer, checkInitialState()
     )
     const { setCartItems } = useContext(OverviewContext)
     const history = useHistory()
-
     const {
         personalInfo,
         billingAddress,
@@ -65,7 +69,7 @@ export default function CheckoutContextProvider({ children }) {
         actualStep,
         orderID
     } = checkoutState
-    console.log("paso")
+
     useLocalStorage(
         { personalInfo, billingAddress, payment, actualStep },
         "checkoutInfo"
@@ -97,9 +101,9 @@ export default function CheckoutContextProvider({ children }) {
     }
 
     const setCheckoutDone = (saveUserInfo) => {
-        if (!saveUserInfo) localStorage.removeItem("checkoutInfo")
-
-        localStorage.removeItem("react-sc-state-cart-items")
+        if (!saveUserInfo) {
+            localStorage.removeItem("checkoutInfo")
+        }
         dispatch({
             type: "FINISH_CHECKOUT"
         })
@@ -107,6 +111,7 @@ export default function CheckoutContextProvider({ children }) {
             if cart is empty, go back to home
         */
         setCartItems([])
+
     }
 
     return (

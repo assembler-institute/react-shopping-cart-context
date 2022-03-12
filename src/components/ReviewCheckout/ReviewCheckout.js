@@ -1,16 +1,16 @@
 import React, { useContext, useState } from "react"
-
 import Button from "../Button"
 import ReviewProductItem from "../ReviewProductItem/ReviewProductItem"
 import { CheckoutContext } from "../../context/CheckoutContext"
 import { OverviewContext } from "../../context/OverviewContext"
+
 
 export function ReviewCheckout() {
     const [saveUserInfo, setSaveUserInfo] = useState(false)
     const {
         personalInfo,
         billingAddress,
-        payment,
+        payment = null,
         orderID,
         setCheckoutDone
     } = useContext(CheckoutContext)
@@ -109,9 +109,15 @@ export function ReviewCheckout() {
                     <p className="bolder">{totalCalculated}€</p>
                 </div>
                 <Button
-                    onClick={() => setCheckoutDone(saveUserInfo)}
+                    onClick={() => {
+                        setCheckoutDone(saveUserInfo)
+                    }
+
+
+                    }
                 >Back to home</Button>
             </section>
+
         </div>
     )
 }

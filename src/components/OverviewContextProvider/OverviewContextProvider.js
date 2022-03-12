@@ -1,4 +1,5 @@
-import React from "react"
+import React, { useEffect } from "react"
+import { useHistory } from "react-router-dom";
 import { OverviewContext } from "../../context/OverviewContext"
 import { getCartTotal } from "../Cart/Cart";
 
@@ -9,6 +10,10 @@ export default function OverviewContextProvider({
     handleChange,
     handleRemove }) {
     const subTotal = getCartTotal(cartItems)
+    const history = useHistory()
+    useEffect(() => {
+        if (cartItems.length === 0) history.push("/")
+    }, [cartItems])
     return (
         <OverviewContext.Provider value={{
             setCartItems: setCartItems,

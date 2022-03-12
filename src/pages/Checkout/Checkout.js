@@ -15,9 +15,9 @@ import Overview from "../../components/Overview/Overview";
 import { CheckoutContext } from "../../context/CheckoutContext";
 
 
+
 function Checkout() {
     const { actualStep } = useContext(CheckoutContext)
-    console.log("render: checkout")
     return (
         <>
             <header className="checkoutHeader">
@@ -32,7 +32,6 @@ function Checkout() {
                     <Route path="/checkout/step-4"><ReviewCheckout /></Route>
                     {actualStep <= 2 && <Overview />}
                 </article>
-
             </main>
         </>
 
