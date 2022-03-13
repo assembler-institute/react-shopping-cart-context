@@ -23,7 +23,9 @@ function checkoutReducer(state, action) {
         case "FINISH_CHECKOUT":
             return {
                 ...state,
+                saveUserInfo: payload,
                 actualStep: 1,
+
             }
         case "SET_INFO":
             // sets the info dynamiclly, and sums 1 to go for next step
@@ -39,7 +41,7 @@ function checkoutReducer(state, action) {
             }
         case "RESET":
             return {
-                checkoutInitialState
+                ...checkoutInitialState
             }
         default:
             return {
@@ -83,12 +85,21 @@ export default function CheckoutContextProvider({ children }) {
         }
     }, [])
 
+
     const setFormInfo = (nameForm, data) => {
         dispatch({
             type: "SET_INFO",
             nameForm: nameForm,
             payload: data
         })
+    }
+
+    const resetForm = () => {
+        if (!checkoutState.saveUserInfo) {
+            dispatch({
+                type: "RESET"
+            })
+        }
     }
 
     const setStep = (step) => {
@@ -101,11 +112,9 @@ export default function CheckoutContextProvider({ children }) {
     }
 
     const setCheckoutDone = (saveUserInfo) => {
-        if (!saveUserInfo) {
-            localStorage.removeItem("checkoutInfo")
-        }
         dispatch({
-            type: "FINISH_CHECKOUT"
+            type: "FINISH_CHECKOUT",
+            payload: saveUserInfo
         })
         /* this state returns us to home, because condition in overview,
             if cart is empty, go back to home
@@ -119,6 +128,7 @@ export default function CheckoutContextProvider({ children }) {
             setFormInfo: setFormInfo,
             setCheckoutDone: setCheckoutDone,
             setStep: setStep,
+            resetForm: resetForm,
             orderID: orderID,
             personalInfo: personalInfo,
             billingAddress: billingAddress,

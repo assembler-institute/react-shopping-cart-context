@@ -184,43 +184,43 @@ function App() {
   }
   return (
     <BrowserRouter>
-      <Switch>
-        <Route path="/new-product">
-          <NewProduct saveNewProduct={saveNewProduct} />
-        </Route>
-        <Route path="/" exact>
-          <Home
-            fullWidth
-            cartItems={cartItems}
-            products={products}
-            isLoading={isLoading}
-            hasError={hasError}
-            loadingError={loadingError}
-            handleDownVote={handleDownVote}
-            handleUpVote={handleUpVote}
-            handleSetFavorite={handleSetFavorite}
-            handleAddToCart={handleAddToCart}
-            handleRemove={handleRemove}
-            handleChange={handleChange}
-          />
-        </Route>
+      <OverviewContextProvider
+        cartItems={cartItems}
+        setCartItems={setCartItems}
+        handleChange={handleChange}
+        handleRemove={handleRemove}
+      >
+        <CheckoutContextProvider>
+          <Switch>
+            <Route path="/new-product">
+              <NewProduct saveNewProduct={saveNewProduct} />
+            </Route>
+            <Route path="/" exact>
+              <Home
+                fullWidth
+                cartItems={cartItems}
+                products={products}
+                isLoading={isLoading}
+                hasError={hasError}
+                loadingError={loadingError}
+                handleDownVote={handleDownVote}
+                handleUpVote={handleUpVote}
+                handleSetFavorite={handleSetFavorite}
+                handleAddToCart={handleAddToCart}
+                handleRemove={handleRemove}
+                handleChange={handleChange}
+              />
+            </Route>
 
-        <Route path="/checkout">
+            <Route path="/checkout">
 
-          <OverviewContextProvider
-            cartItems={cartItems}
-            setCartItems={setCartItems}
-            handleChange={handleChange}
-            handleRemove={handleRemove}
-          >
-            <CheckoutContextProvider>
               <Checkout fullWidth />
-            </CheckoutContextProvider>
-          </OverviewContextProvider>
 
-        </Route>
+            </Route>
 
-      </Switch>
+          </Switch>
+        </CheckoutContextProvider>
+      </OverviewContextProvider>
     </BrowserRouter >
   );
 }
