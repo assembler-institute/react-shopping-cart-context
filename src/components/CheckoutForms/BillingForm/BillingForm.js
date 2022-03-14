@@ -20,7 +20,7 @@ export function BillingForm() {
                     address: billingAddress.address ? billingAddress.address : "",
                     city: billingAddress.city ? billingAddress.city : "",
                     postalCode: billingAddress.postalCode ? billingAddress.postalCode : "",
-                    country: billingAddress.country ? billingAddress.country : ""
+                    country: billingAddress.country ? billingAddress.country : country
 
                 }}
                 validationSchema={billingFormSchema}
