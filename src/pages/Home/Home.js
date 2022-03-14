@@ -1,9 +1,8 @@
-import React, { useEffect, useContext } from "react";
+import React from "react";
 
 import ProductsListing from "../../components/ProductsListing";
 import Cart from "../../components/Cart";
 import withLayout from "../../hoc/withLayout";
-import { CheckoutContext } from "../../context/CheckoutContext";
 
 function Home({
   products,
@@ -18,10 +17,6 @@ function Home({
   handleRemove,
   handleChange,
 }) {
-  const { resetForm } = useContext(CheckoutContext)
-  useEffect(() => {
-    resetForm()
-  }, [])
   return (
     <div className="row">
       <div className="col col-8">

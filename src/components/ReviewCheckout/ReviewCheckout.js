@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react"
-import { Redirect } from "react-router-dom"
 import Button from "../Button"
 import ReviewProductItem from "../ReviewProductItem/ReviewProductItem"
 import { CheckoutContext } from "../../context/CheckoutContext"
@@ -13,7 +12,6 @@ export function ReviewCheckout() {
         billingAddress,
         payment = null,
         orderID,
-        actualStep,
         setCheckoutDone
     } = useContext(CheckoutContext)
     const {
@@ -119,8 +117,6 @@ export function ReviewCheckout() {
                     }
                 >Back to home</Button>
             </section>
-            {actualStep === 1 && <Redirect to="/checkout" />}
-
         </div>
     )
 }

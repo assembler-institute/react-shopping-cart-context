@@ -5,15 +5,15 @@ import { v4 as uuid } from "uuid"
 // context
 import { CheckoutContext } from "../../context/CheckoutContext";
 import { OverviewContext } from "../../context/OverviewContext";
-// local storage hook
-import useLocalStorage from "../../hooks/useLocalStorage"
 
-const checkoutInitialState = {
+
+const initialState = {
     personalInfo: {},
     billingAddress: {},
     payment: {},
     orderID: uuid(),
     actualStep: 1,
+    temporaryStorage: true
 }
 
 
@@ -23,8 +23,8 @@ function checkoutReducer(state, action) {
         case "FINISH_CHECKOUT":
             return {
                 ...state,
-                saveUserInfo: payload,
                 actualStep: 1,
+                temporaryStorage: false
 
             }
         case "SET_INFO":
@@ -39,10 +39,6 @@ function checkoutReducer(state, action) {
                 ...state,
                 actualStep: payload
             }
-        case "RESET":
-            return {
-                ...checkoutInitialState
-            }
         default:
             return {
                 ...state
@@ -51,11 +47,11 @@ function checkoutReducer(state, action) {
 }
 
 const checkInitialState = () => {
-
     const initialItems = localStorage.getItem("checkoutInfo") ?
         JSON.parse(localStorage.getItem("checkoutInfo"))
-        : checkoutInitialState
-    return initialItems
+        : initialState
+    // condition temp localstorage
+    return { ...initialItems, actualStep: 1 }
 }
 
 export default function CheckoutContextProvider({ children }) {
@@ -71,11 +67,6 @@ export default function CheckoutContextProvider({ children }) {
         actualStep,
         orderID
     } = checkoutState
-
-    useLocalStorage(
-        { personalInfo, billingAddress, payment, actualStep },
-        "checkoutInfo"
-    )
 
     useEffect(() => {
         const location = history.location.pathname.split("/")[2]
@@ -94,14 +85,6 @@ export default function CheckoutContextProvider({ children }) {
         })
     }
 
-    const resetForm = () => {
-        if (!checkoutState.saveUserInfo) {
-            dispatch({
-                type: "RESET"
-            })
-        }
-    }
-
     const setStep = (step) => {
         dispatch({
             type: "SET_STEP",
@@ -112,6 +95,16 @@ export default function CheckoutContextProvider({ children }) {
     }
 
     const setCheckoutDone = (saveUserInfo) => {
+        if (saveUserInfo) {
+            localStorage.setItem("checkoutInfo", JSON.stringify({
+                personalInfo,
+                billingAddress,
+                payment
+            })
+            )
+        } else {
+            localStorage.removeItem("checkoutInfo")
+        }
         dispatch({
             type: "FINISH_CHECKOUT",
             payload: saveUserInfo
@@ -128,7 +121,6 @@ export default function CheckoutContextProvider({ children }) {
             setFormInfo: setFormInfo,
             setCheckoutDone: setCheckoutDone,
             setStep: setStep,
-            resetForm: resetForm,
             orderID: orderID,
             personalInfo: personalInfo,
             billingAddress: billingAddress,
