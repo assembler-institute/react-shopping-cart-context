@@ -6,7 +6,6 @@ import { v4 as uuid } from "uuid"
 import { CheckoutContext } from "../../context/CheckoutContext";
 import { OverviewContext } from "../../context/OverviewContext";
 
-
 const initialState = {
     personalInfo: {},
     billingAddress: {},
@@ -47,11 +46,17 @@ function checkoutReducer(state, action) {
 }
 
 const checkInitialState = () => {
-    const initialItems = localStorage.getItem("checkoutInfo") ?
-        JSON.parse(localStorage.getItem("checkoutInfo"))
-        : initialState
-    // condition temp localstorage
-    return { ...initialItems, actualStep: 1 }
+    if (localStorage.getItem("checkoutInfo")) {
+        return {
+            ...JSON.parse(localStorage.getItem("checkoutInfo")),
+            actualStep: 1
+        }
+    }
+    // temporal checkout for user refresh
+    if (localStorage.getItem("tempCheckout")) {
+        return JSON.parse(localStorage.getItem("tempCheckout"))
+    }
+    return initialState
 }
 
 export default function CheckoutContextProvider({ children }) {
@@ -65,8 +70,16 @@ export default function CheckoutContextProvider({ children }) {
         billingAddress,
         payment,
         actualStep,
+        temporaryStorage,
         orderID
     } = checkoutState
+
+    useEffect(() => {
+        if (temporaryStorage) {
+            return localStorage.setItem("tempCheckout", JSON.stringify(checkoutState))
+        }
+        return localStorage.removeItem("tempCheckout")
+    }, [checkoutState])
 
     useEffect(() => {
         const location = history.location.pathname.split("/")[2]
@@ -74,6 +87,7 @@ export default function CheckoutContextProvider({ children }) {
         if (location !== `step-${actualStep}`) {
             history.push(`/checkout/step-${actualStep}`)
         }
+
     }, [])
 
 
@@ -119,8 +133,8 @@ export default function CheckoutContextProvider({ children }) {
     return (
         <CheckoutContext.Provider value={{
             setFormInfo: setFormInfo,
-            setCheckoutDone: setCheckoutDone,
             setStep: setStep,
+            setCheckoutDone: setCheckoutDone,
             orderID: orderID,
             personalInfo: personalInfo,
             billingAddress: billingAddress,

@@ -14,7 +14,6 @@ import 'react-phone-input-2/lib/style.css'
 
 export function PersonalForm() {
     const { personalInfo, setFormInfo, actualStep } = useContext(CheckoutContext)
-    console.log("render: PersonalForm")
     return (
         <section className="mflex mcol malign-center">
             <h1 className="formTitle">Personal information</h1>
