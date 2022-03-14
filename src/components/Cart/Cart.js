@@ -1,18 +1,26 @@
 import React from "react";
 
+import { useHistory } from "react-router-dom";
 import ShoppingCartItem from "../ShoppingCartItem";
 import Button from "../Button";
 
-function getCartTotal(cart) {
+
+export function getCartTotal(cart) {
   return cart.reduce((accum, item) => {
     return accum + item.price * item.quantity;
   }, 0);
 }
 
 function Cart({ cartItems, handleRemove, handleChange, ...props }) {
+  const history = useHistory();
+
+  const goToCheckout = () => {
+    history.push("/checkout/step-1")
+  }
+
   return (
     <aside {...props}>
-      <div className="row flex-column">
+      <div className="row flex-column" data-testid="Cart">
         <div className="col shopping__cart__header">
           <h2 className="h3 mt-2">Shopping Cart</h2>
           <hr className="mb-3" />
@@ -49,7 +57,7 @@ function Cart({ cartItems, handleRemove, handleChange, ...props }) {
               <hr />
             </div>
             <div className="col">
-              <Button>Checkout</Button>
+              <Button disabled={cartItems.length === 0} onClick={goToCheckout} >Checkout</Button>
             </div>
           </div>
         </div>

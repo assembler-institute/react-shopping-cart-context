@@ -1,1 +1,1 @@
-export { default } from "./Input";
+export { default, classNameInputCondition } from "./Input";

@@ -1,0 +1,46 @@
+@use "../../assets/styles/variables.scss" as v;
+
+.backgroundCard {
+  z-index: inherit;
+  position: absolute;
+  top: 10%;
+  left: 20%;
+  img {
+    width: 100%;
+    opacity: 0.5;
+    height: auto;
+  }
+}
+.cardContainer {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 20px 35px;
+  width: 400px;
+  height: 250px;
+  border-radius: 15px;
+  gap: 10px;
+  background: linear-gradient(
+    127deg,
+    rgba(0, 212, 255, 1),
+    rgba(71, 71, 97, 1)
+  );
+  color: white;
+
+  .cardType {
+    align-self: flex-end;
+  }
+  .chip {
+    width: 50px;
+    height: auto;
+  }
+  .CardNumbersField {
+    z-index: 1;
+    font-size: 30px;
+  }
+  .cardFooter {
+    display: inline-flex;
+    justify-content: space-between;
+  }
+}

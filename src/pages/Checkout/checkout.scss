@@ -1,0 +1,172 @@
+@use "../../assets/styles/variables.scss" as v;
+@use "../../assets/styles/layout.scss" as l;
+
+.checkoutHeader {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.checkoutFormWrapper {
+  width: 100%;
+  .formBtnWrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  section {
+    width: 100%;
+  }
+}
+
+form {
+  width: 30%;
+  .selectContainer {
+    margin: 30px 0;
+  }
+  .formButton {
+    color: white;
+    background-color: v.$purple;
+    border-radius: 5px;
+    border: none;
+    padding: 5px;
+    justify-self: center;
+    &:disabled {
+      opacity: 0.5;
+    }
+    &:hover {
+      transition: 0.5;
+      opacity: 0.8;
+    }
+  }
+  .backLink {
+    color: inherit;
+    font-size: 14px;
+    text-align: center;
+  }
+  .cancelFormBtn:hover {
+    text-decoration: underline;
+  }
+}
+// personal form phone input
+.phoneInput {
+  margin: 20px 0;
+
+  input {
+    width: 100% !important;
+  }
+}
+
+// pay methods
+.paymentSection {
+  width: 45%;
+  .formTitle {
+    text-align: center;
+  }
+}
+.paymentFormWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 5.5em;
+  .paymentForm {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+  }
+}
+.methodsContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+.secretFields {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  input {
+    width: 50%;
+  }
+}
+.conditionsContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  font-size: 12px;
+  #conditions {
+    align-self: flex-start;
+    width: 20px;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .methodsContainer {
+    flex-direction: column;
+  }
+  .paymentFormWrapper {
+    flex-direction: column;
+    align-items: center;
+    .paymentForm {
+      width: 40%;
+    }
+  }
+}
+
+// review component
+.reviewContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.reviewSection {
+  border-radius: 5px;
+  width: 50% !important;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  border: 1px solid black;
+  background-color: rgb(255, 255, 255);
+  .orderConfirmed {
+    h1 {
+      color: v.$lightBlue;
+      margin-bottom: 10px;
+    }
+    .saveInfoCheckbox {
+      width: 20px;
+      height: 20px;
+      margin-right: 5px;
+    }
+  }
+  .orderInfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .orderItem {
+    display: block;
+    .orderItemTitle {
+      color: #adb3bc;
+    }
+  }
+  .reviewProducts {
+    margin: 10px 0;
+    border-top: 1px solid rgb(221, 221, 221);
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .subtotalSummary {
+    border-top: 1px solid rgb(221, 221, 221);
+    border-bottom: 1px solid rgb(221, 221, 221);
+  }
+  .subtotal,
+  .shippingCost,
+  .taxes,
+  .totalContainer {
+    display: flex;
+    justify-content: space-between;
+  }
+  .totalContainer {
+    margin-top: 15px;
+  }
+}

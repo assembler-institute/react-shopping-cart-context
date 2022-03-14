@@ -1,0 +1,31 @@
+.mflex {
+  display: flex;
+}
+.mrow {
+  flex-direction: row;
+}
+.mcol {
+  flex-direction: column;
+}
+.mjustify-center {
+  justify-content: center;
+}
+.mjustify-around {
+  justify-content: space-around;
+}
+.mjustify-between {
+  justify-content: space-between;
+}
+.malign-center {
+  align-items: center;
+}
+
+.mnoButton {
+  outline: none;
+  background-color: inherit;
+  border: none;
+}
+
+.bolder {
+  font-weight: bold;
+}

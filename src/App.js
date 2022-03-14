@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
+// context
+import CheckoutContextProvider from "./components/CheckoutContextProvider"
 import Home from "./pages/Home";
 import NewProduct from "./pages/NewProduct";
 
@@ -8,6 +10,8 @@ import * as api from "./api";
 
 import useLocalStorage from "./hooks/useLocalStorage";
 import loadLocalStorageItems from "./utils/loadLocalStorageItems";
+import Checkout from "./pages/Checkout/Checkout";
+import OverviewContextProvider from "./components/OverviewContextProvider/OverviewContextProvider";
 
 function buildNewCartItem(cartItem) {
   if (cartItem.quantity >= cartItem.unitsInStock) {
@@ -116,7 +120,7 @@ function App() {
       if (
         product.id === productId &&
         product.votes.downVotes.currentValue <
-          product.votes.downVotes.lowerLimit
+        product.votes.downVotes.lowerLimit
       ) {
         return {
           ...product,
@@ -178,7 +182,6 @@ function App() {
   function saveNewProduct(newProduct) {
     setProducts((prevState) => [newProduct, ...prevState]);
   }
-
   return (
     <BrowserRouter>
       <Switch>
@@ -201,8 +204,24 @@ function App() {
             handleChange={handleChange}
           />
         </Route>
+
+        <Route path="/checkout">
+
+          <OverviewContextProvider
+            cartItems={cartItems}
+            setCartItems={setCartItems}
+            handleChange={handleChange}
+            handleRemove={handleRemove}
+          >
+            <CheckoutContextProvider>
+              <Checkout fullWidth />
+            </CheckoutContextProvider>
+          </OverviewContextProvider>
+
+        </Route>
+
       </Switch>
-    </BrowserRouter>
+    </BrowserRouter >
   );
 }
 
