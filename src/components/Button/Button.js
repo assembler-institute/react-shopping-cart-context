@@ -15,7 +15,6 @@ function Button({
     "btn-block": block,
     "btn-sm": small,
   });
-
   return (
     <button
       className={classes}

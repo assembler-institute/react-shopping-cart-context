@@ -1,4 +1,4 @@
-module.exports = {
+/* module.exports = {
   env: {
     browser: true,
     es2021: true,
@@ -49,7 +49,7 @@ module.exports = {
     },
   ],
   rules: {
-    "prettier/prettier": "error",
+    "prettier/prettier": "off",
     "react/jsx-filename-extension": "off",
     "import/prefer-default-export": "off",
     "prefer-destructuring": "off",
@@ -61,3 +61,4 @@ module.exports = {
     "react/prop-types": "off",
   },
 };
+   */

@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import "./ShoppingCartItem.scss";
 
 import Button from "../Button";
+import { useProducts } from "../Context/reducer";
 
 function buildSelectOptions(unitsInStock) {
   return Array.from({ length: unitsInStock }, (_value, index) => {
@@ -15,21 +16,13 @@ function buildSelectOptions(unitsInStock) {
   });
 }
 
-function ShoppingCartItem({
-  id,
-  img,
-  title,
-  price,
-  quantity,
-  unitsInStock,
-  handleChange,
-  handleRemove,
-}) {
+function ShoppingCartItem({ id, img, title, price, quantity, unitsInStock }) {
+  const { remove, change } = useProducts();
   function onHandleChange(event) {
-    handleChange(event, id);
+    change(event, id);
   }
   function onHandleRemove() {
-    handleRemove(id);
+    remove(id);
   }
 
   return (
@@ -53,21 +46,23 @@ function ShoppingCartItem({
                   </p>
                 </div>
                 <div className="col mt-auto">
-                  <div className="row">
-                    <div className="col col-6 col-lg-4">
-                      <select
-                        className="custom-select"
-                        onChange={onHandleChange}
-                        onBlur={onHandleChange}
-                        value={quantity}
-                      >
-                        {buildSelectOptions(unitsInStock)}
-                      </select>
+                  {unitsInStock ? (
+                    <div className="row">
+                      <div className="col col-6 col-lg-4">
+                        <select
+                          className="custom-select"
+                          onChange={onHandleChange}
+                          onBlur={onHandleChange}
+                          value={quantity}
+                        >
+                          {buildSelectOptions(unitsInStock)}
+                        </select>
+                      </div>
+                      <div className="col col-6 col-lg-8">
+                        <Button onClick={onHandleRemove}>Remove</Button>
+                      </div>
                     </div>
-                    <div className="col col-6 col-lg-8">
-                      <Button onClick={onHandleRemove}>Remove</Button>
-                    </div>
-                  </div>
+                  ):`Quantity: ${quantity}`}
                 </div>
               </div>
             </div>

@@ -5,11 +5,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { ProductsProvider } from "./components/Context/reducer";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <ProductsProvider>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </ProductsProvider>,
   document.getElementById("root"),
 );
 

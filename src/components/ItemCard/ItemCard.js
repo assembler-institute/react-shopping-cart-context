@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import FavoriteIconButton from "../FavoriteIconButton";
 import IconButton from "../IconButton";
@@ -6,6 +6,7 @@ import Button from "../Button";
 import { ThumbDown, ThumbUp } from "../SVGIcons";
 
 import "./ItemCard.scss";
+import { useProducts } from "../Context/reducer";
 
 function Divider() {
   return <hr className="ItemCard__divider" />;
@@ -34,22 +35,20 @@ function ItemCard({
   isFavorite,
   upVotes,
   downVotes,
-  handleDownVote,
-  handleUpVote,
-  handleSetFavorite,
-  handleAddToCart,
 }) {
+  const { setFavorite, setUpVotes, setDownVotes, addToCart } = useProducts();
+
   function onDownVote() {
-    handleDownVote(id);
+    setDownVotes(id);
   }
   function onUpVote() {
-    handleUpVote(id);
+    setUpVotes(id);
   }
   function onSetFavorite() {
-    handleSetFavorite(id);
+    setFavorite(id);
   }
   function onAddToCart() {
-    handleAddToCart(id);
+    addToCart(id);
   }
 
   return (
